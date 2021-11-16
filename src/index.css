@@ -310,9 +310,8 @@ footer {
 .why-choose-us-container .each-choose-us-container {
   width: 32%;
   padding: 15px;
-  border-radius: 50px;
-  /*border: 5px solid rgb(189, 223, 238);*/
-  border: 5px solid rgba(43, 52, 61, 0.198);
+  /*border-radius: 50px;
+  border: 5px solid rgb(189, 223, 238);*/
 }
 .forms_class_guests_cabin_settings_container {
   position: relative;
@@ -453,12 +452,14 @@ footer {
 .download_mobile_app_section_container {
   display: flex;
   /*background-color: rgba(233, 233, 11, 0.205);
-  border: 5px solid rgba(233, 233, 11, 0.274);*/
+  border: 5px solid rgba(233, 233, 11, 0.274);
   border: 5px solid rgba(43, 52, 61, 0.198);
-  background-color: rgba(43, 52, 61, 0.14);
+  background-color: rgba(43, 52, 61, 0.14);*/
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  background-color: white;
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 50px;
+  border-radius: 20px;
 }
 .download_mobile_app_btn_container {
   display: flex;
@@ -814,6 +815,7 @@ footer {
   .why-choose-us-container .each-choose-us-container {
     width: 100%;
     margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .download_mobile_section {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
