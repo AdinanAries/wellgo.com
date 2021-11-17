@@ -598,12 +598,21 @@ footer {
   justify-content: center;
   border-radius: 20px;
 }
+.main_search_from_overall_container{
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
   .search_forms_promo_card{
-    margin-top: 0;
     border-radius: 0;
     margin: 0;
+  }
+  .main_search_from_overall_container{
+    border-radius: 0;
+    box-shadow: none;
   }
   #booking_start_checkout_page_container{
     padding-bottom: 135px;
@@ -791,7 +800,7 @@ footer {
   }
   .search-form-container {
     margin-left: 0;
-    padding: 5px;
+    padding: 0;
     border: none;
   }
   .forms_class_guests_cabin_settings_container {
