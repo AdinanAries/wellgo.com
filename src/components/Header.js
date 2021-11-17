@@ -40,7 +40,7 @@ function Header(){
                         </div>
                         <div id="desktop_login_menu_item" onClick={show_login_page} className="each-header-menu-item">
                             <p>
-                                <i className="fa fa-user" />Login
+                                <i className="fa fa-user" />Account
                             </p>
                         </div>
                     </div>

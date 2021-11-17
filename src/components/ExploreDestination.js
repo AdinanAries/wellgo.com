@@ -27,7 +27,7 @@ export default function ExploreDestinations(){
                             <div onClick={show_full_search_form} style={{position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <i style={{color: "rgba(0,0,0,0.4)"}} className="fa fa-search"></i>
                             </div>
-                            <div onClick={show_full_search_form} style={{position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
+                            <div onClick={show_full_search_form} style={{fontFamily: "'Prompt', sans-serif", position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                 <p style={{color: "rgba(0,0,0,0.6)"}}>
                                     enter airports, dates, cabin...</p>
                             </div>
@@ -36,17 +36,17 @@ export default function ExploreDestinations(){
                                     <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>
                                     <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                        <i style={{marginLeft: 7, fontSize: 16, color: "rgba(0,0,0,0.4)"}} className="fa fa-angle-down"></i></p>
+                                        <i id="landing_page_search_form_show_filters_btn_caret" style={{marginLeft: 7, fontSize: 16, color: "rgba(0,0,0,0.4)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
                                 </div>
                             </div>
 
-                            <div id="landing_page_search_filters_container" style={{display: "none", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
+                            <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
                                 <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.7)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end", cursor: "pointer", padding: "10px 0"}}>
-                                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
-                                            <p style={{fontSize: 14, color: "rgba(0,55,123,0.9)", fontWeight: "bolder", textAlign: "right"}}>
+                                        <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
+                                            <p style={{fontSize: 14, color: "rgba(0,175,23,0.9)", letterSpacing: 1, fontWeight: "bolder", textAlign: "right"}}>
                                                 Flights</p>
-                                            <p style={{fontSize: 12, marginTop: 5, color: "rgba(0,55,123,0.8)"}}>
+                                            <p style={{fontSize: 12, marginTop: 5, letterSpacing: 1, color: "rgb(0,175,23)"}}>
                                                 <i style={{marginRight: 5, color: "green"}} className="fa fa-check"></i>
                                                 Buy cheapest flights here</p>
                                         </div>
@@ -56,11 +56,11 @@ export default function ExploreDestinations(){
                                     </div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end", cursor: "not-allowed", padding: "10px 0"}}>
                                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
-                                            <p style={{fontSize: 14, color: "rgba(0,0,0,0.6)", fontWeight: "bolder", textAlign: "right"}}>
+                                            <p style={{fontSize: 14, color: "rgba(0,0,0,0.6)", letterSpacing: 1, fontWeight: "bolder", textAlign: "right"}}>
                                                 Hotels</p>
-                                            <p style={{fontSize: 12, marginTop: 5, color: "rgba(0,0,0,0.6)"}}>
+                                            <p style={{fontSize: 12, marginTop: 5, letterSpacing: 1, color: "rgba(0,0,0,0.6)"}}>
                                                 <i style={{marginRight: 5, color: "orangered"}} className="fa fa-exclamation-triangle"></i>
-                                                this service is unavailable at the moment
+                                                unavailable at the moment
                                             </p>
                                         </div>
                                         <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
@@ -69,11 +69,11 @@ export default function ExploreDestinations(){
                                     </div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end", cursor: "not-allowed", padding: "10px 0"}}>
                                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
-                                            <p style={{fontSize: 14, color: "rgba(0,0,0,0.6)", fontWeight: "bolder", textAlign: "right"}}>
+                                            <p style={{fontSize: 14, color: "rgba(0,0,0,0.6)", letterSpacing: 1, fontWeight: "bolder", textAlign: "right"}}>
                                                 Food Delivery</p>
-                                            <p style={{fontSize: 12, marginTop: 5, color: "rgba(0,0,0,0.6)"}}>
+                                            <p style={{fontSize: 12, marginTop: 5, letterSpacing: 1, color: "rgba(0,0,0,0.6)"}}>
                                                 <i style={{marginRight: 5, color: "orangered"}} className="fa fa-exclamation-triangle"></i>
-                                                this service is unavailable at the moment
+                                                unavailable at the moment
                                             </p>
                                         </div>
                                         <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
@@ -108,11 +108,13 @@ export default function ExploreDestinations(){
 }
 
 let is_landing_page_search_filters_open = false;
-function toggle_main_page_search_filters(){
+export function toggle_main_page_search_filters(){
     if(is_landing_page_search_filters_open){
         $("#landing_page_search_filters_container").slideUp("fast");
+        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(0deg)";
     }else{
         $("#landing_page_search_filters_container").slideDown("fast");
+        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(180deg)";
     }
     is_landing_page_search_filters_open = !is_landing_page_search_filters_open;
 }

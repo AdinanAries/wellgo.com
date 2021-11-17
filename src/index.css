@@ -610,6 +610,9 @@ footer {
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  #landing_page_search_form_show_filters_btn:hover{
+    background: none;
+  }
   .search_forms_promo_card{
     border-radius: 0;
     margin: 0;

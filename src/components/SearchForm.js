@@ -6,7 +6,7 @@ function SearchForm(){
     return(
         <div className="main-search-form">
             <div className="main_search_from_overall_container">
-                <p style={{margin: 20, fontFamily: "'Prompt', Sans-serif", fontWeight: 1000, color: "rgba(0,0,0,0.7)"}}>
+                <p style={{margin: 15, fontFamily: "'Prompt', Sans-serif", fontWeight: 1000, color: "rgba(0,0,0,0.7)"}}>
                     Search Flights
                 </p>
                 <div className="two-search-inputs-container">

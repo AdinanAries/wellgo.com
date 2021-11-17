@@ -1,3 +1,5 @@
+import { toggle_main_page_search_filters } from "../components/ExploreDestination";
+
 export function show_login_page(){
 
     document.getElementById("site_main_header").style.display="block";
@@ -75,6 +77,12 @@ export function show_explore_page(){
 
 export function show_full_search_form(){
     
+    if(document.getElementById("landing_page_search_filters_container").style.display==="none"){
+        //do nothing
+    }else{
+        toggle_main_page_search_filters();
+    }
+
     window.scrollTo(0, 0);
 
     document.getElementById("site_main_header").style.display="block";
