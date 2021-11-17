@@ -5,6 +5,8 @@ import ExploreDestinations from "./ExploreDestination";
 
 import explore_page_hero from "../explore_page_hero.jpg";
 
+//backgroundImage: `url('${explore_page_hero}')`,
+
 function Main(){
     return (
         <main>
@@ -15,7 +17,7 @@ function Main(){
                     </div>
                 </div>
                 <div className="wrapper">
-                    <div style={{marginTop: 10, height: "calc(100vh - 390px)", boxShadow: "0 0 5px rgba(0,0,0,0.3)", backgroundImage: `url('${explore_page_hero}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", borderRadius: 50}}>
+                    <div style={{marginTop: 10, height: "calc(100vh - 420px)", backgroundColor: "rgb(123,95,21)", boxShadow: "0 0 5px rgba(0,0,0,0.3)", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", borderRadius: 20}}>
                         <p style={{color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 35}}>
                             See the world,</p>
                         <p style={{marginTop: -9,color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28 }}>
@@ -24,8 +26,8 @@ function Main(){
                             We got you on these amaizing trip ideas that will 
                             make you want to do it over again
                         </p>
-                        <div style={{backgroundColor: "slateblue", padding: 14, color: "white", cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginTop: 20, width: "fit-content", borderRadius: 50}}>
-                            Start exploring
+                        <div style={{padding: 14, color: "orange", cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginTop: 15, width: "fit-content", borderRadius: 50}}>
+                        <i className="fa fa-globe" style={{marginRight: 7, fontSize: 19, color: "rgba(255,255,5,0.5)"}}></i>Start exploring
                         </div>
                     </div>
                 </div>
