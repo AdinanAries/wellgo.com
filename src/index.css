@@ -171,6 +171,7 @@ footer {
   display: none;
   animation: pop-in 0.2s ease-out;
   position: absolute;
+  z-index: 1000;
   width: calc(100vw - 17px);
   padding: 5px;
   height: 100vh;
