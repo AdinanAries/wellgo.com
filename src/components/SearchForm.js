@@ -1,14 +1,15 @@
-import $ from "jquery";
+import $, { nodeName } from "jquery";
 
 import { show_search_page } from "../helpers/PageRoutingFuncs";
 
 function SearchForm(){
     return(
         <div className="main-search-form">
+            <div style={{backgroundColor: "white", padding: "20px 10px", borderRadius: 50, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
             <div className="two-search-inputs-container">
                 <div className="each_flex-side first">
                     <div className="forms_class_guests_cabin_settings_container">
-                        <div id="forms_main_class_guests_cabin_settings_pane" className="forms_class_guests_cabin_settings_pane">
+                        <div id="forms_main_class_guests_cabin_settings_pane" className="forms_class_guests_cabin_settings_pane"  style={{borderRadius: 30}}>
                             <p onClick={()=>document.getElementById("forms_main_class_guests_cabin_settings_pane").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
                             <div id="add_travelers_settings_pane" style={{padding: 15, display: "none"}}>
                                 <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", fontSize: 17, marginTop: 10, marginBottom: 20}}>
@@ -25,7 +26,7 @@ function SearchForm(){
                                             +</div>
                                     </div>
                                 </div>
-                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10, borderRadius: 30}}>
                                     <div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Children
                                         <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>Ages 2 to 17</p>
@@ -39,7 +40,7 @@ function SearchForm(){
                                             +</div>
                                     </div>
                                 </div>
-                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10, borderRadius: 30}}>
                                     <div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Infants
                                         <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>Younger than 2</p>
@@ -104,19 +105,19 @@ function SearchForm(){
                                     </div>
                                 </div>
                             </div>
-                            <div onClick={()=>document.getElementById("forms_main_class_guests_cabin_settings_pane").style.display = "none"} style={{cursor: "pointer", padding: 10, margin: 10, marginTop: 0, backgroundColor: "rgb(23, 87, 148)", color: "white", textAlign: "center", borderRadius: 9, textAlign: "center"}}>
+                            <div onClick={()=>document.getElementById("forms_main_class_guests_cabin_settings_pane").style.display = "none"} style={{cursor: "pointer", padding: 10, margin: 10, marginTop: 0, backgroundColor: "rgb(23, 87, 148)", color: "white", textAlign: "center", borderRadius: 50, textAlign: "center"}}>
                                     Done
                                 </div>
                         </div>
-                        <div onClick={show_cabin_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none"}}>
+                        <div onClick={show_cabin_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                             <i style={{fontSize: 15, marginRight: 10}} className="fa fa-level-up"></i>
                             Economy
                         </div>
-                        <div onClick={show_travelers_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none"}}>
+                        <div onClick={show_travelers_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                             <i style={{fontSize: 15, marginRight: 10}} className="fa fa-user"></i>
                             1 Adult
                         </div>
-                        <div onClick={show_trip_round_settings_pane} className="searchFormChkInputLbl" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none"}}>
+                        <div onClick={show_trip_round_settings_pane} className="searchFormChkInputLbl" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                             <i style={{fontSize: 15, marginRight: 10}} className="fa fa-repeat"></i>
                             Round-trip
                         </div>
@@ -125,7 +126,7 @@ function SearchForm(){
                 </div>
                 <div className="each_flex-side">
                     <div style={{width: "100%"}}>
-                        <div className="main-search_txt_input" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none"}}>
+                        <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                             <i style={{fontSize: 20, marginRight: 5}} className="fa fa-calendar-o"></i>
                             <input id="departure_return_dates_input" type="text" readOnly="true" placeholder="departure - return"/>
                         </div>
@@ -135,7 +136,7 @@ function SearchForm(){
             <div>
                 <div className="two-search-inputs-container">
                     <div style={{position: "relative"}} className="search_forms_from_where_input_fld_container each_flex-side">
-                        <div id="from_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete">
+                        <div id="from_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{borderRadius: 30}}>
                             <p onClick={()=>document.getElementById("from_where_airports_auto_complete_input").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
                             <input autocomplete="off" id="from_where_airports_auto_complete_input_fld" 
                                 onBlur={()=>{
@@ -162,19 +163,19 @@ function SearchForm(){
                                 </ul>
                             </div>
                         </div>
-                        <div className="main-search_txt_input" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none"}}>
+                        <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                             <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
                             <input id="search_forms_from_where_input_fld" onClick={open_from_where_auto_complete_pane} type="text" autocomplete="off" placeholder="from where?" />
                         </div>
                     </div>
-                    <div id="main_switch_inputs_btn" className="switchinputsBtn"  style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none"}}
+                    <div id="main_switch_inputs_btn" className="switchinputsBtn"  style={{border: "none", boxShadow: "0 0 5px rgba(0,0,0,0.3)",}}
                         onClick={switch_input_rotate_func}>
                         <p style={{textAlign: "center"}}>
                             <i className="fa fa-exchange"></i>
                         </p>
                     </div>
                     <div className="search_forms_to_where_input_fld_container each_flex-side">
-                        <div id="to_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete">
+                        <div id="to_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{borderRadius: 30}}>
                             <p onClick={()=>document.getElementById("to_where_airports_auto_complete_input").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
                             <input autocomplete="off" id="to_where_airports_auto_complete_input_fld" 
                                 onBlur={()=>{
@@ -201,14 +202,15 @@ function SearchForm(){
                                 </ul>
                             </div>
                         </div>
-                        <div className="main-search_txt_input" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none"}}>
+                        <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                             <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
                             <input id="search_forms_to_where_input_fld" onClick={open_to_where_auto_complete_pane} type="text" autocomplete="off" placeholder="to where?" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div onClick={show_search_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", border: "none"}}>
+            </div>
+            <div onClick={show_search_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", border: "none", borderRadius: 50}}>
                 <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
             </div>
         </div>

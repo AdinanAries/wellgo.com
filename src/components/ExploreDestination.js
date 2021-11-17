@@ -27,7 +27,7 @@ export default function ExploreDestinations(){
                             </div>
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <p style={{color: "rgba(0,0,0,0.6)"}}>
-                                    enter airport, dates, cabin...</p>
+                                    enter airports, dates, cabin...</p>
                             </div>
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <div style={{display: "flex", flexDirection: "row"}}>
