@@ -16,7 +16,7 @@ function DownloadMobileApp(){
                             For better user experience, we recommend that you download our mobile app.</p>
                     </div>
                     <div className="download_mobile_app_btn_container">
-                        <div style={{cursor: "pointer", textAlign: "center", color: "white", backgroundColor: "rgb(43, 52, 61)", padding: "14px", borderRadius: 9, minWidth: 120}}>
+                        <div style={{cursor: "pointer", textAlign: "center", color: "white", backgroundColor: "rgb(43, 52, 61)", padding: "14px", borderRadius: 50, minWidth: 120}}>
                             <i className="fa fa-download" style={{marginRight: 7, color: "rgba(255,255,255,0.4)"}}></i>get the app
                         </div>
                     </div>

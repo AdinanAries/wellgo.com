@@ -21,11 +21,11 @@ function SearchForm(){
                                         <div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Adults</div>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                            <div style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div onClick={()=>remove_traveler("adult")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 -</div>
-                                            <div style={{color: "rgba(0,0,0,0.7)", width: 40, height: 30, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div id="add_travelers_display_adults_number" style={{color: "rgba(0,0,0,0.7)", width: 40, height: 30, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 1</div>
-                                            <div style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div onClick={()=>add_traveler("adult")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 +</div>
                                         </div>
                                     </div>
@@ -35,11 +35,11 @@ function SearchForm(){
                                             <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>Ages 2 to 17</p>
                                             </div>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                            <div style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div onClick={()=>remove_traveler("child")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 -</div>
-                                            <div style={{color: "rgba(0,0,0,0.7)", width: 40, height: 30, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div id="add_travelers_display_children_number" style={{color: "rgba(0,0,0,0.7)", width: 40, height: 30, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 0</div>
-                                            <div style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div onClick={()=>add_traveler("child")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 +</div>
                                         </div>
                                     </div>
@@ -49,11 +49,11 @@ function SearchForm(){
                                             <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>Younger than 2</p>
                                         </div>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                            <div style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div onClick={()=>remove_traveler("infant")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 -</div>
-                                            <div style={{color: "rgba(0,0,0,0.7)", width: 40, height: 30, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div id="add_travelers_display_infants_number" style={{color: "rgba(0,0,0,0.7)", width: 40, height: 30, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 0</div>
-                                            <div style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <div onClick={()=>add_traveler("infant")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 +</div>
                                         </div>
                                     </div>
@@ -61,50 +61,50 @@ function SearchForm(){
                                 <div id="select_cabin_settings_pane" style={{padding: 15, display: "none"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
                                         Select Cabin</p>
-                                    <div style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <div onClick={()=>select_cabin_type("economy")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                         <label htmlFor="select_cabin_economy_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Economy</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input id="select_cabin_economy_chk" style={{width: 20, height: 20}} type="radio" checked="true"/>
+                                            <input className="select_cabin_type_chk" id="select_cabin_economy_chk" style={{width: 20, height: 20}} type="radio" checked="true"/>
                                         </div>
                                     </div>
-                                    <div style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <div onClick={()=>select_cabin_type("business")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                         <label htmlFor="select_cabin_business_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Business</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input id="select_cabin_business_chk" style={{width: 20, height: 20}} type="radio" />
+                                            <input className="select_cabin_type_chk" id="select_cabin_business_chk" style={{width: 20, height: 20}} type="radio" />
                                         </div>
                                     </div>
-                                    <div style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <div onClick={()=>select_cabin_type("first")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                         <label htmlFor="select_cabin_first_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             First</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input id="select_cabin_first_chk" style={{width: 20, height: 20}} type="radio" />
+                                            <input className="select_cabin_type_chk" id="select_cabin_first_chk" style={{width: 20, height: 20}} type="radio" />
                                         </div>
                                     </div>
                                 </div>
                                 <div id="select_trip_round_settings_pane" style={{padding: 15, display: "none"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
                                         Select Trip Round</p>
-                                    <div style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <div onClick={()=>select_trip_round("round-trip")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                         <label htmlFor="trip_round_round_trip_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Round-trip</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input id="trip_round_round_trip_chk" style={{width: 20, height: 20}} type="radio" checked="true"/>
+                                            <input className="select_trip_round_chk" id="trip_round_round_trip_chk" style={{width: 20, height: 20}} type="radio" checked="true"/>
                                         </div>
                                     </div>
-                                    <div style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <div onClick={()=>select_trip_round("one-way")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                         <label htmlFor="trip_round_one_way_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             One-way</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input id="trip_round_one_way_chk" style={{width: 20, height: 20}} type="radio" />
+                                            <input className="select_trip_round_chk" id="trip_round_one_way_chk" style={{width: 20, height: 20}} type="radio" />
                                         </div>
                                     </div>
-                                    <div style={{cursor: "not-allowed", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <div onClick={()=>select_trip_round("multi-city")} style={{cursor: "not-allowed", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                         <label htmlFor="trip_round_multi_city_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Multi-city</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input id="trip_round_multi_city_chk" style={{width: 20, height: 20}} type="radio" />
+                                            <input className="select_trip_round_chk" id="trip_round_multi_city_chk" style={{width: 20, height: 20}} type="radio" />
                                         </div>
                                     </div>
                                 </div>
@@ -112,15 +112,15 @@ function SearchForm(){
                                         Done
                                     </div>
                             </div>
-                            <div onClick={show_cabin_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div id="select_cabin_type_main_input_display" onClick={show_cabin_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                                 <i style={{fontSize: 15, marginRight: 10}} className="fa fa-level-up"></i>
                                 Economy
                             </div>
-                            <div onClick={show_travelers_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div id="add_travelers_main_input_display" onClick={show_travelers_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                                 <i style={{fontSize: 15, marginRight: 10}} className="fa fa-user"></i>
                                 1 Adult
                             </div>
-                            <div onClick={show_trip_round_settings_pane} className="searchFormChkInputLbl" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div id="select_trip_round_main_input_display" onClick={show_trip_round_settings_pane} className="searchFormChkInputLbl" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                                 <i style={{fontSize: 15, marginRight: 10}} className="fa fa-repeat"></i>
                                 Round-trip
                             </div>
@@ -266,6 +266,283 @@ function show_travelers_settings_pane(){
 
     document.getElementById("select_trip_round_settings_pane").style.display = "none";
     document.getElementById("select_cabin_settings_pane").style.display = "none";
+}
+
+function select_cabin_type(type="economy"){
+    Array.from(document.getElementsByClassName("select_cabin_type_chk")).forEach( each=> {
+        each.checked = false;
+    });
+    if(type === "economy"){
+        document.getElementById("select_cabin_economy_chk").checked = true;
+        document.getElementById("select_cabin_type_main_input_display").innerHTML = `
+            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
+            Economy
+        `;
+    }else if(type === "business"){
+        document.getElementById("select_cabin_business_chk").checked = true;
+        document.getElementById("select_cabin_type_main_input_display").innerHTML = `
+            <i style="font-size: 15px; margin-right: 10px" class="fa fa-level-up"></i>
+            Business
+        `;
+    }else if(type === "first"){
+        document.getElementById("select_cabin_first_chk").checked = true;
+        document.getElementById("select_cabin_type_main_input_display").innerHTML = `
+            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
+            First
+        `;
+    }
+}
+
+function select_trip_round(type="round-trip"){
+    Array.from(document.getElementsByClassName("select_trip_round_chk")).forEach( each=> {
+        each.checked = false;
+    });
+    if(type === "round-trip"){
+        document.getElementById("trip_round_round_trip_chk").checked = true;
+        document.getElementById("select_trip_round_main_input_display").innerHTML = `
+            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
+            Round-trip
+        `;
+    }else if(type === "one-way"){
+        document.getElementById("trip_round_one_way_chk").checked = true;
+        document.getElementById("select_trip_round_main_input_display").innerHTML = `
+            <i style="font-size: 15px; margin-right: 10px" class="fa fa-repeat"></i>
+            One-way
+        `;
+    }else if(type === "multi-city"){
+        document.getElementById("trip_round_multi_city_chk").checked = true;
+        document.getElementById("select_trip_round_main_input_display").innerHTML = `
+            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
+            Multi-city
+        `;
+    }
+}
+
+let travelers = {
+    adults: 1,
+    children: 0,
+    infants: 0,
+}
+function add_traveler(type="adult"){
+
+    if((travelers.adults + travelers.children + travelers.infants) > 14){
+        alert("only maximum of 15 travelers allowed")
+        return;
+    }
+
+    if(type === "adult"){
+        travelers.adults += 1;
+
+        if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
+            document.getElementById("add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers.adults} Adults`;
+        }else{
+            (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults + travelers.children + travelers.infants} Travelers
+                ` : document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults} Adult
+                    `
+        }
+
+        document.getElementById("add_travelers_display_adults_number").innerHTML = travelers.adults;
+    }else if(type === "child"){
+        travelers.children += 1;
+
+        if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
+            document.getElementById("add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers.children} Children`;
+        }else{
+            (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults + travelers.children + travelers.infants} Travelers
+                `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.children} Child
+                    `
+        }
+            document.getElementById("add_travelers_display_children_number").innerHTML = travelers.children;
+    }else if(type === "infant"){
+        travelers.infants += 1;
+
+        if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
+            document.getElementById("add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers.infants} Infants`;
+        }else{
+            (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults + travelers.children + travelers.infants} Travelers
+                `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.infants} Infant
+            `
+        }
+        
+        document.getElementById("add_travelers_display_infants_number").innerHTML = travelers.infants;
+    }
+}
+
+function remove_traveler(type="adult"){
+
+    if((travelers.adults + travelers.children + travelers.infants) < 2){
+        alert("at least one(1) adult or child traveler required")
+        return;
+    }
+
+    if(type === "adult"){
+        travelers.adults -= 1;
+        if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
+            document.getElementById("add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers.adults} Adults`;
+        }else if(travelers.adults < 1 && travelers.infants > 0 && travelers.children == 0){
+            if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.infants} Infants`;
+            }else{
+                (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                    document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.infants} Infant
+                `
+            }
+        }else if(travelers.adults < 1 && travelers.infants == 0 && travelers.children > 0){
+            if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.children} Children`;
+            }else{
+                (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                    document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                            ${travelers.children} Child
+                        `
+            }
+        }else{
+            (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults + travelers.children + travelers.infants} Travelers
+                ` : document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults} Adult
+                    `
+        }
+
+        document.getElementById("add_travelers_display_adults_number").innerHTML = travelers.adults;
+    }else if(type === "child"){
+        travelers.children -= 1;
+
+        if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
+            document.getElementById("add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers.children} Children`;
+        }else if(travelers.adults == 0 && travelers.infants > 0 && travelers.children < 1){
+            if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.infants} Infants`;
+            }else{
+                (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                    document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.infants} Infant
+                `
+            }
+        }else if(travelers.adults > 0 && travelers.infants == 0 && travelers.children < 1){
+            if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults} Adults`;
+            }else{
+                (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                    document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    ` : document.getElementById("add_travelers_main_input_display").innerHTML = `
+                            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                            ${travelers.adults} Adult
+                        `
+            }
+        }else{
+            (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults + travelers.children + travelers.infants} Travelers
+                `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.children} Child
+                    `
+        }
+
+        document.getElementById("add_travelers_display_children_number").innerHTML = travelers.children;
+    }else if(type === "infant"){
+        travelers.infants -= 1;
+
+        if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
+            document.getElementById("add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers.infants} Infants`;
+        }else if(travelers.adults == 0 && travelers.infants < 1 && travelers.children > 0){
+            if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.infants} Infants`;
+            }else{
+                (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                    document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.infants} Infant
+                `
+            }
+        }else if(travelers.adults > 0 && travelers.infants < 1 && travelers.children == 0){
+            if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults} Adults`;
+            }else{
+                (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                    document.getElementById("add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    ` : document.getElementById("add_travelers_main_input_display").innerHTML = `
+                            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                            ${travelers.adults} Adult
+                        `
+            }
+        }else{
+            (travelers.adults + travelers.children + travelers.infants) > 1 ?
+                document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.adults + travelers.children + travelers.infants} Travelers
+                `: document.getElementById("add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers.infants} Infant
+            `
+        }
+        
+        document.getElementById("add_travelers_display_infants_number").innerHTML = travelers.infants;
+    }
 }
 
 export default SearchForm;
