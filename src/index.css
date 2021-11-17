@@ -604,6 +604,9 @@ footer {
   border-radius: 20px;
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
+#landing_page_search_form_show_filters_btn:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
   .search_forms_promo_card{

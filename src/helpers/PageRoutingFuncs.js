@@ -74,6 +74,9 @@ export function show_explore_page(){
 }
 
 export function show_full_search_form(){
+    
+    window.scrollTo(0, 0);
+
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="block";
 }

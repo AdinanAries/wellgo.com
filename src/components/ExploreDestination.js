@@ -8,6 +8,8 @@ import user_account_icon from "../icons/user_account_icon.png";
 
 import { show_login_page, show_full_search_form, show_trips_page, show_explore_page } from '../helpers/PageRoutingFuncs';
 
+import $ from "jquery"
+
 export default function ExploreDestinations(){
     return (
             <div className="explore_destinations_promo_card">
@@ -21,15 +23,15 @@ export default function ExploreDestinations(){
                             Our interest is to make travel affordable 
                             because we believe that people should go places...
                         </p>
-                        <div onClick={show_full_search_form} style={{cursor: "pointer", textShadow: "none", backgroundColor: "white", height: 50, padding: "0 15px", maxWidth: 500, margin: "auto", marginTop: 40, display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.7)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                        <div style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "white", height: 50, paddingLeft: 15, maxWidth: 500, margin: "auto", marginTop: 40, display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.7)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            <div onClick={show_full_search_form} style={{position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <i style={{color: "rgba(0,0,0,0.4)"}} className="fa fa-search"></i>
                             </div>
-                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <div onClick={show_full_search_form} style={{position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <p style={{color: "rgba(0,0,0,0.6)"}}>
                                     enter airports, dates, cabin...</p>
                             </div>
-                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 1, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <div style={{display: "flex", flexDirection: "row"}}>
                                     <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>
@@ -37,6 +39,37 @@ export default function ExploreDestinations(){
                                         <i style={{marginLeft: 7, fontSize: 16, color: "rgba(0,0,0,0.4)"}} className="fa fa-angle-down"></i></p>
                                 </div>
                             </div>
+
+                            <div id="landing_page_search_filters_container" style={{display: "none", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
+                                <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.7)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
+                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end", cursor: "pointer", padding: 5}}>
+                                        <p style={{display: "flex", fontSize: 14, flexDirection: "column", justifyContent: "center", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
+                                            Flights Bookings</p>
+                                        <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
+                                            <i style={{fontSize: 14, color: "white"}} className="fa fa-plane"></i>
+                                        </p>
+                                    </div>
+                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end", cursor: "pointer", padding: 5}}>
+                                        <p style={{display: "flex", fontSize: 14, flexDirection: "column", justifyContent: "center", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
+                                            Hotels Bookings</p>
+                                        <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
+                                            <i style={{fontSize: 14, color: "white"}} className="fa fa-bed"></i>
+                                        </p>
+                                    </div>
+                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end", cursor: "pointer", padding: 5}}>
+                                        
+                                        <p style={{display: "flex", fontSize: 14, flexDirection: "column", justifyContent: "center", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
+                                            Food Delivery</p>
+                                        <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
+                                            <i style={{fontSize: 14, color: "white"}} className="fa fa-cutlery"></i>
+                                        </p>
+                                    </div>
+                                    <p style={{textAlign: "center", color: "rgba(0,0,0,0.4)", fontSize: 13, marginTop: 10, padding: 10, paddingTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+                                        Wellgo.com &copy; 2022, all rights reserved
+                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div style={{textShadow: "none", height: 50, padding: "0 15px", width: "fit-content", margin: "auto", marginTop: 30, display: "flex", borderRadius: 50, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
@@ -56,4 +89,14 @@ export default function ExploreDestinations(){
             </div>
         
     );
+}
+
+let is_landing_page_search_filters_open = false;
+function toggle_main_page_search_filters(){
+    if(is_landing_page_search_filters_open){
+        $("#landing_page_search_filters_container").slideUp("fast");
+    }else{
+        $("#landing_page_search_filters_container").slideDown("fast");
+    }
+    is_landing_page_search_filters_open = !is_landing_page_search_filters_open;
 }
