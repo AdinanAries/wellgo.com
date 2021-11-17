@@ -116,14 +116,14 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 20px;
+  margin-right: 25px;
 }
 .header_mobile_menus i {
   color: rgb(11, 71, 95);
-  font-size: 23px;
+  font-size: 21px;
 }
 .header_mobile_menus_item.active i{
-  color: #c900b0;
+  color: #c900b1c9;
 }
 .site-logo{
   cursor: pointer;
@@ -135,7 +135,7 @@ header {
   justify-content: center;
 }
 .site-logo p img{
-  width: 55px;
+  width: 45px;
 }
 .site-logo-txt{
   margin-left: 5px;
@@ -146,6 +146,7 @@ header {
 .site-logo-txt p{
   color: rgb(44, 107, 128);
   font-family: Sans-serif;
+  font-family: 'Prompt', sans-serif;
   font-weight: 1000;
   font-size: 23px;
 }
@@ -159,7 +160,7 @@ main {
   text-align: center;
 }
 .footer-site-logo img{
-  width: 90px;
+  width: 50px;
 }
 footer {
   background-color: rgb(43, 52, 61);
@@ -285,6 +286,7 @@ footer {
   color: rgb(11, 71, 95);
   font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Prompt', sans-serif;
 }
 .header-menu-items .each-header-menu-item i {
   color: rgb(11, 71, 95);;
@@ -741,7 +743,7 @@ footer {
     display: none;
   }
   .site-logo p img{
-    width: 45px;
+    width: 35px;
   }
   .site-logo-txt{
     margin-left: 5px;
@@ -751,7 +753,6 @@ footer {
   }
   .site-logo-txt p{
     color: rgb(44, 107, 128);
-    font-family: Sans-serif;
     font-weight: 1000;
     font-size: 20px;
   }
@@ -807,7 +808,7 @@ footer {
   .why-choose-us-container {
     margin-top: -0px;
     display: block;
-    padding: 30px 5px;
+    padding: 30px 10px;
     padding-bottom: 10px;
   }
   .why-choose-us-container .each-choose-us-container {
@@ -816,10 +817,9 @@ footer {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .download_mobile_section {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    margin: 5px;
-    margin-bottom: 30px;
-    padding-top: 20px;
+    margin: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
   }
   .download_mobile_app_section_container {
     display: block;

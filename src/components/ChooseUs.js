@@ -6,7 +6,7 @@ var ChooseUs = ()=>{
     return (
         <div>
             <div className="wrapper">
-                <div style={{padding: 10, margin: "0 5px", marginBottom: 20, marginTop: -50, backgroundColor: "white", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
+                <div style={{padding: 10, margin: "0 10px", marginBottom: 20, marginTop: -50, backgroundColor: "white", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
                     <h1 style={{textAlign: "center", fontSize: 20, marginTop: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "Sans-serif"}}
                     >Get the Best Deals!</h1>
                     <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", margin: "0 5px", fontWeight: "bolder", fontSize: 15}}
@@ -34,7 +34,7 @@ var ChooseUs = ()=>{
                             <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
                                 This is a place holder text for the description of this info card</p>
                         </div>
-                        <div className="each-choose-us-container">
+                        <div style={{border: "none"}} className="each-choose-us-container">
                             
                             <div style={{backgroundImage: `url('${bestdealssvg}')`, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center",
                                 height: 150, marginTop: 5, marginBottom: 5}}>
