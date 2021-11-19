@@ -2,11 +2,14 @@ import securepaymentssvg from '../icons/securepayments.svg';
 import bestdealssvg from '../icons/bestdeals.svg';
 import customersupportsvg from '../icons/customersupport.svg';
 
+import DownloadMobileApp from "./DownloadMobileApp";
+
 var ChooseUs = ()=>{
     return (
         <div>
             <div className="wrapper">
-                <div style={{padding: 10, margin: "0 10px", marginBottom: 20, marginTop: -50, backgroundColor: "white", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
+                <div style={{padding: 10, margin: "0 10px", marginBottom: 20, marginTop: -60, backgroundColor: "white", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
+                    <div style={{width: 90, margin: "auto", marginBottom: 40, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.3)", borderRadius: 500}}></div>
                     <h1 style={{textAlign: "center", fontSize: 20, marginTop: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                     >Get the Best Deals!</h1>
                     <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", margin: "0 5px", fontWeight: "bolder", fontSize: 15}}
@@ -46,6 +49,7 @@ var ChooseUs = ()=>{
                                 This is a place holder text for the description of this info card</p>
                         </div>
                     </div>
+                    <DownloadMobileApp />
                 </div>
             </div>
         </div>

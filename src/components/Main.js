@@ -1,6 +1,5 @@
 import SearchForm from "./SearchForm";
 import ChooseUs from "./ChooseUs";
-import DownloadMobileApp from "./DownloadMobileApp";
 import ExploreDestinations from "./ExploreDestination";
 
 import explore_page_hero from "../explore_page_hero.jpg";
@@ -34,7 +33,7 @@ function Main(){
             </div>
             <ExploreDestinations />
             <ChooseUs />
-            <DownloadMobileApp />
+            
         </main>
     );
 }
