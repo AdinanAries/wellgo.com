@@ -4,6 +4,8 @@ import ExploreDestinations from "./ExploreDestination";
 
 import explore_page_hero from "../explore_page_hero.jpg";
 
+import { show_explore_page } from "../helpers/PageRoutingFuncs";
+
 //backgroundImage: `url('${explore_page_hero}')`,
 
 function Main(){
@@ -25,7 +27,7 @@ function Main(){
                             We got you on these amaizing trip ideas that will 
                             make you want to do it over again
                         </p>
-                        <div style={{padding: 14, color: "orange", cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginTop: 15, width: "fit-content", borderRadius: 50}}>
+                        <div onClick={show_explore_page} style={{padding: 14, color: "orange", cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginTop: 15, width: "fit-content", borderRadius: 50}}>
                             <i className="fa fa-globe" style={{marginRight: 7, fontSize: 19, color: "rgba(255,255,5,0.5)"}}></i>Start exploring
                         </div>
                     </div>

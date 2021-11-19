@@ -24,14 +24,14 @@ export default function ExploreDestinations(){
                             because we believe that people should go places...
                         </p>
                         <div style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "white", height: 50, paddingLeft: 15, maxWidth: 500, margin: "auto", marginTop: 40, display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.7)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                            <div onClick={show_full_search_form} style={{position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <i style={{color: "rgba(0,0,0,0.4)"}} className="fa fa-search"></i>
                             </div>
-                            <div onClick={show_full_search_form} style={{fontFamily: "'Prompt', sans-serif", position: "relative", zIndex: 1, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
+                            <div onClick={show_full_search_form} style={{fontFamily: "'Prompt', sans-serif", position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                 <p style={{color: "rgba(0,0,0,0.6)"}}>
                                     enter airports, dates, cabin...</p>
                             </div>
-                            <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 1, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                 <div style={{display: "flex", flexDirection: "row"}}>
                                     <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>
@@ -40,7 +40,7 @@ export default function ExploreDestinations(){
                                 </div>
                             </div>
 
-                            <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
+                            <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
                                 <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
                                     <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "pointer", padding: "15px 0", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                                         <div style={{display: "flex", flexDirection: "column",}}>
@@ -87,15 +87,24 @@ export default function ExploreDestinations(){
                     </div>
                     <div style={{textShadow: "none", height: 50, padding: "0 15px", width: "fit-content", margin: "auto", marginTop: 30, display: "flex", borderRadius: 50, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                         <div style={{display: "flex", flexDirection: "row"}}>
-                            <p onClick={show_trips_page} style={{display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: 10.5, marginRight: 20, borderRadius: 20, textAlign: "center", width: 50, backgroundColor: "rgb(255,255,255)", cursor: "pointer", boxShadow: "1px 2px 3px rgba(0,0,0,0.7)"}}>
+                            <div className="landing_page_hero_menu_items" onClick={show_trips_page}>
                                 <img src={trips_icon} style={{width: 29, height: "auto"}} />
-                            </p>
-                            <p onClick={show_explore_page} style={{display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: 10.5, marginRight: 20, borderRadius: 20, textAlign: "center", width: 50, backgroundColor: "rgb(255,255,255)", cursor: "pointer", boxShadow: "1px 2px 3px rgba(0,0,0,0.7)"}}>
+                                <p className="landing_page_hero_menu_item_tooltip">
+                                    Trips
+                                </p>
+                            </div>
+                            <div className="landing_page_hero_menu_items" onClick={show_explore_page}>
                                 <img src={explore_icon} style={{width: 29, height: "auto"}} />
-                            </p>
-                            <p onClick={show_login_page} style={{display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: 9, marginRight: 20, borderRadius: 20, textAlign: "center", width: 50, backgroundColor: "rgb(255,255,255)", cursor: "pointer", boxShadow: "1px 2px 3px rgba(0,0,0,0.7)"}}>
+                                <p className="landing_page_hero_menu_item_tooltip">
+                                    Explore
+                                </p>
+                            </div>
+                            <div className="landing_page_hero_menu_items" onClick={show_login_page} style={{paddingLeft: 9}}>
                                 <img src={user_account_icon} style={{width: 32, height: "auto"}} />
-                            </p>
+                                <p className="landing_page_hero_menu_item_tooltip">
+                                    Account
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

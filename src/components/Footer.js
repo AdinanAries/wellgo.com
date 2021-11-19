@@ -46,7 +46,7 @@ function Footer(){
                             <div style={{marginTop: 10}}>
                                 <p style={{color: "white", textAlign: "center"}}>
                                     <i style={{marginRight: 10, opacity: 0.4, marginBottom: 8}} className="fa fa-envelope"></i>
-                                    support@willgo.com
+                                    support@wellgo.com
                                 </p>
                                 <p style={{color: "white", textAlign: "center"}}>
                                     <i style={{marginRight: 10, opacity: 0.4, marginBottom: 20}} className="fa fa-phone"></i>
@@ -68,7 +68,7 @@ function Footer(){
                     </div>
                 </div>
                 <p className="footer_very_lower_text" style={{marginTop: 20, textAlign: "center", opacity: 0.6, paddingTop: 20, color: "rgba(255,255,255,0.5)", borderTop: "1px solid rgba(255,255,255,0.3)"}}>
-                    &copy; 2022 willgo.com, all rights reserved</p>
+                    &copy; 2022 wellgo.com, all rights reserved</p>
             </div> 
         </footer>
     );
