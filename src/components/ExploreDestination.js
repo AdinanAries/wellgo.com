@@ -40,8 +40,8 @@ export default function ExploreDestinations(){
                                 </div>
                             </div>
 
-                            <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "rgba(255,255,255,0.9)"}}>
-                                <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
+                            <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
+                                <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
                                     <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "pointer", padding: "15px 0", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                                         <div style={{display: "flex", flexDirection: "column",}}>
                                             <p style={{fontSize: 15, color: "rgba(0,0,0,0.8)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
@@ -80,9 +80,6 @@ export default function ExploreDestinations(){
                                             <i style={{fontSize: 14, color: "white"}} className="fa fa-cutlery"></i>
                                         </p>
                                     </div>
-                                    <p style={{textAlign: "center", color: "rgba(0,0,0,0.5)", fontSize: 13, marginTop: 10, padding: 15, paddingBottom: 5, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
-                                        Wellgo.com &copy; 2022, all rights reserved
-                                    </p>
                                 </div>
                             </div>
 
