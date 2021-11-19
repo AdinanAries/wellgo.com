@@ -40,15 +40,15 @@ export default function ExploreDestinations(){
                                 </div>
                             </div>
 
-                            <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
-                                <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.7)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
+                            <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "rgba(255,255,255,0.9)"}}>
+                                <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
                                     <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "pointer", padding: "15px 0", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                                         <div style={{display: "flex", flexDirection: "column",}}>
-                                            <p style={{fontSize: 15, color: "rgba(0,0,0,0.6)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
-                                                Flights</p>
+                                            <p style={{fontSize: 15, color: "rgba(0,0,0,0.8)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
+                                                flights</p>
                                             <p style={{fontSize: 12, marginTop: 3, letterSpacing: 1, color: "rgba(0,0,0,0.6)", fontWeight: "bolder"}}>
                                                 <i style={{marginRight: 5, color: "rgb(0,205,0)"}} className="fa fa-check"></i>
-                                                Buy cheapest flights here</p>
+                                                buy cheapest flights here...</p>
                                         </div>
                                         <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "rgb(0,0,255,0.6)", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
                                             <i style={{fontSize: 14, color: "white"}} className="fa fa-plane"></i>
@@ -56,11 +56,11 @@ export default function ExploreDestinations(){
                                     </div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "not-allowed", padding: "15px 0", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
-                                            <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
-                                                Hotels</p>
+                                            <p style={{fontSize: 15, color: "rgba(0,0,0,0.8)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
+                                                hotels</p>
                                             <p style={{fontSize: 12, marginTop: 3, letterSpacing: 1, fontWeight: "bolder", color: "rgba(0,0,0,0.6)"}}>
                                                 <i style={{marginRight: 5, color: "orangered"}} className="fa fa-exclamation-triangle"></i>
-                                                unavailable at the moment
+                                                unavailable at the moment...
                                             </p>
                                         </div>
                                         <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
@@ -69,18 +69,18 @@ export default function ExploreDestinations(){
                                     </div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "not-allowed", padding: "15px 0"}}>
                                         <div style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
-                                            <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", fontWeight: "bolder", letterSpacing: 1, textAlign: ""}}>
-                                                Food Delivery</p>
+                                            <p style={{fontSize: 15, color: "rgba(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1, textAlign: ""}}>
+                                                food delivery</p>
                                             <p style={{fontSize: 12, marginTop: 3, letterSpacing: 1, fontWeight: "bolder", color: "rgba(0,0,0,0.6)"}}>
                                                 <i style={{marginRight: 5, color: "orangered"}} className="fa fa-exclamation-triangle"></i>
-                                                unavailable at the moment
+                                                unavailable at the moment...
                                             </p>
                                         </div>
                                         <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
                                             <i style={{fontSize: 14, color: "white"}} className="fa fa-cutlery"></i>
                                         </p>
                                     </div>
-                                    <p style={{textAlign: "center", color: "rgba(0,0,0,0.4)", fontSize: 13, marginTop: 10, padding: 10, paddingTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+                                    <p style={{textAlign: "center", color: "rgba(0,0,0,0.5)", fontSize: 13, marginTop: 10, padding: 15, paddingBottom: 5, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
                                         Wellgo.com &copy; 2022, all rights reserved
                                     </p>
                                 </div>
