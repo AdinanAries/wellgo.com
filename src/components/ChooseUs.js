@@ -8,7 +8,7 @@ var ChooseUs = ()=>{
     return (
         <div>
             <div className="wrapper">
-                <div style={{padding: 10, margin: "0 10px", marginBottom: 20, marginTop: -60, backgroundColor: "white", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
+                <div style={{padding: 10, margin: "0 10px", marginBottom: 20, marginTop: "calc(100vh - 30px)", backgroundColor: "white", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
                     <div style={{width: 90, margin: "auto", marginBottom: 40, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.3)", borderRadius: 500}}></div>
                     <h1 style={{textAlign: "center", fontSize: 20, marginTop: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                     >Get the Best Deals!</h1>
