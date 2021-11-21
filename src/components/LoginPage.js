@@ -6,7 +6,7 @@ export default function LoginPage(){
             <div className="wrapper">
                 <div id="main_login_form" style={{padding: "30px 5px"}}>
                     <p style={{marginLeft: 20, fontSize: 30, fontWeight: "bolder", color: "rgba(0,0,0,0.8)"}}>Login</p>
-                    <div style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", border: "1px solid rgba(0,0,0,0.2)", borderRadius: 9, overflow: "hidden"}}>
+                    <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                         <p style={{padding: 15, backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", letterSpacing: 1, marginBottom: 10, color: "white"}}>
                             <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-sign-in"></i>
                             Sign In</p>
@@ -35,7 +35,7 @@ export default function LoginPage(){
                 </div>
                 <div id="main_signup_form" style={{display: "none", padding: "30px 5px"}}>
                     <p style={{marginLeft: 20, fontSize: 30, fontWeight: "bolder", color: "rgba(0,0,0,0.8)"}}>Login</p>
-                        <div style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", border: "1px solid rgba(0,0,0,0.2)", borderRadius: 9, overflow: "hidden"}}>
+                        <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                         <p style={{padding: 15, backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", letterSpacing: 1, marginBottom: 10, color: "white"}}>
                             <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-user"></i>
                             Signup</p>

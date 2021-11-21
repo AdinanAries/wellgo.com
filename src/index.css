@@ -733,6 +733,15 @@ footer {
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .login_page_form_container{
+    box-shadow: none !important;
+    border-radius: 0 !important;
+
+  }
+  #main_signup_form, #main_login_form{
+    padding: 0 !important;
+    padding-top: 30px;
+  }
   .ticket_loader_info_1{
     width: 70%;
     margin-bottom: 5px;
