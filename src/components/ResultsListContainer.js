@@ -1,6 +1,7 @@
 import explore_page_hero from "../explore_page_hero.jpg";
 
 import deltaIcon from "../deltaIcon.png";
+import airplane from "../icons/airplane.svg";
 
 import { show_explore_page } from "../helpers/PageRoutingFuncs";
 import { show_selected_ticket_details_pane } from "./SelectedTicketPane";
@@ -8,6 +9,7 @@ import { show_selected_ticket_details_pane } from "./SelectedTicketPane";
 export default function ResultsListContainer(){
     return (
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+
             <div style={{display: "none", animation: "item_slide_down 0.5s ease-in"}} id="itinerary_and_filter_icon">
                 <div>
                     <p style={{fontSize: 16, fontFamily: "'Prompt', sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
@@ -210,6 +212,9 @@ export default function ResultsListContainer(){
                                 </option>
                             </select>
                         </div>*/}
+                    </div>
+                    <div id="animated_loader" style={{position: "relative", height: 190}}>
+                        <div style={{backgroundImage: `url('${airplane}')`, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", width: 120, height: 120, position: "absolute", left: "calc(50% - 80px)", zIndex: 2, animation: "moving_plane 5s ease-in-out infinite"}}></div>
                     </div>
                     <div style={{animation: "item_slide_down 0.5s ease-in", marginBottom: 20}} className="search_result_inportant_notice_container">
                         <div>
