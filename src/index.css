@@ -29,8 +29,12 @@ body {
   0%{
     opacity: 0;
   }
+  50%{
+    opacity: 1;
+    transform: scale(1.1);
+  }
   100%{
-
+    transform: scale(1);
   }
 }
 /*-----------------------------------------------------------*/
@@ -421,6 +425,7 @@ footer {
   padding: 10px 0;
 }
 .airports_auto_complete_close_btn {
+  z-index: 2;
   position: absolute;
   right: 15px;
   top: 10px;
@@ -634,7 +639,7 @@ footer {
   border-radius: 20px;
   text-align: center;
   width: 50px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.87);
   cursor: "pointer";
   box-shadow: 1px 2px 3px rgba(0,0,0,0.3);
 }
@@ -739,6 +744,7 @@ footer {
     padding: 0 10px;
     width: 100vw;
     position: fixed;
+    z-index: 1001;
     top: 0;
     left: 0;
     background-color: white;

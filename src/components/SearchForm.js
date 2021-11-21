@@ -213,10 +213,10 @@ function SearchForm(){
                     </div>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
-                    <div onClick={show_home_page} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.2)", border: "none", borderRadius: 50}}>
+                    <div onClick={show_home_page} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
                         <i className="fa fa-times" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Close
                     </div>
-                    <div onClick={show_search_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.2)", border: "none", borderRadius: 50}}>
+                    <div onClick={show_search_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
                         <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
                     </div>
                 </div>

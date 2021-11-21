@@ -16,22 +16,22 @@ export default function ExploreDestinations(){
                 <div>
                     <div className="wrapper">
                         <div style={{marginBottom: 60}}>
-                            <p style={{color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38}}>
+                            <p style={{color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38, animation: "fade_and_pop 0.5s 0.2s ease-in", transition: "all 2s"}}>
                                 Wellgo.com</p>
-                            <p style={{marginTop: -9,color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 30 }}>
+                            <p style={{marginTop: -9,color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28 }}>
                                 Cheap Flight Tickets</p>
-                            <p style={{color: "white", maxWidth: 350, marginTop: 10, marginBottom: 10, fontFamily: "'Prompt', sans-serif", lineHeight: 1.1}}>
+                            <p style={{color: "white", maxWidth: 350, marginTop: 10, marginBottom: 10, animation: "fade_and_pop 0.5s 0.8s ease-in", transition: "all 2s", fontFamily: "'Prompt', sans-serif", lineHeight: 1.1}}>
                                 Our interest is to make travel affordable 
                                 because we believe that people should go places
                             </p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(255, 255, 255, 0.8)", height: 60, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(255, 255, 255, 0.87)", height: 60, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                 <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                    <i style={{color: "rgba(0,0,0,0.4)"}} className="fa fa-search"></i>
+                                    <i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>
                                 </div>
                                 <div onClick={show_full_search_form} style={{fontFamily: "'Prompt', sans-serif", position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
-                                    <p style={{color: "rgba(0,0,0,0.6)", textAlign: "left"}}>
+                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "left"}}>
                                         enter airports, dates, cabin...</p>
                                 </div>
                                 <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center"}}>
@@ -39,13 +39,13 @@ export default function ExploreDestinations(){
                                         <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>
                                         <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <i id="landing_page_search_form_show_filters_btn_caret" style={{marginLeft: 7, fontSize: 16, color: "rgba(0,0,0,0.4)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
+                                            <i id="landing_page_search_form_show_filters_btn_caret" style={{marginLeft: 7, fontSize: 16, color: "rgba(0,0,0,0.5)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
                                     </div>
                                 </div>
 
-                                <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 25px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
+                                <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 27px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
                                     <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
-                                        <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "pointer", padding: "15px 0", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                        <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "pointer", padding: "15px 0", paddingTop: 5, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                                             <div style={{display: "flex", flexDirection: "column",}}>
                                                 <p style={{fontSize: 15, color: "rgba(0,0,0,0.8)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
                                                     flights</p>
@@ -122,7 +122,7 @@ let is_landing_page_search_filters_open = false;
 export function toggle_main_page_search_filters(){
     if(is_landing_page_search_filters_open){
         setTimeout(()=>{
-            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(255, 255, 255, 0.87)";
         }, 200);
         $("#landing_page_search_filters_container").slideUp("fast");
         document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(0deg)";
