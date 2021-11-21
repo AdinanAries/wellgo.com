@@ -8,7 +8,7 @@ import { show_selected_ticket_details_pane } from "./SelectedTicketPane";
 export default function ResultsListContainer(){
     return (
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
-            <div id="itinerary_and_filter_icon">
+            <div style={{display: "none", animation: "item_slide_down 0.5s ease-in"}} id="itinerary_and_filter_icon">
                 <div>
                     <p style={{fontSize: 16, fontFamily: "'Prompt', sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
                         New York
@@ -21,120 +21,172 @@ export default function ResultsListContainer(){
                     <i style={{marginRight: 7}} className="fa fa-sliders" ariaHidden="true"></i>
                     Filters</p>
             </div>
+            <div style={{animation: "item_slide_down 0.5s ease-in"}} id="itinerary_and_filter_icon">
+                <div>
+                    <p className="info_item_loader" style={{fontSize: 16, fontFamily: "'Prompt', sans-serif", color: "rgba(0,0,0,0.0)", fontWeight: "bolder"}}>
+                        New York
+                        <span style={{margin: "0 10px", color: "rgba(0,0,0,0.0)"}}><i className="fa fa-exchange"></i></span>
+                        Canada
+                    </p>
+                    <p className="info_item_loader"  style={{fontSize: 13, color: "rgba(0,0,0,0.0)", marginTop: 2}}>Nov 25 - Nov 27</p>
+                </div>
+                <p className="info_item_loader" style={{fontWeight: "bolder", fontSize: 17}}>
+                    <i style={{marginRight: 7}} className="fa fa-sliders" ariaHidden="true"></i>
+                    Filters</p>
+            </div>
             <div className="search_list_main_flex_container">
                 <div id="search_list_main__settings_section" className="search_list_main__settings_section">
-                    <div id="mobile_sort_and_filter_title_and_sort">
-                        <div style={{height: 50, borderBottom: "1px solid rgba(0,0,0,0.1)", display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                    Sort and Filter
-                                </p>
-                                <p onClick={()=>document.getElementById("search_list_main__settings_section").style.display="none"} id="close_filter_and_sort_btn" style={{color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
-                                    &times;
-                                </p>
-                            </div>
+                    {/**loaders */}
+                    <div style={{marginTop: 20}}>
+                        <div style={{marginBottom: 40}}>
+                            <p  className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 16, fontFamily: "'Prompt', sans-serif", width: "fit-content", fontWeight: "bolder", marginBottom: 10}}>
+                                Important Notice
+                            </p>
+                            <p className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 14, width: 200}}>
+                                Prices displayed include taxes
+                            </p>
                         </div>
-                        <div style={{marginTop: "20px", marginBottom: 35}}>
-                            <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 17}}>Sort by</p>
-                            <select style={{padding: 14, marginTop: 12, width: "100%", border: "1px solid rgba(0,0,0,0.3)", borderRadius: 9, color: "rgba(0,0,0,0.7)",}}>
-                                <option>
-                                    Price (Lowest)
-                                </option>
-                            </select>
+                        <div style={{marginBottom: 40}}>
+                            <p  className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 16, fontFamily: "'Prompt', sans-serif", width: "fit-content", fontWeight: "bolder", marginBottom: 10}}>
+                                Important Notice
+                            </p>
+                            <p className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 14, width: 200}}>
+                                Prices displayed include taxes
+                            </p>
                         </div>
-                    </div>
-                    <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 17, marginBottom: 30}}>
-                        <i style={{marginRight: 7}} className="fa fa-sliders" ariaHidden="true"></i>
-                        Filter by</p>
-
-                    <div style={{marginBottom: 30}}>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 15}}>
-                            <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Stops</p>
-                            <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
+                        <div style={{marginBottom: 40}}>
+                            <p  className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 16, fontFamily: "'Prompt', sans-serif", width: "fit-content", fontWeight: "bolder", marginBottom: 10}}>
+                                Important Notice
+                            </p>
+                            <p className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 14, width: 200}}>
+                                Prices displayed include taxes
+                            </p>
                         </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop (6)</p>
-                            </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$143</p>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>1 Stop (30)</p>
-                            </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$123</p>
+                        <div style={{marginBottom: 40}}>
+                            <p  className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 16, fontFamily: "'Prompt', sans-serif", width: "fit-content", fontWeight: "bolder", marginBottom: 10}}>
+                                Important Notice
+                            </p>
+                            <p className="info_item_loader" style={{color: "rgba(0,0,0,0)", height: 30, fontSize: 14, width: 200}}>
+                                Prices displayed include taxes
+                            </p>
                         </div>
                     </div>
 
-                    <div style={{marginBottom: 20}}>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 15}}>
-                            <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Airlines</p>
-                            <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Air Canada (22)</p>
+                    {/**settings */}
+                    <div style={{display: "none"}}>
+                        <div id="mobile_sort_and_filter_title_and_sort">
+                            <div style={{height: 50, borderBottom: "1px solid rgba(0,0,0,0.1)", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                        Sort and Filter
+                                    </p>
+                                    <p onClick={()=>document.getElementById("search_list_main__settings_section").style.display="none"} id="close_filter_and_sort_btn" style={{color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
+                                        &times;
+                                    </p>
+                                </div>
                             </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$243</p>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>American Airlines (11)</p>
+                            <div style={{marginTop: "20px", marginBottom: 35}}>
+                                <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 17}}>Sort by</p>
+                                <select style={{padding: 14, marginTop: 12, width: "100%", border: "1px solid rgba(0,0,0,0.3)", borderRadius: 9, color: "rgba(0,0,0,0.7)",}}>
+                                    <option>
+                                        Price (Lowest)
+                                    </option>
+                                </select>
                             </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$133</p>
                         </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>United (5)</p>
-                            </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$114</p>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>WestJet (3)</p>
-                            </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$132</p>
-                        </div>
-                    </div>
+                        <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 17, marginBottom: 30}}>
+                            <i style={{marginRight: 7}} className="fa fa-sliders" ariaHidden="true"></i>
+                            Filter by</p>
 
-                    <div style={{marginBottom: 30}}>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 15}}>
-                            <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Travel and baggage</p>
-                            <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Seat choice included</p>
+                        <div style={{marginBottom: 30}}>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 15}}>
+                                <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Stops</p>
+                                <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
                             </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$143</p>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Carry-on bag included</p>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop (6)</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$143</p>
                             </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$123</p>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>No cancel fee</p>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>1 Stop (30)</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$123</p>
                             </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$111</p>
                         </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>No change fee</p>
+
+                        <div style={{marginBottom: 20}}>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 15}}>
+                                <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Airlines</p>
+                                <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
                             </div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$371</p>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Air Canada (22)</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$243</p>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>American Airlines (11)</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$133</p>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>United (5)</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$114</p>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>WestJet (3)</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$132</p>
+                            </div>
+                        </div>
+
+                        <div style={{marginBottom: 30}}>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 15}}>
+                                <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Travel and baggage</p>
+                                <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Seat choice included</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$143</p>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Carry-on bag included</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$123</p>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>No cancel fee</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$111</p>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                <div style={{display: "flex", flexDirection: "row"}}>
+                                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>No change fee</p>
+                                </div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$371</p>
+                            </div>
                         </div>
                     </div>
                 </div>
