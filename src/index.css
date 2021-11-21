@@ -25,6 +25,22 @@ body {
   height: 100vh;
   z-index: 1001;
 }
+@keyframes item_slide_down {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 @keyframes fade_and_pop {
   0%{
     opacity: 0;
@@ -36,6 +52,21 @@ body {
   100%{
     transform: scale(1);
   }
+}
+.info_item_loader{
+  animation: opacity 1s ease-in-out infinite;
+  color: rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 50px;
+}
+.ticket_loader_info_1{
+  width: 45%;
+}
+.ticket_loader_info_2{
+  width: 30%;
+}
+.ticket_loader_info_3{
+  width: 20%;
 }
 /*-----------------------------------------------------------*/
 .drp-selected {
@@ -673,6 +704,19 @@ footer {
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .ticket_loader_info_1{
+    width: 70%;
+    margin-bottom: 5px;
+  }
+  .ticket_loader_info_2{
+    width: 60%;
+  }
+  .ticket_loader_info_3{
+    width: 100%;
+  }
+  .ticket_loader_info_4{
+    width: 50%;
+  }
   #landing_page_search_form_show_filters_btn:hover{
     background: none;
   }
