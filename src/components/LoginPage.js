@@ -5,10 +5,8 @@ export default function LoginPage(){
         <main id="login_page" style={{display: "none"}}>
             <div className="wrapper">
                 <div id="main_login_form" style={{padding: "30px 5px"}}>
-                    <p style={{marginLeft: 20, fontSize: 30, fontWeight: "bolder", color: "rgba(0,0,0,0.8)"}}>Login</p>
                     <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
-                        <p style={{padding: 15, backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", letterSpacing: 1, marginBottom: 10, color: "white"}}>
-                            <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-sign-in"></i>
+                        <p style={{padding: 15, backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", letterSpacing: 1, marginBottom: 10, color: "white"}}>
                             Sign In</p>
                         <div style={{padding: "10px",}}>
                             <div style={{marginBottom: 10}}>
@@ -23,21 +21,24 @@ export default function LoginPage(){
                                     <input type="password" placeholder="Password"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
-                            <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 50}}>
-                                Login
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
+                                <div style={{color: "white", cursor: "pointer", width: "fit-content", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                                    <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-sign-in"></i>
+                                    Login
+                                </div>
                             </div>
-                            <p style={{marginTop: 15, color: "darkcyan", cursor: "pointer", fontSize: 14, textAlign: "center",}}>Forgot your password?</p>
-                            <p onClick={show_signup_form} style={{marginTop: 25, backgroundColor: "rgb(43, 52, 61)", width: "fit-content", color: "white", textAlign: "center", padding: "14px", width: "200px", borderRadius: 5, cursor: "pointer"}}>
-                                <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-user"></i>
-                                Create an Account</p>
+                            <div style={{borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                                <p style={{marginTop: 15, color: "darkcyan", cursor: "pointer", fontSize: 14, textAlign: "center",}}>Forgot your password?</p>
+                                <p onClick={show_signup_form} style={{textAlign: "center", padding: "14px", fontSize: 14, borderRadius: 5, cursor: "pointer"}}>
+                                    <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-user"></i>
+                                    Create an Account</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div id="main_signup_form" style={{display: "none", padding: "30px 5px"}}>
-                    <p style={{marginLeft: 20, fontSize: 30, fontWeight: "bolder", color: "rgba(0,0,0,0.8)"}}>Login</p>
                         <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
-                        <p style={{padding: 15, backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", letterSpacing: 1, marginBottom: 10, color: "white"}}>
-                            <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-user"></i>
+                        <p style={{padding: 15, fontFamily: "'Prompt', Sans-serif", backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", letterSpacing: 1, marginBottom: 10, color: "white"}}>
                             Signup</p>
                         <div style={{padding: "10px",}}>
                             <div style={{marginBottom: 10}}>
@@ -64,11 +65,14 @@ export default function LoginPage(){
                                     <input type="password" placeholder="Confirm Password"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
-                            <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 50}}>
-                                Register
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
+                                <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                                    <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-check-square-o"></i>
+                                    Register
+                                </div>
                             </div>
-                            <p onClick={show_login_form} style={{marginTop: 25, backgroundColor: "rgb(43, 52, 61)", color: "white", textAlign: "center", padding: "14px", width: "250px", borderRadius: 5, cursor: "pointer"}}>
-                                <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-sign-in"></i>
+                            <p onClick={show_login_form} style={{marginTop: 10, textAlign: "center", padding: "14px", fontSize: 14, cursor: "pointer", borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+                                <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-sign-in"></i>
                                 Login with existing account</p>
                         </div>
                     </div>

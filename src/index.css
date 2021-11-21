@@ -740,7 +740,6 @@ footer {
   }
   #main_signup_form, #main_login_form{
     padding: 0 !important;
-    padding-top: 30px;
   }
   .ticket_loader_info_1{
     width: 70%;
