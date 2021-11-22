@@ -6,7 +6,7 @@ function TripsPage(){
                 <div style={{padding: "40px 5px"}}>
                     <p style={{marginLeft: 20, fontSize: 30, fontWeight: "bolder", color: "rgba(0,0,0,0.8)"}}>Trips</p>
                     <div style={{}}>
-                        <NotLoggedIn msg={"You must be logged in to see your trips"}/>
+                        <NotLoggedIn msg={"You must login to see your trips"}/>
                     </div>
                 </div>
             </div>

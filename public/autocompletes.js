@@ -125,8 +125,111 @@ function changeAirportsToInput(airport, iata, icao){
     //window.localStorage.setItem("flights_post_data", JSON.stringify(fligh_search_data));
 }
 
+//-------------------------------------------------------------------------------------------------------------------
+//search results page forms
+document.getElementById("sp_from_where_airports_auto_complete_input_fld").addEventListener("input", (evnt)=>{
+    let counter = 0;
+    document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML = "";
+    let flights = [];
+
+    //if backspace has been pressed, don't auto-complete on input
+    if(!evnt.data){
+        return null;
+    }
+
+    if(evnt.target.value){
+
+        flights = filter_airports_array_based_input_value(evnt.target.value);
+
+        flights = flights.map(elem => {
+                counter++;
+                return counter < 6 && `
+                    <li><div onclick="sp_changeAirportsFromInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                        <div>
+                            <p class="autocomplete_list_airport_city_name">
+                                <i class="fa fa-plane"></i>
+                                ${elem.city} (${elem.IATA} - ${elem.name})
+                            </p>
+                            <p class="autocomplete_list_country_name">
+                                ${elem.country}
+                            </p>
+                        </div>
+                    </div></li>`;
+                
+            })
+    }
+    //console.log(flights);
+    document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML = flights.join('').replaceAll("false","");
+})
 
 
+function sp_changeAirportsFromInput(airport, iata, icao){
+    document.getElementById("sp_from_where_airports_auto_complete_input_fld").value = airport;
+    document.getElementById("sp_search_forms_from_where_input_fld").value = airport;
+    //fligh_search_data.origin_iata = iata;
+
+    if(iata === "\\N" || iata === "N"){
+        //fligh_search_data.origin_iata = icao;
+        document.getElementById("sp_from_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
+        document.getElementById("sp_search_forms_from_where_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
+    }
+
+    //window.localStorage.setItem("flights_post_data", JSON.stringify(fligh_search_data));
+}
+
+//Destination Airports Auto Completion
+
+document.getElementById("sp_to_where_airports_auto_complete_input_fld").addEventListener("input", (evnt)=>{
+    let counter = 0;
+    document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = "";
+    let flights = [];
+
+    //if backspace has been pressed, don't auto-complete on input
+    if(!evnt.data){
+        return null;
+    }
+
+    if(evnt.target.value){
+
+        flights = filter_airports_array_based_input_value(evnt.target.value);
+
+        flights = flights.map(elem => {
+            counter++;
+            return counter < 6 && `
+                    <li><div onclick="sp_changeAirportsToInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                        <div>
+                            <p class="autocomplete_list_airport_city_name">
+                                <i class="fa fa-plane"></i>
+                                ${elem.city} (${elem.IATA} - ${elem.name})
+                            </p>
+                            <p class="autocomplete_list_country_name">
+                                ${elem.country}
+                            </p>
+                        </div>
+                    </div></li>`;
+            
+        });
+    }
+    //console.log(flights);
+    document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = flights.join('').replaceAll("false","");
+})
+
+
+function sp_changeAirportsToInput(airport, iata, icao){
+    document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport;
+    document.getElementById("sp_search_forms_to_where_input_fld").value = airport;
+    //fligh_search_data.destination_iata = iata;
+
+    if(iata === "\\N" || iata === "N"){
+        //fligh_search_data.destination_iata = icao;
+        document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
+        document.getElementById("sp_search_forms_to_where_input_fld").value =  airport.split("(")[0] + " (" + icao + ")";
+    }
+
+    //window.localStorage.setItem("flights_post_data", JSON.stringify(fligh_search_data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /*function *filter(array, condition, maxSize) {
     if (!maxSize || maxSize > array.length) {
       maxSize = array.length;

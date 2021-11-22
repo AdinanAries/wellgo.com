@@ -458,8 +458,9 @@ export default function ResultsListContainer(){
                             We got you on these amaizing trip ideas that will 
                             make you want to do it over again
                         </p>
-                        <div onClick={show_explore_page} style={{textAlign: "center", cursor: "pointer", width:"fit-content", backgroundColor: "#c900b0", fontSize: 15, fontFamily: "'Prompt', sans-serif", color: "white", padding: 14, borderRadius: 9}}>
-                            Start exploring
+                        <div onClick={show_explore_page} style={{textAlign: "center", cursor: "pointer", width:"fit-content", backgroundColor: "#c900b0", fontSize: 14, fontFamily: "'Prompt', sans-serif", color: "white", padding: 14, borderRadius: 50}}>
+                            <i className="fa fa-globe" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>
+                            Explore now
                         </div>
                     </div>
                 </div>

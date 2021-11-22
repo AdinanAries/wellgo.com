@@ -27,8 +27,8 @@ export default function ExplorePage(){
                         <i className="fa fa-exclamation-triangle" style={{color: "yellow", marginRight: 10}}></i>
                         Opps! something went wrong
                     </div>
-                    <div onClick={show_home_page} style={{backgroundColor: "slateblue", padding: 14, color: "white", cursor: "pointer", marginTop: 20, width: "fit-content", borderRadius: 9, }}>
-                        <i className="fa fa-home" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>go to home page
+                    <div onClick={show_home_page} style={{backgroundColor: "darkslateblue", padding: 14, color: "white", cursor: "pointer", marginTop: 20, width: "fit-content", borderRadius: 50}}>
+                        <i className="fa fa-home" style={{marginRight: 5, fontSize: 20,color: "rgba(255,255,255,0.4)"}}></i>Home page
                     </div>
                 </div>
             </div>
