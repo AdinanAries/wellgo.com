@@ -44,44 +44,33 @@ export default function ExploreDestinations(){
                                 </div>
 
                                 <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 27px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
-                                    <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, minHeight: 140, padding: "10px 20px"}}>
-                                        <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "pointer", padding: "15px 0", paddingTop: 5, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                    <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                        <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
+                                            <p style={{textAlign: "center", marginRight: 10}}>
+                                                <i style={{fontSize: 18, color: "slateblue"}} className="fa fa-plane"></i>
+                                            </p>
                                             <div style={{display: "flex", flexDirection: "column",}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.8)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
-                                                    flights</p>
-                                                <p style={{fontSize: 12, marginTop: 3, letterSpacing: 1, color: "rgba(0,0,0,0.6)", fontWeight: "bolder"}}>
-                                                    <i style={{marginRight: 5, color: "rgb(0,205,0)"}} className="fa fa-check"></i>
-                                                    buy cheapest flights here...</p>
+                                                <p style={{fontSize: 15, color: "slateblue", letterSpacing: 1, fontWeight: 'bolder'}}>
+                                                    Flight</p>
                                             </div>
-                                            <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "rgb(0,0,255,0.6)", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
-                                                <i style={{fontSize: 14, color: "white"}} className="fa fa-plane"></i>
-                                            </p>
                                         </div>
-                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "not-allowed", padding: "15px 0", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.8)", letterSpacing: 1, fontWeight: "bolder", textAlign: ""}}>
-                                                    hotels</p>
-                                                <p style={{fontSize: 12, marginTop: 3, letterSpacing: 1, fontWeight: "bolder", color: "rgba(0,0,0,0.6)"}}>
-                                                    <i style={{marginRight: 5, color: "orangered"}} className="fa fa-exclamation-triangle"></i>
-                                                    unavailable at the moment...
-                                                </p>
-                                            </div>
-                                            <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
-                                                <i style={{fontSize: 14, color: "white"}} className="fa fa-bed"></i>
+                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
+                                            <p style={{textAlign: "center", marginRight: 10}}>
+                                                <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-bed"></i>
                                             </p>
+                                            <div style={{display: "flex", flexDirection: "column",}}>
+                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.9)", letterSpacing: 1}}>
+                                                    Stay</p>
+                                            </div>
                                         </div>
-                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", cursor: "not-allowed", padding: "15px 0"}}>
-                                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center",}}>
-                                                <p style={{textAlign: "left", fontSize: 15, color: "rgba(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1, textAlign: ""}}>
-                                                    food delivery</p>
-                                                <p style={{fontSize: 12, marginTop: 3, letterSpacing: 1, fontWeight: "bolder", color: "rgba(0,0,0,0.6)"}}>
-                                                    <i style={{marginRight: 5, color: "orangered"}} className="fa fa-exclamation-triangle"></i>
-                                                    unavailable at the moment...
-                                                </p>
-                                            </div>
-                                            <p style={{marginLeft: 10, padding: 7, width: 40, textAlign: "center", borderRadius: 10, backgroundColor: "skyblue", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
-                                                <i style={{fontSize: 14, color: "white"}} className="fa fa-cutlery"></i>
+                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", cursor: "pointer", padding: "15px 0"}}>
+                                            <p style={{textAlign: "center", marginRight: 10}}>
+                                                <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-car"></i>
                                             </p>
+                                            <div style={{display: "flex", flexDirection: "column",}}>
+                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.9)", letterSpacing: 1}}>
+                                                    Car</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
