@@ -11,7 +11,6 @@ function toggle_see_ticket_details_itinerary_details(){
     }
         is_itinerary_showing = !is_itinerary_showing;
 }
-  
 
 function return_each_ticket(item){
     return `
@@ -171,7 +170,7 @@ function return_selected_ticket_item(item){
                                         </p>
                                         <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 5px;">1h 35m wait in Toronto</p>
                                     </div>
-                                    <div style="marginLeft: 20}}>
+                                    <div style="margin-left: 20px;">
                                         <p style="font-size: 13px; color: rgba(0,0,0,0.7);">1h 35m flight</p>
                                         <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Operated by WestJet Encore</p>
                                         <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Dehavilland DHC-8 400</p>
@@ -216,7 +215,7 @@ function return_selected_ticket_item(item){
                         <i class="fa fa-check" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>
                         Carry-on bag included
                     </p>
-                    <p style="margin-rop: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+                    <p style="margin-top: 10px; display: flex; flex-direction: row; justify-content: space-between;">
                         <span style="color: rgba(0,0,0,0.8); font-size: 13px;">
                             <i class="fa fa-money" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>1st checked bag:
                         </span>
@@ -228,7 +227,7 @@ function return_selected_ticket_item(item){
                         Flexibility
                     </p>
                     <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
-                    <i className="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                    <i class="fa fa-times" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>
                         Cancellation not allowed
                     </p>
                     <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
