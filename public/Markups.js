@@ -15,7 +15,7 @@ function toggle_see_ticket_details_itinerary_details(){
 
 function return_each_ticket(item){
     return `
-        <div onclick="show_selected_ticket_details_pane()" style="cursor: pointer; background-color: rgba(255,255,255,0.7); border-radius: 9px; margin-bottom: 10px; padding: 15px 10px; box-shadow: 0 0 5px rgba(0,0,0,0.1)">
+        <div onclick="show_selected_ticket_details_pane()" style="cursor: pointer; background-color: rgba(255,255,255,0.7); border-radius: 9px; margin-bottom: 10px; padding: 15px 10px;">
             <div class="each_ticket_upper_flex" style="flex-direction: row; justify-content: space-between;">
                 <div>
                     <p style="color: rgba(0,0,0,0.8); font-weight: bolder; font-size: 16px; font-family: 'Prompt', Sans-serif; marginBottom: 2px;">9:45am - 2:54pm</p>
@@ -212,7 +212,7 @@ function return_selected_ticket_item(item){
                     <p style="font-size: 14px; margin-top: 25px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
                         Bags
                     </p>
-                    <p style="color: rgba(0,0,0,0.8); font-size: 13px; marginTop: 10px;">
+                    <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
                         <i class="fa fa-check" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>
                         Carry-on bag included
                     </p>
