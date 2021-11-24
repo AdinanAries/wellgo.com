@@ -1,7 +1,12 @@
+import React, { useRef } from "react";
+
 import SearchResultSearchForm from "./SearchResultSearchForm";
 import ResultsListContainer from "./ResultsListContainer";
 
-function SearchPageMain(){
+function SearchPageMain(props){
+
+    const ref = useRef(null);
+
     return (
         <main>
             <div className="wrapper">

@@ -43,6 +43,7 @@ export function show_search_page(){
     document.getElementById("login_page").style.display="none";
     document.getElementById("trips_page").style.display="none";
     document.getElementById("search_page").style.display="block";
+
 }
 
 export function show_trips_page(){

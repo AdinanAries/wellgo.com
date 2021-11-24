@@ -1,3 +1,29 @@
+let search_obj = {
+  type: "one-way",
+  itinerary: {
+    departure: {
+      airport: "MAD",
+      date: "2022-23-03"
+    },
+    arrival:{
+      airport: "CGD",
+      date: "2022-24-03"
+    },
+    cabin: "ECONOMY",
+    travelers: {
+      adults: 1,
+      children: 0,
+      infants: 0
+    }
+  }
+}
+if(localStorage.getItem("search_obj")){
+  //other code here
+}else{
+  localStorage.setItem("search_obj", JSON.stringify(search_obj));
+}
+
+
 $(function() {
     $('#departure_return_dates_input').daterangepicker({
       opens: 'left',
@@ -20,7 +46,8 @@ $(function() {
     });
   });
 
-  document.getElementById("animated_loader").innerHTML += `
+  function add_clouds_to_animated_loader(){
+    document.getElementById("animated_loader").innerHTML += `
     <div class="preloader" style="opacity: 1; ">
       <svg version="1.1" id="sun" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 10 10" enable-background="new 0 0 10 10" xml:space="preserve" style="opacity: 1; margin-left: 0px; margin-top: 0px;">
         <g>
@@ -69,3 +96,39 @@ $(function() {
       WE'LL GET YOU THERE IN A SEC...
     </div>
 `;
+}
+
+
+
+//search function
+document.getElementById("home_search_form_submit_btn").addEventListener("click", e=>{
+  e.preventDefault();
+
+  document.getElementById("search_results_list_items").innerHTML = '';
+
+  add_clouds_to_animated_loader();
+  document.getElementById("animated_loader").style.display = "block";
+  document.getElementById("search_result_important_notice").innerHTML = return_search_results_important_notice_loader();
+  for(let i=0; i<6; i++){
+    document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
+  }
+
+  search_submit_function();
+
+});
+document.getElementById("sp_search_form_submit_btn").addEventListener("click", e=>{
+  e.preventDefault();
+
+  document.getElementById("search_results_list_items").innerHTML = '';
+
+  add_clouds_to_animated_loader();
+  document.getElementById("animated_loader").style.display = "block";
+  document.getElementById("search_result_important_notice").innerHTML = return_search_results_important_notice_loader();
+  for(let i=0; i<6; i++){
+    document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
+  }
+
+  search_submit_function();
+
+})
+

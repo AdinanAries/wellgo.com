@@ -65,7 +65,7 @@ function SearchForm(){
                                         <label htmlFor="select_cabin_economy_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Economy</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input className="select_cabin_type_chk" id="select_cabin_economy_chk" style={{width: 20, height: 20}} type="radio" checked="true"/>
+                                            <input className="select_cabin_type_chk" id="select_cabin_economy_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
                                         </div>
                                     </div>
                                     <div onClick={()=>select_cabin_type("business")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
@@ -90,7 +90,7 @@ function SearchForm(){
                                         <label htmlFor="trip_round_round_trip_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Round-trip</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input className="select_trip_round_chk" id="trip_round_round_trip_chk" style={{width: 20, height: 20}} type="radio" checked="true"/>
+                                            <input className="select_trip_round_chk" id="trip_round_round_trip_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
                                         </div>
                                     </div>
                                     <div onClick={()=>select_trip_round("one-way")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
@@ -141,7 +141,7 @@ function SearchForm(){
                         <div style={{position: "relative"}} className="search_forms_from_where_input_fld_container each_flex-side">
                             <div id="from_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{borderRadius: 30}}>
                                 <p onClick={()=>document.getElementById("from_where_airports_auto_complete_input").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
-                                <input autocomplete="off" id="from_where_airports_auto_complete_input_fld" 
+                                <input autoComplete="off" id="from_where_airports_auto_complete_input_fld" 
                                     onBlur={()=>{
                                         setTimeout(()=>document.getElementById("from_where_airports_auto_complete_input").style.display = "none",
                                             200);
@@ -168,7 +168,7 @@ function SearchForm(){
                             </div>
                             <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
-                                <input id="search_forms_from_where_input_fld" onClick={open_from_where_auto_complete_pane} type="text" autocomplete="off" placeholder="from where?" />
+                                <input id="search_forms_from_where_input_fld" onClick={open_from_where_auto_complete_pane} type="text" autoComplete="off" placeholder="from where?" />
                             </div>
                         </div>
                         <div id="main_switch_inputs_btn" className="switchinputsBtn"  style={{border: "none", boxShadow: "0 0 5px rgba(0,0,0,0.3)",}}
@@ -180,7 +180,7 @@ function SearchForm(){
                         <div className="search_forms_to_where_input_fld_container each_flex-side">
                             <div id="to_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{borderRadius: 30}}>
                                 <p onClick={()=>document.getElementById("to_where_airports_auto_complete_input").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
-                                <input autocomplete="off" id="to_where_airports_auto_complete_input_fld" 
+                                <input autoComplete="off" id="to_where_airports_auto_complete_input_fld" 
                                     onBlur={()=>{
                                         setTimeout(()=>document.getElementById("to_where_airports_auto_complete_input").style.display = "none",
                                             200);
@@ -207,7 +207,7 @@ function SearchForm(){
                             </div>
                             <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
-                                <input id="search_forms_to_where_input_fld" onClick={open_to_where_auto_complete_pane} type="text" autocomplete="off" placeholder="to where?" />
+                                <input id="search_forms_to_where_input_fld" onClick={open_to_where_auto_complete_pane} type="text" autoComplete="off" placeholder="to where?" />
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@ function SearchForm(){
                     <div onClick={show_home_page} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
                         <i className="fa fa-times" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Close
                     </div>
-                    <div onClick={show_search_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
+                    <div onClick={show_search_page} id="home_search_form_submit_btn" className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
                         <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
                     </div>
                 </div>

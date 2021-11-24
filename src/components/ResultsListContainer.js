@@ -4,9 +4,9 @@ import deltaIcon from "../deltaIcon.png";
 import airplane from "../icons/airplane.svg";
 
 import { show_explore_page } from "../helpers/PageRoutingFuncs";
-import { show_selected_ticket_details_pane } from "./SelectedTicketPane";
 
-export default function ResultsListContainer(){
+export default function ResultsListContainer(props){
+
     return (
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
 
@@ -193,69 +193,34 @@ export default function ResultsListContainer(){
                     </div>
                 </div>
                 <div className="search_list_main_tickets_section">
-                    <div style={{display: "none", animation: "item_slide_down 0.5s ease-in"}} className="search_result_inportant_notice_container">
-                        <div>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 16, fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginBottom: 10}}>
-                                <i className="fa fa-info-circle" style={{fontSize: 15, marginRight: 5}}></i>Important Notice
-                            </p>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 14}}>
-                                Prices displayed include taxes and may change based on availability. 
-                                You can review any additional fees before checkout. 
-                                Prices are not final until you complete your purchase.
-                            </p>
-                        </div>
-                        {/*<div style={{marginLeft: 10}}>
-                            <p style={{fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Sort by</p>
-                            <select style={{padding: 14, marginTop: 5, backgroundColor: "rgba(255,0,255,0.2)", border: "1px solid rgba(0,0,0,0.3)", borderRadius: 9, color: "rgba(0,0,0,0.7)",}}>
-                                <option>
-                                    Price (Lowest)
-                                </option>
-                            </select>
-                        </div>*/}
-                    </div>
                     <div id="animated_loader" style={{position: "relative", height: 190}}>
                         <div style={{backgroundImage: `url('${airplane}')`, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", width: 120, height: 120, position: "absolute", left: "calc(50% - 80px)", zIndex: 2, animation: "the_moving_plane 15s ease-in-out infinite"}}></div>
                     </div>
-                    <div style={{animation: "item_slide_down 0.5s ease-in", marginBottom: 20}} className="search_result_inportant_notice_container">
-                        <div>
-                            <p  className="info_item_loader" style={{color: "rgba(0,0,0,0)", fontSize: 16, fontFamily: "'Prompt', sans-serif", width: "fit-content", fontWeight: "bolder", marginBottom: 10}}>
-                                <i className="fa fa-info-circle" style={{fontSize: 15, marginRight: 5}}></i>Important Notice
-                            </p>
-                            <p className="info_item_loader" style={{color: "rgba(0,0,0,0)", fontSize: 14}}>
-                                Prices displayed include taxes and may change based on availability. 
-                                You can review any additional fees before checkout. 
-                                Prices are not final until you complete your purchase.
-                            </p>
-                        </div>
-                        {/*<div style={{marginLeft: 10}}>
-                            <p style={{fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Sort by</p>
-                            <select style={{padding: 14, marginTop: 5, backgroundColor: "rgba(255,0,255,0.2)", border: "1px solid rgba(0,0,0,0.3)", borderRadius: 9, color: "rgba(0,0,0,0.7)",}}>
-                                <option>
-                                    Price (Lowest)
-                                </option>
-                            </select>
-                        </div>*/}
+                    
+                    <div id="search_result_important_notice">
+
                     </div>
+                    
                     <div id="search_results_list_items">
                         <div style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 20, padding: "15px 10px", animation: "item_slide_down 0.5s ease-in"}}>
-                                <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
-                                    <div className="ticket_loader_info_1">
-                                        <p className="info_item_loader" style={{borderRadius: 50, fontSize: 12, height: 40}}>Montreal (YUB) - New York (LGA)</p>
-                                    </div>
-                                    <div className="ticket_loader_info_2">
-                                        <p className="info_item_loader" style={{fontSize: 12, height: 40}}>2h 1m in Toronto(yyz)</p>
-                                    </div>
-                                    <div className="each_ticket_price_display_container  ticket_loader_info_3">
-                                        <p className="each_ticket_price_display info_item_loader" style={{fontWeight: "1000", fontSize: 27, fontFamily: "'Prompt', sans-serif", marginBottom: 2}}>
-                                            $335</p>
-                                    </div>
+                            <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
+                                <div className="ticket_loader_info_1">
+                                    <p className="info_item_loader" style={{borderRadius: 50, fontSize: 12, height: 40}}>Montreal (YUB) - New York (LGA)</p>
                                 </div>
-                                <div className="ticket_loader_info_4" style={{marginTop: 5}}>
-                                    <p className="info_item_loader" style={{color: "rgba(0,0,0,0)", fontSize: 12, height: 30}}>
-                                        Delta &#8226;
-                                        Delta 7204 and 7138 operated by WestJet
-                                    </p>
+                                <div className="ticket_loader_info_2">
+                                    <p className="info_item_loader" style={{fontSize: 12, height: 40}}>2h 1m in Toronto(yyz)</p>
                                 </div>
+                                <div className="each_ticket_price_display_container  ticket_loader_info_3">
+                                    <p className="each_ticket_price_display info_item_loader" style={{fontWeight: "1000", fontSize: 27, fontFamily: "'Prompt', sans-serif", marginBottom: 2}}>
+                                        $335</p>
+                                </div>
+                            </div>
+                            <div className="ticket_loader_info_4" style={{marginTop: 5}}>
+                                <p className="info_item_loader" style={{color: "rgba(0,0,0,0)", fontSize: 12, height: 30}}>
+                                    Delta &#8226;
+                                    Delta 7204 and 7138 operated by WestJet
+                                </p>
+                            </div>
                         </div>
                         <div style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 20, padding: "15px 10px", animation: "item_slide_down 0.5s ease-in"}}>
                             <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
@@ -337,7 +302,7 @@ export default function ResultsListContainer(){
                                 </p>
                             </div>
                         </div>
-                        <div onClick={show_selected_ticket_details_pane} style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
+                        <div style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
                             <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
                                 <div>
                                     <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', sans-serif", marginBottom: 2}}>9:45am - 2:54pm</p>
@@ -364,7 +329,7 @@ export default function ResultsListContainer(){
                                 </p>
                             </div>
                         </div>
-                        <div onClick={show_selected_ticket_details_pane} style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
+                        <div style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
                             <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
                                 <div>
                                     <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', sans-serif", marginBottom: 2}}>9:45am - 2:54pm</p>
@@ -391,7 +356,7 @@ export default function ResultsListContainer(){
                                 </p>
                             </div>
                         </div>
-                        <div onClick={show_selected_ticket_details_pane} style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
+                        <div style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
                             <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
                                 <div>
                                     <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', sans-serif", marginBottom: 2}}>9:45am - 2:54pm</p>
@@ -418,7 +383,7 @@ export default function ResultsListContainer(){
                                 </p>
                             </div>
                         </div>
-                        <div onClick={show_selected_ticket_details_pane} style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
+                        <div style={{display: "none", cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
                             <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
                                 <div>
                                     <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', sans-serif", marginBottom: 2}}>9:45am - 2:54pm</p>
