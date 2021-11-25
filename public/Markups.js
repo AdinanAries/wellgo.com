@@ -261,6 +261,145 @@ function return_search_results_important_notice(obj){
         </div>
     `;
 }
+function return_search_results_filters_and_sort(obj){
+    return `
+        <div>
+            <div id="mobile_sort_and_filter_title_and_sort">
+                <div style="height: 50px; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center;">
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <p style="color: rgba(0,0,0,0.7); font-weight: bolder; display: flex; flex-direction: column; justify-content: center;">
+                            Sort and Filter
+                        </p>
+                        <p onclick="document.getElementById('search_list_main__settings_section').style.display='none';" id="close_filter_and_sort_btn" style="color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
+                            &times;
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 35px;">
+                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 17px">Sort by</p>
+                    <select style="padding: 14px; margin-top: 12px; width: 100%; border: 1px solid rgba(0,0,0,0.3); border-radius: 9px; color: rgba(0,0,0,0.7);">
+                        <option>
+                            Price (Lowest)
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 17px; margin-bottom: 30px;">
+                <i style="margin-right: 7px;" class="fa fa-sliders" aria-hidden="true"></i>
+                Filter by</p>
+
+            <div style="margin-bottom: 30px;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 15px">
+                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 14px;">Stops</p>
+                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 14px;">From</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">Nonstop (6)</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); font-size: 15px">$143</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">1 Stop (30)</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); font-size: 15px;">$123</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 15px;">
+                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 14px;">Airlines</p>
+                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 14px;">From</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">Air Canada (22)</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); fontSize: 15px;">$243</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">American Airlines (11)</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); font-size: 15px;">$133</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">United (5)</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); font-size: 15px;">$114</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">WestJet (3)</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); fontSize: 15px;">$132</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 15px;">
+                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 14px;">Travel and baggage</p>
+                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 14px;">From</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); fontSize: 15px;">Seat choice included</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); fontSize: 15px;">$143</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">Carry-on bag included</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); font-size: 15px;">$123</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">No cancel fee</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); font-size: 15px;">$111</p>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: row;">
+                        <input style="width: 19px; height: 19px; margin-right: 5px;" type="checkbox" />
+                        <p style="color: rgba(0,0,0,0.7); font-size: 15px;">No change fee</p>
+                    </div>
+                    <p style="color: rgba(0,0,0,0.7); font-size: 15px;">$371</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+function return_search_results_mobile_top_itin_display(obj){
+    return `
+        <div id="itinerary_and_filter_icon">
+            <div>
+                <p style="font-size: 16px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                    New York
+                    <span style="margin: 0 10px; color: rgba(0,0,0,0.4);"><i class="fa fa-exchange"></i></span>
+                    Canada
+                </p>
+                <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 2px;">Nov 25 - Nov 27</p>
+            </div>
+            <p onclick="document.getElementById('search_list_main__settings_section').style.display='block';" style="font-weight: bolder; color: rgb(11, 71, 95); font-size: 17px;">
+                <i style="margin-right: 7px;" class="fa fa-sliders" aria-hidden="true"></i>
+                Filters</p>
+        </div>
+    `;
+}
+
+//loaders
 function return_search_results_important_notice_loader(){
     return `
         <div style="animation: item_slide_down 0.5s ease-in; marginBottom: 20" class="search_result_inportant_notice_container">
@@ -301,4 +440,60 @@ function return_ticket_card_loader(){
         </div>
     `;
 }
+function return_search_results_filters_and_sort_loader(){
+    return `
+        <div style="margin-top: 20px;">
+            <div style="margin-bottom: 40px;">
+                <p  class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 16px; font-family: 'Prompt', Sans-serif; width: fit-content; font-weight: bolder; margin-bottom: 10px;">
+                    Important Notice
+                </p>
+                <p class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 14px; width: 200px;">
+                    Prices displayed include taxes
+                </p>
+            </div>
+            <div style="margin-bottom: 40px;">
+                <p  class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 16px; font-family: 'Prompt', Sans-serif; width: fit-content; font-weight: bolder; margin-bottom: 10px;">
+                    Important Notice
+                </p>
+                <p class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 14px; width: 200px;">
+                    Prices displayed include taxes
+                </p>
+            </div>
+            <div style="margin-bottom: 40px;">
+                <p  class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 16px; font-family: 'Prompt', Sans-serif; width: fit-content; font-weight: bolder; margin-bottom: 10px;">
+                    Important Notice
+                </p>
+                <p class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 14px; width: 200px;">
+                    Prices displayed include taxes
+                </p>
+            </div>
+            <div style="margin-bottom: 40px;">
+                <p  class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 16px; font-family: 'Prompt', Sans-serif; width: fit-content; font-weight: bolder; margin-bottom: 10px;">
+                    Important Notice
+                </p>
+                <p class="info_item_loader" style="color: rgba(0,0,0,0); height: 30px; font-size: 14px; width: 200px;">
+                    Prices displayed include taxes
+                </p>
+            </div>
+        </div>
+    `;
+}
+function return_search_results_mobile_top_itin_display_loader(){
+    return `
+        <div style="animation: item_slide_down 0.5s ease-in;" id="itinerary_and_filter_icon">
+            <div>
+                <p class="info_item_loader" style="font-size: 16px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.0); font-weight: bolder;">
+                    New York
+                    <span style="margin: 0 10px; color: rgba(0,0,0,0.0);"><i class="fa fa-exchange"></i></span>
+                    Canada
+                </p>
+                <p class="info_item_loader"  style="fontSize: 13px; color: rgba(0,0,0,0.0); margin-top: 2px;">Nov 25 - Nov 27</p>
+            </div>
+            <p class="info_item_loader" style="font-weight: bolder; font-size: 17px;">
+                <i style="marginRight: 7px;" class="fa fa-sliders" aria-hidden="true"></i>
+                Filters</p>
+        </div>
+    `;
+}
+
 document.getElementById("selected_ticket_pane").innerHTML = return_selected_ticket_item({});

@@ -46,29 +46,29 @@ export default function ExploreDestinations(){
                                 <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 27px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
                                     <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                         <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
-                                            <p style={{textAlign: "center", marginRight: 10}}>
+                                            {/*<p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "slateblue"}} className="fa fa-plane"></i>
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "column",}}>
-                                                <p style={{fontSize: 15, color: "slateblue", letterSpacing: 1, fontWeight: 'bolder'}}>
+                                            </p>*/}
+                                            <div style={{display: "flex", flexDirection: "column"}}>
+                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1, fontWeight: 'bolder'}}>
                                                     Flight</p>
                                             </div>
                                         </div>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
-                                            <p style={{textAlign: "center", marginRight: 10}}>
+                                            {/*<p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-bed"></i>
-                                            </p>
+                                            </p>*/}
                                             <div style={{display: "flex", flexDirection: "column",}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.9)", letterSpacing: 1}}>
+                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1, fontWeight: "bolder"}}>
                                                     Stay</p>
                                             </div>
                                         </div>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", cursor: "pointer", padding: "15px 0"}}>
-                                            <p style={{textAlign: "center", marginRight: 10}}>
+                                            {/*<p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-car"></i>
-                                            </p>
+                                            </p>*/}
                                             <div style={{display: "flex", flexDirection: "column",}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.9)", letterSpacing: 1}}>
+                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1, fontWeight: "bolder"}}>
                                                     Car</p>
                                             </div>
                                         </div>

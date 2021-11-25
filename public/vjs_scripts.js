@@ -109,6 +109,8 @@ document.getElementById("home_search_form_submit_btn").addEventListener("click",
   add_clouds_to_animated_loader();
   document.getElementById("animated_loader").style.display = "block";
   document.getElementById("search_result_important_notice").innerHTML = return_search_results_important_notice_loader();
+  document.getElementById("search_list_main__settings_section").innerHTML = return_search_results_filters_and_sort_loader();
+  document.getElementById("search_results_mobile_top_itin_display").innerHTML = return_search_results_mobile_top_itin_display_loader();
   for(let i=0; i<6; i++){
     document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
   }
@@ -124,6 +126,8 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
   add_clouds_to_animated_loader();
   document.getElementById("animated_loader").style.display = "block";
   document.getElementById("search_result_important_notice").innerHTML = return_search_results_important_notice_loader();
+  document.getElementById("search_list_main__settings_section").innerHTML = return_search_results_filters_and_sort_loader();
+  document.getElementById("search_results_mobile_top_itin_display").innerHTML = return_search_results_mobile_top_itin_display_loader();
   for(let i=0; i<6; i++){
     document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
   }
