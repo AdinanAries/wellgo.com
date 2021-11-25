@@ -6,8 +6,8 @@ export default function LoginPage(){
             <div className="wrapper">
                 <div id="main_login_form" style={{padding: "30px 5px"}}>
                     <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
-                        <p style={{padding: 15, backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", letterSpacing: 1, marginBottom: 10, color: "white"}}>
-                            Sign In</p>
+                        <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
+                            Log Into Account</p>
                         <div style={{padding: "10px",}}>
                             <div style={{marginBottom: 10}}>
                                <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
@@ -37,9 +37,9 @@ export default function LoginPage(){
                     </div>
                 </div>
                 <div id="main_signup_form" style={{display: "none", padding: "30px 5px"}}>
-                        <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
-                        <p style={{padding: 15, fontFamily: "'Prompt', Sans-serif", backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", letterSpacing: 1, marginBottom: 10, color: "white"}}>
-                            Signup</p>
+                    <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
+                        <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
+                            Add New Account</p>
                         <div style={{padding: "10px",}}>
                             <div style={{marginBottom: 10}}>
                                <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
