@@ -5,7 +5,7 @@ export default function LoginPage(){
         <main id="login_page" style={{display: "none"}}>
             <div className="wrapper">
                 <div id="main_login_form" style={{padding: "30px 5px"}}>
-                    <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
+                    <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                         <p style={{padding: 15, backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", letterSpacing: 1, marginBottom: 10, color: "white"}}>
                             Sign In</p>
                         <div style={{padding: "10px",}}>
@@ -37,7 +37,7 @@ export default function LoginPage(){
                     </div>
                 </div>
                 <div id="main_signup_form" style={{display: "none", padding: "30px 5px"}}>
-                        <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", marginTop: 30, backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
+                        <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                         <p style={{padding: 15, fontFamily: "'Prompt', Sans-serif", backgroundColor: "rgb(43, 52, 61)", fontWeight: "bolder", letterSpacing: 1, marginBottom: 10, color: "white"}}>
                             Signup</p>
                         <div style={{padding: "10px",}}>
