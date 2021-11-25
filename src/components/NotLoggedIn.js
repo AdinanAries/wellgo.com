@@ -7,7 +7,6 @@ export default function NotLoggedIn({msg}){
         <div>
             <div style={{backgroundImage: `url('${loginIcon}')`, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center",
                             height: 150, marginTop: 5, marginBottom: 5}}>
-
             </div>
             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 17, marginTop: 10, marginBottom: 20, textAlign: "center", fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                 <i style={{marginRight: 5, color: "orangered"}} className="fa fa-exclamation-triangle"></i>
