@@ -49,6 +49,9 @@ export default function ExploreDestinations(){
                                             {/*<p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "slateblue"}} className="fa fa-plane"></i>
                                             </p>*/}
+                                            <div style={{marginRight: 10, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                                <div style={{width: 9, height: 9, borderRadius: "100%", background: "linear-gradient(35deg, darkslateblue, rgba(255,255,255))"}}></div>
+                                            </div>
                                             <div style={{display: "flex", flexDirection: "column"}}>
                                                 <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1, fontWeight: 'bolder'}}>
                                                     Flight</p>

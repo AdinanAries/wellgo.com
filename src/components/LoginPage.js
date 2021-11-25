@@ -28,8 +28,8 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div style={{borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                                <p style={{marginTop: 15, color: "darkcyan", cursor: "pointer", fontSize: 14, textAlign: "center",}}>Forgot your password?</p>
-                                <p onClick={show_signup_form} style={{textAlign: "center", padding: "14px", fontSize: 14, borderRadius: 5, cursor: "pointer"}}>
+                                <p style={{width: "fit-content", margin: "auto", marginTop: 5, padding: 10, color: "darkcyan", cursor: "pointer", fontSize: 14}}>Forgot your password?</p>
+                                <p onClick={show_signup_form} style={{padding: 10, width: "fit-content", margin: "auto", marginTop: 5, marginBottom: 5, fontSize: 14, borderRadius: 5, cursor: "pointer"}}>
                                     <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-user"></i>
                                     Create an Account</p>
                             </div>
@@ -71,9 +71,11 @@ export default function LoginPage(){
                                     Register
                                 </div>
                             </div>
-                            <p onClick={show_login_form} style={{marginTop: 10, textAlign: "center", padding: "14px", fontSize: 14, cursor: "pointer", borderTop: "1px solid rgba(0,0,0,0.1)"}}>
-                                <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-sign-in"></i>
-                                Login with existing account</p>
+                            <div style={{borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                                <p onClick={show_login_form} style={{width: "fit-content", margin: 'auto', marginTop: 5, padding: "15px", fontSize: 14, cursor: "pointer"}}>
+                                    <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-sign-in"></i>
+                                    Login with existing account</p>
+                            </div>
                         </div>
                     </div>
                 </div>

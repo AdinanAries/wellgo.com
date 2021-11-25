@@ -12,6 +12,19 @@ function toggle_see_ticket_details_itinerary_details(){
         is_itinerary_showing = !is_itinerary_showing;
 }
 
+//helpers
+let replacement_codes = [
+    "@#wellgoqoute#@",
+    "@#wellgodoubleqoute#@"
+]
+function stringify_obj_for_template_strings(obj){
+    return JSON.stringify(obj).replaceAll("'", replacement_codes[0]).replaceAll('"', replacement_codes[1]);
+}
+function parse_obj_for_template_strings(string_p){
+    return JSON.parse((string_p.replaceAll(replacement_codes[0], "'").replaceAll(replacement_codes[1], '"')))
+}
+
+//markups
 function return_each_ticket(item){
     return `
         <div onclick="show_selected_ticket_details_pane()" style="cursor: pointer; background-color: rgba(255,255,255,0.7); border-radius: 9px; margin-bottom: 10px; padding: 15px 10px;">
@@ -45,6 +58,7 @@ function return_each_ticket(item){
 }
 
 function return_selected_ticket_item(item){
+    let checkout_obj = {name: "anything"}
     return `
         <div id="selected_ticket_main_details_pane">
                 <div style="padding: 10px; border-bottom: 1px solid rgba(0,0,0,0.1);">
@@ -236,7 +250,8 @@ function return_selected_ticket_item(item){
                     </p>
                 </div>
                 <div class="selected_ticket_book_btn_container">
-                    <div onclick="show_start_checkout_page()" class="selected_ticket_book_btn">
+                    <div onclick="show_start_checkout_page('${stringify_obj_for_template_strings(checkout_obj)}');" class="selected_ticket_book_btn">
+                        <i style="margin-right: 2px; color: rgba(255,255,255,0.5); font-size: 19px;" class="fa fa-check-square-o" aria-hidden="true"></i>
                         Book
                     </div>
                 </div>
@@ -395,6 +410,152 @@ function return_search_results_mobile_top_itin_display(obj){
             <p onclick="document.getElementById('search_list_main__settings_section').style.display='block';" style="font-weight: bolder; color: rgb(11, 71, 95); font-size: 17px;">
                 <i style="margin-right: 7px;" class="fa fa-sliders" aria-hidden="true"></i>
                 Filters</p>
+        </div>
+    `;
+}
+function return_start_checkout_info(json_obj){
+
+    let js_obj = parse_obj_for_template_strings(json_obj);
+    console.log(js_obj);
+
+    return `
+        <div class="wrapper">
+            <div style="padding: 10px; display: flex; flex-direction: column; justify-content: center;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div>
+                        <div class="site-logo">
+                            <p class="site-logo-img">
+                                <img src="./WillgoLogo.png"/></p>
+                            <div class="site-logo-txt">
+                                <p>
+                                    Wellgo
+                                    <span>.com</span>
+                                </p>
+                            </div>
+                        </div>
+                        <p style="fontSize: 13px; margin-top: 10px; color: rgba(0,0,0,0.7); marginLeft: 10px;">
+                            <i style="margin-right: 5px; font-size: 19px; color: rgba(0,0,0,0.4);" class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            Checkout total:
+                            <span style="font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.6); fontSize: 13px; font-weight: bolder; margin-left: 10px;">$133.23</span>
+                        </p>
+                    </div>
+                    <p onclick="document.getElementById('booking_start_checkout_page_container').style.display='none';" style="cursor: pointer; color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
+                        &times;
+                    </p>
+                </div>
+            </div>
+            <div class="checkout_page_all_info_flex_container">
+                <div class="checkout_page_all_info_flex_left">
+                    <div style="border: 1px solid rgba(0,0,0,0.1); border-radius: 9px; padding: 10px; margin: 10px;">
+                        <p style="font-size: 17px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                            Montreal to New York
+                        </p>
+                        <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
+                            <img src="./deltaIcon.png" style="width: 27px; height: auto; object-fit: conver;" />
+                            Delta &#8226; Thu, Nov 25
+                        </p>
+                        <div style="margin-top: 20px;">
+                            <p style="font-size: 15px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                                9:45am - 2:54pm
+                            </p>
+                            <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 5px;">
+                                5h 9m (1 stop)
+                            </p>
+                            <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 5px;">
+                                2h 1m in Toronto (YYZ)
+                            </p>
+                            <p style="color: rgba(0,0,0,0.7); font-size: 17px; margin-top: 5px;">
+                                <i style="margin-right: 10px;" class="fa fa-wifi"></i>
+                            </p>
+                            <p style="cursor: pointer; margin-top: 10px; font-size: 14px; color: #c900b0;">
+                                See details <i style="margin-left: 5px;" class="fa fa-angle-down"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div style="border: 1px solid rgba(0,0,0,0.1); border-radius: 9px; padding: 10px; margin: 10px;">
+                        <p style="font-size: 17px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                            New York to Montreal
+                        </p>
+                        <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
+                            <img src="./deltaIcon.png" style="width: 27px; height: auto; object-fit: cover;" />
+                            Delta &#8226; Thu, Nov 25
+                        </p>
+                        <div style="margin-top: 20px;">
+                            <p style="font-size: 15px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                                9:45am - 2:54pm
+                            </p>
+                            <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 5px;">
+                                5h 9m (1 stop)
+                            </p>
+                            <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 5px;">
+                                2h 1m in Toronto (YYZ)
+                            </p>
+                            <p style="color: rgba(0,0,0,0.7); font-size: 17px; margin-top: 5px;">
+                                <i style="margin-right: 10px;" class="fa fa-wifi"></i>
+                            </p>
+                            <p style="cursor: pointer; margin-top: 10px; font-size: 14px; color: #c900b0;">
+                                See details <i style="margin-left: 5px;" class="fa fa-angle-down"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout_page_all_info_flex_right">
+                    <div style="border: 1px solid rgba(0,0,0,0.1); border-radius: 9px; padding: 10px; margin: 10px;">
+                        <p style="font-size: 19px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                            Price Summary
+                        </p>
+                        <div style="margin-top: 20px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px;">
+                            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                                <p style="font-size: 14px; letter-spacing: 1; color: rgba(0,0,0,0.8); font-weight: bolder;">
+                                    Traveler: 1 Adult
+                                </p>
+                                <p style="font-size: 14px; font-weight: bolder; letter-spacing: 1; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                                    $133.28
+                                </p>
+                            </div>
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 10px;">
+                                <p style="font-size: 14px; letter-spacing: 1; color: rgba(0,0,0,0.7);">
+                                    Flight
+                                </p>
+                                <p style="font-size: 14px; letter-spacing: 1; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7);">
+                                    $101.10
+                                </p>
+                            </div>
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 10px;">
+                                <p style="font-size: 14px; letter-spacing: 1; color: rgba(0,0,0,0.7);">
+                                    Taxes and fees
+                                </p>
+                                <p style="font-size: 14px; letter-spacing: 1; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7);">
+                                    $32.18
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 20px;">
+                            <div>
+                                <p style="font-size: 17px; letter-spacing: 1; color: rgba(0,0,0,0.8); font-weight: bolder;">
+                                    Total
+                                </p>
+                                <p style="font-size: 12px; margin-top: 5px; color: rgba(0,0,0,0.7);">
+                                    <i style="margin-right: 5px;" class="fa fa-info-circle"></i>
+                                    prices are quoted in US dollars
+                                </p>
+                            </div>
+                            <p style="font-size: 17px; font-weight: bolder; letter-spacing: 1; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                                $133.28
+                            </p>
+                        </div>
+                        <div class="checkout_page_main_checkout_btn_container">
+                            <p class="checkout_page_mobile_button_place_total_price_display">
+                                <i style="margin-right: 5px;" class="fa fa-info-circle"></i>
+                                The total amout you pay is $133.28. See price summary at the bottom
+                            </p>
+                            <div class="checkout_page_main_checkout_btn">
+                                <i style="margin-right: 5px; color: rgba(255,255,255,0.5);" class="fa fa-credit-card"></i>Checkout
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     `;
 }

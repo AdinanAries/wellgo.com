@@ -46,8 +46,8 @@ $(function() {
     });
   });
 
-  function add_clouds_to_animated_loader(){
-    document.getElementById("animated_loader").innerHTML += `
+function add_clouds_to_animated_loader(){
+  document.getElementById("animated_loader").innerHTML += `
     <div class="preloader" style="opacity: 1; ">
       <svg version="1.1" id="sun" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="10px" height="10px" viewBox="0 0 10 10" enable-background="new 0 0 10 10" xml:space="preserve" style="opacity: 1; margin-left: 0px; margin-top: 0px;">
         <g>
@@ -95,10 +95,13 @@ $(function() {
     <div class="text">
       WE'LL GET YOU THERE IN A SEC...
     </div>
-`;
+  `;
 }
 
-
+function show_start_checkout_page(obj){
+  document.getElementById("booking_start_checkout_page_container").innerHTML = return_start_checkout_info(obj);
+  document.getElementById("booking_start_checkout_page_container").style.display = "block";
+}
 
 //search function
 document.getElementById("home_search_form_submit_btn").addEventListener("click", e=>{
