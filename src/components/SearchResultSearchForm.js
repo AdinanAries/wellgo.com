@@ -266,6 +266,8 @@ function sp_show_travelers_settings_pane(){
 
 //-------------------------------
 function sp_select_cabin_type(type="economy"){
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+
     Array.from(document.getElementsByClassName("sp_select_cabin_type_chk")).forEach( each=> {
         each.checked = false;
     });
@@ -275,22 +277,28 @@ function sp_select_cabin_type(type="economy"){
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             Economy
         `;
+        flight_search_data.itinerary.cabin = "ECONOMY";
     }else if(type === "business"){
         document.getElementById("sp_select_cabin_business_chk").checked = true;
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="font-size: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             Business
         `;
+        flight_search_data.itinerary.cabin = "BUSINESS";
     }else if(type === "first"){
         document.getElementById("sp_select_cabin_first_chk").checked = true;
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             First
         `;
+        flight_search_data.itinerary.cabin = "FIRST";
     }
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 function sp_select_trip_round(type="round-trip"){
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+
     Array.from(document.getElementsByClassName("sp_select_trip_round_chk")).forEach( each=> {
         each.checked = false;
     });
@@ -300,19 +308,23 @@ function sp_select_trip_round(type="round-trip"){
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
             Round-trip
         `;
+        flight_search_data.type = "round-trip";
     }else if(type === "one-way"){
         document.getElementById("sp_trip_round_one_way_chk").checked = true;
         document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
             <i style="font-size: 15px; margin-right: 10px" class="fa fa-repeat"></i>
             One-way
         `;
+        flight_search_data.type = "one-way";
     }else if(type === "multi-city"){
         document.getElementById("sp_trip_round_multi_city_chk").checked = true;
         document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
             Multi-city
         `;
+        flight_search_data.type = "multi-city";
     }
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 let travelers = {

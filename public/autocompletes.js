@@ -63,16 +63,19 @@ function changeAirportsFromInput(airport, iata, icao){
     document.getElementById("from_where_airports_auto_complete_input_fld").value = airport;
     document.getElementById("search_forms_from_where_input_fld").value = airport;
     add_origin_input_airport_to_history(iata)
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    flight_search_data.itinerary.departure.airport = iata;
     //fligh_search_data.origin_iata = iata;
 
     if(iata === "\\N" || iata === "N"){
         add_origin_input_airport_to_history(icao)
+        flight_search_data.itinerary.departure.airport = icao;
         //fligh_search_data.origin_iata = icao;
         document.getElementById("from_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
         document.getElementById("search_forms_from_where_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
     }
 
-    //window.localStorage.setItem("flights_post_data", JSON.stringify(fligh_search_data));
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 //Destination Airports Auto Completion
@@ -117,16 +120,19 @@ function changeAirportsToInput(airport, iata, icao){
     document.getElementById("to_where_airports_auto_complete_input_fld").value = airport;
     document.getElementById("search_forms_to_where_input_fld").value = airport;
     add_destination_input_airport_to_history(iata)
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    flight_search_data.itinerary.arrival.airport = iata;
     //fligh_search_data.destination_iata = iata;
 
     if(iata === "\\N" || iata === "N"){
         add_destination_input_airport_to_history(icao)
+        flight_search_data.itinerary.arrival.airport = icao;
         //fligh_search_data.destination_iata = icao;
         document.getElementById("to_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
         document.getElementById("search_forms_to_where_input_fld").value =  airport.split("(")[0] + " (" + icao + ")";
     }
 
-    //window.localStorage.setItem("flights_post_data", JSON.stringify(fligh_search_data));
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -170,15 +176,20 @@ document.getElementById("sp_from_where_airports_auto_complete_input_fld").addEve
 function sp_changeAirportsFromInput(airport, iata, icao){
     document.getElementById("sp_from_where_airports_auto_complete_input_fld").value = airport;
     document.getElementById("sp_search_forms_from_where_input_fld").value = airport;
+    sp_add_origin_input_airport_to_history(iata)
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    flight_search_data.itinerary.departure.airport = iata;
     //fligh_search_data.origin_iata = iata;
 
     if(iata === "\\N" || iata === "N"){
+        sp_add_origin_input_airport_to_history(icao)
+        flight_search_data.itinerary.departure.airport = icao;
         //fligh_search_data.origin_iata = icao;
         document.getElementById("sp_from_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
         document.getElementById("sp_search_forms_from_where_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
     }
 
-    //window.localStorage.setItem("flights_post_data", JSON.stringify(fligh_search_data));
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 //Destination Airports Auto Completion
@@ -222,15 +233,20 @@ document.getElementById("sp_to_where_airports_auto_complete_input_fld").addEvent
 function sp_changeAirportsToInput(airport, iata, icao){
     document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport;
     document.getElementById("sp_search_forms_to_where_input_fld").value = airport;
+    sp_add_destination_input_airport_to_history(iata)
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    flight_search_data.itinerary.arrival.airport = iata;
     //fligh_search_data.destination_iata = iata;
 
     if(iata === "\\N" || iata === "N"){
+        sp_add_destination_input_airport_to_history(icao)
+        flight_search_data.itinerary.arrival.airport = icao;
         //fligh_search_data.destination_iata = icao;
         document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
         document.getElementById("sp_search_forms_to_where_input_fld").value =  airport.split("(")[0] + " (" + icao + ")";
     }
 
-    //window.localStorage.setItem("flights_post_data", JSON.stringify(fligh_search_data));
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -374,6 +390,148 @@ function return_history_markup(obj, type){
     }else{
         return `
             <li><div onclick="changeAirportsToInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
+                <div style="height: 35px; margin-right: 15px; display: flex; flex-direction: column; justify-content: center;">
+                    <i class="fa fa-history" style="color: rgba(0,0,0,0.3); font-size: 22px;"></i>
+                </div>
+                <div>
+                    <div>
+                        <p style="font-size: 14px; font-weight: bolder; color: rgba(0,0,0,0.8);">
+                            ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
+                        </p>
+                        <p style="font-size: 14px; color: rgba(0,0,0,0.8);">
+                            ${obj.country}
+                        </p>
+                    </div>
+                </div>
+            </div></li>
+        `;
+    }
+    
+}
+
+
+//search page airports history
+let sp_aiports_input_history = {
+    from: [],
+    to: []
+}
+function sp_add_origin_input_airport_to_history(aita){
+
+    if(window.localStorage.getItem("sp_airports_input_history")){
+        let airports_history = JSON.parse(window.localStorage.getItem("sp_airports_input_history"));
+        
+        //removing existing same vlaue
+        airports_history.from = airports_history.from.filter(each => {
+            return (each !== aita)
+        });
+
+        let temp_airports = [];
+        if(airports_history.from.length > 4){
+            for(let i=1; i<5; i++){
+                temp_airports.push(airports_history.from[i]);
+            }
+            console.log(temp_airports);
+            airports_history.from = [...temp_airports, aita];
+        }else{
+            airports_history.from.push(aita);
+        }
+        localStorage.setItem("sp_airports_input_history", JSON.stringify(airports_history));
+    }else{
+        sp_aiports_input_history.from.push(aita);
+        window.localStorage.setItem("sp_airports_input_history", JSON.stringify(sp_aiports_input_history));
+    }
+    
+}
+function sp_add_destination_input_airport_to_history(aita){
+
+    if(window.localStorage.getItem("sp_airports_input_history")){
+        let airports_history = JSON.parse(window.localStorage.getItem("sp_airports_input_history"));
+        
+        //removing existing same vlaue
+        airports_history.to = airports_history.to.filter(each => {
+            return (each !== aita)
+        });
+
+        let temp_airports = [];
+        if(airports_history.to.length > 4){
+            for(let i=1; i<5; i++){
+                temp_airports.push(airports_history.to[i]);
+            }
+            console.log(temp_airports);
+            airports_history.to = [...temp_airports, aita];
+        }else{
+            airports_history.to.push(aita);
+        }
+        localStorage.setItem("sp_airports_input_history", JSON.stringify(airports_history));
+    }else{
+        aiports_input_history.to.push(aita);
+        window.localStorage.setItem("sp_airports_input_history", JSON.stringify(sp_aiports_input_history));
+    }
+    
+}
+
+function sp_show_all_origin_airport_history(){
+
+    document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML = "";
+    let airports_history = JSON.parse(window.localStorage.getItem("sp_airports_input_history"));
+    //console.log(airports_history)
+    for(let i = (airports_history.from.length-1); ; ){
+        let airport;
+        if(i<0) break;
+        airport = AirportsData.filter(each => {
+            return (each.IATA === airports_history.from[i] || each.ICAO === airports_history.from[i]);
+        });
+        if(airport.length===0){ 
+            i--;
+            continue;
+        }
+        document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML += sp_return_history_markup(airport[0], "origin");
+        i--;
+    }
+}
+document.getElementById("sp_search_forms_from_where_input_fld").addEventListener("click", e => {
+    sp_show_all_origin_airport_history();
+});
+
+function sp_show_all_destination_airport_history(){
+
+    document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = "";
+    let airports_history = JSON.parse(window.localStorage.getItem("sp_airports_input_history"));
+    for(let i = (airports_history.to.length-1); ; ){
+        if(i<0) break;
+        let airport = AirportsData.filter(each => {
+            return (each.IATA === airports_history.to[i] || each.ICAO === airports_history.to[i]);
+        });
+        document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML += sp_return_history_markup(airport[0], "destination");
+        i--;
+    }
+}
+document.getElementById("sp_search_forms_to_where_input_fld").addEventListener("click", e => {
+    sp_show_all_destination_airport_history();
+});
+
+function sp_return_history_markup(obj, type){
+    if(type === "origin"){
+        return `
+            <li><div onclick="sp_changeAirportsFromInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
+                <div style="height: 35px; margin-right: 15px; display: flex; flex-direction: column; justify-content: center;">
+                    <i class="fa fa-history" style="color: rgba(0,0,0,0.3); font-size: 22px;"></i>
+                </div>
+                <div>
+                    <div>
+                        <p style="font-size: 14px; font-weight: bolder; color: rgba(0,0,0,0.8);">
+                            ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
+                        </p>
+                        <p style="font-size: 14px; color: rgba(0,0,0,0.8);">
+                            ${obj.country}
+                        </p>
+                    </div>
+                </div>
+            </div></li>
+        `;
+    }else{
+        return `
+            <li><div onclick="sp_changeAirportsToInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
                 <div style="height: 35px; margin-right: 15px; display: flex; flex-direction: column; justify-content: center;">
                     <i class="fa fa-history" style="color: rgba(0,0,0,0.3); font-size: 22px;"></i>
                 </div>
