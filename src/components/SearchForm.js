@@ -148,21 +148,7 @@ function SearchForm(){
                                     }} className="airports_auto_complete_input" type="text" placeholder="Where are you leaving from?"/>
                                 <div className="airports_auto_complete_list_container">
                                     <ul id="flights_auto_complete_from_where_input_list">
-                                        <li><div style={{padding: 10, display: "flex", flexDirection: "row", cursor: "pointer"}}>
-                                            <div style={{height: 35, marginRight: 10, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                                <i className="fa fa-history" style={{color: "rgba(0,0,0,0.3)", fontSize: 17}}></i>
-                                            </div>
-                                            <div>
-                                                <div>
-                                                    <p style={{fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.8)"}}>
-                                                        New York (LGA - Laguardia)
-                                                    </p>
-                                                    <p style={{fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
-                                                        United States
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -188,8 +174,8 @@ function SearchForm(){
                                 <div className="airports_auto_complete_list_container">
                                     <ul id="flights_auto_complete_to_where_input_list">
                                         <li><div style={{padding: 10, display: "flex", flexDirection: "row", cursor: "pointer"}}>
-                                            <div style={{height: 35, marginRight: 10, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                                <i className="fa fa-history" style={{color: "rgba(0,0,0,0.3)", fontSize: 17}}></i>
+                                            <div style={{height: 35, marginRight: 15, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                                <i className="fa fa-history" style={{color: "rgba(0,0,0,0.3)", fontSize: 22}}></i>
                                             </div>
                                             <div>
                                                 <div>

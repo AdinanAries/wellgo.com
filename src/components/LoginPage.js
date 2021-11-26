@@ -72,7 +72,7 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div style={{borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                                <p onClick={show_login_form} style={{width: "217px", textAlign: "center", margin: 'auto', marginTop: 5, padding: "15px", fontSize: 14, cursor: "pointer"}}>
+                                <p onClick={show_login_form} style={{width: "220px", textAlign: "center", margin: 'auto', marginTop: 5, padding: "15px", fontSize: 14, cursor: "pointer"}}>
                                     <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-sign-in"></i>
                                     Login with existing account</p>
                             </div>
