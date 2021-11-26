@@ -28,8 +28,8 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div style={{borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                                <p style={{width: "fit-content", margin: "auto", marginTop: 5, padding: 10, color: "darkcyan", cursor: "pointer", fontSize: 14}}>Forgot your password?</p>
-                                <p onClick={show_signup_form} style={{padding: 10, width: "fit-content", margin: "auto", marginTop: 5, marginBottom: 5, fontSize: 14, borderRadius: 5, cursor: "pointer"}}>
+                                <p style={{width: "165px", textAlign: "center", margin: "auto", marginTop: 5, padding: 10, color: "darkcyan", cursor: "pointer", fontSize: 14}}>Forgot your password?</p>
+                                <p onClick={show_signup_form} style={{padding: 10, width: "150px", textAlign: "center", margin: "auto", marginTop: 5, marginBottom: 5, fontSize: 14, borderRadius: 5, cursor: "pointer"}}>
                                     <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-user"></i>
                                     Create an Account</p>
                             </div>
@@ -72,7 +72,7 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div style={{borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                                <p onClick={show_login_form} style={{width: "fit-content", margin: 'auto', marginTop: 5, padding: "15px", fontSize: 14, cursor: "pointer"}}>
+                                <p onClick={show_login_form} style={{width: "217px", textAlign: "center", margin: 'auto', marginTop: 5, padding: "15px", fontSize: 14, cursor: "pointer"}}>
                                     <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-sign-in"></i>
                                     Login with existing account</p>
                             </div>
