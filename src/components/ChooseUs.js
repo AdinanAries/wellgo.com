@@ -27,12 +27,12 @@ var ChooseUs = ()=>{
                             >Verified reviews from travelers</p>
                         <div className="home_page_reviews_wrapper">
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", left: 0}}>
-                                <div style={{width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
+                                <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
                                     <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-left"></i>
                                 </div>
                             </div>
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", right: 0}}>
-                                <div style={{width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
+                                <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
                                     <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-right"></i>
                                 </div>
                             </div>
@@ -40,29 +40,38 @@ var ChooseUs = ()=>{
                                 <div className="home_page_reviews_each_reviewer_pic">
                                     <div className="home_page_reviews_each_reviewer_pic_img_container" style={{display: "flex", flexDirection: "row"}}>
                                         <div style={{width: 110, height: 110, border: "4px solid #c751b9", overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                            <img src={wellgo_reviewer} style={{width: 110, height: "auto"}} />
+                                            <img id="home_page_reviews_selected_reviewer_img" src={wellgo_reviewer} style={{width: 110, height: "auto"}} />
                                         </div>
                                     </div>
-                                    <p style={{marginTop: 15, fontFamily: "Courgette", color: "#c751b9", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <p id="home_page_reviews_selected_reviewer_name" style={{marginTop: 15, fontFamily: "Courgette", color: "#c751b9", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                         Evelin Grigory
                                     </p>
-                                    <p style={{marginBottom: 20,fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                    <p id="home_page_reviews_selected_reviewer_city" style={{marginBottom: 20,fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                         New York City
                                     </p>
                                     
                                 </div>
                                 <div className="home_page_reviews_each_review_details">
-                                    <p style={{borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10,fontSize: 19, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(83,0,0,0.8)', letterSpacing: 1}}>
+                                    <p id="home_page_reviews_selected_reviewer_msg" style={{borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10,fontSize: 19, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(83,0,0,0.8)', letterSpacing: 1}}>
                                         <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette"}}>"</span>
                                         This is the actual review message to be displayed for what this traveler is saying 
                                         about how great wellgo.com is in the travel retail market
                                     </p>
-                                   <p style={{marginTop: 20, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.8)'}}>
+                                   <p id="home_page_reviews_selected_reviewer_date" style={{marginTop: 20, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.8)'}}>
                                         March 23rd 2022
                                     </p>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 35}}>
                                         <div style={{display: "flex", flexDirection: "row"}}>
-                                            <div style={{marginRight: 15}}>
+                                            <div onClick={()=>show_selected_review(0)} style={{marginRight: 15}} className="home_page_other_reviewer">
+                                                <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        New York City
+                                                    </p>
+                                                    <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        This is is each other reviewer message that can be only to some 
+                                                        extent. Well add this message later
+                                                    </p>
+                                                </div>
                                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                                     <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
                                                         <img src={wellgo_reviewer3} style={{width: 60, height: "auto"}} />
@@ -75,7 +84,16 @@ var ChooseUs = ()=>{
                                                     Jul 11, 2021
                                                 </p>
                                             </div>
-                                            <div style={{marginRight: 10}}>
+                                            <div onClick={()=>show_selected_review(1)} style={{marginRight: 10}} className="home_page_other_reviewer">
+                                                <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        New York City
+                                                    </p>
+                                                    <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        This is is each other reviewer message that can be only to some 
+                                                        extent. Well add this message later
+                                                    </p>
+                                                </div>
                                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                                     <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
                                                         <img src={wellgo_reviewer4} style={{width: 60, height: "auto"}} />
@@ -88,7 +106,16 @@ var ChooseUs = ()=>{
                                                     Mar 23, 2021
                                                 </p>
                                             </div>
-                                            <div className="mobile_hidden" style={{marginRight: 15}}>
+                                            <div onClick={()=>show_selected_review(2)} className="mobile_hidden home_page_other_reviewer" style={{marginRight: 15}}>
+                                                <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        New York City
+                                                    </p>
+                                                    <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        This is is each other reviewer message that can be only to some 
+                                                        extent. Well add this message later
+                                                    </p>
+                                                </div>
                                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                                     <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
                                                         <img src={wellgo_reviewer5} style={{width: 60, height: "auto"}} />
@@ -101,7 +128,16 @@ var ChooseUs = ()=>{
                                                     Jul 11, 2021
                                                 </p>
                                             </div>
-                                            <div className="mobile_hidden" style={{marginRight: 15}}>
+                                            <div onClick={()=>show_selected_review(3)} className="mobile_hidden home_page_other_reviewer" style={{marginRight: 15}}>
+                                                <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        New York City
+                                                    </p>
+                                                    <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        This is is each other reviewer message that can be only to some 
+                                                        extent. Well add this message later
+                                                    </p>
+                                                </div>
                                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                                     <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
                                                         <img src={wellgo_reviewer6} style={{width: 60, height: "auto"}} />
@@ -111,10 +147,19 @@ var ChooseUs = ()=>{
                                                     Setzo
                                                 </p>
                                                 <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                                    Jul 11, 2021
+                                                    Oct 14, 2021
                                                 </p>
                                             </div>
-                                            <div>
+                                            <div onClick={()=>show_selected_review(4)} className="home_page_other_reviewer">
+                                                <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        New York City
+                                                    </p>
+                                                    <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        This is is each other reviewer message that can be only to some 
+                                                        extent. Well add this message later
+                                                    </p>
+                                                </div>
                                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                                     <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
                                                         <img src={wellgo_reviewer2} style={{width: 60, height: "auto"}} />
@@ -182,3 +227,65 @@ var ChooseUs = ()=>{
 }
 
 export default ChooseUs;
+
+let reviewers = [
+    {
+        name: "Edward Onsoh",
+        city: "New York City",
+        date: "July 11 2021",
+        img: wellgo_reviewer3,
+        msg: `This is is each other reviewer message that can be only to some 
+        extent. Well add this message later. Lets see what Edward has said about our
+        service`
+    },
+    {
+        name: "Naana Agyeman",
+        city: "New York City",
+        date: "March 23 2021",
+        img: wellgo_reviewer4,
+        msg: `This is is each other reviewer message that can be only to some 
+        extent. Well add this message later. Lets see what Edward has said about our
+        service`
+    },
+    {
+        name: "Regina Daniels",
+        city: "New York City",
+        date: "July 11 2021",
+        img: wellgo_reviewer5,
+        msg: `This is is each other reviewer message that can be only to some 
+        extent. Well add this message later. Lets see what Edward has said about our
+        service`
+    },
+    {
+        name: "Setzo Aldavis",
+        city: "New York City",
+        date: "October 14 2021",
+        img: wellgo_reviewer6,
+        msg: `This is is each other reviewer message that can be only to some 
+        extent. Well add this message later. Lets see what Edward has said about our
+        service`
+    },
+    {
+        name: "Cecilia Branden",
+        city: "New York City",
+        date: "January 03 2021",
+        img: wellgo_reviewer2,
+        msg: `This is is each other reviewer message that can be only to some 
+        extent. Well add this message later. Lets see what Edward has said about our
+        service`
+    }
+]
+
+function show_selected_review(index){
+
+    let obj = reviewers[index];
+
+    document.getElementById("home_page_reviews_selected_reviewer_name").innerText = obj.name;
+    document.getElementById("home_page_reviews_selected_reviewer_date").innerText = obj.date;
+    document.getElementById("home_page_reviews_selected_reviewer_msg").innerHTML = `
+        <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette"}}>"</span>
+        ${obj.msg}
+    `;
+    document.getElementById("home_page_reviews_selected_reviewer_city").innerText = obj.city;
+    document.getElementById("home_page_reviews_selected_reviewer_img").src = obj.img;
+}
