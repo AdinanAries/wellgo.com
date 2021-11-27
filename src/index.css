@@ -389,8 +389,8 @@ footer {
 .why-choose-us-container .each-choose-us-container {
   width: 32%;
   padding: 15px;
-  /*border-radius: 50px;
-  border: 5px solid rgb(189, 223, 238);*/
+  border-radius: 50px;
+  border: 5px solid rgb(189, 223, 238);
 }
 .forms_class_guests_cabin_settings_container {
   position: relative;
@@ -542,7 +542,7 @@ footer {
   border-radius: 20px;*/
   background-color: white;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 50px 20px;
+  padding: 30px 20px;
   margin-bottom: 20px;
   margin-top: 10px;
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
@@ -738,34 +738,44 @@ footer {
   display: block;
 }
 .home_page_reviews_container{
-  padding: 50px 5px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 30px 5px;
   margin-bottom: 10px;
   background-color: white;
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
   border-radius: 20px;*/
 }
 .home_page_reviews_wrapper{
-  max-width: 800px;
-  padding: 0 100px;
+  max-width: 1000px;
+  padding: 0 20px;
   margin: auto;
   position: relative;
 }
 .home_page_reviews_each_review{
-  display: flex;
-  flex-direction: row;
+  
 }
 .home_page_reviews_each_reviewer_pic{
   min-width: 150px;
-  margin-right: 10px;
+  margin-left: 70px;
+  position: relative;
+  z-index: 1;
 }
 .home_page_reviews_each_review_details{
+  border-top: 10px solid #c751b9;
   justify-content: center;
   display: flex;
   flex-direction: column;
+  padding: 30px 10px;
+  margin-top: -125px;
+  padding-top: 145px;
+  border-radius: 10px;
+  background-color: #b8d4f5;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4)
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .mobile_hidden{
+    display: none !important;
+  }
   .home_page_reviews_container{
     box-shadow: none;
     border-radius: 0;
@@ -774,19 +784,27 @@ footer {
     display: block;
   }
   .home_page_reviews_each_reviewer_pic{
-    margin-right: 0;
+    margin-left: 0;
+  }
+  .home_page_reviews_each_reviewer_pic p{
+    text-align: center !important;
+  }
+  .home_page_reviews_each_reviewer_pic_img_container{
+    justify-content: center !important;
   }
   .login_page_form_container{
     box-shadow: none !important;
     border-radius: 0 !important;
-    
+  }
+  .home_page_reviews_each_review_details{
+    margin-top: -135px;
   }
   .get_best_deals_container{
     box-shadow: none;
     border-radius: 0;
   }
   .home_page_reviews_wrapper{
-    padding: 0 40px;
+    padding: 0 20px;
   }
   #main_signup_form, #main_login_form{
     padding: 0 !important;
@@ -1045,7 +1063,6 @@ footer {
   .why-choose-us-container .each-choose-us-container {
     width: 100%;
     margin-bottom: 5px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .download_mobile_section {
     margin: 0;
