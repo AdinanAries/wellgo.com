@@ -244,11 +244,11 @@ footer {
   display: none;
   animation: pop-in 0.2s ease-out;
   position: absolute;
-  top: calc(-100vh + 29px);
+  top: calc(-100vh);
   z-index: 1000;
   width: calc(100vw - 19px);
   padding: 5px;
-  height: calc(100vh - 50px);
+  height: calc(100vh);
   padding-top: 10px;
   background-size: auto;
   background-repeat: no-repeat;
@@ -373,6 +373,10 @@ footer {
 }
 .header-menu-items .each-header-menu-item.active i{
   color: #c900b0 !important;
+}
+.get_best_deals_container{
+  /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;*/
 }
 .why-choose-us-container {
   display: flex;
@@ -535,12 +539,14 @@ footer {
   border: 5px solid rgba(43, 52, 61, 0.198);
   background-color: rgba(43, 52, 61, 0.14);
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
-  border-radius: 20px;
-  background-color: white;*/
+  border-radius: 20px;*/
+  background-color: white;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 50px 20px;
   margin-bottom: 20px;
-  
+  margin-top: 10px;
+  /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;*/
 }
 .download_mobile_app_btn_container {
   display: flex;
@@ -668,7 +674,7 @@ footer {
 }
 .search_forms_promo_card{
   margin-top: 10px;
-  height: calc(100vh - 420px);
+  height: calc(100vh - 390px);
   background-color: rgb(123,95,21);
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
   background-size: cover;
@@ -732,10 +738,12 @@ footer {
   display: block;
 }
 .home_page_reviews_container{
-  padding: 40px 5px;
+  padding: 50px 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  
+  margin-bottom: 10px;
+  background-color: white;
+  /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;*/
 }
 .home_page_reviews_wrapper{
   max-width: 800px;
@@ -758,6 +766,10 @@ footer {
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .home_page_reviews_container{
+    box-shadow: none;
+    border-radius: 0;
+  }
   .home_page_reviews_each_review{
     display: block;
   }
@@ -767,7 +779,11 @@ footer {
   .login_page_form_container{
     box-shadow: none !important;
     border-radius: 0 !important;
-
+    
+  }
+  .get_best_deals_container{
+    box-shadow: none;
+    border-radius: 0;
   }
   .home_page_reviews_wrapper{
     padding: 0 40px;
@@ -1032,13 +1048,15 @@ footer {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .download_mobile_section {
-    margin: 10px;
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin: 0;
+    border-radius: 0;
   }
   .download_mobile_app_section_container {
     display: block;
     margin-top: 0;
+    margin-bottom: 20px;
+    box-shadow: none;
+    border-radius: 0;
   }
   .download_mobile_app_btn_container {
     margin-left: 0;

@@ -8,13 +8,16 @@ import DownloadMobileApp from "./DownloadMobileApp";
 var ChooseUs = ()=>{
     return (
         <div>
-            <div className="wrapper">
-                <div style={{padding: 10, margin: "0 10px", marginBottom: 20, marginTop: "calc(100vh - 30px)", backgroundColor: "white", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
-                    <div style={{width: 90, margin: "auto", marginBottom: 40, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.3)", borderRadius: 500}}></div>
-
-                    <h1 style={{textAlign: "center", fontSize: 20, marginTop: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                    >Reviews From Travelers</h1>
+            
+                <div style={{marginBottom: 0, padding: "10px 0", marginTop: "calc(100vh)", backgroundColor: "white", boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
+                   <div className="wrapper"> 
+                    
+                    <div style={{width: 90, margin: "auto", marginBottom: 40, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.8)", borderRadius: 500}}></div>
+                    
+                    
                     <div className="home_page_reviews_container">
+                        <h1 style={{textAlign: "center", fontSize: 20, marginBottom: 40, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        >Reviews From Travelers</h1>
                         <div className="home_page_reviews_wrapper">
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", position: "absolute", height: "100%", left: 0}}>
                                 <div style={{width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
@@ -53,8 +56,9 @@ var ChooseUs = ()=>{
                             </div>
                         </div>
                     </div>
-                    <h1 style={{textAlign: "center", fontSize: 20, marginTop: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                    >Get the Best Deals!</h1>
+                    <div className="get_best_deals_container" style={{backgroundColor: "white", padding: "50px 0"}}>
+                        <h1 style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        >Get the Best Deals!</h1>
                     <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", margin: "0 5px", fontWeight: "bolder", fontSize: 15}}
                     >We have the cheapest flight tickets</p>
                     <div className="why-choose-us-container" >
@@ -91,6 +95,7 @@ var ChooseUs = ()=>{
                             <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
                                 This is a place holder text for the description of this info card</p>
                         </div>
+                    </div>
                     </div>
                     <DownloadMobileApp />
                 </div>
