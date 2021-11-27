@@ -283,7 +283,7 @@ function show_selected_review(index){
     document.getElementById("home_page_reviews_selected_reviewer_name").innerText = obj.name;
     document.getElementById("home_page_reviews_selected_reviewer_date").innerText = obj.date;
     document.getElementById("home_page_reviews_selected_reviewer_msg").innerHTML = `
-        <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette"}}>"</span>
+        <span style="font-size: 45px; color: #c751b9; margin-right: 10px; font-family: Courgette;">"</span>
         ${obj.msg}
     `;
     document.getElementById("home_page_reviews_selected_reviewer_city").innerText = obj.city;
