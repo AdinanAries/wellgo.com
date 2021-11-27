@@ -158,7 +158,7 @@ function SearchForm(){
                             </div>
                         </div>
                         <div id="main_switch_inputs_btn" className="switchinputsBtn"  style={{border: "none", boxShadow: "0 0 5px rgba(0,0,0,0.3)",}}
-                            onClick={switch_input_rotate_func}>
+                            onClick={switch_airports_input_values}>
                             <p style={{textAlign: "center"}}>
                                 <i className="fa fa-exchange"></i>
                             </p>
@@ -222,6 +222,19 @@ function switch_input_rotate_func(){
         switch_btn_switched = false;
     }
     
+}
+function switch_airports_input_values(){
+    let from_airport_value = document.getElementById("search_forms_from_where_input_fld").value;
+    document.getElementById("search_forms_from_where_input_fld").value = document.getElementById("search_forms_to_where_input_fld").value;
+    document.getElementById("search_forms_to_where_input_fld").value = from_airport_value;
+    switch_input_rotate_func();
+
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    let temp_iata = flight_search_data.itinerary.departure.airport;
+    flight_search_data.itinerary.departure.airport = flight_search_data.itinerary.arrival.airport;
+    flight_search_data.itinerary.arrival.airport = temp_iata;
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
 }
 
 function open_to_where_auto_complete_pane(){
