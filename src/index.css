@@ -731,12 +731,46 @@ footer {
 .landing_page_hero_menu_items:hover .landing_page_hero_menu_item_tooltip{
   display: block;
 }
+.home_page_reviews_container{
+  padding: 40px 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  
+}
+.home_page_reviews_wrapper{
+  max-width: 800px;
+  padding: 0 100px;
+  margin: auto;
+  position: relative;
+}
+.home_page_reviews_each_review{
+  display: flex;
+  flex-direction: row;
+}
+.home_page_reviews_each_reviewer_pic{
+  min-width: 150px;
+  margin-right: 10px;
+}
+.home_page_reviews_each_review_details{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .home_page_reviews_each_review{
+    display: block;
+  }
+  .home_page_reviews_each_reviewer_pic{
+    margin-right: 0;
+  }
   .login_page_form_container{
     box-shadow: none !important;
     border-radius: 0 !important;
 
+  }
+  .home_page_reviews_wrapper{
+    padding: 0 40px;
   }
   #main_signup_form, #main_login_form{
     padding: 0 !important;
