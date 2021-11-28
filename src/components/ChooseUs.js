@@ -46,10 +46,20 @@ var ChooseUs = ()=>{
                                     <p id="home_page_reviews_selected_reviewer_name" style={{marginTop: 15, fontFamily: "Courgette", color: "#c751b9", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                         Evelin Grigory
                                     </p>
-                                    <p id="home_page_reviews_selected_reviewer_city" style={{marginBottom: 20,fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                    <p id="home_page_reviews_selected_reviewer_city" style={{marginBottom: 10,fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                         New York City
                                     </p>
-                                    
+                                    <div className="reviews_rating" style={{display: "flex", flexDirection: "row"}}>
+                                        <div className="all_ratings_dotes">
+                                            <div className="rating_dot"><div className="full"></div></div>
+                                            <div className="rating_dot"><div className="full"></div></div>
+                                            <div className="rating_dot"><div className="full"></div></div>
+                                            <div className="rating_dot"><div className="full"></div></div>
+                                            <div className="rating_dot"><div className="half"></div></div>
+                                        </div>
+                                    </div>
+                                    <p className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "#b8d4f5", fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
+                                        4.5</p>
                                 </div>
                                 <div className="home_page_reviews_each_review_details">
                                     <p id="home_page_reviews_selected_reviewer_msg" style={{borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10,fontSize: 19, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(83,0,0,0.8)', letterSpacing: 1}}>
