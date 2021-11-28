@@ -21,10 +21,10 @@ var ChooseUs = ()=>{
                     
                     
                     <div className="home_page_reviews_container">
-                        <h1 style={{textAlign: "center", fontSize: 20, marginBottom: 10, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        <h1 style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Reviews</h1>
-                        <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", margin: "0 5px", marginBottom: 40, fontWeight: "bolder", fontSize: 15}}
-                            >Verified reviews from travelers</p>
+                        <h1 className="mobile_margin_bottom_20" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        >Verified reviews from travelers</h1>
                         <div className="home_page_reviews_wrapper">
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", left: 0}}>
                                 <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
@@ -221,8 +221,8 @@ var ChooseUs = ()=>{
                     <div className="get_best_deals_container" style={{backgroundColor: "white", padding: "20px 0"}}>
                         <h1 style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Get the Best Deals!</h1>
-                        <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", margin: "0 5px", fontWeight: "bolder", fontSize: 15}}
-                        >We have the cheapest flight tickets</p>
+                        <h1 style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        >We have the cheapest flight tickets</h1>
                         <div className="why-choose-us-container" >
                             <div className="each-choose-us-container">
                                 

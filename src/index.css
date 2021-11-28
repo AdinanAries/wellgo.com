@@ -836,6 +836,9 @@ footer {
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .mobile_margin_bottom_20{
+    padding-bottom: 20px !important;
+  }
   .reviews_rating{
     justify-content: center;
   }
