@@ -74,6 +74,12 @@ var ChooseUs = ()=>{
                                         <div style={{display: "flex", flexDirection: "row"}}>
                                             <div onClick={()=>show_selected_review(0)} style={{marginRight: 15}} className="home_page_other_reviewer">
                                                 <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
+                                                        Edward Onsoh
+                                                    </p>
+                                                    <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        Jul 11, 2021
+                                                    </p>
                                                     <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                                         New York City
                                                     </p>
@@ -90,12 +96,18 @@ var ChooseUs = ()=>{
                                                 <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
                                                     Edward
                                                 </p>
-                                                <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                                    Jul 11, 2021
+                                                <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                    4.6
                                                 </p>
                                             </div>
-                                            <div onClick={()=>show_selected_review(1)} style={{marginRight: 10}} className="home_page_other_reviewer">
+                                            <div onClick={()=>show_selected_review(1)} style={{marginRight: 15}} className="home_page_other_reviewer">
                                                 <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
+                                                        Naana Agyeman
+                                                    </p>
+                                                    <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        Mar 23, 2021
+                                                    </p>
                                                     <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                                         New York City
                                                     </p>
@@ -112,12 +124,18 @@ var ChooseUs = ()=>{
                                                 <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
                                                     Naana
                                                 </p>
-                                                <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                                    Mar 23, 2021
+                                                <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                    4.7
                                                 </p>
                                             </div>
                                             <div onClick={()=>show_selected_review(2)} className="mobile_hidden home_page_other_reviewer" style={{marginRight: 15}}>
                                                 <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
+                                                        Regina Daniels
+                                                    </p>
+                                                    <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        Jul 11, 2021
+                                                    </p>
                                                     <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                                         New York City
                                                     </p>
@@ -134,12 +152,18 @@ var ChooseUs = ()=>{
                                                 <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
                                                     Regina
                                                 </p>
-                                                <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                                    Jul 11, 2021
+                                                <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                    5.0
                                                 </p>
                                             </div>
                                             <div onClick={()=>show_selected_review(3)} className="mobile_hidden home_page_other_reviewer" style={{marginRight: 15}}>
                                                 <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
+                                                        Setzo Aldavis
+                                                    </p>
+                                                    <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        Oct 14, 2021
+                                                    </p>
                                                     <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                                         New York City
                                                     </p>
@@ -156,12 +180,18 @@ var ChooseUs = ()=>{
                                                 <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
                                                     Setzo
                                                 </p>
-                                                <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                                    Oct 14, 2021
+                                                <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                    4.9
                                                 </p>
                                             </div>
                                             <div onClick={()=>show_selected_review(4)} className="home_page_other_reviewer">
                                                 <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
+                                                    <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
+                                                        Cecilia Braden
+                                                    </p>
+                                                    <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                        Jan 03, 2021
+                                                    </p>
                                                     <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                                         New York City
                                                     </p>
@@ -178,8 +208,8 @@ var ChooseUs = ()=>{
                                                 <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
                                                     Cecilia
                                                 </p>
-                                                <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                                    Jan 03, 2021
+                                                <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                                    5.0
                                                 </p>
                                             </div>
                                         </div>
