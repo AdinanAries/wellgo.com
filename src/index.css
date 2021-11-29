@@ -195,11 +195,11 @@ header {
   margin-right: 25px;
 }
 .header_mobile_menus i {
-  color: rgb(18, 97, 128);
+  color: rgb(153, 216, 241);
   font-size: 21px;
 }
 .header_mobile_menus_item.active i {
-  color: #c900b1c9;
+  color: #db7fd0;
 }
 .site-logo {
   cursor: pointer;
@@ -220,7 +220,7 @@ header {
   justify-content: center;
 }
 .site-logo-txt p {
-  color: rgb(29, 162, 206);
+  color: rgb(169, 221, 255);
   font-family: Sans-serif;
   font-family: "Prompt", sans-serif;
   font-weight: 1000;
@@ -228,7 +228,7 @@ header {
 }
 .site-logo-txt span {
   font-size: 13px;
-  color: #c900b0;
+  color: #db7fd0;
 }
 main {
 }
@@ -377,7 +377,7 @@ footer {
 }
 .header-menu-items .each-header-menu-item.active i {
   display: inline;
-  color: #c900b0 !important;
+  color: #db7fd0 !important;
 }
 .get_best_deals_container {
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
@@ -700,10 +700,10 @@ footer {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 #landing_page_search_form_show_filters_btn{
-  background-color: #e606cb;
+  background-color: #d66aca;
 }
 #landing_page_search_form_show_filters_btn:hover {
-  background-color: #f000d4;
+  background-color: #d85ac9;
 }
 .landing_page_hero_menu_items {
   position: relative;
@@ -999,7 +999,7 @@ footer {
     width: 50%;
   }
   #landing_page_search_form_show_filters_btn:hover {
-    background-color: #e606cb;
+    background-color: #d66aca;
   }
   .search_forms_promo_card {
     border-radius: 0;
