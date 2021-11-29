@@ -7,6 +7,9 @@ import wellgo_reviewer3 from '../wellgo_reviewer3.jpg';
 import wellgo_reviewer4 from '../wellgo_reviewer4.jpg';
 import wellgo_reviewer5 from '../wellgo_reviewer5.jpg';
 import wellgo_reviewer6 from '../wellgo_reviewer6.jpg';
+import reviews_icon from "../icons/reviews_icon.svg";
+
+import { show_full_search_form } from "../helpers/PageRoutingFuncs";
 
 import DownloadMobileApp from "./DownloadMobileApp";
 
@@ -26,6 +29,12 @@ var ChooseUs = ()=>{
                         <h1 className="mobile_margin_bottom_20" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Verified reviews from travelers</h1>
                         <div className="home_page_reviews_wrapper">
+
+                            <div onClick={show_full_search_form} className="home_page_reviews_start_search_btn">
+                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>
+                                Search Flights now
+                            </div>
+
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", left: 0}}>
                                 <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
                                     <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-left"></i>
@@ -37,6 +46,9 @@ var ChooseUs = ()=>{
                                 </div>
                             </div>
                             <div className="home_page_reviews_each_review">
+
+                                <div className="reviews_watermark_icon" style={{backgroundImage: `url('${reviews_icon}')`}}></div>
+
                                 <div className="home_page_reviews_each_reviewer_pic">
                                     <div className="home_page_reviews_each_reviewer_pic_img_container" style={{display: "flex", flexDirection: "row"}}>
                                         <div style={{width: 110, height: 110, border: "4px solid #c751b9", overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
@@ -222,7 +234,7 @@ var ChooseUs = ()=>{
                         <h1 style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Get the Best Deals!</h1>
                         <h1 style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                        >We have the cheapest flight tickets</h1>
+                        >We have the cheapest tickets</h1>
                         <div className="why-choose-us-container" >
                             <div className="each-choose-us-container">
                                 

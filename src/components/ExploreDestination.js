@@ -105,6 +105,9 @@ export default function ExploreDestinations(){
                     </div>
                     
                 </div>
+                <div className="landing_page_scroll_down_indicator">
+                    <i className="fa fa-arrow-down"></i>
+                </div>
             </div>
         
     );

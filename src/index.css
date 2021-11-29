@@ -750,14 +750,36 @@ footer {
   margin: auto;
   position: relative;
 }
+.home_page_reviews_start_search_btn{
+  position: absolute;
+  top: 10px;
+  padding: 14px 20px;
+  width: 300px;
+  right: 30px;
+  background-color: rgba(0, 0, 0, 0.07);
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 4;
+}
 .home_page_reviews_each_review{
-  
+  position: relative;
+}
+.reviews_watermark_icon{
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  top: 21px;
+  height: 200px;
+  width: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .home_page_reviews_each_reviewer_pic{
   min-width: 150px;
   margin-left: 70px;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 .home_page_reviews_each_review_details{
   border-top: 10px solid #c751b9;
@@ -822,7 +844,7 @@ footer {
   overflow: hidden;
   width: 15px;
   height: 15px;
-  border: 0.1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 .rating_dot .full{
   width: 100%;
@@ -834,8 +856,32 @@ footer {
   height: 100%;
   background: #c751b9;
 }
+@keyframes arrow_bounce {
+  0%{
+    transform: translateY(0);
+  }
+  100%{
+    transform: translateY(100%);
+  }
+}
+.landing_page_scroll_down_indicator{
+ position: absolute;
+ bottom: 30px;
+ left: 50%;
+}
+.landing_page_scroll_down_indicator i{
+  font-size: 26px;
+  color: white;
+  animation: arrow_bounce 1s infinite;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
+}
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .reviews_watermark_icon{
+    width: 120px;
+    height: 120px;
+    right: -20px;
+  }
   .mobile_margin_bottom_20{
     padding-bottom: 20px !important;
   }
@@ -863,6 +909,9 @@ footer {
   }
   .home_page_reviews_each_reviewer_pic_img_container{
     justify-content: center !important;
+  }
+  .home_page_reviews_start_search_btn{
+    display: none;
   }
   .login_page_form_container{
     box-shadow: none !important;
