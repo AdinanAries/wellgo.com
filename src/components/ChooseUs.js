@@ -8,6 +8,7 @@ import wellgo_reviewer4 from '../wellgo_reviewer4.jpg';
 import wellgo_reviewer5 from '../wellgo_reviewer5.jpg';
 import wellgo_reviewer6 from '../wellgo_reviewer6.jpg';
 import reviews_icon from "../icons/reviews_icon.svg";
+import reviews_icon2 from "../icons/reviews_icon2.svg";
 
 import { show_full_search_form } from "../helpers/PageRoutingFuncs";
 
@@ -24,9 +25,9 @@ var ChooseUs = ()=>{
                     
                     
                     <div className="home_page_reviews_container">
-                        <h1 style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Reviews</h1>
-                        <h1 className="mobile_margin_bottom_20" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Verified reviews from travelers</h1>
                         <div className="home_page_reviews_wrapper">
 
@@ -48,6 +49,7 @@ var ChooseUs = ()=>{
                             <div className="home_page_reviews_each_review">
 
                                 <div className="reviews_watermark_icon" style={{backgroundImage: `url('${reviews_icon}')`}}></div>
+                                <div className="reviews_watermark_icon2" style={{backgroundImage: `url('${reviews_icon2}')`}}></div>
 
                                 <div className="home_page_reviews_each_reviewer_pic">
                                     <div className="home_page_reviews_each_reviewer_pic_img_container" style={{display: "flex", flexDirection: "row"}}>
@@ -58,7 +60,7 @@ var ChooseUs = ()=>{
                                     <p id="home_page_reviews_selected_reviewer_name" style={{marginTop: 15, fontFamily: "Courgette", color: "#c751b9", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                         Evelin Grigory
                                     </p>
-                                    <p id="home_page_reviews_selected_reviewer_city" style={{marginBottom: 10,fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+                                    <p  className="mobile_font_13" id="home_page_reviews_selected_reviewer_city" style={{marginBottom: 10,fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,73,0,0.8)'}}>
                                         New York City
                                     </p>
                                     <div className="reviews_rating" style={{display: "flex", flexDirection: "row"}}>
@@ -70,7 +72,7 @@ var ChooseUs = ()=>{
                                             <div className="rating_dot"><div className="half"></div></div>
                                         </div>
                                     </div>
-                                    <p className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "#b8d4f5", fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
+                                    <p className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "white", /*backgroundColor: "#b8d4f5",*/ fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
                                         4.5</p>
                                 </div>
                                 <div className="home_page_reviews_each_review_details">
@@ -79,7 +81,7 @@ var ChooseUs = ()=>{
                                         This is the actual review message to be displayed for what this traveler is saying 
                                         about how great wellgo.com is in the travel retail market
                                     </p>
-                                   <p id="home_page_reviews_selected_reviewer_date" style={{marginTop: 20, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.8)'}}>
+                                   <p className="mobile_font_13" id="home_page_reviews_selected_reviewer_date" style={{marginTop: 20, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,73,0,0.8)'}}>
                                         March 23rd 2022
                                     </p>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 35}}>
@@ -231,9 +233,9 @@ var ChooseUs = ()=>{
                         </div>
                     </div>
                     <div className="get_best_deals_container" style={{backgroundColor: "white", padding: "20px 0"}}>
-                        <h1 style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        <h1 className="page_title" style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Get the Best Deals!</h1>
-                        <h1 style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        <h1 className="title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >We have the cheapest tickets</h1>
                         <div className="why-choose-us-container" >
                             <div className="each-choose-us-container">

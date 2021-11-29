@@ -10,7 +10,7 @@ function DownloadMobileApp(){
 
                     </div>
                     <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
-                        <p className="download_mobile_app_title" style={{color: "#c900b0", fontWeight: "bolder", marginBottom: 5, fontFamily: "Courgette"}}>
+                        <p className="download_mobile_app_title" style={{color: "#c751b9", fontWeight: "bolder", marginBottom: 5, fontFamily: "Courgette"}}>
                             Get Our Mobile App</p>
                         <p style={{color: "rgba(0,0,0,0.6)", fontWeight: "bolder", fontSize: 15}}>
                             For better user experience, we recommend that you download our mobile app.</p>

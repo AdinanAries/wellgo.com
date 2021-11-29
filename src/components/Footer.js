@@ -7,7 +7,7 @@ function Footer(){
                 <div className="footer_section_flex_container">
                 <div className="footer_section_each_flex_section_container">
                         <div>
-                            <p style={{fontWeight: "bolder", color: "#c900b0", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
+                            <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
                                 Wellgo.com</p>
                             <p className="footer-site-logo">
                                 <img src={WillgoLogo}/></p>
@@ -18,7 +18,7 @@ function Footer(){
                     </div>
                     <div className="footer_section_each_flex_section_container">
                         <div>
-                            <p style={{fontWeight: "bolder", color: "#c900b0", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
+                            <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
                                 About Us</p>
                             <p className="footer_about_text" style={{color: "white", textAlign: "center", letterSpacing: 0.5, fontFamily: "Courgette", maxWidth: 250}}>
                             Wellgo.com is a online travel agency who's business operations targets mostly the African
@@ -41,7 +41,7 @@ function Footer(){
                     </div>*/}
                     <div>
                         <div className="footer_section_each_flex_section_container" style={{marginBottom: 20}}>
-                            <p style={{fontWeight: "bolder", color: "#c900b0", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
+                            <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
                                 Contact</p>
                             <div style={{marginTop: 10}}>
                                 <p style={{color: "white", textAlign: "center"}}>

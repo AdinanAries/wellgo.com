@@ -37,7 +37,7 @@ body {
   0% {
     transform: translateY(0);
   }
-  50%{
+  50% {
     transform: translateY(10%);
   }
   100% {
@@ -47,15 +47,14 @@ body {
 @keyframes the_moving_plane {
   0% {
     transform: rotate(0);
-
   }
-  25%{
+  25% {
     transform: rotate(15deg) translate(50px);
   }
-  50%{
+  50% {
     transform: rotate(0);
   }
-  75%{
+  75% {
     transform: rotate(-25deg);
   }
   100% {
@@ -71,30 +70,30 @@ body {
   }
 }
 @keyframes fade_and_pop {
-  0%{
+  0% {
     opacity: 0;
   }
-  50%{
+  50% {
     opacity: 1;
     transform: scale(1.1);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
 }
-.info_item_loader{
+.info_item_loader {
   animation: opacity 1s ease-in-out infinite;
-  color: rgba(0,0,0,0);
-  background-color: rgba(0,0,0,0.3);
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 50px;
 }
-.ticket_loader_info_1{
+.ticket_loader_info_1 {
   width: 45%;
 }
-.ticket_loader_info_2{
+.ticket_loader_info_2 {
   width: 30%;
 }
-.ticket_loader_info_3{
+.ticket_loader_info_3 {
   width: 20%;
 }
 /*-------------------------------------------------------------*/
@@ -172,7 +171,7 @@ header {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);*/
   z-index: 10;
 }
-.mobile-menu-header{
+.mobile-menu-header {
   background-color: rgb(53, 115, 173);
   height: 60px;
   display: flex;
@@ -184,7 +183,7 @@ header {
 .header_humburger_menu {
   display: none;
 }
-.header_mobile_menus div{
+.header_mobile_menus div {
   height: 60px;
   display: flex;
   flex-direction: column;
@@ -195,44 +194,44 @@ header {
   color: rgb(11, 71, 95);
   font-size: 21px;
 }
-.header_mobile_menus_item.active i{
+.header_mobile_menus_item.active i {
   color: #c900b1c9;
 }
-.site-logo{
+.site-logo {
   cursor: pointer;
   display: flex;
 }
-.site-logo-img{
-  display: flex; 
+.site-logo-img {
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.site-logo p img{
+.site-logo p img {
   width: 45px;
 }
-.site-logo-txt{
+.site-logo-txt {
   margin-left: 5px;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.site-logo-txt p{
+.site-logo-txt p {
   color: rgb(44, 107, 128);
   font-family: Sans-serif;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   font-weight: 1000;
   font-size: 23px;
 }
-.site-logo-txt span{
+.site-logo-txt span {
   font-size: 13px;
   color: #c900b0;
 }
 main {
 }
-.footer-site-logo{
+.footer-site-logo {
   text-align: center;
 }
-.footer-site-logo img{
+.footer-site-logo img {
   width: 50px;
 }
 footer {
@@ -361,20 +360,20 @@ footer {
   color: rgb(11, 71, 95);
   font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
 }
 .header-menu-items .each-header-menu-item i {
-  color: rgb(11, 71, 95);;
+  color: rgb(11, 71, 95);
   margin-right: 7px;
   font-size: 16px;
 }
-.header-menu-items .each-header-menu-item.active{
+.header-menu-items .each-header-menu-item.active {
   /*border-bottom: 3px solid #c900b0 !important;*/
 }
-.header-menu-items .each-header-menu-item.active i{
+.header-menu-items .each-header-menu-item.active i {
   color: #c900b0 !important;
 }
-.get_best_deals_container{
+.get_best_deals_container {
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
   border-radius: 20px;*/
 }
@@ -411,7 +410,7 @@ footer {
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);*/
   cursor: pointer;
 }
-.searchFormChkInputLbl i{
+.searchFormChkInputLbl i {
   color: rgb(52, 75, 85);
 }
 .searchFormChkInputLbl:hover {
@@ -516,14 +515,14 @@ footer {
   padding: 10px;
   cursor: pointer;
 }
-.explore_destinations_promo_card{
+.explore_destinations_promo_card {
   position: fixed;
   top: 0;
   left: 0;
   margin-bottom: 30px;
   height: 100vh;
   width: 100vw;
-  background-image: url('./explore_destination_img.jpg');
+  background-image: url("./explore_destination_img.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -559,48 +558,48 @@ footer {
   justify-content: space-between;
   padding: 20px 10px;
 }
-.search_list_main_flex_container{
+.search_list_main_flex_container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.search_list_main__settings_section{
+.search_list_main__settings_section {
   animation: pop-in 0.2s ease-out;
   width: 19%;
 }
-.search_list_main_tickets_section{
+.search_list_main_tickets_section {
   width: calc(66% - 50px);
 }
-.search_list_main_ads_section{
+.search_list_main_ads_section {
   min-height: 500px;
   width: 15%;
   margin-top: 10px;
 }
-.search_result_inportant_notice_container{
+.search_result_inportant_notice_container {
   margin: 10px;
-  background-color: rgba(255,0,0,0.1);
+  background-color: rgba(255, 0, 0, 0.1);
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid rgba(255,0,0,0.1);
+  border: 1px solid rgba(255, 0, 0, 0.1);
 }
-#close_filter_and_sort_btn{
+#close_filter_and_sort_btn {
   display: none;
 }
-#itinerary_and_filter_icon{
+#itinerary_and_filter_icon {
   display: none;
   padding: 20px 10px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.each_ticket_upper_flex{
+.each_ticket_upper_flex {
   display: flex;
 }
-.each_ticket_price_display{
+.each_ticket_price_display {
   text-align: right;
 }
-.display_more_info_pane{
+.display_more_info_pane {
   display: none;
   animation: pop-in 0.2s ease-out;
   position: fixed;
@@ -615,7 +614,7 @@ footer {
   overflow: auto;
   padding-bottom: 80px;
 }
-.selected_ticket_book_btn_container{
+.selected_ticket_book_btn_container {
   position: fixed;
   width: 700px;
   background-color: white;
@@ -623,7 +622,7 @@ footer {
   bottom: 0;
   right: 0;
 }
-.selected_ticket_book_btn{
+.selected_ticket_book_btn {
   cursor: pointer;
   color: white;
   background-color: #c900b0;
@@ -631,7 +630,7 @@ footer {
   border-radius: 9px;
   text-align: center;
 }
-#booking_start_checkout_page_container{
+#booking_start_checkout_page_container {
   display: none;
   animation: pop-in 0.2s ease-out;
   position: fixed;
@@ -643,18 +642,18 @@ footer {
   z-index: 1003;
   overflow: auto;
 }
-.checkout_page_all_info_flex_container{
+.checkout_page_all_info_flex_container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.checkout_page_all_info_flex_left{
+.checkout_page_all_info_flex_left {
   width: calc(65% - 30px);
 }
-.checkout_page_all_info_flex_right{
+.checkout_page_all_info_flex_right {
   width: calc(35%);
 }
-.checkout_page_main_checkout_btn{
+.checkout_page_main_checkout_btn {
   margin-top: 20px;
   text-align: center;
   background-color: rgb(23, 87, 148);
@@ -662,21 +661,21 @@ footer {
   padding: 14px;
   border-radius: 9px;
 }
-.checkout_page_mobile_button_place_total_price_display{
+.checkout_page_mobile_button_place_total_price_display {
   display: none;
   font-size: 13px;
   margin-bottom: 10px;
   /*color: #c900b0;*/
   color: rgba(0, 0, 0, 0.6);
   letter-spacing: 1px;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   text-align: center;
 }
-.search_forms_promo_card{
+.search_forms_promo_card {
   margin-top: 10px;
   height: calc(100vh - 390px);
-  background-color: rgb(123,95,21);
-  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  background-color: rgb(123, 95, 21);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -686,16 +685,16 @@ footer {
   justify-content: center;
   border-radius: 20px;
 }
-.main_search_from_overall_container{
+.main_search_from_overall_container {
   background-color: white;
   padding: 10px;
   border-radius: 20px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
-#landing_page_search_form_show_filters_btn:hover{
+#landing_page_search_form_show_filters_btn:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-.landing_page_hero_menu_items{
+.landing_page_hero_menu_items {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -707,9 +706,9 @@ footer {
   width: 50px;
   background-color: rgba(255, 255, 255, 0.87);
   cursor: "pointer";
-  box-shadow: 1px 2px 3px rgba(0,0,0,0.3);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }
-.landing_page_hero_menu_item_tooltip{
+.landing_page_hero_menu_item_tooltip {
   display: none;
   position: absolute;
   padding: 5px;
@@ -719,38 +718,38 @@ footer {
   background-color: white;
   width: 70px;
   font-size: 13px;
-  box-shadow: 1px 2px 3px rgba(0,0,0,0.7);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7);
 }
 .landing_page_hero_menu_item_tooltip:after {
-  content: '';
-    display: block;  
-    position: absolute;
-    left: calc(50% - 5px);
-    bottom: calc(100%);
-    width: 0;
-    height: 0;
-    border-bottom: 5px solid white;
-    border-top: 5px solid transparent;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
+  content: "";
+  display: block;
+  position: absolute;
+  left: calc(50% - 5px);
+  bottom: calc(100%);
+  width: 0;
+  height: 0;
+  border-bottom: 5px solid white;
+  border-top: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
 }
-.landing_page_hero_menu_items:hover .landing_page_hero_menu_item_tooltip{
+.landing_page_hero_menu_items:hover .landing_page_hero_menu_item_tooltip {
   display: block;
 }
-.home_page_reviews_container{
+.home_page_reviews_container {
   padding: 30px 5px;
   margin-bottom: 10px;
   background-color: white;
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
   border-radius: 20px;*/
 }
-.home_page_reviews_wrapper{
+.home_page_reviews_wrapper {
   max-width: 1000px;
   padding: 0 20px;
   margin: auto;
   position: relative;
 }
-.home_page_reviews_start_search_btn{
+.home_page_reviews_start_search_btn {
   position: absolute;
   top: 10px;
   padding: 14px 20px;
@@ -762,10 +761,10 @@ footer {
   cursor: pointer;
   z-index: 4;
 }
-.home_page_reviews_each_review{
+.home_page_reviews_each_review {
   position: relative;
 }
-.reviews_watermark_icon{
+.reviews_watermark_icon {
   position: absolute;
   z-index: 2;
   right: 0;
@@ -775,13 +774,25 @@ footer {
   background-size: contain;
   background-repeat: no-repeat;
 }
-.home_page_reviews_each_reviewer_pic{
+.reviews_watermark_icon2{
+  position: absolute;
+  z-index: 2;
+  width: 150px;
+  height: 150px;
+  left: calc(50% - 50px);
+  top: 50px;
+  transform: rotate(20deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.home_page_reviews_each_reviewer_pic {
   min-width: 150px;
-  margin-left: 70px;
+  margin-left: 100px;
   position: relative;
   z-index: 3;
 }
-.home_page_reviews_each_review_details{
+.home_page_reviews_each_review_details {
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-top: 10px solid #c751b9;
   justify-content: center;
   display: flex;
@@ -790,28 +801,28 @@ footer {
   margin-top: -177px;
   padding-top: 145px;
   border-radius: 10px;
-  background-color: #b8d4f5;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4)
+  /*background-color: #b8d4f5;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4)*/
 }
-.home_page_other_reviewer{
+.home_page_other_reviewer {
   position: relative;
   cursor: pointer;
 }
-.home_page_other_reviewer:hover .home_page_other_reviewer_bubble{
+.home_page_other_reviewer:hover .home_page_other_reviewer_bubble {
   display: block;
 }
 
 @keyframes bubble_display {
-  0%{
+  0% {
     transform: translateX(30%);
     opacity: 0;
   }
-  100%{
+  100% {
     transform: translateX(0);
     opacity: 1;
   }
 }
-.home_page_other_reviewer_bubble{
+.home_page_other_reviewer_bubble {
   display: none;
   animation: bubble_display 0.3s ease-in-out;
   position: absolute;
@@ -830,15 +841,15 @@ footer {
   top: 100%;
   left: calc(50% - 5px);
   border-top: 10px solid white;
-  border-top-color: white; 
+  border-top-color: white;
   border-left: 10px solid transparent;
-  border-right: 10px solid transparent; 
+  border-right: 10px solid transparent;
 }
-.all_ratings_dotes{
+.all_ratings_dotes {
   display: flex;
   flex-direction: row;
 }
-.rating_dot{
+.rating_dot {
   margin-right: 5px;
   border-radius: 100%;
   overflow: hidden;
@@ -846,30 +857,30 @@ footer {
   height: 15px;
   background-color: rgba(0, 0, 0, 0.15);
 }
-.rating_dot .full{
+.rating_dot .full {
   width: 100%;
   height: 100%;
   background: #c751b9;
 }
-.rating_dot .half{
+.rating_dot .half {
   width: 50%;
   height: 100%;
   background: #c751b9;
 }
 @keyframes arrow_bounce {
-  0%{
+  0% {
     transform: translateY(0);
   }
-  100%{
+  100% {
     transform: translateY(100%);
   }
 }
-.landing_page_scroll_down_indicator{
- position: absolute;
- bottom: 100px;
- left: 50%;
+.landing_page_scroll_down_indicator {
+  position: absolute;
+  bottom: 100px;
+  left: calc(50% - 22px);
 }
-.landing_page_scroll_down_indicator i{
+.landing_page_scroll_down_indicator i {
   font-size: 26px;
   color: white;
   animation: arrow_bounce 1s infinite;
@@ -877,93 +888,114 @@ footer {
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
-  .reviews_watermark_icon{
-    width: 120px;
-    height: 120px;
+  .reviews_watermark_icon {
+    width: 140px;
+    height: 140px;
     right: -10px;
+    top: 27px;
   }
-  .mobile_margin_bottom_20{
+  .reviews_watermark_icon2{
+    display: none;
+  }
+  .mobile_margin_bottom_20 {
     padding-bottom: 20px !important;
   }
-  .reviews_rating{
-    justify-content: center;
+  .reviews_rating {
+    /*justify-content: center;*/
   }
-  .reviews_rating_number{
-    margin: auto;
+  .rating_dot {
+    width: 11px;
+    height: 11px;
   }
-  .mobile_hidden{
+  .reviews_rating_number {
+    /*margin: auto;*/
+  }
+  .mobile_hidden {
     display: none !important;
   }
-  .home_page_reviews_container{
+  .home_page_reviews_container {
     box-shadow: none;
     border-radius: 0;
+    padding-bottom: 10px;
   }
-  .home_page_reviews_each_review{
+  .home_page_reviews_each_review {
     display: block;
   }
-  .home_page_reviews_each_reviewer_pic{
-    margin-left: 0;
+  .home_page_reviews_each_reviewer_pic {
+    margin-left: 20px;
   }
-  .home_page_reviews_each_reviewer_pic p{
+  /*.home_page_reviews_each_reviewer_pic p{
     text-align: center !important;
   }
   .home_page_reviews_each_reviewer_pic_img_container{
     justify-content: center !important;
+  }*/
+  #home_page_reviews_selected_reviewer_msg,
+  #home_page_reviews_selected_reviewer_name,
+  .page_title {
+    font-size: 15px !important;
   }
-  .home_page_reviews_start_search_btn{
-    display: none;
+  .mobile_font_13,
+  .title_desc {
+    font-size: 13px !important;
   }
-  .login_page_form_container{
+  .home_page_reviews_start_search_btn {
+    width: 180px;
+    font-size: 13px;
+    right: 5px;
+  }
+  .login_page_form_container {
     box-shadow: none !important;
     border-radius: 0 !important;
   }
-  .home_page_reviews_each_review_details{
+  .home_page_reviews_each_review_details {
     margin-top: -177px;
   }
-  .get_best_deals_container{
+  .get_best_deals_container {
     box-shadow: none;
     border-radius: 0;
   }
-  .home_page_reviews_wrapper{
+  .home_page_reviews_wrapper {
     padding: 0 5px;
   }
-  #main_signup_form, #main_login_form{
+  #main_signup_form,
+  #main_login_form {
     padding: 0 !important;
   }
-  .ticket_loader_info_1{
+  .ticket_loader_info_1 {
     width: 70%;
     margin-bottom: 5px;
   }
-  .ticket_loader_info_2{
+  .ticket_loader_info_2 {
     width: 60%;
   }
-  .ticket_loader_info_3{
+  .ticket_loader_info_3 {
     width: 100%;
   }
-  .ticket_loader_info_4{
+  .ticket_loader_info_4 {
     width: 50%;
   }
-  #landing_page_search_form_show_filters_btn:hover{
+  #landing_page_search_form_show_filters_btn:hover {
     background: none;
   }
-  .search_forms_promo_card{
+  .search_forms_promo_card {
     border-radius: 0;
     margin: 0;
   }
-  .main_search_from_overall_container{
+  .main_search_from_overall_container {
     border-radius: 0;
     box-shadow: none;
   }
-  #booking_start_checkout_page_container{
+  #booking_start_checkout_page_container {
     padding-bottom: 135px;
   }
-  .checkout_page_main_checkout_btn{
+  .checkout_page_main_checkout_btn {
     margin-top: 0;
   }
-  .checkout_page_mobile_button_place_total_price_display{
+  .checkout_page_mobile_button_place_total_price_display {
     display: block;
   }
-  .checkout_page_main_checkout_btn_container{
+  .checkout_page_main_checkout_btn_container {
     background-color: white;
     padding: 10px;
     position: fixed;
@@ -973,17 +1005,18 @@ footer {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);*/
   }
-  .checkout_page_all_info_flex_container{
+  .checkout_page_all_info_flex_container {
     display: block;
   }
-  .checkout_page_all_info_flex_left, .checkout_page_all_info_flex_right{
+  .checkout_page_all_info_flex_left,
+  .checkout_page_all_info_flex_right {
     width: 100%;
   }
-  .display_more_info_pane{
+  .display_more_info_pane {
     width: 100vw;
     box-shadow: none;
   }
-  .selected_ticket_book_btn_container{
+  .selected_ticket_book_btn_container {
     position: fixed;
     border: none;
     right: 0;
@@ -991,25 +1024,25 @@ footer {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);*/
   }
-  .each_ticket_upper_flex{
+  .each_ticket_upper_flex {
     display: block;
   }
-  .each_ticket_price_display{
+  .each_ticket_price_display {
     text-align: left;
   }
-  .each_ticket_price_display_container{
+  .each_ticket_price_display_container {
     margin: 10px 0;
     padding: 10px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  #search_results_page_search_form{
+  #search_results_page_search_form {
     display: none;
   }
-  .search_list_main_flex_container{
+  .search_list_main_flex_container {
     display: block;
   }
-  .search_list_main__settings_section{
+  .search_list_main__settings_section {
     display: none;
     padding: 0 10px;
     width: 100vw;
@@ -1020,20 +1053,20 @@ footer {
     background-color: white;
     height: 100vh;
   }
-  .search_list_main_tickets_section{
+  .search_list_main_tickets_section {
     width: 100%;
     padding: 0 5px;
   }
-  .search_list_main_ads_section{
+  .search_list_main_ads_section {
     display: none;
   }
-  #close_filter_and_sort_btn{
+  #close_filter_and_sort_btn {
     display: block;
   }
-  #itinerary_and_filter_icon{
+  #itinerary_and_filter_icon {
     display: flex;
   }
-  .search_result_inportant_notice_container{
+  .search_result_inportant_notice_container {
     margin: 0;
     background: none;
     border: none;
@@ -1093,11 +1126,11 @@ footer {
     border-radius: 4px;
   }
   /*----------------------------------------------*/
-  .explore_destinations_promo_card{
+  .explore_destinations_promo_card {
     border-radius: 0;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
   }
-  header{
+  header {
     box-shadow: none;
     border: none;
     height: 50px;
@@ -1111,24 +1144,24 @@ footer {
   .header-menu-items {
     display: none;
   }
-  .site-logo p img{
+  .site-logo p img {
     width: 35px;
   }
-  .site-logo-txt{
+  .site-logo-txt {
     margin-left: 5px;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     justify-content: center;
   }
-  .site-logo-txt p{
+  .site-logo-txt p {
     color: rgb(44, 107, 128);
     font-weight: 1000;
     font-size: 20px;
   }
-  .site-logo-txt span{
+  .site-logo-txt span {
     display: none;
   }
-  .hero-section{
+  .hero-section {
     width: 100vw;
     padding: 0;
   }
@@ -1218,12 +1251,12 @@ footer {
 }
 
 .preloader {
-	position: absolute;
-	margin-top: 0;
-	height: 60px;
-	width: 60px;
-	left: 50%;
-	top: 0;
+  position: absolute;
+  margin-top: 0;
+  height: 60px;
+  width: 60px;
+  left: 50%;
+  top: 0;
 }
 
 svg {
@@ -1234,7 +1267,7 @@ svg {
 path {
   stroke: #9ea1a4;
   stroke-width: 0.25;
-  fill: #241E20;
+  fill: #241e20;
 }
 
 #cloud {
@@ -1269,7 +1302,6 @@ path {
   fill: #efefef;
 }
 
-
 #sun {
   margin-top: 6px;
   opacity: 0;
@@ -1279,7 +1311,7 @@ path {
   left: 90px;
   top: 5px;
   z-index: 1;
-  
+
   /*animation-name: rotate;
   animation-duration: 16000ms;
   animation-iteration-count: infinite;
@@ -1290,7 +1322,6 @@ path {
   stroke-width: 0.18;
   fill: #9ea1a4;
 }
-
 
 @keyframes rotate {
   0% {
@@ -1321,7 +1352,7 @@ path {
   height: 10px;
   margin-left: 4px;
   border-radius: 0px 0px 6px 6px;
-  
+
   animation-name: drop;
   animation-duration: 350ms;
   animation-iteration-count: infinite;
@@ -1367,7 +1398,6 @@ path {
   animation-delay: -1300ms;
 }
 
-
 @keyframes drop {
   50% {
     height: 45px;
@@ -1388,13 +1418,13 @@ path {
   position: absolute;
   left: calc(50% - 60px);
   top: 60px;
-	font-family: Helvetica, 'Helvetica Neue', sans-serif;
-	letter-spacing: 1px;
-	text-align: center;
-	margin-left: -43px;
-	font-weight: bold;
-	margin-top: 80px;
-	font-size: 11px;
-	color: #a0a0a0;
-	width: 200px;
+  font-family: Helvetica, "Helvetica Neue", sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-left: -43px;
+  font-weight: bold;
+  margin-top: 80px;
+  font-size: 11px;
+  color: #a0a0a0;
+  width: 200px;
 }
