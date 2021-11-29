@@ -172,7 +172,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10002;
+  z-index: 1002;
   background-color: #000000;
 }
 .mobile-menu-header {
@@ -1014,6 +1014,7 @@ footer {
   }
   #booking_start_checkout_page_container {
     padding-bottom: 135px;
+    z-index: 1005;
   }
   .checkout_page_main_checkout_btn {
     margin-top: 0;
@@ -1041,6 +1042,9 @@ footer {
   .display_more_info_pane {
     width: 100vw;
     box-shadow: none;
+  }
+  #selected_ticket_pane{
+    z-index: 1005 !important;
   }
   .selected_ticket_book_btn_container {
     position: fixed;
@@ -1232,10 +1236,10 @@ footer {
   }
   .airports_inputs_with_auto_complete {
     position: fixed;
-    top: 0px;
+    top: 60px;
     left: 0;
     border-radius: 0 !important;
-    height: 100vh;
+    height: calc(100vh - 60px);
     box-shadow: none;
   }
   .why-choose-us-container {
