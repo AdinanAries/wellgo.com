@@ -28,7 +28,7 @@ function Header(){
                                 <i className="fa fa-search" />Search
                             </p>
                         </div>
-                        <div id="desktop_explore_menu_item" onClick={show_explore_page} className="each-header-menu-item">
+                        <div id="desktop_explore_menu_item" style={{display: "none"}} onClick={show_explore_page} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-globe" />Explore
                             </p>

@@ -3,9 +3,9 @@ import { show_home_page } from "../helpers/PageRoutingFuncs";
 
 export default function ExplorePage(){
     return (
-        <main style={{display: "none"}} id="explore_page">
+        <main style={{display: "none", backgroundImage: `url('${explore_page_hero}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} id="explore_page">
             <div className="wrapper">
-                <div style={{margin: 10, backgroundColor: "rgba(255,0,0,0.1)", padding: 10, borderRadius: 5, border: "1px solid rgba(255,0,0,0.1)"}}>
+                <div style={{margin: 10, backgroundColor: "rgba(255,0,0,0.8)", padding: 10, borderRadius: 5, border: "1px solid rgba(255,0,0,0.1)"}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontSize: 16, fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginBottom: 10}}>
                         <i className="fa fa-wrench" style={{fontSize: 19, marginRight: 5}}></i>Maintenance Notice
                     </p>
@@ -14,7 +14,7 @@ export default function ExplorePage(){
                         We apologize for any inconvenience
                     </p>
                 </div>
-                <div style={{marginBottom: 30, height: 500, backgroundImage: `url('${explore_page_hero}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", padding: 20, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                <div style={{/*marginBottom: 30,*/ height: 500, padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", textShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
                     <p style={{color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38}}>
                         See the world,</p>
                     <p style={{marginTop: -9,color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 30 }}>

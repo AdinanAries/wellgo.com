@@ -53,14 +53,14 @@ function Footer(){
                                     +1 732-799-9546
                                 </p>
                                 <p style={{color: "white", textAlign: "center"}}>
-                                    <span style={{backgroundColor: "rgba(0,0,0,0.3)", padding: "10px 15px", marginRight: 5, borderRadius: 4}}>
-                                        <i style={{opacity: 0.5, marginBottom: 5}} className="fa fa-facebook"></i>
+                                    <span style={{padding: "5px", marginRight: 10, borderRadius: 4, cursor: "pointer"}}>
+                                        <i style={{opacity: 0.5, marginBottom: 5, fontSize: 19}} className="fa fa-facebook"></i>
                                     </span>
-                                    <span style={{backgroundColor: "rgba(0,0,0,0.3)", padding: "10px 15px", marginRight: 5, borderRadius: 4}}>
-                                        <i style={{opacity: 0.5, marginBottom: 5}} className="fa fa-twitter"></i>
+                                    <span style={{padding: "5px", marginRight: 10, borderRadius: 4, cursor: "pointer"}}>
+                                        <i style={{opacity: 0.5, marginBottom: 5, fontSize: 19}} className="fa fa-twitter"></i>
                                     </span>
-                                    <span style={{backgroundColor: "rgba(0,0,0,0.3)", padding: "10px 15px", marginRight: 5, borderRadius: 4}}>
-                                        <i style={{opacity: 0.5, marginBottom: 5}} className="fa fa-instagram"></i>
+                                    <span style={{padding: "5px", marginRight: 10, borderRadius: 4, cursor: "pointer"}}>
+                                        <i style={{opacity: 0.5, marginBottom: 5, fontSize: 19}} className="fa fa-instagram"></i>
                                     </span>
                                 </p>
                             </div>

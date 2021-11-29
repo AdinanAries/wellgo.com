@@ -18,7 +18,7 @@ var ChooseUs = ()=>{
     return (
         <div>
             
-                <div style={{marginBottom: 0, padding: "10px 0", marginTop: "calc(100vh)", backgroundColor: "white", boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
+                <div style={{marginBottom: 0, padding: "10px 0", marginTop: "calc(100vh)", backgroundColor: "rgb(229, 233, 241)", boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
                    <div className="wrapper"> 
                     
                     <div style={{width: 90, margin: "auto", marginBottom: 0, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.8)", borderRadius: 500}}></div>
@@ -72,7 +72,7 @@ var ChooseUs = ()=>{
                                             <div className="rating_dot"><div className="half"></div></div>
                                         </div>
                                     </div>
-                                    <p className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "white", /*backgroundColor: "#b8d4f5",*/ fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
+                                    <p className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "rgb(229, 233, 241)", /*backgroundColor: "#b8d4f5",*/ fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
                                         4.5</p>
                                 </div>
                                 <div className="home_page_reviews_each_review_details">
@@ -232,7 +232,7 @@ var ChooseUs = ()=>{
                             </div>
                         </div>
                     </div>
-                    <div className="get_best_deals_container" style={{backgroundColor: "white", padding: "20px 0"}}>
+                    <div className="get_best_deals_container" style={{padding: "20px 0"}}>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Get the Best Deals!</h1>
                         <h1 className="title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}

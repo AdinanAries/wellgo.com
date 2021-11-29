@@ -34,12 +34,12 @@ export default function ExploreDestinations(){
                                     <p style={{color: "rgba(0,0,0,0.7)", textAlign: "left"}}>
                                         enter airports, dates, cabin...</p>
                                 </div>
-                                <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                    <div style={{display: "flex", flexDirection: "row"}}>
+                                <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 60}}>
+                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+                                        {/*<p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                            <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>*/}
                                         <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>
-                                        <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <i id="landing_page_search_form_show_filters_btn_caret" style={{marginLeft: 7, fontSize: 16, color: "rgba(0,0,0,0.5)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
+                                            <i id="landing_page_search_form_show_filters_btn_caret" style={{/*marginLeft: 7,*/ fontSize: 16, color: "rgba(0,0,0,0.7)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
                                     </div>
                                 </div>
 
@@ -79,7 +79,7 @@ export default function ExploreDestinations(){
                                 </div>
 
                             </div>
-                            <div style={{textShadow: "none", height: 50, padding: "0 15px", width: "fit-content", margin: "auto", marginTop: 30, marginBottom: 50, display: "flex", borderRadius: 50, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            <div style={{textShadow: "none", height: 50, padding: "0 15px", width: "fit-content", margin: "auto", marginTop: 30, display: "flex", borderRadius: 50, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                 <div style={{display: "flex", flexDirection: "row"}}>
                                     <div className="landing_page_hero_menu_items" onClick={show_trips_page}>
                                         <img src={trips_icon} style={{width: 29, height: "auto"}} />

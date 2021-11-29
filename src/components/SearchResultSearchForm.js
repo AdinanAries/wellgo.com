@@ -410,6 +410,13 @@ function sp_add_traveler(type="adult"){
         
         document.getElementById("sp_add_travelers_display_infants_number").innerHTML = travelers.infants;
     }
+
+    //adding current travelers setting to local storage
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    flight_search_data.itinerary.travelers.adults = travelers.adults;
+    flight_search_data.itinerary.travelers.children = travelers.children;
+    flight_search_data.itinerary.travelers.infants = travelers.infants;
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 function sp_remove_traveler(type="adult"){
@@ -566,6 +573,13 @@ function sp_remove_traveler(type="adult"){
         
         document.getElementById("sp_add_travelers_display_infants_number").innerHTML = travelers.infants;
     }
+
+    //adding current travelers setting to local storage
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    flight_search_data.itinerary.travelers.adults = travelers.adults;
+    flight_search_data.itinerary.travelers.children = travelers.children;
+    flight_search_data.itinerary.travelers.infants = travelers.infants;
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 export default SearchForm;
