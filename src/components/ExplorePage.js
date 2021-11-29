@@ -3,7 +3,7 @@ import { show_home_page } from "../helpers/PageRoutingFuncs";
 
 export default function ExplorePage(){
     return (
-        <main style={{display: "none", backgroundImage: `url('${explore_page_hero}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} id="explore_page">
+        <main className="explore_page_main" style={{display: "none", backgroundImage: `url('${explore_page_hero}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} id="explore_page">
             <div className="wrapper">
                 <div style={{margin: 10, backgroundColor: "white", padding: 10, borderRadius: 5, border: "1px solid rgba(255,0,0,0.1)"}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontSize: 16, fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginBottom: 10}}>

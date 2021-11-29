@@ -908,6 +908,9 @@ footer {
   #search_page{
     padding-top: 50px !important;
   }
+  .explore_page_main{
+    background: rgb(43, 52, 61) !important;
+  }
   .home_page_other_reviewer:hover .home_page_other_reviewer_bubble {
     display: none;
   }
@@ -1155,7 +1158,7 @@ footer {
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
   }
   header {
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
     background: rgb(43, 52, 61);
     border: none;
     height: 60px;
