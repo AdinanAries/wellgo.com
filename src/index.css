@@ -826,9 +826,9 @@ footer {
   display: none;
   animation: bubble_display 0.3s ease-in-out;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   bottom: calc(100% + 20px);
-  background-color: white;
+  background-color: rgb(238, 238, 238);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   padding: 20px 10px;
@@ -839,9 +839,9 @@ footer {
   content: "";
   position: absolute;
   top: 100%;
-  left: calc(50% - 5px);
-  border-top: 10px solid white;
-  border-top-color: white;
+  left: calc(50% - 10px);
+  border-top: 10px solid rgb(223, 223, 223);
+  border-top-color: rgb(212, 212, 212);
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
@@ -888,6 +888,9 @@ footer {
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .home_page_other_reviewer:hover .home_page_other_reviewer_bubble {
+    display: none;
+  }
   .reviews_watermark_icon {
     width: 140px;
     height: 140px;

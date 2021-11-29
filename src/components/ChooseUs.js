@@ -77,7 +77,7 @@ var ChooseUs = ()=>{
                                 </div>
                                 <div className="home_page_reviews_each_review_details">
                                     <p id="home_page_reviews_selected_reviewer_msg" style={{borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10,fontSize: 19, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(83,0,0,0.8)', letterSpacing: 1}}>
-                                        <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette"}}>"</span>
+                                        <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette", position: "relative", zIndex: 3}}>"</span>
                                         This is the actual review message to be displayed for what this traveler is saying 
                                         about how great wellgo.com is in the travel retail market
                                     </p>
@@ -337,7 +337,7 @@ function show_selected_review(index){
     document.getElementById("home_page_reviews_selected_reviewer_name").innerText = obj.name;
     document.getElementById("home_page_reviews_selected_reviewer_date").innerText = obj.date;
     document.getElementById("home_page_reviews_selected_reviewer_msg").innerHTML = `
-        <span style="font-size: 45px; color: #c751b9; margin-right: 10px; font-family: Courgette;">"</span>
+        <span style="font-size: 45px; color: #c751b9; margin-right: 10px; font-family: Courgette; position: relative; z-index: 3;">"</span>
         ${obj.msg}
     `;
     document.getElementById("home_page_reviews_selected_reviewer_city").innerText = obj.city;
