@@ -1154,8 +1154,13 @@ footer {
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
   }
   header {
-    box-shadow: none;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+    background: rgb(43, 52, 61);
+    border: none;
     height: 60px;
+  }
+  footer{
+    background-color: rgb(43, 52, 61);
   }
   .header_content_container {
     padding: 0 10px;

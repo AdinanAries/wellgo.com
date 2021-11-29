@@ -5,7 +5,7 @@ export default function ExplorePage(){
     return (
         <main style={{display: "none", backgroundImage: `url('${explore_page_hero}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} id="explore_page">
             <div className="wrapper">
-                <div style={{margin: 10, backgroundColor: "rgba(255,0,0,0.8)", padding: 10, borderRadius: 5, border: "1px solid rgba(255,0,0,0.1)"}}>
+                <div style={{margin: 10, backgroundColor: "white", padding: 10, borderRadius: 5, border: "1px solid rgba(255,0,0,0.1)"}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontSize: 16, fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginBottom: 10}}>
                         <i className="fa fa-wrench" style={{fontSize: 19, marginRight: 5}}></i>Maintenance Notice
                     </p>
