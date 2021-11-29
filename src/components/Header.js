@@ -48,7 +48,7 @@ function Header(){
                         <div className="header_mobile_menus" style={{display: "flex", flexDirection: "row"}}>
                             <div id="mobile_search_menu_item" className="header_mobile_menus_item active" onClick={show_home_page}><i className="fa fa-search"></i></div>
                             <div id="mobile_trips_menu_item" className="header_mobile_menus_item" onClick={show_trips_page}><i className="fa fa-briefcase"></i></div>
-                            <div id="mobile_login_menu_item" className="header_mobile_menus_item" onClick={show_login_page} style={{marginRight: 0}}><i className="fa fa-user-circle"></i></div>
+                            <div id="mobile_login_menu_item" style={{marginRight: 10}} className="header_mobile_menus_item" onClick={show_login_page}><i className="fa fa-user-circle"></i></div>
                         </div>
                     </div>
                     
