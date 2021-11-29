@@ -15,15 +15,9 @@ export default function ExploreDestinations(){
             <div className="explore_destinations_promo_card">
                 <div>
                     <div className="wrapper">
-                        <div style={{marginBottom: 60}}>
-                            <p style={{color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38, animation: "fade_and_pop 0.5s 0.2s ease-in", transition: "all 2s"}}>
-                                Wellgo.com</p>
-                            <p style={{marginTop: -9,color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28 }}>
+                        <div className="landing_page_jumb_text" style={{marginBottom: 60}}>
+                            <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28 }}>
                                 Cheap Flight Tickets</p>
-                            <p style={{color: "white", maxWidth: 350, marginTop: 10, marginBottom: 10, animation: "fade_and_pop 0.5s 0.8s ease-in", transition: "all 2s", fontFamily: "'Prompt', sans-serif", lineHeight: 1.1}}>
-                                Our interest is to make travel affordable 
-                                because we believe that people should go places
-                            </p>
                         </div>
                         <div>
                             <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(255, 255, 255, 0.87)", height: 60, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
@@ -32,7 +26,7 @@ export default function ExploreDestinations(){
                                 </div>
                                 <div onClick={show_full_search_form} style={{fontFamily: "'Prompt', sans-serif", position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", textAlign: "left"}}>
-                                        enter airports, dates, cabin...</p>
+                                        click here to start search...</p>
                                 </div>
                                 <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 60}}>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>

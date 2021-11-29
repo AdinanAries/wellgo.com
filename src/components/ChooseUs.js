@@ -18,7 +18,7 @@ var ChooseUs = ()=>{
     return (
         <div>
             
-                <div style={{marginBottom: 0, padding: "10px 0", marginTop: "calc(100vh)", backgroundColor: "rgb(229, 233, 241)", boxShadow: "0 0 5px rgba(0,0,0,0.3)"}}>
+                <div style={{marginBottom: 0, padding: "10px 0", backgroundColor: "rgb(229, 233, 241)",}}>
                    <div className="wrapper"> 
                     
                     <div style={{width: 90, margin: "auto", marginBottom: 0, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.8)", borderRadius: 500}}></div>
