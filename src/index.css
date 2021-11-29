@@ -866,7 +866,7 @@ footer {
 }
 .landing_page_scroll_down_indicator{
  position: absolute;
- bottom: 30px;
+ bottom: 100px;
  left: 50%;
 }
 .landing_page_scroll_down_indicator i{
@@ -880,7 +880,7 @@ footer {
   .reviews_watermark_icon{
     width: 120px;
     height: 120px;
-    right: -20px;
+    right: -10px;
   }
   .mobile_margin_bottom_20{
     padding-bottom: 20px !important;
