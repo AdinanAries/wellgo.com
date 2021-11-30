@@ -9,6 +9,7 @@ import wellgo_reviewer5 from '../wellgo_reviewer5.jpg';
 import wellgo_reviewer6 from '../wellgo_reviewer6.jpg';
 import reviews_icon from "../icons/reviews_icon.svg";
 import reviews_icon2 from "../icons/reviews_icon2.svg";
+import citiesIcon from "../icons/citiesIcon.svg";
 
 //cities imgs
 import LondonImg from "../citiesImg/London.jpg";
@@ -287,6 +288,23 @@ var ChooseUs = ()=>{
                                 <div className="home_page_each_most_visited_cities_bottom">
                                     
                                 </div>
+                            </div>
+                        </div>
+                        <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                            >Other Popular Cities</h1>
+                        <div style={{borderTop: "4px solid orange", padding: "15px", backgroundColor: "rgba(255,255,255,0.6)"}}>
+                            <div className="more_popular_cities_svg_img" style={{height: 150, width: 150, backgroundImage: `url('${citiesIcon}')`, backgroundRepeat: "no-repeat", backgroundSize: "contain", position: "absolute", top: -50, left: 20, zIndex: 1}}>
+
+                            </div>
+                            <div>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                    Paris - France</p>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                    Ontario - Canada</p>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                    Lagos - Nigeria</p>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                    Cairo - Egypt</p>
                             </div>
                         </div>
                     </div>

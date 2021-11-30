@@ -946,8 +946,18 @@ footer {
 .home_page_each_most_visited_cities:hover .home_page_each_most_visited_cities_btn{
   /*background-color: rgb(170, 216, 235);*/
 }
+.each_more_popular_city{
+  transition: all 0.3s;
+}
+.each_more_popular_city:hover{
+   padding: 0 20px;
+}
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
+  .more_popular_cities_svg_img{
+    width: 70px !important;
+    height: 70px !important;
+  }
   .home_page_most_visited_cities_list{
     padding: 0;
     padding-bottom: 10px;
