@@ -43,12 +43,12 @@ var ChooseUs = ()=>{
                             </div>
 
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", left: 0}}>
-                                <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
+                                <div onClick={show_previous_reviewer} style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
                                     <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-left"></i>
                                 </div>
                             </div>
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", right: 0}}>
-                                <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
+                                <div onClick={show_next_reviewer} style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
                                     <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-right"></i>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@ var ChooseUs = ()=>{
                                         New York City
                                     </p>
                                     <div className="reviews_rating" style={{display: "flex", flexDirection: "row"}}>
-                                        <div className="all_ratings_dotes">
+                                        <div id="main_all_ratings_dots" className="all_ratings_dotes">
                                             <div className="rating_dot"><div className="full"></div></div>
                                             <div className="rating_dot"><div className="full"></div></div>
                                             <div className="rating_dot"><div className="full"></div></div>
@@ -78,7 +78,7 @@ var ChooseUs = ()=>{
                                             <div className="rating_dot"><div className="half"></div></div>
                                         </div>
                                     </div>
-                                    <p className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "rgb(229, 233, 241)", /*backgroundColor: "#b8d4f5",*/ fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
+                                    <p id="main_reviews_rating_number" className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "rgb(229, 233, 241)", /*backgroundColor: "#b8d4f5",*/ fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
                                         4.5</p>
                                 </div>
                                 <div className="home_page_reviews_each_review_details">
@@ -367,7 +367,8 @@ let reviewers = [
         img: wellgo_reviewer3,
         msg: `This is is each other reviewer message that can be only to some 
         extent. Well add this message later. Lets see what Edward has said about our
-        service`
+        service`,
+        rated: 4.6
     },
     {
         name: "Naana Agyeman",
@@ -376,7 +377,8 @@ let reviewers = [
         img: wellgo_reviewer4,
         msg: `This is is each other reviewer message that can be only to some 
         extent. Well add this message later. Lets see what Edward has said about our
-        service`
+        service`,
+        rated: 4.7
     },
     {
         name: "Regina Daniels",
@@ -385,7 +387,8 @@ let reviewers = [
         img: wellgo_reviewer5,
         msg: `This is is each other reviewer message that can be only to some 
         extent. Well add this message later. Lets see what Edward has said about our
-        service`
+        service`,
+        rated: 5
     },
     {
         name: "Setzo Aldavis",
@@ -394,7 +397,8 @@ let reviewers = [
         img: wellgo_reviewer6,
         msg: `This is is each other reviewer message that can be only to some 
         extent. Well add this message later. Lets see what Edward has said about our
-        service`
+        service`,
+        rated: 4.9
     },
     {
         name: "Cecilia Branden",
@@ -403,7 +407,8 @@ let reviewers = [
         img: wellgo_reviewer2,
         msg: `This is is each other reviewer message that can be only to some 
         extent. Well add this message later. Lets see what Edward has said about our
-        service`
+        service`,
+        rated: 5
     }
 ]
 
@@ -419,4 +424,103 @@ function show_selected_review(index){
     `;
     document.getElementById("home_page_reviews_selected_reviewer_city").innerText = obj.city;
     document.getElementById("home_page_reviews_selected_reviewer_img").src = obj.img;
+    document.getElementById("main_all_ratings_dots").innerHTML = return_rating_markup(obj.rated);
+    document.getElementById("main_reviews_rating_number").innerText = (obj.rated.toFixed(1));
 }
+
+function return_rating_markup(rating_num){
+    if(rating_num === 5){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+        `
+    }else if(rating_num < 5 && rating_num >= 4.5){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="half"></div></div>
+        `
+    }else if(rating_num < 4.5 && rating_num >= 4){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"></div>
+        `
+    }else if(rating_num < 4 && rating_num >= 3.5){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="half"></div></div>
+            <div class="rating_dot"></div>
+        `
+    }else if(rating_num < 3.5 && rating_num >= 3){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+        `
+    }else if(rating_num < 3 && rating_num >= 2.5){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="half"></div></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+        `
+    }else if(rating_num < 2.5 && rating_num >= 2){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+        `
+    }else if(rating_num < 2 && rating_num >= 1.5){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"><div class="half"></div></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+        `
+    }else if(rating_num < 1.5 && rating_num >= 1){
+        return `
+            <div class="rating_dot"><div class="full"></div></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+            <div class="rating_dot"></div>
+        `
+    }
+}
+
+let current_reviewer = 1
+function show_next_reviewer(){
+    current_reviewer = current_reviewer + 1;
+    if(current_reviewer >= reviewers.length){
+        current_reviewer = (reviewers.length - 1);
+        return null
+    }
+    show_selected_review(current_reviewer);
+}
+function show_previous_reviewer(){
+    current_reviewer = current_reviewer - 1;
+    if(current_reviewer < 0){
+        current_reviewer = 0;
+        return null;
+    }
+    show_selected_review(current_reviewer);
+}
+/*setTimeout(()=>{
+    document.getElementById("main_all_ratings_dots").innerHTML = return_rating_markup(3.9);
+}, 500)*/
