@@ -956,9 +956,10 @@ footer {
     display: block;
   }
   .home_page_each_most_visited_cities{
-    width: calc(100% - 10px);
-    margin: 0 5px;
+    width: 100%;
     margin-bottom: 7px;
+    border-radius: 0;
+    box-shadow: none;
   }
   .landing_page_jumb_text{
     margin-bottom: 20px !important;
