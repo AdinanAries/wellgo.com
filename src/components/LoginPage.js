@@ -10,15 +10,15 @@ export default function LoginPage(){
                             Log Into Account</p>
                         <div style={{padding: "10px",}}>
                             <div style={{marginBottom: 10}}>
-                               <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="email" placeholder="Email"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="email" placeholder="Email"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{marginBottom: 10}}>
-                               <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="password" placeholder="Password"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="password" placeholder="Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
@@ -42,27 +42,27 @@ export default function LoginPage(){
                             Add New Account</p>
                         <div style={{padding: "10px",}}>
                             <div style={{marginBottom: 10}}>
-                               <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="text" placeholder="Full Name"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="text" placeholder="Full Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{marginBottom: 10}}>
-                               <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="email" placeholder="Email"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="email" placeholder="Email"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{marginBottom: 10}}>
-                               <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="password" placeholder="Password"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="password" placeholder="Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{marginBottom: 10}}>
-                               <div style={{backgroundColor: "rgba(0,0,0,0.07)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 14}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="password" placeholder="Confirm Password"  style={{padding: 14, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="password" placeholder="Confirm Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>

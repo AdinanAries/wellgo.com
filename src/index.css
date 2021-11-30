@@ -723,6 +723,7 @@ footer {
 .landing_page_hero_menu_item_tooltip {
   display: none;
   position: absolute;
+  z-index: 3;
   padding: 5px;
   border-radius: 4px;
   top: calc(100% + 10px);
@@ -1083,13 +1084,15 @@ footer {
   .search_list_main__settings_section {
     display: none;
     padding: 0 10px;
+    padding-bottom: 50px;
     width: 100vw;
     position: fixed;
     z-index: 1001;
-    top: 0;
+    top: 60px;
     left: 0;
     background-color: white;
-    height: 100vh;
+    height: calc(100vh - 60px);
+    overflow: auto;
   }
   .search_list_main_tickets_section {
     width: 100%;
