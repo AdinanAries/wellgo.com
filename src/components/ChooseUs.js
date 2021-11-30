@@ -10,9 +10,15 @@ import wellgo_reviewer6 from '../wellgo_reviewer6.jpg';
 import reviews_icon from "../icons/reviews_icon.svg";
 import reviews_icon2 from "../icons/reviews_icon2.svg";
 
+//cities imgs
+import LondonImg from "../citiesImg/London.jpg";
+import AccraImg from "../citiesImg/AccraGhana.jpg";
+import LAImg from "../citiesImg/LA_US.jpg";
+
 import { show_full_search_form } from "../helpers/PageRoutingFuncs";
 
 import DownloadMobileApp from "./DownloadMobileApp";
+import { cloneElement } from 'react';
 
 var ChooseUs = ()=>{
     return (
@@ -22,7 +28,6 @@ var ChooseUs = ()=>{
                    <div className="wrapper"> 
                     
                     <div style={{width: 90, margin: "auto", marginBottom: 0, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.8)", borderRadius: 500}}></div>
-                    
                     
                     <div className="home_page_reviews_container">
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
@@ -232,6 +237,60 @@ var ChooseUs = ()=>{
                             </div>
                         </div>
                     </div>
+
+                    <div className="home_page_most_visited_cities" style={{paddingTop: 10}}>
+                        <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                            >Popular Cities</h1>
+                        <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                            >see some of most visited cities</h1>
+                        <div className="home_page_most_visited_cities_list">
+                            <div  className="home_page_each_most_visited_cities">
+                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${LondonImg}')`}}>
+
+                                </div>
+                                <div className="home_page_each_most_visited_cities_btn">
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>London</p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
+                                        United Kingdom</p>
+                                    
+                                </div>
+                                <div className="home_page_each_most_visited_cities_bottom">
+                                    
+                                </div>
+                            </div>
+                            <div  className="home_page_each_most_visited_cities">
+                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${AccraImg}')`}}>
+
+                                </div>
+                                <div className="home_page_each_most_visited_cities_btn">
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
+                                        Accra</p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
+                                        Ghana</p>
+                                    
+                                </div>
+                                <div className="home_page_each_most_visited_cities_bottom">
+                                    
+                                </div>
+                            </div>
+                            <div  className="home_page_each_most_visited_cities">
+                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${LAImg}')`}}>
+
+                                </div>
+                                <div className="home_page_each_most_visited_cities_btn">
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
+                                        Los Angeles</p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
+                                        United States</p>
+                                    
+                                </div>
+                                <div className="home_page_each_most_visited_cities_bottom">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="get_best_deals_container" style={{padding: "20px 0"}}>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Get the Best Deals!</h1>
