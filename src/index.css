@@ -930,7 +930,7 @@ footer {
 }
 .home_page_each_most_visited_cities_bottom{
   height: calc(100% - 250px);
-  margin-top: -34px;
+  margin-top: -33px;
   background: linear-gradient(23deg, #c751b9, rgb(153, 216, 241));
 }
 .home_page_each_most_visited_cities_btn{
@@ -956,9 +956,9 @@ footer {
     display: block;
   }
   .home_page_each_most_visited_cities{
-    width: calc(100% - 15px);
+    width: calc(100% - 10px);
     margin: 0 5px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
   }
   .landing_page_jumb_text{
     margin-bottom: 20px !important;
