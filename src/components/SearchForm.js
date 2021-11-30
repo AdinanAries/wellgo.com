@@ -129,7 +129,7 @@ function SearchForm(){
                     </div>
                     <div className="each_flex-side">
                         <div style={{width: "100%"}}>
-                            <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div className="main-search_txt_input" style={{border: "none", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-calendar-o"></i>
                                 <input id="departure_return_dates_input" type="text" readOnly="true" placeholder="departure - return"/>
                             </div>
@@ -152,7 +152,7 @@ function SearchForm(){
                                     </ul>
                                 </div>
                             </div>
-                            <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div className="main-search_txt_input" style={{border: "none", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
                                 <input id="search_forms_from_where_input_fld" onClick={open_from_where_auto_complete_pane} type="text" autoComplete="off" placeholder="from where?" />
                             </div>
@@ -191,7 +191,7 @@ function SearchForm(){
                                     </ul>
                                 </div>
                             </div>
-                            <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div className="main-search_txt_input" style={{border: "none", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
                                 <input id="search_forms_to_where_input_fld" onClick={open_to_where_auto_complete_pane} type="text" autoComplete="off" placeholder="to where?" />
                             </div>
@@ -199,7 +199,7 @@ function SearchForm(){
                     </div>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
-                    <div onClick={show_home_page} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
+                    <div onClick={()=>show_home_page(true)} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
                         <i className="fa fa-times" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Close
                     </div>
                     <div onClick={show_search_page} id="home_search_form_submit_btn" className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>

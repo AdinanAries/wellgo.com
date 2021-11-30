@@ -1,4 +1,4 @@
-import explore_page_hero from "../explore_page_hero.jpg";
+import explore_page_hero from "../explore_destination_img2.jpg";
 import { show_home_page } from "../helpers/PageRoutingFuncs";
 
 export default function ExplorePage(){
@@ -16,12 +16,11 @@ export default function ExplorePage(){
                 </div>
                 <div style={{/*marginBottom: 30,*/ height: 500, padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", textShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
                     <p style={{color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38}}>
-                        See the world,</p>
+                        Read, Travel,</p>
                     <p style={{marginTop: -9,color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 30 }}>
-                        with a third eye</p>
+                        and Become.</p>
                     <p style={{color: "white", maxWidth: 350, marginTop: 10, marginBottom: 10, fontFamily: "'Prompt', sans-serif", lineHeight: 1.1}}>
-                        We got you on these amaizing trip ideas that will 
-                        make you want to do it over again
+                        We've got trip ideas for you...
                     </p>
                     <div style={{backgroundColor: "rgba(0,0,0,0.4)", fontFamily: "'Prompt', sans-serif", color: "white", padding: 14}}>
                         <i className="fa fa-exclamation-triangle" style={{color: "yellow", marginRight: 10}}></i>

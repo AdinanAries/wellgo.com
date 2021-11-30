@@ -26,14 +26,14 @@ var ChooseUs = ()=>{
                     
                     <div className="home_page_reviews_container">
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                        >Reviews</h1>
+                        >Customer Satisfaction</h1>
                         <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                        >Verified reviews from travelers</h1>
+                        >get the luxury of cheap travel</h1>
                         <div className="home_page_reviews_wrapper">
 
                             <div onClick={show_full_search_form} className="home_page_reviews_start_search_btn">
                                 <i style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>
-                                Search Flights now
+                                Book Yours Today...
                             </div>
 
                             <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", left: 0}}>
@@ -236,7 +236,7 @@ var ChooseUs = ()=>{
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Get the Best Deals!</h1>
                         <h1 className="title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                        >We have the cheapest tickets</h1>
+                        >we have the cheapest tickets</h1>
                         <div className="why-choose-us-container" >
                             <div className="each-choose-us-container">
                                 

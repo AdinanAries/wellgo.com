@@ -15,10 +15,14 @@ export function show_login_page(){
     document.getElementById("login_page").style.display="block";
 }
 
-export function show_home_page(){
+export function show_home_page(is_from_search=false){
     
     //document.getElementById("site_main_header").style.display="none";
-    document.getElementById("main_hero_section").style.display="none";
+    if(!is_from_search){
+        document.getElementById("main_hero_section").style.display="block";
+    }else{
+        document.getElementById("main_hero_section").style.display="none";
+    }
 
     window.scrollTo(0, 0);
     change_nav_active_icon("mobile_search_menu_item", "desktop_search_menu_item");

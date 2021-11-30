@@ -286,32 +286,35 @@ footer {
 }
 .main-search_txt_input {
   padding-left: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.356);
-  border-radius: 9px;
+  /*border: 1px solid rgba(0, 0, 0, 0.356);*/
+  border-radius: 50px;
   background-color: white;
-  /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);*/
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
   width: 100%;
+  margin-bottom: 10px !important;
 }
 .main-search_txt_input input[type="text"],
 .main-search_txt_input input[type="number"] {
   margin-left: 5px;
   width: calc(100% - 30px);
-  padding: 14px;
+  padding: 16px;
   padding-left: 0;
   background: none;
   border: none;
+  
 }
 .main-search_txt_input i {
   color: rgb(52, 75, 85);
 }
 .searchBtn {
-  border-radius: 9px;
+  border-radius: 50px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   background-color: rgb(54, 117, 168);*/
   background-color: rgb(23, 87, 148);
   color: white;
   text-align: center;
-  padding: 14px;
+  padding: 16px;
   margin-top: 5px;
   cursor: pointer;
 }
@@ -339,7 +342,8 @@ footer {
   justify-content: center;
   border-radius: 100%;
   background-color: white;
-  border: 1px solid rgba(90, 108, 117, 0.76); /*rgb(54, 117, 168);*/
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
+  /*border: 1px solid rgba(90, 108, 117, 0.76); rgb(54, 117, 168);*/
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);*/
   position: relative;
   z-index: 2;
@@ -410,9 +414,11 @@ footer {
   width: 33%;
   border-radius: 9px;
   /*background-color: rgb(26, 102, 153);*/
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
   border: 1px solid rgba(0, 0, 0, 0.356);
   text-align: center;
   background-color: white;
+  margin-bottom: 10px !important;
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);*/
   cursor: pointer;
 }
@@ -524,14 +530,12 @@ footer {
 .explore_destinations_promo_card {
   padding: 20px;
   padding-top: 100px;
-  margin-bottom: 30px;
   background: linear-gradient(90deg, #000000, rgba(255, 255, 255, 0), #000000),
   linear-gradient(#000000, rgba(255, 255, 255, 0), #000000), 
   url("./explore_destination_img.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -678,7 +682,7 @@ footer {
 }
 .search_forms_promo_card {
   margin-top: 10px;
-  height: calc(100vh - 390px);
+  height: calc(100vh - 420px);
   background-color: rgb(123, 95, 21);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   background-size: cover;
@@ -764,6 +768,7 @@ footer {
   width: 300px;
   right: 30px;
   background-color: rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
   color: rgba(0, 0, 0, 0.6);
   border-radius: 50px;
   cursor: pointer;
@@ -913,7 +918,6 @@ footer {
     padding-top: 50px !important;
   }
   .explore_page_main{
-    background: rgb(43, 52, 61) !important;
   }
   .home_page_other_reviewer:hover .home_page_other_reviewer_bubble {
     display: none;
