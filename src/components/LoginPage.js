@@ -16,7 +16,7 @@ export default function LoginPage(){
                                 <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_payment_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                                         <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-credit-card"></i>
-                                        Payment</p>
+                                        Payments</p>
                                 </div>
                                 <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_passport_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
@@ -73,10 +73,16 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10, padding: 10}}>
-                                <p>Payment</p>
+                                <div style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
+                                    <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
+                                    Add New Payment Method
+                                </div>
                             </div>
                             <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10, padding: 10}}>
-                                <p>Passport</p>
+                                <div style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
+                                    <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
+                                    Add New Passport
+                                </div>
                             </div>
                         </div>
                         <div className="user_account_page_each_child_container user_account_page_second_child_container" style={{borderLeft: "1px solid rgba(0,0,0,0.1)"}}>
@@ -85,7 +91,7 @@ export default function LoginPage(){
                                 Booking History
                             </p>
                             <div style={{marginTop: 20}}>
-                                <div style={{borderBottom: "1px solid rgb(0,0,0,0.1)", marginBottom: 10, paddingBottom: 10}}>
+                                <div style={{backgroundColor: "rgb(0,0,0,0.1)", marginBottom: 3, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
@@ -100,7 +106,7 @@ export default function LoginPage(){
                                         <i style={{marginLeft: 10}} className="fa fa-long-arrow-right"></i>
                                     </p>
                                 </div>
-                                <div style={{borderBottom: "1px solid rgb(0,0,0,0.1)", marginBottom: 10, paddingBottom: 10}}>
+                                <div style={{background: "rgb(0,0,0,0.1)", marginBottom: 3, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
@@ -115,7 +121,7 @@ export default function LoginPage(){
                                         <i style={{marginLeft: 10}} className="fa fa-long-arrow-right"></i>
                                     </p>
                                 </div>
-                                <div style={{borderBottom: "1px solid rgb(0,0,0,0.1)", marginBottom: 10, paddingBottom: 10}}>
+                                <div style={{background: "rgb(0,0,0,0.1)", marginBottom: 3, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
