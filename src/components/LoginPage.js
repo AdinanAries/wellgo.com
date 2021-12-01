@@ -91,7 +91,7 @@ export default function LoginPage(){
                                 Booking History
                             </p>
                             <div style={{marginTop: 20}}>
-                                <div style={{backgroundColor: "rgb(0,0,0,0.1)", marginBottom: 3, padding: 10}}>
+                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
@@ -102,11 +102,10 @@ export default function LoginPage(){
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         JFK - Kotoka</p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                        view booking
-                                        <i style={{marginLeft: 10}} className="fa fa-long-arrow-right"></i>
+                                        view more ...
                                     </p>
                                 </div>
-                                <div style={{background: "rgb(0,0,0,0.1)", marginBottom: 3, padding: 10}}>
+                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
@@ -117,11 +116,10 @@ export default function LoginPage(){
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         JFK - Kotoka</p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                        view booking
-                                        <i style={{marginLeft: 10}} className="fa fa-long-arrow-right"></i>
+                                        view more ...
                                     </p>
                                 </div>
-                                <div style={{background: "rgb(0,0,0,0.1)", marginBottom: 3, padding: 10}}>
+                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
@@ -132,8 +130,7 @@ export default function LoginPage(){
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         JFK - Kotoka</p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                        view booking
-                                        <i style={{marginLeft: 10}} className="fa fa-long-arrow-right"></i>
+                                        view more ...
                                     </p>
                                 </div>
                             </div>
