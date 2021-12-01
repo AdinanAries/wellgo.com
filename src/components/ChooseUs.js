@@ -38,7 +38,7 @@ var ChooseUs = ()=>{
                         <div className="home_page_reviews_wrapper">
 
                             <div onClick={show_full_search_form} className="home_page_reviews_start_search_btn">
-                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>
+                                <i style={{marginRight: 10, color: "#c751b9"}} className="fa fa-search"></i>
                                 Book Yours Today...
                             </div>
 
@@ -297,13 +297,13 @@ var ChooseUs = ()=>{
 
                             </div>
                             <div>
-                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     Paris - France</p>
-                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     Ontario - Canada</p>
-                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     Lagos - Nigeria</p>
-                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "fit-content", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <p className="each_more_popular_city" style={{cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     Cairo - Egypt</p>
                             </div>
                         </div>
