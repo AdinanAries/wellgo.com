@@ -67,12 +67,12 @@ export default function LoginPage(){
                             </p>
                             <div style={{marginTop: 20}}>
                                 <div style={{borderBottom: "1px solid rgb(0,0,0,0.1)", marginBottom: 10, paddingBottom: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial", color: "rgb(102, 169, 233)"}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
+                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        From <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, fontWeight: "bolder"}}>
-                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, fontWeight: "bolder"}}>
+                                        From <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
+                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
                                         Accra</span></p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         JFK - Kotoka</p>
@@ -82,12 +82,12 @@ export default function LoginPage(){
                                     </p>
                                 </div>
                                 <div style={{borderBottom: "1px solid rgb(0,0,0,0.1)", marginBottom: 10, paddingBottom: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial", color: "rgb(102, 169, 233)"}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
+                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        From <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, fontWeight: "bolder"}}>
-                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, fontWeight: "bolder"}}>
+                                        From <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
+                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
                                         Accra</span></p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         JFK - Kotoka</p>
@@ -97,12 +97,12 @@ export default function LoginPage(){
                                     </p>
                                 </div>
                                 <div style={{borderBottom: "1px solid rgb(0,0,0,0.1)", marginBottom: 10, paddingBottom: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial", color: "rgb(102, 169, 233)"}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
+                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        From <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, fontWeight: "bolder"}}>
-                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, fontWeight: "bolder"}}>
+                                        From <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
+                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
                                         Accra</span></p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         JFK - Kotoka</p>
