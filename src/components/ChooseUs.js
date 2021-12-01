@@ -291,7 +291,7 @@ var ChooseUs = ()=>{
                             </div>
                         </div>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                            >Other Popular Cities</h1>
+                            >More To Explore</h1>
                         <div style={{borderTop: "4px solid orange", padding: "15px", backgroundColor: "rgba(255,255,255,0.6)"}}>
                             <div className="more_popular_cities_svg_img" style={{height: 150, width: 150, backgroundImage: `url('${citiesIcon}')`, backgroundRepeat: "no-repeat", backgroundSize: "contain", position: "absolute", top: -50, left: 20, zIndex: 1}}>
 
@@ -310,10 +310,10 @@ var ChooseUs = ()=>{
                     </div>
 
                     <div className="get_best_deals_container" style={{padding: "20px 0"}}>
-                        <h1 className="page_title" style={{textAlign: "center", fontSize: 20, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                        >Get the Best Deals!</h1>
+                        <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginTop: 10, color: "rgba(0,0,0,0.7)", marginBottom: "10px", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        >Get the best deals at the best prices!</h1>
                         <h1 className="title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                        >we have the cheapest tickets</h1>
+                        ></h1>
                         <div className="why-choose-us-container" >
                             <div className="each-choose-us-container">
                                 
@@ -321,7 +321,7 @@ var ChooseUs = ()=>{
                                     height: 150, marginTop: 5, marginBottom: 5}}>
 
                                 </div>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette"}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Best Deals</p>
                                 <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
                                     This is a place holder text for the description of this info card</p>
@@ -332,7 +332,7 @@ var ChooseUs = ()=>{
                                     height: 150, marginTop: 5, marginBottom: 5}}>
 
                                 </div>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette"}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Secure Payment</p>
                                 <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
                                     This is a place holder text for the description of this info card</p>
@@ -343,7 +343,7 @@ var ChooseUs = ()=>{
                                     height: 150, marginTop: 5, marginBottom: 5}}>
 
                                 </div>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette"}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Customer Support</p>
                                 <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
                                     This is a place holder text for the description of this info card</p>

@@ -21,8 +21,7 @@ function Footer(){
                             <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
                                 About Us</p>
                             <p className="footer_about_text" style={{color: "white", textAlign: "center", letterSpacing: 0.5, fontFamily: "Courgette", maxWidth: 250}}>
-                            Wellgo.com is a online travel agency who's business operations targets mostly the African
-                            travel market</p>
+                            Wellgo.com is a flight ticket sales company that's striaght to the point...</p>
                         </div>
                     </div>
                     {/*<div className="footer_section_each_flex_section_container">

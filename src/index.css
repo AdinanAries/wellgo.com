@@ -528,6 +528,7 @@ footer {
   cursor: pointer;
 }
 .explore_destinations_promo_card {
+  height: 65vh;
   padding: 20px;
   padding-top: 100px;
   background: linear-gradient(90deg, #000000, rgba(255, 255, 255, 0), #000000),
@@ -1230,6 +1231,7 @@ footer {
   }
   /*----------------------------------------------*/
   .explore_destinations_promo_card {
+    height: auto;
     padding-top: 80px;
     background: rgb(43, 52, 61) !important;
     border-radius: 0;
