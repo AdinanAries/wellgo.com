@@ -953,6 +953,9 @@ footer {
 .each_more_popular_city:hover{
    padding: 0 20px;
 }
+#selected_ticket_pane{
+  z-index: 1003 !important;
+}
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
 @media screen and (max-width: 700px) {
   .more_popular_cities_svg_img{
@@ -1115,9 +1118,7 @@ footer {
     width: 100vw;
     box-shadow: none;
   }
-  #selected_ticket_pane{
-    z-index: 1005 !important;
-  }
+  
   .selected_ticket_book_btn_container {
     position: fixed;
     border: none;

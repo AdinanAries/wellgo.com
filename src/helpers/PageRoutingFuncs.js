@@ -17,6 +17,7 @@ export function show_login_page(){
 
 export function show_home_page(is_from_search=false){
     
+    document.getElementById("selected_ticket_pane").style.display="none";
     //document.getElementById("site_main_header").style.display="none";
     if(!is_from_search){
         document.getElementById("main_hero_section").style.display="block";
