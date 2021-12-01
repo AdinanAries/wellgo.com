@@ -8,34 +8,47 @@ export default function LoginPage(){
                     <div className="user_account_page_container">
                         <div className="user_account_page_each_child_container">
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 5, marginBottom: 10}}>
-                                <div style={{backgroundColor: "rgba(0,0,0,0.1)", display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)"}}>
+                                <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                                         <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-user"></i>
                                         Account</p>
                                 </div>
-                                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
+                                <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_payment_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                                         <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-credit-card"></i>
                                         Payment</p>
                                 </div>
-                                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
+                                <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_passport_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                                         <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-user"></i>
                                         Passports</p>
                                 </div>
                             </div>
-                            <div style={{marginTop: 10, padding: 10}}>
-                                <div style={{display: "flex", flexDirection: "row"}}>
-                                    <div style={{marginRight: 10, borderRadius: "100%", width: 80, height: 80, boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "rgba(0,0,0,0.1)", overflow: "hidden", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <div id="user_account_main_account_pane" style={{marginTop: 10, padding: 10}}>
+                                <div style={{display: "flex", flexDirection: "row", position: "relative"}}>
+                                    <div style={{marginRight: 20, borderRadius: "100%", width: 80, height: 80, boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "rgba(0,0,0,0.1)", overflow: "hidden", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <i style={{fontSize: 50, color: "rgba(0,0,0,0.4)"}} className="fa fa-user"></i>
                                     </div>
                                     <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, fontWeight: "bolder", color: "rgba(0,0,0,0.7)"}}>
                                             Mohammed Adinan</p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
+                                        <p onClick={()=>document.getElementById("profile_view_more_options_drop_down").style.display="block"} style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
                                             more options
                                             <i style={{marginLeft: 10}} className="fa fa-angle-right"></i>
                                         </p>
+                                        <div id="profile_view_more_options_drop_down" style={{display: "none", overflow: "hidden", position: "absolute", top: "calc(100% - 10px)", left: 0, zIndex: 1, borderRadius: 6, backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", animation: "pop-in 0.2s ease-out"}}>
+                                            <p onClick={()=>document.getElementById("profile_view_more_options_drop_down").style.display="none"} style={{fontSize: 30, marginBottom: 5, borderBottom: "1px solid rgba(0,0,0,0.1)", padding: "0 10px", cursor: "pointer", textAlign: "right"}}>
+                                                &times;
+                                            </p>
+                                            <p style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 15, padding: "10px 20px", color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
+                                                <i style={{marginRight: 5}} className="fa fa-pencil"></i>
+                                                edit profile
+                                            </p>
+                                            <p style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", marginTop: 10, backgroundColor: "crimson", fontSize: 15, padding: "10px 20px", color: "white", cursor: "pointer"}}>
+                                                <i style={{marginRight: 5}} className="fa fa-sign-out"></i>
+                                                logout
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div style={{marginTop: 20}}>
@@ -58,6 +71,12 @@ export default function LoginPage(){
                                     <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", textAlign: "center", fontSize: 15, borderRadius: 6, padding: 14, color: "white", backgroundColor: "rgb(23, 87, 148)", boxShadow: "1px 2px 3px rgba(0,0,0,0.33)"}}>
                                         Frequent Flyer and Membership</p>
                                 </div>
+                            </div>
+                            <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10, padding: 10}}>
+                                <p>Payment</p>
+                            </div>
+                            <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10, padding: 10}}>
+                                <p>Passport</p>
                             </div>
                         </div>
                         <div className="user_account_page_each_child_container user_account_page_second_child_container" style={{borderLeft: "1px solid rgba(0,0,0,0.1)"}}>
@@ -205,4 +224,40 @@ function show_signup_form(){
     document.getElementById("main_login_form").style.display="none";
     document.getElementById("main_signup_form").style.display="block";
     //$("#main_signup_form").slideDown("fast")
+}
+
+function show_main_account_pane(){
+
+    Array.from(document.getElementsByClassName("user_account_pane_main_menu_item")).forEach(each=>{
+        each.classList.remove("active");
+    });
+    document.getElementById("user_account_pane_account_menu_item").classList.add("active");
+
+    document.getElementById("user_account_main_passports_pane").style.display="none";
+    document.getElementById("user_account_main_payment_pane").style.display="none";
+    document.getElementById("user_account_main_account_pane").style.display="block";
+}
+
+function show_main_payment_pane(){
+
+    Array.from(document.getElementsByClassName("user_account_pane_main_menu_item")).forEach(each=>{
+        each.classList.remove("active");
+    });
+    document.getElementById("user_account_pane_payment_menu_item").classList.add("active");
+
+    document.getElementById("user_account_main_passports_pane").style.display="none";
+    document.getElementById("user_account_main_payment_pane").style.display="block";
+    document.getElementById("user_account_main_account_pane").style.display="none";
+}
+
+function show_main_passport_pane(){
+
+    Array.from(document.getElementsByClassName("user_account_pane_main_menu_item")).forEach(each=>{
+        each.classList.remove("active");
+    });
+    document.getElementById("user_account_pane_passport_menu_item").classList.add("active");
+
+    document.getElementById("user_account_main_passports_pane").style.display="block";
+    document.getElementById("user_account_main_payment_pane").style.display="none";
+    document.getElementById("user_account_main_account_pane").style.display="none";
 }
