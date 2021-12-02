@@ -27,7 +27,7 @@ if(localStorage.getItem("search_obj")){
 $(function() {
   $('#departure_return_dates_input').daterangepicker({
     opens: 'left',
-    //autoUpdateInput: false,
+    autoUpdateInput: false,
     locale: {
       cancelLabel: 'Clear'
     }
@@ -50,14 +50,14 @@ $(function() {
 $(function() {
   $('#sp_departure_return_dates_input').daterangepicker({
     opens: 'left',
-    //autoUpdateInput: false,
+    autoUpdateInput: false,
     locale: {
       cancelLabel: 'Clear'
     }
   }, function(start, end, label) {
 
     setTimeout(()=>{
-      document.getElementById("departure_return_dates_input").value = start.toString().substring(0,11) +" - "+ end.toString().substring(0,11);
+      document.getElementById("sp_departure_return_dates_input").value = start.toString().substring(0,11) +" - "+ end.toString().substring(0,11);
     }, 100);
 
     let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));

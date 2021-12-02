@@ -308,7 +308,7 @@ footer {
 }
 .searchBtn {
   border-radius: 50px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   background-color: rgb(54, 117, 168);*/
   background-color: rgb(23, 87, 148);
@@ -980,6 +980,44 @@ footer {
   width: calc(50% - 5px);
 }
 /*https://www.reshot.com/free-svg-icons/item/deal-sites-2X5DS6LMUB/*/
+/*Date Picker*/
+.daterangepicker{
+  border-radius: 25px !important;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33) !important;
+  overflow: hidden;
+  padding: 20px !important;
+  top: 155px !important;
+}
+.daterangepicker .calendar-table table{
+  border-spacing: 5px !important;
+}
+.daterangepicker .drp-calendar{
+  max-width: 500px !important;
+}
+.daterangepicker td, .daterangepicker th{
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 15px !important;
+  font-family: 'Prompt', sans-serif;
+  border-radius: 100% !important;
+  border: none !important;
+}
+.applyBtn,
+.cancelBtn {
+  border: none !important;
+  color: white !important;
+  background-color: #c900b0;
+  padding: 14px !important;
+  min-width: 80px;
+  border-radius: 50px !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
+}
+.cancelBtn {
+  background-color: rgb(23, 87, 148);
+}
+.daterangepicker td.start-date{
+  
+}
 @media screen and (max-width: 700px) {
   .user_account_page_container{
     display: block;
@@ -1237,7 +1275,20 @@ footer {
     min-width: 100vw;
     border-radius: 0 !important;
     min-height: 100vh;
+    padding: 0 !important;
   }
+  .daterangepicker td, .daterangepicker th{
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 13px !important;
+    border-radius: 0 !important;
+  }
+  .daterangepicker td.start-date {
+    border-radius: 20px 0 0 20px !important;
+}
+.daterangepicker td.end-date {
+  border-radius: 0 20px 20px 0 !important;
+}
   .drp-calendar {
     min-width: calc(100% - 20px) !important;
   }
@@ -1248,18 +1299,6 @@ footer {
   .table-condensed thead tr th {
     padding-bottom: 10px !important;
     color: #c900b0 !important;
-  }
-  .applyBtn,
-  .cancelBtn {
-    border: none !important;
-    color: white !important;
-    background-color: #c900b0;
-    padding: 14px !important;
-    min-width: 80px;
-    border-radius: 4px !important;
-  }
-  .cancelBtn {
-    background-color: rgb(23, 87, 148);
   }
   .daterangepicker select.monthselect,
   .daterangepicker select.yearselect {
@@ -1576,3 +1615,4 @@ path {
   color: #a0a0a0;
   width: 200px;
 }
+

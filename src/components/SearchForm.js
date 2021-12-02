@@ -129,7 +129,7 @@ function SearchForm(){
                     </div>
                     <div className="each_flex-side">
                         <div style={{width: "100%"}}>
-                            <div className="main-search_txt_input" style={{border: "none", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
+                            <div className="main-search_txt_input" style={{border: "none", position: "relative", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-calendar-o"></i>
                                 <input id="departure_return_dates_input" type="text" readOnly="true" placeholder="departure - return"/>
                             </div>
