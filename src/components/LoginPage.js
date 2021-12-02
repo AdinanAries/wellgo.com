@@ -1,11 +1,70 @@
 import $ from "jquery";
 
+import edit_user_forms_bg from "../icons/edit_user_forms_bg.svg";
+import credit_card_payment from "../icons/credit_card_payment.svg";
+import passport from "../icons/passport.svg";
+
 export default function LoginPage(){
     return (
         <main id="login_page" style={{display: "none"}}>
 
+            <div id="account_page_edit_profile_form" style={{display: "none"}} className="page-popup-cover">
+                <div className="page-popup-cover-content-container">
+                    <div style={{backgroundImage: `url('${edit_user_forms_bg}')`}} className="page-popup-cover-container-svg-bg"></div>
+                    <p onClick={()=>document.getElementById("account_page_edit_profile_form").style.display="none"} className="page-popup-cover-close-btn">
+                        &times;
+                    </p>
+                    <div className="page-popup-cover-content-header">
+                        Edit Profile
+                    </div>
+                    <div style={{padding: "10px",}}>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="text" placeholder="First Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="text" placeholder="Middle Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="text" placeholder="Last Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="email" placeholder="Email"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-calendar-o" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="text" placeholder="Date of Birth"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            <div style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                                    <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
+                                    Cancel
+                                </div>
+                                <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                                    <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-check-square-o"></i>
+                                    Update
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
             <div id="account_page_add_payments_form" style={{display: "none"}} className="page-popup-cover">
                 <div className="page-popup-cover-content-container">
+                    <div style={{backgroundImage: `url('${credit_card_payment}')`}} className="page-popup-cover-container-svg-bg"></div>
                     <p onClick={()=>document.getElementById("account_page_add_payments_form").style.display="none"} className="page-popup-cover-close-btn">
                         &times;
                     </p>
@@ -17,6 +76,7 @@ export default function LoginPage(){
 
             <div id="account_page_add_passport_form" style={{display: "none"}} className="page-popup-cover">
                 <div className="page-popup-cover-content-container">
+                    <div style={{backgroundImage: `url('${passport}')`}} className="page-popup-cover-container-svg-bg"></div>
                     <p onClick={()=>document.getElementById("account_page_add_passport_form").style.display="none"} className="page-popup-cover-close-btn">
                         &times;
                     </p>
@@ -63,7 +123,7 @@ export default function LoginPage(){
                                             <p onClick={()=>document.getElementById("profile_view_more_options_drop_down").style.display="none"} style={{fontSize: 30, marginBottom: 5, borderBottom: "1px solid rgba(0,0,0,0.1)", padding: "0 10px", cursor: "pointer", textAlign: "right"}}>
                                                 &times;
                                             </p>
-                                            <p style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 15, padding: "10px 20px", color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
+                                            <p onClick={show_edit_profile_form} style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 15, padding: "10px 20px", color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
                                                 <i style={{marginRight: 5}} className="fa fa-pencil"></i>
                                                 edit profile
                                             </p>
@@ -210,7 +270,19 @@ export default function LoginPage(){
                             <div style={{marginBottom: 10}}>
                                <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="text" placeholder="Full Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="text" placeholder="First Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="text" placeholder="Middle Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="text" placeholder="Last Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{marginBottom: 10}}>
@@ -304,4 +376,8 @@ function show_add_new_payment_form(){
 
 function show_add_new_passport_form(){
     document.getElementById("account_page_add_passport_form").style.display = "flex";
+}
+
+function show_edit_profile_form(){
+    document.getElementById("account_page_edit_profile_form").style.display = "flex";
 }
