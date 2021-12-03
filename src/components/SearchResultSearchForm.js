@@ -5,16 +5,16 @@ import { show_search_page } from "../helpers/PageRoutingFuncs";
 function SearchForm(){
     return(
         <div id="search_results_page_search_form" className="main-search-form">
-            <div className="two-search-inputs-container" style={{marginBottom: 5}}>
+            <div className="two-search-inputs-container" style={{marginBottom: 10}}>
                 <div className="each_flex-side first">
                     <div className="forms_class_guests_cabin_settings_container" style={{zIndex: 10}}>
                         <div id="sp_forms_main_class_guests_cabin_settings_pane" className="forms_class_guests_cabin_settings_pane">
                             <p onClick={()=>document.getElementById("sp_forms_main_class_guests_cabin_settings_pane").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
                             <div id="sp_add_travelers_settings_pane" style={{padding: 15, display: "none"}}>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", fontSize: 17, marginTop: 10, marginBottom: 20}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", fontSize: 17, marginTop: 10, marginBottom: 20}}>
                                     Add Travelers</p>
                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Adults</div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                         <div onClick={()=>sp_remove_traveler("adult")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
@@ -26,7 +26,7 @@ function SearchForm(){
                                     </div>
                                 </div>
                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Children
                                         <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>Ages 2 to 17</p>
                                         </div>
@@ -40,7 +40,7 @@ function SearchForm(){
                                     </div>
                                 </div>
                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Infants
                                         <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>Younger than 2</p>
                                     </div>
@@ -55,24 +55,24 @@ function SearchForm(){
                                 </div>
                             </div>
                             <div id="sp_select_cabin_settings_pane" style={{padding: 15, display: "none"}}>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
                                     Select Cabin</p>
                                 <div onClick={()=>sp_select_cabin_type("economy")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_select_cabin_economy_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <label htmlFor="sp_select_cabin_economy_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Economy</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <input id="sp_select_cabin_economy_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
                                     </div>
                                 </div>
                                 <div onClick={()=>sp_select_cabin_type("business")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_select_cabin_business_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <label htmlFor="sp_select_cabin_business_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Business</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <input id="sp_select_cabin_business_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" />
                                     </div>
                                 </div>
                                 <div onClick={()=>sp_select_cabin_type("first")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_select_cabin_first_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <label htmlFor="sp_select_cabin_first_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         First</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <input id="sp_select_cabin_first_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" />
@@ -80,24 +80,24 @@ function SearchForm(){
                                 </div>
                             </div>
                             <div id="sp_select_trip_round_settings_pane" style={{padding: 15, display: "none"}}>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
                                     Select Trip Round</p>
                                 <div onClick={()=>sp_select_trip_round("round-trip")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_trip_round_round_trip_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <label htmlFor="sp_trip_round_round_trip_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Round-trip</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <input id="sp_trip_round_round_trip_chk" className="sp_select_trip_round_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
                                     </div>
                                 </div>
                                 <div onClick={()=>sp_select_trip_round("one-way")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_trip_round_one_way_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <label htmlFor="sp_trip_round_one_way_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         One-way</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <input id="sp_trip_round_one_way_chk" className="sp_select_trip_round_chk" style={{width: 20, height: 20}} type="radio" />
                                     </div>
                                 </div>
                                 <div onClick={()=>sp_select_trip_round("multi-city")} style={{cursor: "not-allowed", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_trip_round_multi_city_chk"><div style={{color: "rgba(0,0,0,0.7)", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <label htmlFor="sp_trip_round_multi_city_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Multi-city</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <input id="sp_trip_round_multi_city_chk" className="sp_select_trip_round_chk" style={{width: 20, height: 20}} type="radio" />
@@ -108,17 +108,17 @@ function SearchForm(){
                                 Done
                             </div>
                         </div>
-                        <div id="sp_select_cabin_type_main_input_display" onClick={sp_show_cabin_settings_pane} style={{cursor: "pointer", marginRight: 30, fontSize: 14}}>
+                        <div id="sp_select_cabin_type_main_input_display" onClick={sp_show_cabin_settings_pane} style={{cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginRight: 30, fontSize: 14}}>
                             <i style={{fontSize: 15, marginRight: 10}} className="fa fa-level-up"></i>
                             Economy
                             <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                         </div>
-                        <div id="sp_add_travelers_main_input_display" onClick={sp_show_travelers_settings_pane} style={{cursor: "pointer", marginRight: 30, fontSize: 14}}>
+                        <div id="sp_add_travelers_main_input_display" onClick={sp_show_travelers_settings_pane} style={{cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginRight: 30, fontSize: 14}}>
                             <i style={{fontSize: 15, marginRight: 10}} className="fa fa-user"></i>
                             1 Adult
                             <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                         </div>
-                        <div id="sp_select_trip_round_main_input_display" onClick={sp_show_trip_round_settings_pane} style={{cursor: "pointer", marginRight: 30, fontSize: 14}}>
+                        <div id="sp_select_trip_round_main_input_display" onClick={sp_show_trip_round_settings_pane} style={{cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginRight: 30, fontSize: 14}}>
                             <i style={{fontSize: 15, marginRight: 10}} className="fa fa-repeat"></i>
                             Round-trip
                             <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>

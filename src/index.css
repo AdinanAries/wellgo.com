@@ -316,7 +316,7 @@ footer {
   width: calc(100vw - 19px);
   padding: 5px;
   height: calc(100vh - 60px);
-  padding-top: 10px;
+  padding-top: 0;
   background-size: auto;
   background-repeat: no-repeat;
   background-position: right;
@@ -365,7 +365,7 @@ footer {
   padding-left: 0;
   background: none;
   border: none;
-  
+  font-family: 'Prompt', sans-serif;
 }
 .main-search_txt_input i {
   color: rgb(52, 75, 85);
@@ -483,6 +483,8 @@ footer {
   text-align: center;
   background-color: white;
   margin-bottom: 10px !important;
+  font-family: 'Prompt', sans-serif;
+  font-size: 14px;
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);*/
   cursor: pointer;
 }
@@ -560,12 +562,14 @@ footer {
   padding: 25px 15px;
   border: none;
   font-weight: bolder;
+  font-family: 'Prompt', sans-serif;
   letter-spacing: 0.5px;
   font-size: 15px;
 }
 .airports_auto_complete_list_container {
   border-top: 1px solid rgba(0, 0, 0, 0.137);
-  padding: 10px 0;
+  padding: 10px;
+  
 }
 .airports_auto_complete_close_btn {
   z-index: 2;
@@ -577,18 +581,19 @@ footer {
   cursor: pointer;
 }
 .autocomplete_list_airport_city_name {
+  font-family: 'Prompt', sans-serif;
   font-size: 14px;
-  font-weight: bolder;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.9);
 }
 .autocomplete_list_airport_city_name i {
-  color: slateblue;
+  color: rgb(192, 78, 182);
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   margin-right: 10px;
   font-size: 16px;
 }
 .autocomplete_list_country_name {
   margin-left: 23px;
-  font-size: 14px;
+  font-size: 13px;
   color: rgba(0, 0, 0, 0.8);
 }
 .autocomplete_list_each_item_container {
@@ -834,7 +839,7 @@ footer {
 .home_page_reviews_start_search_btn {
   position: absolute;
   top: 10px;
-  padding: 14px 20px;
+  padding: 10px 20px;
   width: 300px;
   right: 30px;
   background-color: rgba(0, 0, 0, 0.07);
@@ -843,6 +848,7 @@ footer {
   border-radius: 50px;
   cursor: pointer;
   z-index: 4;
+  font-family: 'Prompt', sans-serif;
 }
 .home_page_reviews_start_search_btn:hover{
   border: 1px solid #c751b9;
@@ -1193,7 +1199,7 @@ footer {
     font-size: 13px !important;
   }
   .home_page_reviews_start_search_btn {
-    width: 180px;
+    width: 190px;
     font-size: 13px;
     right: 5px;
   }

@@ -377,10 +377,10 @@ function return_history_markup(obj, type){
                 </div>
                 <div>
                     <div>
-                        <p style="font-size: 14px; font-weight: bolder; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
                             ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
                         </p>
-                        <p style="font-size: 14px; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
                             ${obj.country}
                         </p>
                     </div>
@@ -395,10 +395,10 @@ function return_history_markup(obj, type){
                 </div>
                 <div>
                     <div>
-                        <p style="font-size: 14px; font-weight: bolder; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
                             ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
                         </p>
-                        <p style="font-size: 14px; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
                             ${obj.country}
                         </p>
                     </div>
@@ -519,10 +519,10 @@ function sp_return_history_markup(obj, type){
                 </div>
                 <div>
                     <div>
-                        <p style="font-size: 14px; font-weight: bolder; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
                             ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
                         </p>
-                        <p style="font-size: 14px; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
                             ${obj.country}
                         </p>
                     </div>
@@ -537,10 +537,10 @@ function sp_return_history_markup(obj, type){
                 </div>
                 <div>
                     <div>
-                        <p style="font-size: 14px; font-weight: bolder; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
                             ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
                         </p>
-                        <p style="font-size: 14px; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
                             ${obj.country}
                         </p>
                     </div>
