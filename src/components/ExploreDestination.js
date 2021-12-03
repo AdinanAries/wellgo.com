@@ -25,7 +25,7 @@ export default function ExploreDestinations(){
                                     <i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>
                                 </div>
                                 <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
+                                    <p className="static_search_bar_text" style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
                                         click to start search...</p>
                                 </div>
                                 <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 60}}>
