@@ -1050,7 +1050,7 @@ footer {
   border-radius: 25px !important;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33) !important;
   overflow: hidden;
-  padding: 20px !important;
+  padding: 30px !important;
   top: 155px !important;
 }
 .daterangepicker .calendar-table table{
@@ -1060,18 +1060,23 @@ footer {
   max-width: 500px !important;
 }
 .daterangepicker td, .daterangepicker th{
-  width: 40px !important;
-  height: 40px !important;
+  width: 45px !important;
+  height: 45px !important;
   font-size: 15px !important;
   font-family: 'Prompt', sans-serif;
   border-radius: 100% !important;
   border: none !important;
+  font-weight: initial !important;
+}
+.daterangepicker th{
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-size: 13px !important;
 }
 .applyBtn,
 .cancelBtn {
   border: none !important;
   color: white !important;
-  background-color: #c900b0;
+  background-color: #d146c1;
   padding: 14px !important;
   min-width: 80px;
   border-radius: 50px !important;
@@ -1080,7 +1085,7 @@ footer {
 .cancelBtn {
   background-color: rgb(23, 87, 148);
 }
-.daterangepicker td.start-date{
+.daterangepicker td.start-date, .daterangepicker td.end-date {
   
 }
 @media screen and (max-width: 700px) {
@@ -1374,7 +1379,7 @@ footer {
   }
   .table-condensed thead tr th {
     padding-bottom: 10px !important;
-    color: #c900b0 !important;
+    /*color: #c900b0 !important;*/
   }
   .daterangepicker select.monthselect,
   .daterangepicker select.yearselect {

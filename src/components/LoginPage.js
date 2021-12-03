@@ -156,25 +156,27 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10, padding: 10}}>
-                                <div onClick={show_add_new_payment_form} style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
-                                    <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
-                                    Add New Payment Method
-                                </div>
-                                <div style={{backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginTop: 20, padding: "20px"}}>
+                                
+                                <div style={{backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginBottom: 20, padding: "20px"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No payment method added</p>
                                 </div>
+                                <div onClick={show_add_new_payment_form} style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
+                                    <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
+                                    Add New Payment Method
+                                </div>
                             </div>
                             <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10, padding: 10}}>
-                                <div onClick={show_add_new_passport_form} style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
-                                    <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
-                                    Add New Passport
-                                </div>
-                                <div style={{backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginTop: 20, padding: "20px"}}>
+                                <div style={{backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginBottom: 20, padding: "20px"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No passport added</p>
+                                </div>
+
+                                <div onClick={show_add_new_passport_form} style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
+                                    <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
+                                    Add New Passport
                                 </div>
                             </div>
                         </div>
