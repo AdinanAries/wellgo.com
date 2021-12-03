@@ -1240,6 +1240,7 @@ footer {
   .search_forms_promo_card {
     border-radius: 0;
     margin: 0;
+    height: calc(100vh - 440px);
   }
   .main_search_from_overall_container {
     border-radius: 0;
