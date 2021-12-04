@@ -3,6 +3,8 @@ import $ from "jquery";
 import edit_user_forms_bg from "../icons/edit_user_forms_bg.svg";
 import credit_card_payment from "../icons/credit_card_payment.svg";
 import passport from "../icons/passport.svg";
+import nothing_found_icon from "../icons/nothing_found_icon.svg";
+import card_not_found from "../icons/card_not_found.svg";
 
 export default function LoginPage(){
     return (
@@ -163,12 +165,13 @@ export default function LoginPage(){
                             </div>
                             <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10,}}>
                                 
-                                <div style={{display: "none", backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginBottom: 20, padding: "20px"}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
+                                <div style={{marginBottom: 20, padding: "20px"}}>
+                                <div style={{backgroundImage: `url(${card_not_found})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No payment method added</p>
                                 </div>
-                                <div style={{backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                <div style={{display: "none", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <div id="show_more_payment_method_info_btn0">
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                             ...3453
@@ -225,12 +228,12 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
-                                <div style={{display: "none", backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginBottom: 20, padding: "20px"}}>
+                                <div style={{backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginBottom: 20, padding: "20px"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No passport added</p>
                                 </div>
-                                <div style={{backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                <div style={{display: "none", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <div id="show_more_passport_info_btn0">
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                             Mohammed Adinan
@@ -331,7 +334,7 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div style={{marginTop: 10}}>
-                                <div style={{backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
                                             <i className="fa fa-ticket" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
@@ -351,7 +354,7 @@ export default function LoginPage(){
                                         see all ...
                                     </p>
                                 </div>
-                                <div style={{backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
                                             <i className="fa fa-ticket" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
@@ -371,7 +374,7 @@ export default function LoginPage(){
                                         see all ...
                                     </p>
                                 </div>
-                                <div style={{backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
                                             <i className="fa fa-ticket" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
@@ -390,6 +393,12 @@ export default function LoginPage(){
                                     <p onClick="show_booking_history_more_info_pane" style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
                                         see all ...
                                     </p>
+                                </div>
+                                <div style={{marginBottom: 20, padding: "20px"}}>
+                                    <div style={{backgroundImage: `url(${nothing_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
+                                        <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
+                                        Oops nothing found</p>
                                 </div>
                                 {/*<div style={{backgroundColor: "rgb(0,0,0,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
