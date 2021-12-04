@@ -201,7 +201,7 @@ export default function LoginPage(){
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
                                         </div>
                                     </div>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
+                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
                                         <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
                                             <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
                                         </div>
@@ -261,7 +261,7 @@ export default function LoginPage(){
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
                                         </div>
                                     </div>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
+                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
                                         <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
                                             <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
                                         </div>
