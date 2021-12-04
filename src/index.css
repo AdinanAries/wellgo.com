@@ -687,10 +687,10 @@ footer {
   animation: pop-in 0.2s ease-out;
   position: fixed;
   right: 0;
-  top: 0;
+  top: 60px;
   width: 700px;
   z-index: 1002;
-  height: 100vh;
+  height: calc(100vh - 120px);
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 10px;

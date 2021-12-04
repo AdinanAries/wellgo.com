@@ -163,16 +163,16 @@ export default function LoginPage(){
                                         No payment method added</p>
                                 </div>
                                 <div style={{backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
-                                    <div>
+                                    <div id="show_more_payment_method_info_btn0">
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                             ...3453
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
                                         </p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                        <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                                             view more ...
                                         </p>
                                     </div>
-                                    <div style={{display: "none"}}>
+                                    <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
                                         <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
                                             <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
                                             Mohammed Adinan</p>
@@ -200,6 +200,9 @@ export default function LoginPage(){
                                             <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
                                         </div>
+                                        <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                            view less ...
+                                        </p>
                                     </div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
                                         <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
@@ -222,17 +225,17 @@ export default function LoginPage(){
                                         No passport added</p>
                                 </div>
                                 <div style={{backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
-                                    <div>
+                                    <div id="show_more_passport_info_btn0">
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                             Mohammed Adinan
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , GH076033</span>
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Madrid - Spain ...</span>
                                         </p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                        <p onClick={()=>show_more_passport_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                                             view more ...
                                         </p>
                                     </div>
-                                    <div style={{display: "none"}}>
+                                    <div  id="show_more_passport_info_container0" style={{display: "none"}}>
                                         <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
                                             <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
                                             Mohammed Adinan</p>
@@ -260,6 +263,9 @@ export default function LoginPage(){
                                             <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
                                         </div>
+                                        <p onClick={()=>hide_more_passport_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                            view less ...
+                                        </p>
                                     </div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
                                         <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
@@ -281,14 +287,42 @@ export default function LoginPage(){
                                 <i style={{marginRight: 10}} className="fa fa-history"></i>
                                 Booking History
                             </p>
-                            <div style={{marginTop: 20, backgroundColor: "rgba(0,0,0,0.072)", borderRadius: 50, overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                <p style={{display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 40, height: 40, borderRadius: "100%"}}>
+                            <div style={{marginTop: 20, position: "relative", backgroundColor: "rgba(0,0,0,0.072)", borderRadius: 50, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                <p style={{position: "relative", zIndex: 4, display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 40, height: 40, borderRadius: "100%"}}>
                                     <i style={{color: "rgba(0,0,0,0.7)"}} className="fa fa-calendar-o"></i>
                                 </p>
-                                <input id="booking_history_date_range_input" readOnly="true" style={{border: "none", borderRadius: 50, fontSize: 14, padding: "5px 10px", backgroundColor: "rgba(0,0,0,0.052)", fontFamily: "'Prompt', sans-serif", width: "calc(100% - 85px)"}} type="text" placeholder="add start and end dates"/>
-                                <p style={{display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.072)",}}>
-                                    <i style={{color: "rgba(0,0,0,0.7)"}} className="fa fa-caret-down"></i>
+                                <input id="booking_history_date_range_input" readOnly="true" style={{position: "relative", zIndex: 4, border: "none", borderRadius: 50, fontSize: 14, padding: "5px 10px", backgroundColor: "rgba(0,0,0,0.052)", fontFamily: "'Prompt', sans-serif", width: "calc(100% - 85px)"}} type="text" placeholder="add start and end dates"/>
+                                <p onClick={toggle_show_booking_history_filters} style={{position: "relative", zIndex: 4, display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.072)",}}>
+                                    <i id="toggle_show_booking_history_filters_caret" style={{color: "rgba(0,0,0,0.7)", transition: "all 0.2s ease-in-out"}} className="fa fa-caret-down"></i>
                                 </p>
+                                <div id="booking_history_filters_container" style={{display: "none", padding: "0 10px", backgroundColor: "rgb(240,240,240)", paddingTop: 50, position: "absolute", top: -10, left: 0, zIndex: 3, width: "calc(100% + 5px)", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.33)",}}>
+                                    <div style={{padding: 10}}>
+                                        <p style={{fontSize: 13, fontWeight: "bolder", letterSpacing: 1, color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', sans-serif"}}>Filter by:</p>
+                                        <div style={{marginLeft: 10, marginTop: 5}}>
+                                            <p style={{fontSize: 13, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
+                                                Cabin type</p>
+                                            <select style={{marginTop: 5, border: "none", borderRadius: 50, backgroundColor: "rgba(0,0,0,0.052)", fontFamily: "'Prompt', sans-serif", padding: 10, fontSize: 14, width: "100%"}}>
+                                                <option>All</option>
+                                                <option>Cheapest</option>
+                                                <option>Economy</option>
+                                                <option>Premium</option>
+                                                <option>Business</option>
+                                                <option>First</option>
+                                            </select>
+                                            <p style={{fontSize: 13, letterSpacing: 1, color: "rgba(0,0,0,0.7)", marginTop: 15, fontFamily: "'Prompt', sans-serif"}}>
+                                                Trip type</p>
+                                                <select style={{marginTop: 5, border: "none", borderRadius: 50, backgroundColor: "rgba(0,0,0,0.052)", fontFamily: "'Prompt', sans-serif", padding: 10, fontSize: 14, width: "100%"}}>
+                                                <option>All</option>
+                                                <option>Round-trip</option>
+                                                <option>One-way</option>
+                                                <option>Multicity</option>
+                                            </select>
+                                            <div onClick={hide_booking_history_filters} style={{cursor: "pointer", padding: 10, backgroundColor: "rgba(53,53,86)", color: "white", borderRadius: 50, textAlign: "center", marginTop: 10}}>
+                                                Done
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div style={{marginTop: 10}}>
                                 <div style={{backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
@@ -519,4 +553,40 @@ function show_add_new_passport_form(){
 
 function show_edit_profile_form(){
     document.getElementById("account_page_edit_profile_form").style.display = "flex";
+}
+
+let is_booking_history_hidden = true;
+function toggle_show_booking_history_filters(){
+    if(is_booking_history_hidden){
+        show_booking_history_filters();
+    }else{
+        hide_booking_history_filters();
+    }
+    is_booking_history_hidden = !is_booking_history_hidden;
+}
+function show_booking_history_filters(){
+    document.getElementById("toggle_show_booking_history_filters_caret").style.transform = "rotate(180deg)";
+    $("#booking_history_filters_container").slideDown("fast");
+}
+function hide_booking_history_filters(){
+    document.getElementById("toggle_show_booking_history_filters_caret").style.transform = "rotate(0)";
+    $("#booking_history_filters_container").slideUp("fast");
+}
+
+function show_more_payment_method_info(index){
+    document.getElementById("show_more_payment_method_info_btn"+index).style.display = "none";
+    $("#show_more_payment_method_info_container"+index).slideDown("fast");
+}
+function hide_more_payment_method_info(index){
+    document.getElementById("show_more_payment_method_info_btn"+index).style.display = "block";
+    $("#show_more_payment_method_info_container"+index).slideUp("fast");
+}
+
+function show_more_passport_info(index){
+    document.getElementById("show_more_passport_info_btn"+index).style.display = "none";
+    $("#show_more_passport_info_container"+index).slideDown("fast");
+}
+function hide_more_passport_info(index){
+    document.getElementById("show_more_passport_info_btn"+index).style.display = "block";
+    $("#show_more_passport_info_container"+index).slideUp("fast");
 }
