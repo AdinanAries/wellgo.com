@@ -8,6 +8,12 @@ export default function LoginPage(){
     return (
         <main id="login_page" style={{display: "none"}}>
 
+            <div id="booking_history_more_info_pane" className="display_more_info_pane">
+                <p onClick={()=>document.getElementById("booking_history_more_info_pane").style.display="none"} className="page-popup-cover-close-btn">
+                    &times;
+                </p>
+            </div>
+
             <div id="account_page_edit_profile_form" style={{display: "none"}} className="page-popup-cover">
                 <div className="page-popup-cover-content-container">
                     <div style={{backgroundImage: `url('${edit_user_forms_bg}')`}} className="page-popup-cover-container-svg-bg"></div>
@@ -341,7 +347,7 @@ export default function LoginPage(){
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-plane" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
                                         JFK - Kotoka, Round-trip</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
                                         see all ...
                                     </p>
                                 </div>
@@ -361,7 +367,7 @@ export default function LoginPage(){
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-plane" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
                                         JFK - Kotoka, Round-trip</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
                                         see all ...
                                     </p>
                                 </div>
@@ -381,7 +387,7 @@ export default function LoginPage(){
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-plane" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
                                         JFK - Kotoka, Round-trip</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
+                                    <p onClick="show_booking_history_more_info_pane" style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
                                         see all ...
                                     </p>
                                 </div>
@@ -589,4 +595,8 @@ function show_more_passport_info(index){
 function hide_more_passport_info(index){
     document.getElementById("show_more_passport_info_btn"+index).style.display = "block";
     $("#show_more_passport_info_container"+index).slideUp("fast");
+}
+
+function show_booking_history_more_info_pane(){
+    document.getElementById("booking_history_more_info_pane").style.display = "block";
 }
