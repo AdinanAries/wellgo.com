@@ -281,10 +281,14 @@ export default function LoginPage(){
                                 <i style={{marginRight: 10}} className="fa fa-history"></i>
                                 Booking History
                             </p>
-                            <div style={{marginTop: 20, overflow: "hidden", borderBottom: "1px solid rgba(0,0,0,0.2)"}}>
-                                <i style={{marginRight: 10, marginLeft: 10, color: "rgba(0,0,0,0.7)"}} className="fa fa-calendar-o"></i>
-                                <input value="Fri, Mar 23rd - Sat, Mar 30th" style={{border: "none", fontSize: 14, padding: 10, paddingLeft: 0, background: "none", fontFamily: "'Prompt', sans-serif", width: "calc(100% - 65px)"}} type="text" placeholder="add start and end dates"/>
-                                <i style={{marginRight: 10, marginLeft: 10, color: "rgba(0,0,0,0.7)"}} className="fa fa-caret-down"></i>
+                            <div style={{marginTop: 20, backgroundColor: "rgba(0,0,0,0.072)", borderRadius: 50, overflow: "hidden", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                <p style={{display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 40, height: 40, borderRadius: "100%"}}>
+                                    <i style={{color: "rgba(0,0,0,0.7)"}} className="fa fa-calendar-o"></i>
+                                </p>
+                                <input id="booking_history_date_range_input" readOnly="true" style={{border: "none", borderRadius: 50, fontSize: 14, padding: "5px 10px", backgroundColor: "rgba(0,0,0,0.052)", fontFamily: "'Prompt', sans-serif", width: "calc(100% - 85px)"}} type="text" placeholder="add start and end dates"/>
+                                <p style={{display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.072)",}}>
+                                    <i style={{color: "rgba(0,0,0,0.7)"}} className="fa fa-caret-down"></i>
+                                </p>
                             </div>
                             <div style={{marginTop: 10}}>
                                 <div style={{backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
