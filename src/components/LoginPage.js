@@ -107,7 +107,7 @@ export default function LoginPage(){
                                         Passports</p>
                                 </div>
                             </div>
-                            <div id="user_account_main_account_pane" style={{marginTop: 10, padding: 10}}>
+                            <div id="user_account_main_account_pane" style={{marginTop: 20}}>
                                 <div style={{display: "flex", flexDirection: "row", position: "relative"}}>
                                     <div className="account_page_profile_pic_container" style={{marginRight: 20, borderRadius: "100%", width: 80, height: 80, boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "rgba(0,0,0,0.1)", overflow: "hidden", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <i style={{fontSize: 50, color: "rgba(0,0,0,0.4)"}} className="fa fa-user"></i>
@@ -155,7 +155,7 @@ export default function LoginPage(){
                                         Frequent Flyer and Membership</p>
                                 </div>
                             </div>
-                            <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10, padding: 10}}>
+                            <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10,}}>
                                 
                                 <div style={{display: "none", backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginBottom: 20, padding: "20px"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
@@ -215,7 +215,7 @@ export default function LoginPage(){
                                     Add New Payment Method
                                 </div>
                             </div>
-                            <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10, padding: 10}}>
+                            <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
                                 <div style={{display: "none", backgroundColor: "rgba(255,0,0,0.1)", borderLeft: "4px solid rgba(255,0,0,0.3)", marginBottom: 20, padding: "20px"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
