@@ -427,9 +427,8 @@ function return_start_checkout_info(json_obj){
                             <p class="site-logo-img">
                                 <img src="./WillgoLogo.png"/></p>
                             <div class="site-logo-txt">
-                                <p>
-                                    Wellgo
-                                    <span>.com</span>
+                                <p style="color: rgb(23, 87, 148);">
+                                    Wellgo<span>.com</span>
                                 </p>
                             </div>
                         </div>

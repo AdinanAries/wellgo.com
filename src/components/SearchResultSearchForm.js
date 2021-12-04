@@ -15,7 +15,9 @@ function SearchForm(){
                                     Add Travelers</p>
                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                     <div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                        Adults</div>
+                                        Adults
+                                        <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>18 and above</p>
+                                    </div>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                         <div onClick={()=>sp_remove_traveler("adult")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             -</div>

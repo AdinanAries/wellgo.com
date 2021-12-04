@@ -21,7 +21,7 @@ function SearchForm(){
                                         <div style={{color: "rgba(0,0,0,0.7)", height: 30, fontFamily: "'Prompt', sans-serif", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Adults
                                             <p style={{fontSize: 12, color: "rgba(0,0,0,0.6)"}}>18 and above</p>
-                                            </div>
+                                        </div>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                             <div onClick={()=>remove_traveler("adult")} style={{cursor: "pointer", borderRadius: "100%", border: "1px solid rgba(0,0,0,0.3)", width: 35, height: 35, textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 -</div>

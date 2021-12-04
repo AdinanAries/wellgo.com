@@ -737,6 +737,7 @@ footer {
   width: calc(35%);
 }
 .checkout_page_main_checkout_btn {
+  cursor: pointer;
   margin-top: 20px;
   text-align: center;
   background-color: rgb(23, 87, 148);
@@ -1117,8 +1118,9 @@ footer {
     font-size: 14px !important;
   }
   .page-popup-cover-content-container{
+    margin-top: 60px;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 60px);
     border-radius: 0;
     padding: 0 10px;
     box-shadow: none;
@@ -1127,14 +1129,16 @@ footer {
     display: block;
     margin: 0;
     border-radius: 0;
+    padding: 0;
   }
   .user_account_page_each_child_container{
     width: 100%;
-    padding: 10px 0;
+    padding: 10px;
   }
   .user_account_page_second_child_container{
     border-left: none !important;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     padding-top: 20px;
   }
   .more_popular_cities_svg_img{
