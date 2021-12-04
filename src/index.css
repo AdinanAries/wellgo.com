@@ -1545,7 +1545,37 @@ footer {
     padding-bottom: 30px !important;
   }
 }
+/*iphone 5*/
 @media screen and (max-width: 330px){
+  * {
+    font-size: 14px;
+  }
+  .home_page_reviews_each_reviewer_pic_img_container div{
+    width: 90px !important;
+    height: 90px !important;
+  }
+  .home_page_reviews_each_reviewer_pic_img_container div img{
+    width: 90px !important;
+  }
+  .home_page_reviews_each_review{
+    padding-top: 15px !important;
+  }
+  .reviews_watermark_icon{
+    top: 23px;
+  }
+  .user_account_pane_main_menu_item p{
+    font-size: 13px !important;
+  }
+  .account_page_profile_pic_container{
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .account_page_user_name_display{
+    font-size: 14px !important;
+  }
+  .searchFormChkInputLbl{
+    font-size: 11px !important;
+  }
   .static_search_bar_text{
     font-size: 13px;
   }

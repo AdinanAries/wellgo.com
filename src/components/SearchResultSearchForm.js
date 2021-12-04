@@ -57,11 +57,25 @@ function SearchForm(){
                             <div id="sp_select_cabin_settings_pane" style={{padding: 15, display: "none"}}>
                                 <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
                                     Select Cabin</p>
+                                    <div onClick={()=>sp_select_cabin_type("cheapest")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <label htmlFor="sp_select_cabin_cheapest_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                        Cheapest</div></label>
+                                    <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                        <input id="sp_select_cabin_cheapest_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
+                                    </div>
+                                </div>
                                 <div onClick={()=>sp_select_cabin_type("economy")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                     <label htmlFor="sp_select_cabin_economy_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Economy</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                        <input id="sp_select_cabin_economy_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
+                                        <input id="sp_select_cabin_economy_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" />
+                                    </div>
+                                </div>
+                                <div onClick={()=>sp_select_cabin_type("premium")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <label htmlFor="sp_select_cabin_premium_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                        Premium</div></label>
+                                    <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                        <input id="sp_select_cabin_premium_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" />
                                     </div>
                                 </div>
                                 <div onClick={()=>sp_select_cabin_type("business")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
@@ -110,7 +124,7 @@ function SearchForm(){
                         </div>
                         <div id="sp_select_cabin_type_main_input_display" onClick={sp_show_cabin_settings_pane} style={{cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginRight: 30, fontSize: 14}}>
                             <i style={{fontSize: 15, marginRight: 10}} className="fa fa-level-up"></i>
-                            Economy
+                            Cheapest
                             <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                         </div>
                         <div id="sp_add_travelers_main_input_display" onClick={sp_show_travelers_settings_pane} style={{cursor: "pointer", fontFamily: "'Prompt', sans-serif", marginRight: 30, fontSize: 14}}>
@@ -285,13 +299,27 @@ function sp_select_cabin_type(type="economy"){
     Array.from(document.getElementsByClassName("sp_select_cabin_type_chk")).forEach( each=> {
         each.checked = false;
     });
-    if(type === "economy"){
+    if(type === "cheapest"){
+        document.getElementById("sp_select_cabin_cheapest_chk").checked = true;
+        document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
+            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
+            Cheapest
+        `;
+        flight_search_data.itinerary.cabin = "LCC";
+    }else if(type === "economy"){
         document.getElementById("sp_select_cabin_economy_chk").checked = true;
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             Economy
         `;
         flight_search_data.itinerary.cabin = "ECONOMY";
+    }else if(type === "premium"){
+        document.getElementById("sp_select_cabin_premium_chk").checked = true;
+        document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
+            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
+            Premium
+        `;
+        flight_search_data.itinerary.cabin = "PREMIUM";
     }else if(type === "business"){
         document.getElementById("sp_select_cabin_business_chk").checked = true;
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `

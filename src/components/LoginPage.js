@@ -109,11 +109,11 @@ export default function LoginPage(){
                             </div>
                             <div id="user_account_main_account_pane" style={{marginTop: 10, padding: 10}}>
                                 <div style={{display: "flex", flexDirection: "row", position: "relative"}}>
-                                    <div style={{marginRight: 20, borderRadius: "100%", width: 80, height: 80, boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "rgba(0,0,0,0.1)", overflow: "hidden", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <div className="account_page_profile_pic_container" style={{marginRight: 20, borderRadius: "100%", width: 80, height: 80, boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "rgba(0,0,0,0.1)", overflow: "hidden", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <i style={{fontSize: 50, color: "rgba(0,0,0,0.4)"}} className="fa fa-user"></i>
                                     </div>
                                     <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, fontWeight: "bolder", color: "rgba(0,0,0,0.7)"}}>
+                                        <p className="account_page_user_name_display" style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, fontWeight: "bolder", color: "rgba(0,0,0,0.7)"}}>
                                             Mohammed Adinan</p>
                                         <p onClick={()=>document.getElementById("profile_view_more_options_drop_down").style.display="block"} style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
                                             more options
@@ -186,7 +186,7 @@ export default function LoginPage(){
                                 Booking History
                             </p>
                             <div style={{marginTop: 20}}>
-                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
+                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
@@ -200,7 +200,7 @@ export default function LoginPage(){
                                         view more ...
                                     </p>
                                 </div>
-                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
+                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
@@ -214,7 +214,7 @@ export default function LoginPage(){
                                         view more ...
                                     </p>
                                 </div>
-                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
+                                <div style={{backgroundColor: "rgb(0,0,0,0.05)", borderRadius: 20, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
                                             Reference:</span> G030E9S</p>
