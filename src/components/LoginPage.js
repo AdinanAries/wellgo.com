@@ -281,7 +281,12 @@ export default function LoginPage(){
                                 <i style={{marginRight: 10}} className="fa fa-history"></i>
                                 Booking History
                             </p>
-                            <div style={{marginTop: 20}}>
+                            <div style={{marginTop: 20, overflow: "hidden", borderBottom: "1px solid rgba(0,0,0,0.2)"}}>
+                                <i style={{marginRight: 10, marginLeft: 10, color: "rgba(0,0,0,0.7)"}} className="fa fa-calendar-o"></i>
+                                <input value="Fri, Mar 23rd - Sat, Mar 30th" style={{border: "none", fontSize: 14, padding: 10, paddingLeft: 0, background: "none", fontFamily: "'Prompt', sans-serif", width: "calc(100% - 65px)"}} type="text" placeholder="add start and end dates"/>
+                                <i style={{marginRight: 10, marginLeft: 10, color: "rgba(0,0,0,0.7)"}} className="fa fa-caret-down"></i>
+                            </div>
+                            <div style={{marginTop: 10}}>
                                 <div style={{backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
