@@ -53,8 +53,22 @@ export default function LoginPage(){
                             </div>
                             <div style={{marginBottom: 10}}>
                                <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-mobile" style={{marginRight: 10, fontSize: 22, color: "rgb(43, 52, 61)"}}></i>
+                                    <input type="text" placeholder="Mobile"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-calendar-o" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                     <input type="text" placeholder="Date of Birth"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <select style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}>
+                                        <option>Male</option>
+                                    </select>
                                 </div>
                             </div>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>

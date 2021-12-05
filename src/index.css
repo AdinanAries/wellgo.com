@@ -161,9 +161,6 @@ body {
   width: 20%;
 }
 /*-------------------------------------------------------------*/
-.drp-selected {
-  display: none !important;
-}
 .ui-datepicker {
   z-index: 5 !important;
   width: 300px;
@@ -1107,6 +1104,15 @@ footer {
 .daterangepicker td.start-date, .daterangepicker td.end-date {
   
 }
+.drp-buttons {
+  /*border: none !important;*/
+  padding: 20px !important;
+}
+.drp-selected {
+  display: none !important;
+  /*padding: 14px;
+  font-family: "Prompt", sans-serif;*/
+}
 @media screen and (max-width: 700px) {
   .search_forms_promo_card p:nth-child(1){
     font-size: 24px !important;
@@ -1416,10 +1422,6 @@ footer {
   
   .drp-calendar {
     min-width: calc(100% - 20px) !important;
-  }
-  .drp-buttons {
-    border: none !important;
-    padding: 20px !important;
   }
   .table-condensed thead tr th {
     padding-bottom: 10px !important;
