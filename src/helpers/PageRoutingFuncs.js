@@ -12,6 +12,8 @@ export function show_login_page(){
     document.getElementById("explore_page").style.display="none";
     document.getElementById("home_page").style.display="none";
     document.getElementById("trips_page").style.display="none";
+    document.getElementById("deals_page").style.display="none";
+    document.getElementById("help_page").style.display="none";
     document.getElementById("login_page").style.display="block";
 }
 
@@ -32,6 +34,8 @@ export function show_home_page(is_from_search=false){
     document.getElementById("explore_page").style.display="none";
     document.getElementById("login_page").style.display="none";
     document.getElementById("trips_page").style.display="none";
+    document.getElementById("deals_page").style.display="none";
+    document.getElementById("help_page").style.display="none";
     document.getElementById("home_page").style.display="block";
 }
 
@@ -47,6 +51,8 @@ export function show_search_page(){
     document.getElementById("explore_page").style.display="none";
     document.getElementById("login_page").style.display="none";
     document.getElementById("trips_page").style.display="none";
+    document.getElementById("deals_page").style.display="none";
+    document.getElementById("help_page").style.display="none";
     document.getElementById("search_page").style.display="block";
 
 }
@@ -63,7 +69,25 @@ export function show_trips_page(){
     document.getElementById("explore_page").style.display="none";
     document.getElementById("login_page").style.display="none";
     document.getElementById("home_page").style.display="none";
+    document.getElementById("deals_page").style.display="none";
     document.getElementById("trips_page").style.display="block";
+}
+
+export function show_deals_page(){
+
+    document.getElementById("site_main_header").style.display="block";
+    document.getElementById("main_hero_section").style.display="none";
+
+    window.scrollTo(0, 0);
+    //change_nav_active_icon("mobile_trips_menu_item", "desktop_trips_menu_item");
+
+    document.getElementById("search_page").style.display="none";
+    document.getElementById("explore_page").style.display="none";
+    document.getElementById("login_page").style.display="none";
+    document.getElementById("home_page").style.display="none";
+    document.getElementById("deals_page").style.display="block";
+    document.getElementById("help_page").style.display="none";
+    document.getElementById("trips_page").style.display="none";
 }
 
 export function show_explore_page(){
@@ -76,9 +100,28 @@ export function show_explore_page(){
 
     document.getElementById("search_page").style.display="none";
     document.getElementById("trips_page").style.display="none";
+    document.getElementById("deals_page").style.display="none";
+    document.getElementById("help_page").style.display="none";
     document.getElementById("login_page").style.display="none";
     document.getElementById("home_page").style.display="none";
     document.getElementById("explore_page").style.display="block";
+}
+
+export function show_help_page(){
+
+    document.getElementById("site_main_header").style.display="block";
+    document.getElementById("main_hero_section").style.display="none";
+
+    window.scrollTo(0, 0);
+    //change_nav_active_icon("mobile_search_menu_item", "desktop_explore_menu_item");
+
+    document.getElementById("search_page").style.display="none";
+    document.getElementById("trips_page").style.display="none";
+    document.getElementById("deals_page").style.display="none";
+    document.getElementById("help_page").style.display="block";
+    document.getElementById("login_page").style.display="none";
+    document.getElementById("home_page").style.display="none";
+    document.getElementById("explore_page").style.display="none";
 }
 
 export function show_full_search_form(){

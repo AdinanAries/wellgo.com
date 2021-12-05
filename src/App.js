@@ -11,6 +11,8 @@ import ExplorePage from './components/ExplorePage';
 import SearchPage from './components/SearchPage';
 import SelectedTicketPane from './components/SelectedTicketPane';
 import CheckoutPage from './components/CheckoutPage';
+import DealsPage from "./components/DealsPage";
+import HelpPage from "./components/HelpPage";
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
       <Header />
       <HomePage />
       <TripsPage />
+      <DealsPage />
+      <HelpPage />
       <LoginPage />
       <ExplorePage />
       <SearchPage />

@@ -6,7 +6,7 @@ import trips_icon from "../icons/trips_icon.png";
 import explore_icon from "../icons/explore_icon.png";
 import user_account_icon from "../icons/user_account_icon.png";
 
-import { show_login_page, show_full_search_form, show_trips_page, show_explore_page } from '../helpers/PageRoutingFuncs';
+import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../helpers/PageRoutingFuncs';
 
 import $ from "jquery"
 
@@ -51,7 +51,7 @@ export default function ExploreDestinations(){
                                                     Search</p>
                                             </div>
                                         </div>
-                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
+                                        <div onClick={show_deals_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
                                             {/*<p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-bed"></i>
                                             </p>*/}
@@ -60,7 +60,7 @@ export default function ExploreDestinations(){
                                                     Deals</p>
                                             </div>
                                         </div>
-                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", cursor: "pointer", padding: "15px 0"}}>
+                                        <div onClick={show_help_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", cursor: "pointer", padding: "15px 0"}}>
                                             {/*<p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-car"></i>
                                             </p>*/}

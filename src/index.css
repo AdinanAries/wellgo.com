@@ -915,7 +915,7 @@ footer {
     opacity: 1;
   }
 }
-.home_page_other_reviewer_bubble {
+.home_page_other_reviewer_bubble, .each_more_popular_city_popup {
   display: none;
   animation: bubble_display 0.3s ease-in-out;
   position: absolute;
@@ -927,6 +927,15 @@ footer {
   padding: 20px 10px;
   width: 200px;
   margin-left: -70px;
+}
+.each_more_popular_city_popup {
+  bottom: calc(100% + 10px);
+  background-color: rgb(238, 238, 238);
+  border-radius: 50px;
+  padding: 0;
+  width: 400px;
+  margin-left: -125px;
+  overflow: hidden;
 }
 .speech-bubble-bottom:after {
   content: "";
@@ -960,6 +969,9 @@ footer {
   height: 100%;
   background: #c751b9;
 }
+.each_more_popular_city:hover .each_more_popular_city_popup{
+  display: block;
+}
 @keyframes arrow_bounce {
   0% {
     transform: translateY(0);
@@ -983,7 +995,7 @@ footer {
 #search_page{
   padding-top: 90px;
 }
-#explore_page, #trips_page, #login_page{
+#explore_page, #trips_page, #deals_page, #help_page, #login_page{
   padding-top: 60px;
 }
 .home_page_most_visited_cities_list{
@@ -1058,7 +1070,7 @@ footer {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33) !important;
   overflow: hidden;
   padding: 30px !important;
-  top: 155px !important;
+  top: 90px !important;
 }
 .daterangepicker .calendar-table table{
   border-spacing: 5px !important;
