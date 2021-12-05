@@ -5,6 +5,7 @@ import credit_card_payment from "../icons/credit_card_payment.svg";
 import passport from "../icons/passport.svg";
 import nothing_found_icon from "../icons/nothing_found_icon.svg";
 import card_not_found from "../icons/card_not_found.svg";
+import not_found_icon from "../icons/not_found_icon.svg";
 
 export default function LoginPage(){
     return (
@@ -229,7 +230,7 @@ export default function LoginPage(){
                             </div>
                             <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
                                 <div style={{marginBottom: 20, padding: "20px"}}>
-                                <div style={{backgroundImage: `url(${card_not_found})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
+                                <div style={{backgroundImage: `url(${not_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No passport added</p>
