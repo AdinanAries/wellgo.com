@@ -26,25 +26,57 @@ export default function LoginPage(){
                     <div className="page-popup-cover-content-header">
                         Edit Profile
                     </div>
+                    <div className="steps_form_all_steps_indicators">
+                        <div className="steps_form_each_step_indicator_container active">
+                            <p style={{fontSize: 13, marginLeft: 40, fontFamily: "'Prompt', sans-serif"}}>Personal</p>
+                            <div className="steps_form_each_step_indicator active">
+                                <p><i className="fa fa-user"></i></p>
+                            </div>
+                        </div>
+                        <div className="steps_form_each_step_indicator_container">
+                            <p style={{fontSize: 13, marginLeft: 40, fontFamily: "'Prompt', sans-serif"}}>Contact</p>
+                            <div className="steps_form_each_step_indicator">
+                                <p><i className="fa fa-phone"></i></p>
+                            </div>
+                        </div>
+                        <div className="steps_form_each_step_indicator_container">
+                            <p style={{fontSize: 13, marginLeft: 40, fontFamily: "'Prompt', sans-serif"}}>Passpword</p>
+                            <div className="steps_form_each_step_indicator">
+                                <p><i className="fa fa-key"></i></p>
+                            </div>
+                            <div style={{left: "calc(100% - 20px)", top: "calc(100% - 15px)", position: "absolute"}} className="steps_form_each_step_indicator">
+                                <p><i className="fa fa-bars"></i></p>
+                            </div>
+                        </div>
+                    </div>
                     <div style={{padding: "10px",}}>
-                            <div style={{marginBottom: 10}}>
-                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="text" placeholder="First Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                        <div>
+                            <div style={{display: "flex", flexDirection: "row", marginBottom: 20}}>
+                                <div className="account_page_profile_pic_container" style={{marginRight: 20, borderRadius: "100%", width: 80, height: 80, boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "rgba(0,0,0,0.1)", overflow: "hidden", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <i style={{fontSize: 50, color: "rgba(0,0,0,0.4)"}} className="fa fa-user"></i>
+                                </div>
+                                <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <p style={{color: 'rgba(0,0,0,0.7)', fontSize: 14, color: "rgba(0,0,0,0.7)", border: "1px solid rgba(0,0,0,0.1)", padding: 10, borderRadius:   10, cursor: "pointer"}}>
+                                        <i style={{marginRight: 10, color: "green"}} className="fa fa-plus"></i>Upload Profile Photo</p>
                                 </div>
                             </div>
                             <div style={{marginBottom: 10}}>
                                <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="text" placeholder="Middle Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="text" placeholder="First Name"  style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             <div style={{marginBottom: 10}}>
                                <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                    <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    <input type="text" placeholder="Last Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input type="text" placeholder="Middle Name"  style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
+                            <div style={{marginBottom: 10}}>
+                               <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <input type="text" placeholder="Last Name"  style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{display: "none"}}>
                             <div style={{marginBottom: 10}}>
                                <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
@@ -57,6 +89,8 @@ export default function LoginPage(){
                                     <input type="text" placeholder="Mobile"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
+                        </div>
+                        <div style={{display: "none"}}>
                             <div style={{marginBottom: 10}}>
                                <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                     <i className="fa fa-calendar-o" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
@@ -71,7 +105,8 @@ export default function LoginPage(){
                                     </select>
                                 </div>
                             </div>
-                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                        </div>
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
                             <div style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                                     <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
                                     Cancel

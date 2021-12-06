@@ -24,8 +24,9 @@ function Header(){
                     
                     <div className="header-menu-items">
                         <div id="desktop_search_menu_item" onClick={()=>show_home_page(false)} className="each-header-menu-item active">
-                            <p>
-                                <i className="fa fa-search" />Search
+                            <p style={{padding: "10px", width: 110, color: "rgba(255,255,255,0.6)"}}>
+                                <i style={{display: 'inline', fontWeight: "initial", color: "rgb(46, 108, 133)"}} className="fa fa-search" />
+                                Search...
                             </p>
                         </div>
                         <div id="desktop_explore_menu_item" onClick={show_explore_page} className="each-header-menu-item">
@@ -46,7 +47,11 @@ function Header(){
                     </div>
                     <div className="header_humburger_menu">
                         <div className="header_mobile_menus" style={{display: "flex", flexDirection: "row"}}>
-                            <div id="mobile_search_menu_item" className="header_mobile_menus_item active" onClick={()=>show_home_page(false)}><i className="fa fa-search"></i></div>
+                            <div id="mobile_search_menu_item" className="header_mobile_menus_item active" onClick={()=>show_home_page(false)}>
+                            <p style={{fontSize: 15, padding: "5px", width: 85, color: "white"}}>
+                                <i style={{display: 'inline', fontWeight: "initial", fontSize: 18, marginRight: 10}} className="fa fa-search" />
+                                Search...
+                            </p></div>
                             <div id="mobile_trips_menu_item" className="header_mobile_menus_item" onClick={show_trips_page}><i className="fa fa-briefcase"></i></div>
                             <div id="mobile_login_menu_item" style={{marginRight: 10}} className="header_mobile_menus_item" onClick={show_login_page}><i className="fa fa-user-circle"></i></div>
                         </div>
