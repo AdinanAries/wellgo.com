@@ -70,7 +70,7 @@
 .page-popup-cover-close-btn:hover{
   background-color: rgba(0, 0, 0, 0.1);
 }
-input:focus {
+input:focus, select:focus {
   outline: none;
 }
 ul li {
@@ -1112,6 +1112,39 @@ footer {
   display: none !important;
   /*padding: 14px;
   font-family: "Prompt", sans-serif;*/
+}
+.checkout-page-ancillary-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.07);
+}
+.checkout-page-each-ancillary{
+  cursor: pointer;
+  width: calc(33% - 1px);
+  padding: 15px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+.checkout-page-each-ancillary:hover{
+  border: 1px solid rgb(185, 103, 164);
+}
+.checkout-page-each-ancillary p{
+  text-align: center;
+}
+.checkout-page-each-ancillary p:nth-child(1){
+  margin-bottom: 10px;
+}
+.checkout-page-each-ancillary p:nth-child(2){
+  font-size: 14px;
+  font-family: 'Prompt', sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+}
+.checkout-page-each-ancillary p img{
+  width: 40px;
+  height: auto;
 }
 @media screen and (max-width: 700px) {
   .search_forms_promo_card p:nth-child(1){

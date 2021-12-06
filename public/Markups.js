@@ -445,6 +445,20 @@ function return_start_checkout_info(json_obj){
             </div>
             <div class="checkout_page_all_info_flex_container">
                 <div class="checkout_page_all_info_flex_left">
+                    <div class="checkout-page-ancillary-container">
+                        <div class="checkout-page-each-ancillary">
+                            <p><img src="./flight_seat.png"/></p>
+                            <p>Select Seat</p>
+                        </div>
+                        <div class="checkout-page-each-ancillary">
+                            <p><img src="./meal-icon.png"/></p>
+                            <p>Add Meal</p>
+                        </div>
+                        <div class="checkout-page-each-ancillary">
+                            <p><img src="./luggage_icon.png"/></p>
+                            <p>Add Luggage</p>
+                        </div>
+                    </div>
                     <div style="border: 1px solid rgba(0,0,0,0.1); border-radius: 9px; padding: 10px; margin: 10px;">
                         <p style="font-size: 17px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
                             Montreal to New York
