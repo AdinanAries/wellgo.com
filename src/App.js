@@ -13,11 +13,13 @@ import SelectedTicketPane from './components/SelectedTicketPane';
 import CheckoutPage from './components/CheckoutPage';
 import DealsPage from "./components/DealsPage";
 import HelpPage from "./components/HelpPage";
+import HPSupport from "./components/HPSupport";
 
 
 function App() {
   return (
     <div className="">
+      <HPSupport />
       <SelectedTicketPane />
       <MobileMenu />
       <CheckoutPage />
