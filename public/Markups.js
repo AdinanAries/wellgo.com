@@ -446,21 +446,58 @@ function return_start_checkout_info(json_obj){
             <div class="checkout_page_all_info_flex_container">
                 <div class="checkout_page_all_info_flex_left">
                     <div class="checkout-page-ancillary-container">
-                        <div class="checkout-page-each-ancillary">
+                        <div onclick="start_select_seat_ancillary();" class="checkout-page-each-ancillary">
                             <p><img src="./flight_seat.png"/></p>
                             <p>Select Seat</p>
                         </div>
-                        <div class="checkout-page-each-ancillary">
+                        <div onclick="start_add_meal_ancillary();" class="checkout-page-each-ancillary">
                             <p><img src="./meal-icon.png"/></p>
                             <p>Add Meal</p>
                         </div>
-                        <div class="checkout-page-each-ancillary">
+                        <div onclick="start_add_luggage_ancillary();" class="checkout-page-each-ancillary">
                             <p><img src="./luggage_icon.png"/></p>
                             <p>Add Luggage</p>
                         </div>
                     </div>
+                    <div id="add_ancillaries_container">
+                        <div onclick="hide_add_ancillaries_container();" style="background-color: white; cursor: pointer; width: 35px; height: 35px; text-align: center; border: 1px solid rgba(0,0,0,0.1); border-radius: 100%; position: absolute; z-index: 1; top: 10px; right: 10px; color: rgba(0,0,0,0.7); font-size: 19px; display: flex; flex-direction: column; justify-content: center;">
+                            <i class="fa fa-angle-up"></i>
+                        </div>
+                        <div id="seat_ancillary_settings_container" class="each_ancillary_setting_container">
+                            <p style="text-align: center; font-size: 15px; letter-spacing: 1; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                                Select Your Preferred Seat
+                            </p>
+                        </div>
+                        <div id="meal_ancillary_settings_container" class="each_ancillary_setting_container">
+                            <p style="text-align: center; font-size: 15px; letter-spacing: 1; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                                Add Meal to Your Trip
+                            </p>
+                        </div>
+                        <div id="luggage_ancillary_settings_container" class="each_ancillary_setting_container">
+                            <p style="text-align: center; font-size: 15px; letter-spacing: 1; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                                Include Checked Bags
+                            </p>
+                        </div>
+                        <div style="margin: 10px 0;">
+                            <p style="color: rgba(0,0,0,0.7); font-size: 13px;">
+                                <i style="margin-right: 5px; color: green;" class="fa fa-info-circle"></i>
+                                FYI, the ancillary services you include here are unbound with the base price. Therefore adding them will cost 
+                                extra money.
+                            </p>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 20px; padding: 10px 0; border-top: 1px solid rgba(0,0,0,0.1)">
+                            <div onclick="cancel_add_ancillaries_container();" style="background-color: white; padding: 10px; border: 1px solid rgba(0,0,0,0.1); font-size: 14px; border-radius: 50px; cursor: pointer;">
+                                <i style="margin-right: 10px; color: orangered;" class="fa fa-times"></i>
+                                Cancel
+                            </div>
+                            <div style="background-color: white; padding: 10px; border: 1px solid rgba(0,0,0,0.1); font-size: 14px; border-radius: 50px; cursor: pointer;">
+                                <i style="margin-right: 10px; color: green;" class="fa fa-check"></i>
+                                Save
+                            </div>
+                        </div>
+                    </div>
                     <div style="border: 1px solid rgba(0,0,0,0.1); border-radius: 9px; padding: 10px; margin: 10px;">
-                        <p style="font-size: 17px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
+                        <p style="font-size: 14px; letter-spacing: 1; font-weight: bolder; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.8);">
                             Montreal to New York
                         </p>
                         <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">

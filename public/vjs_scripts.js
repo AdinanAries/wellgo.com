@@ -149,6 +149,39 @@ function show_start_checkout_page(obj){
   document.getElementById("booking_start_checkout_page_container").style.display = "block";
 }
 
+function show_add_ancillaries_container(){
+  $("#add_ancillaries_container").slideDown("fast");
+}
+
+function hide_add_ancillaries_container(){
+  $("#add_ancillaries_container").slideUp("fast");
+}
+
+function start_select_seat_ancillary(){
+  show_add_ancillaries_container();
+  document.getElementById("seat_ancillary_settings_container").style.display="block";
+  document.getElementById("meal_ancillary_settings_container").style.display="none";
+  document.getElementById("luggage_ancillary_settings_container").style.display="none";
+}
+
+function start_add_luggage_ancillary(){
+  show_add_ancillaries_container();
+  document.getElementById("seat_ancillary_settings_container").style.display="none";
+  document.getElementById("meal_ancillary_settings_container").style.display="none";
+  document.getElementById("luggage_ancillary_settings_container").style.display="block";
+}
+
+function start_add_meal_ancillary(){
+  show_add_ancillaries_container();
+  document.getElementById("seat_ancillary_settings_container").style.display="none";
+  document.getElementById("meal_ancillary_settings_container").style.display="block";
+  document.getElementById("luggage_ancillary_settings_container").style.display="none";
+}
+
+function cancel_add_ancillaries_container(){
+  hide_add_ancillaries_container();
+}
+
 //search function
 document.getElementById("home_search_form_submit_btn").addEventListener("click", e=>{
   e.preventDefault();
@@ -183,5 +216,5 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
   search_submit_function();
 
-})
+});
 

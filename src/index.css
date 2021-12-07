@@ -1186,6 +1186,15 @@ footer {
 .steps_form_each_step_indicator_container:hover .steps_form_each_step_indicator {
   background-color: #f19de7;
 }
+#add_ancillaries_container{
+  display: none;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.07);
+  position: relative;
+}
+.each_ancillary_setting_container{
+  padding: 10px 0;
+}
 @media screen and (max-width: 700px) {
   .search_forms_promo_card p:nth-child(1){
     font-size: 24px !important;
@@ -1637,9 +1646,12 @@ footer {
   }
 }
 /*iphone 5*/
-@media screen and (max-width: 330px){
+@media screen and (max-width: 361px){
   * {
     font-size: 14px;
+  }
+  .site-logo-txt p{
+    display: none;
   }
   .home_page_reviews_each_reviewer_pic_img_container div{
     width: 90px !important;
