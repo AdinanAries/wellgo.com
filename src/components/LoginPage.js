@@ -28,24 +28,27 @@ export default function LoginPage(){
                     </div>
                     <div className="steps_form_all_steps_indicators">
                         <div className="steps_form_each_step_indicator_container active">
-                            <p style={{fontSize: 13, marginLeft: 40, fontFamily: "'Prompt', sans-serif"}}>Personal</p>
+                            <p style={{fontSize: 13, marginLeft: -20, fontFamily: "'Prompt', sans-serif"}}>Personal</p>
                             <div className="steps_form_each_step_indicator active">
                                 <p><i className="fa fa-user"></i></p>
                             </div>
                         </div>
                         <div className="steps_form_each_step_indicator_container">
-                            <p style={{fontSize: 13, marginLeft: 40, fontFamily: "'Prompt', sans-serif"}}>Contact</p>
+                            <p style={{fontSize: 13, marginLeft: -20, fontFamily: "'Prompt', sans-serif"}}>Contact</p>
                             <div className="steps_form_each_step_indicator">
                                 <p><i className="fa fa-phone"></i></p>
                             </div>
                         </div>
                         <div className="steps_form_each_step_indicator_container">
-                            <p style={{fontSize: 13, marginLeft: 40, fontFamily: "'Prompt', sans-serif"}}>Passpword</p>
+                            <p style={{fontSize: 13, width: "calc(100% + 40px)", marginLeft: -20, fontFamily: "'Prompt', sans-serif", display: "flex", flexDirection: 'row', justifyContent: "space-between"}}>
+                                <span style={{fontSize: 13, fontFamily: "'Prompt', sans-serif"}}>Other</span>
+                                <span style={{fontSize: 13, fontFamily: "'Prompt', sans-serif"}}>Password</span>
+                            </p>
                             <div className="steps_form_each_step_indicator">
-                                <p><i className="fa fa-key"></i></p>
+                                <p><i className="fa fa-bars"></i></p>
                             </div>
                             <div style={{left: "calc(100% - 20px)", top: "calc(100% - 15px)", position: "absolute"}} className="steps_form_each_step_indicator">
-                                <p><i className="fa fa-bars"></i></p>
+                                <p><i className="fa fa-key"></i></p>
                             </div>
                         </div>
                     </div>

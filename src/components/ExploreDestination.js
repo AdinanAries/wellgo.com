@@ -25,7 +25,7 @@ export default function ExploreDestinations(){
                                     <i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>
                                 </div>
                                 <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
-                                    <p className="static_search_bar_text" style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
+                                    <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
                                         click to start search...</p>
                                 </div>
                                 <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 60}}>
@@ -122,3 +122,21 @@ export function toggle_main_page_search_filters(){
     }
     is_landing_page_search_filters_open = !is_landing_page_search_filters_open;
 }
+
+var i = 0;
+var txt = 'click to start search...'; /* The text */
+var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("landing_page_search_input_text_display").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+setTimeout(()=>{
+    document.getElementById("landing_page_search_input_text_display").innerHTML = '';
+    i = 0;
+    typeWriter();
+}, 500);
