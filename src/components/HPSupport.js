@@ -40,12 +40,14 @@ export default function HPSupportBtn(){
     );
 }
 
+var i = 0;
 let is_chat_container_shown = false;
 function toggle_show_hp_support_chat_container(){
     if(is_chat_container_shown){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
         document.getElementById("support_chat_container").style.display = "none";
         document.getElementById("chatbot_provided_manual_channels").style.display="none";
+        i=0;
     }else{
         typeWriter();
         document.getElementById("support_chat_container").style.display = "block";
@@ -54,7 +56,7 @@ function toggle_show_hp_support_chat_container(){
     is_chat_container_shown = !is_chat_container_shown;
 }
 
-var i = 0;
+
 var txt = 'Hey! we are currently upgrading some site features. Please use our manual channels below.'; /* The text */
 var speed = 20; /* The speed/duration of the effect in milliseconds */
 
