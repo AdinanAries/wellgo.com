@@ -30,7 +30,7 @@ export default function ExploreDestinations(){
 
                                 <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                     <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
-                                        </p>
+                                        Loading...</p>
                                 </div>
                                 <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 70}}>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
@@ -41,7 +41,7 @@ export default function ExploreDestinations(){
                                     </div>
                                 </div>
 
-                                <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 32px)", paddingTop: 25, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, left: 0, width: "100%", backgroundColor: "white"}}>
+                                <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 32px)", paddingTop: 32, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, left: 0, width: "100%", backgroundColor: "white"}}>
                                     <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                         {/*<div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "center",  cursor: "pointer", padding: "15px", backgroundColor: ""}}>
                                             <p style={{textAlign: "center", marginRight: 10}}>
@@ -134,8 +134,15 @@ export function toggle_main_page_search_filters(){
 }
 
 var i = 0;
-var txt = "Hey, Greetings! Search flights or get help below"; /* The text click to start search...*/
+var txt = "Hey, Greetings! Search flights or get help below"; /*The text click to start search...*/
 var speed = 50; /* The speed/duration of the effect in milliseconds */
+
+export function chat_bot_new_msg(txt_p){
+    document.getElementById("landing_page_search_input_text_display").innerHTML="";
+    i=0;
+    txt=txt_p;
+    typeWriter();
+}
 
 function typeWriter() {
   if (i < txt.length) {

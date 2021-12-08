@@ -1,4 +1,10 @@
-import { toggle_main_page_search_filters } from "../components/ExploreDestination";
+import { toggle_main_page_search_filters, chat_bot_new_msg } from "../components/ExploreDestination";
+import { chat_bot_msg } from "../chatbot_msgs";
+
+function return_new_msg(){
+    return chat_bot_msg.msgs[0].msg;
+}
+setTimeout(return_new_msg, 1000);
 
 export function show_login_page(){
 
@@ -19,6 +25,8 @@ export function show_login_page(){
 
 export function show_home_page(is_from_search=false){
     
+    chat_bot_new_msg(return_new_msg());
+
     document.getElementById("selected_ticket_pane").style.display="none";
     //document.getElementById("site_main_header").style.display="none";
     if(!is_from_search){
