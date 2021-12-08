@@ -149,6 +149,6 @@ setTimeout(()=>{
     document.getElementById("landing_page_search_input_text_display").innerHTML = '';
     i = 0;
     typeWriter();
-}, 500);
+}, 1000);
 
-setTimeout(()=>toggle_main_page_search_filters(), 1000);
+setTimeout(()=>toggle_main_page_search_filters(), 2000);
