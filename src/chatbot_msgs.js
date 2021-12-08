@@ -7,7 +7,12 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "Hey! "
+            msg: "Umm, Do you know the pink button is a toggle?"
+
+        },
+        {
+            type: "notice",
+            msg: "FYI, having an account helps get even lower prices"
 
         }
     ]
