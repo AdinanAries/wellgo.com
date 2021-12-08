@@ -599,7 +599,7 @@ footer {
 }
 .explore_destinations_promo_card {
   height: 65vh;
-  padding: 20px;
+  padding: 20px 10px;
   padding-top: 100px;
   background: linear-gradient(90deg, #000000, rgba(255, 255, 255, 0), #000000),
   linear-gradient(#000000, rgba(255, 255, 255, 0), #000000), 

@@ -109,6 +109,8 @@ export function show_explore_page(){
 
 export function show_help_page(){
 
+    toggle_main_page_search_filters()
+
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
 

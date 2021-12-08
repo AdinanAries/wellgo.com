@@ -2,9 +2,11 @@
 
 import WillgoLogo from '../WillgoLogo.png';
 import search_bar_flight_icon from "../icons/search_bar_flight_icon.png";
-import trips_icon from "../icons/trips_icon.png";
+import deals_icon from "../icons/deals_icon.png";
 import explore_icon from "../icons/explore_icon.png";
 import user_account_icon from "../icons/user_account_icon.png";
+
+import botIcon from "../icons/botIcon.svg";
 
 import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../helpers/PageRoutingFuncs';
 
@@ -20,15 +22,17 @@ export default function ExploreDestinations(){
                                 Cheap Flight Tickets</p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(255, 255, 255, 0.87)", height: 60, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                    <i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(255, 255, 255, 0.87)", height: 70, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                <div style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
+                                    <div style={{backgroundImage: `url('${botIcon}')`, width: 50, height: 40, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
                                 </div>
+
                                 <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                     <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
-                                        click to start search...</p>
+                                        </p>
                                 </div>
-                                <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 60}}>
+                                <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 70}}>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                         {/*<p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>*/}
@@ -37,48 +41,54 @@ export default function ExploreDestinations(){
                                     </div>
                                 </div>
 
-                                <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 27px)", paddingTop: 25, borderBottomLeftRadius: 25, borderBottomRightRadius: 25, left: 0, width: "100%", backgroundColor: "white"}}>
+                                <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 32px)", paddingTop: 25, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, left: 0, width: "100%", backgroundColor: "white"}}>
                                     <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                        <div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
-                                            {/*<p style={{textAlign: "center", marginRight: 10}}>
-                                                <i style={{fontSize: 18, color: "slateblue"}} className="fa fa-plane"></i>
-                                            </p>*/}
+                                        {/*<div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "center",  cursor: "pointer", padding: "15px", backgroundColor: ""}}>
+                                            <p style={{textAlign: "center", marginRight: 10}}>
+                                                <i style={{fontSize: 18, color: "darkslateblue"}} className="fa fa-plane"></i>
+                                            </p>
                                             <div style={{marginRight: 10, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                                 <div style={{width: 8, height: 8, borderRadius: "100%", background: "linear-gradient(35deg, darkslateblue, rgba(255,255,255))"}}></div>
                                             </div>
                                             <div style={{display: "flex", flexDirection: "column"}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1, fontWeight: 'bolder'}}>
-                                                    Search</p>
+                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1,}}>
+                                                    Search Flights</p>
                                             </div>
+                                        </div>*/}
+                                        <div onClick={show_full_search_form} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50, marginLeft: 10, fontSize: 14}}>
+                                            <i className="fa fa-search" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Search Flight
                                         </div>
-                                        <div onClick={show_deals_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
+                                        {/*<div onClick={show_deals_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
                                             {/*<p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-bed"></i>
-                                            </p>*/}
+                                            </p>/}
                                             <div style={{display: "flex", flexDirection: "column",}}>
                                                 <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
                                                     Deals</p>
                                             </div>
-                                        </div>
-                                        <div onClick={show_help_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", cursor: "pointer", padding: "15px 0"}}>
-                                            {/*<p style={{textAlign: "center", marginRight: 10}}>
+                                        </div>*/}
+                                        {/*<div onClick={show_help_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", cursor: "pointer", padding: "15px 0"}}>
+                                            <p style={{textAlign: "center", marginRight: 10}}>
                                                 <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-car"></i>
-                                            </p>*/}
+                                            </p>
                                             <div style={{display: "flex", flexDirection: "column",}}>
                                                 <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
                                                     Help</p>
                                             </div>
-                                        </div>
+                                        </div>*/}
+                                        <div onClick={show_help_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", backgroundColor: "#ae6500", border: "none", borderRadius: 50, marginRight: 10, fontSize: 14}}>
+                                                <i className="fa fa-question" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Get Help
+                                            </div>
                                     </div>
                                 </div>
 
                             </div>
                             <div style={{textShadow: "none", height: 50, padding: "0 15px", width: "fit-content", margin: "auto", marginTop: 30, display: "flex", borderRadius: 50, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                 <div style={{display: "flex", flexDirection: "row"}}>
-                                    <div className="landing_page_hero_menu_items" onClick={show_trips_page}>
-                                        <img src={trips_icon} style={{width: 29, height: "auto"}} />
+                                    <div className="landing_page_hero_menu_items" onClick={show_deals_page}>
+                                        <img src={deals_icon} style={{width: 29, height: "auto"}} />
                                         <p className="landing_page_hero_menu_item_tooltip">
-                                            Trips
+                                            Deals
                                         </p>
                                     </div>
                                     <div className="landing_page_hero_menu_items" onClick={show_explore_page}>
@@ -124,7 +134,7 @@ export function toggle_main_page_search_filters(){
 }
 
 var i = 0;
-var txt = 'click to start search...'; /* The text */
+var txt = "Hey, Greetings! Search flights or get help below"; /* The text click to start search...*/
 var speed = 50; /* The speed/duration of the effect in milliseconds */
 
 function typeWriter() {
@@ -140,3 +150,5 @@ setTimeout(()=>{
     i = 0;
     typeWriter();
 }, 500);
+
+setTimeout(()=>toggle_main_page_search_filters(), 1000);
