@@ -34,6 +34,29 @@ export let chat_bot_msg = {
             type: "notice",
             msg: "Also, just give me a tap for a chat"
 
+        },
+        {
+            type: "notice",
+            msg: "The round pink button hides/shows buttons below"
+
+        },
+        {
+            type: "notice",
+            msg: "The darkblue button shows manual search form.."
+
+        },
+        {
+            type: "notice",
+            msg: "The dark orange button takes you to help page"
+
+        },
+        {
+            type: "notice",
+            msg: "I think that... Umm... Nevermind..."
+        },
+        {
+            type: "notice",
+            msg: "I think that... Umm... Nevermind..."
         }
     ]
 }

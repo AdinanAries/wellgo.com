@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 import NotLoggedIn from './NotLoggedIn';
 
 import support_page_support_icon from "../icons/support_page_support_icon.svg";

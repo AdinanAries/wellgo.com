@@ -1199,7 +1199,7 @@ footer {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 11;
+  z-index: 1005;
 }
 .homepage_start_support_btn{
   position: relative;
@@ -1243,6 +1243,7 @@ footer {
   border-right: 10px solid transparent;
 }
 .chatbot_popup_tip{
+  display: none;
   position: absolute;
   bottom: 0;
   right: 0;

@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 import botIcon from "../icons/botIcon.svg";
 
 export default function HPSupportBtn(){
@@ -8,7 +10,7 @@ export default function HPSupportBtn(){
                     &times;
                 </p>
                 <div style={{padding: "20px"}}>
-                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.7)"}}>Help/Support</p>
+                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.7)"}}>Help/Support/Assistance</p>
                 </div>
                 <div style={{padding: 10,}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
@@ -37,16 +39,16 @@ export default function HPSupportBtn(){
                 <i className="fa fa-comments"></i>
             </div>
             <div id="main_chat_bot_tips_poppup_section" className="chatbot_popup_tip">
-                <div onClick={()=>document.getElementById("main_chat_bot_tips_poppup_section").style.display="none"} className="chatbot_popup_tip_close_btn">
+                <div onClick={hide_new_chatbot_tip} className="chatbot_popup_tip_close_btn">
                     &times;
                 </div>
-                <div className="chatbot_popup_tip_msg">
+                <div onClick={toggle_show_hp_support_chat_container} className="chatbot_popup_tip_msg">
                     <p>
                         <i className="fa fa-lightbulb-o"></i>
                         Hey! I'm Bot AD, I'll be your assistant here...
                     </p>
                 </div>
-                <div className="chatbot_popup_tip_img">
+                <div onClick={toggle_show_hp_support_chat_container} className="chatbot_popup_tip_img">
                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
                 </div>
             </div>
@@ -60,10 +62,12 @@ let is_chat_container_shown = false;
 export function toggle_show_hp_support_chat_container(){
     if(is_chat_container_shown){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
-        document.getElementById("support_chat_container").style.display = "none";
+        $("#support_chat_container").slideUp("fast");
+        //document.getElementById("support_chat_container").style.display = "none";
         document.getElementById("chatbot_provided_manual_channels").style.display="none";
         i=0;
     }else{
+        hide_new_chatbot_tip();
         typeWriter();
         document.getElementById("support_chat_container").style.display = "block";
         setTimeout(()=>document.getElementById("chatbot_provided_manual_channels").style.display="block",1000);
@@ -82,3 +86,16 @@ function typeWriter() {
     setTimeout(typeWriter, speed);
   }
 }
+
+export function show_new_chatbot_tip(msg){
+    document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
+    setTimeout(()=>hide_new_chatbot_tip(),15000);
+}
+
+export function hide_new_chatbot_tip(msg){
+    $("#main_chat_bot_tips_poppup_section").slideUp("fast");
+}
+
+$(document).ready(()=>{
+    setTimeout(()=>show_new_chatbot_tip("msg"),10000);
+});
