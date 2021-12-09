@@ -9,6 +9,7 @@ import user_account_icon from "../icons/user_account_icon.png";
 import botIcon from "../icons/botIcon.svg";
 
 import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../helpers/PageRoutingFuncs';
+import { toggle_show_hp_support_chat_container } from "./HPSupport";
 
 import $ from "jquery"
 
@@ -23,7 +24,7 @@ export default function ExploreDestinations(){
                         </div>
                         <div>
                             <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "white", height: 70, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                <div style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                <div onClick={toggle_show_hp_support_chat_container} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                     {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
                                     <div style={{backgroundImage: `url('${botIcon}')`, width: 50, height: 40, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
                                 </div>

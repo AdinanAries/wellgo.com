@@ -24,6 +24,16 @@ export let chat_bot_msg = {
             type: "notice",
             msg: "Umm, We should get you flying ASAP, I think..."
 
+        },
+        {
+            type: "notice",
+            msg: "Also, just give me a tap for a chat"
+
+        },
+        {
+            type: "notice",
+            msg: "Also, just give me a tap for a chat"
+
         }
     ]
 }

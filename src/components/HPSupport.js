@@ -42,7 +42,7 @@ export default function HPSupportBtn(){
 
 var i = 0;
 let is_chat_container_shown = false;
-function toggle_show_hp_support_chat_container(){
+export function toggle_show_hp_support_chat_container(){
     if(is_chat_container_shown){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
         document.getElementById("support_chat_container").style.display = "none";
