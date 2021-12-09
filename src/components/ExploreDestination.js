@@ -22,7 +22,7 @@ export default function ExploreDestinations(){
                                 Cheap Flight Tickets</p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(255, 255, 255, 0.87)", height: 70, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "white", height: 70, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                 <div style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                     {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
                                     <div style={{backgroundImage: `url('${botIcon}')`, width: 50, height: 40, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
@@ -121,12 +121,12 @@ let is_landing_page_search_filters_open = false;
 export function toggle_main_page_search_filters(){
     if(is_landing_page_search_filters_open){
         setTimeout(()=>{
-            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(255, 255, 255, 0.87)";
+            //document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(255, 255, 255, 0.87)";
         }, 200);
         $("#landing_page_search_filters_container").slideUp("fast");
         document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(0deg)";
     }else{
-        document.getElementById("landing_page_search_form_bar").style.backgroundColor = "white";
+        //document.getElementById("landing_page_search_form_bar").style.backgroundColor = "white";
         $("#landing_page_search_filters_container").slideDown("fast");
         document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(180deg)";
     }
@@ -134,7 +134,7 @@ export function toggle_main_page_search_filters(){
 }
 
 var i = 0;
-var txt = "Hey, Greetings! Search flights or get help below"; /*The text click to start search...*/
+var txt = "Hey, Greetings! Search flights or get help, below"; /*The text click to start search...*/
 var speed = 50; /* The speed/duration of the effect in milliseconds */
 
 export function chat_bot_new_msg(txt_p){

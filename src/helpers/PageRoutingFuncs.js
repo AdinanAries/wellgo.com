@@ -1,9 +1,8 @@
 import { toggle_main_page_search_filters, chat_bot_new_msg } from "../components/ExploreDestination";
-import { chat_bot_msg } from "../chatbot_msgs";
+import { return_new_rand_msg } from "../chatbot_funcs";
 
-function return_new_rand_msg(){
-    return chat_bot_msg.msgs[Math.floor(Math.random() * chat_bot_msg.msgs.length)].msg;
-}
+
+
 
 export function show_login_page(){
 

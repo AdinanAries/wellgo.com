@@ -225,8 +225,8 @@ body {
 
 header {
   height: 60px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  /*background-color: rgb(229, 233, 241);*/
+  /*border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgb(229, 233, 241);*/
   /*background-color: rgb(53, 115, 173);
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);*/
   width: 100%;
@@ -788,7 +788,7 @@ footer {
   border-radius: 20px;
   text-align: center;
   width: 50px;
-  background-color: rgba(255, 255, 255, 0.87);
+  background-color: white;
   cursor: "pointer";
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }

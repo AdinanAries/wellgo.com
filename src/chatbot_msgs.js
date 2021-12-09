@@ -12,7 +12,17 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "FYI, having an account helps get even lower prices"
+            msg: "FYI, having an account gets you discounts"
+
+        },
+        {
+            type: "notice",
+            msg: "Hey! I'm thinking about something..."
+
+        },
+        {
+            type: "notice",
+            msg: "Umm, We should get you flying ASAP, I think..."
 
         }
     ]
