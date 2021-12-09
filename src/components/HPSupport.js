@@ -36,7 +36,22 @@ export default function HPSupportBtn(){
             <div onClick={toggle_show_hp_support_chat_container} className="homepage_start_support_btn">
                 <i className="fa fa-comments"></i>
             </div>
+            <div id="main_chat_bot_tips_poppup_section" className="chatbot_popup_tip">
+                <div onClick={()=>document.getElementById("main_chat_bot_tips_poppup_section").style.display="none"} className="chatbot_popup_tip_close_btn">
+                    &times;
+                </div>
+                <div className="chatbot_popup_tip_msg">
+                    <p>
+                        <i className="fa fa-lightbulb-o"></i>
+                        Hey! I'm Bot AD, I'll be your assistant here...
+                    </p>
+                </div>
+                <div className="chatbot_popup_tip_img">
+                    <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
+                </div>
+            </div>
         </div>
+        
     );
 }
 

@@ -1242,6 +1242,63 @@ footer {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
+.chatbot_popup_tip{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  animation: pop-in 0.2s ease-out;
+}
+.chatbot_popup_tip_msg{
+  background-color: white;
+  width: 200px;
+  position: absolute;
+  bottom: 53px;
+  right: 40px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+}
+.chatbot_popup_tip_img{
+  z-index: 5;
+  width: 52px;
+  height: 52px;
+  border-radius: 100%;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.chatbot_popup_tip_msg p{
+  font-size: 12px;
+  color: rgba(0,0,0,0.8);
+  font-family: 'Prompt', sans-serif;
+}
+.chatbot_popup_tip_msg p i{
+  margin-right: 10px;
+  color: green;
+  font-size: 22px;
+}
+.chatbot_popup_tip_close_btn{
+  background-color: white;
+  color: orangered;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 65px;
+  right: -10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 22px;
+}
 @media screen and (max-width: 700px) {
   .support_chat_div_container{
     position: fixed;
