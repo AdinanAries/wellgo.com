@@ -31,11 +31,19 @@ export default function HPSupportBtn(){
                                     <i style={{marginRight: 10}} className="fa fa-envelope"></i>
                                     Email</p>
                             </div>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="main_support_chat_user_input_txt_container" className="support_chat_user_input_txt_container">
+                    <textarea onFocus={chat_txt_input_focus_func} onBlur={chat_txt_input_blur_func}>
+                        type your message here...
+                    </textarea>
+                    <div className="cht-btn">
+                        <i style={{transform: "rotate(49deg)"}} className="fa fa-paper-plane"></i>
                     </div>
                 </div>
             </div>
-            <div onClick={toggle_show_hp_support_chat_container} className="homepage_start_support_btn">
+            <div onClick={toggle_show_hp_support_chat_container} id="main_homepage_start_support_btn" className="homepage_start_support_btn">
                 <i className="fa fa-comments"></i>
             </div>
             <div id="main_chat_bot_tips_poppup_section" className="chatbot_popup_tip">
@@ -65,12 +73,16 @@ export function toggle_show_hp_support_chat_container(){
         $("#support_chat_container").slideUp("fast");
         //document.getElementById("support_chat_container").style.display = "none";
         document.getElementById("chatbot_provided_manual_channels").style.display="none";
+        document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
         i=0;
     }else{
         hide_new_chatbot_tip();
         typeWriter();
         document.getElementById("support_chat_container").style.display = "block";
-        setTimeout(()=>document.getElementById("chatbot_provided_manual_channels").style.display="block",1000);
+        setTimeout(()=>{
+            document.getElementById("chatbot_provided_manual_channels").style.display="block";
+            document.getElementById("main_support_chat_user_input_txt_container").style.display="flex";
+        },1200);
     }
     is_chat_container_shown = !is_chat_container_shown;
 }
@@ -99,3 +111,16 @@ export function hide_new_chatbot_tip(msg){
 $(document).ready(()=>{
     setTimeout(()=>show_new_chatbot_tip("msg"),10000);
 });
+
+function chat_txt_input_focus_func(){
+    if($(document).width() <= 700){
+        document.getElementById("main_homepage_start_support_btn").style.display = "none";
+        document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 10px)";
+    }
+}
+function chat_txt_input_blur_func(){
+    if($(document).width() <= 700){
+        document.getElementById("main_homepage_start_support_btn").style.display = "flex";
+        document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 90px)";
+    }
+}

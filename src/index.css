@@ -70,7 +70,7 @@
 .page-popup-cover-close-btn:hover{
   background-color: rgba(0, 0, 0, 0.1);
 }
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
   outline: none;
 }
 ul li {
@@ -1213,6 +1213,10 @@ footer {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.homepage_start_support_btn:hover{
+  transform: scale(1.1);
 }
 .homepage_start_support_btn i{
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
@@ -1242,6 +1246,46 @@ footer {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
+.support_chat_user_input_txt_container{
+  transition: all 0.2s ease-out;
+  animation: pop-in 0.2s ease-out;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  border-radius: 50px;
+  background-color: rgb(238, 237, 237);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.support_chat_user_input_txt_container textarea{
+   padding: 5px;
+   padding-left: 20px;
+   border: none;
+   background: none;
+   width: calc(100% - 50px);
+   max-width: calc(100% - 50px);
+   min-width: calc(100% - 50px);
+   min-height: 50px;
+   font-size: 14px;
+   resize: none;
+}
+.support_chat_user_input_txt_container .cht-btn{
+ background-color: #6b3f66;
+ text-align: center;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ width: 40px;
+ height: 40px;
+ margin: 5px;
+ border-radius: 100%;
+ color: rgb(255, 255, 255);
+ cursor: pointer;
+}
 .chatbot_popup_tip{
   display: none;
   position: absolute;
@@ -1261,6 +1305,7 @@ footer {
   border-top-left-radius: 10px;
   padding: 15px;
   cursor: pointer;
+  z-index: 5;
 }
 .chatbot_popup_tip_img{
   z-index: 5;
@@ -1299,6 +1344,7 @@ footer {
   align-items: center;
   cursor: pointer;
   font-size: 22px;
+  z-index: 5;
 }
 @media screen and (max-width: 700px) {
   .support_chat_div_container{
@@ -1310,6 +1356,9 @@ footer {
     width: 100vw;
     height: calc(100vh - 60px);
     z-index: 3;
+  }
+  .support_chat_user_input_txt_container{
+    width: calc(100% - 90px);
   }
   .search_forms_promo_card p:nth-child(1){
     font-size: 24px !important;
