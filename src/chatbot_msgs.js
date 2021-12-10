@@ -2,12 +2,12 @@ export let chat_bot_msg = {
     msgs: [
         {
             type: "greeting",
-            msg: "Hey, I was digging for you, found new price dip"
+            msg: "&#129488; I was digging for you, found new price dip"
 
         },
         {
             type: "notice",
-            msg: "Umm, Do you know the pink button is a toggle?"
+            msg: "Umm, Do you know the pink button is a toggle?&#128073;"
 
         },
         {
@@ -17,22 +17,22 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "Hey! I'm thinking about something..."
+            msg: "Hey! I'm thinking about something... &#129300;&#129300;&#129300;"
 
         },
         {
             type: "notice",
-            msg: "Umm, We should get you flying ASAP, I think..."
+            msg: "Umm, We should get you flying ASAP, I think...&#129300;"
 
         },
         {
             type: "notice",
-            msg: "Also, just give me a tap for a chat"
+            msg: "&#128072; Also, just give me a tap for a chat"
 
         },
         {
             type: "notice",
-            msg: "Also, just give me a tap for a chat"
+            msg: "&#128072; Also, just give me a tap for a chat"
 
         },
         {
@@ -47,16 +47,16 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "The dark orange button takes you to help page"
+            msg: "The dark orange button takes you to help page&#128071;"
 
         },
         {
             type: "notice",
-            msg: "I think that... Umm... Nevermind..."
+            msg: "I think that... Umm... Nevermind... &#128578;"
         },
         {
             type: "notice",
-            msg: "I think that... Umm... Nevermind..."
+            msg: "I think that... Umm... Nevermind... &#128580;"
         }
     ]
 }

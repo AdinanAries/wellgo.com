@@ -31,7 +31,7 @@ export default function ExploreDestinations(){
 
                                 <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                     <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
-                                        Loading...</p>
+                                        &#128400; Hey...</p>
                                 </div>
                                 <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 70}}>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
@@ -135,7 +135,7 @@ export function toggle_main_page_search_filters(){
 }
 
 var i = 0;
-var txt = "Hey, Greetings! Search flights or get help, below"; /*The text click to start search...*/
+var txt = "Greetings! &#128400; Search flights or get help, below &#128071;"; /*The text click to start search...*/
 var speed = 50; /* The speed/duration of the effect in milliseconds */
 
 export function chat_bot_new_msg(txt_p){
@@ -146,10 +146,17 @@ export function chat_bot_new_msg(txt_p){
 }
 
 function typeWriter() {
-  if (i < txt.length) {
-    document.getElementById("landing_page_search_input_text_display").innerHTML += txt.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
+    if (i < txt.length) {
+
+        if(txt.charAt(i) === "&" && txt.charAt(i+1) === "#"){
+            document.getElementById("landing_page_search_input_text_display").innerHTML += txt.substring(i, i+8);
+            i = i+9;
+        }else{
+           document.getElementById("landing_page_search_input_text_display").innerHTML += txt.charAt(i); 
+           i++;
+        }
+
+        setTimeout(typeWriter, speed);
   }
 }
 

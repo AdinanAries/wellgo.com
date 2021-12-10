@@ -15,7 +15,7 @@ export default function HPSupportBtn(){
                 <div style={{padding: 10,}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <div style={{backgroundImage: `url('${botIcon}')`, width: 70, height: 50, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
-                        <div style={{marginLeft: 10, backgroundColor: "rgba(0,0,0,0.07", padding: 5, borderRadius: 5}}>
+                        <div style={{marginLeft: 10, backgroundColor: "rgba(0,0,0,0.07", padding: 5, borderRadius: 5, maxWidth: "calc(100% - 45px)"}}>
                             <p id="chatbot_greenting_message_p" style={{fontFamily: "'Prompt', sans-serif", fontSize: 14}}></p>
                         </div>
                     </div>
@@ -88,13 +88,22 @@ export function toggle_show_hp_support_chat_container(){
 }
 
 
-var txt = 'Hey! we are currently upgrading some site features. Please use our manual channels below.'; /* The text */
+var txt = `Hey! &#128400; We are currently upgrading some site features...
+            I'm sorry I may not be very helpful RN... &#128530;
+            Please use our manual channels below. &#128071;`; /* The text */
 var speed = 20; /* The speed/duration of the effect in milliseconds */
 
 function typeWriter() {
   if (i < txt.length) {
-    document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i);
-    i++;
+        if(txt.charAt(i) === "&" && txt.charAt(i+1) === "#"){
+            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(i, i+8);
+            i = i+9;
+        }else{
+            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i); 
+            i++;
+        }
+    //document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i);
+    //i++;
     setTimeout(typeWriter, speed);
   }
 }
