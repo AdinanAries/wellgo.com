@@ -253,15 +253,15 @@ export default function LoginPage(){
                                             Other</p>
                                         <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                             DOB: March 23rd, 1992</p>
-                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 230}}>
+                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
                                             <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar-o"></i>
                                             <input style={{padding: 10, border: "none"}} type="text" placeholder="add your date of birth" />
                                         </div>
                                         <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                             Gender: Male</p>
-                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 230}}>
+                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
                                             <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-user"></i>
-                                            <select style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)"}} type="text" placeholder="add your date of birth">
+                                            <select style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none"}} type="text" placeholder="add your date of birth">
                                                 <option>Add Your Gender</option>
                                                 <option>Male</option>
                                                 <option>Female</option>
@@ -684,6 +684,7 @@ function show_add_new_passport_form(){
 
 function show_edit_profile_form(){
     document.getElementById("account_page_edit_profile_form").style.display = "flex";
+    document.getElementById("profile_view_more_options_drop_down").style.display = "none";
 }
 
 let is_booking_history_hidden = true;
