@@ -29,6 +29,7 @@
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
   position: relative;
   overflow: auto;
+  transition: all 0.2s ease-out;
 }
 .page-popup-cover-container-svg-bg{
   position: absolute;
@@ -1152,6 +1153,9 @@ footer {
   position: relative;
   margin: 30px 25px;
 }
+.steps_form_each_step_indicator_container.active .steps_form_each_step_indicator{
+  background-color: #f19de7;
+}
 .steps_form_each_step_indicator_container{
   position: relative;
   height: 50px;
@@ -1180,9 +1184,7 @@ footer {
   flex-direction: column;
   justify-content: center;
 }
-.steps_form_each_step_indicator.active{
-  background-color: #f19de7;
-}
+
 .steps_form_each_step_indicator_container:hover .steps_form_each_step_indicator {
   background-color: #f19de7;
 }

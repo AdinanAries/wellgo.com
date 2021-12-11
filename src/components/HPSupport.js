@@ -53,7 +53,7 @@ export default function HPSupportBtn(){
                 <div onClick={toggle_show_hp_support_chat_container} className="chatbot_popup_tip_msg">
                     <p>
                         <i className="fa fa-lightbulb-o"></i>
-                        Hey! I'm Bot AD, I'll be your assistant here...
+                        Hey! I'm AD, I'll be assisting you around here... cheers... &#127866;
                     </p>
                 </div>
                 <div onClick={toggle_show_hp_support_chat_container} className="chatbot_popup_tip_img">

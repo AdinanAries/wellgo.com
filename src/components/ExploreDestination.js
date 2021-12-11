@@ -136,7 +136,7 @@ export function toggle_main_page_search_filters(){
 
 var i = 0;
 var txt = "Greetings! &#128400; Search flights or get help, below &#128071;"; /*The text click to start search...*/
-var speed = 50; /* The speed/duration of the effect in milliseconds */
+var speed = 30; /* The speed/duration of the effect in milliseconds */
 
 export function chat_bot_new_msg(txt_p){
     document.getElementById("landing_page_search_input_text_display").innerHTML="";

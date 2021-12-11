@@ -7,7 +7,7 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "Umm, Do you know the pink button is a toggle?&#128073;"
+            msg: "Umm, Do you know the pink button is a toggle? &#128073;"
 
         },
         {
@@ -22,7 +22,7 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "Umm, We should get you flying ASAP, I think...&#129300;"
+            msg: "Umm, We should get you flying ASAP, I think... &#129300;"
 
         },
         {
@@ -47,16 +47,16 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "The dark orange button takes you to help page&#128071;"
+            msg: "The dark orange button takes you to help page &#128071;"
 
         },
         {
             type: "notice",
-            msg: "I think that... Umm... Nevermind... &#128578;"
+            msg: "I think that... Umm... Nevermind... &#128580; &#128578;"
         },
         {
             type: "notice",
-            msg: "I think that... Umm... Nevermind... &#128580;"
+            msg: "I think that... Umm... Nevermind... &#128578; &#128580;"
         }
     ]
 }
