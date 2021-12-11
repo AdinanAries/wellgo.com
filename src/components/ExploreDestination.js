@@ -23,17 +23,17 @@ export default function ExploreDestinations(){
                                 Cheap Flight Tickets</p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "white", height: 70, paddingLeft: 15, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                <div onClick={toggle_show_hp_support_chat_container} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.25)",border: "1px solid rgba(255,255,255,0.3)", height: 70, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                <div onClick={toggle_show_hp_support_chat_container} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
                                     {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
-                                    <div style={{backgroundImage: `url('${botIcon}')`, width: 50, height: 40, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
+                                    <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
                                 </div>
 
                                 <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
-                                    <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
+                                    <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
                                         &#128400; Hey...</p>
                                 </div>
-                                <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: 50, padding: "0 15px", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 70}}>
+                                <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                         {/*<p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>*/}
@@ -122,12 +122,16 @@ let is_landing_page_search_filters_open = false;
 export function toggle_main_page_search_filters(){
     if(is_landing_page_search_filters_open){
         setTimeout(()=>{
-            //document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(255, 255, 255, 0.87)";
+            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(0,0,0,0.25)";
+            document.getElementById("landing_page_search_form_bar").style.borderWidth = "1px";
+            document.getElementById("landing_page_search_input_text_display").style.color = "white";
         }, 200);
         $("#landing_page_search_filters_container").slideUp("fast");
         document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(0deg)";
     }else{
-        //document.getElementById("landing_page_search_form_bar").style.backgroundColor = "white";
+        document.getElementById("landing_page_search_form_bar").style.backgroundColor = "white";
+        document.getElementById("landing_page_search_form_bar").style.borderWidth = "0";
+        document.getElementById("landing_page_search_input_text_display").style.color = "rgba(0,0,0,0.7)";
         $("#landing_page_search_filters_container").slideDown("fast");
         document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(180deg)";
     }
