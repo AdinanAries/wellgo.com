@@ -254,8 +254,8 @@ export default function LoginPage(){
                                         <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                             DOB: March 23rd, 1992</p>
                                         <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
-                                            <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar-o"></i>
-                                            <input style={{padding: 10, border: "none"}} type="text" placeholder="add your date of birth" />
+                                            <p><i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar-o"></i>
+                                            <input style={{padding: 10, border: "none", width: "calc(100% - 40px)"}} type="text" placeholder="add your date of birth" /></p>
                                         </div>
                                         <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                             Gender: Male</p>
