@@ -23,7 +23,7 @@ export default function ExploreDestinations(){
                                 Cheap Flight Tickets</p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.25)",border: "1px solid rgba(255,255,255,0.3)", height: 70, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.2)",border: "1px solid rgba(255,255,255,0.4)", height: 70, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                 <div onClick={toggle_show_hp_support_chat_container} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
                                     {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
                                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
@@ -122,7 +122,7 @@ let is_landing_page_search_filters_open = false;
 export function toggle_main_page_search_filters(){
     if(is_landing_page_search_filters_open){
         setTimeout(()=>{
-            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(0,0,0,0.25)";
+            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(92,0,92,0.2)";
             document.getElementById("landing_page_search_form_bar").style.borderWidth = "1px";
             document.getElementById("landing_page_search_input_text_display").style.color = "white";
         }, 200);
