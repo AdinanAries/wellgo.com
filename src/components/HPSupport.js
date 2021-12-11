@@ -123,13 +123,21 @@ $(document).ready(()=>{
 
 function chat_txt_input_focus_func(){
     if($(document).width() <= 700){
-        document.getElementById("main_homepage_start_support_btn").style.display = "none";
-        document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 10px)";
+        setTimeout(()=>{
+            document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 10px)";
+            document.getElementById("main_homepage_start_support_btn").style.display = "none";
+        },200);
+        document.getElementById("main_homepage_start_support_btn").style.opacity = 0; 
     }
 }
 function chat_txt_input_blur_func(){
     if($(document).width() <= 700){
-        document.getElementById("main_homepage_start_support_btn").style.display = "flex";
+        setTimeout(()=>{
+            document.getElementById("main_homepage_start_support_btn").style.opacity = 1;
+        },400);
+        setTimeout(()=>{
+            document.getElementById("main_homepage_start_support_btn").style.display = "flex";
+        },200);
         document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 90px)";
     }
 }

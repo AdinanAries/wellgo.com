@@ -251,10 +251,26 @@ export default function LoginPage(){
                                     <div style={{marginBottom: 20}}>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", marginBottom: 5, color: "rgb(102, 169, 233)", letterSpacing: 1}}>
                                             Other</p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
+                                        <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                             DOB: March 23rd, 1992</p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
+                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 230}}>
+                                            <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar-o"></i>
+                                            <input style={{padding: 10, border: "none"}} type="text" placeholder="add your date of birth" />
+                                        </div>
+                                        <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                             Gender: Male</p>
+                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 230}}>
+                                            <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-user"></i>
+                                            <select style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)"}} type="text" placeholder="add your date of birth">
+                                                <option>Add Your Gender</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                        </div>
+                                        <div style={{cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
+                                            <i className="fa fa-save" style={{color: "rgba(255,255,255,0.6)", marginRight: 10}}></i>
+                                            Save
+                                        </div>
                                     </div>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", textAlign: "center", fontSize: 15, borderRadius: 6, padding: 14, color: "white", backgroundColor: "rgb(23, 87, 148)", boxShadow: "1px 2px 3px rgba(0,0,0,0.33)"}}>
                                         Frequent Flyer and Membership</p>

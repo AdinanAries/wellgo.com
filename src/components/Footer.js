@@ -66,8 +66,8 @@ function Footer(){
                         </div>
                     </div>
                 </div>
-                <p className="footer_very_lower_text" style={{marginTop: 20, textAlign: "center", opacity: 0.6, paddingTop: 20, color: "rgba(255,255,255,0.5)", borderTop: "1px solid rgba(255,255,255,0.3)"}}>
-                    &copy; 2022 wellgo.com, all rights reserved</p>
+                <p className="footer_very_lower_text" style={{marginTop: 20, textAlign: "center", opacity: 0.6, paddingTop: 20, color: "rgba(255,255,255,0.55)", borderTop: "1px solid rgba(255,255,255,0.3)"}}>
+                    &copy; 2022 wellgo.com...</p>
             </div> 
         </footer>
     );
