@@ -1,13 +1,18 @@
 export let chat_bot_msg = {
     msgs: [
         {
-            type: "greeting",
-            msg: "&#129488; I was digging for you, found new price dip"
+            type: "notice",
+            msg: "&#129488; I was digging... prices dropped again"
 
         },
         {
             type: "notice",
-            msg: "Umm, Do you know the pink button is a toggle? &#128073;"
+            msg: "&#129488; Whoa... prices keep dropping..."
+
+        },
+        {
+            type: "notice",
+            msg: "Umm, this pink button will show buttons below &#128073;"
 
         },
         {
@@ -22,41 +27,53 @@ export let chat_bot_msg = {
         },
         {
             type: "notice",
-            msg: "Umm, We should get you flying ASAP, I think... &#129300;"
+            msg: "&#129300; Lets get you flying ASAP, Right? &#129300;"
 
         },
         {
             type: "notice",
-            msg: "&#128072; Also, just give me a tap for a chat"
+            msg: "Hey! &#128073; click here... &#128072;"
+        },
+        {
+            type: "notice",
+            msg: "&#128072; Tap me for a chat.."
 
         },
         {
             type: "notice",
-            msg: "&#128072; Also, just give me a tap for a chat"
+            msg: "&#128072; You need help? Tap me..."
 
         },
         {
             type: "notice",
-            msg: "The round pink button hides/shows buttons below"
+            msg: "This button hides/shows buttons below &#128073;"
 
         },
         {
             type: "notice",
-            msg: "The darkblue button shows manual search form.."
+            msg: "Hey! &#128073; click here... &#128072;"
+        },
+        {
+            type: "notice",
+            msg: "&#128071; The search fligts button opens the form"
 
         },
         {
             type: "notice",
-            msg: "The dark orange button takes you to help page &#128071;"
+            msg: "The get help button &#128071; opens help page"
 
         },
         {
             type: "notice",
-            msg: "I think that... Umm... Nevermind... &#128580; &#128578;"
+            msg: "I think that... &#129300;... Nevermind... &#128580;&#128578;"
         },
         {
             type: "notice",
-            msg: "I think that... Umm... Nevermind... &#128578; &#128580;"
+            msg: "Umm... &#129300;... Nevermind... &#128578;&#128580;"
+        },
+        {
+            type: "notice",
+            msg: "Hey! &#128073; click here... &#128072;"
         }
     ]
 }
