@@ -611,6 +611,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }
 .download_mobile_app_section_container {
   display: flex;
@@ -1693,6 +1694,8 @@ footer {
     background: rgb(43, 52, 61) !important;
     border-radius: 0;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+  }
+  #landing_page_search_form_bar{
   }
   header {
     box-shadow: none;
