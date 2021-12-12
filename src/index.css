@@ -1707,6 +1707,7 @@ footer {
     color: rgb(216, 216, 216);
     background: none;
     box-shadow: none;
+    font-family: 'Prompt', sans-serif;
   }
   .landing_page_hero_menu_item_tooltip::after{
     display: none;
