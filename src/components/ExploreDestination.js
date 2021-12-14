@@ -21,9 +21,11 @@ export default function ExploreDestinations(){
                         <div className="landing_page_jumb_text" style={{marginBottom: 20}}>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28, textAlign: "center"}}>
                                 Cheap Flights</p>
+                            <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontFamily: "'Prompt', sans-serif", fontSize: 15, textAlign: "center"}}>
+                                &#8226; Virtual Agent &#8226;</p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.4)", height: 70, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.4)", height: 70, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ display: "flex", flexDirection: "row", justifyContent: "space-between", zIndex: 5}}>
                                 <div onClick={toggle_show_hp_support_chat_container} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
                                     {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
                                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
@@ -43,43 +45,29 @@ export default function ExploreDestinations(){
                                 </div>
 
                                 <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 32px)", paddingTop: 32, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, left: 0, width: "100%", backgroundColor: "white"}}>
-                                    <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 25, borderBottomLeftRadius: 25, padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                                        {/*<div onClick={show_full_search_form} style={{display: "flex", flexDirection: "row", justifyContent: "center",  cursor: "pointer", padding: "15px", backgroundColor: ""}}>
-                                            <p style={{textAlign: "center", marginRight: 10}}>
-                                                <i style={{fontSize: 18, color: "darkslateblue"}} className="fa fa-plane"></i>
-                                            </p>
-                                            <div style={{marginRight: 10, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                                <div style={{width: 8, height: 8, borderRadius: "100%", background: "linear-gradient(35deg, darkslateblue, rgba(255,255,255))"}}></div>
+                                    <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 40, borderBottomLeftRadius: 40,}}>
+                                        <div style={{padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                            <div style={{display: "flex", flexDirection: "row",}}>
+                                                <div onClick={show_full_search_form} className="searchBtn" style={{marginRight: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)", border: "none", borderRadius: 50, marginLeft: 10, fontSize: 14}}>
+                                                    <i className="fa fa-search" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Search Flight
+                                                </div>
+                                                <div onClick={show_help_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "#ae6500", border: "none", borderRadius: 50, marginRight: 10, fontSize: 14}}>
+                                                    <i className="fa fa-question" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Get Help
+                                                </div>
                                             </div>
-                                            <div style={{display: "flex", flexDirection: "column"}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1,}}>
-                                                    Search Flights</p>
+                                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", borderRadius: 50, marginRight: 10, fontSize: 14,}}>
+                                                    <i className="fa fa-phone" style={{color: "goldenrod"}}></i>
+                                                </div>
                                             </div>
-                                        </div>*/}
-                                        <div onClick={show_full_search_form} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50, marginLeft: 10, fontSize: 14}}>
-                                            <i className="fa fa-search" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Search Flight
                                         </div>
-                                        {/*<div onClick={show_deals_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", borderRight: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", padding: "15px 0"}}>
-                                            {/*<p style={{textAlign: "center", marginRight: 10}}>
-                                                <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-bed"></i>
-                                            </p>/}
-                                            <div style={{display: "flex", flexDirection: "column",}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Deals</p>
+                                        <div style={{padding: 5}}>
+                                            <div onClick={start_book_with_vitual_agent} style={{borderRadius: 40, borderTopRightRadius: 10, borderTopLeftRadius: 10, padding: 16, border: "1px solid rgba(0,0,0,0.1)", backgroundColor: "#eee"}}>
+                                                <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', sans-serif", fontSize: 14}}>
+                                                <i className="fa fa-commenting" style={{marginRight: 10, fontSize: 19, color: "rgb(23, 87, 148)"}}></i>
+                                                Book with Vitual Agent</p>
                                             </div>
-                                        </div>*/}
-                                        {/*<div onClick={show_help_page} style={{display: "flex", flexDirection: "row", justifyContent: "center", width: "33%", cursor: "pointer", padding: "15px 0"}}>
-                                            <p style={{textAlign: "center", marginRight: 10}}>
-                                                <i style={{fontSize: 18, color: "rgba(0,0,0,0.6)"}} className="fa fa-car"></i>
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "column",}}>
-                                                <p style={{fontSize: 15, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Help</p>
-                                            </div>
-                                        </div>*/}
-                                        <div onClick={show_help_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", backgroundColor: "#ae6500", border: "none", borderRadius: 50, marginRight: 10, fontSize: 14}}>
-                                                <i className="fa fa-question" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Get Help
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -174,3 +162,6 @@ $(document).ready(()=>{
     setTimeout(()=>toggle_main_page_search_filters(), 2000);
 });
 
+function start_book_with_vitual_agent(){
+    toggle_show_hp_support_chat_container();
+}

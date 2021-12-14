@@ -1393,12 +1393,12 @@ footer {
   }
   .support_chat_div_container{
     position: fixed;
-    top: 60px;
+    top: 0;
     left: 0;
     border-radius: 0;
     box-shadow: none;
     width: 100vw;
-    height: calc(100vh - 60px);
+    height: 100vh;
     z-index: 3;
   }
   .support_chat_user_input_txt_container{
@@ -1475,6 +1475,9 @@ footer {
     font-size: 17px !important;
     letter-spacing: 1px;
     color: rgba(255,255,255,0.7) !important;
+  }
+  .landing_page_jumb_text p:nth-child(2){
+    font-size: 11px !important;
   }
   #search_page{
     padding-top: 50px !important;

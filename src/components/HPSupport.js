@@ -135,7 +135,7 @@ $(document).ready(()=>{
 });
 
 function chat_txt_input_focus_func(){
-    document.getElementById("main_support_chat_user_input_txt_container").style.height = "200px";
+    document.getElementById("main_support_chat_user_input_txt_container").style.height = "100px";
     document.getElementById("main_support_chat_user_input_txt_container").style.borderRadius = "10px";
     if($(document).width() <= 700){
         setTimeout(()=>{
