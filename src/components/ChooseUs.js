@@ -294,7 +294,7 @@ var ChooseUs = ()=>{
                         </div>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                             >More To Explore</h1>
-                        <div style={{borderTop: "4px solid orange", padding: "15px", backgroundColor: "rgba(255,255,255,0.6)"}}>
+                        <div style={{borderTop: "4px solid orange", padding: "15px", background: "linear-gradient(rgba(255,255,255), rgba(0,0,0,0))"}}>
                             <div className="more_popular_cities_svg_img" style={{height: 150, width: 150, backgroundImage: `url('${citiesIcon}')`, backgroundRepeat: "no-repeat", backgroundSize: "contain", position: "absolute", top: -50, left: 20, zIndex: 1}}>
                             </div>
                             <div>
@@ -390,9 +390,9 @@ var ChooseUs = ()=>{
                                     height: 150, marginTop: 5, marginBottom: 5}}>
 
                                 </div>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 5, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Best Deals</p>
-                                <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 15, fontFamily: "'Prompt', sans-serif"}}>
                                     This is a place holder text for the description of this info card</p>
                             </div>
                             <div className="each-choose-us-container">
@@ -401,9 +401,9 @@ var ChooseUs = ()=>{
                                     height: 150, marginTop: 5, marginBottom: 5}}>
 
                                 </div>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 5, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Secure Payment</p>
-                                <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 15, fontFamily: "'Prompt', sans-serif"}}>
                                     This is a place holder text for the description of this info card</p>
                             </div>
                             <div className="each-choose-us-container">
@@ -412,9 +412,9 @@ var ChooseUs = ()=>{
                                     height: 150, marginTop: 5, marginBottom: 5}}>
 
                                 </div>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 10, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 5, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Customer Support</p>
-                                <p style={{color: "rgba(0,0,0,0.6)", textAlign: "center", fontWeight: "bolder", fontSize: 15}}>
+                                <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 15, fontFamily: "'Prompt', sans-serif"}}>
                                     This is a place holder text for the description of this info card</p>
                             </div>
                         </div>

@@ -462,6 +462,7 @@ footer {
   padding: 15px;
   border-radius: 50px;
   border: 5px solid rgb(189, 223, 238);
+  background-color: white;
 }
 .forms_class_guests_cabin_settings_container {
   position: relative;
