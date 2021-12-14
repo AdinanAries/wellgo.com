@@ -9,13 +9,25 @@ export default function HPSupportBtn(){
                 <p onClick={toggle_show_hp_support_chat_container} className="page-popup-cover-close-btn">
                     &times;
                 </p>
-                <div style={{padding: "20px"}}>
-                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.7)"}}>Help/Support/Assistance</p>
+                <div style={{padding: "10px 20px", display: "flex", flexDirection: "row", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                    <div style={{borderRight: "1px solid rgba(0,0,0,0.1)", marginRight: 20}}>
+                        <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat',}}></div>
+                        <p style={{fontSize: 13, fontFamily: "'Prompt', sans-serif", marginTop: 1}}>
+                            Bot AD 
+                            <span style={{color: "goldenrod", fontSize: 11, marginRight: "10px"}}> / V1.0.0</span>
+                        </p>
+                    </div>
+                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                        <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.7)",}}>Support/Assistance</p>
+                        <div style={{display: "flex", flexDirection: "row"}}>
+                            <p style={{width: 7, height: 7, backgroundColor: "red", marginRight: 5, marginTop: 7, borderRadius: "100%"}}></p>
+                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>status: offline</p>
+                        </div>
+                    </div>
                 </div>
-                <div style={{padding: 10,}}>
-                    <div style={{display: "flex", flexDirection: "row"}}>
-                        <div style={{backgroundImage: `url('${botIcon}')`, width: 70, height: 50, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
-                        <div style={{marginLeft: 10, backgroundColor: "rgba(0,0,0,0.07", padding: 5, borderRadius: 5, maxWidth: "calc(100% - 45px)"}}>
+                <div style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll"}}>
+                    <div className="support_chat_bot_sent_msg_container">
+                        <div className="support_chat_bot_sent_msg_inner_container">
                             <p id="chatbot_greenting_message_p" style={{fontFamily: "'Prompt', sans-serif", fontSize: 14}}></p>
                         </div>
                     </div>
@@ -31,6 +43,11 @@ export default function HPSupportBtn(){
                                     <i style={{marginRight: 10}} className="fa fa-envelope"></i>
                                     Email</p>
                             </div>
+                        </div>
+                    </div>
+                    <div className="support_chat_user_sent_msg_container">
+                        <div className="support_chat_user_sent_msg_inner_container">
+                            <p>This will be your message submitted for chatbot to analyze</p>
                         </div>
                     </div>
                 </div>
