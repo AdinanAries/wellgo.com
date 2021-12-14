@@ -25,7 +25,7 @@ export default function HPSupportBtn(){
                         </div>
                     </div>
                 </div>
-                <div style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll"}}>
+                <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll"}}>
                     <div className="support_chat_bot_sent_msg_container">
                         <div className="support_chat_bot_sent_msg_inner_container">
                             <p id="chatbot_greenting_message_p" style={{fontFamily: "'Prompt', sans-serif", fontSize: 14}}></p>
@@ -45,17 +45,13 @@ export default function HPSupportBtn(){
                             </div>
                         </div>
                     </div>
-                    <div className="support_chat_user_sent_msg_container">
-                        <div className="support_chat_user_sent_msg_inner_container">
-                            <p>This will be your message submitted for chatbot to analyze</p>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div id="main_support_chat_user_input_txt_container" className="support_chat_user_input_txt_container">
                     <textarea onFocus={chat_txt_input_focus_func} onBlur={chat_txt_input_blur_func}>
                         type your message here...
                     </textarea>
-                    <div className="cht-btn">
+                    <div id="hp_support_user_submit_chat_btn" className="cht-btn">
                         <i style={{transform: "rotate(49deg)"}} className="fa fa-paper-plane"></i>
                     </div>
                 </div>
@@ -139,22 +135,36 @@ $(document).ready(()=>{
 });
 
 function chat_txt_input_focus_func(){
+    document.getElementById("main_support_chat_user_input_txt_container").style.height = "200px";
+    document.getElementById("main_support_chat_user_input_txt_container").style.borderRadius = "10px";
     if($(document).width() <= 700){
         setTimeout(()=>{
             document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 10px)";
+            
             document.getElementById("main_homepage_start_support_btn").style.display = "none";
         },200);
         document.getElementById("main_homepage_start_support_btn").style.opacity = 0; 
     }
+    //console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value)
+    if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
+        document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "";
+    }
 }
 function chat_txt_input_blur_func(){
-    if($(document).width() <= 700){
-        setTimeout(()=>{
-            document.getElementById("main_homepage_start_support_btn").style.opacity = 1;
-        },400);
-        setTimeout(()=>{
-            document.getElementById("main_homepage_start_support_btn").style.display = "flex";
-        },200);
-        document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 90px)";
-    }
+    setTimeout(()=>{
+        document.getElementById("main_support_chat_user_input_txt_container").style.height = "50px";
+        document.getElementById("main_support_chat_user_input_txt_container").style.borderRadius = "50px";
+        if($(document).width() <= 700){
+            setTimeout(()=>{
+                document.getElementById("main_homepage_start_support_btn").style.opacity = 1;
+            },400);
+            setTimeout(()=>{
+                document.getElementById("main_homepage_start_support_btn").style.display = "flex";
+            },200);
+            document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 90px)";
+        }
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === ""){
+            document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
+        }
+    },300);
 }

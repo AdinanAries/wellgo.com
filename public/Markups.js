@@ -610,6 +610,17 @@ function return_start_checkout_info(json_obj){
     `;
 }
 
+function return_each_user_chat_message_markup(){
+    console.log("here")
+    return `
+        <div class="support_chat_user_sent_msg_container">
+            <div class="support_chat_user_sent_msg_inner_container">
+                <p>${document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim()}</p>
+            </div>
+        </div>
+    `;
+}
+
 //loaders
 function return_search_results_important_notice_loader(){
     return `

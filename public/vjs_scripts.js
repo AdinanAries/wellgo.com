@@ -218,3 +218,15 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
+
+//chat functions
+document.getElementById("hp_support_user_submit_chat_btn").addEventListener("click", e=>{
+  e.preventDefault();
+  if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
+    //dont add empty input to chat displayed items
+  }else{
+    document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup();
+  }
+  document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
+  $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
+})
