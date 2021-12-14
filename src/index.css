@@ -1265,7 +1265,7 @@ footer {
 }
 .support_chat_user_sent_msg_inner_container p{
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   font-family: 'Prompt', sans-serif;
 }
 .support_chat_bot_sent_msg_container{
@@ -1283,7 +1283,7 @@ footer {
 }
 .support_chat_bot_sent_msg_inner_container p{
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   font-family: 'Prompt', sans-serif;
 }
 .support_chat_user_input_txt_container{

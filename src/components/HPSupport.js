@@ -28,7 +28,7 @@ export default function HPSupportBtn(){
                 <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll", paddingBottom: 70}}>
                     <div className="support_chat_bot_sent_msg_container">
                         <div className="support_chat_bot_sent_msg_inner_container">
-                            <p id="chatbot_greenting_message_p" style={{fontFamily: "'Prompt', sans-serif", fontSize: 14}}></p>
+                            <p id="chatbot_greenting_message_p" style={{fontFamily: "'Prompt', sans-serif", fontSize: 15}}></p>
                         </div>
                     </div>
                     <div id="chatbot_provided_manual_channels" style={{display: 'none', animation: "pop-in 0.2s ease-out"}}>
