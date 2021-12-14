@@ -1257,7 +1257,7 @@ footer {
   margin-bottom: 10px;
 }
 .support_chat_user_sent_msg_inner_container{
-  width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
   background-color: #003f7a;
   border-radius: 30px;
   border-top-right-radius: 0;
@@ -1276,7 +1276,7 @@ footer {
   margin-bottom: 10px;
 }
 .support_chat_bot_sent_msg_inner_container{
-  width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
   background-color: #004f5f;
   border-radius: 30px;
   border-top-left-radius: 0;
