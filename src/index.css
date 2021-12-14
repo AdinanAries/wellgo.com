@@ -1262,7 +1262,6 @@ footer {
   border-radius: 30px;
   border-top-right-radius: 0;
   padding: 20px 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 .support_chat_user_sent_msg_inner_container p{
   color: white;
@@ -1281,7 +1280,6 @@ footer {
   border-radius: 30px;
   border-top-left-radius: 0;
   padding: 20px 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 .support_chat_bot_sent_msg_inner_container p{
   color: white;
@@ -1313,7 +1311,7 @@ footer {
    max-width: calc(100% - 50px);
    min-width: calc(100% - 50px);
    height: 100%;
-   font-size: 14px;
+   font-size: 15px;
    resize: none;
 }
 .support_chat_user_input_txt_container .cht-btn{
