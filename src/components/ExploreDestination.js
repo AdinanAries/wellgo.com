@@ -56,7 +56,7 @@ export default function ExploreDestinations(){
                                                 </div>
                                             </div>
                                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", borderRadius: 50, marginRight: 10, fontSize: 14,}}>
+                                                <div onClick={start_call_from_search_filters} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", borderRadius: 50, marginRight: 10, fontSize: 14,}}>
                                                     <i className="fa fa-phone" style={{color: "goldenrod"}}></i>
                                                 </div>
                                             </div>
@@ -166,4 +166,10 @@ $(document).ready(()=>{
 
 function start_book_with_vitual_agent(){
     toggle_show_hp_support_chat_container();
+    toggle_main_page_search_filters();
+}
+
+function start_call_from_search_filters(){
+    alert("placing your call now");
+    toggle_main_page_search_filters();
 }
