@@ -611,11 +611,20 @@ function return_start_checkout_info(json_obj){
 }
 
 function return_each_user_chat_message_markup(){
-    console.log("here")
     return `
         <div class="support_chat_user_sent_msg_container">
             <div class="support_chat_user_sent_msg_inner_container">
                 <p>${document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim()}</p>
+            </div>
+        </div>
+    `;
+}
+
+function return_each_bot_chat_message_markup(bot_reply){
+    return `
+        <div class="support_chat_bot_sent_msg_container">
+            <div class="support_chat_bot_sent_msg_inner_container">
+                <p>${bot_reply}</p>
             </div>
         </div>
     `;

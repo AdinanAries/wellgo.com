@@ -218,15 +218,56 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
+bot_server_base_url = "http://localhost:5001";
 
-//chat functions
-document.getElementById("hp_support_user_submit_chat_btn").addEventListener("click", e=>{
-  e.preventDefault();
+var get_answer_from_bot = (user_query) => {
+  console.log(user_query)
+  return $.ajax({
+      type: "POST",
+      url: `${bot_server_base_url}/query_bot/`,
+      data: JSON.stringify({
+          q: user_query
+      }),
+      contentType: "application/jSON; charset=utf-8",
+      dataType: "json",
+      success: res => {
+          console.log(res)
+          return res
+      },
+      error: err => {
+          //console.log(err)
+          return {
+              msg: "Ohh! I think we have a problem on network. Don't forget the internet is my brain..."
+          }
+      }
+  })
+}
+
+async function run_chat_instance(){
+  console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
+  let bot_reply = await get_answer_from_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
+  console.log(bot_reply);
+  let bot_reply_msg;
+  if(bot_reply){
+    bot_reply_msg = bot_reply.msg;
+  }else{
+    bot_reply_msg = "Opps! we have an error";
+  }
+  
   if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
     //dont add empty input to chat displayed items
   }else{
     document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup();
+    document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(bot_reply_msg);
   }
   document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
   $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
-})
+}
+
+//chat functions
+document.getElementById("hp_support_user_submit_chat_btn").addEventListener("click", e=>{
+  e.preventDefault();
+  run_chat_instance();
+});
+
+console.log(document.getElementById("hp_support_user_submit_chat_btn"))
