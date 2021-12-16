@@ -270,7 +270,16 @@ document.getElementById("hp_support_user_submit_chat_btn").addEventListener("cli
   run_chat_instance();
 });
 
-console.log(document.getElementById("hp_support_user_submit_chat_btn"))
+document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
+  e.preventDefault();
+  e.which = e.which || e.keyCode;
+  if(e.which == 13) {
+    run_chat_instance();
+    document.querySelector("#main_support_chat_user_input_txt_container textarea").blur();
+  }
+});
+
+//console.log(document.getElementById("hp_support_user_submit_chat_btn"))
 
 
 /*if($(document).width() > 700){
