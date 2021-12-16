@@ -9,6 +9,7 @@ export function show_login_page(){
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
     document.querySelector("header").style.backgroundColor="#000000";
+    localStorage.removeItem("is_home_page");
 
     window.scrollTo(0, 0);
     change_nav_active_icon("mobile_login_menu_item", "desktop_login_menu_item");
@@ -24,6 +25,8 @@ export function show_login_page(){
 
 export function show_home_page(is_from_search=false){
     
+    localStorage.setItem("is_home_page", "yes");
+
     chat_bot_new_msg(return_new_rand_msg());
 
     document.getElementById("selected_ticket_pane").style.display="none";
@@ -50,6 +53,8 @@ export function show_home_page(is_from_search=false){
 
 export function show_search_page(){
 
+    localStorage.removeItem("is_home_page");
+
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
     document.querySelector("header").style.backgroundColor="#000000";
@@ -69,6 +74,8 @@ export function show_search_page(){
 
 export function show_trips_page(){
 
+    localStorage.removeItem("is_home_page");
+
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
     document.querySelector("header").style.backgroundColor="#000000";
@@ -85,6 +92,8 @@ export function show_trips_page(){
 }
 
 export function show_deals_page(){
+
+    localStorage.removeItem("is_home_page");
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
@@ -104,6 +113,8 @@ export function show_deals_page(){
 
 export function show_explore_page(){
 
+    localStorage.removeItem("is_home_page");
+
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
     document.querySelector("header").style.backgroundColor="#000000";
@@ -121,6 +132,8 @@ export function show_explore_page(){
 }
 
 export function show_help_page(){
+
+    localStorage.removeItem("is_home_page");
 
     toggle_main_page_search_filters()
 
@@ -153,6 +166,7 @@ export function show_full_search_form(){
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="block";
     document.querySelector("header").style.backgroundColor="#000000";
+    localStorage.removeItem("is_home_page");
 }
 
 export function change_nav_active_icon(mobile_id, desktop_id){

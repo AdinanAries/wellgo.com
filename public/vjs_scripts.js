@@ -277,3 +277,21 @@ console.log(document.getElementById("hp_support_user_submit_chat_btn"))
   document.querySelector("header").style.backgroundColor="#000000";
   document.querySelector("").style.color = "";
 }*/
+localStorage.setItem("is_home_page", "yes");
+window.onscroll = function() {
+  if(localStorage.getItem("is_home_page")){
+    if (window.pageYOffset > 200) { 
+
+      if($(window).width() > 700){
+        document.querySelector("header").style.backgroundColor="#000000";
+      }
+      
+    } else { 
+      
+      if($(window).width() > 700){
+        document.querySelector("header").style.background="none";
+      }
+
+    }
+  }
+}
