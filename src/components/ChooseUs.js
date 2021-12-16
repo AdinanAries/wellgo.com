@@ -10,6 +10,7 @@ import wellgo_reviewer6 from '../wellgo_reviewer6.jpg';
 import reviews_icon from "../icons/reviews_icon.svg";
 import reviews_icon2 from "../icons/reviews_icon2.svg";
 import citiesIcon from "../icons/citiesIcon.svg";
+import smart_phone_img from "../smart_phone_img.jpg";
 
 //cities imgs
 import LondonImg from "../citiesImg/London.jpg";
@@ -29,7 +30,22 @@ var ChooseUs = ()=>{
     return (
         <div>
             <div style={{marginBottom: 0, padding: "10px 0", backgroundColor: "rgb(229, 233, 241)",}}>
-                <div className="wrapper"> 
+                <div className="wrapper">
+                    <div className='between-jumbotron-and-subsections'>
+                        <div className="between-jumbotron-and-subsections_icon" style={{backgroundImage: `url('${smart_phone_img}')`}}></div>
+                        <div style={{height: "100%", padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}}>
+                            <p style={{fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38}}>
+                                Get The App!</p>
+                            <p style={{marginTop: -9,fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 30 }}>
+                                get better deals.</p>
+                            <p style={{maxWidth: 350, marginTop: 10, marginBottom: 10, fontFamily: "'Prompt', sans-serif", lineHeight: 1.1}}>
+                                plus awsome user experience...
+                            </p>
+                            <div style={{backgroundColor: "darkslateblue", boxShadow: "0 0 5px rgba(0,0,0,0.4)", padding: 14, color: "white", fontFamily: "'Prompt', sans-serif", cursor: "pointer", marginTop: 20, width: "fit-content", borderRadius: 50}}>
+                                Send Link to Phone
+                            </div>
+                        </div>
+                    </div> 
                     <div style={{width: 90, margin: "auto", marginBottom: 0, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.8)", borderRadius: 500}}></div>
                     
                     <div className="home_page_reviews_container">

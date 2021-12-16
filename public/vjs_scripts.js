@@ -271,3 +271,9 @@ document.getElementById("hp_support_user_submit_chat_btn").addEventListener("cli
 });
 
 console.log(document.getElementById("hp_support_user_submit_chat_btn"))
+
+
+/*if($(document).width() > 700){
+  document.querySelector("header").style.backgroundColor="#000000";
+  document.querySelector("").style.color = "";
+}*/
