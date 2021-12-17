@@ -218,11 +218,11 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
-//bot_server_base_url = "http://localhost:5001";
-bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+bot_server_base_url = "http://localhost:5001";
+//bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 
 var get_answer_from_bot = (user_query) => {
-  console.log(user_query)
+  //console.log(user_query)
   return $.ajax({
       type: "POST",
       url: `${bot_server_base_url}/query_bot/`,
@@ -246,13 +246,19 @@ var get_answer_from_bot = (user_query) => {
 
 async function run_chat_instance(){
   console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
-  let bot_reply = await get_answer_from_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
-  console.log(bot_reply);
+  let bot_reply=undefined;
   let bot_reply_msg;
+  try{
+    bot_reply = await get_answer_from_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
+  }catch(e){
+    bot_reply_msg = "Opps! My server failed. My bad...";
+  }
+  console.log(bot_reply);
+  
   if(bot_reply){
     bot_reply_msg = bot_reply.msg;
   }else{
-    bot_reply_msg = "Opps! we have an error";
+    bot_reply_msg = "Opps! My server failed. My bad...";
   }
   
   if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
