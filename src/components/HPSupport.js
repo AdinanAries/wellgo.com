@@ -25,7 +25,7 @@ export default function HPSupportBtn(){
                         </div>
                     </div>
                 </div>
-                <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll", paddingBottom: 70}}>
+                <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll", paddingBottom: 100}}>
                     <div className="support_chat_bot_sent_msg_container">
                         <div className="support_chat_bot_sent_msg_inner_container">
                             <p id="chatbot_greenting_message_p" style={{fontFamily: "'Prompt', sans-serif", fontSize: 15}}></p>
@@ -136,11 +136,12 @@ $(document).ready(()=>{
 
 function chat_txt_input_focus_func(){
     document.getElementById("main_support_chat_user_input_txt_container").style.height = "100px";
-    document.getElementById("main_support_chat_user_input_txt_container").style.borderRadius = "10px";
+    document.getElementById("main_support_chat_user_input_txt_container").style.borderRadius = 0;
     if($(document).width() <= 700){
         setTimeout(()=>{
-            document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 10px)";
-            
+            document.getElementById("main_support_chat_user_input_txt_container").style.width = "100%";
+            document.getElementById("main_support_chat_user_input_txt_container").style.bottom = 0;
+            document.getElementById("main_support_chat_user_input_txt_container").style.left=0;
             document.getElementById("main_homepage_start_support_btn").style.display = "none";
         },200);
         document.getElementById("main_homepage_start_support_btn").style.opacity = 0; 
@@ -162,6 +163,9 @@ function chat_txt_input_blur_func(){
                 document.getElementById("main_homepage_start_support_btn").style.display = "flex";
             },200);
             document.getElementById("main_support_chat_user_input_txt_container").style.width = "calc(100% - 90px)";
+            document.getElementById("main_support_chat_user_input_txt_container").style.bottom = "20px";
+            document.getElementById("main_support_chat_user_input_txt_container").style.left = "5px";
+            $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
         }
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === ""){
             document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
