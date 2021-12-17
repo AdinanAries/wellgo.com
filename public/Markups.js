@@ -630,6 +630,14 @@ function return_each_bot_chat_message_markup(bot_reply){
     `;
 }
 
+function return_bot_chat_status_markup(status){
+    //statuses: online, offline, other...
+    return `
+        <p style="width: 8px; height: 8px; background-color: green; margin-right: 5px; margin-top: 6px; border-radius: 100%;"></p>
+        <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">online</p>
+    `
+}
+
 //loaders
 function return_search_results_important_notice_loader(){
     return `
@@ -725,6 +733,11 @@ function return_search_results_mobile_top_itin_display_loader(){
                 Filters</p>
         </div>
     `;
+}
+function return_bot_chat_loading_markup(){
+    return `
+        <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">typing...</p>
+    `
 }
 
 document.getElementById("selected_ticket_pane").innerHTML = return_selected_ticket_item({});

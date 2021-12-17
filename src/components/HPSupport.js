@@ -19,9 +19,8 @@ export default function HPSupportBtn(){
                     </div>
                     <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.7)",}}>Support/Assistance</p>
-                        <div style={{display: "flex", flexDirection: "row"}}>
-                            <p style={{width: 7, height: 7, backgroundColor: "red", marginRight: 5, marginTop: 7, borderRadius: "100%"}}></p>
-                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>status: offline</p>
+                        <div id="main_chat_bot_status_display" style={{display: "flex", flexDirection: "row", width: "100%"}}>
+                            
                         </div>
                     </div>
                 </div>
@@ -78,9 +77,24 @@ export default function HPSupportBtn(){
     );
 }
 
+function return_bot_chat_status_markup(status){
+    //statuses: online, offline, other...
+    return `
+        <p style="width: 8px; height: 8px; background-color: green; margin-right: 5px; margin-top: 6px; border-radius: 100%;"></p>
+        <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">online</p>
+    `
+}
+function return_bot_chat_loading_markup(){
+    return `
+        <p style="width: 8px; height: 8px; background-color: red; margin-right: 5px; margin-top: 6px; border-radius: 100%;"></p>
+        <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">loading...</p>
+    `
+}
+
 var i = 0;
 let is_chat_container_shown = false;
 export function toggle_show_hp_support_chat_container(){
+    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup();
     if(is_chat_container_shown){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
         $("#support_chat_container").slideUp("fast");
@@ -89,6 +103,9 @@ export function toggle_show_hp_support_chat_container(){
         document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
         i=0;
     }else{
+        setTimeout(()=>{
+            document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
+        },1000)
         hide_new_chatbot_tip();
         typeWriter();
         document.getElementById("support_chat_container").style.display = "block";

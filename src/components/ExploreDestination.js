@@ -65,7 +65,7 @@ export default function ExploreDestinations(){
                                             <div onClick={start_book_with_vitual_agent} style={{borderRadius: 40, borderTopRightRadius: 10, borderTopLeftRadius: 10, padding: 16, border: "1px solid rgba(0,0,0,0.1)", backgroundColor: "#eee"}}>
                                                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', sans-serif", fontSize: 14}}>
                                                 <i className="fa fa-commenting" style={{marginRight: 10, fontSize: 19, color: "rgb(23, 87, 148)"}}></i>
-                                                Book with Vitual Agent</p>
+                                                Book with Virtual Agent</p>
                                                 <p style={{fontSize: 11, marginTop: 3, textAlign: "center", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
                                                     Bot AD &#8226; <span style={{color: "goldenrod", fontSize: 11}}>V1.0.0</span> &#8226; powered by wellgo</p>
                                             </div>
