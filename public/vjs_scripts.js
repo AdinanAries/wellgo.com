@@ -218,7 +218,8 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
-bot_server_base_url = "http://localhost:5001";
+//bot_server_base_url = "http://localhost:5001";
+bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 
 var get_answer_from_bot = (user_query) => {
   console.log(user_query)
