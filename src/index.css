@@ -291,6 +291,7 @@ header {
   font-size: 24px;
 }
 .site-logo-txt span {
+  display: none;
   font-size: 13px;
   color: #db7fd0;
 }
@@ -1420,7 +1421,17 @@ footer {
 .chat_div_bot_top_profile_section:hover {
   background: linear-gradient(white, rgba(0, 0, 0, 0.05), white), linear-gradient(90deg, white, white);
 }
+.support_chat_sub_container{
+  animation: pop-in 0.2s ease-out;
+  height: 100%;
+}
 @media screen and (max-width: 700px) {
+  .checkout-page-each-ancillary p img{
+    width: 30px !important;
+  }
+  .checkout-page-each-ancillary p{
+    font-size: 13px !important;
+  }
   .each_more_popular_city:hover .each_more_popular_city_popup{
     display: none;
   }

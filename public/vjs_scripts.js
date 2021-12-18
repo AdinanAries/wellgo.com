@@ -218,8 +218,8 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
-//bot_server_base_url = "http://localhost:5001";
-bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+bot_server_base_url = "http://localhost:5001";
+//bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 
 var get_answer_from_bot = (user_query) => {
   //console.log(user_query)
@@ -245,8 +245,8 @@ var get_answer_from_bot = (user_query) => {
 }
 
 async function run_chat_instance(){
-  document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup()
-  console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
+  document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
+  //console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
   let bot_reply=undefined;
   let bot_reply_msg;
   try{
