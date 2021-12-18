@@ -1,14 +1,15 @@
 import { toggle_main_page_search_filters, chat_bot_new_msg } from "../components/ExploreDestination";
 import { return_new_rand_msg } from "../chatbot_funcs";
 
-
+import $ from "jquery";
 
 
 export function show_login_page(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
-    document.querySelector("header").style.backgroundColor="#000000";
+    if($(window).width() > 700)
+        document.querySelector("header").style.backgroundColor="#000000";
     localStorage.removeItem("is_home_page");
 
     window.scrollTo(0, 0);
@@ -30,10 +31,12 @@ export function show_home_page(is_from_search=false){
     chat_bot_new_msg(return_new_rand_msg());
 
     document.getElementById("selected_ticket_pane").style.display="none";
-    document.querySelector("header").style.background ="none";
+    if($(window).width() > 700)
+        document.querySelector("header").style.background ="none";
     //document.getElementById("site_main_header").style.display="none";
     if(!is_from_search){
-        document.querySelector("header").style.backgroundColor="#000000";
+        if($(window).width() > 700)
+            document.querySelector("header").style.backgroundColor="#000000";
         document.getElementById("main_hero_section").style.display="block";
     }else{
         document.getElementById("main_hero_section").style.display="none";
@@ -57,7 +60,8 @@ export function show_search_page(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
-    document.querySelector("header").style.backgroundColor="#000000";
+    if($(window).width() > 700)
+        document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
     change_nav_active_icon("mobile_search_menu_item", "desktop_search_menu_item");
@@ -78,7 +82,8 @@ export function show_trips_page(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
-    document.querySelector("header").style.backgroundColor="#000000";
+    if($(window).width() > 700)
+        document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
     change_nav_active_icon("mobile_trips_menu_item", "desktop_trips_menu_item");
@@ -97,7 +102,8 @@ export function show_deals_page(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
-    document.querySelector("header").style.backgroundColor="#000000";
+    if($(window).width() > 700)
+        document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
     //change_nav_active_icon("mobile_trips_menu_item", "desktop_trips_menu_item");
@@ -117,7 +123,8 @@ export function show_explore_page(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
-    document.querySelector("header").style.backgroundColor="#000000";
+    if($(window).width() > 700)
+        document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
     change_nav_active_icon("mobile_search_menu_item", "desktop_explore_menu_item");
@@ -139,7 +146,8 @@ export function show_help_page(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
-    document.querySelector("header").style.backgroundColor="#000000";
+    if($(window).width() > 700)
+        document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
     //change_nav_active_icon("mobile_search_menu_item", "desktop_explore_menu_item");
@@ -165,7 +173,8 @@ export function show_full_search_form(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="block";
-    document.querySelector("header").style.backgroundColor="#000000";
+    if($(window).width() > 700)
+        document.querySelector("header").style.backgroundColor="#000000";
     localStorage.removeItem("is_home_page");
 }
 
