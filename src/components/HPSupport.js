@@ -9,18 +9,31 @@ export default function HPSupportBtn(){
                 <p onClick={toggle_show_hp_support_chat_container} className="page-popup-cover-close-btn">
                     &times;
                 </p>
-                <div style={{padding: "10px 20px", display: "flex", flexDirection: "row", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                    <div style={{borderRight: "1px solid rgba(0,0,0,0.1)", marginRight: 20}}>
-                        <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat',}}></div>
+                <div style={{padding: "10px 20px", display: "flex", flexDirection: "row", borderBottom: "1px solid rgba(0,0,0,0.1)", justifyContent: "space-between"}}>
+                    <div style={{display: "flex", flexDirection: "row",}}>
+                        <div className="chat_div_bot_top_profile_section" style={{borderRight: "1px solid rgba(0,0,0,0.1)", marginRight: 20, cursor: "pointer"}}>
+                        <div style={{display: "flex", flexDirection: "row",}}>
+                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", marginRight: 20}}>
+                                <i style={{fontSize: 19}} className="fa fa-angle-left"></i>
+                            </div>
+                            <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat',}}></div>
+                        </div>
                         <p style={{fontSize: 13, fontFamily: "'Prompt', sans-serif", marginTop: 1}}>
                             Bot AD 
                             <span style={{color: "goldenrod", fontSize: 11, marginRight: "10px"}}> / V1.0.0</span>
                         </p>
+                        </div>
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.7)",}}>Assistant</p>
+                            <div id="main_chat_bot_status_display" style={{display: "flex", flexDirection: "row", width: "100%"}}>
+                                
+                            </div>
+                        </div>
                     </div>
-                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                        <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, fontWeight: "bolder", color: "rgba(0,0,0,0.7)",}}>Support/Assistance</p>
-                        <div id="main_chat_bot_status_display" style={{display: "flex", flexDirection: "row", width: "100%"}}>
-                            
+                    <div style={{ marginRight: 40, marginLeft: 20, cursor: "pointer",display: "flex", textShadow: "0 0 10px rgba(0,0,0,0.1)", flexDirection: "column", justifyContent: "center"}}>
+                        <div className="chat_div_bot_top_profile_section">
+                            <p style={{textAlign: "center"}}><i style={{color: "rgba(0,128,0,0.7)", fontSize: 17, marginRight: 7}} className="fa fa-wrench"></i>
+                            <span style={{color: "rgba(122,128,0,0.7)", fontSize: 11, fontFamily: "'Prompt', sans-serif"}}>Settings</span></p>
                         </div>
                     </div>
                 </div>

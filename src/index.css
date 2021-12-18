@@ -235,6 +235,7 @@ header {
   top: 0;
   left: 0;
   z-index: 1002;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   /*background-color: #000000;*/
 }
 .mobile-menu-header {
@@ -273,6 +274,7 @@ header {
   justify-content: center;
 }
 .site-logo p img {
+  display: none;
   width: 45px;
 }
 .site-logo-txt {
@@ -431,6 +433,7 @@ footer {
   font-size: 16px;
   font-family: "Prompt", sans-serif;
   letter-spacing: 1px;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
 }
 .header-menu-items .each-header-menu-item i {
   display: none;
@@ -1283,13 +1286,14 @@ footer {
 }
 .support_chat_user_sent_msg_inner_container{
   max-width: calc(100% - 20px);
-  background-color: #003f7a;
+  background-color: rgb(218, 232, 238);
   border-radius: 30px;
   border-top-right-radius: 0;
   padding: 20px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .support_chat_user_sent_msg_inner_container p{
-  color: white;
+  color: rgba(0, 0, 0, 0.9);
   font-size: 15px;
   font-family: 'Prompt', sans-serif;
 }
@@ -1301,13 +1305,14 @@ footer {
 }
 .support_chat_bot_sent_msg_inner_container{
   max-width: calc(100% - 20px);
-  background-color: #004f5f;
+  background-color: rgb(236, 226, 240);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   border-top-left-radius: 0;
   padding: 20px 10px;
 }
 .support_chat_bot_sent_msg_inner_container p{
-  color: white;
+  color: rgba(0, 0, 0, 0.9);
   font-size: 15px;
   font-family: 'Prompt', sans-serif;
 }
@@ -1411,6 +1416,9 @@ footer {
   cursor: pointer;
   font-size: 22px;
   z-index: 5;
+}
+.chat_div_bot_top_profile_section:hover {
+  background: linear-gradient(white, rgba(0, 0, 0, 0.05), white), linear-gradient(90deg, white, white);
 }
 @media screen and (max-width: 700px) {
   .each_more_popular_city:hover .each_more_popular_city_popup{
@@ -1792,6 +1800,7 @@ footer {
     background: rgb(43, 52, 61);
     border: none;
     height: 60px;
+    text-shadow: none;
   }
   footer{
     background-color: rgb(43, 52, 61);
@@ -1807,6 +1816,7 @@ footer {
   }
   .site-logo p img {
     width: 35px;
+    display: block;
   }
   .site-logo-txt {
     margin-left: 5px;
