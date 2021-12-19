@@ -1260,8 +1260,8 @@ footer {
   position: relative;
   display: none;
   animation: pop-in 0.2s ease-out;
-  width: 450px;
-  height: 500px;
+  width: 500px;
+  height: calc(100vh - 100px);
   background-color: white;
   border-radius: 10px;
   position: absolute;
@@ -1285,7 +1285,7 @@ footer {
   justify-content: flex-end;
   margin-bottom: 10px;
 }
-.support_chat_user_sent_msg_inner_container{
+.support_chat_user_sent_msg_inner_container, .support_chat_user_input_input_suggestions{
   max-width: calc(100% - 20px);
   background-color: rgb(218, 232, 238);
   border-radius: 30px;
@@ -1321,7 +1321,6 @@ footer {
   transition: all 0.2s ease-out;
   animation: pop-in 0.2s ease-out;
   display: none;
-  flex-direction: row;
   justify-content: space-between;
   position: absolute;
   bottom: 5px;
@@ -1333,6 +1332,11 @@ footer {
   overflow: hidden;
   height: 50px;
 }
+.support_chat_user_input_txt_inner_container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
 .support_chat_user_input_txt_container textarea{
    padding: 5px;
    padding-left: 20px;
@@ -1341,9 +1345,12 @@ footer {
    width: calc(100% - 50px);
    max-width: calc(100% - 50px);
    min-width: calc(100% - 50px);
-   height: 100%;
+   height: 50px;
    font-size: 15px;
    resize: none;
+}
+.support_chat_user_input_input_suggestions{
+  padding: 10px 20px;
 }
 .support_chat_user_input_txt_container .cht-btn{
  background-color: #6b3f66;

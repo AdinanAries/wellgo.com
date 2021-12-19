@@ -236,13 +236,33 @@ var get_answer_from_bot = (user_query) => {
           return res
       },
       error: err => {
-          //console.log(err)
+          console.log(err)
           return {
               msg: "Ohh! I think we have a problem on network. Don't forget the internet is my brain..."
           }
       }
   })
 }
+
+var get_bot_query_autocomplete = (input_q)=>{
+  return $.ajax({
+    type: "POST", 
+    url: `${bot_server_base_url}/q_autocomplete/`,
+    data: JSON.stringify({
+      q: input_q
+    }),
+    dataType: "json",
+    contentType: "application/json; charset=utf-8",
+    success: res => {
+      console.log(res);
+      return res;
+    },
+    error: err => {
+      console.log(err)
+      return err.responseText;
+    }
+  });
+} 
 
 async function run_chat_instance(){
   document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
@@ -265,7 +285,41 @@ async function run_chat_instance(){
   if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
     //dont add empty input to chat displayed items
   }else{
-    document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup();
+    document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
+    setTimeout(()=>{
+      document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(bot_reply_msg);
+      $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
+      document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
+      document.getElementById("suggested_bot_query_display").innerHTML = "";
+    }, 1000)
+    
+  }
+  document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
+  $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+  
+}
+
+async function default_run_chat_instance(msg){
+  document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
+  let bot_reply=undefined;
+  let bot_reply_msg;
+  try{
+    bot_reply = await get_answer_from_bot(msg);
+  }catch(e){
+    bot_reply_msg = "Opps! My server failed. My bad...";
+  }
+  console.log(bot_reply);
+  
+  if(bot_reply){
+    bot_reply_msg = bot_reply.msg;
+  }else{
+    bot_reply_msg = "Opps! My server failed. My bad...";
+  }
+  
+  if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
+    //dont add empty input to chat displayed items
+  }else{
+    document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(msg);
     setTimeout(()=>{
       document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(bot_reply_msg);
       $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
@@ -274,6 +328,7 @@ async function run_chat_instance(){
     
   }
   document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
+  document.getElementById("suggested_bot_query_display").innerHTML = "";
   $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
 }
 
@@ -290,6 +345,23 @@ document.querySelector("#main_support_chat_user_input_txt_container textarea").a
     run_chat_instance();
     document.querySelector("#main_support_chat_user_input_txt_container textarea").blur();
   }
+});
+
+async function get_bot_query_autocomplete_wrapper(e){
+  let autocompleted = await get_bot_query_autocomplete(e.target.value);
+  console.log("autocompleted: ", autocompleted.q)
+  let displayed_q = autocompleted.q.length > 30 ? `${autocompleted.q.substring(0,30)}...` : autocompleted.q;
+  document.getElementById("suggested_bot_query_display").innerHTML = `
+    <div onclick="default_run_chat_instance('${displayed_q}');" class="support_chat_user_input_input_suggestions">
+      <p style="color: rgba(0,0,0,0.9); font-size: 14px; font-family: 'Prompt', sans-serif;">
+          <i class="fa fa-lightbulb-o" style="margin-right: 5px; color: rgba(0,55,55,0.9);"></i>
+          ${displayed_q}</p>
+    </div>
+  `;
+}
+
+document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
+  get_bot_query_autocomplete_wrapper(e)
 });
 
 //console.log(document.getElementById("hp_support_user_submit_chat_btn"))

@@ -133,11 +133,16 @@ export default function HPSupportBtn(){
                         
                     </div>
                     <div id="main_support_chat_user_input_txt_container" className="support_chat_user_input_txt_container">
-                        <textarea onFocus={chat_txt_input_focus_func} onBlur={chat_txt_input_blur_func}>
-                            type your message here...
-                        </textarea>
-                        <div id="hp_support_user_submit_chat_btn" className="cht-btn">
-                            <i style={{transform: "rotate(49deg)"}} className="fa fa-paper-plane"></i>
+                        <div className="support_chat_user_input_txt_inner_container">
+                            <textarea onFocus={chat_txt_input_focus_func} onBlur={chat_txt_input_blur_func}>
+                                type your message here...
+                            </textarea>
+                            <div id="hp_support_user_submit_chat_btn" className="cht-btn">
+                                <i style={{transform: "rotate(49deg)"}} className="fa fa-paper-plane"></i>
+                            </div>
+                        </div>
+                        <div id="suggested_bot_query_display">
+
                         </div>
                     </div>
                 </div>
@@ -198,7 +203,7 @@ export function toggle_show_hp_support_chat_container(){
         document.getElementById("support_chat_container").style.display = "block";
         setTimeout(()=>{
             document.getElementById("chatbot_provided_manual_channels").style.display="block";
-            document.getElementById("main_support_chat_user_input_txt_container").style.display="flex";
+            document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
         },1200);
     }
     is_chat_container_shown = !is_chat_container_shown;

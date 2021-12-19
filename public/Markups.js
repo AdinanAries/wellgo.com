@@ -610,11 +610,11 @@ function return_start_checkout_info(json_obj){
     `;
 }
 
-function return_each_user_chat_message_markup(){
+function return_each_user_chat_message_markup(msg){
     return `
         <div class="support_chat_user_sent_msg_container">
             <div class="support_chat_user_sent_msg_inner_container">
-                <p>${document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim()}</p>
+                <p>${msg}</p>
             </div>
         </div>
     `;
