@@ -218,15 +218,17 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
-//bot_server_base_url = "http://localhost:5001";
-bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+bot_server_base_url = "http://localhost:5001";
+//bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 
 var get_answer_from_bot = (user_query) => {
   //console.log(user_query)
+  //console.log("bot status: ", wellgo_bot.status)
   return $.ajax({
       type: "POST",
       url: `${bot_server_base_url}/query_bot/`,
       data: JSON.stringify({
+          bot_status: wellgo_bot.status,
           q: user_query
       }),
       contentType: "application/jSON; charset=utf-8",
@@ -249,12 +251,13 @@ var get_bot_query_autocomplete = (input_q)=>{
     type: "POST", 
     url: `${bot_server_base_url}/q_autocomplete/`,
     data: JSON.stringify({
+      bot_status: wellgo_bot.status,
       q: input_q
     }),
     dataType: "json",
     contentType: "application/json; charset=utf-8",
     success: res => {
-      console.log(res);
+      //console.log(res);
       return res;
     },
     error: err => {
@@ -264,6 +267,7 @@ var get_bot_query_autocomplete = (input_q)=>{
   });
 } 
 
+let isTripRoundFirstEntered=true;
 async function run_chat_instance(){
   document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
   //console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
@@ -278,6 +282,103 @@ async function run_chat_instance(){
   
   if(bot_reply){
     bot_reply_msg = bot_reply.msg;
+
+    //if type === "" it means server did not return any valid response for current bot status
+    //so don't reset the status unless user says stop
+    if(bot_reply.type !== "")
+      wellgo_bot.status = bot_reply.type;
+    
+
+    //----------------------flight booking process---------------------------------------//
+    //step one: origin - destination
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="origin-destination"){
+        let validation = validate_user_airports_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+        }else{
+          if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "yes" && wellgo_bot.step==="origin-destination"){
+            wellgo_bot.step="trip-round"
+          }else{
+            wellgo_bot.step="origin-destination";
+            if(validation.isValid){
+              //find airports here;
+              //if origin and destination airports contains more that one element, then give you a list using div containers to select from
+              //after selection, set wellgo_bot.step="departure-arrival-dates"
+              let origin_airpots = ["new york"];
+              let destination_airports = ["paris"];
+              bot_reply_msg =  `so you said from ${validation.origin} to ${validation.destination} and I found ${origin_airpots[0]} to ${destination_airports[0]}... Say 'yes' to continue or enter new places or say 'stop' to do something else`;
+              
+            }else{
+              bot_reply_msg = validation.msg;
+              wellgo_bot.status = "begin_air_booking";
+            }
+          }
+          
+        }
+        
+
+    }
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step===""){
+      wellgo_bot.step="origin-destination";
+    }
+
+    //step two: trip-round
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="trip-round"){
+
+      let trip_round_init_mgs = [
+        "K.. cool.. do you want a return flight?... say 'round trip' if you do or say 'one way' if dont"
+      ]
+      bot_reply_msg = trip_round_init_mgs[Math.floor(Math.random() * trip_round_init_mgs.length)];
+
+      if(!isTripRoundFirstEntered){
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Alright... no promblem",
+            "Cool...",
+            "Got it..."
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+        }else{
+
+          if((document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "round trip"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "one way") 
+              && wellgo_bot.step==="trip-round"){
+            wellgo_bot.step="departure-return-dates";
+            //add trip round to stored localstorage obj
+          }else{
+            let stop_trip_round_err_reply_msgs = [
+              "I should be expecting you to say 'round trip' or 'one way'",
+              "You should say 'round trip' to include return flights or say 'one way' for only departure flight",
+              "Ummm. You're supposed to say 'one way' or 'round trip'"
+            ];
+            bot_reply_msg = stop_trip_round_err_reply_msgs[Math.floor(Math.random() * stop_trip_round_err_reply_msgs.length)]
+            wellgo_bot.step="trip-round";
+
+          }
+          
+        }
+      }
+      isTripRoundFirstEntered=false;
+    }
+
+    //step three: travel dates
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="departure-return-dates"){
+      let travel_dates_init_messages = [
+        "Good!, Now lets get your travel dates"
+      ]
+      bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
+    }
+
+  //-----------------------------------end of flight booking process------------------------------//
   }else{
     bot_reply_msg = "Opps! My server failed. My bad...";
   }
@@ -312,6 +413,7 @@ async function default_run_chat_instance(msg){
   
   if(bot_reply){
     bot_reply_msg = bot_reply.msg;
+    wellgo_bot.status = bot_reply.type;
   }else{
     bot_reply_msg = "Opps! My server failed. My bad...";
   }
@@ -349,19 +451,30 @@ document.querySelector("#main_support_chat_user_input_txt_container textarea").a
 
 async function get_bot_query_autocomplete_wrapper(e){
   let autocompleted = await get_bot_query_autocomplete(e.target.value);
-  console.log("autocompleted: ", autocompleted.q)
-  let displayed_q = autocompleted.q.length > 30 ? `${autocompleted.q.substring(0,30)}...` : autocompleted.q;
-  document.getElementById("suggested_bot_query_display").innerHTML = `
-    <div onclick="default_run_chat_instance('${displayed_q}');" class="support_chat_user_input_input_suggestions">
-      <p style="color: rgba(0,0,0,0.9); font-size: 14px; font-family: 'Prompt', sans-serif;">
-          <i class="fa fa-lightbulb-o" style="margin-right: 5px; color: rgba(0,55,55,0.9);"></i>
-          ${displayed_q}</p>
-    </div>
-  `;
+  //console.log("autocompleted: ", autocompleted.q)
+  if(autocompleted.q===""){
+    document.getElementById("suggested_bot_query_display").innerHTML = "";
+  }else{
+    let displayed_q = autocompleted.q.length > 30 ? `${autocompleted.q.substring(0,30)}...` : autocompleted.q;
+    document.getElementById("suggested_bot_query_display").innerHTML = `
+      <div onclick="default_run_chat_instance('${displayed_q}');" style="cursor: pointer;" class="support_chat_user_input_input_suggestions">
+        <p style="color: rgba(0,0,0,0.9); font-size: 14px; font-family: 'Prompt', sans-serif;">
+            <i class="fa fa-lightbulb-o" style="margin-right: 5px; color: rgba(0,55,55,0.9);"></i>
+            ${displayed_q}</p>
+      </div>
+    `;
+  }
+  
 }
 
 document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
-  get_bot_query_autocomplete_wrapper(e)
+  if(e.target.value===""){
+    document.getElementById("suggested_bot_query_display").innerHTML = "";
+    //return;
+  }else{
+    get_bot_query_autocomplete_wrapper(e)
+  }
+  
 });
 
 //console.log(document.getElementById("hp_support_user_submit_chat_btn"))
