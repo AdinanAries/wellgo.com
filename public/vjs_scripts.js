@@ -378,7 +378,7 @@ async function run_chat_instance(){
       bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
     }
 
-  //-----------------------------------end of flight booking process------------------------------//
+  //---------------------end of flight booking process-------------------------------------//
   }else{
     bot_reply_msg = "Opps! My server failed. My bad...";
   }
