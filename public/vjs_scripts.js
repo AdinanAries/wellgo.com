@@ -218,8 +218,8 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
-//bot_server_base_url = "http://localhost:5001";
-bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+bot_server_base_url = "http://localhost:5001";
+//bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 
 var get_answer_from_bot = (user_query) => {
   //console.log(user_query)
@@ -268,6 +268,8 @@ var get_bot_query_autocomplete = (input_q)=>{
 } 
 
 let isTripRoundFirstEntered=true;
+let isDatesFirstEntered=true;
+let isCabinClassFirstEntered=true;
 async function run_chat_instance(){
   document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
   //console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
@@ -357,7 +359,7 @@ async function run_chat_instance(){
           }else{
             let stop_trip_round_err_reply_msgs = [
               "I should be expecting you to say 'round trip' or 'one way'",
-              "You should say 'round trip' to include return flights or say 'one way' for only departure flight",
+              "You should say 'round trip' to include return flights or say 'one way' for only departure flights",
               "Ummm. You're supposed to say 'one way' or 'round trip'"
             ];
             bot_reply_msg = stop_trip_round_err_reply_msgs[Math.floor(Math.random() * stop_trip_round_err_reply_msgs.length)]
@@ -372,10 +374,59 @@ async function run_chat_instance(){
 
     //step three: travel dates
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="departure-return-dates"){
-      let travel_dates_init_messages = [
-        "Good!, Now lets get your travel dates"
-      ]
+      let travel_dates_init_messages =[]
+      if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
+        travel_dates_init_messages = [
+          "Good! Now lets get your travel date. Please Say something like 'February 23, 2022' where February is the month and 23 is the date of month and 2022 is the year..."
+        ]
+      }
       bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
+      if(!isDatesFirstEntered){
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+        }else{
+          let validation = validate_user_dates_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim(), JSON.parse(localStorage.getItem("search_obj")).type)
+          console.log("date validation: ", validation);
+          if(!validation.isValid){
+            bot_reply_msg = validation.msg;
+          }else if(validation.isValid){
+            wellgo_bot.step = "cabin-class";
+            bot_reply_msg = validation.msg;
+          }
+        }
+      }
+      isDatesFirstEntered=false;
+    }
+
+    //step four: cabin class
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="cabin-class"){
+      let travel_cabin_init_messages = [
+        "Alright... Almost done. One last step is to provide flight class.. You should say one of the following.. 'first class', 'economy', 'business', 'premium', or 'cheapest'"
+      ]
+      
+      bot_reply_msg = travel_cabin_init_messages[Math.floor(Math.random() * travel_cabin_init_messages.length)];
+      if(!isCabinClassFirstEntered){
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+        }else{
+
+        }
+      }
+      isCabinClassFirstEntered=false;
     }
 
   //---------------------end of flight booking process-------------------------------------//

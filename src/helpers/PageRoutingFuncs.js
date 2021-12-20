@@ -38,6 +38,7 @@ export function show_home_page(is_from_search=false){
         if($(window).width() > 700)
             document.querySelector("header").style.backgroundColor="#000000";
         document.getElementById("main_hero_section").style.display="block";
+        localStorage.removeItem("is_home_page");
     }else{
         document.getElementById("main_hero_section").style.display="none";
     }
