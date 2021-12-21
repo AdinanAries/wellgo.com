@@ -271,6 +271,7 @@ let scroll_chat=true;
 let isTripRoundFirstEntered=true;
 let isDatesFirstEntered=true;
 let isCabinClassFirstEntered=true;
+let isSearchingFlightFirstEnter=true;
 let selectedOriginAirport="";
 let selectedDestinationAirport=""
 function select_departure_airports_suggested_by_bot(iata, elemid){
@@ -323,10 +324,19 @@ async function run_chat_instance(){
           bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
           wellgo_bot.status = "";
           wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
         }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "done"){
           
           if(selectedOriginAirport==="" && selectedDestinationAirport===""){
-            bot_reply_msg=`Please select your airports above or enter new ones in the form or airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
+            bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
           }else if(selectedOriginAirport===""){
             bot_reply_msg=`umm... You did not select departure airport`
           }else if(selectedDestinationAirport===""){
@@ -415,6 +425,15 @@ async function run_chat_instance(){
           bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
           wellgo_bot.status = "";
           wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
         }else{
 
           if((document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "round trip"
@@ -440,6 +459,7 @@ async function run_chat_instance(){
 
     //step three: travel dates
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="departure-return-dates"){
+      isTripRoundFirstEntered=true;
       let travel_dates_init_messages =[]
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_messages = [
@@ -457,6 +477,15 @@ async function run_chat_instance(){
           bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
           wellgo_bot.status = "";
           wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
         }else{
           let validation = validate_user_dates_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim(), JSON.parse(localStorage.getItem("search_obj")).type)
           console.log("date validation: ", validation);
@@ -473,6 +502,7 @@ async function run_chat_instance(){
 
     //step four: cabin class
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="cabin-class"){
+      isDatesFirstEntered=true;
       let travel_cabin_init_messages = [
         "Alright... Almost done. One last step is to provide flight class.. You should say one of the following.. 'first class', 'economy', 'business', 'premium', or 'cheapest'"
       ]
@@ -488,6 +518,15 @@ async function run_chat_instance(){
           bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
           wellgo_bot.status = "";
           wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
         }else{
 
           if(
@@ -514,6 +553,35 @@ async function run_chat_instance(){
         }
       }
       isCabinClassFirstEntered=false;
+    }
+
+    //step five: searching flight schedules
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
+      isCabinClassFirstEntered=true;
+      if(!isSearchingFlightFirstEnter){
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else{
+          bot_reply_msg = `Please holdon while I search your flight... or say 'stop' if we're not doing it anymore...`
+        }
+      }
+      isSearchingFlightFirstEnter=false
     }
 
   //---------------------end of flight booking process-------------------------------------//
@@ -742,17 +810,14 @@ function start_book_with_vitual_agent(){
   let start_air_booking_intro = [
     `Hey! &#128400;... We're only 4 steps away...
         please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
-         that is a city to city answer, or 'United States to France',
-          which is a country to country answer, or 'La Guardia to Charles de Gaulle Intl',
-           which is a airport to airpot answer.`,
-    `Sup! &#128400; kk.. let's dive right in... To start with, please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
-          that is a city to city answer, or 'United States to France',
-            which is a country to country answer, or 'La Guardia to Charles de Gaulle Intl',
-             which is a airport to airpot answer.`,
+          or something like 'United States to France'...
+          , or 'La Guardia to Charles de Gaulle Intl'`,
+    `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 'New York to Paris',
+          , or something like 'United States to France',
+            , or 'La Guardia to Charles de Gaulle Intl'`,
     `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
-          that is a city to city answer, or 'United States to France',
-            which is a country to country answer, or 'La Guardia to Charles de Gaulle Intl',
-             which is a airport to airpot answer.`,
+          , or something like 'United States to France',
+            , or 'La Guardia to Charles de Gaulle Intl'`,
   ]
   txt = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
   toggle_show_hp_support_chat_container();
