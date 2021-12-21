@@ -271,18 +271,21 @@ let scroll_chat=true;
 let isTripRoundFirstEntered=true;
 let isDatesFirstEntered=true;
 let isCabinClassFirstEntered=true;
-
+let selectedOriginAirport="";
+let selectedDestinationAirport=""
 function select_departure_airports_suggested_by_bot(iata, elemid){
   Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(244,0,0,0.1)"
   });
-  document.getElementById(elemid).style.backgroundColor="rgba(244,0,0,0.3)"
+  document.getElementById(elemid).style.backgroundColor="rgba(244,0,0,0.3)";
+  selectedOriginAirport=iata;
 }
 function select_destination_airports_suggested_by_bot(iata, elemid){
   Array.from(document.querySelectorAll(".destination_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(0,244,0,0.1)"
   });
-  document.getElementById(elemid).style.backgroundColor="rgba(0,244,0,0.3)"
+  document.getElementById(elemid).style.backgroundColor="rgba(0,244,0,0.3)";
+  selectedDestinationAirport=iata
 }
 
 async function run_chat_instance(){
@@ -320,6 +323,17 @@ async function run_chat_instance(){
           bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
           wellgo_bot.status = "";
           wellgo_bot.step = "";
+        }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "done"){
+          
+          if(selectedOriginAirport==="" && selectedDestinationAirport===""){
+            bot_reply_msg=`Please select your airports above or enter new ones in the form or airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
+          }else if(selectedOriginAirport===""){
+            bot_reply_msg=`umm... You did not select departure airport`
+          }else if(selectedDestinationAirport===""){
+            bot_reply_msg=`Please select your destination airport`
+          }else{
+            wellgo_bot.step="trip-round";
+          }
         }else{
           if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "yes" && wellgo_bot.step==="origin-destination"){
             wellgo_bot.step="trip-round"
@@ -343,7 +357,7 @@ async function run_chat_instance(){
               }else{
                 scroll_chat=false;
                 bot_reply_msg = `
-                So, I found a couple airports, Please pick your departure and destination airports below...
+                So, I found a couple airports, select your departure and destination airports and then say 'done' after that...
                 <br/><br/>
                 <span style="font-weight: bolder; font-size: 12px;">Departure</span><br/><br/>`;
                 for(i=0;i<origin_airpots.length;i++){
@@ -364,7 +378,7 @@ async function run_chat_instance(){
                   if(i>4)break;
                 }
 
-                bot_reply_msg += `and if incase you don't see your airport then please say new airports, or cities below.... like 'New York to Paris' or...`
+                bot_reply_msg += `and incase you don't see your airport then re-enter cities or airports like 'New York to Paris' or...`
 
               }
               
@@ -387,7 +401,7 @@ async function run_chat_instance(){
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="trip-round"){
 
       let trip_round_init_mgs = [
-        "K.. cool.. do you want a return flight?... say 'round trip' if you do or say 'one way' if dont"
+        "K.. cool.. do you want a return flight?... say 'round trip' if you do or say 'one way' if you dont"
       ]
       bot_reply_msg = trip_round_init_mgs[Math.floor(Math.random() * trip_round_init_mgs.length)];
 
@@ -410,7 +424,7 @@ async function run_chat_instance(){
             //add trip round to stored localstorage obj
           }else{
             let stop_trip_round_err_reply_msgs = [
-              "I should be expecting you to say 'round trip' or 'one way'",
+              "I should be expecting you to say either 'round trip' or 'one way'",
               "You should say 'round trip' to include return flights or say 'one way' for only departure flights",
               "Ummm. You're supposed to say 'one way' or 'round trip'"
             ];
@@ -476,6 +490,27 @@ async function run_chat_instance(){
           wellgo_bot.step = "";
         }else{
 
+          if(
+            document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "first class" ||
+            document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "economy" ||
+            document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "business" ||
+            document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "premium" ||
+            document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "cheapest"
+            ){
+
+              //set cabin class here
+              wellgo_bot.step = "searching-flight";
+              bot_reply_msg = `Great! give me a minute to get you some flight schedules`
+
+          }else{
+            let err_msgs = [
+              "Your answer should be one of 'first class', 'economy', 'business', 'premium', or 'cheapest'",
+              "You should say either 'first class', or 'economy', or 'business', or 'premium', or 'cheapest'",
+              "Umm... your answer didn't match any of 'first class', 'economy', 'business', 'premium', or 'cheapest'"
+            ]
+            bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
+          }
+          
         }
       }
       isCabinClassFirstEntered=false;
