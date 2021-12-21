@@ -271,7 +271,22 @@ let scroll_chat=true;
 let isTripRoundFirstEntered=true;
 let isDatesFirstEntered=true;
 let isCabinClassFirstEntered=true;
+
+function select_departure_airports_suggested_by_bot(iata, elemid){
+  Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
+    each.style.backgroundColor="rgba(244,0,0,0.1)"
+  });
+  document.getElementById(elemid).style.backgroundColor="rgba(244,0,0,0.3)"
+}
+function select_destination_airports_suggested_by_bot(iata, elemid){
+  Array.from(document.querySelectorAll(".destination_airport_suggested_by_bot")).forEach(each=>{
+    each.style.backgroundColor="rgba(0,244,0,0.1)"
+  });
+  document.getElementById(elemid).style.backgroundColor="rgba(0,244,0,0.3)"
+}
+
 async function run_chat_instance(){
+  scroll_chat=true;
   document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
   //console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
   let bot_reply=undefined;
@@ -333,7 +348,7 @@ async function run_chat_instance(){
                 <span style="font-weight: bolder; font-size: 12px;">Departure</span><br/><br/>`;
                 for(i=0;i<origin_airpots.length;i++){
                   bot_reply_msg += `
-                    <span style="background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    <span id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('iata', 'departure_airport_suggested_by_bot_${i}')" style="background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
                       ${origin_airpots[i].city} - ${origin_airpots[i].name}<br/>
                     </span><br/><br/>
                   `;
@@ -342,7 +357,7 @@ async function run_chat_instance(){
                 bot_reply_msg += `<br/><span style="font-weight: bolder; font-size: 12px;">Destination</span><br/><br/>`
                 for(i=0;i<destination_airports.length;i++){
                   bot_reply_msg += `
-                    <span style="background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    <span id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('iata', 'destination_airport_suggested_by_bot_${i}')" style="background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
                     ${destination_airports[i].city} - ${destination_airports[i].name}<br/>
                     </span><br/><br/>
                   `;
@@ -491,6 +506,7 @@ async function run_chat_instance(){
 }
 
 async function default_run_chat_instance(msg){
+  scroll_chat=true;
   document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
   let bot_reply=undefined;
   let bot_reply_msg;
