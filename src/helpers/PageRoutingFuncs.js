@@ -1,4 +1,4 @@
-import { toggle_main_page_search_filters, chat_bot_new_msg } from "../components/ExploreDestination";
+import { chat_bot_new_msg } from "../components/ExploreDestination";
 import { return_new_rand_msg } from "../chatbot_funcs";
 
 import $ from "jquery";
@@ -143,7 +143,7 @@ export function show_help_page(){
 
     localStorage.removeItem("is_home_page");
 
-    toggle_main_page_search_filters()
+    //toggle_main_page_search_filters()
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
@@ -164,11 +164,11 @@ export function show_help_page(){
 
 export function show_full_search_form(){
     
-    if(document.getElementById("landing_page_search_filters_container").style.display==="none"){
+    /*if(document.getElementById("landing_page_search_filters_container").style.display==="none"){
         //do nothing
     }else{
         toggle_main_page_search_filters();
-    }
+    }*/
 
     window.scrollTo(0, 0);
 

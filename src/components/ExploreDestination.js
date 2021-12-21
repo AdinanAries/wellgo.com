@@ -9,7 +9,6 @@ import user_account_icon from "../icons/user_account_icon.png";
 import botIcon from "../icons/botIcon.svg";
 
 import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../helpers/PageRoutingFuncs';
-import { toggle_show_hp_support_chat_container } from "./HPSupport";
 
 import $ from "jquery"
 
@@ -26,7 +25,7 @@ export default function ExploreDestinations(){
                         </div>
                         <div>
                             <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.5)", height: 70, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ display: "flex", flexDirection: "row", justifyContent: "space-between", zIndex: 5}}>
-                                <div onClick={toggle_show_hp_support_chat_container} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
+                                <div id="landing_page_search_form_bar_bot_img" style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
                                     {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
                                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
                                 </div>
@@ -35,7 +34,7 @@ export default function ExploreDestinations(){
                                     <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
                                         &#128400; Hey...</p>
                                 </div>
-                                <div id="landing_page_search_form_show_filters_btn" onClick={toggle_main_page_search_filters} style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
+                                <div id="landing_page_search_form_show_filters_btn" style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
                                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                         {/*<p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>*/}
@@ -48,21 +47,21 @@ export default function ExploreDestinations(){
                                     <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 40, borderBottomLeftRadius: 40,}}>
                                         <div style={{padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                             <div style={{display: "flex", flexDirection: "row",}}>
-                                                <div onClick={show_full_search_form} className="searchBtn" style={{marginRight: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)", fontFamily: "'Prompt', sans-serif", border: "none", borderRadius: 50, marginLeft: 10, fontSize: 14}}>
+                                                <div onClick={show_full_search_form} id="landing_page_search_bar_show_main_search_form_btn" className="searchBtn" style={{marginRight: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)", fontFamily: "'Prompt', sans-serif", border: "none", borderRadius: 50, marginLeft: 10, fontSize: 14}}>
                                                     <i className="fa fa-search" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Search Flight
                                                 </div>
-                                                <div onClick={show_help_page} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "#ae6500", fontFamily: "'Prompt', sans-serif", border: "none", borderRadius: 50, marginRight: 10, fontSize: 14}}>
+                                                <div onClick={show_help_page} id="landing_page_search_bar_help_pg_btn" className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "#ae6500", fontFamily: "'Prompt', sans-serif", border: "none", borderRadius: 50, marginRight: 10, fontSize: 14}}>
                                                     <i className="fa fa-question" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Get Help
                                                 </div>
                                             </div>
                                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", borderLeft: "1px solid rgba(0,0,0,0.1)", paddingLeft: 10}}>
-                                                <div onClick={start_call_from_search_filters} className="searchBtn" style={{boxShadow: "none", background: "none", fontFamily: "'Prompt', sans-serif", borderRadius: 0, marginRight: 10, fontSize: 14}}>
+                                                <div id="landing_page_search_bar_call_btn" className="searchBtn" style={{boxShadow: "none", background: "none", fontFamily: "'Prompt', sans-serif", borderRadius: 0, marginRight: 10, fontSize: 14}}>
                                                     <i className="fa fa-phone" style={{color: "rgb(46, 46, 46)", fontSize: 19, textShadow: "1px 2px 3px rgba(0,0,0,0.33)"}}></i>
                                                 </div>
                                             </div>
                                         </div>
                                         <div style={{padding: 5}}>
-                                            <div onClick={start_book_with_vitual_agent} style={{borderRadius: 40, borderTopRightRadius: 10, borderTopLeftRadius: 10, padding: 16, border: "1px solid rgba(0,0,0,0.1)", backgroundColor: "#eee"}}>
+                                            <div id="landing_page_search_bar_book_w_vta_btn" style={{borderRadius: 40, borderTopRightRadius: 10, borderTopLeftRadius: 10, padding: 16, border: "1px solid rgba(0,0,0,0.1)", backgroundColor: "#eee"}}>
                                                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', sans-serif", fontSize: 14}}>
                                                 <i className="fa fa-commenting" style={{marginRight: 10, fontSize: 19, color: "rgb(23, 87, 148)"}}></i>
                                                 Book with Virtual Agent</p>
@@ -108,26 +107,6 @@ export default function ExploreDestinations(){
     );
 }
 
-let is_landing_page_search_filters_open = false;
-export function toggle_main_page_search_filters(){
-    if(is_landing_page_search_filters_open){
-        setTimeout(()=>{
-            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(0,0,0,0.3)";
-            document.getElementById("landing_page_search_form_bar").style.borderWidth = "1px";
-            document.getElementById("landing_page_search_input_text_display").style.color = "white";
-        }, 200);
-        $("#landing_page_search_filters_container").slideUp("fast");
-        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(0deg)";
-    }else{
-        document.getElementById("landing_page_search_form_bar").style.backgroundColor = "white";
-        document.getElementById("landing_page_search_form_bar").style.borderWidth = "0";
-        document.getElementById("landing_page_search_input_text_display").style.color = "rgba(0,0,0,0.7)";
-        $("#landing_page_search_filters_container").slideDown("fast");
-        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(180deg)";
-    }
-    is_landing_page_search_filters_open = !is_landing_page_search_filters_open;
-}
-
 var i = 0;
 var txt = "Greetings! &#128400; Search flights or get help, below &#128071;"; /*The text click to start search...*/
 var speed = 30; /* The speed/duration of the effect in milliseconds */
@@ -161,15 +140,4 @@ $(document).ready(()=>{
         typeWriter();
     }, 1000);
 
-    setTimeout(()=>toggle_main_page_search_filters(), 2000);
 });
-
-function start_book_with_vitual_agent(){
-    toggle_show_hp_support_chat_container();
-    toggle_main_page_search_filters();
-}
-
-function start_call_from_search_filters(){
-    alert("placing your call now");
-    toggle_main_page_search_filters();
-}

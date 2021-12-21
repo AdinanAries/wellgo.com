@@ -6,7 +6,7 @@ export default function HPSupportBtn(){
     return (
         <div className="hp_support_container">
             <div id="support_chat_container" className="support_chat_div_container">
-                <p onClick={toggle_show_hp_support_chat_container} className="page-popup-cover-close-btn">
+                <p id="main_chat_hp_support_container_close_btn" className="page-popup-cover-close-btn">
                     &times;
                 </p>
                 <div className="support_chat_sub_container" id="support_chat_settings_container" style={{display: "none"}}>
@@ -59,7 +59,7 @@ export default function HPSupportBtn(){
                                             <span style={{color: "goldenrod", fontSize: 11, marginRight: "10px"}}> / V1.0.0</span>
                                         </p>
                                     </div>
-                                    <div style={{borderRadius: 50, borderTopLeftRadius: 0, padding: "10px 20px", backgroundColor: "rgba(223,134,0,0.2)", boxShadow: "0 0 10px rgba(0,0,0,0.1)"}}>
+                                    <div  onClick={show_support_chat_messaging_container} style={{cursor: "pointer", borderRadius: 50, borderTopLeftRadius: 0, padding: "10px 20px", backgroundColor: "rgba(223,134,0,0.2)", boxShadow: "0 0 10px rgba(0,0,0,0.1)"}}>
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
                                             This place should contain your last chat with the bot...</p>
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 11, color: "rgba(84,0,55,0.8)", marginTop: 5, marginLeft: 10}}>
@@ -147,20 +147,20 @@ export default function HPSupportBtn(){
                     </div>
                 </div>
             </div>
-            <div onClick={toggle_show_hp_support_chat_container} id="main_homepage_start_support_btn" className="homepage_start_support_btn">
+            <div id="main_homepage_start_support_btn" className="homepage_start_support_btn">
                 <i className="fa fa-comments"></i>
             </div>
             <div id="main_chat_bot_tips_poppup_section" className="chatbot_popup_tip">
                 <div onClick={hide_new_chatbot_tip} className="chatbot_popup_tip_close_btn">
                     &times;
                 </div>
-                <div onClick={toggle_show_hp_support_chat_container} className="chatbot_popup_tip_msg">
+                <div id="main_chatbot_popup_tip_msg" className="chatbot_popup_tip_msg">
                     <p>
                         <i className="fa fa-lightbulb-o"></i>
                         Hey! I'm AD, I'll be assisting you around here... cheers... &#127866;
                     </p>
                 </div>
-                <div onClick={toggle_show_hp_support_chat_container} className="chatbot_popup_tip_img">
+                <div id="main_chatbot_popup_tip_img" className="chatbot_popup_tip_img">
                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
                 </div>
             </div>
@@ -183,59 +183,12 @@ function return_bot_chat_loading_markup(){
     `
 }
 
-var i = 0;
-let is_chat_container_shown = false;
-export function toggle_show_hp_support_chat_container(){
-    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup();
-    if(is_chat_container_shown){
-        document.getElementById("chatbot_greenting_message_p").innerHTML = '';
-        $("#support_chat_container").slideUp("fast");
-        //document.getElementById("support_chat_container").style.display = "none";
-        document.getElementById("chatbot_provided_manual_channels").style.display="none";
-        document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
-        i=0;
-    }else{
-        setTimeout(()=>{
-            document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
-        },1000)
-        hide_new_chatbot_tip();
-        typeWriter();
-        document.getElementById("support_chat_container").style.display = "block";
-        setTimeout(()=>{
-            document.getElementById("chatbot_provided_manual_channels").style.display="block";
-            document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
-        },1200);
-    }
-    is_chat_container_shown = !is_chat_container_shown;
-}
-
-
-var txt = `Hey! &#128400; We are currently upgrading some site features...
-            I'm sorry I may not be very helpful RN... &#128530;
-            Please use our manual channels below. &#128071;`; /* The text */
-var speed = 20; /* The speed/duration of the effect in milliseconds */
-
-function typeWriter() {
-  if (i < txt.length) {
-        if(txt.charAt(i) === "&" && txt.charAt(i+1) === "#"){
-            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(i, i+8);
-            i = i+9;
-        }else{
-            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i); 
-            i++;
-        }
-    //document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i);
-    //i++;
-    setTimeout(typeWriter, speed);
-  }
-}
-
-export function show_new_chatbot_tip(msg){
+/*export function show_new_chatbot_tip(msg){
     document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
     setTimeout(()=>hide_new_chatbot_tip(),15000);
-}
+}*/
 
-export function hide_new_chatbot_tip(msg){
+export function hide_new_chatbot_tip(){
     $("#main_chat_bot_tips_poppup_section").slideUp("fast");
 }
 
@@ -257,9 +210,9 @@ export function show_support_chat_settings_container(){
     document.getElementById("chat_settings_page_bot_status_display").innerHTML = return_bot_chat_status_markup("online")
 }
 
-$(document).ready(()=>{
+/*$(document).ready(()=>{
     setTimeout(()=>show_new_chatbot_tip("msg"),10000);
-});
+});*/
 
 function chat_txt_input_focus_func(){
     document.getElementById("main_support_chat_user_input_txt_container").style.height = "100px";

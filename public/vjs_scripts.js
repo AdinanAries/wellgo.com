@@ -218,8 +218,8 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
-//bot_server_base_url = "http://localhost:5001";
-bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+bot_server_base_url = "http://localhost:5001";
+//bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 
 var get_answer_from_bot = (user_query) => {
   //console.log(user_query)
@@ -267,6 +267,7 @@ var get_bot_query_autocomplete = (input_q)=>{
   });
 } 
 
+let scroll_chat=true;
 let isTripRoundFirstEntered=true;
 let isDatesFirstEntered=true;
 let isCabinClassFirstEntered=true;
@@ -310,12 +311,48 @@ async function run_chat_instance(){
           }else{
             wellgo_bot.step="origin-destination";
             if(validation.isValid){
+              
               //find airports here;
               //if origin and destination airports contains more that one element, then give you a list using div containers to select from
               //after selection, set wellgo_bot.step="departure-arrival-dates"
-              let origin_airpots = ["new york"];
-              let destination_airports = ["paris"];
-              bot_reply_msg =  `so you said from ${validation.origin} to ${validation.destination} and I found ${origin_airpots[0]} to ${destination_airports[0]}... Say 'yes' to continue or enter new places or say 'stop' to do something else`;
+              let origin_airpots = filter_airports_array_based_input_value(validation.origin);
+              let destination_airports = filter_airports_array_based_input_value(validation.destination);
+              console.log(origin_airpots);
+              console.log(destination_airports);
+              if(origin_airpots.length === 1 && destination_airports.length === 1){
+
+                let origin_airports_txt = `${origin_airpots[0].city} (${origin_airpots[0].name} - ${origin_airpots[0].country})`;
+                let destination_airports_txt = `${destination_airports[0].city} (${destination_airports[0].name} - ${destination_airports[0].country})`;
+                bot_reply_msg =  `so you said from ${validation.origin} to ${validation.destination} and I found ${origin_airports_txt} to ${destination_airports_txt}... Say 'yes' to continue or enter new places or say 'stop' to do something else`;
+
+              }else{
+                scroll_chat=false;
+                bot_reply_msg = `
+                So, I found a couple airports, Please pick your departure and destination airports below...
+                <br/><br/>
+                <span style="font-weight: bolder; font-size: 12px;">Departure</span><br/><br/>`;
+                for(i=0;i<origin_airpots.length;i++){
+                  bot_reply_msg += `
+                    <span style="background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                      ${origin_airpots[i].city} - ${origin_airpots[i].name}<br/>
+                    </span><br/><br/>
+                  `;
+                  if(i>4)break;
+                }
+                bot_reply_msg += `<br/><span style="font-weight: bolder; font-size: 12px;">Destination</span><br/><br/>`
+                for(i=0;i<destination_airports.length;i++){
+                  bot_reply_msg += `
+                    <span style="background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    ${destination_airports[i].city} - ${destination_airports[i].name}<br/>
+                    </span><br/><br/>
+                  `;
+                  if(i>4)break;
+                }
+
+                bot_reply_msg += `and if incase you don't see your airport then please say new airports, or cities below.... like 'New York to Paris' or...`
+
+              }
+              
               
             }else{
               bot_reply_msg = validation.msg;
@@ -440,14 +477,16 @@ async function run_chat_instance(){
     document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
     setTimeout(()=>{
       document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(bot_reply_msg);
-      $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
+      if(scroll_chat)
+        $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
       document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
       document.getElementById("suggested_bot_query_display").innerHTML = "";
     }, 1000)
     
   }
   document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
-  $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+  if(scroll_chat)
+    $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
   
 }
 
@@ -528,6 +567,165 @@ document.querySelector("#main_support_chat_user_input_txt_container textarea").a
   
 });
 
+
+var ig = 0;
+let is_chat_container_shown = false;
+function toggle_show_hp_support_chat_container(){
+    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup();
+    if(is_chat_container_shown){
+        document.getElementById("chatbot_greenting_message_p").innerHTML = '';
+        $("#support_chat_container").slideUp("fast");
+        //document.getElementById("support_chat_container").style.display = "none";
+        if(document.getElementById("chatbot_provided_manual_channels"))
+          document.getElementById("chatbot_provided_manual_channels").style.display="none";
+        document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
+        ig=0;
+    }else{
+        setTimeout(()=>{
+            document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
+        },1000)
+        hide_new_chatbot_tip();
+        typeWriter();
+        document.getElementById("support_chat_container").style.display = "block";
+        setTimeout(()=>{
+          if(document.getElementById("chatbot_provided_manual_channels"))
+              document.getElementById("chatbot_provided_manual_channels").style.display="block";
+            document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
+        },1200);
+    }
+    is_chat_container_shown = !is_chat_container_shown;
+}
+
+var txt = ""; /* The text */
+var speed = 20; /* The speed/duration of the effect in milliseconds */
+
+function typeWriter() {
+  if (ig < txt.length) {
+        if(txt.charAt(ig) === "&" && txt.charAt(ig+1) === "#"){
+            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, ig+8);
+            ig = ig+9;
+        }else{
+            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(ig); 
+            ig++;
+        }
+    //document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i);
+    //i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+function show_new_chatbot_tip(msg){
+    document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
+    setTimeout(()=>hide_new_chatbot_tip(),15000);
+}
+
+function hide_new_chatbot_tip(){
+    $("#main_chat_bot_tips_poppup_section").slideUp("fast");
+}
+
+$(document).ready(()=>{
+  setTimeout(()=>show_new_chatbot_tip("msg"),10000);
+  setTimeout(()=>toggle_main_page_search_filters(), 2000);
+});
+
+document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
+  txt = `Hey! &#128400; We are currently upgrading some site features...
+            I'm sorry I may not be very helpful RN... &#128530;
+            Please use our manual channels below. &#128071;`
+  toggle_show_hp_support_chat_container();
+});
+
+document.getElementById("main_chatbot_popup_tip_msg").addEventListener("click", e=>{
+  txt = `Hey! &#128400; We are currently upgrading some site features...
+            I'm sorry I may not be very helpful RN... &#128530;
+            Please use our manual channels below. &#128071;`
+  toggle_show_hp_support_chat_container();
+});
+
+document.getElementById("main_chatbot_popup_tip_img").addEventListener("click", e=>{
+  txt = `Hey! &#128400; We are currently upgrading some site features...
+            I'm sorry I may not be very helpful RN... &#128530;
+            Please use our manual channels below. &#128071;`
+  toggle_show_hp_support_chat_container();
+});
+
+document.getElementById("main_chat_hp_support_container_close_btn").addEventListener("click", e=>{
+  toggle_show_hp_support_chat_container();
+});
+
+document.getElementById("landing_page_search_form_bar_bot_img").addEventListener("click", e=>{
+  txt = `Hey! &#128400; We are currently upgrading some site features...
+            I'm sorry I may not be very helpful RN... &#128530;
+            Please use our manual channels below. &#128071;`
+  toggle_show_hp_support_chat_container()
+});
+
+let is_landing_page_search_filters_open = false;
+function toggle_main_page_search_filters(){
+    if(is_landing_page_search_filters_open){
+        setTimeout(()=>{
+            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(0,0,0,0.3)";
+            document.getElementById("landing_page_search_form_bar").style.borderWidth = "1px";
+            document.getElementById("landing_page_search_input_text_display").style.color = "white";
+        }, 200);
+        $("#landing_page_search_filters_container").slideUp("fast");
+        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(0deg)";
+    }else{
+        document.getElementById("landing_page_search_form_bar").style.backgroundColor = "white";
+        document.getElementById("landing_page_search_form_bar").style.borderWidth = "0";
+        document.getElementById("landing_page_search_input_text_display").style.color = "rgba(0,0,0,0.7)";
+        $("#landing_page_search_filters_container").slideDown("fast");
+        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(180deg)";
+    }
+    is_landing_page_search_filters_open = !is_landing_page_search_filters_open;
+}
+
+function start_book_with_vitual_agent(){
+  document.getElementById("hp_support_chat_items").innerHTML = `
+    <div class="support_chat_bot_sent_msg_container">
+      <div class="support_chat_bot_sent_msg_inner_container">
+          <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
+      </div>
+    </div>
+  `;
+  let start_air_booking_intro = [
+    `Hey! &#128400;... We're only 4 steps away...
+        please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
+         that is a city to city answer, or 'United States to France',
+          which is a country to country answer, or 'La Guardia to Charles de Gaulle Intl',
+           which is a airport to airpot answer.`,
+    `Sup! &#128400; kk.. let's dive right in... To start with, please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
+          that is a city to city answer, or 'United States to France',
+            which is a country to country answer, or 'La Guardia to Charles de Gaulle Intl',
+             which is a airport to airpot answer.`,
+    `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
+          that is a city to city answer, or 'United States to France',
+            which is a country to country answer, or 'La Guardia to Charles de Gaulle Intl',
+             which is a airport to airpot answer.`,
+  ]
+  txt = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
+  toggle_show_hp_support_chat_container();
+  toggle_main_page_search_filters();
+  wellgo_bot.status = "begin_air_booking";
+  wellgo_bot.step = "origin-destination";
+}
+
+document.getElementById("landing_page_search_bar_call_btn").addEventListener("click", e=>{
+  alert("placing your call now");
+  toggle_main_page_search_filters();
+});
+document.getElementById("landing_page_search_form_show_filters_btn").addEventListener("click", e=>{
+  toggle_main_page_search_filters()
+});
+document.getElementById("landing_page_search_bar_show_main_search_form_btn").addEventListener("click", e=>{
+  toggle_main_page_search_filters()
+});
+document.getElementById("landing_page_search_bar_help_pg_btn").addEventListener("click", e=>{
+  toggle_main_page_search_filters()
+});
+document.getElementById("landing_page_search_bar_book_w_vta_btn").addEventListener("click", e=>{
+  start_book_with_vitual_agent();
+});
 //console.log(document.getElementById("hp_support_user_submit_chat_btn"))
 
 
