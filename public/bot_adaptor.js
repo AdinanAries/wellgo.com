@@ -82,7 +82,14 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
             
         ]
 
-        let dates = inputs.trim().split("to");
+        if(!inputs.split(" ").includes("to")){
+            return{
+                isValid: false,
+                msg: err_msg[Math.floor(Math.random() * err_msg.length)]
+            }
+        }
+
+        let dates = inputs.trim().split(" to ");
 
         if(dates.length !== 2){
             return{

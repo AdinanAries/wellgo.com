@@ -1257,6 +1257,21 @@ footer {
   color: white;
   font-size: 17px;
 }
+.bot_view_flights_all_details{
+  position: absolute;
+  display: none;
+  top: 85px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 150px);
+  overflow-y: auto;
+  z-index: 1;
+  background-color: rgb(241, 255, 250);
+  animation: pop-in 0.2s ease-out;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
 .support_chat_div_container{
   position: relative;
   display: none;
@@ -1332,6 +1347,7 @@ footer {
   border: 1px solid rgba(0, 0, 0, 0.1);
   overflow: hidden;
   height: 50px;
+  z-index: 2;
 }
 .support_chat_user_input_txt_inner_container{
   width: 100%;

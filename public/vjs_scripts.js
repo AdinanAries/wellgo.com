@@ -315,7 +315,17 @@ function select_destination_airports_suggested_by_bot(iata, icao, elemid){
 
   window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
-
+function clear_airports_suggested_by_bot_ids(){
+  Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
+    each.id="";
+  });
+  Array.from(document.querySelectorAll(".destination_airport_suggested_by_bot")).forEach(each=>{
+    each.id="";
+  });
+}
+function main_bot_view_flights_all_details_func(){
+  document.getElementById("main_bot_view_flights_all_details").style.display="block";
+}
 async function run_chat_instance(){
   scroll_chat=true;
   document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
@@ -369,6 +379,7 @@ async function run_chat_instance(){
           }else if(selectedDestinationAirport===""){
             bot_reply_msg=`Please select your destination airport`
           }else{
+            clear_airports_suggested_by_bot_ids();
             wellgo_bot.step="trip-round";
           }
         }else{
@@ -655,7 +666,7 @@ async function run_chat_instance(){
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
         for(i=0;i<5;i++){
           bot_reply_msg += `
-            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="view_search_result_by_bot_('iata', 'icao', 'search_result_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
+            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
               $133.33 
               <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
               <br/>
@@ -788,6 +799,7 @@ async function default_run_chat_instance(msg){
           }else if(selectedDestinationAirport===""){
             bot_reply_msg=`Please select your destination airport`
           }else{
+            clear_airports_suggested_by_bot_ids();
             wellgo_bot.step="trip-round";
           }
         }else{
@@ -1073,7 +1085,7 @@ async function default_run_chat_instance(msg){
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
         for(i=0;i<5;i++){
           bot_reply_msg += `
-            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="view_search_result_by_bot_('iata', 'icao', 'search_result_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
+            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func();" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
               $133.33 
               <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
               <br/>

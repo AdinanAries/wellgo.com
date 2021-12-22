@@ -6,6 +6,13 @@ export default function HPSupportBtn(){
     return (
         <div className="hp_support_container">
             <div id="support_chat_container" className="support_chat_div_container">
+            <div id="main_bot_view_flights_all_details" className="bot_view_flights_all_details">
+                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                    <div onClick={()=>document.getElementById("main_bot_view_flights_all_details").style.display="none"} style={{padding: 14, color: "white", backgroundColor: "crimson", fontSize: 14, borderRadius: 50}}>
+                        <i style={{marginRight: 10}} className="fa fa-times"></i>close</div>
+                    <div>Select</div>
+                </div>
+            </div>
                 <p id="main_chat_hp_support_container_close_btn" className="page-popup-cover-close-btn">
                     &times;
                 </p>
