@@ -274,19 +274,46 @@ let isCabinClassFirstEntered=true;
 let isSearchingFlightFirstEnter=true;
 let selectedOriginAirport="";
 let selectedDestinationAirport=""
-function select_departure_airports_suggested_by_bot(iata, elemid){
+
+let selectedAFlight=false;
+let hasBotReturnedResults=true;
+function select_departure_airports_suggested_by_bot(iata, icao,elemid){
   Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(244,0,0,0.1)"
   });
   document.getElementById(elemid).style.backgroundColor="rgba(244,0,0,0.3)";
   selectedOriginAirport=iata;
+  //add_origin_input_airport_to_history(iata)
+  let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+  flight_search_data.itinerary.departure.airport = iata;
+  //fligh_search_data.origin_iata = iata;
+
+  if(iata === "\\N" || iata === "N"){
+    selectedOriginAirport=icao;
+    //add_origin_input_airport_to_history(icao)
+    flight_search_data.itinerary.departure.airport = icao;
+  }
+
+  window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
 }
-function select_destination_airports_suggested_by_bot(iata, elemid){
+function select_destination_airports_suggested_by_bot(iata, icao, elemid){
   Array.from(document.querySelectorAll(".destination_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(0,244,0,0.1)"
   });
   document.getElementById(elemid).style.backgroundColor="rgba(0,244,0,0.3)";
   selectedDestinationAirport=iata
+  //add_destination_input_airport_to_history(iata)
+  let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+  flight_search_data.itinerary.arrival.airport = iata;
+  
+  if(iata === "\\N" || iata === "N"){
+    selectedDestinationAirport=icao
+    //add_destination_input_airport_to_history(icao)
+    flight_search_data.itinerary.arrival.airport = icao;
+  }
+
+  window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
 async function run_chat_instance(){
@@ -313,7 +340,7 @@ async function run_chat_instance(){
 
     //----------------------flight booking process---------------------------------------//
     //step one: origin - destination
-    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="origin-destination"){
+    {if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="origin-destination"){
         let validation = validate_user_airports_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
           let stop_booking_reply_msgs = [
@@ -360,35 +387,69 @@ async function run_chat_instance(){
               console.log(destination_airports);
               if(origin_airpots.length === 1 && destination_airports.length === 1){
 
+                //origin airport
+                //selectedOriginAirport=origin_airpots[0].IATA;
+                //add_origin_input_airport_to_history(origin_airpots[0].IATA)
+                let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+                flight_search_data.itinerary.departure.airport = origin_airpots[0].IATA;
+                
+                if(origin_airpots[0].IATA === "\\N" || origin_airpots[0].IATA === "N"){
+                  //selectedOriginAirport=origin_airpots[0].ICAO;
+                  //add_origin_input_airport_to_history(origin_airpots[0].ICAO)
+                  flight_search_data.itinerary.departure.airport = origin_airpots[0].ICAO;
+                }
+
+                //window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
+                //destination airport
+                //add_destination_input_airport_to_history(destination_airports[0].IATA)
+                //let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+                flight_search_data.itinerary.arrival.airport = destination_airports[0].IATA;
+                
+                if(destination_airports[0].IATA === "\\N" || destination_airports[0].IATA === "N"){
+                  //selectedDestinationAirport=icao
+                  //add_destination_input_airport_to_history(destination_airports[0].ICAO)
+                  flight_search_data.itinerary.arrival.airport = destination_airports[0].ICAO;
+                }
+
+                window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
                 let origin_airports_txt = `${origin_airpots[0].city} (${origin_airpots[0].name} - ${origin_airpots[0].country})`;
                 let destination_airports_txt = `${destination_airports[0].city} (${destination_airports[0].name} - ${destination_airports[0].country})`;
                 bot_reply_msg =  `so you said from ${validation.origin} to ${validation.destination} and I found ${origin_airports_txt} to ${destination_airports_txt}... Say 'yes' to continue or enter new places or say 'stop' to do something else`;
 
+              }else if(origin_airpots.length < 1 && destination_airports.length < 1){
+                bot_reply_msg = `Umm... I didn't find any airports for '${validation.origin} to ${validation.destination}'... Please let's try to enter valid information. Try again...`;
+              }else if(origin_airpots.length < 1){
+                bot_reply_msg = `Umm... I didn't find any airports for '${validation.origin}'... Please let's try to enter valid information. Try again...`;
+              }else if(destination_airports.length < 1){
+                bot_reply_msg = `Umm... I didn't find any airports for '${validation.destination}'... Please let's try to enter valid information. Try again...`;
               }else{
                 scroll_chat=false;
                 bot_reply_msg = `
                 So, I found a couple airports, select your departure and destination airports and then say 'done' after that...
                 <br/><br/>
-                <span style="font-weight: bolder; font-size: 12px;">Departure</span><br/><br/>`;
+                <span style="font-weight: bolder; font-size: 13px;">Departure</span><br/>`;
                 for(i=0;i<origin_airpots.length;i++){
                   bot_reply_msg += `
-                    <span id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('iata', 'departure_airport_suggested_by_bot_${i}')" style="background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
-                      ${origin_airpots[i].city} - ${origin_airpots[i].name}<br/>
-                    </span><br/><br/>
+                    <p id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('iata', 'icao', 'departure_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                      ${origin_airpots[i].city} - ${origin_airpots[i].name} - ${origin_airpots[i].country}
+                    </p>
                   `;
                   if(i>4)break;
                 }
-                bot_reply_msg += `<br/><span style="font-weight: bolder; font-size: 12px;">Destination</span><br/><br/>`
+                bot_reply_msg += `<br/><span style="font-weight: bolder; font-size: 13px;">Destination</span><br/>`
                 for(i=0;i<destination_airports.length;i++){
                   bot_reply_msg += `
-                    <span id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('iata', 'destination_airport_suggested_by_bot_${i}')" style="background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
-                    ${destination_airports[i].city} - ${destination_airports[i].name}<br/>
-                    </span><br/><br/>
+                    <p id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('iata', 'icao', 'destination_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    ${destination_airports[i].city} - ${destination_airports[i].name} - ${destination_airports[i].country}
+                    </p>
                   `;
                   if(i>4)break;
                 }
 
-                bot_reply_msg += `and incase you don't see your airport then re-enter cities or airports like 'New York to Paris' or...`
+                bot_reply_msg += `<br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
+                  and incase you don't see your airport then re-enter cities or airports. eg. 'New York to Paris' or...</span>`
 
               }
               
@@ -454,7 +515,9 @@ async function run_chat_instance(){
           
         }
       }
-      isTripRoundFirstEntered=false;
+      if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() !== "stop"){
+        isTripRoundFirstEntered=false;
+      }
     }
 
     //step three: travel dates
@@ -497,7 +560,9 @@ async function run_chat_instance(){
           }
         }
       }
-      isDatesFirstEntered=false;
+      if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() !== "stop"){
+        isDatesFirstEntered=false;
+      }
     }
 
     //step four: cabin class
@@ -552,12 +617,45 @@ async function run_chat_instance(){
           
         }
       }
-      isCabinClassFirstEntered=false;
+      if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() !== "stop"){
+        isCabinClassFirstEntered=false;
+      }
+      
     }
 
     //step five: searching flight schedules
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
       isCabinClassFirstEntered=true;
+
+      if(hasBotReturnedResults){
+        scroll_chat=false;
+        bot_reply_msg += `
+        <br/>
+        Here are some schedules I found after searching... please view and select which one you want. And just say 'done' when you finish.
+        <br/><br/>
+        <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
+        for(i=0;i<5;i++){
+          bot_reply_msg += `
+            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="view_search_result_by_bot_('iata', 'icao', 'search_result_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
+              $133.33 
+              <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
+              <br/>
+              <span style="font-size: 15px;">
+                9:40am - 5:20pm
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
+              </span>
+              <br/>
+              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+              <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
+              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+              <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
+              <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
+            </p>
+          `;
+          if(i>4)break;
+        }
+      }
+      
       if(!isSearchingFlightFirstEnter){
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
           let stop_booking_reply_msgs = [
@@ -577,14 +675,25 @@ async function run_chat_instance(){
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
+        }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "done"){
+          
+          if(!selectedAFlight){
+            bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
+          }else{
+            wellgo_bot.step="trip-round";
+          }
         }else{
-          bot_reply_msg = `Please holdon while I search your flight... or say 'stop' if we're not doing it anymore...`
+
+          bot_reply_msg = `Please holdon while I search your flight... or say 'stop' if we're not doing it anymore...`;
+          
         }
       }
-      isSearchingFlightFirstEnter=false
-    }
-
-  //---------------------end of flight booking process-------------------------------------//
+      if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() !== "stop"){
+        isSearchingFlightFirstEnter=false
+      }
+    }}
+    //---------------------end of flight booking process-------------------------------------//
+  
   }else{
     bot_reply_msg = "Opps! My server failed. My bad...";
   }
@@ -622,7 +731,373 @@ async function default_run_chat_instance(msg){
   
   if(bot_reply){
     bot_reply_msg = bot_reply.msg;
-    wellgo_bot.status = bot_reply.type;
+
+    //if type === "" it means server did not return any valid response for current bot status
+    //so don't reset the status unless user says stop
+    if(bot_reply.type !== "")
+      wellgo_bot.status = bot_reply.type;
+    
+
+    //----------------------flight booking process---------------------------------------//
+    //step one: origin - destination
+    {if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="origin-destination"){
+        let validation = validate_user_airports_input_for_bot(msg.trim());
+        if(msg.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else if(msg.trim().toLowerCase() === "done"){
+          
+          if(selectedOriginAirport==="" && selectedDestinationAirport===""){
+            bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
+          }else if(selectedOriginAirport===""){
+            bot_reply_msg=`umm... You did not select departure airport`
+          }else if(selectedDestinationAirport===""){
+            bot_reply_msg=`Please select your destination airport`
+          }else{
+            wellgo_bot.step="trip-round";
+          }
+        }else{
+          if(msg.trim().toLowerCase() === "yes" && wellgo_bot.step==="origin-destination"){
+            wellgo_bot.step="trip-round"
+          }else{
+            wellgo_bot.step="origin-destination";
+            if(validation.isValid){
+              
+              //find airports here;
+              //if origin and destination airports contains more that one element, then give you a list using div containers to select from
+              //after selection, set wellgo_bot.step="departure-arrival-dates"
+              let origin_airpots = filter_airports_array_based_input_value(validation.origin);
+              let destination_airports = filter_airports_array_based_input_value(validation.destination);
+              console.log(origin_airpots);
+              console.log(destination_airports);
+              if(origin_airpots.length === 1 && destination_airports.length === 1){
+
+                //origin airport
+                //selectedOriginAirport=origin_airpots[0].IATA;
+                //add_origin_input_airport_to_history(origin_airpots[0].IATA)
+                let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+                flight_search_data.itinerary.departure.airport = origin_airpots[0].IATA;
+                
+                if(origin_airpots[0].IATA === "\\N" || origin_airpots[0].IATA === "N"){
+                  //selectedOriginAirport=origin_airpots[0].ICAO;
+                  //add_origin_input_airport_to_history(origin_airpots[0].ICAO)
+                  flight_search_data.itinerary.departure.airport = origin_airpots[0].ICAO;
+                }
+
+                //window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
+                //destination airport
+                //add_destination_input_airport_to_history(destination_airports[0].IATA)
+                //let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+                flight_search_data.itinerary.arrival.airport = destination_airports[0].IATA;
+                
+                if(destination_airports[0].IATA === "\\N" || destination_airports[0].IATA === "N"){
+                  //selectedDestinationAirport=icao
+                  //add_destination_input_airport_to_history(destination_airports[0].ICAO)
+                  flight_search_data.itinerary.arrival.airport = destination_airports[0].ICAO;
+                }
+
+                window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
+                let origin_airports_txt = `${origin_airpots[0].city} (${origin_airpots[0].name} - ${origin_airpots[0].country})`;
+                let destination_airports_txt = `${destination_airports[0].city} (${destination_airports[0].name} - ${destination_airports[0].country})`;
+                bot_reply_msg =  `so you said from ${validation.origin} to ${validation.destination} and I found ${origin_airports_txt} to ${destination_airports_txt}... Say 'yes' to continue or enter new places or say 'stop' to do something else`;
+
+              }else if(origin_airpots.length < 1 && destination_airports.length < 1){
+                bot_reply_msg = `Umm... I didn't find any airports for '${validation.origin} to ${validation.destination}'... Please let's try to enter valid information. Try again...`;
+              }else if(origin_airpots.length < 1){
+                bot_reply_msg = `Umm... I didn't find any airports for '${validation.origin}'... Please let's try to enter valid information. Try again...`;
+              }else if(destination_airports.length < 1){
+                bot_reply_msg = `Umm... I didn't find any airports for '${validation.destination}'... Please let's try to enter valid information. Try again...`;
+              }else{
+                scroll_chat=false;
+                bot_reply_msg = `
+                So, I found a couple airports, select your departure and destination airports and then say 'done' after that...
+                <br/><br/>
+                <span style="font-weight: bolder; font-size: 13px;">Departure</span><br/>`;
+                for(i=0;i<origin_airpots.length;i++){
+                  bot_reply_msg += `
+                    <p id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('iata', 'icao', 'departure_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                      ${origin_airpots[i].city} - ${origin_airpots[i].name} - ${origin_airpots[i].country}
+                    </p>
+                  `;
+                  if(i>4)break;
+                }
+                bot_reply_msg += `<br/><span style="font-weight: bolder; font-size: 13px;">Destination</span><br/>`
+                for(i=0;i<destination_airports.length;i++){
+                  bot_reply_msg += `
+                    <p id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('iata', 'icao', 'destination_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    ${destination_airports[i].city} - ${destination_airports[i].name} - ${destination_airports[i].country}
+                    </p>
+                  `;
+                  if(i>4)break;
+                }
+
+                bot_reply_msg += `<br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
+                  and incase you don't see your airport then re-enter cities or airports. eg. 'New York to Paris' or...</span>`
+
+              }
+              
+              
+            }else{
+              bot_reply_msg = validation.msg;
+              wellgo_bot.status = "begin_air_booking";
+            }
+          }
+          
+        }
+        
+
+    }
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step===""){
+      wellgo_bot.step="origin-destination";
+    }
+
+    //step two: trip-round
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="trip-round"){
+
+      let trip_round_init_mgs = [
+        "K.. cool.. do you want a return flight?... say 'round trip' if you do or say 'one way' if you dont"
+      ]
+      bot_reply_msg = trip_round_init_mgs[Math.floor(Math.random() * trip_round_init_mgs.length)];
+
+      if(!isTripRoundFirstEntered){
+        if(msg.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Alright... no promblem",
+            "Cool...",
+            "Got it..."
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else{
+
+          if((msg.trim().toLowerCase() === "round trip"
+              || msg.trim().toLowerCase() === "one way") 
+              && wellgo_bot.step==="trip-round"){
+            wellgo_bot.step="departure-return-dates";
+            //add trip round to stored localstorage obj
+          }else{
+            let stop_trip_round_err_reply_msgs = [
+              "I should be expecting you to say either 'round trip' or 'one way'",
+              "You should say 'round trip' to include return flights or say 'one way' for only departure flights",
+              "Ummm. You're supposed to say 'one way' or 'round trip'"
+            ];
+            bot_reply_msg = stop_trip_round_err_reply_msgs[Math.floor(Math.random() * stop_trip_round_err_reply_msgs.length)]
+            wellgo_bot.step="trip-round";
+
+          }
+          
+        }
+      }
+      if(msg.trim().toLowerCase() !== "stop"){
+        isTripRoundFirstEntered=false;
+      }
+    }
+
+    //step three: travel dates
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="departure-return-dates"){
+      isTripRoundFirstEntered=true;
+      let travel_dates_init_messages =[]
+      if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
+        travel_dates_init_messages = [
+          "Good! Now lets get your travel date. Please Say something like 'February 23, 2022' where February is the month and 23 is the date of month and 2022 is the year..."
+        ]
+      }
+      bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
+      if(!isDatesFirstEntered){
+        if(msg.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else{
+          let validation = validate_user_dates_input_for_bot(msg.trim(), JSON.parse(localStorage.getItem("search_obj")).type)
+          console.log("date validation: ", validation);
+          if(!validation.isValid){
+            bot_reply_msg = validation.msg;
+          }else if(validation.isValid){
+            wellgo_bot.step = "cabin-class";
+            bot_reply_msg = validation.msg;
+          }
+        }
+      }
+      if(msg.trim().toLowerCase() !== "stop"){
+        isDatesFirstEntered=false;
+      }
+    }
+
+    //step four: cabin class
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="cabin-class"){
+      isDatesFirstEntered=true;
+      let travel_cabin_init_messages = [
+        "Alright... Almost done. One last step is to provide flight class.. You should say one of the following.. 'first class', 'economy', 'business', 'premium', or 'cheapest'"
+      ]
+      
+      bot_reply_msg = travel_cabin_init_messages[Math.floor(Math.random() * travel_cabin_init_messages.length)];
+      if(!isCabinClassFirstEntered){
+        if(msg.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else{
+
+          if(
+            msg.trim().toLowerCase() === "first class" ||
+            msg.trim().toLowerCase() === "economy" ||
+            msg.trim().toLowerCase() === "business" ||
+            msg.trim().toLowerCase() === "premium" ||
+            msg.trim().toLowerCase() === "cheapest"
+            ){
+
+              //set cabin class here
+              wellgo_bot.step = "searching-flight";
+              bot_reply_msg = `Great! give me a minute to get you some flight schedules`
+
+          }else{
+            let err_msgs = [
+              "Your answer should be one of 'first class', 'economy', 'business', 'premium', or 'cheapest'",
+              "You should say either 'first class', or 'economy', or 'business', or 'premium', or 'cheapest'",
+              "Umm... your answer didn't match any of 'first class', 'economy', 'business', 'premium', or 'cheapest'"
+            ]
+            bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
+          }
+          
+        }
+      }
+      if(msg.trim().toLowerCase() !== "stop"){
+        isCabinClassFirstEntered=false;
+      }
+      
+    }
+
+    //step five: searching flight schedules
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
+      isCabinClassFirstEntered=true;
+
+      if(hasBotReturnedResults){
+        scroll_chat=false;
+        bot_reply_msg += `
+        <br/>
+        Here are some schedules I found after searching... please view and select which one you want. And just say 'done' when you finish.
+        <br/><br/>
+        <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
+        for(i=0;i<5;i++){
+          bot_reply_msg += `
+            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="view_search_result_by_bot_('iata', 'icao', 'search_result_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
+              $133.33 
+              <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
+              <br/>
+              <span style="font-size: 15px;">
+                9:40am - 5:20pm
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
+              </span>
+              <br/>
+              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+              <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
+              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+              <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
+              <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
+            </p>
+          `;
+          if(i>4)break;
+        }
+      }
+      
+      if(!isSearchingFlightFirstEnter){
+        if(msg.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else if(msg.trim().toLowerCase() === "done"){
+          
+          if(!selectedAFlight){
+            bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
+          }else{
+            wellgo_bot.step="trip-round";
+          }
+        }else{
+
+          bot_reply_msg = `Please holdon while I search your flight... or say 'stop' if we're not doing it anymore...`;
+          
+        }
+      }
+      if(msg.trim().toLowerCase() !== "stop"){
+        isSearchingFlightFirstEnter=false
+      }
+    }}
+    //---------------------end of flight booking process-------------------------------------//
+  
+
+  /*if(bot_reply){
+    bot_reply_msg = bot_reply.msg;
+    wellgo_bot.status = bot_reply.type;*/
   }else{
     bot_reply_msg = "Opps! My server failed. My bad...";
   }

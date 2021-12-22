@@ -543,6 +543,7 @@ footer {
   display: none;
   animation: pop-in 0.2s ease-out;
   position: absolute;
+  top: -5px;
   z-index: 3;
   min-height: 400px;
   width: 100%;
@@ -589,7 +590,7 @@ footer {
   color: rgba(0, 0, 0, 0.9);
 }
 .autocomplete_list_airport_city_name i {
-  color: rgb(192, 78, 182);
+  color: rgb(25, 75, 116);
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   margin-right: 10px;
   font-size: 16px;

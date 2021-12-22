@@ -38,7 +38,7 @@ function validate_user_airports_input_for_bot(inputs){
 function validate_user_dates_input_for_bot(inputs, trip_round){
     let err_msg = [
         "Your date must be in the form 'Month day, year' like 'February 4, 2022', or say 'stop' to cancel flight booking all-together",
-        "I can't parse your date. Make sure it looks like 'February 23, 2022'... You can also say 'stop' to stop booking a flight",
+        "I can't read your date. Make sure it looks like 'February 23, 2022'... You can also say 'stop' to stop booking a flight",
         "Your date must look like 'February 16, 2022'. so you 'February' or 'Feb' for month and '16' for date of month and '2022' for year..."
         
     ]
