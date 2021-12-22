@@ -432,7 +432,7 @@ async function run_chat_instance(){
                 <span style="font-weight: bolder; font-size: 13px;">Departure</span><br/>`;
                 for(i=0;i<origin_airpots.length;i++){
                   bot_reply_msg += `
-                    <p id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('iata', 'icao', 'departure_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    <p id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('${origin_airpots[i].IATA}', '${origin_airpots[i].ICAO}', 'departure_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
                       ${origin_airpots[i].city} - ${origin_airpots[i].name} - ${origin_airpots[i].country}
                     </p>
                   `;
@@ -441,7 +441,7 @@ async function run_chat_instance(){
                 bot_reply_msg += `<br/><span style="font-weight: bolder; font-size: 13px;">Destination</span><br/>`
                 for(i=0;i<destination_airports.length;i++){
                   bot_reply_msg += `
-                    <p id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('iata', 'icao', 'destination_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    <p id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('${destination_airports[i].IATA}', '${destination_airports[i].ICAO}', 'destination_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
                     ${destination_airports[i].city} - ${destination_airports[i].name} - ${destination_airports[i].country}
                     </p>
                   `;
@@ -498,10 +498,25 @@ async function run_chat_instance(){
         }else{
 
           if((document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "round trip"
-              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "one way") 
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "one way"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "one-way"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "oneway"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "roundtrip"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "round-trip") 
               && wellgo_bot.step==="trip-round"){
             wellgo_bot.step="departure-return-dates";
-            //add trip round to stored localstorage obj
+            let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+            if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "one way"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "one-way"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "oneway"){
+                flight_search_data.type = "one-way";
+            }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "round trip"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "round-trip"
+              || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "roundtrip"){
+                flight_search_data.type = "round-trip";
+            }
+            window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
           }else{
             let stop_trip_round_err_reply_msgs = [
               "I should be expecting you to say either 'round trip' or 'one way'",
@@ -527,6 +542,10 @@ async function run_chat_instance(){
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_messages = [
           "Good! Now lets get your travel date. Please Say something like 'February 23, 2022' where February is the month and 23 is the date of month and 2022 is the year..."
+        ]
+      }else if(JSON.parse(localStorage.getItem("search_obj")).type==="round-trip"){
+        travel_dates_init_messages = [
+          "Cool.. Now lets get your departure and return date. Please Say something like 'February 23, 2022 to February 28, 2022' where February is the month and 23 is the date of month and 2022 is the year..."
         ]
       }
       bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
@@ -832,7 +851,7 @@ async function default_run_chat_instance(msg){
                 <span style="font-weight: bolder; font-size: 13px;">Departure</span><br/>`;
                 for(i=0;i<origin_airpots.length;i++){
                   bot_reply_msg += `
-                    <p id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('iata', 'icao', 'departure_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    <p id="departure_airport_suggested_by_bot_${i}" class="departure_airport_suggested_by_bot" onclick="select_departure_airports_suggested_by_bot('${origin_airpots[i].IATA}', '${origin_airpots[i].ICAO}', 'departure_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
                       ${origin_airpots[i].city} - ${origin_airpots[i].name} - ${origin_airpots[i].country}
                     </p>
                   `;
@@ -841,7 +860,7 @@ async function default_run_chat_instance(msg){
                 bot_reply_msg += `<br/><span style="font-weight: bolder; font-size: 13px;">Destination</span><br/>`
                 for(i=0;i<destination_airports.length;i++){
                   bot_reply_msg += `
-                    <p id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('iata', 'icao', 'destination_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
+                    <p id="destination_airport_suggested_by_bot_${i}" class="destination_airport_suggested_by_bot" onclick="select_destination_airports_suggested_by_bot('${destination_airports[i].IATA}', '${destination_airports[i].ICAO}', 'destination_airport_suggested_by_bot_${i}')" style="margin-bottom: 5px; background-color: rgba(0,244,0,0.1); cursor: pointer; padding: 20px; font-size: 14px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px">
                     ${destination_airports[i].city} - ${destination_airports[i].name} - ${destination_airports[i].country}
                     </p>
                   `;
@@ -898,10 +917,24 @@ async function default_run_chat_instance(msg){
         }else{
 
           if((msg.trim().toLowerCase() === "round trip"
+              || msg.trim().toLowerCase() === "one-way"
+              || msg.trim().toLowerCase() === "oneway"
+              || msg.trim().toLowerCase() === "roundtrip"
+              || msg.trim().toLowerCase() === "round-trip"
               || msg.trim().toLowerCase() === "one way") 
               && wellgo_bot.step==="trip-round"){
             wellgo_bot.step="departure-return-dates";
-            //add trip round to stored localstorage obj
+            let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+            if(msg.trim().toLowerCase() === "one way"
+              || msg.trim().toLowerCase() === "one-way"
+              || msg.trim().toLowerCase() === "oneway"){
+                flight_search_data.type = "one-way";
+            }else if(msg.trim().toLowerCase() === "round trip"
+              || msg.trim().toLowerCase() === "round-trip"
+              || msg.trim().toLowerCase() === "roundtrip"){
+                flight_search_data.type = "round-trip";
+            }
+            window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
           }else{
             let stop_trip_round_err_reply_msgs = [
               "I should be expecting you to say either 'round trip' or 'one way'",
@@ -927,6 +960,10 @@ async function default_run_chat_instance(msg){
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_messages = [
           "Good! Now lets get your travel date. Please Say something like 'February 23, 2022' where February is the month and 23 is the date of month and 2022 is the year..."
+        ]
+      }else if(JSON.parse(localStorage.getItem("search_obj")).type==="round-trip"){
+        travel_dates_init_messages = [
+          "Cool.. Now lets get your departure and return date. Please Say something like 'February 23, 2022 to February 28, 2022' where February is the month and 23 is the date of month and 2022 is the year..."
         ]
       }
       bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
@@ -1287,11 +1324,11 @@ function start_book_with_vitual_agent(){
         please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
           or something like 'United States to France'...
           , or 'La Guardia to Charles de Gaulle Intl'`,
-    `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 'New York to Paris',
-          , or something like 'United States to France',
+    `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 'New York to Paris'
+          , or something like 'United States to France'
             , or 'La Guardia to Charles de Gaulle Intl'`,
-    `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
-          , or something like 'United States to France',
+    `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris'
+          , or something like 'United States to France'
             , or 'La Guardia to Charles de Gaulle Intl'`,
   ]
   txt = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
