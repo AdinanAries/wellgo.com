@@ -7,10 +7,15 @@ export default function HPSupportBtn(){
         <div className="hp_support_container">
             <div id="support_chat_container" className="support_chat_div_container">
             <div id="main_bot_view_flights_all_details" className="bot_view_flights_all_details">
+                <div id="selected_ticket_pane_for_bot_list" style={{height: "calc(100% - 60px)", borderBottom: "1px solid rgba(0,0,0,0.1)", marginBottom: 10, overflowY: "auto"}}>
+
+                </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                    <div onClick={()=>document.getElementById("main_bot_view_flights_all_details").style.display="none"} style={{padding: 14, color: "white", backgroundColor: "crimson", fontSize: 14, borderRadius: 50}}>
+                    <div onClick={()=>document.getElementById("main_bot_view_flights_all_details").style.display="none"} 
+                    style={{cursor: "pointer", boxShadow: "0 0 10px rgba(0,0,0,0.2)", padding: 14, color: "white", backgroundColor: "crimson", fontSize: 14, borderRadius: 50}}>
                         <i style={{marginRight: 10}} className="fa fa-times"></i>close</div>
-                    <div>Select</div>
+                        <label htmlFor="select_a_ticket_from_bot_list_chck"><div style={{cursor: "pointer", boxShadow: "0 0 10px rgba(0,0,0,0.2)", padding: 14, color: "white", backgroundColor: "darkblue", fontSize: 14, borderRadius: 50}}>
+                        <input id="select_a_ticket_from_bot_list_chck" style={{marginRight: 10, width: 12, height: 12}} type="checkbox"/>select</div></label>
                 </div>
             </div>
                 <p id="main_chat_hp_support_container_close_btn" className="page-popup-cover-close-btn">

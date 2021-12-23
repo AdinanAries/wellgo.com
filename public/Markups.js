@@ -12,6 +12,16 @@ function toggle_see_ticket_details_itinerary_details(){
         is_itinerary_showing = !is_itinerary_showing;
 }
 
+var is_itinerary_showing_for_bot_list = false;
+function bot_toggle_see_ticket_details_itinerary_details(){
+    if(is_itinerary_showing_for_bot_list){
+        $("#bot_see_ticket_details_itinerary_details").slideUp("fast");
+    }else{
+        $("#bot_see_ticket_details_itinerary_details").slideDown("fast");
+    }
+    is_itinerary_showing_for_bot_list = !is_itinerary_showing_for_bot_list;
+}
+
 //helpers
 let replacement_codes = [
     "@#wellgoqoute#@",
@@ -254,6 +264,200 @@ function return_selected_ticket_item(item){
                         <i style="margin-right: 2px; color: rgba(255,255,255,0.5); font-size: 19px;" class="fa fa-check-square-o" aria-hidden="true"></i>
                         Book
                     </div>
+                </div>
+            </div>
+
+    `;
+}
+
+function return_selected_ticket_item_from_bot_list(item){
+    let checkout_obj = {name: "anything"}
+    return `
+        <div>
+                <div style="padding: 10px; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div>
+                            <p style="font-size: 17px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                                9:45am - 5:23pm (2 stops)
+                            </p>
+                            <p style="font-size: 14px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7);">
+                                New York
+                                <span style="margin: 0 10px; color: rgba(0,0,0,0.4);"><i class="fa fa-exchange"></i></span>
+                                Canada
+                            </p>
+                            <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 2px;">Nov 25 - Nov 27</p>
+                            <p style="color: rgba(0,0,0,0.8); font-size: 12px; margin-top: 10px;">
+                                <img src="./deltaIcon.png" style="width: 27px; height: auto; object-fit: cover;" />
+                                Delta
+                                <span onclick="bot_toggle_see_ticket_details_itinerary_details()" style="cursor: pointer; margin-left: 15px; font-size: 14px; color: #c900b0;">
+                                    See details <i style="marginLeft: 5px;" class="fa fa-angle-down"></i>
+                                </span>
+                            </p>
+                            <div id="bot_see_ticket_details_itinerary_details" style="display: none; margin-top: 10px; margin-bottom: 20px;">
+
+                                <!--Take off without stops-->
+                                <div style="display: none; border-left: 3px dashed rgba(0,0,0,0.2); margin-top: 20px; padding: 5px 10px; padding-right: 0; position: relative;">
+                                    <div style="width: 10px; height: 10px; border-radius: 100%; position: absolute; top: -15px; left: -6.5px;">
+                                        <i class="fa fa-map-marker" style="color: rgba(0,0,0,0.3);"></i>
+                                    </div>
+                                    <div style="position: absolute; left: -8.5px; background-color: white; top: calc(50% - 20px); border-radius: 100%;">
+                                        <i style="color: rgba(0,0,0,0.3); transform: rotate(135deg);" class="fa fa-plane"></i>
+                                    </div>
+                                    <div style="width: 10px; height: 10px; borderRadius: 100%; position: absolute; bottom: -10px; left: -6.5px;">
+                                        <i class="fa fa-map-marker" style="color: rgba(0,0,0,0.3);"></i>
+                                    </div>
+                                    <p style="font-size: 15px; font-family: 'Prompt', sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                                        9:45am - New York
+                                    </p>
+                                    <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 2px; margin-left: 20px; margin-bottom: 20px;">La Guardia (LGA)</p>
+                                    <div style="margin-left: 20px;">
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7);">1h 35m flight</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); marginTop: 4px;">Operated by WestJet Encore</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); marginTop: 4px;">Dehavilland DHC-8 400</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); marginTop: 4px;">Economy/Coach (T)</p>
+                                    </div>
+                                    <p style="font-size: 15px; margin-top: 20px; font-family: 'Prompt', sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                                        11:20am - Toronto
+                                    </p>
+                                    <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-left: 20px; margin-top: 2px;">Pearson Intl. (YYZ)</p>
+                                </div>                            
+
+                                <!--Take off with stops-->
+                                <div style="border-left: 3px dashed rgba(0,0,0,0.2); margin-top: 20px; padding: 5px 10px; padding-right: 0; position: relative;">
+                                    <div style="width: 10px; height: 10px; border-radius: 100%; position: absolute; top: -15px; left: -6.5px;">
+                                        <i class="fa fa-map-marker" style="color: rgba(0,0,0,0.3);"></i>
+                                    </div>
+                                    <div style="position: absolute; left: -8.5px; background-color: white; top: calc(50% - 20px); border-radius: 100%;">
+                                        <i style="color: rgba(0,0,0,0.3); transform: rotate(135deg);" class="fa fa-plane"></i>
+                                    </div>
+                                    <div style="width: 10px; height: 10px; border-radius: 100%; border: 3px solid rgba(0,0,0,0.3); position: absolute; bottom: -10px; left: -7px;">
+
+                                    </div>
+                                    <p style="font-size: 15px; font-family: 'Prompt', sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                                        9:45am - New York
+                                    </p>
+                                    <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 2px; margin-left: 20px; margin-bottom: 20px;">La Guardia (LGA)</p>
+                                    <div style="margin-left: 20px;">
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7);">1h 35m flight</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Operated by WestJet Encore</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Dehavilland DHC-8 400</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Economy/Coach (T)</p>
+                                    </div>
+                                </div>
+
+                                <!--Middle Stop Segments-->
+                                <div style="border-left: 3px dashed rgba(0,0,0,0.2); margin-top: 10px; padding: 5px 10px; padding-right: 0; position: relative;">
+                                    <div style="width: 10px; height: 10px; border-radius: 100%; position: absolute; top: -11px; left: -6.5px;">
+                                        
+                                    </div>
+                                    <div style="position: absolute; left: -8.5px; background-color: white; top: calc(50% - 20px); border-radius: 100%;">
+                                        <i style="color: "rgba(0,0,0,0.3)", transform: "rotate(135deg)"}} className="fa fa-plane"></i>
+                                    </div>
+                                    <div style="width: 10px; height: 10px; border-radius: 100%; border: 3px solid rgba(0,0,0,0.3); position: absolute; bottom: -10px; left: -7px;">
+                                        
+                                    </div>
+                                    <p style="font-size: 15px; font-family: 'Prompt', sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                                        11:20am - Toronto
+                                    </p>
+                                    <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-left: 20px; margin-top: 2px;">Pearson Intl. (YYZ)</p>
+                                    <div style="background-color: rgba(255,0,0,0.1); margin: 10px; width: fit-content; border: 1px solid rgba(255,0,0,0.1); border-radius: 6px; padding: 10px 20px;">
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7);">
+                                            <i class="fa fa-exclamation-triangle" style="color: rgba(255,0,0,0.7); margin-right: 5px"></i>
+                                            Flight Stop
+                                        </p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 5px;">1h 35m wait in Toronto</p>
+                                    </div>
+                                    <div style="margin-left: 20px;">
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7);">1h 35m flight</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Operated by WestJet Encore</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Dehavilland DHC-8 400</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Economy/Coach (T)</p>
+                                    </div>
+                                </div>
+
+                                <!--Arrival with stops-->
+                                <div style="border-left: 3px dashed rgba(0,0,0,0.2); margin-top: 10px; padding: 5px 10px; padding-right: 0; position: relative;">
+                                    <div style="width: 10px; height: 10px; borderRadius: 100%; position: absolute; top: -11px; left: -6.5px;">
+                                        
+                                    </div>
+                                    <div style="position: absolute; left: -8.5px; background-color: white; top: calc(50% - 20px); border-radius: 100%;">
+                                        <i style="color: rgba(0,0,0,0.3); transform: rotate(135deg);" class="fa fa-plane"></i>
+                                    </div>
+                                    <div style="width: 10px; height: 10px; border-radius: 100%; position: absolute; bottom: -10px; left: -6.5px">
+                                        <i class="fa fa-map-marker" style="color: rgba(0,0,0,0.3);"></i>
+                                    </div>
+                                    <p style="font-size: 15px; font-family: 'Prompt', sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                                        11:20am - Toronto
+                                    </p>
+                                    <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-left: 20px; margin-top: 2px;">Pearson Intl. (YYZ)</p>
+                                    <div style="background-color: rgba(255,0,0,0.1); margin: 10px; width: fit-content; border: 1px solid rgba(255,0,0,0.1); border-radius: 6px; padding: 10px 20px;">
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7);">
+                                            <i class="fa fa-exclamation-triangle" style="color: rgba(255,0,0,0.7); margin-right: 5px;"></i>
+                                            Flight Stop
+                                        </p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 5px;">1h 35m wait in Toronto</p>
+                                    </div>
+                                    <div style="margin-left: 20px;">
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7);">1h 35m flight</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Operated by WestJet Encore</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Dehavilland DHC-8 400</p>
+                                        <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-top: 4px;">Economy/Coach (T)</p>
+                                    </div>
+                                    <p style="font-size: 15px; margin-top: 20px; font-family: 'Prompt', sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                                        11:20am - Toronto
+                                    </p>
+                                    <p style="font-size: 13px; color: rgba(0,0,0,0.7); margin-left: 20px; margin-top: 2px;">Pearson Intl. (YYZ)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 10px;">
+                    <p style="font-size: 22px; font-family: 'Prompt'; Sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                        $378
+                    </p>
+                    <p style="color: rgba(0,0,0,0.8); font-size: 11px; marginTop: -2px;">
+                        rountrip for 1 traveler
+                    </p>
+                    <p style="font-size: 14px; margin-top: 20px; font-family: 'Prompt', sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder">
+                        Main Cabin
+                    </p>
+                    <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 5px;">
+                        Economy
+                    </p>
+                    <p style="font-size: 14px; margin-top: 25px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                        Seat
+                    </p>
+                    <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
+                    <i class="fa fa-check" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>
+                        Seat choice included
+                    </p>
+                    <p style="font-size: 14px; margin-top: 25px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                        Bags
+                    </p>
+                    <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
+                        <i class="fa fa-check" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>
+                        Carry-on bag included
+                    </p>
+                    <p style="margin-top: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+                        <span style="color: rgba(0,0,0,0.8); font-size: 13px;">
+                            <i class="fa fa-money" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>1st checked bag:
+                        </span>
+                        <span style="color: rgba(0,0,0,0.8)" fontSize: 13px;">
+                            $30
+                        </span>
+                    </p>
+                    <p style="font-size: 14px; margin-top: 25px; font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.7); font-weight: bolder;">
+                        Flexibility
+                    </p>
+                    <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
+                    <i class="fa fa-times" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>
+                        Cancellation not allowed
+                    </p>
+                    <p style="color: rgba(0,0,0,0.8); font-size: 13px; margin-top: 10px;">
+                        <i class="fa fa-check" style="margin-right: 10px; font-size: 16px; color: rgba(0,0,0,0.5);"></i>
+                        No change fees
+                    </p>
                 </div>
             </div>
 
@@ -741,3 +945,4 @@ function return_bot_chat_loading_markup(type){
 }
 
 document.getElementById("selected_ticket_pane").innerHTML = return_selected_ticket_item({});
+document.getElementById("selected_ticket_pane_for_bot_list").innerHTML = return_selected_ticket_item_from_bot_list({})
