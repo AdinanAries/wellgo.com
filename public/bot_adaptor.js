@@ -136,3 +136,243 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
         }
     }
 }
+
+function validate_travelers_input_for_bot(input){
+    let resp_obj = {
+        isValid: false,
+        adults: 0,
+        children: 0,
+        infants: 0
+    }
+    //alert(input.includes(","))
+    if(input.includes(",")){
+        let travelers = input.trim().split(","); //string to array
+        travelers = travelers.join(""); //array to string
+        travelers = travelers.split(" "); //string to array
+        console.log(travelers);
+        console.log(parseInt(travelers[0].trim(), 10));
+        if(travelers.length > 6 || travelers.length < 1){
+            //alert("here")
+            resp_obj.isValid = false;
+            resp_obj.adults=0;
+            resp_obj.children=0;
+            resp_obj.infants=0;
+            return resp_obj;
+        }else if(travelers.length === 2){
+            if(isNaN(parseInt(travelers[0].trim(), 10))){
+                resp_obj.isValid = false;
+                resp_obj.adults=0;
+                resp_obj.children=0;
+                resp_obj.infants=0;
+                return resp_obj;
+            }else{
+                if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
+                    resp_obj.isValid = true;
+                    resp_obj.adults=travelers[0].trim();
+                }
+                if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
+                    resp_obj.isValid = true;
+                    resp_obj.children=travelers[0].trim();
+                }
+                if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
+                    resp_obj.isValid = true;
+                    resp_obj.infants=travelers[0].trim();
+                }
+                return resp_obj;
+            }
+        }else if(travelers.length === 4){
+            if(isNaN(parseInt(travelers[0].trim(), 10)) || isNaN(parseInt(travelers[2].trim(), 10))){
+                resp_obj.isValid = false;
+                resp_obj.adults=0;
+                resp_obj.children=0;
+                resp_obj.infants=0;
+                return resp_obj;
+            }else{
+                if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
+                    resp_obj.isValid = true;
+                    resp_obj.adults=travelers[0].trim();
+                }
+                if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
+                    resp_obj.isValid = true;
+                    resp_obj.children=travelers[0].trim();
+                }
+                if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
+                    resp_obj.isValid = true;
+                    resp_obj.infants=travelers[0].trim();
+                }
+                if(travelers[3].trim().toLowerCase() === "adult" || travelers[3].trim().toLowerCase() === "adults"){
+                    resp_obj.isValid = true;
+                    resp_obj.adults=travelers[2].trim();
+                }
+                if(travelers[3].trim().toLowerCase() === "child" || travelers[3].trim().toLowerCase() === "children"){
+                    resp_obj.isValid = true;
+                    resp_obj.children=travelers[2].trim();
+                }
+                if(travelers[3].trim().toLowerCase() === "infant" || travelers[3].trim().toLowerCase() === "infants"){
+                    resp_obj.isValid = true;
+                    resp_obj.infants=travelers[2].trim();
+                }
+                return resp_obj;
+            }
+            
+        }else if(travelers.length === 6){
+            console.log(isNaN(parseInt(travelers[0].trim(), 10)));
+            if(isNaN(parseInt(travelers[0].trim(), 10)) || isNaN(parseInt(travelers[2].trim(), 10)) || isNaN(parseInt(travelers[4].trim(), 10))){
+                resp_obj.isValid = false;
+                resp_obj.adults=0;
+                resp_obj.children=0;
+                resp_obj.infants=0;
+                return resp_obj;
+            }else{
+                if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
+                    resp_obj.isValid = true;
+                    resp_obj.adults=travelers[0].trim();
+                }
+                if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
+                    resp_obj.isValid = true;
+                    resp_obj.children=travelers[0].trim();
+                }
+                if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
+                    resp_obj.isValid = true;
+                    resp_obj.infants=travelers[0].trim();
+                }
+                if(travelers[3].trim().toLowerCase() === "adult" || travelers[3].trim().toLowerCase() === "adults"){
+                    resp_obj.isValid = true;
+                    resp_obj.adults=travelers[2].trim();
+                }
+                if(travelers[3].trim().toLowerCase() === "child" || travelers[3].trim().toLowerCase() === "children"){
+                    resp_obj.isValid = true;
+                    resp_obj.children=travelers[2].trim();
+                }
+                if(travelers[3].trim().toLowerCase() === "infant" || travelers[3].trim().toLowerCase() === "infants"){
+                    resp_obj.isValid = true;
+                    resp_obj.infants=travelers[2].trim();
+                }
+                if(travelers[5].trim().toLowerCase() === "adult" || travelers[5].trim().toLowerCase() === "adults"){
+                    resp_obj.isValid = true;
+                    resp_obj.adults=travelers[4].trim();
+                }
+                if(travelers[5].trim().toLowerCase() === "child" || travelers[5].trim().toLowerCase() === "children"){
+                    resp_obj.isValid = true;
+                    resp_obj.children=travelers[4].trim();
+                }
+                if(travelers[5].trim().toLowerCase() === "infant" || travelers[5].trim().toLowerCase() === "infants"){
+                    resp_obj.isValid = true;
+                    resp_obj.infants=travelers[4].trim(); 
+                }
+                return resp_obj;
+            }
+        }
+    }else if(input.trim().split(" ").length === 2){
+        let travelers = input.trim().split(" ");
+        if(isNaN(parseInt(travelers[0].trim(), 10))){
+            resp_obj.isValid = false;
+            resp_obj.adults=0;
+            resp_obj.children=0;
+            resp_obj.infants=0;
+            return resp_obj;
+        }else{
+            if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
+                resp_obj.isValid = true;
+                resp_obj.adults=travelers[0].trim();
+            }
+            if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
+                resp_obj.isValid = true;
+                resp_obj.children=travelers[0].trim();
+            }
+            if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
+                resp_obj.isValid = true;
+                resp_obj.infants=travelers[0].trim();
+            }
+            return resp_obj;
+        }
+    }else if(input.trim().split(" ").length === 4){
+        let travelers = input.trim().split(" ");
+        if(isNaN(parseInt(travelers[0].trim(), 10)) || isNaN(parseInt(travelers[2].trim(), 10))){
+            resp_obj.isValid = false;
+            resp_obj.adults=0;
+            resp_obj.children=0;
+            resp_obj.infants=0;
+            return resp_obj;
+        }else{
+            if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
+                resp_obj.isValid = true;
+                resp_obj.adults=travelers[0].trim();
+            }
+            if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
+                resp_obj.isValid = true;
+                resp_obj.children=travelers[0].trim();
+            }
+            if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
+                resp_obj.isValid = true;
+                resp_obj.infants=travelers[0].trim();
+            }
+            if(travelers[3].trim().toLowerCase() === "adult" || travelers[3].trim().toLowerCase() === "adults"){
+                resp_obj.isValid = true;
+                resp_obj.adults=travelers[2].trim();
+            }
+            if(travelers[3].trim().toLowerCase() === "child" || travelers[3].trim().toLowerCase() === "children"){
+                resp_obj.isValid = true;
+                resp_obj.children=travelers[2].trim();
+            }
+            if(travelers[3].trim().toLowerCase() === "infant" || travelers[3].trim().toLowerCase() === "infants"){
+                resp_obj.isValid = true;
+                resp_obj.infants=travelers[2].trim();
+            }
+            return resp_obj;
+        }
+    }else if(input.trim().split(" ").length === 6){
+        let travelers = input.trim().split(" ");
+        if(isNaN(parseInt(travelers[0].trim(), 10)) || isNaN(parseInt(travelers[2].trim(), 10)) || isNaN(parseInt(travelers[4].trim(), 10))){
+            resp_obj.isValid = false;
+            resp_obj.adults=0;
+            resp_obj.children=0;
+            resp_obj.infants=0;
+            return resp_obj;
+        }else{
+            if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
+                resp_obj.isValid = true;
+                resp_obj.adults=travelers[0].trim();
+            }
+            if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
+                resp_obj.isValid = true;
+                resp_obj.children=travelers[0].trim();
+            }
+            if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
+                resp_obj.isValid = true;
+                resp_obj.infants=travelers[0].trim();
+            }
+            if(travelers[3].trim().toLowerCase() === "adult" || travelers[3].trim().toLowerCase() === "adults"){
+                resp_obj.isValid = true;
+                resp_obj.adults=travelers[2].trim();
+            }
+            if(travelers[3].trim().toLowerCase() === "child" || travelers[3].trim().toLowerCase() === "children"){
+                resp_obj.isValid = true;
+                resp_obj.children=travelers[2].trim();
+            }
+            if(travelers[3].trim().toLowerCase() === "infant" || travelers[3].trim().toLowerCase() === "infants"){
+                resp_obj.isValid = true;
+                resp_obj.infants=travelers[2].trim();
+            }
+            if(travelers[5].trim().toLowerCase() === "adult" || travelers[5].trim().toLowerCase() === "adults"){
+                resp_obj.isValid = true;
+                resp_obj.adults=travelers[4].trim();
+            }
+            if(travelers[5].trim().toLowerCase() === "child" || travelers[5].trim().toLowerCase() === "children"){
+                resp_obj.isValid = true;
+                resp_obj.children=travelers[4].trim();
+            }
+            if(travelers[5].trim().toLowerCase() === "infant" || travelers[5].trim().toLowerCase() === "infants"){
+                resp_obj.isValid = true;
+                resp_obj.infants=travelers[4].trim(); 
+            }
+            return resp_obj;
+        }
+    }
+    resp_obj.isValid = false;
+    resp_obj.adults=0;
+    resp_obj.children=0;
+    resp_obj.infants=0;
+    return resp_obj;
+    
+}

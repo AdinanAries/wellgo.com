@@ -272,6 +272,7 @@ let isTripRoundFirstEntered=true;
 let isDatesFirstEntered=true;
 let isCabinClassFirstEntered=true;
 let isSearchingFlightFirstEnter=true;
+let isGettingTravelersFirstEntered=true;
 let selectedOriginAirport="";
 let selectedDestinationAirport=""
 
@@ -400,6 +401,7 @@ async function run_chat_instance(){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
           if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
@@ -538,6 +540,7 @@ async function run_chat_instance(){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
@@ -611,6 +614,7 @@ async function run_chat_instance(){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
@@ -654,6 +658,7 @@ async function run_chat_instance(){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
@@ -668,8 +673,11 @@ async function run_chat_instance(){
             ){
 
               //set cabin class here
-              wellgo_bot.step = "searching-flight";
-              bot_reply_msg = `Great! give me a minute to get you some flight schedules`
+              wellgo_bot.step = "getting-travelers";
+              bot_reply_msg = `Now... Let's get how may people you're booking for... Say something like '1 adult' ... or something like
+               '1 child' ... or '1 adult, 1 infant' ... or '1 adult, 2 children, 1 infant' ... Note that, adults refer to 18 years and above, 
+               children refer to 2 to 17 years, infants refer to below 2 years, ...
+               and only 'adult/adults, child/children, and infant/infants are allowed`;
 
           }else{
             let err_msgs = [
@@ -688,14 +696,66 @@ async function run_chat_instance(){
       
     }
 
-    //step five: searching flight schedules
-    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
+    //step five: gettings travlers
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="getting-travelers"){
       isCabinClassFirstEntered=true;
+      if(!isGettingTravelersFirstEntered){
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else{
+        let validation = validate_travelers_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase())
+        console.log("validation: ", validation);
+        if(!validation.isValid){
+          let err_msgs = [
+            `You should say something like '1 adult' ... or something like
+            '1 child' ... or '1 adult, 1 infant' ... or '1 adult, 2 children, 1 infant' ... Note that, adults refer to 18 years and above, 
+            children refer to 2 to 17 years, infants refer to below 2 years, ...
+            and only 'adult/adults, child/children, and infant/infants are allowed`,
+            `I'm expecting you to say something like '1 adult' ... or
+            '1 child' ... or '1 adult, 1 infant' ... or '1 adult, 2 children, 1 infant' ... Adults refer to 18 years and above, 
+            children refer to 2 to 17 years, infants refer to below 2 years, ...
+            and only 'adult/adults, child/children, and infant/infants are allowed`,
+            `Say something like '1 adult' ... or
+            '1 child' ... or '1 adult, 1 infant' ... or '1 adult, 2 children, 1 infant' ... Adults refer to 18 years and above, 
+            children refer to 2 to 17 years, infants refer to below 2 years, ...
+            and only 'adult/adults, child/children, and infant/infants are allowed`
+          ]
+          bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
+        }else{
+          wellgo_bot.step = "searching-flight";
+          bot_reply_msg = `Great! give me a minute to get you some flight schedules`;
+        }
+        }
+      }
+      if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() !== "stop"){
+        isGettingTravelersFirstEntered=false;
+      }
+    }
+
+    //step six: searching flight schedules
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
+      isGettingTravelersFirstEntered=true;
 
       if(hasBotReturnedResults){
         scroll_chat=false;
-        bot_reply_msg += `
-        <br/>
+        bot_reply_msg = `
         Here are some schedules I found after searching... please view and select which one you want. And just say 'done' when you finish.
         <br/><br/>
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
@@ -737,6 +797,7 @@ async function run_chat_instance(){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
           clear_flight_results_showed_by_bot();
@@ -757,7 +818,8 @@ async function run_chat_instance(){
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
-            bot_reply_msg = `Great... Now lets collect your traveler detials`
+            bot_reply_msg = `Great... Now lets collect your traveler detials`;
+            scroll_chat=true;
           }
         }else{
 
@@ -781,16 +843,22 @@ async function run_chat_instance(){
     document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
     setTimeout(()=>{
       document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(bot_reply_msg);
-      if(scroll_chat)
-        $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
+      if(scroll_chat){
+        $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+      }else{
+        document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+      }
       document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
       document.getElementById("suggested_bot_query_display").innerHTML = "";
     }, 1000)
     
   }
   document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
-  if(scroll_chat)
+  if(scroll_chat){
     $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+  }else{
+    document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+  }
   
 }
 
@@ -834,6 +902,7 @@ async function default_run_chat_instance(msg){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
@@ -970,6 +1039,7 @@ async function default_run_chat_instance(msg){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
@@ -1042,6 +1112,7 @@ async function default_run_chat_instance(msg){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
@@ -1085,6 +1156,7 @@ async function default_run_chat_instance(msg){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
 
@@ -1099,8 +1171,9 @@ async function default_run_chat_instance(msg){
             ){
 
               //set cabin class here
-              wellgo_bot.step = "searching-flight";
-              bot_reply_msg = `Great! give me a minute to get you some flight schedules`
+              wellgo_bot.step = "getting-travelers";
+              bot_reply_msg = `Now... Let's get how may people you're booking for... Say something like '1 adult'... or something like
+               '1 child' ... or '1 adult, 2 children, 1 infant'... Note that, only 'adult/adults, child/children, and infant/infants are allowed`;
 
           }else{
             let err_msgs = [
@@ -1119,14 +1192,66 @@ async function default_run_chat_instance(msg){
       
     }
 
-    //step five: searching flight schedules
-    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
+    //step five: gettings travlers
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="getting-travelers"){
       isCabinClassFirstEntered=true;
+      if(!isGettingTravelersFirstEntered){
+        if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
+          let stop_booking_reply_msgs = [
+            "Ok cool...",
+            "Got it... Let me know...",
+            "Sure, no problem"
+          ];
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          wellgo_bot.status = "";
+          wellgo_bot.step = "";
+
+          scroll_chat=true;
+          isTripRoundFirstEntered=true;
+          isDatesFirstEntered=true;
+          isCabinClassFirstEntered=true;
+          isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
+          selectedOriginAirport="";
+          selectedDestinationAirport="";
+
+        }else{
+        let validation = validate_travelers_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase())
+        console.log("validation: ", validation);
+        if(!validation.isValid){
+          let err_msgs = [
+            `You should say something like '1 adult' ... or something like
+            '1 child' ... or '1 adult, 1 infant' ... or '1 adult, 2 children, 1 infant' ... Note that, adults refer to 18 years and above, 
+            children refer to 2 to 17 years, infants refer to below 2 years, ...
+            and only 'adult/adults, child/children, and infant/infants are allowed`,
+            `I'm expecting you to say something like '1 adult' ... or
+            '1 child' ... or '1 adult, 1 infant' ... or '1 adult, 2 children, 1 infant' ... Adults refer to 18 years and above, 
+            children refer to 2 to 17 years, infants refer to below 2 years, ...
+            and only 'adult/adults, child/children, and infant/infants are allowed`,
+            `Say something like '1 adult' ... or
+            '1 child' ... or '1 adult, 1 infant' ... or '1 adult, 2 children, 1 infant' ... Adults refer to 18 years and above, 
+            children refer to 2 to 17 years, infants refer to below 2 years, ...
+            and only 'adult/adults, child/children, and infant/infants are allowed`
+          ]
+          bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
+        }else{
+          wellgo_bot.step = "searching-flight";
+          bot_reply_msg = `Great! give me a minute to get you some flight schedules`;
+        }
+        }
+      }
+      if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() !== "stop"){
+        isGettingTravelersFirstEntered=false;
+      }
+    }
+
+    //step six: searching flight schedules
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
+      isGettingTravelersFirstEntered=true;
 
       if(hasBotReturnedResults){
         scroll_chat=false;
-        bot_reply_msg += `
-        <br/>
+        bot_reply_msg = `
         Here are some schedules I found after searching... please view and select which one you want. And just say 'done' when you finish.
         <br/><br/>
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
@@ -1168,6 +1293,7 @@ async function default_run_chat_instance(msg){
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
+          isGettingTravelersFirstEntered=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
           clear_flight_results_showed_by_bot();
@@ -1188,7 +1314,8 @@ async function default_run_chat_instance(msg){
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
-            bot_reply_msg = `Great... Now lets collect your traveler detials`
+            bot_reply_msg = `Great... Now lets collect your traveler detials`;
+            scroll_chat=true;
           }
         }else{
 
@@ -1216,14 +1343,22 @@ async function default_run_chat_instance(msg){
     document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(msg);
     setTimeout(()=>{
       document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(bot_reply_msg);
-      $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
+      if(scroll_chat){
+        $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+      }else{
+        document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+      }
       document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
     }, 1000)
     
   }
   document.querySelector("#main_support_chat_user_input_txt_container textarea").value = "type your message here...";
   document.getElementById("suggested_bot_query_display").innerHTML = "";
-  $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"))
+  if(scroll_chat){
+    $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+  }else{
+    document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+  }
 }
 
 //chat functions
@@ -1287,7 +1422,9 @@ function toggle_show_hp_support_chat_container(){
             document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
         },1000)
         hide_new_chatbot_tip();
-        typeWriter();
+        if(wellgo_bot.status===""){
+          typeWriter();
+        }
         document.getElementById("support_chat_container").style.display = "block";
         setTimeout(()=>{
           if(document.getElementById("chatbot_provided_manual_channels"))
@@ -1331,23 +1468,29 @@ $(document).ready(()=>{
 });
 
 document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
+  if(wellgo_bot.status===""){
   txt = `Hey! &#128400; We are currently upgrading some site features...
             I'm sorry I may not be very helpful RN... &#128530;
             Please use our manual channels below. &#128071;`
+  }
   toggle_show_hp_support_chat_container();
 });
 
 document.getElementById("main_chatbot_popup_tip_msg").addEventListener("click", e=>{
+  if(wellgo_bot.status===""){
   txt = `Hey! &#128400; We are currently upgrading some site features...
             I'm sorry I may not be very helpful RN... &#128530;
             Please use our manual channels below. &#128071;`
+  }
   toggle_show_hp_support_chat_container();
 });
 
 document.getElementById("main_chatbot_popup_tip_img").addEventListener("click", e=>{
+  if(wellgo_bot.status===""){
   txt = `Hey! &#128400; We are currently upgrading some site features...
             I'm sorry I may not be very helpful RN... &#128530;
             Please use our manual channels below. &#128071;`
+  }
   toggle_show_hp_support_chat_container();
 });
 
@@ -1356,9 +1499,11 @@ document.getElementById("main_chat_hp_support_container_close_btn").addEventList
 });
 
 document.getElementById("landing_page_search_form_bar_bot_img").addEventListener("click", e=>{
+  if(wellgo_bot.status===""){
   txt = `Hey! &#128400; We are currently upgrading some site features...
             I'm sorry I may not be very helpful RN... &#128530;
             Please use our manual channels below. &#128071;`
+  }
   toggle_show_hp_support_chat_container()
 });
 
@@ -1383,26 +1528,44 @@ function toggle_main_page_search_filters(){
 }
 
 function start_book_with_vitual_agent(){
-  document.getElementById("hp_support_chat_items").innerHTML = `
-    <div class="support_chat_bot_sent_msg_container">
-      <div class="support_chat_bot_sent_msg_inner_container">
-          <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
+
+  if(wellgo_bot.status===""){
+    //reseting everything
+    wellgo_bot.status = "";
+    wellgo_bot.step = "";
+
+    scroll_chat=true;
+    isTripRoundFirstEntered=true;
+    isDatesFirstEntered=true;
+    isCabinClassFirstEntered=true;
+    isSearchingFlightFirstEnter=true;
+    isGettingTravelersFirstEntered=true;
+    selectedOriginAirport="";
+    selectedDestinationAirport="";
+    if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
+      clear_airports_suggested_by_bot_ids()
+
+    document.getElementById("hp_support_chat_items").innerHTML = `
+      <div class="support_chat_bot_sent_msg_container">
+        <div class="support_chat_bot_sent_msg_inner_container">
+            <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
+        </div>
       </div>
-    </div>
-  `;
-  let start_air_booking_intro = [
-    `Hey! &#128400;... We're only 4 steps away...
-        please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
-          or something like 'United States to France'...
-          , or 'La Guardia to Charles de Gaulle Intl'`,
-    `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 'New York to Paris'
-          , or something like 'United States to France'
+    `;
+    let start_air_booking_intro = [
+      `Hey! &#128400;... We're only 4 steps away...
+          please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
+            or something like 'United States to France'...
             , or 'La Guardia to Charles de Gaulle Intl'`,
-    `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris'
-          , or something like 'United States to France'
-            , or 'La Guardia to Charles de Gaulle Intl'`,
-  ]
-  txt = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
+      `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 'New York to Paris'
+            , or something like 'United States to France'
+              , or 'La Guardia to Charles de Gaulle Intl'`,
+      `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris'
+            , or something like 'United States to France'
+              , or 'La Guardia to Charles de Gaulle Intl'`,
+    ]
+    txt = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
+  }
   toggle_show_hp_support_chat_container();
   toggle_main_page_search_filters();
   wellgo_bot.status = "begin_air_booking";

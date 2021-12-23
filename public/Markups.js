@@ -938,7 +938,7 @@ function return_search_results_mobile_top_itin_display_loader(){
         </div>
     `;
 }
-function return_bot_chat_loading_markup(type){
+function return_bot_chat_loading_markup(type="loading"){
     return `
         <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">${type}...</p>
     `
