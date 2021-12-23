@@ -6,18 +6,31 @@ export default function HPSupportBtn(){
     return (
         <div className="hp_support_container">
             <div id="support_chat_container" className="support_chat_div_container">
-            <div id="main_bot_view_flights_all_details" className="bot_view_flights_all_details">
-                <div id="selected_ticket_pane_for_bot_list" style={{height: "calc(100% - 60px)", borderBottom: "1px solid rgba(0,0,0,0.1)", marginBottom: 10, overflowY: "auto"}}>
+                <div id="main_bot_view_flights_all_details" className="bot_view_flights_all_details">
+                    <div id="main_bot_view_flights_all_details_selected_cover" style={{display: "none", animation: "pop-in 0.2s ease-out", position: "absolute", top: 0, left: 0, width: "100%", height: "calc(100% - 70px)", zIndex: 1, backgroundColor: "rgba(0,0,0,0.1)", flexDirection: "column", justifyContent: "center"}}>
+                        <div style={{backgroundColor: "white", margin: 10, borderRadius: 10, padding: 20, boxShadow: "0 0 10px rgba(0,0,0,0.3)"}}>
+                            <p style={{fontSize: 14, color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', sans-serif"}}>
+                                <i className="fa fa-info-circle" style={{marginRight: 10, color: "green"}}></i>
+                            You have selected this flight...
+                            Please say 'done' to confirm</p>
+                            <div style={{marginTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 20}}>
+                                <div id="main_bot_view_flights_all_details_deselect_btn" style={{padding: 14, cursor: "pointer", backgroundColor: "crimson", color: "white", fontSize: 14, textAlign: "center", borderRadius: 50}}>
+                                    <i className="fa fa-times" style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}}></i>deselect this flight
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="selected_ticket_pane_for_bot_list" style={{height: "calc(100% - 60px)", borderBottom: "1px solid rgba(0,0,0,0.1)", marginBottom: 10, overflowY: "auto"}}>
 
+                    </div>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                        <div id="main_bot_view_flights_all_details_cancel_btn" 
+                        style={{cursor: "pointer", boxShadow: "0 0 10px rgba(0,0,0,0.2)", padding: 14, color: "white", backgroundColor: "crimson", fontSize: 14, borderRadius: 50}}>
+                            <i style={{marginRight: 10}} className="fa fa-times"></i>close</div>
+                            <label htmlFor="select_a_ticket_from_bot_list_chck"><div id="main_bot_view_flights_all_details_select_btn" style={{cursor: "pointer", boxShadow: "0 0 10px rgba(0,0,0,0.2)", padding: 14, color: "white", backgroundColor: "darkblue", fontSize: 14, borderRadius: 50}}>
+                            <input id="select_a_ticket_from_bot_list_chck" style={{marginRight: 10, width: 12, height: 12}} type="checkbox"/>select</div></label>
+                    </div>
                 </div>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                    <div onClick={()=>document.getElementById("main_bot_view_flights_all_details").style.display="none"} 
-                    style={{cursor: "pointer", boxShadow: "0 0 10px rgba(0,0,0,0.2)", padding: 14, color: "white", backgroundColor: "crimson", fontSize: 14, borderRadius: 50}}>
-                        <i style={{marginRight: 10}} className="fa fa-times"></i>close</div>
-                        <label htmlFor="select_a_ticket_from_bot_list_chck"><div style={{cursor: "pointer", boxShadow: "0 0 10px rgba(0,0,0,0.2)", padding: 14, color: "white", backgroundColor: "darkblue", fontSize: 14, borderRadius: 50}}>
-                        <input id="select_a_ticket_from_bot_list_chck" style={{marginRight: 10, width: 12, height: 12}} type="checkbox"/>select</div></label>
-                </div>
-            </div>
                 <p id="main_chat_hp_support_container_close_btn" className="page-popup-cover-close-btn">
                     &times;
                 </p>

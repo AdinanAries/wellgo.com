@@ -323,6 +323,39 @@ function clear_airports_suggested_by_bot_ids(){
     each.id="";
   });
 }
+function clear_flight_results_showed_by_bot(){
+  Array.from(document.querySelectorAll(".search_result_by_bot")).forEach(each=>{
+    each.innerHTML=`
+      <span style="font-size: 14px;">
+      <i style="margin-right: 10px; color: red;" class="fa fa-exclamation-triangle"></i> AD deleted a message...</span>
+    `;
+    each.style.pointerEvents="none";
+    //each.style.height="0";
+  });
+}
+function select_a_flight_from_bot_list(){
+  if(document.getElementById("select_a_ticket_from_bot_list_chck").checked){
+    document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="flex";
+    selectedAFlight=true;
+  }else{
+    document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+    selectedAFlight=false;
+  }
+}
+document.getElementById("main_bot_view_flights_all_details_select_btn").addEventListener("click",e=>{
+  select_a_flight_from_bot_list();
+});
+document.getElementById("main_bot_view_flights_all_details_deselect_btn").addEventListener("click",e=>{
+  document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+  selectedAFlight=false;
+  document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
+});
+document.getElementById("main_bot_view_flights_all_details_cancel_btn").addEventListener("click", e=>{
+  document.getElementById("main_bot_view_flights_all_details").style.display="none";
+  document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+  selectedAFlight=false;
+  document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
+})
 function main_bot_view_flights_all_details_func(){
   document.getElementById("main_bot_view_flights_all_details").style.display="block";
 }
@@ -369,6 +402,8 @@ async function run_chat_instance(){
           isSearchingFlightFirstEnter=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
+          if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
+            clear_airports_suggested_by_bot_ids()
 
         }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "done"){
           
@@ -666,7 +701,7 @@ async function run_chat_instance(){
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
         for(i=0;i<5;i++){
           bot_reply_msg += `
-            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
+            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
               $133.33 
               <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
               <br/>
@@ -704,13 +739,25 @@ async function run_chat_instance(){
           isSearchingFlightFirstEnter=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
+          clear_flight_results_showed_by_bot();
 
         }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "done"){
           
           if(!selectedAFlight){
-            bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
+            let rpl_msgs = [
+              `Please select a flight above then after, say 'done'`,
+              `Umm... You have'nt selected a flight...`,
+              `You should select a flight first, then say 'done' ...`
+            ]
+            bot_reply_msg=rpl_msgs[Math.floor(Math.random()*rpl_msgs.length)];
           }else{
-            wellgo_bot.step="trip-round";
+            document.getElementById("main_bot_view_flights_all_details").style.display="none";
+            document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+            selectedAFlight=false;
+            document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
+            clear_flight_results_showed_by_bot();
+            wellgo_bot.step="traveler-details-collection";
+            bot_reply_msg = `Great... Now lets collect your traveler detials`
           }
         }else{
 
@@ -1085,7 +1132,7 @@ async function default_run_chat_instance(msg){
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
         for(i=0;i<5;i++){
           bot_reply_msg += `
-            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func();" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px;">
+            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func();" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
               $133.33 
               <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
               <br/>
@@ -1123,13 +1170,25 @@ async function default_run_chat_instance(msg){
           isSearchingFlightFirstEnter=true;
           selectedOriginAirport="";
           selectedDestinationAirport="";
+          clear_flight_results_showed_by_bot();
 
         }else if(msg.trim().toLowerCase() === "done"){
           
           if(!selectedAFlight){
-            bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. 'Kotoka to Laguardia'`
+            let rpl_msgs = [
+              `Please select a flight above then after, say 'done'`,
+              `Umm... You have'nt selected a flight...`,
+              `You should select a flight first, then say 'done' ...`
+            ]
+            bot_reply_msg=rpl_msgs[Math.floor(Math.random()*rpl_msgs.length)];
           }else{
-            wellgo_bot.step="trip-round";
+            document.getElementById("main_bot_view_flights_all_details").style.display="none";
+            document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+            selectedAFlight=false;
+            document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
+            clear_flight_results_showed_by_bot();
+            wellgo_bot.step="traveler-details-collection";
+            bot_reply_msg = `Great... Now lets collect your traveler detials`
           }
         }else{
 
