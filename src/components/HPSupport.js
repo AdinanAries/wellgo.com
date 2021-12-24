@@ -67,7 +67,7 @@ export default function HPSupportBtn(){
                             Help/Support/Assistence</p>
                         <div style={{marginTop: 20}}>
                             <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 12, color: "rgba(0,0,0,0.6)", fontWeight: "bolder", textAlign: "center", marginBottom: 20, marginTop: 10}}>
-                                Your Chats</p>
+                                Recent Chat</p>
                             <div style={{paddingBottom: 20, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                                 <div style={{display: "flex", flexDirection: "row"}}>
                                     <div onClick={show_support_chat_messaging_container} className="chat_div_bot_top_profile_section" style={{cursor: "pointer"}}>
@@ -101,6 +101,24 @@ export default function HPSupportBtn(){
                                     <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <i style={{fontSize: 19, color: "rgba(0,0,0,0.7)"}} className="fa fa-angle-right"></i>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{marginTop: 10, paddingBottom: 10}}>
+                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 12, color: "rgba(0,0,0,0.6)", fontWeight: "bolder", textAlign: "center", marginBottom: 20, marginTop: 20}}>
+                                Your History</p>
+                            <div style={{}}>
+                                <div style={{padding: 20, marginBottom: 10, backgroundColor: "rgba(0,0,0,0.1)", boxShadow: "0 0 10px rgba(0,0,0,0.2)", borderRadius: 50}}>
+                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
+                                        This place should contain your last chat with the bot...</p>
+                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 11, color: "rgba(84,0,55,0.8)", marginTop: 5, marginLeft: 10}}>
+                                        March 23rd, 2022 &#8226; Bot AD</p>
+                                </div>
+                                <div style={{padding: 20, marginBottom: 10, backgroundColor: "rgba(0,0,0,0.1)", boxShadow: "0 0 10px rgba(0,0,0,0.2)", borderRadius: 50}}>
+                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
+                                        This place should contain your last chat with the bot...</p>
+                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 11, color: "rgba(84,0,55,0.8)", marginTop: 5, marginLeft: 10}}>
+                                        March 23rd, 2022 &#8226; Bot AD</p>
                                 </div>
                             </div>
                         </div>

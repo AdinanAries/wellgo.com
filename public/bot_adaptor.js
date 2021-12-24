@@ -10,8 +10,16 @@ var bot_flight_booking_stages_dailog = [
     {
         step: "origin-destination",
         error_msgs: [
-            "Are we still booking a flight for you?... if yes, say something like 'New York to Paris' or 'United States to France' or 'La-guardia to Charles de gualle Intl'... Else say 'stop' so we can do something else...",
-            "Umm... I'm expecting something like 'New York to Paris' or 'United States to France' or 'La-guardia to Charles de gualle Intl'... or we can do another thing if you say 'stop'"
+            `Are we still booking a flight for you?... if yes, say something like '
+            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
+            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
+            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... Else say '
+            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>' so we can do something else...`,
+            `Umm... I'm expecting something like '
+            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
+            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
+            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... 
+            or we can do another thing if you say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>'`
         ]
     }
 ]
