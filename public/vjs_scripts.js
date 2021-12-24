@@ -805,6 +805,7 @@ async function run_chat_instance(){
         }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "done"){
           
           if(!selectedAFlight){
+            scroll_chat=true;
             let rpl_msgs = [
               `Please select a flight above then after, say 'done'`,
               `Umm... You have'nt selected a flight...`,
@@ -818,7 +819,25 @@ async function run_chat_instance(){
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
-            bot_reply_msg = `Great... Now lets collect your traveler detials`;
+            bot_reply_msg = `Oh nice pick! ... <br/><br/>
+                <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
+                  $133.33 
+                  <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
+                  <br/>
+                  <span style="font-size: 15px;">
+                    9:40am - 5:20pm
+                    <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
+                  </span>
+                  <br/>
+                  <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                  <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
+                  <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                  <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
+                  <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
+                </p>
+                <br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
+                  Now lets collect your flight passenger detials to lock-it-in...
+                  </span>`;
             scroll_chat=true;
           }
         }else{
@@ -1301,9 +1320,10 @@ async function default_run_chat_instance(msg){
         }else if(msg.trim().toLowerCase() === "done"){
           
           if(!selectedAFlight){
+            scroll_chat=true;
             let rpl_msgs = [
               `Please select a flight above then after, say 'done'`,
-              `Umm... You have'nt selected a flight...`,
+              `Umm... You haven't selected a flight...`,
               `You should select a flight first, then say 'done' ...`
             ]
             bot_reply_msg=rpl_msgs[Math.floor(Math.random()*rpl_msgs.length)];
@@ -1314,7 +1334,25 @@ async function default_run_chat_instance(msg){
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
-            bot_reply_msg = `Great... Now lets collect your traveler detials`;
+            bot_reply_msg = `Oh nice pick! ... <br/><br/>
+              <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
+                $133.33 
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
+                <br/>
+                <span style="font-size: 15px;">
+                  9:40am - 5:20pm
+                  <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
+                </span>
+                <br/>
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
+                <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
+              </p>
+              <br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
+                Now lets collect your flight passenger detials to lock-it-in...
+                </span>`;
             scroll_chat=true;
           }
         }else{
@@ -1410,27 +1448,29 @@ let is_chat_container_shown = false;
 function toggle_show_hp_support_chat_container(){
     document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup();
     if(is_chat_container_shown){
+      if(wellgo_bot.status===""){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
-        $("#support_chat_container").slideUp("fast");
-        //document.getElementById("support_chat_container").style.display = "none";
-        if(document.getElementById("chatbot_provided_manual_channels"))
-          document.getElementById("chatbot_provided_manual_channels").style.display="none";
-        document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
-        ig=0;
+      }
+      $("#support_chat_container").slideUp("fast");
+      //document.getElementById("support_chat_container").style.display = "none";
+      if(document.getElementById("chatbot_provided_manual_channels"))
+        document.getElementById("chatbot_provided_manual_channels").style.display="none";
+      document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
+      ig=0;
     }else{
-        setTimeout(()=>{
-            document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
-        },1000)
-        hide_new_chatbot_tip();
-        if(wellgo_bot.status===""){
-          typeWriter();
-        }
-        document.getElementById("support_chat_container").style.display = "block";
-        setTimeout(()=>{
-          if(document.getElementById("chatbot_provided_manual_channels"))
-              document.getElementById("chatbot_provided_manual_channels").style.display="block";
-            document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
-        },1200);
+      setTimeout(()=>{
+          document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
+      },1000)
+      hide_new_chatbot_tip();
+      if(wellgo_bot.status===""){
+        typeWriter();
+      }
+      document.getElementById("support_chat_container").style.display = "block";
+      setTimeout(()=>{
+        if(document.getElementById("chatbot_provided_manual_channels"))
+            document.getElementById("chatbot_provided_manual_channels").style.display="block";
+          document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
+      },1200);
     }
     is_chat_container_shown = !is_chat_container_shown;
 }

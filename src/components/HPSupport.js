@@ -7,7 +7,7 @@ export default function HPSupportBtn(){
         <div className="hp_support_container">
             <div id="support_chat_container" className="support_chat_div_container">
                 <div id="main_bot_view_flights_all_details" className="bot_view_flights_all_details">
-                    <div id="main_bot_view_flights_all_details_selected_cover" style={{display: "none", animation: "pop-in 0.2s ease-out", position: "absolute", top: 0, left: 0, width: "100%", height: "calc(100% - 70px)", zIndex: 1, backgroundColor: "rgba(0,0,0,0.1)", flexDirection: "column", justifyContent: "center"}}>
+                    <div id="main_bot_view_flights_all_details_selected_cover" style={{display: "none", animation: "pop-in 0.2s ease-out", position: "absolute", top: 0, left: 0, width: "100%", height: "calc(100%)", zIndex: 1, backgroundColor: "rgba(255,255,255,0.9)", flexDirection: "column", justifyContent: "center"}}>
                         <div style={{backgroundColor: "white", margin: 10, borderRadius: 10, padding: 20, boxShadow: "0 0 10px rgba(0,0,0,0.3)"}}>
                             <p style={{fontSize: 14, color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', sans-serif"}}>
                                 <i className="fa fa-info-circle" style={{marginRight: 10, color: "green"}}></i>
