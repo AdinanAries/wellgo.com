@@ -154,25 +154,6 @@ export default function HPSupportBtn(){
                         </div>
                     </div>
                     <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll", paddingBottom: 100}}>
-                        <div className="support_chat_bot_sent_msg_container">
-                            <div className="support_chat_bot_sent_msg_inner_container">
-                                <p id="chatbot_greenting_message_p" style={{fontFamily: "'Prompt', sans-serif", fontSize: 15}}></p>
-                            </div>
-                        </div>
-                        <div id="chatbot_provided_manual_channels" style={{display: 'none', animation: "pop-in 0.2s ease-out"}}>
-                            <div style={{display: "flex", flexDirection: "row", padding: "20px 0"}}>
-                                <div style={{cursor: "pointer", marginRight: 10, backgroundColor: "rgba(122,21,112)", padding: 20, borderRadius: 50, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
-                                    <p style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: 'white', letterSpacing: 1, fontSize: 12}}>
-                                        <i style={{marginRight: 10}} className="fa fa-phone"></i>
-                                        Call</p>
-                                </div>
-                                <div style={{cursor: "pointer", marginRight: 10, backgroundColor: "rgba(21,122,112)", padding: 20, borderRadius: 50, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
-                                    <p style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: 'white', letterSpacing: 1, fontSize: 12}}>
-                                        <i style={{marginRight: 10}} className="fa fa-envelope"></i>
-                                        Email</p>
-                                </div>
-                            </div>
-                        </div>
                         
                     </div>
                     <div id="main_support_chat_user_input_txt_container" className="support_chat_user_input_txt_container">

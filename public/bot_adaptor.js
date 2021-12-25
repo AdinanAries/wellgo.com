@@ -48,9 +48,18 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
     if(trip_round==="one-way"){
 
         let err_msg = [
-            "Your date must be in the form 'Month day, year' like 'February 4, 2022', or say 'stop' to cancel flight booking all-together",
-            "I can't read your date. Make sure it looks like 'February 23, 2022'... You can also say 'stop' to stop booking a flight",
-            "Your date must look like 'February 16, 2022'. Where 'February' or 'Feb' is for month, and '16' for date of month, and '2022' for year..."
+            `Your date must be in the form 'Month day, year' like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            February 4, 2022</span>', or say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            stop</span>' to cancel flight booking all-together`,
+            `I can't read your date. Make sure it looks like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            February 23, 2022</span>'... You can also say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            stop</spant>' to stop booking a flight`,
+            `Your date must look like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            February 16, 2022</span>'. Where '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            February</span>' or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            Feb</span>' is for month, and '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            16</span>' for date of month, and '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            2022</span>' for year...`
             
         ]
 
@@ -60,6 +69,7 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
                 msg: err_msg[Math.floor(Math.random() * err_msg.length)]
             }
         }
+        
         let dateparts = inputs.trim().split(" ");
         let mmm = dateparts[0].length > 3 ? dateparts[0].substring(0,3) : dateparts[0];
         let dd = dateparts[1].length < 3 ? `0${dateparts[1]}` : dateparts[1];
@@ -74,6 +84,14 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
                 msg: err_msg[Math.floor(Math.random() * err_msg.length)]
             }
         }else{
+            let today = new Date();
+            today = today.setDate(today.getDate()-1);
+            if(the_date < today){
+                return{
+                    isValid: false,
+                    msg: `Umm.. I think the date you provided is past. We can only use today or future date...`
+                }
+            }
             return {
                 isValid: true,
                 msg: `Ok great...`,
@@ -135,6 +153,22 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
                 msg: err_msg[Math.floor(Math.random() * err_msg.length)]
             }
         }else{
+            let today = new Date();
+            today = today.setDate(today.getDate()-1);
+            if(the_date_1 < today || the_date < today){
+                return{
+                    isValid: false,
+                    msg: `Umm.. I think the date you provided is past. We can only use today or future date...`
+                }
+            }
+
+            if(the_date < the_date_1){
+                return{
+                    isValid: false,
+                    msg: `Please check the dates... the return date cannot be before the departure date...`
+                }
+            }
+
             return {
                 isValid: true,
                 msg: `Ok great...`,

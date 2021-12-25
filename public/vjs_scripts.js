@@ -27,6 +27,7 @@ if(localStorage.getItem("search_obj")){
 $(function() {
   $('#departure_return_dates_input').daterangepicker({
     opens: 'left',
+    minDate: new Date(),
     autoUpdateInput: false,
     locale: {
       cancelLabel: 'Clear'
@@ -50,6 +51,7 @@ $(function() {
 $(function() {
   $('#sp_departure_return_dates_input').daterangepicker({
     opens: 'left',
+    minDate: new Date(),
     autoUpdateInput: false,
     locale: {
       cancelLabel: 'Clear'
@@ -485,6 +487,7 @@ async function run_chat_instance(){
                 bot_reply_msg = `Umm... I didn't find any airports for '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">${validation.destination}'</span>
                 ... Please let's try to enter valid information. Try again...`;
               }else{
+                clear_airports_suggested_by_bot_ids();
                 scroll_chat=false;
                 bot_reply_msg = `
                 So, I found a couple airports, select your departure and destination airports and then say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
@@ -1070,6 +1073,7 @@ async function default_run_chat_instance(msg){
                 bot_reply_msg = `Umm... I didn't find any airports for '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
                 ${validation.destination}</span>'... Please let's try to enter valid information. Try again...`;
               }else{
+                clear_airports_suggested_by_bot_ids();
                 scroll_chat=false;
                 bot_reply_msg = `
                 So, I found a couple airports, select your departure and destination airports and then say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
@@ -1639,29 +1643,50 @@ $(document).ready(()=>{
   setTimeout(()=>toggle_main_page_search_filters(), 2000);
 });
 
-document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
-  if(wellgo_bot.status===""){
-  txt = `Hey! &#128400; We are currently upgrading some site features...
+function show_chat_bot_uprading_message(){
+  document.getElementById("hp_support_chat_items").innerHTML = `
+      <div class="support_chat_bot_sent_msg_container">
+        <div class="support_chat_bot_sent_msg_inner_container">
+            <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
+        </div>
+      </div>
+      <div id="chatbot_provided_manual_channels" style="display: none; animation: pop-in 0.2s ease-out;">
+        <div style="display: flex; flex-direction: row; padding: 20px 0;">
+          <div style="cursor: pointer; margin-right: 10px; background-color: rgba(122,21,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+              <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
+                  <i style="margin-right: 10px" class="fa fa-phone"></i>
+                  Call</p>
+          </div>
+          <div style="cursor: pointer; margin-right: 10px; background-color: rgba(21,122,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+              <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
+                  <i style="margin-right: 10px;" class="fa fa-envelope"></i>
+                  Email</p>
+          </div>
+        </div>
+      </div>
+    `;
+    txt = `Hey! &#128400; We are currently upgrading some site features...
             I'm sorry I may not be very helpful RN... &#128530;
             Please use our manual channels below. &#128071;`
+}
+
+document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
+  if(wellgo_bot.status===""){
+    show_chat_bot_uprading_message();
   }
   toggle_show_hp_support_chat_container();
 });
 
 document.getElementById("main_chatbot_popup_tip_msg").addEventListener("click", e=>{
   if(wellgo_bot.status===""){
-  txt = `Hey! &#128400; We are currently upgrading some site features...
-            I'm sorry I may not be very helpful RN... &#128530;
-            Please use our manual channels below. &#128071;`
+    show_chat_bot_uprading_message();
   }
   toggle_show_hp_support_chat_container();
 });
 
 document.getElementById("main_chatbot_popup_tip_img").addEventListener("click", e=>{
   if(wellgo_bot.status===""){
-  txt = `Hey! &#128400; We are currently upgrading some site features...
-            I'm sorry I may not be very helpful RN... &#128530;
-            Please use our manual channels below. &#128071;`
+    show_chat_bot_uprading_message()
   }
   toggle_show_hp_support_chat_container();
 });
@@ -1672,9 +1697,7 @@ document.getElementById("main_chat_hp_support_container_close_btn").addEventList
 
 document.getElementById("landing_page_search_form_bar_bot_img").addEventListener("click", e=>{
   if(wellgo_bot.status===""){
-  txt = `Hey! &#128400; We are currently upgrading some site features...
-            I'm sorry I may not be very helpful RN... &#128530;
-            Please use our manual channels below. &#128071;`
+    show_chat_bot_uprading_message();
   }
   toggle_show_hp_support_chat_container()
 });
