@@ -39,21 +39,28 @@ function Header(){
                             </p>
                         </div>
                         <div id="desktop_search_menu_item" onClick={()=>show_home_page(false)} className="each-header-menu-item active">
-                            <p style={{fontSize: 14, textAlign: "center", padding: "10px", width: 150, color: "rgba(255,255,255)", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", boxShadow: "0 0 10px rgba(0,0,0,0.3)", borderRadius: 9, background: "rgba(0,0,0,0.2)"}}>
-                                <i style={{display: 'inline', fontWeight: "initial", /*color: "rgb(46, 108, 133)"*/ color: "rgba(255,255,255,0.5)"}} className="fa fa-plane" />
-                                Search...
-                            </p>
+                            <div style={{display: "flex", flexDirection: "row", fontSize: 14, padding: "5px", width: 105, border: "2px solid #d66aca", color: "rgba(255,255,255,0.7)", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", borderRadius: 50, backgroundColor: "darkslateblue"}}>
+                                <div style={{textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", width: 30, height: 30, backgroundColor: "white", borderRadius: "100%", marginRight: 10}}>
+                                    <i style={{display: 'inline', fontWeight: "initial", color: "rgb(46, 98, 133)", margin: 0, fontSize: 17}} className="fa fa-plane"/>
+                                </div>
+                                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", fontSize: 13}}>
+                                    Search</div>
+                            </div>
                         </div>
                     </div>
                     <div className="header_humburger_menu">
                         <div className="header_mobile_menus" style={{display: "flex", flexDirection: "row"}}>
                             <div id="mobile_trips_menu_item" className="header_mobile_menus_item" onClick={show_trips_page}><i className="fa fa-briefcase"></i></div>
                             <div id="mobile_login_menu_item" className="header_mobile_menus_item" onClick={show_login_page}><i className="fa fa-user-circle"></i></div>
-                            <div id="mobile_search_menu_item" style={{marginRight: 5}} className="header_mobile_menus_item active" onClick={()=>show_home_page(false)}>
-                                <p style={{fontSize: 15, padding: "5px", width: 100, color: "white", textAlign: "center", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", boxShadow: "0 0 10px rgba(0,0,0,0.3)", borderRadius: 6, background: "rgba(0,0,0,0.4)"}}>
-                                    <i style={{display: 'inline', fontWeight: "initial", fontSize: 18, marginRight: 10}} className="fa fa-plane" />
-                                    Search...
-                                </p>
+                            <div id="mobile_search_menu_item" style={{marginRight: 0}} className="header_mobile_menus_item active" onClick={()=>show_home_page(false)}>
+                                <div style={{display: "flex", flexDirection: "row", margin: 0, fontSize: 14, height: "auto", padding: "5px", width: 95, justifyContent: "flex-start", color: "white", textAlign: "center", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", border: "2px solid #d66aca", color: "rgba(255,255,255,0.7)", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", borderRadius: 50, backgroundColor: "darkslateblue", borderRadius: 50}}>
+                                    <div style={{textAlign: "center", display: "flex", height: "auto", flexDirection: "column", justifyContent: "center", width: 26, height: 26, backgroundColor: "white", borderRadius: "100%", margin: 0, marginRight: 10}}>
+                                        <i style={{display: 'inline', fontWeight: "initial", color: "rgb(46, 98, 133)", margin: 0, fontSize: 14}} className="fa fa-plane"/>
+                                    </div>
+                                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", height: "auto", margin: 0, fontSize: 12}}>
+                                        Search
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

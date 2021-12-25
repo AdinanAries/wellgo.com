@@ -449,6 +449,9 @@ footer {
   display: inline;
   color: #db7fd0 !important;
 }
+#desktop_search_menu_item.active i{
+  color:rgb(124, 94, 58) !important;
+}
 .get_best_deals_container {
   /*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
   border-radius: 20px;*/
