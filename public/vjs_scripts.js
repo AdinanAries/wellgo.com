@@ -364,7 +364,8 @@ function main_bot_view_flights_all_details_func(){
 }
 async function run_chat_instance(){
   scroll_chat=true;
-  document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
+  if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() !== "")
+    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
   //console.log(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim())
   let bot_reply=undefined;
   let bot_reply_msg;
@@ -413,7 +414,7 @@ async function run_chat_instance(){
           
           if(selectedOriginAirport==="" && selectedDestinationAirport===""){
             bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">Kotoka to Laguardia</span>'`
+            <span class="support_chat_bot_msg_highlights">Kotoka to Laguardia</span>'`
           }else if(selectedOriginAirport===""){
             bot_reply_msg=`umm... You did not select departure airport`
           }else if(selectedDestinationAirport===""){
@@ -467,30 +468,30 @@ async function run_chat_instance(){
 
                 let origin_airports_txt = `${origin_airpots[0].city} (${origin_airpots[0].name} - ${origin_airpots[0].country})`;
                 let destination_airports_txt = `${destination_airports[0].city} (${destination_airports[0].name} - ${destination_airports[0].country})`;
-                bot_reply_msg =  `so you said from <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${validation.origin}</span> to <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${validation.destination}</span> and I found <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${origin_airports_txt}</span> to <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${destination_airports_txt}</span>... Say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                yes</span>' to continue or enter new places or say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                bot_reply_msg =  `so you said from <span class="support_chat_bot_msg_highlights">
+                ${validation.origin}</span> to <span class="support_chat_bot_msg_highlights">
+                ${validation.destination}</span> and I found <span class="support_chat_bot_msg_highlights">
+                ${origin_airports_txt}</span> to <span class="support_chat_bot_msg_highlights">
+                ${destination_airports_txt}</span>... Say '<span class="support_chat_bot_msg_highlights">
+                yes</span>' to continue or enter new places or say '<span class="support_chat_bot_msg_highlights">
                 stop</span>' to do something else`;
 
               }else if(origin_airpots.length < 1 && destination_airports.length < 1){
                 bot_reply_msg = `Umm... I didn't find any airports for '
-                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">${validation.origin} to ${validation.destination}</span>
+                <span class="support_chat_bot_msg_highlights">${validation.origin} to ${validation.destination}</span>
                 '... Please let's try to enter valid information. Try again...`;
               }else if(origin_airpots.length < 1){
                 bot_reply_msg = `Umm... I didn't find any airports for '
-                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">${validation.origin}'</span>
+                <span class="support_chat_bot_msg_highlights">${validation.origin}'</span>
                 ... Please let's try to enter valid information. Try again...`;
               }else if(destination_airports.length < 1){
-                bot_reply_msg = `Umm... I didn't find any airports for '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">${validation.destination}'</span>
+                bot_reply_msg = `Umm... I didn't find any airports for '<span class="support_chat_bot_msg_highlights">${validation.destination}'</span>
                 ... Please let's try to enter valid information. Try again...`;
               }else{
                 clear_airports_suggested_by_bot_ids();
                 scroll_chat=false;
                 bot_reply_msg = `
-                So, I found a couple airports, select your departure and destination airports and then say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                So, I found a couple airports, select your departure and destination airports and then say '<span class="support_chat_bot_msg_highlights">
                 done</span>' after that...
                 <br/><br/>
                 <span style="font-weight: bolder; font-size: 13px;">Departure</span><br/>`;
@@ -513,7 +514,7 @@ async function run_chat_instance(){
                 }
 
                 bot_reply_msg += `<br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
-                  and incase you don't see your airport then re-enter cities or airports. eg. '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                  and incase you don't see your airport then re-enter cities or airports. eg. '<span class="support_chat_bot_msg_highlights">
                   New York to Paris</span>' or...</span>`
 
               }
@@ -537,9 +538,9 @@ async function run_chat_instance(){
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="trip-round"){
 
       let trip_round_init_mgs = [
-        `K.. cool.. do you want a return flight?... say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+        `K.. cool.. do you want a return flight?... say '<span class="support_chat_bot_msg_highlights">
         round trip</span>' if you do or say '
-        <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">one way</span>' if you dont`
+        <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`
       ]
       bot_reply_msg = trip_round_init_mgs[Math.floor(Math.random() * trip_round_init_mgs.length)];
 
@@ -587,12 +588,14 @@ async function run_chat_instance(){
 
           }else{
             let stop_trip_round_err_reply_msgs = [
-              `I should be expecting you to say either '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              round trip</span>' or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `I should be expecting you to say either '<span class="support_chat_bot_msg_highlights">
+              round trip</span>' or '<span class="support_chat_bot_msg_highlights">
               one way</span>'`,
-              "You should say 'round trip' to include return flights or say 'one way' for only departure flights",
-              `Ummm. You're supposed to say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              one way</span>' or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `You should say '<span class="support_chat_bot_msg_highlights">
+              round trip</span>' to include return flights or say '<span class="support_chat_bot_msg_highlights">
+              one way</span>' for only departure flights`,
+              `Ummm. You're supposed to say '<span class="support_chat_bot_msg_highlights">
+              one way</span>' or '<span class="support_chat_bot_msg_highlights">
               round trip</span>'`
             ];
             bot_reply_msg = stop_trip_round_err_reply_msgs[Math.floor(Math.random() * stop_trip_round_err_reply_msgs.length)]
@@ -613,18 +616,18 @@ async function run_chat_instance(){
       let travel_dates_init_messages =[]
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_messages = [
-          `Good! Now lets get your travel date. Please Say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February 23, 2022</span>' where <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February</span> is the month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          23</span> is the date of month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+          `Good! Now lets get your travel date. Please Say something like '<span class="support_chat_bot_msg_highlights">
+          February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
           2022</span> is the year...`
         ]
       }else if(JSON.parse(localStorage.getItem("search_obj")).type==="round-trip"){
         travel_dates_init_messages = [
-          `Cool.. Now lets get your departure and return date. Please Say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February 23, 2022 to February 28, 2022</span>' where <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February</span> is the month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          23</span> is the date of month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+          `Cool.. Now lets get your departure and return date. Please Say something like '<span class="support_chat_bot_msg_highlights">
+          February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
           2022</span> is the year...`
         ]
       }
@@ -670,10 +673,10 @@ async function run_chat_instance(){
       isDatesFirstEntered=true;
       let travel_cabin_init_messages = [
         `Alright... Almost done. One last step is to provide flight class.. You should say one of the following.. '
-        <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">first class</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-        economy</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-        business</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-        premium</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+        <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
+        economy</span>', '<span class="support_chat_bot_msg_highlights">
+        business</span>', '<span class="support_chat_bot_msg_highlights">
+        premium</span>', or '<span class="support_chat_bot_msg_highlights">
         cheapest</span>'`
       ]
       
@@ -710,33 +713,33 @@ async function run_chat_instance(){
 
               //set cabin class here
               wellgo_bot.step = "getting-travelers";
-              bot_reply_msg = `Now... Let's see how may people you're booking for... Say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 adult</span>' ... or something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-               1 child</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-               1 adult, 1 infant</span>' ... or ' <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              bot_reply_msg = `Now... Let's see how may people you're booking for... Say something like '<span class="support_chat_bot_msg_highlights">
+              1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+               1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+               1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
                children refer to 2 to 17 years, infants refer to below 2 years, ...
                and only 'adult/adults, child/children, and infant/infants are allowed`;
 
           }else{
             let err_msgs = [
-              `Your answer should be one of '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              first class</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              economy</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              business</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              premium</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `Your answer should be one of '<span class="support_chat_bot_msg_highlights">
+              first class</span>', '<span class="support_chat_bot_msg_highlights">
+              economy</span>', '<span class="support_chat_bot_msg_highlights">
+              business</span>', '<span class="support_chat_bot_msg_highlights">
+              premium</span>', or '<span class="support_chat_bot_msg_highlights">
               cheapest</span>'`,
-              `You should say either '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              first class</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              economy</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              business</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              premium</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `You should say either '<span class="support_chat_bot_msg_highlights">
+              first class</span>', or '<span class="support_chat_bot_msg_highlights">
+              economy</span>', or '<span class="support_chat_bot_msg_highlights">
+              business</span>', or '<span class="support_chat_bot_msg_highlights">
+              premium</span>', or '<span class="support_chat_bot_msg_highlights">
               cheapest</span>'`,
-              `Umm... your answer didn't match any of '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              first class</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              economy</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              business</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              premium</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `Umm... your answer didn't match any of '<span class="support_chat_bot_msg_highlights">
+              first class</span>', '<span class="support_chat_bot_msg_highlights">
+              economy</span>', '<span class="support_chat_bot_msg_highlights">
+              business</span>', '<span class="support_chat_bot_msg_highlights">
+              premium</span>', or '<span class="support_chat_bot_msg_highlights">
               cheapest</span>'`
             ]
             bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
@@ -782,25 +785,25 @@ async function run_chat_instance(){
           console.log("validation: ", validation);
           if(!validation.isValid){
             let err_msgs = [
-              `You should say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `You should say something like '<span class="support_chat_bot_msg_highlights">
               1 adult</span>' ... or something like
-              '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">1 child</span>' 
-              ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 adult, 1 infant</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              '<span class="support_chat_bot_msg_highlights">1 child</span>' 
+              ... or '<span class="support_chat_bot_msg_highlights">
+              1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
               1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
               children refer to 2 to 17 years, infants refer to below 2 years, ...
               and only 'adult/adults, child/children, and infant/infants are allowed`,
-              `I'm expecting you to say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 adult</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 child</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 adult, 1 infant</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `I'm expecting you to say something like '<span class="support_chat_bot_msg_highlights">
+              1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
+              1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+              1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
               1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
               children refer to 2 to 17 years, infants refer to below 2 years, ...
               and only 'adult/adults, child/children, and infant/infants are allowed`,
-              `Say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 adult</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 child</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              1 adult, 1 infant</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `Say something like '<span class="support_chat_bot_msg_highlights">
+              1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
+              1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+              1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
               1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
               children refer to 2 to 17 years, infants refer to below 2 years, ...
               and only 'adult/adults, child/children, and infant/infants are allowed`
@@ -825,7 +828,7 @@ async function run_chat_instance(){
         scroll_chat=false;
         bot_reply_msg = `
         Here are some schedules I found after searching... please view and select which one you want. And just say '
-        <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">done</span>' when you finish.
+        <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
         <br/><br/>
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
         for(i=0;i<5;i++){
@@ -876,10 +879,10 @@ async function run_chat_instance(){
           if(!selectedAFlight){
             scroll_chat=true;
             let rpl_msgs = [
-              `Please select a flight above then after, say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `Please select a flight above then after, say '<span class="support_chat_bot_msg_highlights">
               done</span>'`,
               `Umm... You have'nt selected a flight...`,
-              `You should select a flight first, then say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `You should select a flight first, then say '<span class="support_chat_bot_msg_highlights">
               done</span>' ...`
             ]
             bot_reply_msg=rpl_msgs[Math.floor(Math.random()*rpl_msgs.length)];
@@ -913,7 +916,7 @@ async function run_chat_instance(){
           }
         }else{
 
-          bot_reply_msg = `Please holdon while I search your flight... or say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+          bot_reply_msg = `Please holdon while I search your flight... or say '<span class="support_chat_bot_msg_highlights">
           stop</span>' if we're not doing it anymore...`;
           
         }
@@ -955,7 +958,8 @@ async function run_chat_instance(){
 
 async function default_run_chat_instance(msg){
   scroll_chat=true;
-  document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
+  if(msg.trim()!== "")
+    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
   let bot_reply=undefined;
   let bot_reply_msg;
   try{
@@ -1001,7 +1005,7 @@ async function default_run_chat_instance(msg){
           
           if(selectedOriginAirport==="" && selectedDestinationAirport===""){
             bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">Kotoka to Laguardia</span>'`
+            <span class="support_chat_bot_msg_highlights">Kotoka to Laguardia</span>'`
           }else if(selectedOriginAirport===""){
             bot_reply_msg=`umm... You did not select departure airport`
           }else if(selectedDestinationAirport===""){
@@ -1055,28 +1059,28 @@ async function default_run_chat_instance(msg){
 
                 let origin_airports_txt = `${origin_airpots[0].city} (${origin_airpots[0].name} - ${origin_airpots[0].country})`;
                 let destination_airports_txt = `${destination_airports[0].city} (${destination_airports[0].name} - ${destination_airports[0].country})`;
-                bot_reply_msg =  `so you said from <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${validation.origin}</span> to <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${validation.destination}</span> and I found <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${origin_airports_txt}</span> to <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                ${destination_airports_txt}</span> ... Say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-                yes</span>' to continue or enter new places or say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                bot_reply_msg =  `so you said from <span class="support_chat_bot_msg_highlights">
+                ${validation.origin}</span> to <span class="support_chat_bot_msg_highlights">
+                ${validation.destination}</span> and I found <span class="support_chat_bot_msg_highlights">
+                ${origin_airports_txt}</span> to <span class="support_chat_bot_msg_highlights">
+                ${destination_airports_txt}</span> ... Say '<span class="support_chat_bot_msg_highlights">
+                yes</span>' to continue or enter new places or say '<span class="support_chat_bot_msg_highlights">
                 stop</span>' to do something else`;
 
               }else if(origin_airpots.length < 1 && destination_airports.length < 1){
-                bot_reply_msg = `Umm... I didn't find any airports for <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                bot_reply_msg = `Umm... I didn't find any airports for <span class="support_chat_bot_msg_highlights">
                 '${validation.origin} to ${validation.destination}</span>'... Please let's try to enter valid information. Try again...`;
               }else if(origin_airpots.length < 1){
-                bot_reply_msg = `Umm... I didn't find any airports for '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                bot_reply_msg = `Umm... I didn't find any airports for '<span class="support_chat_bot_msg_highlights">
                 ${validation.origin}</span>'... Please let's try to enter valid information. Try again...`;
               }else if(destination_airports.length < 1){
-                bot_reply_msg = `Umm... I didn't find any airports for '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                bot_reply_msg = `Umm... I didn't find any airports for '<span class="support_chat_bot_msg_highlights">
                 ${validation.destination}</span>'... Please let's try to enter valid information. Try again...`;
               }else{
                 clear_airports_suggested_by_bot_ids();
                 scroll_chat=false;
                 bot_reply_msg = `
-                So, I found a couple airports, select your departure and destination airports and then say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                So, I found a couple airports, select your departure and destination airports and then say '<span class="support_chat_bot_msg_highlights">
                 done</span>' after that...
                 <br/><br/>
                 <span style="font-weight: bolder; font-size: 13px;">Departure</span><br/>`;
@@ -1099,7 +1103,7 @@ async function default_run_chat_instance(msg){
                 }
 
                 bot_reply_msg += `<br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
-                  and incase you don't see your airport then re-enter cities or airports. eg. '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+                  and incase you don't see your airport then re-enter cities or airports. eg. '<span class="support_chat_bot_msg_highlights">
                   New York to Paris</span>' or...</span>`
 
               }
@@ -1123,8 +1127,8 @@ async function default_run_chat_instance(msg){
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="trip-round"){
 
       let trip_round_init_mgs = [
-        `K.. cool.. do you want a return flight?... say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-        round trip</span>' if you do or say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+        `K.. cool.. do you want a return flight?... say '<span class="support_chat_bot_msg_highlights">
+        round trip</span>' if you do or say '<span class="support_chat_bot_msg_highlights">
         one way</span>' if you dont`
       ]
       bot_reply_msg = trip_round_init_mgs[Math.floor(Math.random() * trip_round_init_mgs.length)];
@@ -1172,14 +1176,14 @@ async function default_run_chat_instance(msg){
             window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
           }else{
             let stop_trip_round_err_reply_msgs = [
-              `I should be expecting you to say either '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              round trip</span>' or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `I should be expecting you to say either '<span class="support_chat_bot_msg_highlights">
+              round trip</span>' or '<span class="support_chat_bot_msg_highlights">
               one way</span>'`,
-              `You should say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              round trip</span>' to include return flights or say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `You should say '<span class="support_chat_bot_msg_highlights">
+              round trip</span>' to include return flights or say '<span class="support_chat_bot_msg_highlights">
               one way</span>' for only departure flights`,
-              `Ummm. You're supposed to say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              one way</span>' or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `Ummm. You're supposed to say '<span class="support_chat_bot_msg_highlights">
+              one way</span>' or '<span class="support_chat_bot_msg_highlights">
               round trip</span>'`
             ];
             bot_reply_msg = stop_trip_round_err_reply_msgs[Math.floor(Math.random() * stop_trip_round_err_reply_msgs.length)]
@@ -1200,19 +1204,19 @@ async function default_run_chat_instance(msg){
       let travel_dates_init_messages =[]
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_messages = [
-          `Good! Now lets get your travel date. Please Say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February 23, 2022</span>' where <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February</span> is the month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          23</span> is the date of month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+          `Good! Now lets get your travel date. Please Say something like '<span class="support_chat_bot_msg_highlights">
+          February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
           2022</span> is the year...`
         ]
       }else if(JSON.parse(localStorage.getItem("search_obj")).type==="round-trip"){
         travel_dates_init_messages = [
           `Cool.. Now lets get your departure and return date. Please Say something like '
-          <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February 23, 2022 to February 28, 2022</span>' where <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          February</span> is the month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-          23</span> is the date of month and <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+          <span class="support_chat_bot_msg_highlights">
+          February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
           2022</span> is the year...`
         ]
       }
@@ -1258,11 +1262,11 @@ async function default_run_chat_instance(msg){
       isDatesFirstEntered=true;
       let travel_cabin_init_messages = [
         `Alright... Almost done. One last step is to provide flight class.. You should say one of the following.. 
-        '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">first class</span>', 
-        '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">economy</span>', 
-        '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">business</span>', 
-        '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">premium</span>', or 
-        '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">cheapest</span>'`
+        '<span class="support_chat_bot_msg_highlights">first class</span>', 
+        '<span class="support_chat_bot_msg_highlights">economy</span>', 
+        '<span class="support_chat_bot_msg_highlights">business</span>', 
+        '<span class="support_chat_bot_msg_highlights">premium</span>', or 
+        '<span class="support_chat_bot_msg_highlights">cheapest</span>'`
       ]
       
       bot_reply_msg = travel_cabin_init_messages[Math.floor(Math.random() * travel_cabin_init_messages.length)];
@@ -1299,30 +1303,30 @@ async function default_run_chat_instance(msg){
               //set cabin class here
               wellgo_bot.step = "getting-travelers";
               bot_reply_msg = `Now... Let's get how may people you're booking for... Say something like 
-              '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">1 adult</span>'... or something like
-               '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">1 child</span>' ... or 
-               '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">1 adult, 2 children, 1 infant</span>'... 
+              '<span class="support_chat_bot_msg_highlights">1 adult</span>'... or something like
+               '<span class="support_chat_bot_msg_highlights">1 child</span>' ... or 
+               '<span class="support_chat_bot_msg_highlights">1 adult, 2 children, 1 infant</span>'... 
                Note that, only 'adult/adults, child/children, and infant/infants are allowed`;
 
           }else{
             let err_msgs = [
-              `Your answer should be one of '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              first class</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              economy</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              business</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              premium</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `Your answer should be one of '<span class="support_chat_bot_msg_highlights">
+              first class</span>', '<span class="support_chat_bot_msg_highlights">
+              economy</span>', '<span class="support_chat_bot_msg_highlights">
+              business</span>', '<span class="support_chat_bot_msg_highlights">
+              premium</span>', or '<span class="support_chat_bot_msg_highlights">
               cheapest</span>'`,
-              `You should say either '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              first class</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              economy</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              business</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              premium</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `You should say either '<span class="support_chat_bot_msg_highlights">
+              first class</span>', or '<span class="support_chat_bot_msg_highlights">
+              economy</span>', or '<span class="support_chat_bot_msg_highlights">
+              business</span>', or '<span class="support_chat_bot_msg_highlights">
+              premium</span>', or '<span class="support_chat_bot_msg_highlights">
               cheapest</span>'`,
-              `Umm... your answer didn't match any of '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              first class</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              economy</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              business</span>', '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-              premium</span>', or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+              `Umm... your answer didn't match any of '<span class="support_chat_bot_msg_highlights">
+              first class</span>', '<span class="support_chat_bot_msg_highlights">
+              economy</span>', '<span class="support_chat_bot_msg_highlights">
+              business</span>', '<span class="support_chat_bot_msg_highlights">
+              premium</span>', or '<span class="support_chat_bot_msg_highlights">
               cheapest</span>'`
             ]
             bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
@@ -1364,24 +1368,24 @@ async function default_run_chat_instance(msg){
         console.log("validation: ", validation);
         if(!validation.isValid){
           let err_msgs = [
-            `You should say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 adult</span>' ... or something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 child</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 adult, 1 infant</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            `You should say something like '<span class="support_chat_bot_msg_highlights">
+            1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+            1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+            1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
             1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
             children refer to 2 to 17 years, infants refer to below 2 years, ...
             and only 'adult/adults, child/children, and infant/infants are allowed`,
-            `I'm expecting you to say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 adult</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 child</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 adult, 1 infant</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            `I'm expecting you to say something like '<span class="support_chat_bot_msg_highlights">
+            1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
+            1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+            1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
             1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
             children refer to 2 to 17 years, infants refer to below 2 years, ...
             and only 'adult/adults, child/children, and infant/infants are allowed`,
-            `Say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 adult</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 child</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
-            1 adult, 1 infant</span>' ... or '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+            `Say something like '<span class="support_chat_bot_msg_highlights">
+            1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
+            1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+            1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
             1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
             children refer to 2 to 17 years, infants refer to below 2 years, ...
             and only 'adult/adults, child/children, and infant/infants are allowed`
@@ -1406,7 +1410,7 @@ async function default_run_chat_instance(msg){
         scroll_chat=false;
         bot_reply_msg = `
         Here are some schedules I found after searching... please view and select which one you want. And just say '
-        <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">done</span>' when you finish.
+        <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
         <br/><br/>
         <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
         for(i=0;i<5;i++){
@@ -1457,9 +1461,9 @@ async function default_run_chat_instance(msg){
           if(!selectedAFlight){
             scroll_chat=true;
             let rpl_msgs = [
-              `Please select a flight above then after, say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">done</span>'`,
+              `Please select a flight above then after, say '<span class="support_chat_bot_msg_highlights">done</span>'`,
               `Umm... You haven't selected a flight...`,
-              `You should select a flight first, then say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">done</span>' ...`
+              `You should select a flight first, then say '<span class="support_chat_bot_msg_highlights">done</span>' ...`
             ]
             bot_reply_msg=rpl_msgs[Math.floor(Math.random()*rpl_msgs.length)];
           }else{
@@ -1492,7 +1496,7 @@ async function default_run_chat_instance(msg){
           }
         }else{
 
-          bot_reply_msg = `Please holdon while I search your flight... or say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
+          bot_reply_msg = `Please holdon while I search your flight... or say '<span class="support_chat_bot_msg_highlights">
           stop</span>' if we're not doing it anymore...`;
           
         }
@@ -1640,7 +1644,7 @@ function hide_new_chatbot_tip(){
 
 $(document).ready(()=>{
   setTimeout(()=>show_new_chatbot_tip("msg"),10000);
-  setTimeout(()=>toggle_main_page_search_filters(), 2000);
+  setTimeout(()=>toggle_main_page_search_filters(), 3500);
 });
 
 function show_chat_bot_uprading_message(){
@@ -1749,17 +1753,22 @@ function start_book_with_vitual_agent(){
     `;
     let start_air_booking_intro = [
       `Hey! &#128400;... We're only 4 steps away...
-          please tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris',
-            or something like 'United States to France'...
-            , or 'La Guardia to Charles de Gaulle Intl'`,
-      `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 'New York to Paris'
-            , or something like 'United States to France'
-              , or 'La Guardia to Charles de Gaulle Intl'`,
-      `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 'New York to Paris'
-            , or something like 'United States to France'
-              , or 'La Guardia to Charles de Gaulle Intl'`,
+          please tell me from where you are traveling and to where you are going. You should say something like 
+          '<span class="support_chat_bot_msg_highlights">New York to Paris</span>',
+            or something like '<span class="support_chat_bot_msg_highlights">
+            United States to France</span>'...
+            , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
+      `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 
+      '<span class="support_chat_bot_msg_highlights">New York to Paris</span>'
+            , or something like '<span class="support_chat_bot_msg_highlights">United States to France</span>'
+              , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
+      `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 
+      '<span class="support_chat_bot_msg_highlights">New York to Paris</span>'
+            , or something like '<span class="support_chat_bot_msg_highlights">United States to France</span>'
+              , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
     ]
-    txt = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
+    txt = "";
+    document.getElementById("chatbot_greenting_message_p").innerHTML = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
   }
   toggle_show_hp_support_chat_container();
   toggle_main_page_search_filters();

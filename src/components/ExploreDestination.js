@@ -3,6 +3,7 @@
 import WillgoLogo from '../WillgoLogo.png';
 import search_bar_flight_icon from "../icons/search_bar_flight_icon.png";
 import deals_icon from "../icons/deals_icon.png";
+import trips_icon from "../icons/trips_icon.png";
 import explore_icon from "../icons/explore_icon.png";
 import user_account_icon from "../icons/user_account_icon.png";
 
@@ -87,10 +88,10 @@ export default function ExploreDestinations(){
                                             Explore
                                         </p>
                                     </div>
-                                    <div className="landing_page_hero_menu_items" onClick={show_login_page} style={{paddingLeft: 9}}>
-                                        <img src={user_account_icon} style={{width: 32, height: "auto"}} />
+                                    <div className="landing_page_hero_menu_items" onClick={show_trips_page} style={{paddingLeft: 9}}>
+                                        <img src={trips_icon} style={{width: 32, height: "auto"}} />
                                         <p className="landing_page_hero_menu_item_tooltip">
-                                            Account
+                                            Trips
                                         </p>
                                     </div>
                                 </div>

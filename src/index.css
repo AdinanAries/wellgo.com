@@ -255,11 +255,12 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 25px;
+  margin-right: 17px;
 }
 .header_mobile_menus i {
   color: rgb(153, 216, 241);
-  font-size: 21px;
+  font-size: 22px;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .header_mobile_menus_item.active i {
   color: #db7fd0;
@@ -1335,6 +1336,11 @@ footer {
   color: rgba(0, 0, 0, 0.9);
   font-size: 15px;
   font-family: 'Prompt', sans-serif;
+}
+.support_chat_bot_msg_highlights{
+  font-family: 'Prompt', sans-serif !important;
+  font-size: 14px !important;
+  color: rgb(174, 101, 0) !important;
 }
 .support_chat_user_input_txt_container{
   transition: all 0.2s ease-out;
