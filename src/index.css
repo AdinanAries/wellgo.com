@@ -6,6 +6,9 @@
   font-size: 16px;
   position: relative;
 }
+:root {
+  --app-height: 100%;
+}
 .page-popup-cover{
   animation: pop-in 0.2s ease-out;
   background-color: rgba(0, 0, 0, 0.5);
@@ -84,6 +87,7 @@ ul li {
 }
 body {
   background-color: rgb(229, 233, 241);
+  height:  var(--app-height);
 }
 .mobile-menu {
   display: none;
@@ -1481,6 +1485,7 @@ footer {
     box-shadow: none;
     width: 100vw;
     height: 100vh;
+    height:  var(--app-height);
     z-index: 3;
   }
   .support_chat_user_input_txt_container{
