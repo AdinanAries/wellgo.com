@@ -1817,9 +1817,9 @@ window.onscroll = function() {
     }
   }
 }
-const appHeight = () => {
-  const doc = document.documentElement;
-  doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+const fixChatBotHeight = () => {
+  const div = document.getElementById("support_chat_container");
+  div.style.setProperty("--app-height", `${window.innerHeight}px`);
 }
-window.addEventListener("resize", appHeight)
-appHeight();
+window.addEventListener("resize", fixChatBotHeight)
+fixChatBotHeight();
