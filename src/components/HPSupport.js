@@ -153,7 +153,7 @@ export default function HPSupportBtn(){
                             </div>
                         </div>
                     </div>
-                    <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll", paddingBottom: 100}}>
+                    <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll", paddingBottom: 100, overscrollBehavior: "contain"}}>
                         
                     </div>
                     <div id="main_support_chat_user_input_txt_container" className="support_chat_user_input_txt_container">

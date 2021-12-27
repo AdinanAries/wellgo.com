@@ -9,6 +9,9 @@
   font-size: 16px;
   position: relative;
 }
+/*body.noScroll { /* ...or body.dialogShowing /
+  overflow: hidden;
+}*/
 .page-popup-cover{
   animation: pop-in 0.2s ease-out;
   background-color: rgba(0, 0, 0, 0.5);
@@ -1478,6 +1481,7 @@ footer {
     display: none;
   }
   .support_chat_div_container{
+    /*overscroll-behavior: contain;*/
     position: fixed;
     top: 0;
     left: 0;

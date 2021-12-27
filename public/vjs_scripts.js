@@ -1588,6 +1588,11 @@ let is_chat_container_shown = false;
 function toggle_show_hp_support_chat_container(){
     document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup();
     if(is_chat_container_shown){
+
+      document.body.style.position="initial";
+      document.body.style.width="auto";
+      document.body.style.height="auto";
+
       if(wellgo_bot.status===""){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
       }
@@ -1598,6 +1603,11 @@ function toggle_show_hp_support_chat_container(){
       document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
       ig=0;
     }else{
+
+      document.body.style.position="fixed";
+      document.body.style.width="100vw";
+      document.body.style.height="100vh";
+
       setTimeout(()=>{
           document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
       },1000)
@@ -1823,3 +1833,20 @@ const fixChatBotHeight = () => {
 }
 window.addEventListener("resize", fixChatBotHeight)
 fixChatBotHeight();
+window.addEventListener('touchmove', function(e) {
+  if(document.getElementById('support_chat_container').style.display==="none"){
+    //scroll page
+  }else {
+    e.preventDefault();
+  }
+  
+}, false);
+
+window.addEventListener('scroll', function(e) {
+  if(document.getElementById('support_chat_container').style.display==="none"){
+    //scroll page
+  }else{
+    e.preventDefault();
+  }
+  
+}, false);
