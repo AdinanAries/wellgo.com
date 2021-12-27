@@ -1,5 +1,16 @@
 function show_selected_ticket_details_pane(){
+    if($(window).width() <= 700){
+        document.body.style.position="fixed";
+        document.body.style.width="100vw";
+        document.body.style.height="100vh";
+    }
     document.getElementById("selected_ticket_pane").style.display = "block";
+}
+function hide_selected_ticket_details_pane(){
+    document.body.style.position="initial";
+      document.body.style.width="auto";
+      document.body.style.height="auto";
+      document.getElementById("selected_ticket_pane").style.display="none"
 }
 
 var is_itinerary_showing = false;
@@ -207,7 +218,7 @@ function return_selected_ticket_item(item){
                                 </div>
                             </div>
                         </div>
-                        <p onclick='document.getElementById("selected_ticket_pane").style.display="none"' style="cursor: pointer; color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
+                        <p onclick='hide_selected_ticket_details_pane();' style="cursor: pointer; color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
                             &times;
                         </p>
                     </div>

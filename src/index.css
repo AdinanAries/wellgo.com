@@ -1276,17 +1276,17 @@ footer {
 .bot_view_flights_all_details{
   position: absolute;
   display: none;
-  top: 85px;
-  left: 5px;
-  width: calc(100% - 10px);
-  height: calc(100% - 150px);
+  top: 82px;
+  left: 0;
+  width: calc(100%);
+  height: calc(100% - 140px);
   overflow-y: auto;
   z-index: 1;
-  background-color: rgb(241, 255, 250);
+  background-color: white;
   animation: pop-in 0.2s ease-out;
   padding: 10px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  /*border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);*/
 }
 .support_chat_div_container{
   position: relative;

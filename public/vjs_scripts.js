@@ -1604,9 +1604,11 @@ function toggle_show_hp_support_chat_container(){
       ig=0;
     }else{
 
-      document.body.style.position="fixed";
-      document.body.style.width="100vw";
-      document.body.style.height="100vh";
+      if($(window).width() <= 700){
+        document.body.style.position="fixed";
+        document.body.style.width="100vw";
+        document.body.style.height="100vh";
+      }
 
       setTimeout(()=>{
           document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
@@ -1827,7 +1829,7 @@ window.onscroll = function() {
     }
   }
 }
-const fixChatBotHeight = () => {
+/*const fixChatBotHeight = () => {
   const div = document.getElementById("support_chat_container");
   div.style.setProperty("--app-height", `${window.innerHeight}px`);
 }
@@ -1849,4 +1851,4 @@ window.addEventListener('scroll', function(e) {
     e.preventDefault();
   }
   
-}, false);
+}, false);*/
