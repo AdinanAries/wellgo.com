@@ -310,7 +310,7 @@ var ChooseUs = ()=>{
                         </div>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                             >More To Explore</h1>
-                        <div style={{position: "relative", borderTop: "4px solid orange", padding: "15px", background: "linear-gradient(rgba(255,255,255), rgba(0,0,0,0))"}}>
+                        <div style={{position: "relative", borderTop: "4px solid orange", padding: "15px", background: "rgba(255,255,255)"}}>
                             <div className="more_popular_cities_svg_img" style={{height: 150, width: 150, backgroundImage: `url('${citiesIcon}')`, backgroundRepeat: "no-repeat", backgroundSize: "contain", position: "absolute", top: -50, left: 20, zIndex: 1}}>
                             </div>
                             <div style={{position: "relative", maxWidth: 500, margin: "auto"}}>
@@ -324,7 +324,7 @@ var ChooseUs = ()=>{
                                         <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-right"></i>
                                     </div>
                                 </div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     <div className="each_more_popular_city_popup">
                                         <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
                                             <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${ParisImg}')`}}>
@@ -343,7 +343,7 @@ var ChooseUs = ()=>{
                                         </div>
                                     </div>
                                     Paris - France</div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     <div className="each_more_popular_city_popup">
                                         <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
                                             <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${NewYorkImg}')`}}>
@@ -362,7 +362,7 @@ var ChooseUs = ()=>{
                                         </div>
                                     </div>
                                     New York - US</div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     <div className="each_more_popular_city_popup">
                                         <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
                                             <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${RomeImg}')`}}>
@@ -381,7 +381,7 @@ var ChooseUs = ()=>{
                                         </div>
                                     </div>
                                     Rome - Italy</div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "orange", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     <div className="each_more_popular_city_popup">
                                         <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
                                             <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${CairoImg}')`}}>

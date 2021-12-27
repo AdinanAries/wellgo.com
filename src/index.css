@@ -74,6 +74,11 @@
 input:focus, select:focus, textarea:focus {
   outline: none;
 }
+select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
 ul li {
   list-style-type: none;
 }
@@ -1859,7 +1864,7 @@ footer {
     display: none;
   }
   .site-logo p img {
-    width: 35px;
+    width: 40px;
     display: block;
   }
   .site-logo-txt {

@@ -50,13 +50,13 @@ function Header(){
                     </div>
                     <div className="header_humburger_menu">
                         <div className="header_mobile_menus" style={{display: "flex", flexDirection: "row"}}>
-                            {/*<div id="mobile_trips_menu_item" className="header_mobile_menus_item" onClick={show_trips_page}><i className="fa fa-briefcase"></i></div>*/}
+                            <div style={{display: "none"}} id="mobile_trips_menu_item" className="header_mobile_menus_item" onClick={show_trips_page}><i className="fa fa-briefcase"></i></div>
                             <div id="mobile_search_menu_item" style={{marginRight: 18}} className="header_mobile_menus_item active" onClick={()=>show_home_page(false)}>
                                 <div style={{display: "flex", flexDirection: "row", margin: 0, fontSize: 14, height: "auto", padding: "5px", width: 100, justifyContent: "flex-start", color: "white", textAlign: "center", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", boxShadow: "0 0 10px rgba(0,0,0,0.33)", color: "rgba(255,255,255,0.7)", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", borderRadius: 50, backgroundColor: "rgb(23, 87, 148)", borderRadius: 50}}>
-                                    <div style={{textAlign: "center", display: "flex", height: "auto", flexDirection: "column", justifyContent: "center", width: 25, height: 25, backgroundColor: "white", borderRadius: "100%", margin: 0, marginRight: 10}}>
+                                    <div style={{textAlign: "center", display: "flex", height: "auto", flexDirection: "column", justifyContent: "center", width: 20, height: 20, backgroundColor: "white", borderRadius: "100%", margin: 0, marginRight: 10}}>
                                         <i style={{display: 'inline', fontWeight: "initial", color: "rgb(46, 98, 133)", margin: 0, fontSize: 15}} className="fa fa-plane"/>
                                     </div>
-                                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", height: "auto", margin: 0, fontSize: 15}}>
+                                    <div style={{display: "flex", flexDirection: "column", justifyContent: "center", height: "auto", margin: 0, fontSize: 13}}>
                                         Search
                                     </div>
                                 </div>
