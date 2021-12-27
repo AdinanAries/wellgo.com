@@ -102,9 +102,15 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
     }else if(trip_round==="round-trip"){
 
         let err_msg = [
-            "Your answer must look like 'February 4, 2022 to February 10, 2022' and each date must be in the form 'Month day, year', or say 'stop' to cancel flight booking all-together",
-            "I can't read your date. You should say something like 'February 4, 2022 to February 10, 2022'... You can also say 'stop' to stop booking a flight",
-            "Your answer must look like 'February 16, 2022 to February 20, 2022' and each. Where 'February' or 'Feb' is for month, and '16' and '20' for date of month, and '2022' for year..."
+            `Your answer must look like '<span class="support_chat_bot_msg_highlights">February 4, 2022 to February 10, 2022</span>' 
+            and each date must be in the form 'Month day, year', or say 'stop' to cancel flight booking all-together`,
+            `I can't read your date. You should say something like '<span class="support_chat_bot_msg_highlights">
+            February 4, 2022 to February 10, 2022</span>'... You can also say 'stop' to stop booking a flight`,
+            `Your answer must look like '<span class="support_chat_bot_msg_highlights">February 16, 2022 to February 20, 2022</span>' 
+            and each. Where '<span class="support_chat_bot_msg_highlights">February</span>' or '<span class="support_chat_bot_msg_highlights">
+            Feb</span>' is for month, and '<span class="support_chat_bot_msg_highlights">16</span>' and '
+            <span class="support_chat_bot_msg_highlights">20</span>' for date of month, and '<span class="support_chat_bot_msg_highlights">
+            2022</span>' for year...`
             
         ]
 

@@ -88,6 +88,7 @@ ul li {
 body {
   background-color: rgb(229, 233, 241);
   height:  var(--app-height);
+  min-height: -webkit-fill-available;
 }
 .mobile-menu {
   display: none;
