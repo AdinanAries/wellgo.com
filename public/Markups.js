@@ -218,7 +218,7 @@ function return_selected_ticket_item(item){
                                 </div>
                             </div>
                         </div>
-                        <p onclick='hide_selected_ticket_details_pane();' style="cursor: pointer; color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
+                        <p class="pop-up-close-btn" onclick='hide_selected_ticket_details_pane();' style="cursor: pointer; color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
                             &times;
                         </p>
                     </div>
@@ -653,7 +653,7 @@ function return_start_checkout_info(json_obj){
                             <span style="font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.6); fontSize: 13px; font-weight: bolder; margin-left: 10px;">$133.23</span>
                         </p>
                     </div>
-                    <p onclick="document.getElementById('booking_start_checkout_page_container').style.display='none';" style="cursor: pointer; color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
+                    <p class="pop-up-close-btn" onclick="document.getElementById('booking_start_checkout_page_container').style.display='none';" style="cursor: pointer; color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
                         &times;
                     </p>
                 </div>
