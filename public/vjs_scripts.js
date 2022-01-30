@@ -366,9 +366,18 @@ document.getElementById("main_bot_view_flights_all_details_cancel_btn").addEvent
   document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
   selectedAFlight=false;
   document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
-})
+});
+document.getElementById("main_bot_view_selected_flights_all_details_cancel_btn").addEventListener("click", e=>{
+  document.getElementById("main_bot_view_selected_flights_all_details").style.display="none";
+  //document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+  //selectedAFlight=false;
+  //document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
+});
 function main_bot_view_flights_all_details_func(){
   document.getElementById("main_bot_view_flights_all_details").style.display="block";
+}
+function main_bot_view_selected_flights_all_details_func(){
+  document.getElementById("main_bot_view_selected_flights_all_details").style.display="block";
 }
 async function run_chat_instance(){
   scroll_chat=true;
@@ -906,7 +915,7 @@ async function run_chat_instance(){
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
             bot_reply_msg = `Oh nice pick! ... <br/><br/>
-                <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,244,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
+                <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,244,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
                   $133.33 
                   <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
                   <br/>
@@ -1497,7 +1506,7 @@ async function default_run_chat_instance(msg){
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
             bot_reply_msg = `Oh nice pick! ... <br/><br/>
-              <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
+              <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
                 $133.33 
                 <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
                 <br/>

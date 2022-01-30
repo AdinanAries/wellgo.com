@@ -6,6 +6,22 @@ export default function HPSupportBtn(){
     return (
         <div className="hp_support_container">
             <div id="support_chat_container" className="support_chat_div_container">
+                <div id="main_bot_view_selected_flights_all_details" className="bot_view_flights_all_details">
+                    <div id="ticket_info_pane_for_selected_ticket_from_bot_list" style={{height: "calc(100% - 60px)", borderBottom: "1px solid rgba(0,0,0,0.1)", marginBottom: 10, overflowY: "auto"}}>
+
+                    </div>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                        <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                            <p style={{fontSize: 14, marginRight: 10, padding: "10px 20px", fontFamily: "'Prompt', sans-serif"}}>
+                                <i style={{fontSize: 17, color: "green", marginRight: 10}} className="fa fa-info"></i>
+                                    You've selected this flight</p>
+                        </div>
+                        <div id="main_bot_view_selected_flights_all_details_cancel_btn" 
+                            style={{cursor: "pointer", boxShadow: "0 0 10px rgba(0,0,0,0.2)", padding: 14, color: "white", backgroundColor: "crimson", fontSize: 14, borderRadius: 50}}>
+                            <i style={{marginRight: 10}} className="fa fa-times"></i>close
+                        </div>
+                    </div>
+                </div>
                 <div id="main_bot_view_flights_all_details" className="bot_view_flights_all_details">
                     <div id="main_bot_view_flights_all_details_selected_cover" style={{display: "none", animation: "pop-in 0.2s ease-out", position: "absolute", top: 0, left: 0, width: "100%", height: "calc(100%)", zIndex: 1, backgroundColor: "rgba(255,255,255,0.9)", flexDirection: "column", justifyContent: "center"}}>
                         <div style={{backgroundColor: "white", margin: 10, borderRadius: 10, padding: 20, boxShadow: "0 0 10px rgba(0,0,0,0.3)"}}>

@@ -956,4 +956,5 @@ function return_bot_chat_loading_markup(type="loading"){
 }
 
 document.getElementById("selected_ticket_pane").innerHTML = return_selected_ticket_item({});
-document.getElementById("selected_ticket_pane_for_bot_list").innerHTML = return_selected_ticket_item_from_bot_list({})
+document.getElementById("selected_ticket_pane_for_bot_list").innerHTML = return_selected_ticket_item_from_bot_list({});
+document.getElementById("ticket_info_pane_for_selected_ticket_from_bot_list").innerHTML = return_selected_ticket_item_from_bot_list({});
