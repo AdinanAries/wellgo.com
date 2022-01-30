@@ -831,35 +831,39 @@ async function run_chat_instance(){
     //step six: searching flight schedules
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
       isGettingTravelersFirstEntered=true;
-
-      if(hasBotReturnedResults){
-        scroll_chat=false;
-        bot_reply_msg = `
-        Here are some schedules I found after searching... please view and select which one you want. And just say '
-        <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
-        <br/><br/>
-        <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
-        for(i=0;i<5;i++){
-          bot_reply_msg += `
-            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
-              $133.33 
-              <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
-              <br/>
-              <span style="font-size: 15px;">
-                9:40am - 5:20pm
-                <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
-              </span>
-              <br/>
-              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
-              <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
-              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
-              <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
-              <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
-            </p>
-          `;
-          if(i>4)break;
+      
+      setTimeout(()=>{
+        if(hasBotReturnedResults){
+          scroll_chat=false;
+          show_interapting_message(`
+          I have schedules for you below... please view and select which one you want. And just say '
+          <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
+          <br/><br/>`, false);
+          let itns = `<p style="font-weight: bolder; font-size: 12px; margin-bottom: 10px;">Flight Schedules</p>`;
+          for(i=0;i<5;i++){
+            itns += `
+              <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out; min-width: 270px;">
+                $133.33 
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
+                <br/>
+                <span style="font-size: 15px;">
+                  9:40am - 5:20pm
+                  <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
+                </span>
+                <br/>
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
+                <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
+              </p>
+            `;
+            if(i>4)break;
+          }
+          show_interapting_message(itns, false);
+          hasBotReturnedResults=false;
         }
-      }
+      }, 6000)
       
       if(!isSearchingFlightFirstEnter){
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
@@ -921,6 +925,7 @@ async function run_chat_instance(){
                   Now lets collect your flight passenger detials to lock-it-in...
                   </span>`;
             scroll_chat=true;
+            wellgo_bot.step="pnr-recording";
           }
         }else{
 
@@ -933,6 +938,12 @@ async function run_chat_instance(){
         isSearchingFlightFirstEnter=false
       }
     }}
+
+    //step seven: pnr recording
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
+      alert("pnr recording");
+    }
+
     //---------------------end of flight booking process-------------------------------------//
   
   }else{
@@ -1414,34 +1425,38 @@ async function default_run_chat_instance(msg){
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
       isGettingTravelersFirstEntered=true;
 
-      if(hasBotReturnedResults){
-        scroll_chat=false;
-        bot_reply_msg = `
-        Here are some schedules I found after searching... please view and select which one you want. And just say '
-        <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
-        <br/><br/>
-        <span style="font-weight: bolder; font-size: 12px;">Flight Schedules</span><br/>`;
-        for(i=0;i<5;i++){
-          bot_reply_msg += `
-            <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func();" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
-              $133.33 
-              <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
-              <br/>
-              <span style="font-size: 15px;">
-                9:40am - 5:20pm
-                <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
-              </span>
-              <br/>
-              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
-              <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
-              <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
-              <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
-              <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
-            </p>
-          `;
-          if(i>4)break;
+      setTimeout(()=>{
+        if(hasBotReturnedResults){
+          scroll_chat=false;
+          show_interapting_message(`
+          I have schedules for you below... please view and select which one you want. And just say '
+          <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
+          <br/><br/>`, false);
+          let itns = `<p style="font-weight: bolder; font-size: 12px; margin-bottom: 10px;">Flight Schedules</p>`;
+          for(i=0;i<5;i++){
+            itns += `
+              <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func();" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out; min-width: 270px;">
+                $133.33 
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
+                <br/>
+                <span style="font-size: 15px;">
+                  9:40am - 5:20pm
+                  <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; 6h 5m(1 stop) </span>
+                </span>
+                <br/>
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                <i style="margin-right: 5px;" class="fa fa-map-marker"></i>New York to France</span><br/>
+                <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
+                <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
+                <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
+              </p>
+            `;
+            if(i>4)break;
+          }
+          show_interapting_message(itns, false);
+          hasBotReturnedResults=false;
         }
-      }
+      }, 6000);
       
       if(!isSearchingFlightFirstEnter){
         if(msg.trim().toLowerCase() === "stop"){
@@ -1501,6 +1516,7 @@ async function default_run_chat_instance(msg){
                 Now lets collect your flight passenger detials to lock-it-in...
                 </span>`;
             scroll_chat=true;
+            wellgo_bot.step="pnr-recording";
           }
         }else{
 
@@ -1513,6 +1529,12 @@ async function default_run_chat_instance(msg){
         isSearchingFlightFirstEnter=false
       }
     }}
+
+    //step seven: pnr recording
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
+      alert("pnr recording");
+    }
+
     //---------------------end of flight booking process-------------------------------------//
   
 
