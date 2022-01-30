@@ -271,6 +271,7 @@ var get_bot_query_autocomplete = (input_q)=>{
 
 let scroll_chat=true;
 let isTripRoundFirstEntered=true;
+let isPNRFirstEntered=true;
 let isDatesFirstEntered=true;
 let isCabinClassFirstEntered=true;
 let isSearchingFlightFirstEnter=true;
@@ -288,6 +289,10 @@ function show_interapting_message(msg, scroll_to_bottom){
     document.getElementById("hp_support_chat_items").scrollBy(0, 100);
   }
 }
+function show_user_interapting_message(msg, croll_to_bottom){
+  document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(msg);
+}
+
 function select_departure_airports_suggested_by_bot(iata, icao,elemid){
   Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(244,0,0,0.1)"
@@ -418,6 +423,7 @@ async function run_chat_instance(){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -574,6 +580,7 @@ async function run_chat_instance(){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -662,6 +669,7 @@ async function run_chat_instance(){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -711,6 +719,7 @@ async function run_chat_instance(){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -790,6 +799,7 @@ async function run_chat_instance(){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -887,6 +897,7 @@ async function run_chat_instance(){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -897,6 +908,9 @@ async function run_chat_instance(){
 
         }else if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "done"){
           
+          show_user_interapting_message(document.querySelector("#main_support_chat_user_input_txt_container textarea").value, false);
+          document.querySelector("#main_support_chat_user_input_txt_container textarea").value="";
+
           if(!selectedAFlight){
             scroll_chat=true;
             let rpl_msgs = [
@@ -914,7 +928,7 @@ async function run_chat_instance(){
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
-            bot_reply_msg = `Oh nice pick! ... <br/><br/>
+            let slctedItn = `Oh nice pick! ... <br/><br/>
                 <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,244,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
                   $133.33 
                   <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
@@ -929,11 +943,12 @@ async function run_chat_instance(){
                   <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
                   <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
                   <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
-                </p>
-                <br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
-                  Now lets collect your flight passenger detials to lock-it-in...
-                  </span>`;
-            scroll_chat=true;
+                </p>`;
+              show_interapting_message(slctedItn,false);
+              show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
+                In order to finish booking your flight, we'll need to create a record for the traveling passenger(s)...
+                </p>`,false);
+            scroll_chat=false;
             wellgo_bot.step="pnr-recording";
           }
         }else{
@@ -950,7 +965,14 @@ async function run_chat_instance(){
 
     //step seven: pnr recording
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
-      alert("pnr recording");
+      if(isPNRFirstEntered){
+        show_interapting_message(`So lets do that now...`, false);
+        show_interapting_message(`Please enter traveler's first and last name like this '<span class="support_chat_bot_msg_highlights">Mohammed Adinan</span>'`, false);
+        bot_reply_msg = "";
+      }else{
+        alert("pnr recording");
+      }
+      isPNRFirstEntered=false
     }
 
     //---------------------end of flight booking process-------------------------------------//
@@ -961,6 +983,7 @@ async function run_chat_instance(){
   
   if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
     //dont add empty input to chat displayed items
+    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
   }else{
     document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
     setTimeout(()=>{
@@ -1022,6 +1045,7 @@ async function default_run_chat_instance(msg){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -1174,6 +1198,7 @@ async function default_run_chat_instance(msg){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -1262,6 +1287,7 @@ async function default_run_chat_instance(msg){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -1311,6 +1337,7 @@ async function default_run_chat_instance(msg){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -1384,6 +1411,7 @@ async function default_run_chat_instance(msg){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -1480,6 +1508,7 @@ async function default_run_chat_instance(msg){
 
           scroll_chat=true;
           isTripRoundFirstEntered=true;
+          isPNRFirstEntered=true;
           isDatesFirstEntered=true;
           isCabinClassFirstEntered=true;
           isSearchingFlightFirstEnter=true;
@@ -1490,6 +1519,9 @@ async function default_run_chat_instance(msg){
 
         }else if(msg.trim().toLowerCase() === "done"){
           
+          show_user_interapting_message(msg, false);
+          document.querySelector("#main_support_chat_user_input_txt_container textarea").value="";
+
           if(!selectedAFlight){
             scroll_chat=true;
             let rpl_msgs = [
@@ -1505,7 +1537,7 @@ async function default_run_chat_instance(msg){
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
-            bot_reply_msg = `Oh nice pick! ... <br/><br/>
+            let slctedItn = `Oh nice pick! ... <br/><br/>
               <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
                 $133.33 
                 <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
@@ -1520,11 +1552,13 @@ async function default_run_chat_instance(msg){
                 <span style="font-size: 13px; color: rgba(0,51,0,0.8);">
                 <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
                 <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
-              </p>
-              <br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
-                Now lets collect your flight passenger detials to lock-it-in...
-                </span>`;
-            scroll_chat=true;
+              </p>`;
+
+            show_interapting_message(slctedItn,false);
+            show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
+              In order to finish booking your flight, we'll need to create a record for the traveling passenger(s)......
+              </p>`,false);
+            scroll_chat=false;
             wellgo_bot.step="pnr-recording";
           }
         }else{
@@ -1541,7 +1575,14 @@ async function default_run_chat_instance(msg){
 
     //step seven: pnr recording
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
-      alert("pnr recording");
+      if(isPNRFirstEntered){
+        show_interapting_message(`So lets do that now...`, false);
+        show_interapting_message(`Please enter traveler's first and last name like this '<span class="support_chat_bot_msg_highlights">Mohammed Adinan</span>'`, false);
+        bot_reply_msg = "";
+      }else{
+        alert("pnr recording");
+      }
+      isPNRFirstEntered=false;
     }
 
     //---------------------end of flight booking process-------------------------------------//
@@ -1556,6 +1597,7 @@ async function default_run_chat_instance(msg){
   
   if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
     //dont add empty input to chat displayed items
+    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
   }else{
     document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(msg);
     setTimeout(()=>{
@@ -1786,6 +1828,7 @@ function start_book_with_vitual_agent(){
 
     scroll_chat=true;
     isTripRoundFirstEntered=true;
+    isPNRFirstEntered=true;
     isDatesFirstEntered=true;
     isCabinClassFirstEntered=true;
     isSearchingFlightFirstEnter=true;
