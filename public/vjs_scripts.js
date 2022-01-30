@@ -280,6 +280,14 @@ let selectedDestinationAirport=""
 
 let selectedAFlight=false;
 let hasBotReturnedResults=true;
+function show_interapting_message(msg, scroll_to_bottom){
+  document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(msg);
+  if(scroll_to_bottom){
+    $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+  }else{
+    document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+  }
+}
 function select_departure_airports_suggested_by_bot(iata, icao,elemid){
   Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(244,0,0,0.1)"
@@ -894,7 +902,7 @@ async function run_chat_instance(){
             clear_flight_results_showed_by_bot();
             wellgo_bot.step="traveler-details-collection";
             bot_reply_msg = `Oh nice pick! ... <br/><br/>
-                <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
+                <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,244,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
                   $133.33 
                   <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
                   <br/>
