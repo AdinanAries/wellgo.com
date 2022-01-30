@@ -283,8 +283,10 @@ let selectedAFlight=false;
 let hasBotReturnedResults=true;
 function show_interapting_message(msg, scroll_to_bottom){
   document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(msg);
-  if(scroll_to_bottom){
+  if(scroll_to_bottom===true){
     $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+  }else if(scroll_to_bottom==="none"){
+    //do nothing or don't scroll
   }else{
     document.getElementById("hp_support_chat_items").scrollBy(0, 100);
   }
@@ -927,6 +929,7 @@ async function run_chat_instance(){
             selectedAFlight=false;
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
+            $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
             wellgo_bot.step="traveler-details-collection";
             let slctedItn = `Oh nice pick! ... <br/><br/>
                 <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,244,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
@@ -944,10 +947,10 @@ async function run_chat_instance(){
                   <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
                   <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
                 </p>`;
-              show_interapting_message(slctedItn,false);
-              show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
+              setTimeout(()=>show_interapting_message(slctedItn,"none"),2000);
+              setTimeout(()=>show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
                 In order to finish booking your flight, we'll need to create a record for the traveling passenger(s)...
-                </p>`,false);
+                </p>`,"none"),2000);
             scroll_chat=false;
             wellgo_bot.step="pnr-recording";
           }
@@ -966,8 +969,8 @@ async function run_chat_instance(){
     //step seven: pnr recording
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
       if(isPNRFirstEntered){
-        show_interapting_message(`So lets do that now...`, false);
-        show_interapting_message(`Please enter traveler's first and last name like this '<span class="support_chat_bot_msg_highlights">Mohammed Adinan</span>'`, false);
+        setTimeout(()=>show_interapting_message(`So lets do that now...`, "none"),2000);
+        setTimeout(()=>show_interapting_message(`Please enter traveler's first and last name like this '<span class="support_chat_bot_msg_highlights">Mohammed Adinan</span>'`, "none"),2000);
         bot_reply_msg = "";
       }else{
         alert("pnr recording");
@@ -1536,6 +1539,7 @@ async function default_run_chat_instance(msg){
             selectedAFlight=false;
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
+            $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
             wellgo_bot.step="traveler-details-collection";
             let slctedItn = `Oh nice pick! ... <br/><br/>
               <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
@@ -1554,10 +1558,10 @@ async function default_run_chat_instance(msg){
                 <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
               </p>`;
 
-            show_interapting_message(slctedItn,false);
-            show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
+              setTimeout(()=>show_interapting_message(slctedItn,"none"),2000);
+              setTimeout(()=>show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
               In order to finish booking your flight, we'll need to create a record for the traveling passenger(s)......
-              </p>`,false);
+              </p>`,"none"),2000);
             scroll_chat=false;
             wellgo_bot.step="pnr-recording";
           }
@@ -1576,8 +1580,8 @@ async function default_run_chat_instance(msg){
     //step seven: pnr recording
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
       if(isPNRFirstEntered){
-        show_interapting_message(`So lets do that now...`, false);
-        show_interapting_message(`Please enter traveler's first and last name like this '<span class="support_chat_bot_msg_highlights">Mohammed Adinan</span>'`, false);
+        setTimeout(()=>show_interapting_message(`So lets do that now...`, "none"),2000);
+        setTimeout(()=>show_interapting_message(`Please enter traveler's first and last name like this '<span class="support_chat_bot_msg_highlights">Mohammed Adinan</span>'`, "none"),2000);
         bot_reply_msg = "";
       }else{
         alert("pnr recording");
