@@ -174,12 +174,12 @@ function SearchForm(){
                                     </ul>
                                 </div>
                             </div>
-                            <div className="main-search_txt_input">
+                            <div className="main-search_txt_input search_page_input">
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
                                 <input id="sp_search_forms_from_where_input_fld" onClick={sp_open_from_where_auto_complete_pane} type="text" autoComplete="off" placeholder="from where?" />
                             </div>
                         </div>
-                        <div id="sp_main_switch_inputs_btn" className="switchinputsBtn"
+                        <div id="sp_main_switch_inputs_btn" className="switchinputsBtn" style={{boxShadow: "none", border: "1px solid rgba(0,0,0,0.15)"}}
                             onClick={sp_switch_airports_input_values}>
                             <p style={{textAlign: "center"}}>
                                 <i className="fa fa-exchange"></i>
@@ -213,7 +213,7 @@ function SearchForm(){
                                     </ul>
                                 </div>
                             </div>
-                            <div className="main-search_txt_input">
+                            <div className="main-search_txt_input search_page_input">
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
                                 <input id="sp_search_forms_to_where_input_fld" onClick={sp_open_to_where_auto_complete_pane} type="text" autoComplete="off" placeholder="to where?" />
                             </div>
@@ -221,14 +221,14 @@ function SearchForm(){
                     </div>
                     <div style={{width: "25%", marginRight: 5}}>
                         <div style={{width: "100%"}}>
-                            <div className="main-search_txt_input">
+                            <div className="main-search_txt_input search_page_input">
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-calendar-o"></i>
                                 <input id="sp_departure_return_dates_input" type="text" readOnly="true" placeholder="departure - return"/>
                             </div>
                         </div>
                     </div>
                     <div style={{width: "calc(15% - 30px)"}}>
-                        <div onClick={show_search_page} id="sp_search_form_submit_btn" style={{marginTop: 0, padding: 15}} className="searchBtn">
+                        <div onClick={show_search_page} id="sp_search_form_submit_btn" style={{marginTop: 0, padding: 15, boxShadow: "none"}} className="searchBtn">
                             <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
                         </div>
                     </div>

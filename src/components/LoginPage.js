@@ -6,6 +6,7 @@ import passport from "../icons/passport.svg";
 import nothing_found_icon from "../icons/nothing_found_icon.svg";
 import card_not_found from "../icons/card_not_found.svg";
 import not_found_icon from "../icons/not_found_icon.svg";
+import PaginationButtons from "./PaginationButtons";
 
 export default function LoginPage(){
     return (
@@ -132,23 +133,23 @@ export default function LoginPage(){
                             <div>
                                 
                                 <div style={{marginBottom: 10}}>
-                                    <div style={{position: "relative", backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                        <p style={{fontSize: 13, position: "absolute", top: -12, left: 30, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
+                                    <div style={{position: "relative", padding: 15, backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 5, marginTop: 10, paddingLeft: 16}}>
+                                        <p style={{fontSize: 13, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
+                                            <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                             Old Password</p>
-                                        <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                        <input type="password" placeholder=""  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                        <input type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                     </div>
-                                    <div style={{position: "relative", backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 15, paddingLeft: 16}}>
-                                        <p style={{fontSize: 13, position: "absolute", top: -12, left: 30, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
+                                    <div style={{position: "relative", padding: 15, backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 5, marginTop: 10, paddingLeft: 16}}>
+                                        <p style={{fontSize: 13, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
+                                            <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                             New Password</p>
-                                        <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                        <input type="password" placeholder=""  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                        <input type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                     </div>
-                                    <div style={{position: "relative", backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 15, paddingLeft: 16}}>
-                                        <p style={{fontSize: 13, position: "absolute", top: -12, left: 30, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
+                                    <div style={{position: "relative", padding: 15, backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 5, marginTop: 10, paddingLeft: 16}}>
+                                        <p style={{fontSize: 13, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
+                                            <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                             Confirm Password</p>
-                                        <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                        <input type="password" placeholder=""  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                        <input type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                     </div>
                                 </div>
                             </div>
@@ -278,13 +279,13 @@ export default function LoginPage(){
                             </div>
                             <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10,}}>
                                 
-                                <div style={{marginBottom: 20, padding: "20px"}}>
+                                <div style={{display: "none", marginBottom: 20, padding: "20px"}}>
                                     <div style={{backgroundImage: `url(${card_not_found})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No payment method added</p>
                                 </div>
-                                <div style={{display: "none", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                <div style={{display: "block", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <div id="show_more_payment_method_info_btn0">
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                             ...3453
@@ -341,13 +342,13 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
-                                <div style={{marginBottom: 20, padding: "20px"}}>
-                                <div style={{backgroundImage: `url(${not_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
+                                <div style={{display: "none", marginBottom: 20, padding: "20px"}}>
+                                    <div style={{backgroundImage: `url(${not_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No passport added</p>
                                 </div>
-                                <div style={{display: "none", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                <div style={{display: "block", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <div id="show_more_passport_info_btn0">
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                             Mohammed Adinan
@@ -406,7 +407,7 @@ export default function LoginPage(){
                             </div>
                         </div>
                         <div className="user_account_page_each_child_container user_account_page_second_child_container" style={{borderLeft: "1px solid rgba(0,0,0,0.1)"}}>
-                            <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 10}}>
+                            <div>
                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder", textAlign: "center", fontSize: 14, color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
                                     <i style={{marginRight: 10}} className="fa fa-history"></i>
                                     Booking History
@@ -450,44 +451,37 @@ export default function LoginPage(){
                                 </div>
                             </div>
                             <div style={{marginTop: 10}}>
-                                <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
-                                            <i className="fa fa-ticket" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        </span>G030E9S, 2 travelers, economy</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
+                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 15}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-calendar-o" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
                                         March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        Accra</span></p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-plane" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        JFK - Kotoka, Round-trip</p>
+                                        New York, JFK - Accra, Kotoka</p>
                                     <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see all ...
+                                        see full details ...
                                     </p>
                                 </div>
-                                <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
-                                            <i className="fa fa-ticket" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        </span>G030E9S, 2 travelers, economy</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
+                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 15}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-calendar-o" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
                                         March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        Accra</span></p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-plane" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        JFK - Kotoka, Round-trip</p>
+                                        New York, JFK - Accra, Kotoka</p>
                                     <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see all ...
+                                        see full details ...
+                                    </p>
+                                </div>
+                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 15}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                        <i className="fa fa-calendar-o" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        March 22 - March 27</p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                        <i className="fa fa-plane" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        New York, JFK - Accra, Kotoka</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
+                                        see full details ...
                                     </p>
                                 </div>
                                 <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
@@ -510,11 +504,14 @@ export default function LoginPage(){
                                         see all ...
                                     </p>
                                 </div>
-                                <div style={{marginBottom: 20, padding: "20px"}}>
+                                <div style={{display: "none", marginBottom: 20, padding: "20px"}}>
                                     <div style={{backgroundImage: `url(${nothing_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         Oops nothing found</p>
+                                </div>
+                                <div style={{marginTop: 30}}>
+                                    <PaginationButtons />
                                 </div>
                                 {/*<div style={{backgroundColor: "rgb(0,0,0,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>

@@ -479,8 +479,8 @@ function return_search_results_important_notice(obj){
     return `
         <div class="search_result_inportant_notice_container">
             <div>
-                <p style="color: rgba(0,0,0,0.7); font-size: 16px; font-family: 'Prompt', Sans-serif; font-weight: bolder; margin-bottom: 10px;>
-                    <i class="fa fa-info-circle" style="font-size: 15px; margin-right: 5px;"></i>Important Notice
+                <p style="color: rgba(105,0,0,0.7); font-size: 16px; font-family: 'Prompt', Sans-serif; margin-bottom: 10px;">
+                    <i class="fa fa-info-circle" style="font-size: 15px; color: orangered; margin-right: 5px;"></i>Important Notice
                 </p>
                 <p style="color: rgba(0,0,0,0.7); font-size: 14px">
                     Prices displayed include taxes and may change based on availability. 
@@ -497,7 +497,7 @@ function return_search_results_filters_and_sort(obj){
             <div id="mobile_sort_and_filter_title_and_sort">
                 <div style="height: 50px; border-bottom: 1px solid rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center;">
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <p style="color: rgba(0,0,0,0.7); font-weight: bolder; display: flex; flex-direction: column; justify-content: center;">
+                        <p style="color: rgba(0,0,0,0.5); font-weight: bolder; display: flex; flex-direction: column; justify-content: center;">
                             Sort and Filter
                         </p>
                         <p onclick="document.getElementById('search_list_main__settings_section').style.display='none';" id="close_filter_and_sort_btn" style="color: rgba(255,0,0,0.6); font-size: 33px; margin-right: 5px;">
@@ -506,15 +506,15 @@ function return_search_results_filters_and_sort(obj){
                     </div>
                 </div>
                 <div style="margin-top: 20px; margin-bottom: 35px;">
-                    <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 17px">Sort by</p>
-                    <select style="padding: 14px; margin-top: 12px; width: 100%; border: 1px solid rgba(0,0,0,0.3); border-radius: 9px; color: rgba(0,0,0,0.7);">
+                    <p style="color: rgba(0,0,0,0.5); font-size: 17px">Sort by</p>
+                    <select style="padding: 14px; margin-top: 12px; width: 100%; border: 1px solid rgba(0,0,0,0.15); border-radius: 9px; color: rgba(0,0,0,0.7);">
                         <option>
                             Price (Lowest)
                         </option>
                     </select>
                 </div>
             </div>
-            <p style="font-weight: bolder; color: rgba(0,0,0,0.7); font-size: 17px; margin-bottom: 30px;">
+            <p style="color: rgba(0,0,0,0.5); font-size: 17px; margin-bottom: 30px;">
                 <i style="margin-right: 7px;" class="fa fa-sliders" aria-hidden="true"></i>
                 Filter by</p>
 
