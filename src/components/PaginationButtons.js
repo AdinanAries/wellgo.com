@@ -1,7 +1,10 @@
 function PaginationButtons(){
     return (
         <div style={{display: "flex", justifyContent: "center"}}>
-            <div style={{width: 45, height: 45, border: "1px solid rgba(0,0,0,0.1)", borderRadius: "100%", background: "rgb(0,0,255,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}>
+            <div style={{color: "rgba(0,0,0,0.7)", marginRight: 10, width: 45, height: 45, border: "1px solid rgba(0,0,0,0.1)", borderRadius: "100%", background: "rgb(0,0,255,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}>
+                <i className="fa-solid fa-angles-left"></i>
+            </div>
+            <div style={{color: "rgba(0,0,0,0.7)", width: 45, height: 45, border: "1px solid rgba(0,0,0,0.1)", borderRadius: "100%", background: "rgb(0,0,255,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}>
                 <i className="fa fa-angle-left"></i>
             </div>
             <div>
@@ -10,8 +13,11 @@ function PaginationButtons(){
                     <option>21 - 30</option>
                 </select>
             </div>
-            <div style={{width: 45, height: 45, border: "1px solid rgba(0,0,0,0.1)", borderRadius: "100%", background: "rgb(0,0,255,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}>
+            <div style={{color: "rgba(0,0,0,0.7)", width: 45, height: 45, border: "1px solid rgba(0,0,0,0.1)", borderRadius: "100%", background: "rgb(0,0,255,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}>
                 <i className="fa fa-angle-right"></i>
+            </div>
+            <div style={{color: "rgba(0,0,0,0.7)", marginLeft: 10, width: 45, height: 45, border: "1px solid rgba(0,0,0,0.1)", borderRadius: "100%", background: "rgb(0,0,255,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer"}}>
+                <i className="fa-solid fa-angles-right"></i>
             </div>
         </div>
     )

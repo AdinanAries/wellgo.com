@@ -41,7 +41,7 @@ function Header(){
                         <div id="desktop_search_menu_item" onClick={()=>show_home_page(false)} className="each-header-menu-item active">
                             <div style={{display: "flex", flexDirection: "row", fontSize: 14, padding: "5px", width: 105, color: "rgba(255,255,255,0.7)", textShadow: "1px 2px 3px rgb(0,0,0,0.33)", borderRadius: 50, backgroundColor: "rgb(23, 87, 148)", boxShadow: "0 0 10px rgba(0,0,0,0.4)"}}>
                                 <div style={{textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", width: 30, height: 30, backgroundColor: "white", borderRadius: "100%", marginRight: 10}}>
-                                    <i style={{display: 'inline', fontWeight: "initial", color: "rgb(46, 98, 133)", margin: 0, fontSize: 17}} className="fa fa-plane"/>
+                                    <i style={{display: 'inline', color: "rgb(46, 98, 133)", margin: 0, fontSize: 17}} className="fa-solid fa-plane"/>
                                 </div>
                                 <div style={{display: "flex", flexDirection: "column", justifyContent: "center", fontSize: 13}}>
                                     Search</div>
