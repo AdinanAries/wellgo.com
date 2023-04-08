@@ -115,7 +115,7 @@ export default function LoginPage(){
                         <div id="edit_user_info_other_section" style={{display: "none", animation: "pop-in 0.2s ease-out"}}>
                             <div style={{marginBottom: 10}}>
                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                    <i className="fa fa-calendar-o" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                    <i className="fa fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                     <input type="text" placeholder="Date of Birth"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
@@ -156,15 +156,15 @@ export default function LoginPage(){
                         </div>
                         <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
                             <div style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
-                                    <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
-                                    Cancel
-                                </div>
-                                <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
-                                    <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-check-square-o"></i>
-                                    Update
-                                </div>
+                                <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
+                                Cancel
+                            </div>
+                            <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                                <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-check-square-o"></i>
+                                Update
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
 
@@ -176,6 +176,96 @@ export default function LoginPage(){
                     </p>
                     <div className="page-popup-cover-content-header">
                         Add Payment Method
+                    </div>
+                    <div className="steps_form_all_steps_indicators">
+                        <div id="user_profile_add_payment_method_info_nav_btn" style={{width: "50%"}} onClick={show_add_payment_credit_card_infor} className="steps_form_each_step_indicator_container active payment_method_form">
+                            <p style={{fontSize: 13, marginLeft: -20, fontFamily: "'Prompt', sans-serif", textAlign: "center"}}>
+                                Credit/Debit Card</p>
+                            <div className="steps_form_each_step_indicator" style={{left: "calc(50% - 15px)"}}>
+                                <p><i className="fa-solid fa-credit-card"></i></p>
+                            </div>
+                        </div>
+                        <div id="user_profile_add_payment_address_info_nav_btn" style={{width: "50%"}} onClick={show_add_payment_billing_address_infor} className="steps_form_each_step_indicator_container payment_method_form">
+                            <p style={{fontSize: 13, marginLeft: -20, fontFamily: "'Prompt', sans-serif", textAlign: "center"}}>
+                                Billing Address</p>
+                            <div className="steps_form_each_step_indicator" style={{left: "calc(50% - 15px)"}}>
+                                <p><i className="fa-solid fa-globe"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="user_profile_add_payment_credit_card_form">
+                        <div style={{marginBottom: 10}}>
+                            <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                <i className="fa-solid fa-credit-card" style={{marginLeft: 10}}></i>
+                                <input type="number" placeholder="Card Number"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                            </div>
+                        </div>
+                        <div>
+                            <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                            <i className="fa-solid fa-user" style={{marginLeft: 10}}></i>
+                                <input type="text" placeholder="Holder Name"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
+                            <div style={{marginRight: 10, width: "50%"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-calendar" style={{marginLeft: 10}}></i>
+                                    <input type="number" placeholder="Exp Date"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{width: "calc(50% - 10px)"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-key" style={{marginLeft: 10}}></i>
+                                    <input type="number" placeholder="Sec Code"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="user_profile_add_payment_address_form" style={{display: "none"}}>
+                        <div style={{marginBottom: 10}}>
+                            <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                <i className="fa-solid fa-map-marker" style={{marginLeft: 10}}></i>
+                                <input type="text" placeholder="Street Address"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
+                            <div style={{marginRight: 10, width: "50%"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-tree-city" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="City"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{width: "calc(50% - 10px)"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-earth-americas" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="State"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
+                            <div style={{marginRight: 10, width: "50%"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-earth-americas" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="Country"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{width: "calc(50% - 10px)"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-map-marker" style={{marginLeft: 10}}></i>
+                                    <input type="number" placeholder="Zip Code"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", margin: "20px 0", borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
+                        <div style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                            <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
+                            Cancel
+                        </div>
+                        <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                            <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-save"></i>
+                            Save
+                        </div>
                     </div>
                 </div>
             </div>
@@ -255,7 +345,7 @@ export default function LoginPage(){
                                         <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                                             DOB: March 23rd, 1992</p>
                                         <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
-                                            <p><i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar-o"></i>
+                                            <p><i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar"></i>
                                             <input style={{padding: 10, border: "none", width: "calc(100% - 40px)"}} type="text" placeholder="add your date of birth" /></p>
                                         </div>
                                         <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
@@ -675,9 +765,9 @@ export default function LoginPage(){
                                 </p>
                                 <div style={{marginTop: 10, position: "relative", backgroundColor: "rgba(0,0,0,0.072)", borderRadius: 50, display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                     <p style={{position: "relative", zIndex: 4, display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 40, height: 48, borderRadius: "100%"}}>
-                                        <i style={{color: "rgba(0,0,0,0.7)"}} className="fa fa-calendar-o"></i>
+                                        <i style={{color: "rgba(0,0,0,0.7)"}} className="fa fa-calendar"></i>
                                     </p>
-                                    <input id="booking_history_date_range_input" readOnly="true" style={{position: "relative", zIndex: 4, border: "none", borderRadius: 50, fontSize: 14, padding: "14px 10px", backgroundColor: "rgba(0,0,0,0.052)", fontFamily: "'Prompt', sans-serif", width: "calc(100% - 95px)"}} type="text" placeholder="add start and end dates"/>
+                                    <input id="booking_history_date_range_input" readOnly="true" style={{position: "relative", zIndex: 4, border: "none", borderRadius: 50, fontSize: 14, padding: "14px 10px", backgroundColor: "rgba(0,0,0,0.052)", fontFamily: "'Prompt', sans-serif", width: "calc(100% - 95px)"}} type="text" placeholder="Select date range"/>
                                     <p onClick={toggle_show_booking_history_filters} style={{cursor: "pointer", position: "relative", zIndex: 4, display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: "center", width: 48, height: 48, borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.072)",}}>
                                         <i id="toggle_show_booking_history_filters_caret" style={{color: "rgba(0,0,0,0.7)", transition: "all 0.2s ease-in-out"}} className="fa fa-caret-down"></i>
                                     </p>
@@ -1052,4 +1142,26 @@ function show_edit_user_other_infor(){
     document.getElementById("edit_user_info_personal_section").style.display="none";
     document.getElementById("edit_user_info_contact_section").style.display="none";
     document.getElementById("edit_user_info_other_section").style.display="block";
+} 
+
+function show_add_payment_credit_card_infor(){
+    Array.from(document.querySelectorAll(".steps_form_each_step_indicator_container.payment_method_form")).forEach(each => {
+        each.classList.remove("active")
+        console.log(each.classList)
+    });
+    document.getElementById("user_profile_add_payment_method_info_nav_btn").classList.add("active");
+
+    document.getElementById("user_profile_add_payment_address_form").style.display="none";
+    document.getElementById("user_profile_add_payment_credit_card_form").style.display="block";
+} 
+
+function show_add_payment_billing_address_infor(){
+    Array.from(document.querySelectorAll(".steps_form_each_step_indicator_container.payment_method_form")).forEach(each => {
+        each.classList.remove("active")
+        console.log(each.classList)
+    });
+    document.getElementById("user_profile_add_payment_address_info_nav_btn").classList.add("active");
+
+    document.getElementById("user_profile_add_payment_address_form").style.display="block";
+    document.getElementById("user_profile_add_payment_credit_card_form").style.display="none";
 } 
