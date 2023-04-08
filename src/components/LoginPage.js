@@ -279,6 +279,104 @@ export default function LoginPage(){
                     <div className="page-popup-cover-content-header">
                         Add New Passport
                     </div>
+                    <div className="steps_form_all_steps_indicators">
+                        <div id="user_profile_add_passport_info_nav_btn" style={{width: "50%"}} onClick={show_add_passport_infor} className="steps_form_each_step_indicator_container active passport_form">
+                            <p style={{fontSize: 13, marginLeft: -20, fontFamily: "'Prompt', sans-serif", textAlign: "center"}}>
+                                Passport Details</p>
+                            <div className="steps_form_each_step_indicator" style={{left: "calc(50% - 15px)"}}>
+                                <p><i className="fa-solid fa-passport"></i></p>
+                            </div>
+                        </div>
+                        <div id="user_profile_add_passport_holder_info_nav_btn" style={{width: "50%"}} onClick={show_add_passport_holder_infor} className="steps_form_each_step_indicator_container passport_form">
+                            <p style={{fontSize: 13, marginLeft: -20, fontFamily: "'Prompt', sans-serif", textAlign: "center"}}>
+                                Holder Info</p>
+                            <div className="steps_form_each_step_indicator" style={{left: "calc(50% - 15px)"}}>
+                                <p><i className="fa-solid fa-user"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="user_profile_add_passport_form">
+                        <div style={{marginBottom: 10}}>
+                            <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                <i className="fa-solid fa-passport" style={{marginLeft: 10}}></i>
+                                <input type="number" placeholder="Passport Number"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
+                            <div style={{marginRight: 10, width: "50%"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-calendar" style={{marginLeft: 10}}></i>
+                                    <input type="number" placeholder="Issue Date"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{width: "calc(50% - 10px)"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-calendar" style={{marginLeft: 10}}></i>
+                                    <input type="number" placeholder="Exp Date"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
+                            <div style={{marginRight: 10, width: "50%"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-earth-americas" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="Country"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{width: "calc(50% - 10px)"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-tree-city" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="City"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="user_profile_add_passport_holder_form" style={{display: "none"}}>
+                        <div style={{marginBottom: 10}}>
+                            <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                <i className="fa-solid fa-user" style={{marginLeft: 10}}></i>
+                                <input type="text" placeholder="Name on Passport"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
+                            <div style={{marginRight: 10, width: "50%"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-person-half-dress" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="Gender"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{width: "calc(50% - 10px)"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-earth-americas" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="Nationality"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
+                            <div style={{marginRight: 10, width: "50%"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-calendar" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="Date of Birth"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                            <div style={{width: "calc(50% - 10px)"}}>
+                                <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                                    <i className="fa-solid fa-tree-city" style={{marginLeft: 10}}></i>
+                                    <input type="text" placeholder="Birth City"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", margin: "20px 0", borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
+                        <div style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                            <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
+                            Cancel
+                        </div>
+                        <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                            <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-save"></i>
+                            Save
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -379,7 +477,7 @@ export default function LoginPage(){
                                         <div id="show_more_payment_method_info_btn0">
                                             <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                                 <i className="fa-solid fa-check" style={{color: "lightgreen", marginRight: 10}}></i>
-                                                ...3453
+                                                ****3453
                                                 <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
                                             </p>
                                             <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
@@ -388,287 +486,16 @@ export default function LoginPage(){
                                         </div>
                                         <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
                                             <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
+                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-credit-card"></i>
                                                 Mohammed Adinan</p>
                                             <div style={{marginLeft: 10, marginTop: 10}}>
                                             <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number: </span>***3453</p>
                                                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Exp Date: </span>March 2019</p>
                                                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
-                                            </div>
-                                            <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Holder information</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
-                                            </div>
-                                            <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view less ...
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
-                                                <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                                                    <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
-                                                </div>
-                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                                                    <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <div id="show_more_payment_method_info_btn0">
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
-                                                <i className="fa-solid fa-exclamation-triangle" style={{color: "orange", marginRight: 10}}></i>
-                                                ...3453
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
-                                            </p>
-                                            <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view more ...
-                                            </p>
-                                        </div>
-                                        <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
-                                                Mohammed Adinan</p>
-                                            <div style={{marginLeft: 10, marginTop: 10}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
-                                            </div>
-                                            <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Holder information</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
-                                            </div>
-                                            <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view less ...
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
-                                                <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                                                    <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
-                                                </div>
-                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                                                    <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <div id="show_more_payment_method_info_btn0">
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
-                                                ...3453
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
-                                            </p>
-                                            <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view more ...
-                                            </p>
-                                        </div>
-                                        <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
-                                                Mohammed Adinan</p>
-                                            <div style={{marginLeft: 10, marginTop: 10}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
-                                            </div>
-                                            <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Holder information</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
-                                            </div>
-                                            <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view less ...
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
-                                                <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                                                    <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
-                                                </div>
-                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                                                    <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <div id="show_more_payment_method_info_btn0">
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
-                                                ...3453
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
-                                            </p>
-                                            <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view more ...
-                                            </p>
-                                        </div>
-                                        <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
-                                                Mohammed Adinan</p>
-                                            <div style={{marginLeft: 10, marginTop: 10}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
-                                            </div>
-                                            <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Holder information</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
-                                            </div>
-                                            <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view less ...
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
-                                                <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                                                    <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
-                                                </div>
-                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                                                    <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <div id="show_more_payment_method_info_btn0">
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
-                                                ...3453
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
-                                            </p>
-                                            <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view more ...
-                                            </p>
-                                        </div>
-                                        <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
-                                                Mohammed Adinan</p>
-                                            <div style={{marginLeft: 10, marginTop: 10}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
-                                            </div>
-                                            <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Holder information</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
-                                            </div>
-                                            <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view less ...
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
-                                                <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                                                    <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
-                                                </div>
-                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                                                    <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <div id="show_more_payment_method_info_btn0">
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
-                                                ...3453
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
-                                            </p>
-                                            <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view more ...
-                                            </p>
-                                        </div>
-                                        <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
-                                                Mohammed Adinan</p>
-                                            <div style={{marginLeft: 10, marginTop: 10}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
-                                            </div>
-                                            <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                    Holder information</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Address: </span>
+                                                    956 Anderson Av. Bronx, NY, USA 10452</p>
                                             </div>
                                             <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                                                 view less ...
@@ -1164,4 +991,26 @@ function show_add_payment_billing_address_infor(){
 
     document.getElementById("user_profile_add_payment_address_form").style.display="block";
     document.getElementById("user_profile_add_payment_credit_card_form").style.display="none";
+} 
+
+function show_add_passport_infor(){
+    Array.from(document.querySelectorAll(".steps_form_each_step_indicator_container.passport_form")).forEach(each => {
+        each.classList.remove("active")
+        console.log(each.classList)
+    });
+    document.getElementById("user_profile_add_passport_info_nav_btn").classList.add("active");
+
+    document.getElementById("user_profile_add_passport_holder_form").style.display="none";
+    document.getElementById("user_profile_add_passport_form").style.display="block";
+} 
+
+function show_add_passport_holder_infor(){
+    Array.from(document.querySelectorAll(".steps_form_each_step_indicator_container.passport_form")).forEach(each => {
+        each.classList.remove("active")
+        console.log(each.classList)
+    });
+    document.getElementById("user_profile_add_passport_holder_info_nav_btn").classList.add("active");
+
+    document.getElementById("user_profile_add_passport_holder_form").style.display="block";
+    document.getElementById("user_profile_add_passport_form").style.display="none";
 } 
