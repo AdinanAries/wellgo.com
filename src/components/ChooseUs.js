@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import securepaymentssvg from '../icons/securepayments.svg';
 import bestdealssvg from '../icons/bestdeals.svg';
 import customersupportsvg from '../icons/customersupport.svg';
@@ -25,8 +27,53 @@ import { show_full_search_form } from "../helpers/PageRoutingFuncs";
 
 import DownloadMobileApp from "./DownloadMobileApp";
 import { cloneElement } from 'react';
+import PaginationButtons from './PaginationButtons';
 
 var ChooseUs = ()=>{
+
+    const [data, setData] = useState({
+        exploreCities: {
+            pagination: {},
+            cities: [
+                {
+                    country: "United Kingdom",
+                    city: "London",
+                    picture: LondonImg
+                },
+                {
+                    country: "Ghana",
+                    city: "Accra",
+                    picture: AccraImg
+                },
+                {
+                    country: "United States",
+                    city: "Los Angeles",
+                    picture: LAImg
+                },
+                {
+                    country: "France",
+                    city: "Paris",
+                    picture: ParisImg
+                },
+                {
+                    country: "United States",
+                    city: "New York",
+                    picture: NewYorkImg
+                },
+                {
+                    country: "Italy",
+                    city: "Rome",
+                    picture: RomeImg
+                },
+                {
+                    country: "Egypt",
+                    city: "Cairo",
+                    picture: CairoImg
+                },
+            ]
+        }
+    });
+
     return (
         <div>
             <div style={{marginBottom: 0, padding: "10px 0", backgroundColor: "rgb(229, 233, 241)",}}>
@@ -41,7 +88,17 @@ var ChooseUs = ()=>{
                             <p style={{maxWidth: 350, marginTop: 10, marginBottom: 10, fontFamily: "'Prompt', sans-serif", lineHeight: 1.1}}>
                                 plus awsome user experience...
                             </p>
-                            <div style={{backgroundColor: "darkslateblue", boxShadow: "0 0 5px rgba(0,0,0,0.4)", padding: 14, color: "white", fontFamily: "'Prompt', sans-serif", cursor: "pointer", marginTop: 20, width: "fit-content", borderRadius: 50}}>
+                            <div style={{paddingTop: 10, paddingLeft: 15, paddingBottom: 5}}>
+                                <i style={{color: "darkslateblue"}} className='fa-solid fa-earth-americas'></i>
+                                <select style={{border: "none", marginLeft: 5, color: "rgba(0,0,0,0.7)"}}>
+                                    <option value="1">(+1) United States</option>
+                                </select>
+                            </div>
+                            <div style={{marginTop: 5, border: "1px solid rgba(0,0,0,0.1)", maxWidth: 300, paddingLeft: 15, borderRadius: 50}}>
+                                <i style={{color: "darkslateblue"}} className="fa-solid fa-phone"></i>
+                                <input style={{border: "none", padding: 15, width: "calc(100% - 20px)", background: "none"}} type="number" placeholder="Enter phone number"/>
+                            </div>
+                            <div style={{backgroundColor: "darkslateblue", textAlign: "center", boxShadow: "0 0 5px rgba(0,0,0,0.4)", padding: 14, color: "white", fontFamily: "'Prompt', sans-serif", cursor: "pointer", marginTop: 5, maxWidth: 300, borderRadius: 50}}>
                                 Send Link to Phone
                             </div>
                         </div>
@@ -51,7 +108,7 @@ var ChooseUs = ()=>{
                     <div className="home_page_reviews_container">
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                         >Customer Satisfaction</h1>
-                        <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: "initial", fontFamily: "'Prompt', Sans-serif",}}
                         >get the luxury of cheap travel</h1>
                         <div className="home_page_reviews_wrapper">
 
@@ -260,10 +317,30 @@ var ChooseUs = ()=>{
                     <div className="home_page_most_visited_cities" style={{paddingTop: 10}}>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                             >Popular Cities</h1>
-                        <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                        <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: "initial", fontFamily: "'Prompt', Sans-serif",}}
                             >see some of most visited cities</h1>
                         <div className="home_page_most_visited_cities_list">
-                            <div  className="home_page_each_most_visited_cities">
+                            {
+                                data.exploreCities.cities.slice(0,3).map(each=>
+                                    (
+                                        <div  className="home_page_each_most_visited_cities">
+                                            <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${each.picture}')`}} >
+            
+                                            </div>
+                                            <div className="home_page_each_most_visited_cities_btn">
+                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>{each.city}</p>
+                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
+                                                    {each.country}</p>
+                                                
+                                            </div>
+                                            <div className="home_page_each_most_visited_cities_bottom">
+                                                
+                                            </div>
+                                        </div>
+                                    )
+                                )
+                            }
+                            {/*<div  className="home_page_each_most_visited_cities">
                                 <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${LondonImg}')`}}>
 
                                 </div>
@@ -306,7 +383,7 @@ var ChooseUs = ()=>{
                                 <div className="home_page_each_most_visited_cities_bottom">
                                     
                                 </div>
-                            </div>
+                            </div>*/}
                         </div>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                             >More To Explore</h1>
@@ -400,6 +477,9 @@ var ChooseUs = ()=>{
                                         </div>
                                     </div>
                                     Cairo - Egypt</div>
+                            </div>
+                            <div style={{paddingTop: 20}}>
+                                <PaginationButtons />
                             </div>
                         </div>
                     </div>

@@ -386,17 +386,17 @@ export default function LoginPage(){
                         <div className="user_account_page_each_child_container">
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 5, marginBottom: 10}}>
                                 <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                         <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-user"></i>
                                         Account</p>
                                 </div>
                                 <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_payment_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                         <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-credit-card"></i>
                                         Payments</p>
                                 </div>
                                 <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_passport_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                         <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-book"></i>
                                         Passports</p>
                                 </div>
@@ -529,6 +529,7 @@ export default function LoginPage(){
                                 <div style={{display: "block", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <div id="show_more_passport_info_btn0">
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
+                                            <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
                                             Mohammed Adinan
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , GH076033</span>
                                             <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Madrid - Spain ...</span>
@@ -539,7 +540,7 @@ export default function LoginPage(){
                                     </div>
                                     <div  id="show_more_passport_info_container0" style={{display: "none"}}>
                                         <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                            <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-book"></i>
+                                            <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
                                             Mohammed Adinan</p>
                                         <div style={{marginLeft: 10, marginTop: 10}}>
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
@@ -586,7 +587,7 @@ export default function LoginPage(){
                         </div>
                         <div className="user_account_page_each_child_container user_account_page_second_child_container" style={{borderLeft: "1px solid rgba(0,0,0,0.1)"}}>
                             <div>
-                                <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder", textAlign: "center", fontSize: 14, color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
+                                <p style={{fontFamily: "'Prompt', Sans-serif", textAlign: "center", fontSize: 14, color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
                                     <i style={{marginRight: 10}} className="fa fa-history"></i>
                                     Booking History
                                 </p>
@@ -631,68 +632,82 @@ export default function LoginPage(){
                             <div style={{marginTop: 10, height: 400, overflowY: "auto"}}>
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-calendar" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         New York, JFK - Accra, Kotoka</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see full details ...
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
                                     </p>
                                 </div>
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-calendar" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         New York, JFK - Accra, Kotoka</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see full details ...
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
                                     </p>
                                 </div>
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-calendar" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         New York, JFK - Accra, Kotoka</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see full details ...
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
                                     </p>
                                 </div>
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-calendar" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         New York, JFK - Accra, Kotoka</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see full details ...
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
                                     </p>
                                 </div>
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-calendar" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         New York, JFK - Accra, Kotoka</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see full details ...
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
                                     </p>
                                 </div>
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-calendar" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
-                                        March 22 - March 27</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-map-marker" style={{marginRight: 10, color: "rgba(0,0,0,0.5)"}}></i>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         New York, JFK - Accra, Kotoka</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "#c751b9"}}>
-                                        see full details ...
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
+                                    </p>
+                                </div>
+                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
+                                        New York, JFK - Accra, Kotoka</p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
+                                    </p>
+                                </div>
+                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
+                                        New York, JFK - Accra, Kotoka</p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                        March 22 - March 27</p>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                        view more ...
                                     </p>
                                 </div>
                                 <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
