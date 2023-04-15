@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import securepaymentssvg from '../icons/securepayments.svg';
 import bestdealssvg from '../icons/bestdeals.svg';
@@ -33,7 +33,11 @@ var ChooseUs = ()=>{
 
     const [data, setData] = useState({
         exploreCities: {
-            pagination: {},
+            pagination: {
+                currentPage: 1,
+                numberPerPage: 4,
+                numberOfPages: 0,
+            },
             cities: [
                 {
                     country: "United Kingdom",
@@ -74,6 +78,50 @@ var ChooseUs = ()=>{
         }
     });
 
+    function nextPage() {
+        if(
+            (((data.exploreCities.pagination.currentPage - 1) * data.exploreCities.pagination.numberPerPage)+data.exploreCities.pagination.numberPerPage)
+            > data.exploreCities.cities.length
+        )return;
+        setData({
+            exploreCities: {
+                ...data.exploreCities,
+                pagination: {
+                    currentPage: (++data.exploreCities.pagination.currentPage),
+                    ...data.exploreCities.pagination
+                }
+            }
+        })
+    }
+
+    function prevPage() {
+        if((data.exploreCities.pagination.currentPage-1) < 1)return;
+        setData({
+            exploreCities: {
+                ...data.exploreCities,
+                pagination: {
+                    currentPage: (--data.exploreCities.pagination.currentPage),
+                    ...data.exploreCities.pagination
+                }
+            }
+        })
+    }
+
+    useEffect(() => {
+        setData({
+            exploreCities: {
+                ...data.exploreCities,
+                pagination: {
+                    currentPage: 1,
+                    numberPerPage: 4,
+                    numberOfPages: Math.ceil(data.exploreCities.cities.length / data.exploreCities.pagination.numberPerPage),
+                }
+            }
+        })
+    }, []);
+
+    let begin = ((data.exploreCities.pagination.currentPage - 1) * data.exploreCities.pagination.numberPerPage);
+    let end = begin + data.exploreCities.pagination.numberPerPage;
     return (
         <div>
             <div style={{marginBottom: 0, padding: "10px 0", backgroundColor: "rgb(229, 233, 241)",}}>
@@ -330,7 +378,7 @@ var ChooseUs = ()=>{
                                             <div className="home_page_each_most_visited_cities_btn">
                                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>{each.city}</p>
                                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                                    {each.country}</p>
+                                                    {each.country}, {data.exploreCities.pagination.numberOfPages}</p>
                                                 
                                             </div>
                                             <div className="home_page_each_most_visited_cities_bottom">
@@ -391,17 +439,42 @@ var ChooseUs = ()=>{
                             <div className="more_popular_cities_svg_img" style={{height: 150, width: 150, backgroundImage: `url('${citiesIcon}')`, backgroundRepeat: "no-repeat", backgroundSize: "contain", position: "absolute", top: -50, left: 20, zIndex: 1}}>
                             </div>
                             <div style={{position: "relative", maxWidth: 500, margin: "auto"}}>
-                                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", position: "absolute", zIndex: 1, height: "100%", left: 0}}>
+                                <div onClick={prevPage} style={{display: "flex", flexDirection: "column", justifyContent: "center", position: "absolute", zIndex: 1, height: "100%", left: 0}}>
                                     <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "#db7fd0", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
                                         <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-left"></i>
                                     </div>
                                 </div>
-                                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", position: "absolute", zIndex: 1, height: "100%", right: 0}}>
+                                <div onClick={nextPage} style={{display: "flex", flexDirection: "column", justifyContent: "center", position: "absolute", zIndex: 1, height: "100%", right: 0}}>
                                     <div style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "#db7fd0", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
                                         <i style={{fontSize: 20, color: "white"}} className="fa fa-angle-right"></i>
                                     </div>
                                 </div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                {
+                                    
+                                    data.exploreCities.cities.slice(begin, end).map(each=>
+                                    (
+                                        <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", maxWidth: "300px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                        <div className="each_more_popular_city_popup">
+                                            <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
+                                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${each.picture}')`}}>
+
+                                                </div>
+                                                <div className="home_page_each_most_visited_cities_btn">
+                                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
+                                                        {each.city}</p>
+                                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
+                                                        {each.country}</p>
+                                                    
+                                                </div>
+                                                <div className="home_page_each_most_visited_cities_bottom">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {each.city} - {each.country}</div>
+                                    )
+                                )}
+                                {/*<div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                     <div className="each_more_popular_city_popup">
                                         <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
                                             <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${ParisImg}')`}}>
@@ -476,7 +549,7 @@ var ChooseUs = ()=>{
                                             </div>
                                         </div>
                                     </div>
-                                    Cairo - Egypt</div>
+                                    Cairo - Egypt</div>*/}
                             </div>
                             <div style={{paddingTop: 20}}>
                                 <PaginationButtons />
