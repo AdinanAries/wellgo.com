@@ -465,7 +465,7 @@ var ChooseUs = ()=>{
                                     
                                     data.exploreCities.cities.slice(begin, end).map(each=>
                                     (
-                                        <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", maxWidth: "300px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+                                        <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", maxWidth: "300px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
                                         <div className="each_more_popular_city_popup">
                                             <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
                                                 <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${each.picture}')`}}>
