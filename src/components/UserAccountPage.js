@@ -10,7 +10,7 @@ import PaginationButtons from "./PaginationButtons";
 
 function UserAccountPage(){
     return (
-        <div id="user_account_manager_page">
+        <div id="user_account_manager_page" style={{display: "none"}}>
                     <div className="user_account_page_container">
                         <div className="user_account_page_each_child_container">
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 5, marginBottom: 10}}>
