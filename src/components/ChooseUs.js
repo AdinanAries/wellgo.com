@@ -83,11 +83,11 @@ var ChooseUs = ()=>{
             (((data.exploreCities.pagination.currentPage - 1) * data.exploreCities.pagination.numberPerPage)+data.exploreCities.pagination.numberPerPage)
             > data.exploreCities.cities.length
         )return;
+        ++data.exploreCities.pagination.currentPage;
         setData({
             exploreCities: {
                 ...data.exploreCities,
                 pagination: {
-                    currentPage: (++data.exploreCities.pagination.currentPage),
                     ...data.exploreCities.pagination
                 }
             }
@@ -96,15 +96,27 @@ var ChooseUs = ()=>{
 
     function prevPage() {
         if((data.exploreCities.pagination.currentPage-1) < 1)return;
+        --data.exploreCities.pagination.currentPage;
         setData({
             exploreCities: {
                 ...data.exploreCities,
                 pagination: {
-                    currentPage: (--data.exploreCities.pagination.currentPage),
                     ...data.exploreCities.pagination
                 }
             }
         })
+    }
+
+    function setPage(num) {
+        setData({
+            exploreCities: {
+                ...data.exploreCities,
+                pagination: {
+                    ...data.exploreCities.pagination,
+                    currentPage: num,
+                }
+            }
+        });
     }
 
     useEffect(() => {
@@ -378,7 +390,7 @@ var ChooseUs = ()=>{
                                             <div className="home_page_each_most_visited_cities_btn">
                                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>{each.city}</p>
                                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                                    {each.country}, {data.exploreCities.pagination.numberOfPages}</p>
+                                                    {each.country}</p>
                                                 
                                             </div>
                                             <div className="home_page_each_most_visited_cities_bottom">
@@ -552,7 +564,14 @@ var ChooseUs = ()=>{
                                     Cairo - Egypt</div>*/}
                             </div>
                             <div style={{paddingTop: 20}}>
-                                <PaginationButtons />
+                                <PaginationButtons 
+                                    pageSize={data.exploreCities.pagination.numberPerPage} 
+                                    currentPage={data.exploreCities.pagination.currentPage} 
+                                    totalItems={data.exploreCities.cities.length}
+                                    nextPage={nextPage}
+                                    prevPage={prevPage}
+                                    setPage={setPage}
+                                />
                             </div>
                         </div>
                     </div>
