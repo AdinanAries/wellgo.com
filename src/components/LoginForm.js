@@ -18,7 +18,7 @@ function LoginForm(){
                         </div>
                     </div>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
-                        <div style={{color: "white", cursor: "pointer", width: "fit-content", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                        <div onClick={login_onclick} style={{color: "white", cursor: "pointer", width: "fit-content", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                             <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-sign-in"></i>
                             Login
                         </div>
@@ -41,4 +41,10 @@ function show_signup_form(){
     document.getElementById("main_login_form").style.display="none";
     document.getElementById("main_signup_form").style.display="block";
     //$("#main_signup_form").slideDown("fast")
+}
+
+function login_onclick(){
+    document.getElementById("main_login_form").style.display="none";
+    document.getElementById("main_signup_form").style.display="none";
+    document.getElementById("user_account_manager_page").style.display="block";
 }

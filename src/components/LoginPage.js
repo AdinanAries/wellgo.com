@@ -19,10 +19,10 @@ export default function LoginPage(){
 
     let [user, setUser] = useState({
         id: "001",
-        first_name: "Mohammed",
+        first_name: "Mohammedu",
         middle_name: "",
         last_name: "Adinan",
-        dob: "23-03-1992",
+        dob: "03-23-1992",
         email: "m.adinan@yahoo.com",
         mobile: "+1 7327999546",
         gender: "male"
@@ -91,14 +91,14 @@ export default function LoginPage(){
     });
 
     let [userForm, setUserForm] = useState({
-        id: "",
-        first_name: "",
-        middle_name: "",
-        last_name: "",
-        dob: "",
-        email: "",
-        mobile: "",
-        gender: "",
+        id: "001",
+        first_name: "Mohammedu",
+        middle_name: "Salifu",
+        last_name: "Adinan",
+        dob: "03-23-1992",
+        email: "m.adinan@yahoo.com",
+        mobile: "+1 732 799 9546",
+        gender: "male",
         old_password: "",
         new_password: "",
         confirm_new_password: ""
@@ -129,6 +129,42 @@ export default function LoginPage(){
 
     });
 
+
+    function edit_user_form_firstname(e){
+        setUserForm({
+            ...userForm,
+            first_name: e.target.value,
+        });
+    }
+
+    function edit_user_form_lastname(e){
+        setUserForm({
+            ...userForm,
+            last_name: e.target.value,
+        });
+    }
+
+    function edit_user_form_middlename(e){
+        setUserForm({
+            ...userForm,
+            middle_name: e.target.value,
+        });
+    }
+
+    function edit_user_form_email(e){
+        setUserForm({
+            ...userForm,
+            email: e.target.value,
+        });
+    }
+
+    function edit_user_form_mobile(e){
+        setUserForm({
+            ...userForm,
+            mobile: e.target.value,
+        });
+    }
+
     return (
         <main id="login_page" style={{display: "none"}}>
 
@@ -139,6 +175,11 @@ export default function LoginPage(){
             </div>
             <EditProfileForm 
                 userForm={userForm}
+                editUserFirstName={edit_user_form_firstname}
+                editUserLastName={edit_user_form_lastname}
+                editUserMiddleName={edit_user_form_middlename}
+                editUserEmail={edit_user_form_email}
+                editUserMobile={edit_user_form_mobile}
             />
             <PaymentsForm
                 paymentForm={paymentForm}

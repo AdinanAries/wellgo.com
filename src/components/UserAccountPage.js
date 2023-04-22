@@ -8,7 +8,7 @@ import card_not_found from "../icons/card_not_found.svg";
 import not_found_icon from "../icons/not_found_icon.svg";
 import PaginationButtons from "./PaginationButtons";
 
-function UserAccountPage(){
+function UserAccountPage({user, passports, bookings, payments}){
     return (
         <div id="user_account_manager_page" style={{display: "none"}}>
                     <div className="user_account_page_container">
@@ -37,7 +37,7 @@ function UserAccountPage(){
                                     </div>
                                     <div style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         <p className="account_page_user_name_display" style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, fontWeight: "bolder", color: "rgba(0,0,0,0.7)"}}>
-                                            Mohammed Adinan</p>
+                                            {user.first_name} {user.last_name}</p>
                                         <p onClick={()=>document.getElementById("profile_view_more_options_drop_down").style.display="block"} style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
                                             more options
                                             <i style={{marginLeft: 10}} className="fa fa-angle-right"></i>
@@ -62,22 +62,22 @@ function UserAccountPage(){
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", marginBottom: 5, color: "rgb(102, 169, 233)", letterSpacing: 1}}>
                                             Contact</p>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                            Email: adinanaries@outlook.com</p>
+                                            Email: {user.email}</p>
                                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                            Phone: +1 732 799 9546</p>
+                                            Phone: {user.mobile}</p>
                                     </div>
                                     <div style={{marginBottom: 20}}>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", marginBottom: 5, color: "rgb(102, 169, 233)", letterSpacing: 1}}>
                                             Other</p>
-                                        <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                            DOB: March 23rd, 1992</p>
-                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
+                                        <p style={{display: (user.dob ? "block" : "none"), fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
+                                            DOB: {user.dob}</p>
+                                        <div style={{display: (user.dob ? "none" : "block"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
                                             <p><i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar"></i>
-                                            <input style={{padding: 10, border: "none", width: "calc(100% - 40px)"}} type="text" placeholder="add your date of birth" /></p>
+                                            <input style={{padding: 10, border: "none", width: "calc(100% - 40px)"}} type="text" placeholder="add your date of birth" value={user.dob} /></p>
                                         </div>
-                                        <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                            Gender: Male</p>
-                                        <div style={{borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
+                                        <p style={{display: (user.gender ? "block" : "none"), fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, marginTop: 5, color: "rgba(0,0,0,0.7)"}}>
+                                            Gender: {user.gender}</p>
+                                        <div style={{display: (user.gender ? "none" : "block"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
                                             <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-user"></i>
                                             <select style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none"}} type="text" placeholder="add your date of birth">
                                                 <option>Add Your Gender</option>
@@ -85,7 +85,7 @@ function UserAccountPage(){
                                                 <option>Female</option>
                                             </select>
                                         </div>
-                                        <div style={{cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
+                                        <div style={{display: (user.gender && user.dob ? "none" : "block"),cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
                                             <i className="fa fa-save" style={{color: "rgba(255,255,255,0.6)", marginRight: 10}}></i>
                                             Save
                                         </div>

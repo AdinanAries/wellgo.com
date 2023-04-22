@@ -1,6 +1,12 @@
 import edit_user_forms_bg from "../icons/edit_user_forms_bg.svg";
 
-function EditProfileForm(){
+function EditProfileForm({userForm,
+                            editUserFirstName,
+                            editUserLastName,
+                            editUserMiddleName,
+                            editUserEmail,
+                            editUserMobile,
+                            ...rest}){
     return (
         <div id="account_page_edit_profile_form" style={{display: "none"}} className="page-popup-cover">
             <div className="page-popup-cover-content-container">
@@ -68,17 +74,26 @@ function EditProfileForm(){
                         </div>
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                <input type="text" placeholder="First Name"  style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
+                                <input type="text" placeholder="First Name" 
+                                    onInput={editUserFirstName}
+                                    value={userForm.first_name} 
+                                    style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                <input type="text" placeholder="Middle Name"  style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
+                                <input type="text" placeholder="Middle Name"
+                                    onInput={editUserMiddleName}
+                                    value={userForm.middle_name}
+                                    style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                                <input type="text" placeholder="Last Name"  style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
+                                <input type="text" placeholder="Last Name"
+                                    onInput={editUserLastName}
+                                    value={userForm.last_name}
+                                    style={{padding: 16, width: "calc(100%)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                     </div>
@@ -86,13 +101,19 @@ function EditProfileForm(){
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                <input type="email" placeholder="Email"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                <input type="email" placeholder="Email"
+                                    onInput={editUserEmail}
+                                    value={userForm.email}
+                                    style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa fa-mobile" style={{marginRight: 10, fontSize: 22, color: "rgb(43, 52, 61)"}}></i>
-                                <input type="text" placeholder="Mobile"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                <input type="text" placeholder="Mobile"
+                                    onInput={editUserMobile}
+                                    value={userForm.mobile}
+                                    style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                     </div>
@@ -100,7 +121,7 @@ function EditProfileForm(){
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                <input type="text" placeholder="Date of Birth"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                <input type="text" placeholder="Date of Birth" value={userForm.dob} style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{marginBottom: 10}}>
