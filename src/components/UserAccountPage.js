@@ -96,49 +96,54 @@ function UserAccountPage({user, passports, bookings, payments}){
                             </div>
                             <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10}}>
                                 <div style={{height: 400, overflowY: "auto"}}>
-                                    <div style={{display: "none", marginBottom: 20, padding: "20px"}}>
+                                    <div style={{display: ((payments.length > 0) ? "none" : "block"), marginBottom: 20, padding: "20px"}}>
                                         <div style={{backgroundImage: `url(${card_not_found})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
                                         <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                             <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                             No payment method added</p>
                                     </div>
-                                    <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <div id="show_more_payment_method_info_btn0">
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
-                                                <i className="fa-solid fa-check" style={{color: "lightgreen", marginRight: 10}}></i>
-                                                ****3453
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Mohammed Adinan</span>
-                                            </p>
-                                            <p onClick={()=>show_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view more ...
-                                            </p>
-                                        </div>
-                                        <div id="show_more_payment_method_info_container0" style={{display: "none"}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                                <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-credit-card"></i>
-                                                Mohammed Adinan</p>
-                                            <div style={{marginLeft: 10, marginTop: 10}}>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number: </span>***3453</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Exp Date: </span>March 2019</p>
-                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Address: </span>
-                                                    956 Anderson Av. Bronx, NY, USA 10452</p>
-                                            </div>
-                                            <p onClick={()=>hide_more_payment_method_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                                view less ...
-                                            </p>
-                                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
-                                                <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                                                    <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
+                                    {
+                                        payments.map((each, index)=>(
+                                            <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                                <div id={"show_more_payment_method_info_btn"+index}>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
+                                                        <i className="fa-solid fa-check" style={{color: "lightgreen", marginRight: 10}}></i>
+                                                        ****3453
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>, Mohammed Adinan</span>
+                                                    </p>
+                                                    <p onClick={()=>show_more_payment_method_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                                        view more ...
+                                                    </p>
                                                 </div>
-                                                <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                                                    <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
+                                                <div id={"show_more_payment_method_info_container"+index} style={{display: "none"}}>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
+                                                        <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-credit-card"></i>
+                                                        Mohammed Adinan</p>
+                                                    <div style={{marginLeft: 10, marginTop: 10}}>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number: </span>***3453</p>
+                                                        <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Exp Date: </span>March 2019</p>
+                                                        <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Address: </span>
+                                                            956 Anderson Av. Bronx, NY, USA 10452</p>
+                                                    </div>
+                                                    <p onClick={()=>hide_more_payment_method_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                                        view less ...
+                                                    </p>
+                                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
+                                                        <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
+                                                            <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
+                                                        </div>
+                                                        <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
+                                                            <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        ))
+                                    
+                                    }
                                 </div>
                                 <div style={{padding: "15px 0"}}>
                                     <PaginationButtons />
@@ -149,65 +154,69 @@ function UserAccountPage({user, passports, bookings, payments}){
                                 </div>
                             </div>
                             <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
-                                <div style={{display: "none", marginBottom: 20, padding: "20px"}}>
+                                <div style={{display: ((passports.length > 0) ? "none" : "block"), marginBottom: 20, padding: "20px"}}>
                                     <div style={{backgroundImage: `url(${not_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         No passport added</p>
                                 </div>
-                                <div style={{display: "block", backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
-                                    <div id="show_more_passport_info_btn0">
-                                        <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
-                                            <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
-                                            Mohammed Adinan
-                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , GH076033</span>
-                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Madrid - Spain ...</span>
-                                        </p>
-                                        <p onClick={()=>show_more_passport_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                            view more ...
-                                        </p>
-                                    </div>
-                                    <div  id="show_more_passport_info_container0" style={{display: "none"}}>
-                                        <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
-                                            <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
-                                            Mohammed Adinan</p>
-                                        <div style={{marginLeft: 10, marginTop: 10}}>
-                                        <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
-                                        </div>
-                                        <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
-                                                Holder information</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
-                                            <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
-                                        </div>
-                                        <p onClick={()=>hide_more_passport_info(0)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                            view less ...
-                                        </p>
-                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
-                                            <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                                                <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
+                                {
+                                    passports.map((each, index)=>(
+                                        <div style={{backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+                                            <div id={"show_more_passport_info_btn"+index}>
+                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
+                                                    <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
+                                                    Mohammed Adinan
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , GH076033</span>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Madrid - Spain ...</span>
+                                                </p>
+                                                <p onClick={()=>show_more_passport_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                                    view more ...
+                                                </p>
                                             </div>
-                                            <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                                                <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
+                                            <div  id={"show_more_passport_info_container"+index} style={{display: "none"}}>
+                                                <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
+                                                    <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
+                                                    Mohammed Adinan</p>
+                                                <div style={{marginLeft: 10, marginTop: 10}}>
+                                                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
+                                                </div>
+                                                <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
+                                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
+                                                        Holder information</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
+                                                    <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
+                                                </div>
+                                                <p onClick={()=>hide_more_passport_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                                                    view less ...
+                                                </p>
+                                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
+                                                    <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
+                                                        <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
+                                                    </div>
+                                                    <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
+                                                        <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    ))
+                                }
                                 <div onClick={show_add_new_passport_form} style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
                                     <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
                                     Add New Passport
@@ -259,86 +268,18 @@ function UserAccountPage({user, passports, bookings, payments}){
                                 </div>
                             </div>
                             <div style={{marginTop: 10, height: 400, overflowY: "auto"}}>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                        New York, JFK - Accra, Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                        March 22 - March 27</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                        view more ...
-                                    </p>
-                                </div>
+                                {bookings.map(each =>(
+                                    <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                            <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
+                                            New York, JFK - Accra, Kotoka</p>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                            March 22 - March 27</p>
+                                        <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                            view more ...
+                                        </p>
+                                    </div>
+                                ))}
                                 <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
@@ -365,20 +306,6 @@ function UserAccountPage({user, passports, bookings, payments}){
                                         <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                         Oops nothing found</p>
                                 </div>
-                                {/*<div style={{backgroundColor: "rgb(0,0,0,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 10}}>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 16, fontWeight: "initial"}}>
-                                            Reference:</span> G030E9S</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        From <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
-                                        New York</span> to <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15}}>
-                                        Accra</span></p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                        JFK - Kotoka</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
-                                        view more ...
-                                    </p>
-                                </div>*/}
                             </div>
                             <div style={{marginTop: 30}}>
                                 <PaginationButtons />
