@@ -94,7 +94,7 @@ function UserAccountPage({user, passports, bookings, payments}){
                                         Frequent Flyer and Membership</p>
                                 </div>
                             </div>
-                            <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10}}>
+                            <div id="user_account_main_payment_pane" style={{display: (payments.length > 0 ? "none" : "block"), marginTop: 10}}>
                                 <div style={{height: 400, overflowY: "auto"}}>
                                     <div style={{display: ((payments.length > 0) ? "none" : "block"), marginBottom: 20, padding: "20px"}}>
                                         <div style={{backgroundImage: `url(${card_not_found})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
@@ -103,13 +103,31 @@ function UserAccountPage({user, passports, bookings, payments}){
                                             No payment method added</p>
                                     </div>
                                     {
+                                        /*
+                                            id: "001",
+                                            user_id: "001",
+                                            card_number: "***3424",
+                                            holder_name: "Mohammed Adinan",
+                                            exp_date: "03-23-2025",
+                                            sec_code: "009",
+                                            billing: {
+                                                street: "956 Anderson Ave, 1A",
+                                                city: "Bronx",
+                                                state: "NY",
+                                                country: "United States",
+                                                zip_code: "10453"
+                                            }
+                                        */
+
                                         payments.map((each, index)=>(
-                                            <div style={{display: "block", padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                            <div style={{padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                                                 <div id={"show_more_payment_method_info_btn"+index}>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                                         <i className="fa-solid fa-check" style={{color: "lightgreen", marginRight: 10}}></i>
-                                                        ****3453
-                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>, Mohammed Adinan</span>
+                                                        {each.card_number}
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                            , {each.holder_name}
+                                                        </span>
                                                     </p>
                                                     <p onClick={()=>show_more_payment_method_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                                                         view more ...
@@ -118,15 +136,18 @@ function UserAccountPage({user, passports, bookings, payments}){
                                                 <div id={"show_more_payment_method_info_container"+index} style={{display: "none"}}>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
                                                         <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-credit-card"></i>
-                                                        Mohammed Adinan</p>
+                                                        {each.holder_name}</p>
                                                     <div style={{marginLeft: 10, marginTop: 10}}>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number: </span>***3453</p>
+                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                                Number: </span>{each.card_number}</p>
                                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Exp Date: </span>March 2019</p>
+                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                                Exp Date: </span>{each.exp_date}</p>
                                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Address: </span>
-                                                            956 Anderson Av. Bronx, NY, USA 10452</p>
+                                                            <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                                Address: </span>
+                                                            {each.billing.street} {each.billing.city}, {each.billing.state}, {each.billing.country} {each.billing.zip_code}</p>
                                                     </div>
                                                     <p onClick={()=>hide_more_payment_method_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                                                         view less ...
@@ -161,14 +182,31 @@ function UserAccountPage({user, passports, bookings, payments}){
                                         No passport added</p>
                                 </div>
                                 {
+
+                                    /*
+                                        id: "",
+                                        user_id: "",
+                                        passport_number: "",
+                                        issue_date: "",
+                                        exp_date: "",
+                                        city: "",
+                                        country: "",
+                                        holder_name: "",
+                                        holder_gender: "",
+                                        holder_nationality: "",
+                                        holder_dob: "",
+                                        holder_birth_city: "",
+                                    */
                                     passports.map((each, index)=>(
                                         <div style={{backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                             <div id={"show_more_passport_info_btn"+index}>
                                                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                                                     <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
-                                                    Mohammed Adinan
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , GH076033</span>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}> , Madrid - Spain ...</span>
+                                                    {each.holder_name}
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}
+                                                    > , {each.passport_number}</span>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}
+                                                    > , {each.city} - {each.country} ...</span>
                                                 </p>
                                                 <p onClick={()=>show_more_passport_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                                                     view more ...
@@ -177,30 +215,39 @@ function UserAccountPage({user, passports, bookings, payments}){
                                             <div  id={"show_more_passport_info_container"+index} style={{display: "none"}}>
                                                 <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
                                                     <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
-                                                    Mohammed Adinan</p>
+                                                    {each.holder_name}</p>
                                                 <div style={{marginLeft: 10, marginTop: 10}}>
                                                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Number:</span> GH076033</p>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                            Number:</span> {each.passport_number}</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Issued:</span> March 2019</p>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                            Issued:</span> {each.issue_date}</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Expires:</span> March 2024</p>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                            Expires:</span> {each.exp_date}</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Country:</span> Spain</p>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                            Country:</span> {each.country}</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>City:</span> Madrid</p>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                            City:</span> {each.city}</p>
                                                 </div>
                                                 <div style={{marginLeft: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
                                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, fontWeight: "bolder", marginBottom: 5, color: "rgba(0,0,0,0.7)", letterSpacing: 1}}>
                                                         Holder information</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Name:</span> Mohammed Adinan</p>
+                                                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                            Name:</span> {each.holder_name}</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>DOB:</span> March 23rd, 1992</p>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                        DOB:</span> {each.holder_dob}</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Gender:</span> Male</p>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                        Gender:</span> {each.holder_gender}</p>
                                                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>Birth City:</span> Madrid</p>
+                                                    <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                                        Birth City:</span> {each.holder_birth_city}</p>
                                                 </div>
                                                 <p onClick={()=>hide_more_passport_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                                                     view less ...
@@ -268,18 +315,42 @@ function UserAccountPage({user, passports, bookings, payments}){
                                 </div>
                             </div>
                             <div style={{marginTop: 10, height: 400, overflowY: "auto"}}>
-                                {bookings.map(each =>(
-                                    <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                            <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
-                                            New York, JFK - Accra, Kotoka</p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                            March 22 - March 27</p>
-                                        <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
-                                            view more ...
-                                        </p>
-                                    </div>
-                                ))}
+                                {
+                                    /*
+                                        id: "001",
+                                        user_id: "001",
+                                        airline: "American Airlines",
+                                        ariline_code: "",
+                                        trip_type: "round trip",
+                                        travellers: [{
+                                            first_name: "MOhammed",
+                                            last_name: "Adinan",
+                                            gender: "male",
+                                            dob: "03-23-1992",
+                                        }],
+                                        takeoff_airport: "Laguardia",
+                                        takeoff_airport_code: "",
+                                        takeoff_city: "New York",
+                                        destination_airport: "Kotoka",
+                                        destination_airport_code: "",
+                                        destination_city: "Accra",
+                                        departure_date: "03-23-2023",
+                                        return_date: "04-09-2023"
+                                    */
+                                
+                                    bookings.map(each =>(
+                                        <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
+                                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
+                                                {each.takeoff_city}, {each.takeoff_airport} - {each.destination_city}, {each.destination_airport}</p>
+                                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                                {each.departure_date} - {each.return_date}</p>
+                                            <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                                view more ...
+                                            </p>
+                                        </div>
+                                    ))
+                                }
                                 <div style={{display: "none", backgroundColor: "rgb(0,0,255,0.05)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginBottom: 2, color: "rgb(12, 109, 133)"}}>
                                         <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, fontWeight: "initial", color: "rgba(0,0,0,0.7)"}}>
