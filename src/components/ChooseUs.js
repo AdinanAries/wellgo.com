@@ -400,50 +400,6 @@ var ChooseUs = ()=>{
                                     )
                                 )
                             }
-                            {/*<div  className="home_page_each_most_visited_cities">
-                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${LondonImg}')`}}>
-
-                                </div>
-                                <div className="home_page_each_most_visited_cities_btn">
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>London</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                        United Kingdom</p>
-                                    
-                                </div>
-                                <div className="home_page_each_most_visited_cities_bottom">
-                                    
-                                </div>
-                            </div>
-                            <div  className="home_page_each_most_visited_cities">
-                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${AccraImg}')`}}>
-
-                                </div>
-                                <div className="home_page_each_most_visited_cities_btn">
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
-                                        Accra</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                        Ghana</p>
-                                    
-                                </div>
-                                <div className="home_page_each_most_visited_cities_bottom">
-                                    
-                                </div>
-                            </div>
-                            <div  className="home_page_each_most_visited_cities">
-                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${LAImg}')`}}>
-
-                                </div>
-                                <div className="home_page_each_most_visited_cities_btn">
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
-                                        Los Angeles</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                        United States</p>
-                                    
-                                </div>
-                                <div className="home_page_each_most_visited_cities_bottom">
-                                    
-                                </div>
-                            </div>*/}
                         </div>
                         <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                             >More To Explore</h1>
@@ -486,82 +442,6 @@ var ChooseUs = ()=>{
                                         {each.city} - {each.country}</div>
                                     )
                                 )}
-                                {/*<div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
-                                    <div className="each_more_popular_city_popup">
-                                        <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
-                                            <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${ParisImg}')`}}>
-
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_btn">
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
-                                                    Paris</p>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                                    France</p>
-                                                
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_bottom">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    Paris - France</div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
-                                    <div className="each_more_popular_city_popup">
-                                        <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
-                                            <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${NewYorkImg}')`}}>
-
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_btn">
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
-                                                    New York</p>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                                    United States</p>
-                                                
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_bottom">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    New York - US</div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
-                                    <div className="each_more_popular_city_popup">
-                                        <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
-                                            <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${RomeImg}')`}}>
-
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_btn">
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
-                                                    Rome</p>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                                    Italy</p>
-                                                
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_bottom">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    Rome - Italy</div>
-                                <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", width: "160px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", fontWeight: "bolder", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
-                                    <div className="each_more_popular_city_popup">
-                                        <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
-                                            <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${CairoImg}')`}}>
-
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_btn">
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
-                                                    Cairo</p>
-                                                <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                                    Egypt</p>
-                                                
-                                            </div>
-                                            <div className="home_page_each_most_visited_cities_bottom">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    Cairo - Egypt</div>*/}
                             </div>
                             <div style={{paddingTop: 20}}>
                                 <PaginationButtons 
