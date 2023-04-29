@@ -207,7 +207,7 @@ function HelpSupportChatStartPage(){
                                         <p style={{position: "absolute", right: -40, top: "50%", height: "calc(50% + 5px)", width: 40, borderTop: "1px solid rgba(0,0,0,0.1)", borderRight: "1px solid rgba(0,0,0,0.1)", borderTopRightRadius: 20}}>
                                         </p>
                                     </div>
-                                    <div style={{border: "1px solid rgba(0,0,0,0.1)", padding: 5, borderRadius: 10}}>
+                                    <div style={{border: "1px solid rgba(0,0,0,0.1)", padding: 5, borderRadius: 10, backgroundColor: "rgba(0,0,0,0.1)"}}>
                                         <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
                                             <i className="fa-solid fa-history" style={{marginRight: 10, color: "rgba(0,0,0,0.3)"}}></i>
                                             {each.MSGs[(each.MSGs.length-1)].msg}</p>
