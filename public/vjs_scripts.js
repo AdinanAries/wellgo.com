@@ -281,8 +281,12 @@ let selectedDestinationAirport=""
 
 let selectedAFlight=false;
 let hasBotReturnedResults=true;
-function show_interapting_message(msg, scroll_to_bottom){
-  document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(msg);
+function show_interapting_message(msg, scroll_to_bottom, do_typing=true){
+  if(do_typing){
+    document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup(msg);
+  }else{
+    document.getElementById("hp_support_chat_items").innerHTML += return_each_bot_chat_message_markup_without_typing(msg);
+  }
   if(scroll_to_bottom===true){
     $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
   }else if(scroll_to_bottom==="none"){
@@ -291,6 +295,17 @@ function show_interapting_message(msg, scroll_to_bottom){
     document.getElementById("hp_support_chat_items").scrollBy(0, 100);
   }
 }
+function show_pnr_form(scroll_to_bottom){
+  document.getElementById("hp_support_chat_items").innerHTML += return_PNR_form();
+  if(scroll_to_bottom===true){
+    $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+  }else if(scroll_to_bottom==="none"){
+    //do nothing or don't scroll
+  }else{
+    document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+  }
+}
+
 function show_user_interapting_message(msg, clear_input){
   document.getElementById("hp_support_chat_items").innerHTML += return_each_user_chat_message_markup(msg);
   if(clear_input==true){
@@ -1066,7 +1081,7 @@ async function run_chat_instance(){
           show_interapting_message(`
           I have schedules for you below... please view and select which one you want. And just say '
           <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
-          <br/><br/>`, false);
+          <br/><br/>`, false, false);
           let itns = `<p style="font-weight: bolder; font-size: 12px; margin-bottom: 10px;">Flight Schedules</p>`;
           for(i=0;i<5;i++){
             itns += `
@@ -1088,7 +1103,7 @@ async function run_chat_instance(){
             `;
             if(i>4)break;
           }
-          show_interapting_message(itns, false);
+          show_interapting_message(itns, false, false);
           hasBotReturnedResults=false;
         }
       }, 6000)
@@ -1154,7 +1169,7 @@ async function run_chat_instance(){
                   <i style="margin-right: 5px;" class="fa fa-plane"></i>America Airline</span><br/>
                   <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
                 </p>`;
-              setTimeout(()=>show_interapting_message(slctedItn,"none"),2000);
+              setTimeout(()=>show_interapting_message(slctedItn,"none", false),2000);
               setTimeout(()=>show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
                 In order to finish booking your flight, we'll need to create a record for the traveling passenger(s)...
                 </p>`,"none"),2000);
@@ -1176,8 +1191,9 @@ async function run_chat_instance(){
     //step seven: pnr recording
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
       if(isPNRFirstEntered){
-        setTimeout(()=>show_interapting_message(`So lets do that now...`, "none"),2000);
-        setTimeout(()=>show_interapting_message(`Please enter traveler's first and last name like this '<span class="support_chat_bot_msg_highlights">Mohammed Adinan</span>'`, "none"),2000);
+        setTimeout(()=>show_interapting_message(`So lets do that now...`, "none", false),2000);
+        setTimeout(()=>show_interapting_message(`Please complete the following flight passenger form`, "none", false),2000);
+        setTimeout(()=>show_pnr_form("none"),2000);
         bot_reply_msg = "";
       }else{
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
@@ -1259,7 +1275,12 @@ async function run_chat_instance(){
   
 }
 
-async function default_run_chat_instance(msg){
+function default_run_chat_instance(msg){
+  document.querySelector("#main_support_chat_user_input_txt_container textarea").value = msg;
+  setTimeout(run_chat_instance, 300);
+}
+
+async function default_run_chat_instance_old(msg){
   scroll_chat=true;
   if(msg.trim()!== "")
     document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")

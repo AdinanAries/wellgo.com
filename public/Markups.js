@@ -903,6 +903,28 @@ function return_each_bot_chat_message_markup_without_typing(bot_reply){
     `;
 }
 
+function return_PNR_form(){
+    return `
+     <div style="border: 1px solid rgba(0,0,0,0.1); padding: 5px; background-color: rgba(0,0,0,0.1)">
+        <p style="text-align: center; font-weight: bolder; color: rgba(0,0,0,0.8); font-size: 14px;">
+            Passenger Name Record Form</p>
+        <div style="padding: 10px 0; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.1);">
+            <p style="color: (0,0,0,0.7); font-size: 13px; color: red;">Traveler 1</p>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: calc(50% - 1.5px);">
+                    <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">First Name: </p>
+                    <input style="border: none; width: calc(100% - 20px); padding: 10px;" type="text" placeholder="First Name" />
+                </div>
+                <div style="width: calc(50% - 1.5px);">
+                    <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">Last Name: </p>
+                    <input style="border: none; width: calc(100% - 20px); padding: 10px;" type="text" placeholder="Last Name" />
+                </div>
+            </div>
+        </div>
+     </div>
+    `
+}
+
 function return_bot_chat_status_markup(status){
     //statuses: online, offline, other...
     return `
