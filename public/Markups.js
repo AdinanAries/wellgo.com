@@ -835,7 +835,65 @@ function return_each_user_chat_message_markup(msg){
     `;
 }
 
+function typingFunc(txt, speed, ig, para_id) {
+    if (ig < txt.length) {
+          /*if(txt.charAt(ig) === "&" && txt.charAt(ig+1) === "#"){
+              document.getElementById(para_id).innerHTML += txt.substring(ig, ig+8);
+              ig = ig+9;
+          }*/if(
+                txt.charAt(ig) === "<"
+                && (txt.substring(ig+1, ig+5).toLowerCase() === "span"
+                    || txt.substring(ig+1, ig+2).toLowerCase() === "p"
+                )
+          
+          ){
+            let indexOfTagClosing_1 = txt.indexOf(">", ig); // opening tag
+            let indexOfTagClosing_2 = txt.indexOf(">", indexOfTagClosing_1 + 1); //closing tag
+
+            //making sure its not a nested tag
+            let idxOfClosingTagFirstBraket = txt.indexOf("<", indexOfTagClosing_1+1);
+            let nestCount=0
+            for(;txt.substring(idxOfClosingTagFirstBraket+1, idxOfClosingTagFirstBraket+2)!=="/";){
+                //console.warn(txt.substring(idxOfClosingTagFirstBraket+1, idxOfClosingTagFirstBraket+2))
+                nestCount++;
+                idxOfClosingTagFirstBraket = txt.indexOf("<", idxOfClosingTagFirstBraket+1);
+                indexOfTagClosing_2=txt.indexOf(">", idxOfClosingTagFirstBraket+1);
+            }
+
+            for(let i=0; i<nestCount; i++){
+                indexOfTagClosing_2 = txt.indexOf(">", indexOfTagClosing_2 + 1);
+            }
+
+            //console.warn('tag: ', txt.substring(ig, (indexOfTagClosing_2+1)));
+            document.getElementById(para_id).innerHTML += txt.substring(ig, (indexOfTagClosing_2+1));
+              ig = (indexOfTagClosing_2+1);
+          }else if(txt.substring(ig, ig+5).toLowerCase() === "<br/>"){
+            document.getElementById(para_id).innerHTML += txt.substring(ig, ig+5);
+            ig = ig+5;
+          }
+          else{
+              document.getElementById(para_id).innerHTML += txt.charAt(ig); 
+              ig++;
+          }
+      setTimeout(()=>typingFunc(txt, speed, ig, para_id), speed);
+    }
+  }
+
+let bot_reply_inner_p_id_counter=-1;
 function return_each_bot_chat_message_markup(bot_reply){
+    console.warn('reply', bot_reply);
+    bot_reply_inner_p_id_counter++;
+    setTimeout(()=>typingFunc(bot_reply, 10, 0, `bot_reply_chat_inner_p${bot_reply_inner_p_id_counter}`), 50);
+    return `
+        <div class="support_chat_bot_sent_msg_container">
+            <div class="support_chat_bot_sent_msg_inner_container">
+                <p id="bot_reply_chat_inner_p${bot_reply_inner_p_id_counter}"></p>
+            </div>
+        </div>
+    `;
+}
+
+function return_each_bot_chat_message_markup_without_typing(bot_reply){
     return `
         <div class="support_chat_bot_sent_msg_container">
             <div class="support_chat_bot_sent_msg_inner_container">

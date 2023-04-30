@@ -220,8 +220,8 @@ document.getElementById("sp_search_form_submit_btn").addEventListener("click", e
 
 });
 
-bot_server_base_url = "http://localhost:5001";
-//bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+let bot_server_base_url = "http://localhost:5001";
+//let bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 
 var get_answer_from_bot = (user_query) => {
   //console.log(user_query)
@@ -622,9 +622,9 @@ async function run_chat_instance(){
         let validation = validate_user_airports_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
           let stop_booking_reply_msgs = [
-            "Ok cool...",
-            "Got it... Let me know...",
-            "Sure, no problem"
+            "Ok cool... 🤞",
+            "Got it... Let me know... 👈",
+            "Sure, no problem 👍"
           ];
           bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
           wellgo_bot.status = "";
@@ -1287,9 +1287,9 @@ async function default_run_chat_instance(msg){
         let validation = validate_user_airports_input_for_bot(msg.trim());
         if(msg.trim().toLowerCase() === "stop"){
           let stop_booking_reply_msgs = [
-            "Ok cool...",
-            "Got it... Let me know...",
-            "Sure, no problem"
+            "Ok cool...🤞",
+            "Got it... Let me know... 👈",
+            "Sure, no problem 👍"
           ];
           bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
           wellgo_bot.status = "";
