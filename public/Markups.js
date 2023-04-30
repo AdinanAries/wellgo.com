@@ -911,13 +911,35 @@ function return_PNR_form(){
         <div style="padding: 10px 0; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.1);">
             <p style="color: (0,0,0,0.7); font-size: 13px; color: red;">Traveler 1</p>
             <div style="display: flex; justify-content: space-between;">
-                <div style="width: calc(50% - 1.5px);">
+                <div style="width: calc(50% - 3px);">
                     <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">First Name: </p>
-                    <input style="border: none; width: calc(100% - 20px); padding: 10px;" type="text" placeholder="First Name" />
+                    <input style="border: 1px solid rgba(0,0,0,0.2); width: 100%; padding: 10px;" type="text" placeholder="First Name" />
                 </div>
-                <div style="width: calc(50% - 1.5px);">
+                <div style="width: calc(50% - 3px);">
                     <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">Last Name: </p>
-                    <input style="border: none; width: calc(100% - 20px); padding: 10px;" type="text" placeholder="Last Name" />
+                    <input style="border: 1px solid rgba(0,0,0,0.2); width: 100%; padding: 10px;" type="text" placeholder="Last Name" />
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: calc(50% - 3px);">
+                    <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">Title: </p>
+                    <select style="border: 1px solid rgba(0,0,0,0.2); width: 100%; padding: 10px;">
+                        <option>Mr</option>
+                    </select>
+                </div>
+                <div style="width: calc(50% - 3px);">
+                    <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">Date of Birth: </p>
+                    <input style="border: 1px solid rgba(0,0,0,0.2); width: 100%; padding: 10px;" type="text" placeholder="Date of Birth" />
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: calc(50% - 3px);">
+                    <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">Email: </p>
+                    <input style="border: 1px solid rgba(0,0,0,0.2); width: 100%; padding: 10px;" type="email" placeholder="email" />
+                </div>
+                <div style="width: calc(50% - 3px);">
+                    <p style="font-size: 13px; margin-top: 9px; margin-bottom: 4px;">Phone: </p>
+                    <input style="border: 1px solid rgba(0,0,0,0.2); width: 100%; padding: 10px;" type="text" placeholder="phone eg. +1 732 372 4728" />
                 </div>
             </div>
         </div>
