@@ -408,7 +408,40 @@ function main_bot_view_flights_all_details_func(){
 function main_bot_view_selected_flights_all_details_func(){
   document.getElementById("main_bot_view_selected_flights_all_details").style.display="block";
 }
+
+const BOT_STEPS = {
+  TRIP_ROUND: "trip-round",
+  ORIGIN_DESTINATION: "origin-destination",
+  FLIGHT_SEARCH: "searching-flight",
+  TRAVELER_COUNT: "getting-travelers",
+  PNR_RECORD: "pnr-recording",
+};
+const bot_steps_flow=[
+  /*{
+    step: BOT_STEPS.ORIGIN_DESTINATION,
+    msgs: [],
+  },*/
+  {
+    step: BOT_STEPS.TRIP_ROUND,
+    msgs: [],
+  },
+  {
+    step: BOT_STEPS.TRAVELER_COUNT,
+    msgs: [],
+  },
+  {
+    step: BOT_STEPS.FLIGHT_SEARCH,
+    msgs: [],
+  },
+  {
+    step: BOT_STEPS.PNR_RECORD,
+    msgs: [],
+  }
+];
+let steps_flow=bot_steps_flow;
+
 async function run_chat_instance(){
+
   scroll_chat=true;
   if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() !== "")
     document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup("loading...")
@@ -425,6 +458,11 @@ async function run_chat_instance(){
   if(bot_reply){
     bot_reply_msg = bot_reply.msg;
 
+    if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase().replaceAll(" ", "")==="stop" && wellgo_bot.step===""){
+      show_interapting_message("Yes I know. But We're already not doing any booking or cancellation.","none")
+      return;
+    }
+
     //if type === "" it means server did not return any valid response for current bot status
     //so don't reset the status unless user says stop
     if(bot_reply.type !== "")
@@ -435,7 +473,7 @@ async function run_chat_instance(){
         || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase().replaceAll(" ", "")==="startover"
         || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase().replaceAll(" ", "")==="startagain"){
       
-        if(wellgo_bot.step==="origin-destination"){
+        if(wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
           show_user_interapting_message(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim(), true);
           show_interapting_message(`Yab! I should be expecting your airport inputs..
             say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
@@ -468,7 +506,7 @@ async function run_chat_instance(){
       || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase().replaceAll(" ", "")==="changetripround"
       || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase().replaceAll(" ", "")==="addreturnflight")){
       
-        if(wellgo_bot.step==="trip-round"){
+        if(wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
           show_user_interapting_message(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim(), true);
           show_interapting_message(`Yab! I should be expecting your  inputs..
             say something like '<span class="support_chat_bot_msg_highlights">
@@ -478,7 +516,7 @@ async function run_chat_instance(){
           show_user_interapting_message(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim(), "passive");
           //show_interapting_message(`K.. cool..`, "none");
         }
-        wellgo_bot.step="trip-round";
+        wellgo_bot.step="trip-round";//steps_flow.splice(Math.floor(Math.random()*steps_flow.length), 1);
         scroll_chat=true;
         isTripRoundFirstEntered=true;
         isPNRFirstEntered=true;
@@ -636,12 +674,9 @@ async function run_chat_instance(){
       if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="origin-destination"){
         let validation = validate_user_airports_input_for_bot(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim());
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
-          let stop_booking_reply_msgs = [
-            "Ok cool... 🤞",
-            "Got it... Let me know... 👈",
-            "Sure, no problem 👍"
-          ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          
+          //bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
 
@@ -668,11 +703,11 @@ async function run_chat_instance(){
             bot_reply_msg=`Please select your destination airport`
           }else{
             clear_airports_suggested_by_bot_ids();
-            wellgo_bot.step="trip-round";
+            wellgo_bot.step="trip-round";//steps_flow.splice(Math.floor(Math.random()*steps_flow.length), 1);
           }
         }else{
           if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "yes" && wellgo_bot.step==="origin-destination"){
-            wellgo_bot.step="trip-round"
+            wellgo_bot.step="trip-round";//steps_flow.splice(Math.floor(Math.random()*steps_flow.length), 1);
           }else{
             wellgo_bot.step="origin-destination";
             if(validation.isValid){
@@ -737,9 +772,22 @@ async function run_chat_instance(){
               }else{
                 clear_airports_suggested_by_bot_ids();
                 scroll_chat=false;
+                let confirm_msg=[
+                  `Cool.. I found a couple airports 🛫, select your departure and destination airports and then say '<span class="support_chat_bot_msg_highlights">
+                  done</span>' after that...`,
+                  `👍 Please.. look through the following airports 🛫, select your departure and destination and then reply '<span class="support_chat_bot_msg_highlights">
+                  done</span>' when you finish`,
+                  `Perfect! these 👇 airports 🛫 matched your reply.. Please select yours and reply with '<span class="support_chat_bot_msg_highlights">done</span>' to confirm`,
+                  `Great! These airports 👇 were found for your previous reply. Please select yours and reply '<span class="support_chat_bot_msg_highlights">done</span>' to proceed`,
+                  `Looking good 🙂... Please select your 🛫 airports from the list below and reply with '<span class="support_chat_bot_msg_highlights">done</span>' so I can confirm` ,
+                  `🙂 We're not wasting any of your time 🕐. Please select your airports and 'then say <span class="support_chat_bot_msg_highlights">done</span>' so we can proceed quickly`,
+                  `Hey Umm! 🤔 The lists below 👇 have departure and destination airports. Please select yours then reply with '<span class="support_chat_bot_msg_highlights">done</span>', then we will proceed.`,
+                  `Got it. 🤔 We found you some airports for depature and destination. You may pick yours and reply saying '<span class="support_chat_bot_msg_highlights">done</span>' to confirm with me`,
+                  `😃 You know.. when the prices get good like they are right now, we dont waste any time booking your flight. I have found a couple airports listed below 👇. Please select yours and reply '<span class="support_chat_bot_msg_highlights">done</span>' to proceed quickly`,
+                  `Getting there 💪... I have found a couple airports. Please select your departure and destination then reply with '<span class="support_chat_bot_msg_highlights">done</span>' so I can confirm.`,
+                ]
                 bot_reply_msg = `
-                So, I found a couple airports, select your departure and destination airports and then say '<span class="support_chat_bot_msg_highlights">
-                done</span>' after that...
+                ${confirm_msg[Math.floor(Math.random() * confirm_msg.length)]}
                 <br/><br/>
                 <span style="font-weight: bolder; font-size: 13px;">Departure</span><br/>`;
                 for(i=0;i<origin_airpots.length;i++){
@@ -793,12 +841,13 @@ async function run_chat_instance(){
 
       if(!isTripRoundFirstEntered){
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
-          let stop_booking_reply_msgs = [
+          /*let stop_booking_reply_msgs = [
             "Alright... no promblem",
             "Cool...",
             "Got it..."
           ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
+          bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
 
@@ -882,12 +931,13 @@ async function run_chat_instance(){
       bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
       if(!isDatesFirstEntered){
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
-          let stop_booking_reply_msgs = [
+          /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
             "Sure, no problem"
           ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
+          bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
 
@@ -920,6 +970,7 @@ async function run_chat_instance(){
     //step four: cabin class
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="cabin-class"){
       isDatesFirstEntered=true;
+      hasBotReturnedResults=true;
       let travel_cabin_init_messages = [
         `Alright... Almost done. One last step is to provide flight class.. You should say one of the following.. '
         <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
@@ -932,12 +983,12 @@ async function run_chat_instance(){
       bot_reply_msg = travel_cabin_init_messages[Math.floor(Math.random() * travel_cabin_init_messages.length)];
       if(!isCabinClassFirstEntered){
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
-          let stop_booking_reply_msgs = [
+          /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
             "Sure, no problem"
           ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
           wellgo_bot.status = "";
           wellgo_bot.step = "";
 
@@ -1004,7 +1055,7 @@ async function run_chat_instance(){
     }
 
     //step five: gettings travlers
-    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="getting-travelers"){
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT){
       isCabinClassFirstEntered=true;
 
       //document.querySelector("#main_support_chat_user_input_txt_container textarea").value = `1 adult, 0 child, 0 infant`;
@@ -1012,12 +1063,13 @@ async function run_chat_instance(){
 
       if(!isGettingTravelersFirstEntered){
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
-          let stop_booking_reply_msgs = [
+          /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
             "Sure, no problem"
-          ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          ];*/
+          //bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
 
@@ -1072,15 +1124,19 @@ async function run_chat_instance(){
     }
 
     //step six: searching flight schedules
-    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="searching-flight"){
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH){
       isGettingTravelersFirstEntered=true;
-      
+      let interim_msg=[
+        `Looking Good! 💪 I found some really good flights for you... please view and select which one you want. And just reply '
+        <span class="support_chat_bot_msg_highlights">done</span>' when you finish.`,
+        `Aha! 😃 These flights are really good... please view and select which one you want. And then reply '
+        <span class="support_chat_bot_msg_highlights">done</span>' so we can proceed.`,
+      ]
       setTimeout(()=>{
         if(hasBotReturnedResults){
           scroll_chat=false;
           show_interapting_message(`
-          I have schedules for you below... please view and select which one you want. And just say '
-          <span class="support_chat_bot_msg_highlights">done</span>' when you finish.
+          ${interim_msg[Math.floor(Math.random() * interim_msg.length)]}
           <br/><br/>`, false, false);
           let itns = `<p style="font-weight: bolder; font-size: 12px; margin-bottom: 10px;">Flight Schedules</p>`;
           for(i=0;i<5;i++){
@@ -1170,16 +1226,32 @@ async function run_chat_instance(){
                   <span style="font-size: 11px; color: rgba(0,0,0,0.7);"> view details...</span><br/>
                 </p>`;
               setTimeout(()=>show_interapting_message(slctedItn,"none", false),2000);
-              setTimeout(()=>show_interapting_message(`<p style="font-family: 'Prompt', sans-serif; font-size: 14px">
-                In order to finish booking your flight, we'll need to create a record for the traveling passenger(s)...
-                </p>`,"none"),2000);
+              let repmsg=[
+                `<span style="font-family: 'Prompt', sans-serif; font-size: 14px">
+                  Perfect! 👏🏼 Now time to save your flight, <br/>
+                  In order to do that lets put the traveler(s) on profile...<br/>
+                  If you look below, you will see the Form I'm about to send over.
+                  Please fill out the form and then say done once you finish.
+                </span>`,
+                `<span style="font-family: 'Prompt', sans-serif; font-size: 14px">
+                  In order to finish booking your flight, we'll need a record for the travelers...
+                  Please fill out the Form I'm about to send over.Its down below 👇🏼 ...
+                </span>`
+              ]
+              setTimeout(()=>show_interapting_message(repmsg[Math.floor(Math.random() * repmsg.length)],"none"),2000);
             scroll_chat=false;
             wellgo_bot.step="pnr-recording";
+            isPNRFirstEntered=true;
           }
         }else{
 
-          bot_reply_msg = `Please holdon while I search your flight... or say '<span class="support_chat_bot_msg_highlights">
-          stop</span>' if we're not doing it anymore...`;
+          let interim_msg=[
+            `✋🏿 Please holdon while I search your flight... or say '<span class="support_chat_bot_msg_highlights">
+              stop</span>' if we're not doing it anymore...`,
+            `Please wait ✋🏿, it takes time to get good deals out here... or say '<span class="support_chat_bot_msg_highlights">
+              stop</span>' incase you wanted to stop...`,
+          ]
+          bot_reply_msg = interim_msg[Math.floor(Math.random() * interim_msg.length)];
           
         }
       }
@@ -1189,20 +1261,21 @@ async function run_chat_instance(){
     }}
 
     //step seven: pnr recording
-    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="pnr-recording"){
+    if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step===BOT_STEPS.PNR_RECORD){
       if(isPNRFirstEntered){
-        setTimeout(()=>show_interapting_message(`So lets do that now...`, "none", false),2000);
-        setTimeout(()=>show_interapting_message(`Please complete the following flight passenger form`, "none", false),2000);
-        setTimeout(()=>show_pnr_form("none"),2000);
+        //setTimeout(()=>show_interapting_message(`So lets do that now...`, "none", false),2000);
+        //setTimeout(()=>show_interapting_message(`Please complete the following flight passenger form`, "none", false),2000);
+        setTimeout(()=>show_pnr_form("none"),5000);
         bot_reply_msg = "";
       }else{
         if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase() === "stop"){
-          let stop_booking_reply_msgs = [
+          /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
             "Sure, no problem"
           ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
+          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
+          bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
 

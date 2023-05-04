@@ -840,7 +840,11 @@ function typingFunc(txt, speed, ig, para_id) {
           /*if(txt.charAt(ig) === "&" && txt.charAt(ig+1) === "#"){
               document.getElementById(para_id).innerHTML += txt.substring(ig, ig+8);
               ig = ig+9;
-          }*/if(
+          }*/
+          if(txt.substring(ig, ig+5).toLowerCase() === "<br/>"){
+            document.getElementById(para_id).innerHTML += txt.substring(ig, ig+5);
+            ig = ig+5;
+          }else if(
                 txt.charAt(ig) === "<"
                 && (txt.substring(ig+1, ig+5).toLowerCase() === "span"
                     || txt.substring(ig+1, ig+2).toLowerCase() === "p"
@@ -867,11 +871,7 @@ function typingFunc(txt, speed, ig, para_id) {
             //console.warn('tag: ', txt.substring(ig, (indexOfTagClosing_2+1)));
             document.getElementById(para_id).innerHTML += txt.substring(ig, (indexOfTagClosing_2+1));
               ig = (indexOfTagClosing_2+1);
-          }else if(txt.substring(ig, ig+5).toLowerCase() === "<br/>"){
-            document.getElementById(para_id).innerHTML += txt.substring(ig, ig+5);
-            ig = ig+5;
-          }
-          else{
+          }else{
               document.getElementById(para_id).innerHTML += txt.charAt(ig); 
               ig++;
           }
@@ -905,7 +905,7 @@ function return_each_bot_chat_message_markup_without_typing(bot_reply){
 
 function return_PNR_form(){
     return `
-     <div style="border: 1px solid rgba(0,0,0,0.1); padding: 5px; background-color: rgba(0,0,0,0.1)">
+     <div style="border: 1px solid rgba(0,0,0,0.1); padding: 5px; margin-bottom: 10px; background-color: rgba(0,0,0,0.1)">
         <p style="text-align: center; font-weight: bolder; color: rgba(0,0,0,0.8); font-size: 14px;">
             Passenger Name Record Form</p>
         <div style="padding: 10px 0; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.1);">
