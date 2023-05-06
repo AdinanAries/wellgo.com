@@ -458,11 +458,6 @@ async function run_chat_instance(){
   if(bot_reply){
     bot_reply_msg = bot_reply.msg;
 
-    if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase().replaceAll(" ", "")==="stop" && wellgo_bot.step===""){
-      show_interapting_message("Yes I know. But We're already not doing any booking or cancellation.","none")
-      return;
-    }
-
     //if type === "" it means server did not return any valid response for current bot status
     //so don't reset the status unless user says stop
     if(bot_reply.type !== "")
@@ -833,8 +828,15 @@ async function run_chat_instance(){
     if(wellgo_bot.status==="begin_air_booking" && wellgo_bot.step==="trip-round"){
 
       let trip_round_init_mgs = [
-        `K.. cool.. do you want a return flight?... say '<span class="support_chat_bot_msg_highlights">
+        `K.. cool 😎... do you want a return flight?... say '<span class="support_chat_bot_msg_highlights">
         round trip</span>' if you do or say '
+        <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`,
+        `Looking good... 💪 Now do you want a "return flight" as well?...<br/> 
+        Say '<span class="support_chat_bot_msg_highlights">
+        round trip</span>' if so. Also say '
+        <span class="support_chat_bot_msg_highlights">one way</span>' if you want only the departure`,
+        `Awsome 🙂...  Are we booking a return flight as well?... If so say '<span class="support_chat_bot_msg_highlights">
+        round trip</span>'. For booking only the departure flight say '
         <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`
       ]
       bot_reply_msg = trip_round_init_mgs[Math.floor(Math.random() * trip_round_init_mgs.length)];
@@ -913,11 +915,21 @@ async function run_chat_instance(){
       let travel_dates_init_messages =[]
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_messages = [
-          `Good! Now lets get your travel date. Please Say something like '<span class="support_chat_bot_msg_highlights">
+          `Good! Now lets get your travel date 📆. Please Say something like '<span class="support_chat_bot_msg_highlights">
           February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
           February</span> is the month and <span class="support_chat_bot_msg_highlights">
           23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`
+          2022</span> is the year...`,
+          `Getting there 💪🏼... When is your travel. Say something like '<span class="support_chat_bot_msg_highlights">
+          February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+          2022</span> is the year...`,
+          `👍 OK time to get your traveling date! Please Say something like '<span class="support_chat_bot_msg_highlights">
+          February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+          2022</span> is the year...`,
         ]
       }else if(JSON.parse(localStorage.getItem("search_obj")).type==="round-trip"){
         travel_dates_init_messages = [
@@ -925,7 +937,17 @@ async function run_chat_instance(){
           February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
           February</span> is the month and <span class="support_chat_bot_msg_highlights">
           23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`
+          2022</span> is the year...`,
+          `Getting there 💪🏼... When is your travel. Say something like '<span class="support_chat_bot_msg_highlights">
+          February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+          2022</span> is the year...`,
+          `👍 OK time to get your traveling date! Please Say something like '<span class="support_chat_bot_msg_highlights">
+          February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+          February</span> is the month and <span class="support_chat_bot_msg_highlights">
+          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+          2022</span> is the year...`,
         ]
       }
       bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
@@ -972,12 +994,25 @@ async function run_chat_instance(){
       isDatesFirstEntered=true;
       hasBotReturnedResults=true;
       let travel_cabin_init_messages = [
-        `Alright... Almost done. One last step is to provide flight class.. You should say one of the following.. '
+        `Alright... Almost done. Please provide flight class.. You should say one of the following.. '
         <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
         economy</span>', '<span class="support_chat_bot_msg_highlights">
         business</span>', '<span class="support_chat_bot_msg_highlights">
         premium</span>', or '<span class="support_chat_bot_msg_highlights">
-        cheapest</span>'`
+        cheapest</span>'`,
+        `Kk! Flight class next... You should say one of the following.. '
+        <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
+        economy</span>', '<span class="support_chat_bot_msg_highlights">
+        business</span>', '<span class="support_chat_bot_msg_highlights">
+        premium</span>', or '<span class="support_chat_bot_msg_highlights">
+        cheapest</span>'`,
+        `Perfect 👍... What flight class.. You should say one of the following.. '
+        <span class="support_chat_bot_msg_highlights">
+        first class</span>', '<span class="support_chat_bot_msg_highlights">
+        economy</span>', '<span class="support_chat_bot_msg_highlights">
+        business</span>', '<span class="support_chat_bot_msg_highlights">
+        premium</span>', or '<span class="support_chat_bot_msg_highlights">
+        cheapest</span>'`,
       ]
       
       bot_reply_msg = travel_cabin_init_messages[Math.floor(Math.random() * travel_cabin_init_messages.length)];
@@ -1014,13 +1049,31 @@ async function run_chat_instance(){
 
               //set cabin class here
               wellgo_bot.step = "getting-travelers";
-              bot_reply_msg = `Now... Let's see how may people you're booking for... Say something like '<span class="support_chat_bot_msg_highlights">
-              1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
-               1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
-               1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
-               1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
-               children refer to 2 to 17 years, infants refer to below 2 years, ...
-               and only 'adult/adults, child/children, and infant/infants are allowed`;
+
+              let num_travelers_msg=[
+                `Now... Let's see how may people you're booking for... Say something like '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+                `How many people are getting on the flight... You could say '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+                `How many are you booking for... You could say '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+              ]
+              bot_reply_msg = num_travelers_msg[Math.floor(Math.random() * num_travelers_msg.length)];
 
           }else{
             let err_msgs = [
@@ -1316,8 +1369,30 @@ async function run_chat_instance(){
 
     //---------------------end of flight booking process-------------------------------------//
   
+    if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim().toLowerCase().replaceAll(" ", "")==="stop" && wellgo_bot.step===""){
+      const IdleBotStopMgs=[
+        `Stop? 😏 But We're already not doing any booking or cancellation to stop...`,
+        `Hey! If we were booking a flight or doing anything at all, that's when saying stop would mean something.`,
+        `You got me confused. Sorry, Stop what? 😐`
+      ]
+      show_interapting_message(IdleBotStopMgs[Math.floor(Math.random() * IdleBotStopMgs.length)],"none")
+      //return;
+    }
+
   }else{
-    bot_reply_msg = "Opps! My server failed. My bad...";
+    let svr_err_mgs = [
+      `Opps! 😒 My server failed. My bad. This one is on me..`,
+      `Eh! I think we are having some internet issues. Or Did my server fail? 🤦🏾‍♂️`,
+      `Ummm... wait 😕, could it be your internet or my server crushed.
+      <br/>I'm unable to help you without my server being online.
+      <br/>I'll put in a ticket to alert the technical team.
+      <br/>But also make sure its not your internet.`,
+      `... I can't reach my server. Please check your internet. I think its not working. 
+        <br/>Or Maybe my server crushed`,
+      `I can't imagine my life without the server. Oh no! 🤦🏾‍♂️🤦🏾‍♂️🤦🏾‍♂️ my server is not online right now.<br/>
+      Please, also make sure that your internet it working.`
+    ]
+    bot_reply_msg = svr_err_mgs[Math.floor(Math.random() * svr_err_mgs.length)];
   }
   
   if(document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "" || document.querySelector("#main_support_chat_user_input_txt_container textarea").value.trim() === "type your message here..."){
