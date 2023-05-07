@@ -2177,13 +2177,44 @@ var speed = 20; /* The speed/duration of the effect in milliseconds */
 
 function typeWriter() {
   if (ig < txt.length) {
-        if(txt.charAt(ig) === "&" && txt.charAt(ig+1) === "#"){
-            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, ig+8);
-            ig = ig+9;
-        }else{
-            document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(ig); 
-            ig++;
-        }
+
+    if(txt.substring(ig, ig+5).toLowerCase() === "<br/>"){
+      document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, ig+5);
+      ig = ig+5;
+    }else if(txt.charAt(ig) === "&" && txt.charAt(ig+1) === "#"){
+        document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, ig+8);
+        ig = ig+9;
+    }else if(
+      txt.charAt(ig) === "<"
+      && (txt.substring(ig+1, ig+5).toLowerCase() === "span"
+          || txt.substring(ig+1, ig+2).toLowerCase() === "p"
+      )
+
+    ){
+      let indexOfTagClosing_1 = txt.indexOf(">", ig); // opening tag
+      let indexOfTagClosing_2 = txt.indexOf(">", indexOfTagClosing_1 + 1); //closing tag
+
+      //making sure its not a nested tag
+      let idxOfClosingTagFirstBraket = txt.indexOf("<", indexOfTagClosing_1+1);
+      let nestCount=0
+      for(;txt.substring(idxOfClosingTagFirstBraket+1, idxOfClosingTagFirstBraket+2)!=="/";){
+          //console.warn(txt.substring(idxOfClosingTagFirstBraket+1, idxOfClosingTagFirstBraket+2))
+          nestCount++;
+          idxOfClosingTagFirstBraket = txt.indexOf("<", idxOfClosingTagFirstBraket+1);
+          indexOfTagClosing_2=txt.indexOf(">", idxOfClosingTagFirstBraket+1);
+      }
+
+      for(let i=0; i<nestCount; i++){
+          indexOfTagClosing_2 = txt.indexOf(">", indexOfTagClosing_2 + 1);
+      }
+
+      //console.warn('tag: ', txt.substring(ig, (indexOfTagClosing_2+1)));
+      document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, (indexOfTagClosing_2+1));
+        ig = (indexOfTagClosing_2+1);
+    }else{
+        document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(ig); 
+        ig++;
+    }
     //document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i);
     //i++;
     setTimeout(typeWriter, speed);
@@ -2226,9 +2257,31 @@ function show_chat_bot_uprading_message(){
         </div>
       </div>
     `;
-    txt = `Hey! &#128400; We are currently upgrading some site features...
-            I'm sorry I may not be very helpful RN... &#128530;
-            Please use our manual channels below. &#128071;`
+    let bot_name='Alien Dough'
+    let all_txt=[
+      `Hey! &#128400; ${bot_name} is my name.<br/>
+      FYI, we are currently upgrading some site features...
+      I'm only helpful for certain things like booking a flight RN... &#128530;
+      Please, for all other things I'm unable to help you with,<br/>
+      use you may call or email our helpdesk using buttons provided below. &#128071; <br/>
+      However, if you needed to book a flight, say something like, 
+      <span class="support_chat_bot_msg_highlights">"I want to book a flight"</span>`,
+      `Greetings! 😃 <br/>
+      Due to some upgrades we are currently doing on this site,<br/>
+      I may not be able to do some things yet for you...
+      But sure, booking a flight is certainly something I'm able to help with.
+      Please call or email our helpdesk using links below. &#128071; <br/>
+      If you want to book a flight however, just reply with 
+      <span class="support_chat_bot_msg_highlights">"I want to book a flight"</span>`,
+      `Sup! ✌️. My Name is ${bot_name}. I can certainly help you book a flight.<br/>
+      But for some things, I reccommend calling or texting our helpdesk using buttons provided below.<br/>
+      Reason is, we are upgrading some site features so, I'm not fully functional right now.<br/>
+      But if you needed to book a flight, just reply with 
+      <span class="support_chat_bot_msg_highlights">"I want to book a flight"</span>, 
+      and I'll be able to get 
+      you through that.`
+    ]
+    txt = all_txt[Math.floor(Math.random() * all_txt.length)];
 }
 
 document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
