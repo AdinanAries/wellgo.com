@@ -1065,7 +1065,7 @@ async function run_chat_instance(){
                 1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`,
-                `How many are you booking for... You could say '<span class="support_chat_bot_msg_highlights">
+                `How many people are you booking for... You could say '<span class="support_chat_bot_msg_highlights">
                 1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
                 1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
@@ -2263,7 +2263,7 @@ function show_chat_bot_uprading_message(){
       FYI, we are currently upgrading some site features...
       I'm only helpful for certain things like booking a flight RN... &#128530;
       Please, for all other things I'm unable to help you with,<br/>
-      use you may call or email our helpdesk using buttons provided below. &#128071; <br/>
+      you may call or email our helpdesk using buttons provided below. &#128071; <br/>
       However, if you needed to book a flight, say something like, 
       <span class="support_chat_bot_msg_highlights">"I want to book a flight"</span>`,
       `Greetings! 😃 <br/>

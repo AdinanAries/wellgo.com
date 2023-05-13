@@ -7,8 +7,13 @@ import nothing_found_icon from "../icons/nothing_found_icon.svg";
 import card_not_found from "../icons/card_not_found.svg";
 import not_found_icon from "../icons/not_found_icon.svg";
 import PaginationButtons from "./PaginationButtons";
+import { useState } from "react";
 
 function UserAccountPage({user, passports, bookings, payments}){
+
+    let [editDOB, setEditDOB] = useState(false);
+    let [editGender, setEditGender] = useState(false);
+
     return (
         <div id="user_account_manager_page" style={{display: "none"}}>
                     <div className="user_account_page_container">
@@ -69,23 +74,37 @@ function UserAccountPage({user, passports, bookings, payments}){
                                     <div style={{marginBottom: 20}}>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", marginBottom: 5, color: "rgb(102, 169, 233)", letterSpacing: 1}}>
                                             Other</p>
-                                        <p style={{display: (user.dob ? "block" : "none"), fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                                            DOB: {user.dob}</p>
-                                        <div style={{display: (user.dob ? "none" : "block"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
-                                            <p><i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar"></i>
-                                            <input style={{padding: 10, border: "none", width: "calc(100% - 40px)"}} type="text" placeholder="add your date of birth" value={user.dob} /></p>
+                                        <p style={{display: (user.dob && !editDOB ? "block" : "none"), fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
+                                            DOB: {user.dob}
+                                            <span onClick={()=>{setEditDOB(true)}}>
+                                                <i style={{marginLeft: 20, cursor: "pointer"}} className="fa-solid fa-pencil"></i></span>
+                                            </p>
+                                        <div style={{display: (!user.dob || editDOB ? "block" : "none"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
+                                            <p>
+                                                <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar"></i>
+                                                <input style={{padding: 10, border: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth" value={user.dob} />
+                                                <span onClick={()=>{setEditDOB(false)}}>
+                                                    <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
+                                                </span>
+                                            </p>
                                         </div>
-                                        <p style={{display: (user.gender ? "block" : "none"), fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, marginTop: 5, color: "rgba(0,0,0,0.7)"}}>
-                                            Gender: {user.gender}</p>
-                                        <div style={{display: (user.gender ? "none" : "block"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
+                                        <p style={{display: (user.gender && !editGender ? "block" : "none"), fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, marginTop: 5, color: "rgba(0,0,0,0.7)"}}>
+                                            Gender: {user.gender}
+                                            <span onClick={()=>{setEditGender(true)}}>
+                                                <i style={{marginLeft: 20, cursor: "pointer"}} className="fa-solid fa-pencil"></i></span>
+                                            </p>
+                                        <div style={{display: (!user.gender || editGender ? "block" : "none"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
                                             <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-user"></i>
-                                            <select style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none"}} type="text" placeholder="add your date of birth">
+                                            <select style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth">
                                                 <option>Add Your Gender</option>
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
+                                            <span onClick={()=>{setEditGender(false)}}>
+                                                <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
+                                            </span>
                                         </div>
-                                        <div style={{display: (user.gender && user.dob ? "none" : "block"),cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
+                                        <div style={{display: ((user.gender && user.dob) && (!editDOB && !editGender) ? "none" : "block"),cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
                                             <i className="fa fa-save" style={{color: "rgba(255,255,255,0.6)", marginRight: 10}}></i>
                                             Save
                                         </div>
