@@ -25,25 +25,26 @@ export default function ExploreDestinations(){
                                 &#8226; Virtual Agent &#8226;</p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.5)", height: 70, maxWidth: 550, margin: "auto", display: "flex", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ display: "flex", flexDirection: "row", justifyContent: "space-between", zIndex: 5}}>
-                                <div id="landing_page_search_form_bar_bot_img" style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
-                                    {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
-                                    <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
-                                </div>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.5)", height: 70, maxWidth: 550, margin: "auto", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ zIndex: 5}}>
+                                <div id="landing_page_search_input_text_display_container" style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                    <div id="landing_page_search_form_bar_bot_img" style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
+                                        {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
+                                        <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
+                                    </div>
 
-                                <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
-                                    <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
-                                        &#128400; Hey...</p>
-                                </div>
-                                <div id="landing_page_search_form_show_filters_btn" style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                        {/*<p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>*/}
-                                        <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <i id="landing_page_search_form_show_filters_btn_caret" style={{/*marginLeft: 7,*/ fontSize: 16, color: "rgba(0,0,0,0.7)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
+                                    <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
+                                        <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left", cursor: "text"}}>
+                                            &#128400; Hey...</p>
+                                    </div>
+                                    <div id="landing_page_search_form_show_filters_btn" style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
+                                        <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+                                            {/*<p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                                <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>*/}
+                                            <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                                <i id="landing_page_search_form_show_filters_btn_caret" style={{/*marginLeft: 7,*/ fontSize: 16, color: "rgba(0,0,0,0.7)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div id="landing_page_search_filters_container" style={{display: "none", fontFamily: "'Prompt', sans-serif", position: "absolute", zIndex: 1, top: "calc(100% - 32px)", paddingTop: 32, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, left: 0, width: "100%", backgroundColor: "white"}}>
                                     <div style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderTop: "1px solid rgba(0,0,0,0.1)", borderBottomRightRadius: 40, borderBottomLeftRadius: 40,}}>
                                         <div style={{padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
