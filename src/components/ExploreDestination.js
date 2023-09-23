@@ -33,7 +33,7 @@ export default function ExploreDestinations(){
                                     </div>
 
                                     <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
-                                        <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left", cursor: "text"}}>
+                                        <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
                                             &#128400; Hey...</p>
                                     </div>
                                     <div id="landing_page_search_form_show_filters_btn" style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
