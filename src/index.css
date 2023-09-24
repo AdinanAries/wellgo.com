@@ -1494,7 +1494,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   .between-jumbotron-and-subsections, .home_page_most_visited_cities_list, .why-choose-us-container, #user_account_manager_page{
     margin-left: 0 !important;
     margin-right: 0 !important;
