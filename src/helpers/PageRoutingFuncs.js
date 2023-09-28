@@ -30,29 +30,34 @@ export function show_home_page(is_from_search=false){
 
     chat_bot_new_msg(return_new_rand_msg());
 
-    document.getElementById("selected_ticket_pane").style.display="none";
+    if(document.getElementById("selected_ticket_pane"))
+        document.getElementById("selected_ticket_pane").style.display="none";
     if($(window).width() > 700)
-        document.querySelector("header").style.background ="none";
+        if(document.querySelector("header"))
+            document.querySelector("header").style.background ="none";
     //document.getElementById("site_main_header").style.display="none";
     if(!is_from_search){
         if($(window).width() > 700)
-            document.querySelector("header").style.backgroundColor="#000000";
-        document.getElementById("main_hero_section").style.display="block";
+            if(document.querySelector("header"))
+                document.querySelector("header").style.backgroundColor="#000000";
+        if(document.getElementById("main_hero_section"))
+            document.getElementById("main_hero_section").style.display="block";
         localStorage.removeItem("is_home_page");
     }else{
-        document.getElementById("main_hero_section").style.display="none";
+        if(document.getElementById("main_hero_section"))
+            document.getElementById("main_hero_section").style.display="none";
     }
 
     window.scrollTo(0, 0);
     change_nav_active_icon("mobile_search_menu_item", "desktop_search_menu_item");
 
-    document.getElementById("search_page").style.display="none";
+    //document.getElementById("search_page").style.display="none";
     document.getElementById("explore_page").style.display="none";
     document.getElementById("login_page").style.display="none";
     document.getElementById("trips_page").style.display="none";
     document.getElementById("deals_page").style.display="none";
     document.getElementById("help_page").style.display="none";
-    document.getElementById("home_page").style.display="block";
+    //document.getElementById("home_page").style.display="block";
 }
 
 export function show_search_page(){
