@@ -30,7 +30,7 @@ function App() {
       <HelpPage />
       <LoginPage />
       <ExplorePage />
-      <SearchPage />
+      {/*<SearchPage />*/}
       <Footer />
     </div>
   );

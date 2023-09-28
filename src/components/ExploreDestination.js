@@ -114,7 +114,9 @@ var txt = "Greetings! &#128400; Search flights or get help, below &#128071;"; /*
 var speed = 30; /* The speed/duration of the effect in milliseconds */
 
 export function chat_bot_new_msg(txt_p){
-    document.getElementById("landing_page_search_input_text_display").innerHTML="";
+    if(document.getElementById("landing_page_search_input_text_display"))
+        document.getElementById("landing_page_search_input_text_display").innerHTML="";
+
     i=0;
     txt=txt_p;
     typeWriter();
@@ -124,11 +126,13 @@ function typeWriter() {
     if (i < txt.length) {
 
         if(txt.charAt(i) === "&" && txt.charAt(i+1) === "#"){
-            document.getElementById("landing_page_search_input_text_display").innerHTML += txt.substring(i, i+8);
+            if(document.getElementById("landing_page_search_input_text_display"))
+                document.getElementById("landing_page_search_input_text_display").innerHTML += txt.substring(i, i+8);
             i = i+9;
         }else{
-           document.getElementById("landing_page_search_input_text_display").innerHTML += txt.charAt(i); 
-           i++;
+            if(document.getElementById("landing_page_search_input_text_display"))
+                document.getElementById("landing_page_search_input_text_display").innerHTML += txt.charAt(i); 
+            i++;
         }
 
         setTimeout(typeWriter, speed);
@@ -137,7 +141,8 @@ function typeWriter() {
 
 $(document).ready(()=>{
     setTimeout(()=>{
-        document.getElementById("landing_page_search_input_text_display").innerHTML = '';
+        if(document.getElementById("landing_page_search_input_text_display"))
+            document.getElementById("landing_page_search_input_text_display").innerHTML = '';
         i = 0;
         typeWriter();
     }, 1000);

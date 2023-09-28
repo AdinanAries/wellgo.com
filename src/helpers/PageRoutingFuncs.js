@@ -67,13 +67,13 @@ export function show_search_page(){
     window.scrollTo(0, 0);
     change_nav_active_icon("mobile_search_menu_item", "desktop_search_menu_item");
 
-    document.getElementById("home_page").style.display="none";
+    //document.getElementById("home_page").style.display="none";
     document.getElementById("explore_page").style.display="none";
     document.getElementById("login_page").style.display="none";
     document.getElementById("trips_page").style.display="none";
     document.getElementById("deals_page").style.display="none";
     document.getElementById("help_page").style.display="none";
-    document.getElementById("search_page").style.display="block";
+    //document.getElementById("search_page").style.display="block";
 
 }
 

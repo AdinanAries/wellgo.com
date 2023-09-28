@@ -2,19 +2,20 @@ import SearchForm from "./SearchForm";
 import ChooseUs from "./ChooseUs";
 import ExploreDestinations from "./ExploreDestination";
 
+
 import explore_page_hero from "../explore_page_hero.jpg";
 
 import { show_explore_page } from "../helpers/PageRoutingFuncs";
 
 //backgroundImage: `url('${explore_page_hero}')`,
 
-function Main(){
+function Main(props){
     return (
         <main>
             <div id="main_hero_section" className="hero-section">
                 <div style={{maxWidth: 1500, margin: "auto"}}>
                     <div className="search-form-container">
-                        <SearchForm />
+                        <SearchForm show_search_page={props.show_search_page}/>
                     </div>
                 </div>
                 <div className="wrapper">
