@@ -136,41 +136,43 @@ function changeAirportsToInput(airport, iata, icao){
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-//search results page forms
-document.getElementById("sp_from_where_airports_auto_complete_input_fld").addEventListener("input", (evnt)=>{
-    let counter = 0;
-    document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML = "";
-    let flights = [];
+if(document.getElementById("sp_from_where_airports_auto_complete_input_fld")){
+    //search results page forms
+    document.getElementById("sp_from_where_airports_auto_complete_input_fld").addEventListener("input", (evnt)=>{
+        let counter = 0;
+        document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML = "";
+        let flights = [];
 
-    //if backspace has been pressed, don't auto-complete on input
-    if(!evnt.data){
-        return null;
-    }
+        //if backspace has been pressed, don't auto-complete on input
+        if(!evnt.data){
+            return null;
+        }
 
-    if(evnt.target.value){
+        if(evnt.target.value){
 
-        flights = filter_airports_array_based_input_value(evnt.target.value);
+            flights = filter_airports_array_based_input_value(evnt.target.value);
 
-        flights = flights.map(elem => {
-                counter++;
-                return counter < 6 && `
-                    <li><div onclick="sp_changeAirportsFromInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
-                        <div>
-                            <p class="autocomplete_list_airport_city_name">
-                                <i class="fa fa-plane"></i>
-                                ${elem.city} (${elem.IATA} - ${elem.name})
-                            </p>
-                            <p class="autocomplete_list_country_name">
-                                ${elem.country}
-                            </p>
-                        </div>
-                    </div></li>`;
-                
-            })
-    }
-    //console.log(flights);
-    document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML = flights.join('').replaceAll("false","");
-})
+            flights = flights.map(elem => {
+                    counter++;
+                    return counter < 6 && `
+                        <li><div onclick="sp_changeAirportsFromInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                            <div>
+                                <p class="autocomplete_list_airport_city_name">
+                                    <i class="fa fa-plane"></i>
+                                    ${elem.city} (${elem.IATA} - ${elem.name})
+                                </p>
+                                <p class="autocomplete_list_country_name">
+                                    ${elem.country}
+                                </p>
+                            </div>
+                        </div></li>`;
+                    
+                })
+        }
+        //console.log(flights);
+        document.getElementById("sp_flights_auto_complete_from_where_input_list").innerHTML = flights.join('').replaceAll("false","");
+    })
+}
 
 
 function sp_changeAirportsFromInput(airport, iata, icao){
@@ -193,46 +195,49 @@ function sp_changeAirportsFromInput(airport, iata, icao){
 }
 
 //Destination Airports Auto Completion
+if(document.getElementById("sp_to_where_airports_auto_complete_input_fld")){
+    document.getElementById("sp_to_where_airports_auto_complete_input_fld").addEventListener("input", (evnt)=>{
+        let counter = 0;
+        document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = "";
+        let flights = [];
 
-document.getElementById("sp_to_where_airports_auto_complete_input_fld").addEventListener("input", (evnt)=>{
-    let counter = 0;
-    document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = "";
-    let flights = [];
+        //if backspace has been pressed, don't auto-complete on input
+        if(!evnt.data){
+            return null;
+        }
 
-    //if backspace has been pressed, don't auto-complete on input
-    if(!evnt.data){
-        return null;
-    }
+        if(evnt.target.value){
 
-    if(evnt.target.value){
+            flights = filter_airports_array_based_input_value(evnt.target.value);
 
-        flights = filter_airports_array_based_input_value(evnt.target.value);
-
-        flights = flights.map(elem => {
-            counter++;
-            return counter < 6 && `
-                    <li><div onclick="sp_changeAirportsToInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
-                        <div>
-                            <p class="autocomplete_list_airport_city_name">
-                                <i class="fa fa-plane"></i>
-                                ${elem.city} (${elem.IATA} - ${elem.name})
-                            </p>
-                            <p class="autocomplete_list_country_name">
-                                ${elem.country}
-                            </p>
-                        </div>
-                    </div></li>`;
-            
-        });
-    }
-    //console.log(flights);
-    document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = flights.join('').replaceAll("false","");
-})
+            flights = flights.map(elem => {
+                counter++;
+                return counter < 6 && `
+                        <li><div onclick="sp_changeAirportsToInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                            <div>
+                                <p class="autocomplete_list_airport_city_name">
+                                    <i class="fa fa-plane"></i>
+                                    ${elem.city} (${elem.IATA} - ${elem.name})
+                                </p>
+                                <p class="autocomplete_list_country_name">
+                                    ${elem.country}
+                                </p>
+                            </div>
+                        </div></li>`;
+                
+            });
+        }
+        //console.log(flights);
+        document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = flights.join('').replaceAll("false","");
+    })
+}
 
 
 function sp_changeAirportsToInput(airport, iata, icao){
-    document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport;
-    document.getElementById("sp_search_forms_to_where_input_fld").value = airport;
+    if(document.getElementById("sp_to_where_airports_auto_complete_input_fld"))
+        document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport;
+    if(document.getElementById("sp_search_forms_to_where_input_fld"))
+        document.getElementById("sp_search_forms_to_where_input_fld").value = airport;
     sp_add_destination_input_airport_to_history(iata)
     let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
     flight_search_data.itinerary.arrival.airport = iata;
@@ -242,8 +247,10 @@ function sp_changeAirportsToInput(airport, iata, icao){
         sp_add_destination_input_airport_to_history(icao)
         flight_search_data.itinerary.arrival.airport = icao;
         //fligh_search_data.destination_iata = icao;
-        document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
-        document.getElementById("sp_search_forms_to_where_input_fld").value =  airport.split("(")[0] + " (" + icao + ")";
+        if(document.getElementById("sp_to_where_airports_auto_complete_input_fld"))
+            document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
+        if(document.getElementById("sp_search_forms_to_where_input_fld"))
+            document.getElementById("sp_search_forms_to_where_input_fld").value =  airport.split("(")[0] + " (" + icao + ")";
     }
 
     window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
@@ -489,26 +496,33 @@ function sp_show_all_origin_airport_history(){
         i--;
     }
 }
-document.getElementById("sp_search_forms_from_where_input_fld").addEventListener("click", e => {
-    sp_show_all_origin_airport_history();
-});
+
+if(document.getElementById("sp_search_forms_from_where_input_fld")){
+    document.getElementById("sp_search_forms_from_where_input_fld").addEventListener("click", e => {
+        sp_show_all_origin_airport_history();
+    });
+}
 
 function sp_show_all_destination_airport_history(){
-
-    document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = "";
+    if(document.getElementById("sp_flights_auto_complete_to_where_input_list"))
+        document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML = "";
     let airports_history = JSON.parse(window.localStorage.getItem("sp_airports_input_history"));
     for(let i = (airports_history.to.length-1); ; ){
         if(i<0) break;
         let airport = AirportsData.filter(each => {
             return (each.IATA === airports_history.to[i] || each.ICAO === airports_history.to[i]);
         });
-        document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML += sp_return_history_markup(airport[0], "destination");
+        if(document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML)
+            document.getElementById("sp_flights_auto_complete_to_where_input_list").innerHTML += sp_return_history_markup(airport[0], "destination");
         i--;
     }
 }
-document.getElementById("sp_search_forms_to_where_input_fld").addEventListener("click", e => {
-    sp_show_all_destination_airport_history();
-});
+
+if(document.getElementById("sp_search_forms_to_where_input_fld")){
+    document.getElementById("sp_search_forms_to_where_input_fld").addEventListener("click", e => {
+        sp_show_all_destination_airport_history();
+    });
+}
 
 function sp_return_history_markup(obj, type){
     if(type === "origin"){

@@ -1,8 +1,15 @@
-import $ from "jquery";
+import { useEffect } from "react";
+
+import AutoCompleteInit from "../helpers/AutoCompleteInit";
 
 import { show_search_page } from "../helpers/PageRoutingFuncs";
 
 function SearchForm(){
+
+    useEffect(()=>{
+        AutoCompleteInit();
+    },[]);
+
     return(
         <div id="search_results_page_search_form" className="main-search-form">
             <div className="two-search-inputs-container" style={{marginBottom: 10}}>

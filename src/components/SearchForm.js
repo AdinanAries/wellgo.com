@@ -1,8 +1,13 @@
-import $, { nodeName } from "jquery";
+import { useEffect } from "react";
 
+import AutoCompleteInit from "../helpers/AutoCompleteInit";
 import { show_search_page, show_home_page } from "../helpers/PageRoutingFuncs";
 
 function SearchForm(props){
+
+    useEffect(()=>{
+        AutoCompleteInit();
+    },[]);
 
     const show_search_page=props.show_search_page;
 
