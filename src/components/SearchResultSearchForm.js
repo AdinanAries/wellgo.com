@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 
 import AutoCompleteInit from "../helpers/AutoCompleteInit";
+import DateChoosersInit from "../helpers/DateChoosersInit";
 
 import { show_search_page } from "../helpers/PageRoutingFuncs";
 
 function SearchForm(){
 
     useEffect(()=>{
+        DateChoosersInit();
         AutoCompleteInit();
     },[]);
 
