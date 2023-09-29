@@ -5,7 +5,7 @@ import DateChoosersInit from "../helpers/DateChoosersInit";
 
 import { show_search_page } from "../helpers/PageRoutingFuncs";
 
-function SearchForm(){
+function SearchForm( props ){
 
     useEffect(()=>{
         DateChoosersInit();
@@ -237,7 +237,7 @@ function SearchForm(){
                         </div>
                     </div>
                     <div style={{width: "calc(15% - 30px)"}}>
-                        <div onClick={show_search_page} id="sp_search_form_submit_btn" style={{marginTop: 0, padding: 15, boxShadow: "none"}} className="searchBtn">
+                        <div onClick={()=>{show_search_page(); props.submitFromSearchPage();}} id="sp_search_form_submit_btn" style={{marginTop: 0, padding: 15, boxShadow: "none"}} className="searchBtn">
                             <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
                         </div>
                     </div>

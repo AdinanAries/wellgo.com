@@ -7,6 +7,7 @@ import { show_explore_page } from "../helpers/PageRoutingFuncs";
 import FlightLoaderCard from "./FlightLoaderCard";
 import FlightOfferItem from "./FlightOfferItem";
 import SearchFilters from "./SearchFilters";
+import SearchFiltersLoader from "./SearchFiltersLoader";
 
 function add_clouds_to_animated_loader(){
     document.getElementById("animated_loader").innerHTML += `
@@ -76,10 +77,10 @@ export default function ResultsListContainer(props){
             </div>
             <div className="search_list_main_flex_container">
                 <div id="search_list_main__settings_section" className="search_list_main__settings_section">
-                    { !props.loading ? <SearchFilters /> : ""}
+                    { !props.loading ? <SearchFilters /> : <SearchFiltersLoader />}
                 </div>
                 <div className="search_list_main_tickets_section">
-                    <div id="animated_loader" style={{position: "relative", height: 190}}>
+                    <div id="animated_loader" style={{position: "relative", height: 190, display: props.loading ? "block" : "none"}}>
                         <div style={{backgroundImage: `url('${airplane}')`, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", width: 120, height: 120, position: "absolute", left: "calc(50% - 80px)", zIndex: 2, animation: "the_moving_plane 15s ease-in-out infinite"}}></div>
                     </div>
 
