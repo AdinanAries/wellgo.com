@@ -2257,24 +2257,7 @@ document.getElementById("landing_page_search_form_bar_bot_img").addEventListener
 });
 
 let is_landing_page_search_filters_open = false;
-function toggle_main_page_search_filters(){
-    if(is_landing_page_search_filters_open){
-        setTimeout(()=>{
-            document.getElementById("landing_page_search_form_bar").style.backgroundColor = "rgba(0,0,0,0.3)";
-            document.getElementById("landing_page_search_form_bar").style.borderWidth = "1px";
-            document.getElementById("landing_page_search_input_text_display").style.color = "white";
-        }, 200);
-        $("#landing_page_search_filters_container").slideUp("fast");
-        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(0deg)";
-    }else{
-        document.getElementById("landing_page_search_form_bar").style.backgroundColor = "white";
-        document.getElementById("landing_page_search_form_bar").style.borderWidth = "0";
-        document.getElementById("landing_page_search_input_text_display").style.color = "rgba(0,0,0,0.7)";
-        $("#landing_page_search_filters_container").slideDown("fast");
-        document.getElementById("landing_page_search_form_show_filters_btn_caret").style.transform = "rotate(180deg)";
-    }
-    is_landing_page_search_filters_open = !is_landing_page_search_filters_open;
-}
+
 
 function start_book_with_vitual_agent(){
 
@@ -2331,9 +2314,7 @@ document.getElementById("landing_page_search_bar_call_btn").addEventListener("cl
   alert("placing your call now");
   toggle_main_page_search_filters();
 });
-document.getElementById("landing_page_search_form_show_filters_btn").addEventListener("click", e=>{
-  toggle_main_page_search_filters()
-});
+
 document.getElementById("landing_page_search_bar_show_main_search_form_btn").addEventListener("click", e=>{
   toggle_main_page_search_filters()
 });
