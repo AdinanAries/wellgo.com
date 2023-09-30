@@ -10,7 +10,7 @@ import { error } from "jquery";
 function SearchPageMain(props){
 
     const ref = useRef(null);
-    let [ flights, setFlights ] = useState([1,2,3,4,5,6,7]);
+    let [ flights, setFlights ] = useState([]);
     let [ loading, setLoading ] = useState(true);
 
     const submitFromSearchPage = async () => {
@@ -18,7 +18,7 @@ function SearchPageMain(props){
         setLoading(true);
         let res = await fetchFlightOffers();
         console.log(res);
-        (res) ? setFlights(res.data) : setFlights([]);
+        (res.data.length>0) ? setFlights(res.data) : setFlights([]);
         setLoading(false);
     }
 
@@ -40,11 +40,11 @@ function SearchPageMain(props){
             .then(data => data)
             .catch(err => {
                 console.log(err);
-                return [];
+                return {data: []};
             })
         } catch (e){
             console.log(e);
-            return [];
+            return {data: []};
         }
     }
 
@@ -52,7 +52,7 @@ function SearchPageMain(props){
         (async function go() {
             let res = await fetchFlightOffers();
             console.log(res);
-            (res) ? setFlights(res.data) : setFlights([]);
+            (res.data.length>0) ? setFlights(res.data) : setFlights([]);
             setLoading(false);
         })();
     },[])

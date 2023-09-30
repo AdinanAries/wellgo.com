@@ -59,12 +59,20 @@ function add_clouds_to_animated_loader(){
         WE'LL GET YOU THERE IN A SEC...
       </div>
     `;
-  }
+}
 
 export default function ResultsListContainer(props){
-
-    const FLIGHTS = props.flights.map((each, index) => <FlightOfferItem key={index} flight={each}/>);
-
+    let FLIGHTS;
+    if(props.flights.length>0){
+        FLIGHTS = props.flights.map((each, index) => <FlightOfferItem key={index} flight={each}/>);
+    }else{
+        FLIGHTS = <div style={{padding: "50px 10px", backgroundColor: "rgba(0,0,0,0.1)", border: "1px solid rgba(0,0,0,0.1)"}}>
+            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 14, textAlign: "center"}}>
+                <i style={{marginRight: 10, color: "goldenrod"}}
+                    className="fa-solid fa-exclamation-triangle"></i>
+                Oops! No flights were found</p>
+        </div>
+    }
     setTimeout(()=>{
         add_clouds_to_animated_loader();
     },500)
