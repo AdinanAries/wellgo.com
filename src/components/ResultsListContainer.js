@@ -63,7 +63,7 @@ function add_clouds_to_animated_loader(){
 
 export default function ResultsListContainer(props){
 
-    const FLIGHTS = props.flights.map((each, index) => <FlightOfferItem key={each} />);
+    const FLIGHTS = props.flights.map((each, index) => <FlightOfferItem key={index} flight={each}/>);
 
     setTimeout(()=>{
         add_clouds_to_animated_loader();

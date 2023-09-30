@@ -3,24 +3,58 @@ import React, { useRef, useState, useEffect } from "react";
 import SearchResultSearchForm from "./SearchResultSearchForm";
 import ResultsListContainer from "./ResultsListContainer";
 
+import CONSTANTS from "../Constants/Constants";
+import ENVIRONMENT from "../Constants/Environment";
+import { error } from "jquery";
+
 function SearchPageMain(props){
 
     const ref = useRef(null);
     let [ flights, setFlights ] = useState([1,2,3,4,5,6,7]);
-    let [ loading, setLoading ] = useState(false);
+    let [ loading, setLoading ] = useState(true);
 
-    const submitFromSearchPage = () => {
+    const submitFromSearchPage = async () => {
         setFlights([]);
-            setLoading(true);
-        setTimeout(()=>{
-            setFlights([1,2,3,4,5,6,7]);
-            setLoading(false);
-        }, 4000);
+        setLoading(true);
+        let res = await fetchFlightOffers();
+        console.log(res);
+        setFlights(res.data);
+        setLoading(false);
     }
-    //setFlights([1,2,3,4,5,6,7]);
-    //setLoading(false);
 
-    console.log(JSON.parse(localStorage.getItem("search_obj")));
+    const fetchFlightOffers = async (path="\\api\\flights") => {
+        try{
+            return await fetch(ENVIRONMENT.wellgo_dev_api_svr+path, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                //TODO: body to come from local storage
+                body: JSON.stringify({
+                    todo: "todo",
+                    todoo: "todo"
+                })
+            })
+            .then(res => res.json())
+            .then(data => data)
+            .catch(err => err)
+        } catch (e){
+            console.log(e);
+            return e;
+        }
+    }
+
+    useEffect(() => {
+        (async function go() {
+            let res = await fetchFlightOffers();
+            console.log(res);
+            setFlights(res.data);
+            setLoading(false);
+        })();
+    },[])
+
+    //console.log(JSON.parse(localStorage.getItem("search_obj")));
 
     return (
         <main>
