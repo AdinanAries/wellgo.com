@@ -18,7 +18,7 @@ function SearchPageMain(props){
         setLoading(true);
         let res = await fetchFlightOffers();
         console.log(res);
-        setFlights(res.data);
+        (res) ? setFlights(res.data) : setFlights([]);
         setLoading(false);
     }
 
@@ -38,10 +38,13 @@ function SearchPageMain(props){
             })
             .then(res => res.json())
             .then(data => data)
-            .catch(err => err)
+            .catch(err => {
+                console.log(err);
+                return [];
+            })
         } catch (e){
             console.log(e);
-            return e;
+            return [];
         }
     }
 
@@ -49,7 +52,7 @@ function SearchPageMain(props){
         (async function go() {
             let res = await fetchFlightOffers();
             console.log(res);
-            setFlights(res.data);
+            (res) ? setFlights(res.data) : setFlights([]);
             setLoading(false);
         })();
     },[])
