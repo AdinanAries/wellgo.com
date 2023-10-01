@@ -5,7 +5,6 @@ import ResultsListContainer from "./ResultsListContainer";
 
 import CONSTANTS from "../../../Constants/Constants";
 import ENVIRONMENT from "../../../Constants/Environment";
-import { error } from "jquery";
 import SelectedTicketPane from "./SelectedTicketPane";
 
 function SearchPageMain(props){
@@ -15,18 +14,24 @@ function SearchPageMain(props){
     let [ loading, setLoading ] = useState(true);
     let [ selectedFlightId, setSelectedFlightId] = useState("");
 
+    let api_url = (ENVIRONMENT.runtime.env===CONSTANTS.prod) ?
+        ENVIRONMENT.wellgo_api_svr : ENVIRONMENT.wellgo_dev_api_svr;
+
     const submitFromSearchPage = async () => {
         setFlights([]);
         setLoading(true);
         let res = await fetchFlightOffers();
         console.log(res);
-        (res.data.length>0) ? setFlights(res.data) : setFlights([]);
+        if(res.data)
+            (res.data.length>0) ? setFlights(res.data) : setFlights([]);
+        else
+            setFlights([])
         setLoading(false);
     }
 
     const fetchFlightOffers = async (path="\\api\\flights") => {
         try{
-            return await fetch(ENVIRONMENT.wellgo_dev_api_svr+path, {
+            return await fetch(api_url+path, {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -62,7 +67,10 @@ function SearchPageMain(props){
         (async function go() {
             let res = await fetchFlightOffers();
             console.log(res);
-            (res.data.length>0) ? setFlights(res.data) : setFlights([]);
+            if(res.data)
+                (res.data.length>0) ? setFlights(res.data) : setFlights([]);
+            else
+                setFlights([]);
             setLoading(false);
         })();
     },[])
