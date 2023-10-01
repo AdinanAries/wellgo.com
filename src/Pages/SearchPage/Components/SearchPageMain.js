@@ -3,8 +3,8 @@ import React, { useRef, useState, useEffect } from "react";
 import SearchResultSearchForm from "./SearchResultSearchForm";
 import ResultsListContainer from "./ResultsListContainer";
 
-import CONSTANTS from "../Constants/Constants";
-import ENVIRONMENT from "../Constants/Environment";
+import CONSTANTS from "../../../Constants/Constants";
+import ENVIRONMENT from "../../../Constants/Environment";
 import { error } from "jquery";
 
 function SearchPageMain(props){

@@ -1,18 +1,18 @@
 //import explore_destination_img from "../explore_destination_img.jpg";
 
-import WillgoLogo from '../WillgoLogo.png';
-import search_bar_flight_icon from "../icons/search_bar_flight_icon.png";
-import deals_icon from "../icons/deals_icon.png";
-import trips_icon from "../icons/trips_icon.png";
-import explore_icon from "../icons/explore_icon.png";
-import user_account_icon from "../icons/user_account_icon.png";
-import botIcon from "../icons/botIcon.svg";
+import WillgoLogo from '../../../WillgoLogo.png';
+import search_bar_flight_icon from "../../../icons/search_bar_flight_icon.png";
+import deals_icon from "../../../icons/deals_icon.png";
+import trips_icon from "../../../icons/trips_icon.png";
+import explore_icon from "../../../icons/explore_icon.png";
+import user_account_icon from "../../../icons/user_account_icon.png";
+import botIcon from "../../../icons/botIcon.svg";
 
-import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../helpers/PageRoutingFuncs';
+import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../../../helpers/PageRoutingFuncs';
 
 import $ from "jquery"
 import { useEffect } from 'react';
-import HeroDropIcon from '../helpers/HeroDropIcons';
+import HeroDropIcon from '../../../helpers/HeroDropIcons';
 
 export default function ExploreDestinations(){
 

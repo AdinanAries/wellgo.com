@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-import AutoCompleteInit from "../helpers/AutoCompleteInit";
-import DateChoosersInit from '../helpers/DateChoosersInit';
-import { show_search_page, show_home_page } from "../helpers/PageRoutingFuncs";
+import AutoCompleteInit from "../../../helpers/AutoCompleteInit";
+import DateChoosersInit from '../../../helpers/DateChoosersInit';
+import { show_search_page, show_home_page } from "../../../helpers/PageRoutingFuncs";
 
 function SearchForm(props){
 

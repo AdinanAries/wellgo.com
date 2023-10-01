@@ -1,9 +1,9 @@
-import explore_page_hero from "../explore_page_hero.jpg";
+import explore_page_hero from "../../../explore_page_hero.jpg";
 
-import deltaIcon from "../deltaIcon.png";
-import airplane from "../icons/airplane.svg";
+import deltaIcon from "../../../deltaIcon.png";
+import airplane from "../../../icons/airplane.svg";
 
-import { show_explore_page } from "../helpers/PageRoutingFuncs";
+import { show_explore_page } from "../../../helpers/PageRoutingFuncs";
 import FlightLoaderCard from "./FlightLoaderCard";
 import FlightOfferItem from "./FlightOfferItem";
 import SearchFilters from "./SearchFilters";

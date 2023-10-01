@@ -1,12 +1,12 @@
 import $ from "jquery";
 
-import UserAccountPage from "./UserAccountPage";
+import UserAccountPage from "../UserAccountPage/UserAccountPage";
 import { useState } from "react";
-import EditProfileForm from "./EditProfileForm";
-import PaymentsForm from "./PaymentsForm";
-import PassportsForm from "./PassportsForm";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
+import EditProfileForm from "../UserAccountPage/Components/EditProfileForm";
+import PaymentsForm from "../../components/PaymentsForm";
+import PassportsForm from "../../components/PassportsForm";
+import LoginForm from "./Components/LoginForm";
+import SignupForm from "./Components/SignupForm";
 
 export default function LoginPage(){
 

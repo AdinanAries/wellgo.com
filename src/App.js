@@ -3,17 +3,17 @@ import './App.css';
 
 //components
 import Header from './components/Header';
-import HomePage from './components/HomePage';
+import HomePage from './Pages/HomePage/HomePage';
 import Footer from './components/Footer';
 import MobileMenu from './components/MobileMenu';
-import TripsPage from "./components/TripsPage";
-import LoginPage from './components/LoginPage';
-import ExplorePage from './components/ExplorePage';
-import SearchPage from './components/SearchPage';
+import TripsPage from "./Pages/TripsPage/TripsPage";
+import LoginPage from './Pages/LoginPage/LoginPage';
+import ExplorePage from './Pages/ExplorePage/ExplorePage';
+import SearchPage from './Pages/SearchPage/SearchPage';
 import SelectedTicketPane from './components/SelectedTicketPane';
-import CheckoutPage from './components/CheckoutPage';
-import DealsPage from "./components/DealsPage";
-import HelpPage from "./components/HelpPage";
+import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
+import DealsPage from "./Pages/DealsPage/DealsPage";
+import HelpPage from "./Pages/HelpPage/HelpPage";
 import HPSupport from "./components/HPSupport";
 
 

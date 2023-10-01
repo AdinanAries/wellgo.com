@@ -1,4 +1,4 @@
-import mobile_app_iconsvg from "../icons/mobile_app_icon.svg"
+import mobile_app_iconsvg from "../../../icons/mobile_app_icon.svg"
 
 function DownloadMobileApp(){
     return (

@@ -1,5 +1,5 @@
 import { chat_bot_msg } from "./chatbot_msgs";
-import { chat_bot_new_msg } from "./components/ExploreDestination"
+import { chat_bot_new_msg } from "./Pages/HomePage/Components/ExploreDestination"
 
 export function return_new_rand_msg(){
     return chat_bot_msg.msgs[Math.floor(Math.random() * chat_bot_msg.msgs.length)].msg;

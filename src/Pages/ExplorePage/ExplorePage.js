@@ -1,5 +1,5 @@
-import explore_page_hero from "../explore_destination_img2.jpg";
-import { show_home_page } from "../helpers/PageRoutingFuncs";
+import explore_page_hero from "../../explore_destination_img2.jpg";
+import { show_home_page } from "../../helpers/PageRoutingFuncs";
 
 export default function ExplorePage(){
     return (

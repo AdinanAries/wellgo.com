@@ -1,5 +1,5 @@
-import CONSTANTS from "../Constants/Constants";
-import ENVIRONMENT from "../Constants/Environment";
+import CONSTANTS from "../../../Constants/Constants";
+import ENVIRONMENT from "../../../Constants/Environment";
 
 //Offer item cards
 import DuffelOfferItem from "./FlightOfferCards.js/DuffelOfferItem";

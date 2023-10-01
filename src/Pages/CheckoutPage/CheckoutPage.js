@@ -1,5 +1,5 @@
-import WillgoLogo from '../WillgoLogo.png';
-import deltaIcon from "../deltaIcon.png";
+import WillgoLogo from '../../WillgoLogo.png';
+import deltaIcon from "../../deltaIcon.png";
 
 export default function CheckoutPage(){
     return (

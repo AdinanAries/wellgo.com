@@ -3,9 +3,9 @@ import ChooseUs from "./ChooseUs";
 import ExploreDestinations from "./ExploreDestination";
 
 
-import explore_page_hero from "../explore_page_hero.jpg";
+import explore_page_hero from "../../../explore_page_hero.jpg";
 
-import { show_explore_page } from "../helpers/PageRoutingFuncs";
+import { show_explore_page } from "../../../helpers/PageRoutingFuncs";
 
 //backgroundImage: `url('${explore_page_hero}')`,
 

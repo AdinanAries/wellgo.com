@@ -1,4 +1,4 @@
-import SearchPageMain from "./SearchPageMain";
+import SearchPageMain from "./Components/SearchPageMain";
 
 function SearchPage(){
     return (

@@ -1,8 +1,8 @@
 import $ from "jquery";
 
-import NotLoggedIn from './NotLoggedIn';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
-import support_page_support_icon from "../icons/support_page_support_icon.svg";
+import support_page_support_icon from "../../icons/support_page_support_icon.svg";
 
 function HelpPage(){
     return(

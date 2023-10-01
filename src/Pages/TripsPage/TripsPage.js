@@ -1,6 +1,6 @@
-import NotLoggedIn from './NotLoggedIn';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
-import trips_page_bg from "../icons/trips_page_bg.svg";
+import trips_page_bg from "../../icons/trips_page_bg.svg";
 
 function TripsPage(){
     return(

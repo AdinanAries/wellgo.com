@@ -1,6 +1,6 @@
-import NotLoggedIn from './NotLoggedIn';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
-import deals_page_icon from "../icons/deals_page_icon.svg";
+import deals_page_icon from "../../icons/deals_page_icon.svg";
 
 function DealsPage(){
     return(

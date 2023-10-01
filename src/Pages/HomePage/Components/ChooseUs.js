@@ -1,33 +1,33 @@
 import { useState, useEffect } from "react";
 
-import securepaymentssvg from '../icons/securepayments.svg';
-import bestdealssvg from '../icons/bestdeals.svg';
-import customersupportsvg from '../icons/customersupport.svg';
-import wellgo_reviewer from '../wellgo_reviewer.jpg';
-import wellgo_reviewer2 from '../wellgo_reviewer2.jpg';
-import wellgo_reviewer3 from '../wellgo_reviewer3.jpg';
-import wellgo_reviewer4 from '../wellgo_reviewer4.jpg';
-import wellgo_reviewer5 from '../wellgo_reviewer5.jpg';
-import wellgo_reviewer6 from '../wellgo_reviewer6.jpg';
-import reviews_icon from "../icons/reviews_icon.svg";
-import reviews_icon2 from "../icons/reviews_icon2.svg";
-import citiesIcon from "../icons/citiesIcon.svg";
-import smart_phone_img from "../smart_phone_img.jpg";
+import securepaymentssvg from '../../../icons/securepayments.svg';
+import bestdealssvg from '../../../icons/bestdeals.svg';
+import customersupportsvg from '../../../icons/customersupport.svg';
+import wellgo_reviewer from '../../../wellgo_reviewer.jpg';
+import wellgo_reviewer2 from '../../../wellgo_reviewer2.jpg';
+import wellgo_reviewer3 from '../../../wellgo_reviewer3.jpg';
+import wellgo_reviewer4 from '../../../wellgo_reviewer4.jpg';
+import wellgo_reviewer5 from '../../../wellgo_reviewer5.jpg';
+import wellgo_reviewer6 from '../../../wellgo_reviewer6.jpg';
+import reviews_icon from "../../../icons/reviews_icon.svg";
+import reviews_icon2 from "../../../icons/reviews_icon2.svg";
+import citiesIcon from "../../../icons/citiesIcon.svg";
+import smart_phone_img from "../../../smart_phone_img.jpg";
 
 //cities imgs
-import LondonImg from "../citiesImg/London.jpg";
-import AccraImg from "../citiesImg/AccraGhana.jpg";
-import LAImg from "../citiesImg/LA_US.jpg";
-import ParisImg from "../citiesImg/Paris.jpg";
-import NewYorkImg from "../citiesImg/NewYork.jpg";
-import CairoImg from "../citiesImg/Cairo.jpg";
-import RomeImg from "../citiesImg/Rome.jpg";
+import LondonImg from "../../../citiesImg/London.jpg";
+import AccraImg from "../../../citiesImg/AccraGhana.jpg";
+import LAImg from "../../../citiesImg/LA_US.jpg";
+import ParisImg from "../../../citiesImg/Paris.jpg";
+import NewYorkImg from "../../../citiesImg/NewYork.jpg";
+import CairoImg from "../../../citiesImg/Cairo.jpg";
+import RomeImg from "../../../citiesImg/Rome.jpg";
 
-import { show_full_search_form } from "../helpers/PageRoutingFuncs";
+import { show_full_search_form } from "../../../helpers/PageRoutingFuncs";
 
 import DownloadMobileApp from "./DownloadMobileApp";
 import { cloneElement } from 'react';
-import PaginationButtons from './PaginationButtons';
+import PaginationButtons from '../../../components/PaginationButtons';
 
 var ChooseUs = ()=>{
 

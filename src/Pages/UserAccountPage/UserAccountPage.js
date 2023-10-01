@@ -1,12 +1,12 @@
 import $ from "jquery";
 
-import edit_user_forms_bg from "../icons/edit_user_forms_bg.svg";
-import credit_card_payment from "../icons/credit_card_payment.svg";
-import passport from "../icons/passport.svg";
-import nothing_found_icon from "../icons/nothing_found_icon.svg";
-import card_not_found from "../icons/card_not_found.svg";
-import not_found_icon from "../icons/not_found_icon.svg";
-import PaginationButtons from "./PaginationButtons";
+import edit_user_forms_bg from "../../icons/edit_user_forms_bg.svg";
+import credit_card_payment from "../../icons/credit_card_payment.svg";
+import passport from "../../icons/passport.svg";
+import nothing_found_icon from "../../icons/nothing_found_icon.svg";
+import card_not_found from "../../icons/card_not_found.svg";
+import not_found_icon from "../../icons/not_found_icon.svg";
+import PaginationButtons from "../../components/PaginationButtons";
 import { useState } from "react";
 
 function UserAccountPage({user, passports, bookings, payments}){

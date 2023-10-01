@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import Main from "./Main";
-import SearchPage from "./SearchPageMain";
+import Main from "./Components/Main";
+import SearchPage from "../SearchPage/Components/SearchPageMain";
 
 function HomePage(props){
     

@@ -1,4 +1,4 @@
-import edit_user_forms_bg from "../icons/edit_user_forms_bg.svg";
+import edit_user_forms_bg from "../../../icons/edit_user_forms_bg.svg";
 
 function EditProfileForm({userForm,
                             editUserFirstName,

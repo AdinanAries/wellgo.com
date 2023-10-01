@@ -1,4 +1,4 @@
-import { chat_bot_new_msg } from "../components/ExploreDestination";
+import { chat_bot_new_msg } from "../Pages/HomePage/Components/ExploreDestination";
 import { return_new_rand_msg } from "../chatbot_funcs";
 
 import $ from "jquery";
