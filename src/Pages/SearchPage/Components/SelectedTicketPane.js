@@ -67,7 +67,7 @@ export default function SelectedTicketPane(props){
                         Oops! Something went wrong
                     </p>
                     <div onClick={unselectFlightOffer}
-                        style={{padding: "10px", backgroundColor: "crimson", color: "white", textAlign: "center", margin: "30px 0", borderRadius: 50}}>
+                        style={{padding: "10px", backgroundColor: "crimson", cursor: "pointer", color: "white", textAlign: "center", margin: "30px 0", borderRadius: 50}}>
                         <i className="fa-solid fa-times" style={{marginRight: 10, color: "rgba(255,255,255,0.6)"}}></i>
                         close</div>
                 </div>
