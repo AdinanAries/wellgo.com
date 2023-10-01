@@ -1,11 +1,13 @@
-import deltaIcon from "../deltaIcon.png";
+import deltaIcon from "../../../deltaIcon.png";
 import $ from "jquery";
 
-import { show_start_checkout_page } from "../Pages/CheckoutPage/CheckoutPage";
+import { show_start_checkout_page } from "../../CheckoutPage/CheckoutPage";
 
-export default function SelectedTicketPane(){
+export default function SelectedTicketPane(props){
+
+    const { selectedFlightId } = props;
     return (
-        <div id="selected_ticket_pane" className="display_more_info_pane">
+        <div id="selected_ticket_pane" className="display_more_info_pane" style={{display: "block"}}>
             <div id="selected_ticket_main_details_pane">
                 <div style={{padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
@@ -148,7 +150,7 @@ export default function SelectedTicketPane(){
                                 </div>
                             </div>
                         </div>
-                        <p className="pop-up-close-btn" onClick={global.hide_selected_ticket_details_pane} style={{cursor: "pointer", color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
+                        <p className="pop-up-close-btn" onClick={()=>{global.hide_selected_ticket_details_pane(); props.unselectFlightOffer();}} style={{cursor: "pointer", color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
                             &times;
                         </p>
                     </div>

@@ -6,7 +6,9 @@ import DuffelOfferItem from "./FlightOfferCards.js/DuffelOfferItem";
 
 const FlightOfferItem = (props) => {
     if(CONSTANTS.duffel===ENVIRONMENT.data_provider){
-        return <DuffelOfferItem flight={props.flight} />
+        return <DuffelOfferItem
+            selectFlightOffer={props.selectFlightOffer}
+            flight={props.flight} />
     } else {
         return <div>
             <p>Unknown Data Provider</p>

@@ -62,9 +62,15 @@ function add_clouds_to_animated_loader(){
 }
 
 export default function ResultsListContainer(props){
+
     let FLIGHTS;
     if(props.flights.length>0){
-        FLIGHTS = props.flights.map((each, index) => <FlightOfferItem key={index} flight={each}/>);
+        FLIGHTS = props.flights.map((each, index) => 
+            <FlightOfferItem 
+                selectFlightOffer={props.selectFlightOffer}
+                key={index} 
+                flight={each}
+            />);
     }else{
         FLIGHTS = <div style={{padding: "50px 10px", backgroundColor: "rgba(0,0,0,0.1)", border: "1px solid rgba(0,0,0,0.1)"}}>
             <p style={{color: "rgba(0,0,0,0.7)", fontSize: 14, textAlign: "center"}}>

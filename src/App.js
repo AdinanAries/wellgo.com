@@ -9,8 +9,8 @@ import MobileMenu from './components/MobileMenu';
 import TripsPage from "./Pages/TripsPage/TripsPage";
 import LoginPage from './Pages/LoginPage/LoginPage';
 import ExplorePage from './Pages/ExplorePage/ExplorePage';
-import SearchPage from './Pages/SearchPage/SearchPage';
-import SelectedTicketPane from './components/SelectedTicketPane';
+//import SearchPage from './Pages/SearchPage/SearchPage';
+//import SelectedTicketPane from './components/SelectedTicketPane';
 import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
 import DealsPage from "./Pages/DealsPage/DealsPage";
 import HelpPage from "./Pages/HelpPage/HelpPage";
@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="">
       <HPSupport />
-      <SelectedTicketPane />
+      {/*<SelectedTicketPane />*/}
       <MobileMenu />
       <CheckoutPage />
       <Header  show_home_page={show_home_page} />

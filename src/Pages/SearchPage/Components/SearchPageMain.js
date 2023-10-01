@@ -6,12 +6,14 @@ import ResultsListContainer from "./ResultsListContainer";
 import CONSTANTS from "../../../Constants/Constants";
 import ENVIRONMENT from "../../../Constants/Environment";
 import { error } from "jquery";
+import SelectedTicketPane from "./SelectedTicketPane";
 
 function SearchPageMain(props){
 
     const ref = useRef(null);
     let [ flights, setFlights ] = useState([]);
     let [ loading, setLoading ] = useState(true);
+    let [ selectedFlightId, setSelectedFlightId] = useState("");
 
     const submitFromSearchPage = async () => {
         setFlights([]);
@@ -48,6 +50,14 @@ function SearchPageMain(props){
         }
     }
 
+    const selectFlightOffer = (id) => {
+        setSelectedFlightId(id);
+    }
+
+    const unselectFlightOffer = () => {
+        setSelectedFlightId("");
+    }
+
     useEffect(() => {
         (async function go() {
             let res = await fetchFlightOffers();
@@ -64,7 +74,11 @@ function SearchPageMain(props){
             <div className="wrapper">
                 <div style={{paddingTop: 90}}>
                     <SearchResultSearchForm submitFromSearchPage={submitFromSearchPage} />
-                    <ResultsListContainer flights={flights} loading={loading}/>
+                    <ResultsListContainer 
+                        selectFlightOffer={selectFlightOffer} 
+                        flights={flights} loading={loading}
+                    />
+                    {selectedFlightId ? <SelectedTicketPane selectedFlightId={selectedFlightId} unselectFlightOffer={unselectFlightOffer} /> : ""}
                 </div>
             </div>
         </main>

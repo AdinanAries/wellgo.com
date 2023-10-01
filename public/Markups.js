@@ -4,13 +4,13 @@ function show_selected_ticket_details_pane(){
         document.body.style.width="100vw";
         document.body.style.height="100vh";
     }
-    document.getElementById("selected_ticket_pane").style.display = "block";
+    //document.getElementById("selected_ticket_pane").style.display = "block";
 }
 function hide_selected_ticket_details_pane(){
     document.body.style.position="initial";
       document.body.style.width="auto";
       document.body.style.height="auto";
-      document.getElementById("selected_ticket_pane").style.display="none"
+      //document.getElementById("selected_ticket_pane").style.display="none"
 }
 
 var is_itinerary_showing = false;
