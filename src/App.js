@@ -21,6 +21,7 @@ function App() {
 
   const [ showHome, setShowHome ] = useState(true);
   const [ showSearchPage, setShowSearchPage ] = useState(false);
+  const [ isCheckout, setIsCheckout ] = useState(false);
 
   const show_search_page = () => {
     setShowSearchPage(true);
@@ -30,20 +31,36 @@ function App() {
     setShowSearchPage(false);
   }
 
+  const cancel_checkout = () => {
+    setIsCheckout(false);
+  }
+
+  const begin_checkout = () => {
+    setIsCheckout(true);
+  }
+
   return (
     <div className="">
       <HPSupport />
-      {/*<SelectedTicketPane />*/}
       <MobileMenu />
-      <CheckoutPage />
+      {
+        isCheckout ? 
+          <CheckoutPage 
+            cancel_checkout={cancel_checkout}
+          /> 
+        : ""
+      }
       <Header  show_home_page={show_home_page} />
-      <HomePage show_search_page={show_search_page} showSearchPage={showSearchPage}/>
+      <HomePage 
+        show_search_page={show_search_page} 
+        showSearchPage={showSearchPage}
+        begin_checkout={begin_checkout}
+      />
       <TripsPage />
       <DealsPage />
       <HelpPage />
       <LoginPage />
       <ExplorePage />
-      {/*<SearchPage />*/}
       <Footer />
     </div>
   );

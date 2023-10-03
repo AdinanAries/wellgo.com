@@ -86,7 +86,15 @@ function SearchPageMain(props){
                         selectFlightOffer={selectFlightOffer} 
                         flights={flights} loading={loading}
                     />
-                    {selectedFlightId ? <SelectedTicketPane selectedFlightId={selectedFlightId} unselectFlightOffer={unselectFlightOffer} /> : ""}
+                    {
+                        selectedFlightId ? 
+                        <SelectedTicketPane 
+                            selectedFlightId={selectedFlightId} 
+                            unselectFlightOffer={unselectFlightOffer} 
+                            begin_checkout={props.begin_checkout}
+                        /> 
+                        : ""
+                    }
                 </div>
             </div>
         </main>

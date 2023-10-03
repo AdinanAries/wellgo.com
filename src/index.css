@@ -771,7 +771,7 @@ footer {
   width: 100vw;
   height: 100vh;
   background-color: white;
-  z-index: 1003;
+  z-index: 1005;
   overflow: auto;
 }
 .checkout_page_all_info_flex_container {

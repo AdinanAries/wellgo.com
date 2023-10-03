@@ -2,7 +2,7 @@ import WillgoLogo from '../../WillgoLogo.png';
 import deltaIcon from "../../deltaIcon.png";
 
 export default function CheckoutPage(props){
-    
+
     return (
         <div id="booking_start_checkout_page_container" style={{display: "block"}}>
             <div className="wrapper">
@@ -25,7 +25,7 @@ export default function CheckoutPage(props){
                                     $133.23</span>
                             </p>
                         </div>
-                        <p className="pop-up-close-btn" onClick={()=>document.getElementById('booking_start_checkout_page_container').style.display='none'} 
+                        <p className="pop-up-close-btn" onClick={props.cancel_checkout} 
                             style={{cursor: "pointer", color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
                             &times;
                         </p>

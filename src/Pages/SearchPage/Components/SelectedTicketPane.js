@@ -55,7 +55,8 @@ export default function SelectedTicketPane(props){
                     flightDetail ? 
                         <SelectedTicketInfo 
                             flight={flightDetail}
-                            unselectFlightOffer={unselectFlightOffer} /> : 
+                            unselectFlightOffer={unselectFlightOffer} 
+                            begin_checkout={props.begin_checkout} /> : 
                         <div style={{padding: "40px 10px", height: "calc(100% + 90px)", backgroundColor: "white"}}>
                             <p style={{color: "rgba(0,0,0,0.8)", textAlign: "center"}}>
                                 <i className="fa-solid fa-spinner" style={{marginRight: 10, color: "green"}}></i>
