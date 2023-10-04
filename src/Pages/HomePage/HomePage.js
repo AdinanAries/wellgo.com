@@ -12,7 +12,9 @@ function HomePage(props){
     return(
         <div id="home_page">
             { !props.showSearchPage ? 
-                <Main show_search_page={props.show_search_page}/> : 
+                <Main 
+                    showSearchForm={props.showSearchForm} 
+                    show_search_page={props.show_search_page} /> : 
                 <SearchPage begin_checkout={props.begin_checkout}/> }
         </div>
     );

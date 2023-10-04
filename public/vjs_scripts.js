@@ -2331,7 +2331,7 @@ document.getElementById("landing_page_search_bar_book_w_vta_btn").addEventListen
   document.querySelector("header").style.backgroundColor="#000000";
   document.querySelector("").style.color = "";
 }*/
-localStorage.setItem("is_home_page", "yes");
+
 window.onscroll = function() {
   if(localStorage.getItem("is_home_page")){
     if (window.pageYOffset > 200) { 

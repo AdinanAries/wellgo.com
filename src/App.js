@@ -22,13 +22,15 @@ function App() {
   const [ showHome, setShowHome ] = useState(true);
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
+  const [ showHomePageSearchForm, setShowHomePageSearchForm ] = useState(false);
 
   const show_search_page = () => {
     setShowSearchPage(true);
   }
 
-  const show_home_page = () => {
+  const show_home_page = (with_search_form=false) => {
     setShowSearchPage(false);
+    setShowHomePageSearchForm(with_search_form);
   }
 
   const cancel_checkout = () => {
@@ -55,6 +57,7 @@ function App() {
         show_search_page={show_search_page} 
         showSearchPage={showSearchPage}
         begin_checkout={begin_checkout}
+        showSearchForm={showHomePageSearchForm}
       />
       <TripsPage />
       <DealsPage />

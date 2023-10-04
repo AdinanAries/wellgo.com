@@ -1,3 +1,4 @@
+import CONSTANTS from "../Constants/Constants";
 import { chat_bot_new_msg } from "../Pages/HomePage/Components/ExploreDestination";
 import { return_new_rand_msg } from "../chatbot_funcs";
 
@@ -10,7 +11,7 @@ export function show_login_page(){
         document.getElementById("site_main_header").style.display="block";
     if(document.getElementById("main_hero_section"))
         document.getElementById("main_hero_section").style.display="none";
-    if($(window).width() > 1000)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         if(document.querySelector("header"))
             document.querySelector("header").style.backgroundColor="#000000";
     localStorage.removeItem("is_home_page");
@@ -42,12 +43,12 @@ export function show_home_page(is_from_search=false){
 
     if(document.getElementById("selected_ticket_pane"))
         document.getElementById("selected_ticket_pane").style.display="none";
-    if($(window).width() > 1000)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         if(document.querySelector("header"))
             document.querySelector("header").style.background ="none";
     //document.getElementById("site_main_header").style.display="none";
     if(!is_from_search){
-        if($(window).width() > 1000)
+        if($(window).width() > CONSTANTS.viewport_threshold)
             if(document.querySelector("header"))
                 document.querySelector("header").style.backgroundColor="#000000";
         if(document.getElementById("main_hero_section"))
@@ -85,7 +86,7 @@ export function show_search_page(){
         document.getElementById("site_main_header").style.display="block";
     if(document.getElementById("main_hero_section"))
         document.getElementById("main_hero_section").style.display="none";
-    if($(window).width() > 1000)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         if(document.querySelector("header"))
             document.querySelector("header").style.backgroundColor="#000000";
 
@@ -117,7 +118,7 @@ export function show_trips_page(){
         document.getElementById("site_main_header").style.display="block";
     if(document.getElementById("main_hero_section"))
         document.getElementById("main_hero_section").style.display="none";
-    if($(window).width() > 1000)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
@@ -145,7 +146,7 @@ export function show_deals_page(){
         document.getElementById("site_main_header").style.display="block";
     if(document.getElementById("main_hero_section"))
         document.getElementById("main_hero_section").style.display="none";
-    if($(window).width() > 1000)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         if(document.querySelector("header"))
             document.querySelector("header").style.backgroundColor="#000000";
 
@@ -176,7 +177,7 @@ export function show_explore_page(){
         document.getElementById("site_main_header").style.display="block";
     if(document.getElementById("main_hero_section"))
         document.getElementById("main_hero_section").style.display="none";
-    if($(window).width() > 1000)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         if(document.querySelector("header"))
             document.querySelector("header").style.backgroundColor="#000000";
 
@@ -207,7 +208,7 @@ export function show_help_page(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="none";
-    if($(window).width() > 700)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
@@ -234,7 +235,7 @@ export function show_full_search_form(){
 
     document.getElementById("site_main_header").style.display="block";
     document.getElementById("main_hero_section").style.display="block";
-    if($(window).width() > 700)
+    if($(window).width() > CONSTANTS.viewport_threshold)
         document.querySelector("header").style.backgroundColor="#000000";
     localStorage.removeItem("is_home_page");
 }

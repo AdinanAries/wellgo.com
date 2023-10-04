@@ -28,7 +28,7 @@ export default function ExploreDestinations(){
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28, textAlign: "center"}}>
                                 Cheap Flights</p>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontFamily: "'Prompt', sans-serif", fontSize: 15, textAlign: "center"}}>
-                                &#8226; Virtual Agent &#8226;</p>
+                                &#8226; Virtual Agency &#8226;</p>
                         </div>
                         <div>
                             <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.5)", height: 70, maxWidth: 550, margin: "auto", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ zIndex: 5}}>
@@ -56,10 +56,12 @@ export default function ExploreDestinations(){
                                         <div style={{padding: "10px 0", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                             <div style={{display: "flex", flexDirection: "row",}}>
                                                 <div onClick={show_full_search_form} id="landing_page_search_bar_show_main_search_form_btn" className="searchBtn" style={{marginRight: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)", fontFamily: "'Prompt', sans-serif", border: "none", borderRadius: 50, marginLeft: 10, fontSize: 14}}>
-                                                    <i className="fa fa-search" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Search Flight
+                                                    <i className="fa fa-search" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>
+                                                    Search Flight
                                                 </div>
                                                 <div onClick={show_help_page} id="landing_page_search_bar_help_pg_btn" className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "#ae6500", fontFamily: "'Prompt', sans-serif", border: "none", borderRadius: 50, marginRight: 10, fontSize: 14}}>
-                                                    <i className="fa fa-question" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Get Help
+                                                    <i className="fa fa-question" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>
+                                                    Get Help
                                                 </div>
                                             </div>
                                             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", borderLeft: "1px solid rgba(0,0,0,0.1)", paddingLeft: 10}}>

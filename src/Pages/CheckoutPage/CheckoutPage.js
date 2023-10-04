@@ -59,7 +59,7 @@ export default function CheckoutPage(props){
                             <div onClick={showPNRPage} style={{cursor: "pointer", padding: 10, color: (activePage===CONSTANTS.checkout_pages.pnr) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.6)"}}>
                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                                     <i style={{marginRight: 10, opacity: 0.2}} className='fa-solid fa-users' aria-hidden="false"></i>
-                                    Passenger</p>
+                                    Passengers</p>
                             </div>
                             <div style={nav_separator_style}>{">"}</div>
                             <div onClick={showPaymentPage} style={{cursor: "pointer", padding: 10, color: (activePage===CONSTANTS.checkout_pages.payment) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.6)"}}>

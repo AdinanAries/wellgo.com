@@ -6,10 +6,25 @@ import ExploreDestinations from "./ExploreDestination";
 import explore_page_hero from "../../../explore_page_hero.jpg";
 
 import { show_explore_page } from "../../../helpers/PageRoutingFuncs";
+import { useEffect, useState } from "react";
+import CONSTANTS from "../../../Constants/Constants";
 
 //backgroundImage: `url('${explore_page_hero}')`,
 
 function Main(props){
+    localStorage.setItem("is_home_page", "yes");
+    useEffect(()=>{
+        if(props.showSearchForm){
+            document.getElementById("main_hero_section").style.display="block";
+            if(global.$(window).width() > CONSTANTS.viewport_threshold)
+                document.querySelector("header").style.backgroundColor="#000000";
+        }else{
+            document.getElementById("main_hero_section").style.display="none";
+            if(global.$(window).width() > CONSTANTS.viewport_threshold)
+                document.querySelector("header").style.background="none";
+        }
+    },[])
+
     return (
         <main>
             <div id="main_hero_section" className="hero-section">
