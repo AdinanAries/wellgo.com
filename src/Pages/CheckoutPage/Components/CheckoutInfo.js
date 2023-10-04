@@ -157,8 +157,10 @@ const CheckoutInfo = (props) => {
                                 <i style={{marginRight: 5}} className="fa fa-info-circle"></i>
                                 The total amout you pay is $133.28. See price summary at the bottom
                             </p>
-                            <div className="checkout_page_main_checkout_btn">
-                                <i style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}} className="fa fa-credit-card"></i>Checkout
+                            <div onClick={props.showPNRPage} className="checkout_page_main_checkout_btn" style={{backgroundColor: "darkslateblue"}}>
+                                Continue
+                                <span style={{fontSize: 13, color: "rgba(255,255,255,0.4)", marginLeft: 10}}>
+                                    (Passengers)</span>
                             </div>
                         </div>
                     </div>

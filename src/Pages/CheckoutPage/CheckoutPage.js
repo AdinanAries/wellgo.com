@@ -77,11 +77,11 @@ export default function CheckoutPage(props){
                 </div>
                 {
                     (activePage===CONSTANTS.checkout_pages.info) ?
-                        <CheckoutInfo /> : ""
+                        <CheckoutInfo showPNRPage={showPNRPage} /> : ""
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.pnr) ?
-                        <PassengerNameRecord /> : ""
+                        <PassengerNameRecord showPaymentPage={showPaymentPage} /> : ""
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.payment) ?
