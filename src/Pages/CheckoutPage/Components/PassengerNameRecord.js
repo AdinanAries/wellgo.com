@@ -1,8 +1,22 @@
+import { useState } from "react";
 import PassengerCard from "./PassengerCard";
+import PassengerForm from "./PassengerForm";
 
 const PassengerNameRecord = (props) => {
+    
+    const UNSELECTED_PASSENGER_VALUE = -1;
+
+    const [ selectedPassengertIndex, setSelectedPassengertIndex ] = useState(UNSELECTED_PASSENGER_VALUE);
 
     const { passengers } = props;
+
+    const selectPassengerCard = (index) => {
+        setSelectedPassengertIndex(index);
+    }
+
+    const unSelectPassengerCard = () => {
+        setSelectedPassengertIndex(UNSELECTED_PASSENGER_VALUE);
+    }
 
     return (
         <div>
@@ -13,7 +27,19 @@ const PassengerNameRecord = (props) => {
                             <i className="fa-solid fa-info" style={{marginRight: 10, color: "green"}}></i>
                             Please click on each passenger card below to add their details..</p>
                         <div style={{padding: "10px 0", display: "flex", flexWrap: "wrap", justifyContent: "space-between"}}>
-                            { passengers.map((each, i) => <PassengerCard passenger={each} />) }
+                            
+                            { ((selectedPassengertIndex > UNSELECTED_PASSENGER_VALUE) && (selectedPassengertIndex < passengers.length)) ? 
+                                <PassengerForm 
+                                    passenger={passengers[selectedPassengertIndex]}
+                                    unSelectPassengerCard={unSelectPassengerCard}
+                                /> :
+                                passengers.map((each, i) => <PassengerCard 
+                                    index={i}
+                                    selectPassengerCard={selectPassengerCard} 
+                                    passenger={each} 
+                                />)
+                            }
+                            
                             <div style={{display: "none", position: "relative", border: "1px dashed rgba(0,0,0,0.2)", cursor: "pointer", minHeight: 60, width: "calc(50% - 5px)", padding: 10, borderRadius: 8}}>
                                 <p style={{position: "absolute", top: -5, right: -12, color: "rgba(0,0,0,0.2)", background: "white"}}>
                                     <i className="fa-solid fa-pencil" style={{marginRight: 10}}></i></p>
