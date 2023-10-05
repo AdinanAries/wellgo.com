@@ -5,9 +5,14 @@ const PassengerForm = (props) => {
             <div>
 
             </div>
-            <div style={{backgroundColor: "darkslateblue", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
-                onClick={props.unSelectPassengerCard}
-            >See all Passengers</div>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                <div style={{width: "calc(50% - 5px)", backgroundColor: "crimson", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
+                    onClick={props.unSelectPassengerCard}
+                >Cancel</div>
+                <div style={{width: "calc(50% - 5px)", backgroundColor: "darkslateblue", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
+                    
+                >Save</div>
+            </div>
         </div>
     )
 }
