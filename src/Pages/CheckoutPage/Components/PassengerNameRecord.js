@@ -5,17 +5,30 @@ import PassengerForm from "./PassengerForm";
 const PassengerNameRecord = (props) => {
     
     const UNSELECTED_PASSENGER_VALUE = -1;
+    const PAGE_TITLES = {
+        initial: {
+            msg: "Please click on each passenger card below to add their details..",
+            icon: "fa-solid fa-info"
+        },
+        passenger_selected: {
+            msg: "Please Provide Passenger Information",
+            icon: "fa-solid fa-user"
+        }
+    }
 
     const [ selectedPassengertIndex, setSelectedPassengertIndex ] = useState(UNSELECTED_PASSENGER_VALUE);
+    const [ pageMsg, setPageMsg ] = useState(PAGE_TITLES.initial);
 
     const { passengers } = props;
 
     const selectPassengerCard = (index) => {
         setSelectedPassengertIndex(index);
+        setPageMsg(PAGE_TITLES.passenger_selected);
     }
 
     const unSelectPassengerCard = () => {
         setSelectedPassengertIndex(UNSELECTED_PASSENGER_VALUE);
+        setPageMsg(PAGE_TITLES.initial);
     }
 
     return (
@@ -24,8 +37,8 @@ const PassengerNameRecord = (props) => {
                 <div className="checkout_page_all_info_flex_left">
                     <div style={{marginTop: 10}}>
                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
-                            <i className="fa-solid fa-info" style={{marginRight: 10, color: "green"}}></i>
-                            Please click on each passenger card below to add their details..</p>
+                            <i className={pageMsg.icon} style={{marginRight: 10, color: "green"}}></i>
+                            {pageMsg.msg}</p>
                         <div style={{padding: "10px 0", display: "flex", flexWrap: "wrap", justifyContent: "space-between"}}>
                             
                             { ((selectedPassengertIndex > UNSELECTED_PASSENGER_VALUE) && (selectedPassengertIndex < passengers.length)) ? 
