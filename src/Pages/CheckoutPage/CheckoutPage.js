@@ -4,12 +4,17 @@ import CheckoutInfo from './Components/CheckoutInfo';
 import PassengerNameRecord from './Components/PassengerNameRecord';
 import PaymentPage from './Components/PaymentPage';
 import CONSTANTS from '../../Constants/Constants';
+import { create_offer_obj } from "../../test_objects/duffel_objects";
 
 import { useState } from 'react';
 
 export default function CheckoutPage(props){
 
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
+    const [ checkoutPayload, setcheckoutPayload ] = useState({
+        meta: {},
+        data: create_offer_obj
+    });
 
     const showInfoPage = () => {
         setActivePage(CONSTANTS.checkout_pages.info);
@@ -81,7 +86,7 @@ export default function CheckoutPage(props){
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.pnr) ?
-                        <PassengerNameRecord showPaymentPage={showPaymentPage} /> : ""
+                        <PassengerNameRecord passengers={checkoutPayload.data.passengers} showPaymentPage={showPaymentPage} /> : ""
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.payment) ?
