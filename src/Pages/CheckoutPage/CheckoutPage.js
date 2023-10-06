@@ -28,10 +28,23 @@ export default function CheckoutPage(props){
         setActivePage(CONSTANTS.checkout_pages.payment);
     }
 
+    const savePassengerInfo = (new_info_obj, index) => {
+        let { passengers } = checkoutPayload.data;
+        passengers[index] = new_info_obj;
+        setcheckoutPayload({
+            ...checkoutPayload,
+            data: {
+                ...checkoutPayload.data,
+                passengers
+            }
+        });
+    }
+
     const nav_separator_style = {
         padding: 10,
         color: "rgba(0,0,0,0.2)"
     }
+
     return (
         <div id="booking_start_checkout_page_container" style={{display: "block"}}>
             <div className="wrapper">
@@ -86,7 +99,9 @@ export default function CheckoutPage(props){
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.pnr) ?
-                        <PassengerNameRecord passengers={checkoutPayload.data.passengers} showPaymentPage={showPaymentPage} /> : ""
+                        <PassengerNameRecord 
+                            savePassengerInfo={savePassengerInfo}
+                            passengers={checkoutPayload.data.passengers} showPaymentPage={showPaymentPage} /> : ""
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.payment) ?

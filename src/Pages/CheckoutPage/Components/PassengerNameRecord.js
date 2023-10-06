@@ -31,6 +31,11 @@ const PassengerNameRecord = (props) => {
         setPageMsg(PAGE_TITLES.initial);
     }
 
+    const savePassengerInfo = (new_info_obj, index) => {
+        props.savePassengerInfo(new_info_obj, index);
+        unSelectPassengerCard();
+    }
+
     return (
         <div>
             <div className="checkout_page_all_info_flex_container">
@@ -43,6 +48,8 @@ const PassengerNameRecord = (props) => {
                             
                             { ((selectedPassengertIndex > UNSELECTED_PASSENGER_VALUE) && (selectedPassengertIndex < passengers.length)) ? 
                                 <PassengerForm 
+                                    index={selectedPassengertIndex}
+                                    savePassengerInfo={savePassengerInfo}
                                     passenger={passengers[selectedPassengertIndex]}
                                     unSelectPassengerCard={unSelectPassengerCard}
                                 /> :
