@@ -71,6 +71,7 @@ const PassengerNameRecord = (props) => {
                                     return <PassengerCard 
                                         index={i}
                                         age={age}
+                                        setResponsibleAdultForInfant={props.setResponsibleAdultForInfant}
                                         availableAdultPassengersForInfants={availableAdultPassengersForInfants}
                                         selectPassengerCard={selectPassengerCard} 
                                         passenger={each} 

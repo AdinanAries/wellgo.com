@@ -3,7 +3,7 @@ import { obj_has_empty_prop } from "../../../helpers/general";
 import CONSTANTS from "../../../Constants/Constants";
 
 const PassengerCard = (props) => {
-    const { given_name, family_name } = props.passenger;
+    const { given_name, family_name, id } = props.passenger;
     let incomplete_passenger = obj_has_empty_prop(props.passenger);
 
     useEffect(() => {
@@ -41,8 +41,11 @@ const PassengerCard = (props) => {
                                 Select adult responsible:
                             </span>
                         </p>
-                        <select style={{width: "calc(100%)", background: "none", color: "rgba(255,0,0,0.6)", textAlign: "center", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                            { props.availableAdultPassengersForInfants.map( (each, i) => <option key={each.id} value={each.id}>
+                        <select
+                            onChange={props.setResponsibleAdultForInfant} 
+                            style={{width: "calc(100%)", background: "none", color: "rgba(255,0,0,0.6)", textAlign: "center", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            { props.availableAdultPassengersForInfants.map( (each, i) => <option key={each.id} 
+                                value={`${id} - ${each.id}`}>
                                 {each.given_name} {each.family_name}</option>)}
                             
                         </select>

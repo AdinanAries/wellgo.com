@@ -40,6 +40,10 @@ export default function CheckoutPage(props){
         });
     }
 
+    const setResponsibleAdultForInfant = (e) => {
+        alert(e.target.value);
+    }
+
     const nav_separator_style = {
         padding: 10,
         color: "rgba(0,0,0,0.2)"
@@ -100,6 +104,7 @@ export default function CheckoutPage(props){
                 {
                     (activePage===CONSTANTS.checkout_pages.pnr) ?
                         <PassengerNameRecord 
+                            setResponsibleAdultForInfant={setResponsibleAdultForInfant}
                             savePassengerInfo={savePassengerInfo}
                             passengers={checkoutPayload.data.passengers} showPaymentPage={showPaymentPage} /> : ""
                 }
