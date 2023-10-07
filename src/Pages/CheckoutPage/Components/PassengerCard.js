@@ -27,7 +27,13 @@ const PassengerCard = (props) => {
                 <p style={{position: "absolute", top: -5, right: -12, color: "rgba(0,0,0,0.2)", background: "white"}}>
                     <i className="fa-solid fa-pencil" style={{marginRight: 10}}></i></p>
                 <p style={{fontSize: 14, color: "darkslateblue", fontFamily: "'Prompt', Sans-serif"}}>
-                    <i className="fa-solid fa-user" style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}}></i>
+                { 
+                    (props.age <= CONSTANTS.infant_age_threshold) ?
+                        <i className="fa-solid fa-baby" 
+                            style={{marginRight: 10, fontSize: 18, color: "rgba(0,0,0,0.4)"}}></i> : 
+                        <i className="fa-solid fa-user" 
+                            style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}}></i>
+                }
                     {given_name} {family_name}, <span style={{color: "rgba(0,0,0,0.5)", fontSize: 13}}> {props.age} year(s)</span>
                 </p>
                 <p style={{color: "rga(0,0,0,0.4)", fontFamily: "'Prompt', Sans-serif", fontSize: 12, marginTop: 5}}>
@@ -47,8 +53,9 @@ const PassengerCard = (props) => {
             }{
                 (infant_passenger_id && infant) ?
                     <div style={{textAlign: "center", marginBottom: 10, color: "rgba(0,0,0,0.6)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
-                        <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-info-circle"></i>
-                        Responsible for {infant?.given_name} {infant?.family_name}
+                        <i style={{marginRight: 10, color: "green", fontSize: 18}} className="fa-solid fa-baby"></i>
+                        Responsible for <span style={{color: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                            {infant?.given_name} {infant?.family_name}</span>
                     </div> : ""
             }{ 
                 (props.age <= CONSTANTS.infant_age_threshold) ?  
