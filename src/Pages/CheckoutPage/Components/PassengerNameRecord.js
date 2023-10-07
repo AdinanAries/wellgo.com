@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PassengerCard from "./PassengerCard";
 import PassengerForm from "./PassengerForm";
 import { calculate_age } from "../../../helpers/general";
+import CONSTANTS from "../../../Constants/Constants";
 
 const PassengerNameRecord = (props) => {
     
@@ -19,8 +20,18 @@ const PassengerNameRecord = (props) => {
 
     const [ selectedPassengertIndex, setSelectedPassengertIndex ] = useState(UNSELECTED_PASSENGER_VALUE);
     const [ pageMsg, setPageMsg ] = useState(PAGE_TITLES.initial);
+    const [ availableAdultPassengersForInfants, setAvailableAdultPassengersForInfants ] = useState([]);
 
     const { passengers } = props;
+
+    useEffect(()=> {
+        let temp_arr=[];
+        passengers.forEach( each => {
+            if(calculate_age(each.born_on) > CONSTANTS.infant_age_threshold) 
+                temp_arr.push(each);
+        });
+        setAvailableAdultPassengersForInfants(temp_arr);
+    }, []);
 
     const selectPassengerCard = (index) => {
         setSelectedPassengertIndex(index);
@@ -59,6 +70,7 @@ const PassengerNameRecord = (props) => {
                                     return <PassengerCard 
                                         index={i}
                                         age={age}
+                                        availableAdultPassengersForInfants={availableAdultPassengersForInfants}
                                         selectPassengerCard={selectPassengerCard} 
                                         passenger={each} 
                                     />

@@ -16,8 +16,11 @@ const PassengerCard = (props) => {
                 <p style={{position: "absolute", top: -5, right: -12, color: "rgba(0,0,0,0.2)", background: "white"}}>
                     <i className="fa-solid fa-pencil" style={{marginRight: 10}}></i></p>
                 <p style={{fontSize: 14, color: "darkslateblue", fontFamily: "'Prompt', Sans-serif"}}>
-                    <i className="fa-solid fa-user" style={{marginRight: 10}}></i>
-                    {given_name} {family_name} - <span style={{color: "rgba(0,0,0,0.4)", fontSize: 13}}> Age: {props.age}</span>
+                    <i className="fa-solid fa-user" style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}}></i>
+                    {given_name} {family_name}, <span style={{color: "rgba(0,0,0,0.5)", fontSize: 13}}> {props.age} year(s)</span>
+                </p>
+                <p style={{color: "rga(0,0,0,0.4)", fontFamily: "'Prompt', Sans-serif", fontSize: 12, marginTop: 5}}>
+                    Click this top area to open this passenger's form
                 </p>
             </div>
             {
@@ -32,17 +35,18 @@ const PassengerCard = (props) => {
                     </div>
             }{ 
                 (props.age <= CONSTANTS.infant_age_threshold) ?  
-                    <>
-                        <p style={{paddingBottom: 10, fontFamily: "'Prompt', Sans-serif", textAlign: "center"}}>
+                    <div style={{backgroundColor: "rgba(0,0,0,0.07)"}}>
+                        <p style={{padding: 10, fontFamily: "'Prompt', Sans-serif"}}>
                             <span style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
-                                <i className="fa-solid fa-info" style={{marginRight: 10, color: "green"}}></i>
-                                Please select responsible Adult for this infant
+                                Select adult responsible:
                             </span>
                         </p>
-                        <select style={{width: "calc(100%)", color: "rgba(255,0,0,0.6)", textAlign: "center", backgroundColor: "rgba(0,0,0,0.07)", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                            <option>Mohammed Adinan</option>
+                        <select style={{width: "calc(100%)", background: "none", color: "rgba(255,0,0,0.6)", textAlign: "center", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            { props.availableAdultPassengersForInfants.map( (each, i) => <option key={each.id} value={each.id}>
+                                {each.given_name} {each.family_name}</option>)}
+                            
                         </select>
-                    </>
+                    </div>
                         
                     : "" 
             }
