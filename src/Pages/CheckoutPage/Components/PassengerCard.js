@@ -27,11 +27,11 @@ const PassengerCard = (props) => {
                 incomplete_passenger ? 
                     <div style={{padding: 10, textAlign: "center", color: "rgba(0,0,0,0.6)", borderTop: "1px solid rgba(0,0,0,0.1)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
                         <i style={{marginRight: 10, color: "crimson"}} className="fa-solid fa-exclamation-triangle"></i>
-                        Please complete this passenger's information
+                        Uncompleted form. Please edit.
                     </div> :
                     <div style={{paddingTop: 10, padding: 10, textAlign: "center", color: "rgba(0,0,0,0.6)", borderTop: "1px solid rgba(0,0,0,0.1)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
                         <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
-                        This passenger is all set
+                        Form has been completed
                     </div>
             }{ 
                 (props.age <= CONSTANTS.infant_age_threshold) ?  
