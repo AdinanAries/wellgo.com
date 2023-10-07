@@ -22,17 +22,32 @@ const PassengerNameRecord = (props) => {
     const [ selectedPassengertIndex, setSelectedPassengertIndex ] = useState(UNSELECTED_PASSENGER_VALUE);
     const [ pageMsg, setPageMsg ] = useState(PAGE_TITLES.initial);
     const [ availableAdultPassengersForInfants, setAvailableAdultPassengersForInfants ] = useState([]);
+    const [ allInfantsPassengers, setAllInfantPassengers ] = useState([]);
 
     const { passengers } = props;
 
     useEffect(()=> {
+        setAdultPsngrForInfants();
+        setInfantPsngr();
+    }, []);
+
+    const setAdultPsngrForInfants = () => {
         let temp_arr=[];
         passengers.forEach( each => {
             if(calculate_age(each.born_on) > CONSTANTS.infant_age_threshold) 
                 temp_arr.push(each);
         });
         setAvailableAdultPassengersForInfants(temp_arr);
-    }, []);
+    }
+
+    const setInfantPsngr = () => {
+        let temp_arr=[];
+        passengers.forEach( each => {
+            if(calculate_age(each.born_on) <= CONSTANTS.infant_age_threshold) 
+                temp_arr.push(each);
+        });
+        setAllInfantPassengers(temp_arr);
+    }
 
     const selectPassengerCard = (index) => {
         setSelectedPassengertIndex(index);
@@ -47,6 +62,8 @@ const PassengerNameRecord = (props) => {
     const savePassengerInfo = (new_info_obj, index) => {
         props.savePassengerInfo(new_info_obj, index);
         unSelectPassengerCard();
+        setAdultPsngrForInfants();
+        setInfantPsngr();
     }
 
     return (
@@ -73,6 +90,7 @@ const PassengerNameRecord = (props) => {
                                         age={age}
                                         setResponsibleAdultForInfant={props.setResponsibleAdultForInfant}
                                         availableAdultPassengersForInfants={availableAdultPassengersForInfants}
+                                        allInfantsPassengers={allInfantsPassengers}
                                         selectPassengerCard={selectPassengerCard} 
                                         passenger={each} 
                                     />

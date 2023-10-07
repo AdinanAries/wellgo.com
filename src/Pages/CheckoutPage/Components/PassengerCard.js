@@ -3,8 +3,10 @@ import { obj_has_empty_prop } from "../../../helpers/general";
 import CONSTANTS from "../../../Constants/Constants";
 
 const PassengerCard = (props) => {
-    const { given_name, family_name, id } = props.passenger;
+    const { given_name, family_name, id, infant_passenger_id } = props.passenger;
     let incomplete_passenger = obj_has_empty_prop(props.passenger);
+
+    const infant = props.allInfantsPassengers.find( psngr => psngr.id === infant_passenger_id)
 
     useEffect(() => {
 
@@ -33,6 +35,12 @@ const PassengerCard = (props) => {
                         <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
                         Form has been completed
                     </div>
+            }{
+                (infant_passenger_id && infant) ?
+                    <div style={{textAlign: "center", color: "rgba(0,0,0,0.6)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                        <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-info-circle"></i>
+                        Responsible for {infant?.given_name} {infant?.family_name}
+                    </div> : ""
             }{ 
                 (props.age <= CONSTANTS.infant_age_threshold) ?  
                     <div style={{backgroundColor: "rgba(0,0,0,0.07)"}}>
@@ -45,7 +53,7 @@ const PassengerCard = (props) => {
                             onChange={props.setResponsibleAdultForInfant} 
                             style={{width: "calc(100%)", background: "none", color: "rgba(255,0,0,0.6)", textAlign: "center", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                             { props.availableAdultPassengersForInfants.map( (each, i) => <option key={each.id} 
-                                value={`${id} - ${each.id}`}>
+                                value={`${id}${CONSTANTS.special_str_separator}${each.id}`}>
                                 {each.given_name} {each.family_name}</option>)}
                             
                         </select>
