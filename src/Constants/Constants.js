@@ -1,5 +1,6 @@
 const CONSTANTS = {
     viewport_threshold: 1000,
+    infant_age_threshold: 5,
     duffel: "DUFFEL",
     dev: "DEVELOPMENT",
     prod: "PRODUCTION",

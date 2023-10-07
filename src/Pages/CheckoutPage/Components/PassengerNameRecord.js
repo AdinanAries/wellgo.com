@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PassengerCard from "./PassengerCard";
 import PassengerForm from "./PassengerForm";
+import { calculate_age } from "../../../helpers/general";
 
 const PassengerNameRecord = (props) => {
     
@@ -53,26 +54,17 @@ const PassengerNameRecord = (props) => {
                                     passenger={passengers[selectedPassengertIndex]}
                                     unSelectPassengerCard={unSelectPassengerCard}
                                 /> :
-                                passengers.map((each, i) => <PassengerCard 
-                                    index={i}
-                                    selectPassengerCard={selectPassengerCard} 
-                                    passenger={each} 
-                                />)
+                                passengers.map((each, i) => {
+                                    let age = calculate_age(each.born_on);
+                                    return <PassengerCard 
+                                        index={i}
+                                        age={age}
+                                        selectPassengerCard={selectPassengerCard} 
+                                        passenger={each} 
+                                    />
+                                })
                             }
                             
-                            <div style={{display: "none", position: "relative", border: "1px dashed rgba(0,0,0,0.2)", cursor: "pointer", minHeight: 60, width: "calc(50% - 5px)", padding: 10, borderRadius: 8}}>
-                                <p style={{position: "absolute", top: -5, right: -12, color: "rgba(0,0,0,0.2)", background: "white"}}>
-                                    <i className="fa-solid fa-pencil" style={{marginRight: 10}}></i></p>
-                                <p style={{fontSize: 14, color: "darkslateblue"}}>
-                                    <i className="fa-solid fa-user" style={{marginRight: 10}}></i>
-                                    Abdullah Mohammed 
-                                    <span style={{color: "rgba(0,0,0,0.4)", fontSize: 14}}> - Child</span>
-                                </p>
-                                <div style={{paddingTop: 10, marginTop: 10, color: "rgba(0,0,0,0.6)", borderTop: "1px solid rgba(0,0,0,0.1)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
-                                    Completed passenger information
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -48,9 +48,14 @@ const PassengerForm = (props) => {
         ]});
     }
 
+    const setInfantPassengerId = (e) => {
+        setPassenger({ ...passenger, infant_passenger_id: e.target.value });
+    }
+
     return (
         <div style={{border: "1px solid rgba(0,0,0,0.07)", padding: 10, width: "calc(100% - 22px)", borderRadius: 6}}>
-            <p>{passenger.family_name}</p>
+            <p>{
+                (passenger.infant_passenger_id) }</p>
             <div style={{padding: "10px 0"}}>
                 <input onInput={setTitle} type="text" value={passenger.title} 
                     placeholder="Title"/>
