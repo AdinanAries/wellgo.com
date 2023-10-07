@@ -43,9 +43,14 @@ export default function CheckoutPage(props){
     const setResponsibleAdultForInfant = (e) => {
         const vals = e.target.value.split(CONSTANTS.special_str_separator);
         let { passengers } = checkoutPayload.data;
+        //Previous responsible adult
+        let prev_adult = passengers.find(passenger=>passenger.infant_passenger_id===vals[0]);
+        if(prev_adult){
+            delete prev_adult.infant_passenger_id;
+        }
+        //New responsible adult
         let adult = passengers.find(passenger=>passenger.id===vals[1]);
         let adult_index = passengers.findIndex(passenger=>passenger.id===vals[1]);
-        alert(adult_index);
         adult.infant_passenger_id=vals[0];
         passengers[adult_index]=adult;
         setcheckoutPayload({

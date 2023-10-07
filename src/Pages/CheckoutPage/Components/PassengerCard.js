@@ -6,7 +6,15 @@ const PassengerCard = (props) => {
     const { given_name, family_name, id, infant_passenger_id } = props.passenger;
     let incomplete_passenger = obj_has_empty_prop(props.passenger);
 
-    const infant = props.allInfantsPassengers.find( psngr => psngr.id === infant_passenger_id)
+    //For adult passengers
+    const infant = props.allInfantsPassengers.find( psngr => psngr.id === infant_passenger_id);
+    //For infant passengers
+    const adult = props.availableAdultPassengersForInfants.find( psngr => psngr.infant_passenger_id === id);
+    if(adult){
+        let i = props.availableAdultPassengersForInfants.findIndex( psngr => psngr.id === adult.id );
+        props.availableAdultPassengersForInfants.splice(i,1);
+        props.availableAdultPassengersForInfants.unshift(adult);
+    }
 
     useEffect(() => {
 
@@ -37,7 +45,7 @@ const PassengerCard = (props) => {
                     </div>
             }{
                 (infant_passenger_id && infant) ?
-                    <div style={{textAlign: "center", color: "rgba(0,0,0,0.6)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                    <div style={{textAlign: "center", marginBottom: 10, color: "rgba(0,0,0,0.6)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
                         <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-info-circle"></i>
                         Responsible for {infant?.given_name} {infant?.family_name}
                     </div> : ""
@@ -54,7 +62,7 @@ const PassengerCard = (props) => {
                             style={{width: "calc(100%)", background: "none", color: "rgba(255,0,0,0.6)", textAlign: "center", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                             { props.availableAdultPassengersForInfants.map( (each, i) => <option key={each.id} 
                                 value={`${id}${CONSTANTS.special_str_separator}${each.id}`}>
-                                {each.given_name} {each.family_name}</option>)}
+                                {each.given_name} {each.family_name}</option>) }
                             
                         </select>
                     </div>
