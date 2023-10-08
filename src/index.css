@@ -2282,4 +2282,13 @@ path {
   color: #a0a0a0;
   width: 200px;
 }
+.my-toast-container .Toastify__toast {
+  background-color: rgb(255, 213, 213);
+  color: crimson;
+  border-radius: 6px;
+  padding: 10px;
+  border: 1px solid crimson;
+  text-align: center;
+  font-family: 'Prompt', Sans-serif;
+}
 

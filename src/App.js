@@ -15,6 +15,8 @@ import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
 import DealsPage from "./Pages/DealsPage/DealsPage";
 import HelpPage from "./Pages/HelpPage/HelpPage";
 import HPSupport from "./components/HPSupport";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -65,6 +67,7 @@ function App() {
       <LoginPage />
       <ExplorePage />
       <Footer />
+      <ToastContainer className="my-toast-container" />
     </div>
   );
 }

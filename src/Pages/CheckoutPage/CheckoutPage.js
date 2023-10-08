@@ -5,6 +5,8 @@ import PassengerNameRecord from './Components/PassengerNameRecord';
 import PaymentPage from './Components/PaymentPage';
 import CONSTANTS from '../../Constants/Constants';
 import { create_offer_obj } from "../../test_objects/duffel_objects";
+import { obj_has_empty_prop } from "../../helpers/general";
+import { toast } from 'react-toastify';
 
 import { useState } from 'react';
 
@@ -25,7 +27,8 @@ export default function CheckoutPage(props){
     }
 
     const showPaymentPage = () => {
-        setActivePage(CONSTANTS.checkout_pages.payment);
+        if(is_passenger_data_all_set())
+            setActivePage(CONSTANTS.checkout_pages.payment);
     }
 
     const savePassengerInfo = (new_info_obj, index) => {
@@ -60,6 +63,22 @@ export default function CheckoutPage(props){
                 passengers
             }
         });
+    }
+
+    const is_passenger_data_all_set = () => {
+        const { passengers } = checkoutPayload.data;
+        let has_all_data = true;
+        for(let i=0; i<passengers.length; i++){
+            if(obj_has_empty_prop(passengers[i])){
+                has_all_data=false;
+            }
+        }
+        if(!has_all_data){
+            toast("Please complete all passenger information to continue");
+            return false;
+        }
+        
+        return true;
     }
 
     const nav_separator_style = {
