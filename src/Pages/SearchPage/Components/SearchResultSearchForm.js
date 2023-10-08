@@ -12,6 +12,28 @@ function SearchForm( props ){
         AutoCompleteInit();
     },[]);
 
+    const isAllSearchInputsSet = () => {
+        if(document.getElementById("sp_search_forms_from_where_input_fld").value===""){
+            document.getElementById("sp_search_forms_from_where_input_fld").click();
+            return false;
+        }else if(document.getElementById("sp_search_forms_to_where_input_fld").value===""){
+            document.getElementById("sp_search_forms_to_where_input_fld").click();
+            return false;
+        }else if(document.getElementById("sp_departure_return_dates_input").value===""){
+            document.getElementById("sp_departure_return_dates_input").click();
+            return false;
+        }
+
+        return true;
+    }
+
+    const searchOnSubmit = () => {
+        if(isAllSearchInputsSet()){
+            show_search_page(); 
+            props.submitFromSearchPage();
+        }
+    }
+
     return(
         <div id="search_results_page_search_form" className="main-search-form">
             <div className="two-search-inputs-container" style={{marginBottom: 10}}>
@@ -121,11 +143,11 @@ function SearchForm( props ){
                                         <input id="sp_trip_round_one_way_chk" className="sp_select_trip_round_chk" style={{width: 20, height: 20}} type="radio" />
                                     </div>
                                 </div>
-                                <div onClick={()=>sp_select_trip_round("multi-city")} style={{cursor: "not-allowed", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_trip_round_multi_city_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                <div onClick={()=>{}/*()=>sp_select_trip_round("multi-city")*/} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <label htmlFor="sp_trip_round_multi_city_chk"><div style={{cursor: "not-allowed", color: "rgba(0,0,0,0.2)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Multi-city</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                        <input id="sp_trip_round_multi_city_chk" className="sp_select_trip_round_chk" style={{width: 20, height: 20}} type="radio" />
+                                        <input id="sp_trip_round_multi_city_chk" className="sp_select_trip_round_chk" disabled={true} style={{width: 20, height: 20}} type="radio" />
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +259,7 @@ function SearchForm( props ){
                         </div>
                     </div>
                     <div style={{width: "calc(15% - 30px)"}}>
-                        <div onClick={()=>{show_search_page(); props.submitFromSearchPage();}} id="sp_search_form_submit_btn" style={{marginTop: 0, padding: 15, boxShadow: "none"}} className="searchBtn">
+                        <div onClick={searchOnSubmit} id="sp_search_form_submit_btn" style={{marginTop: 0, padding: 15, boxShadow: "none"}} className="searchBtn">
                             <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
                         </div>
                     </div>

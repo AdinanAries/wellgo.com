@@ -148,11 +148,11 @@ function SearchForm(props){
                                             <input className="select_trip_round_chk" id="trip_round_one_way_chk" style={{width: 20, height: 20}} type="radio" />
                                         </div>
                                     </div>
-                                    <div onClick={()=>select_trip_round("multi-city")} style={{cursor: "not-allowed", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                        <label htmlFor="trip_round_multi_city_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <div onClick={()=>{}/*()=>select_trip_round("multi-city")*/} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                        <label htmlFor="trip_round_multi_city_chk"><div style={{cursor: "not-allowed", color: "rgba(0,0,0,0.2)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Multi-city</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input className="select_trip_round_chk" id="trip_round_multi_city_chk" style={{width: 20, height: 20}} type="radio" />
+                                            <input className="select_trip_round_chk" id="trip_round_multi_city_chk" disabled={true} style={{width: 20, height: 20}} type="radio" />
                                         </div>
                                     </div>
                                 </div>
