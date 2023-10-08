@@ -37,11 +37,7 @@ function SearchPageMain(props){
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                //TODO: body to come from local storage
-                body: JSON.stringify({
-                    todo: "todo",
-                    todoo: "todo"
-                })
+                body: localStorage.getItem("search_obj")
             })
             .then(res => res.json())
             .then(data => data)
