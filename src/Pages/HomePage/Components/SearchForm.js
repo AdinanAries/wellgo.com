@@ -13,6 +13,28 @@ function SearchForm(props){
 
     //const show_search_page=props.show_search_page;
 
+    const isAllSearchInputsSet = () => {
+        if(document.getElementById("search_forms_from_where_input_fld").value===""){
+            document.getElementById("search_forms_from_where_input_fld").click();
+            return false;
+        }else if(document.getElementById("search_forms_to_where_input_fld").value===""){
+            document.getElementById("search_forms_to_where_input_fld").click();
+            return false;
+        }else if(document.getElementById("departure_return_dates_input").value===""){
+            document.getElementById("departure_return_dates_input").click();
+            return false;
+        }
+
+        return true;
+    }
+
+    const searchOnSubmit = () => {
+        if(isAllSearchInputsSet()){
+            show_search_page();
+            props.show_search_page();
+        }
+    }
+
     return(
         <div className="main-search-form">
             <div className="main_search_from_overall_container">
@@ -228,7 +250,7 @@ function SearchForm(props){
                     <div onClick={()=>show_home_page(true)} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
                         <i className="fa fa-times" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Close
                     </div>
-                    <div onClick={()=>{show_search_page();props.show_search_page()}} id="home_search_form_submit_btn" className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
+                    <div onClick={searchOnSubmit} id="home_search_form_submit_btn" className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", borderRadius: 50}}>
                         <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
                     </div>
                 </div>
