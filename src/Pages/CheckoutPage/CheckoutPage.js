@@ -5,7 +5,7 @@ import PassengerNameRecord from './Components/PassengerNameRecord';
 import PaymentPage from './Components/PaymentPage';
 import CONSTANTS from '../../Constants/Constants';
 import { create_offer_obj } from "../../test_objects/duffel_objects";
-import { obj_has_empty_prop } from "../../helpers/general";
+import { obj_has_empty_prop, calculate_age } from "../../helpers/general";
 import { toast } from 'react-toastify';
 
 import { useState } from 'react';
@@ -68,16 +68,31 @@ export default function CheckoutPage(props){
     const is_passenger_data_all_set = () => {
         const { passengers } = checkoutPayload.data;
         let has_all_data = true;
+        let all_infants_have_responsible_adults=true;
         for(let i=0; i<passengers.length; i++){
             if(obj_has_empty_prop(passengers[i])){
                 has_all_data=false;
             }
+            //Infant passengers
+            if(calculate_age(passengers[i].born_on) <= CONSTANTS.infant_age_threshold){
+                let id_found=false;
+                for(let j=0; j < passengers.length; j++){
+                    if(passengers[j]?.infant_passenger_id===passengers[i].id)
+                        id_found=true;
+                }
+                if(!id_found)
+                    all_infants_have_responsible_adults=false;
+            }
         }
         if(!has_all_data){
-            toast("Please complete all passenger information to continue");
+            toast("Please complete all passenger forms to continue");
             return false;
         }
-        
+        if(!all_infants_have_responsible_adults){
+            toast("All infant passengers must have responsible adults");
+            return false;
+        }
+
         return true;
     }
 
