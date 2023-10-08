@@ -2249,15 +2249,7 @@ document.getElementById("main_chat_hp_support_container_close_btn").addEventList
   toggle_show_hp_support_chat_container();
 });
 
-document.getElementById("landing_page_search_form_bar_bot_img").addEventListener("click", e=>{
-  if(wellgo_bot.status===""){
-    show_chat_bot_uprading_message();
-  }
-  toggle_show_hp_support_chat_container()
-});
-
 let is_landing_page_search_filters_open = false;
-
 
 function start_book_with_vitual_agent(){
 
@@ -2321,11 +2313,8 @@ document.getElementById("landing_page_search_bar_show_main_search_form_btn").add
 document.getElementById("landing_page_search_bar_help_pg_btn").addEventListener("click", e=>{
   toggle_main_page_search_filters()
 });
-document.getElementById("landing_page_search_bar_book_w_vta_btn").addEventListener("click", e=>{
-  start_book_with_vitual_agent();
-});
-//console.log(document.getElementById("hp_support_user_submit_chat_btn"))
 
+//console.log(document.getElementById("hp_support_user_submit_chat_btn"))
 
 /*if($(document).width() > 700){
   document.querySelector("header").style.backgroundColor="#000000";

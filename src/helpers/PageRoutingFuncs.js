@@ -206,21 +206,30 @@ export function show_help_page(){
 
     //toggle_main_page_search_filters()
 
-    document.getElementById("site_main_header").style.display="block";
-    document.getElementById("main_hero_section").style.display="none";
+    if(document.getElementById("site_main_header"))
+        document.getElementById("site_main_header").style.display="block";
+    if(document.getElementById("main_hero_section"))
+        document.getElementById("main_hero_section").style.display="none";
     if($(window).width() > CONSTANTS.viewport_threshold)
         document.querySelector("header").style.backgroundColor="#000000";
 
     window.scrollTo(0, 0);
     //change_nav_active_icon("mobile_search_menu_item", "desktop_explore_menu_item");
 
-    document.getElementById("search_page").style.display="none";
-    document.getElementById("trips_page").style.display="none";
-    document.getElementById("deals_page").style.display="none";
-    document.getElementById("help_page").style.display="block";
-    document.getElementById("login_page").style.display="none";
-    document.getElementById("home_page").style.display="none";
-    document.getElementById("explore_page").style.display="none";
+    if(document.getElementById("search_page"))
+        document.getElementById("search_page").style.display="none";
+    if(document.getElementById("trips_page"))
+        document.getElementById("trips_page").style.display="none";
+    if(document.getElementById("deals_page"))
+        document.getElementById("deals_page").style.display="none";
+    if(document.getElementById("help_page"))
+        document.getElementById("help_page").style.display="block";
+    if(document.getElementById("login_page"))
+        document.getElementById("login_page").style.display="none";
+    if(document.getElementById("home_page"))
+        document.getElementById("home_page").style.display="none";
+    if(document.getElementById("explore_page"))
+        document.getElementById("explore_page").style.display="none";
 }
 
 export function show_full_search_form(){

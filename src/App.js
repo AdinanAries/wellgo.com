@@ -67,7 +67,9 @@ function App() {
       <LoginPage />
       <ExplorePage />
       <Footer />
-      <ToastContainer className="my-toast-container" />
+      <ToastContainer 
+        className="my-toast-container"
+        position="bottom-left" />
     </div>
   );
 }
