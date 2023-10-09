@@ -1494,6 +1494,12 @@ footer {
   }
 }
 
+@media screen and (max-width: 1200px){
+  .checkout_passengers_container {
+    padding-left: 10px;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .between-jumbotron-and-subsections, .home_page_most_visited_cities_list, .why-choose-us-container, #user_account_manager_page{
     margin-left: 0 !important;
@@ -2021,6 +2027,12 @@ footer {
   .download_mobile_app_title {
     margin-top: 10px;
   }
+  .checkout_page_site_logo {
+    margin: 10px;
+  }
+  .checkout_passengers_container {
+    padding-right: 10px;
+  }
   .footer_section_flex_container {
     display: block;
   }
@@ -2034,7 +2046,20 @@ footer {
     padding-bottom: 30px !important;
   }
 }
-/*iphone 5*/
+
+@media screen and (max-width: 700px) {
+  .checkout_passenger_card {
+    width: calc(100% - 4px) !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .checkout_page_header_price_total{
+    display: none;
+  }
+}
+
+/* iphone 5 */
 @media screen and (max-width: 361px){
   * {
     font-size: 14px;

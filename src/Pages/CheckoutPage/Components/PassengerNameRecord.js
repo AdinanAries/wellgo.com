@@ -69,7 +69,7 @@ const PassengerNameRecord = (props) => {
     return (
         <div>
             <div className="checkout_page_all_info_flex_container">
-                <div className="checkout_page_all_info_flex_left">
+                <div className="checkout_page_all_info_flex_left checkout_passengers_container">
                     <div style={{marginTop: 10}}>
                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
                             <i className={pageMsg.icon} style={{marginRight: 10, color: "green"}}></i>

@@ -106,7 +106,7 @@ export default function CheckoutPage(props){
             <div className="wrapper">
                 <div style={{paddingTop: 10, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                        <div>
+                        <div className="checkout_page_site_logo">
                             <div className="site-logo">
                                 <p className="site-logo-img">
                                     <img src={"./WillgoLogo.png"} alt={"to do"} /></p>
@@ -142,7 +142,7 @@ export default function CheckoutPage(props){
                                     Payment</p>
                             </div>
                         </div>
-                        <p style={{fontSize: 13, padding: 10, color: "rgba(0,0,0,0.7)"}}>
+                        <p className="checkout_page_header_price_total" style={{fontSize: 13, padding: 10, color: "rgba(0,0,0,0.7)"}}>
                                 Total:
                                 <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.6)", fontSize: 13, marginLeft: 5}}>
                                     $133.23</span>
