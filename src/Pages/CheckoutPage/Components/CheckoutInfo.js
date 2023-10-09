@@ -6,11 +6,11 @@ const CheckoutInfo = (props) => {
             <div className="checkout_page_all_info_flex_container">
                 <div className="checkout_page_all_info_flex_left">
                     <div className="checkout-page-ancillary-container" style={{marginTop: 10}}>
-                        <div onclick={global.start_select_seat_ancillary} className="checkout-page-each-ancillary">
+                        <div onClick={global.start_select_seat_ancillary} className="checkout-page-each-ancillary">
                             <p><img src={"./flight_seat.png"} alt={"to do"} /></p>
                             <p>Select Seat</p>
                         </div>
-                        <div onClick="start_add_meal_ancillary();" className="checkout-page-each-ancillary">
+                        <div onClick={global.start_add_meal_ancillary} className="checkout-page-each-ancillary">
                             <p><img src={"./meal-icon.png"} alt={"to do"}/></p>
                             <p>Add Meal</p>
                         </div>
