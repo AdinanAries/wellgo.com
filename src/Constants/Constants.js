@@ -12,6 +12,9 @@ const CONSTANTS = {
         pnr: "PNR_PAGE",
         payment: "PAYMENT_PAGE"
     },
+    prices: {
+        markup_percentage: 10,
+    },
     envs: [ "PRODUCTION", "DEVELOPMENT" ],
 }
 

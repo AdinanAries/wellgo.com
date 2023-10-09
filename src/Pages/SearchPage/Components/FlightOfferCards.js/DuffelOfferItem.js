@@ -1,3 +1,5 @@
+import { markup } from "../../../../helpers/Prices";
+
 const DuffelOfferItem = (props) => {
     console.log(props);
     const { total_amount, id } = props.flight;
@@ -16,7 +18,7 @@ const DuffelOfferItem = (props) => {
                 </div>
                 <div className="each_ticket_price_display_container">
                     <p className="each_ticket_price_display" style={{color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 27, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
-                        ${total_amount}</p>
+                        ${(markup(total_amount).new_price).toFixed(2)}</p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>Roundtrip per traveler</p>
                 </div>
             </div>
