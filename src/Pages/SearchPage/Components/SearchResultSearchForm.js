@@ -90,11 +90,11 @@ function SearchForm( props ){
                             <div id="sp_select_cabin_settings_pane" style={{padding: 15, display: "none"}}>
                                 <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
                                     Select Cabin</p>
-                                    <div onClick={()=>sp_select_cabin_type("cheapest")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                    <label htmlFor="sp_select_cabin_cheapest_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                <div onClick={()=>{}/*sp_select_cabin_type("cheapest")*/} style={{display: "flex", display: "none", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                    <label htmlFor="sp_select_cabin_cheapest_chk"><div style={{cursor: "not-allowed", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                         Cheapest</div></label>
                                     <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                        <input id="sp_select_cabin_cheapest_chk" className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
+                                        <input id="sp_select_cabin_cheapest_chk" disabled={true} className="sp_select_cabin_type_chk" style={{width: 20, height: 20}} type="radio" defaultChecked={false}/>
                                     </div>
                                 </div>
                                 <div onClick={()=>sp_select_cabin_type("economy")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>

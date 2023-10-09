@@ -3,12 +3,25 @@ import { useEffect } from "react";
 import AutoCompleteInit from "../../../helpers/AutoCompleteInit";
 import DateChoosersInit from '../../../helpers/DateChoosersInit';
 import { show_search_page, show_home_page } from "../../../helpers/PageRoutingFuncs";
+import { toast } from "react-toastify";
 
 function SearchForm(props){
 
     useEffect(()=>{
         DateChoosersInit();
         AutoCompleteInit();
+
+        // Reset cabin type
+        select_cabin_type("economy");
+        // Reset trip round
+        select_trip_round("round-trip");
+        // Rest travelers
+        let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+        flight_search_data.itinerary.travelers.adults = 1;
+        flight_search_data.itinerary.travelers.children = 0;
+        flight_search_data.itinerary.travelers.infants = 0;
+        window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
     },[]);
 
     //const show_search_page=props.show_search_page;
@@ -95,11 +108,11 @@ function SearchForm(props){
                                 <div id="select_cabin_settings_pane" style={{padding: 15, display: "none"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", marginTop: 10, marginBottom: 20}}>
                                         Select Cabin</p>
-                                        <div onClick={()=>select_cabin_type("cheapest")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                                        <label htmlFor="select_cabin_cheapest_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                                    <div onClick={()=>{}/*select_cabin_type("cheapest")*/} style={{display: "flex", display: "none", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                                        <label htmlFor="select_cabin_cheapest_chk"><div style={{cursor: "not-allowed", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Cheapest</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input className="select_cabin_type_chk" id="select_cabin_cheapest_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
+                                            <input className="select_cabin_type_chk" disabled={true} id="select_cabin_cheapest_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
                                         </div>
                                     </div>
                                     <div onClick={()=>select_cabin_type("economy")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
@@ -401,7 +414,7 @@ let travelers = {
 function add_traveler(type="adult"){
 
     if((travelers.adults + travelers.children + travelers.infants) > 14){
-        alert("only maximum of 15 travelers allowed")
+        toast("maximum of 15 travelers allowed")
         return;
     }
 
