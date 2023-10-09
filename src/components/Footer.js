@@ -12,7 +12,7 @@ function Footer(){
                             <p className="footer-site-logo">
                                 <img src={WillgoLogo}/></p>
                             <p style={{color: "white", fontSize: 14, marginTop: 5, textAlign: "center"}}>
-                                &copy; 2022, all rights reserved
+                                &copy; {new Date().getFullYear()}, all rights reserved
                             </p>
                         </div>
                     </div>
@@ -21,7 +21,7 @@ function Footer(){
                             <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
                                 About Us</p>
                             <p className="footer_about_text" style={{color: "white", textAlign: "center", letterSpacing: 0.5, fontFamily: "Courgette", maxWidth: 250}}>
-                            Wellgo.com is a flight ticket sales company that's straight to the point...</p>
+                            Wellgo.com is a virtual travel agency with AI virtual agents...</p>
                         </div>
                     </div>
                     {/*<div className="footer_section_each_flex_section_container">
@@ -67,7 +67,7 @@ function Footer(){
                     </div>
                 </div>
                 <p className="footer_very_lower_text" style={{marginTop: 20, textAlign: "center", opacity: 0.6, paddingTop: 20, color: "rgba(255,255,255,0.55)", borderTop: "1px solid rgba(255,255,255,0.3)"}}>
-                    &copy; 2022 wellgo.com...</p>
+                    &copy; {new Date().getFullYear()} wellgo.com...</p>
             </div> 
         </footer>
     );
