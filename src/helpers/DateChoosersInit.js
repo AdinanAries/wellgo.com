@@ -1,6 +1,9 @@
-const DateChoosersInit = () => {
+import CONSTANTS from "../Constants/Constants";
+
+const DateChoosersInit = (type=CONSTANTS.round_trip) => {
     window.$(function() {
         window.$('#departure_return_dates_input').daterangepicker({
+          singleDatePicker: (type===CONSTANTS.one_way),
           opens: 'left',
           minDate: new Date(),
           autoUpdateInput: false,
@@ -11,12 +14,15 @@ const DateChoosersInit = () => {
       
           setTimeout(()=>{
             if(document.getElementById("departure_return_dates_input"))
-                document.getElementById("departure_return_dates_input").value = start.toString().substring(0,11) +" - "+ end.toString().substring(0,11);
+                document.getElementById("departure_return_dates_input").value = start.toString().substring(0,11) + ((type===CONSTANTS.round_trip) ? " - "+ end.toString().substring(0,11) : "");
           }, 100);
       
           let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
           flight_search_data.itinerary.departure.date = start.format('YYYY-MM-DD');
-          flight_search_data.itinerary.arrival.date = end.format('YYYY-MM-DD');
+          flight_search_data.itinerary.arrival.date="";
+          if(type===CONSTANTS.round_trip){
+            flight_search_data.itinerary.arrival.date = end.format('YYYY-MM-DD');
+          }
       
           window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
       
@@ -26,6 +32,7 @@ const DateChoosersInit = () => {
       
       window.$(function() {
         window.$('#sp_departure_return_dates_input').daterangepicker({
+          singleDatePicker: (type===CONSTANTS.one_way),
           opens: 'left',
           minDate: new Date(),
           autoUpdateInput: false,
@@ -36,12 +43,15 @@ const DateChoosersInit = () => {
       
           setTimeout(()=>{
             if(document.getElementById("sp_departure_return_dates_input"))
-                document.getElementById("sp_departure_return_dates_input").value = start.toString().substring(0,11) +" - "+ end.toString().substring(0,11);
+                document.getElementById("sp_departure_return_dates_input").value = start.toString().substring(0,11) + ((type===CONSTANTS.round_trip) ? " - "+ end.toString().substring(0,11) : "");
           }, 100);
       
           let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
           flight_search_data.itinerary.departure.date = start.format('YYYY-MM-DD');
-          flight_search_data.itinerary.arrival.date = end.format('YYYY-MM-DD');
+          flight_search_data.itinerary.arrival.date="";
+          if(type===CONSTANTS.round_trip){
+            flight_search_data.itinerary.arrival.date = end.format('YYYY-MM-DD');
+          }
       
           window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
       

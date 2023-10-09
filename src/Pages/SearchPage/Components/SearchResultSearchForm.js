@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import AutoCompleteInit from "../../../helpers/AutoCompleteInit";
 import DateChoosersInit from "../../../helpers/DateChoosersInit";
+import CONSTANTS from "../../../Constants/Constants";
 
 import { show_search_page } from "../../../helpers/PageRoutingFuncs";
 
@@ -384,6 +385,9 @@ function sp_select_trip_round(type="round-trip"){
             Round-trip
         `;
         flight_search_data.type = "round-trip";
+        DateChoosersInit(CONSTANTS.round_trip);
+        if(document.getElementById("sp_departure_return_dates_input"))
+            document.getElementById("sp_departure_return_dates_input").placeholder="departure - return";
     }else if(type === "one-way"){
         document.getElementById("sp_trip_round_one_way_chk").checked = true;
         document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
@@ -391,6 +395,9 @@ function sp_select_trip_round(type="round-trip"){
             One-way
         `;
         flight_search_data.type = "one-way";
+        DateChoosersInit(CONSTANTS.one_way);
+        if(document.getElementById("sp_departure_return_dates_input"))
+            document.getElementById("sp_departure_return_dates_input").placeholder="departure";
     }else if(type === "multi-city"){
         document.getElementById("sp_trip_round_multi_city_chk").checked = true;
         document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
