@@ -49,7 +49,7 @@ export default function SelectedTicketPane(props){
 
     return (
         <div id="selected_ticket_pane" className="display_more_info_pane" 
-            style={{display: "block", height: (isError || !flightDetail) ? "100vh": "calc(100vh - 120px)"}}>
+            style={{display: "block", zIndex: 10002/*, height: (isError || !flightDetail) ? "100vh": "calc(100vh - 120px)"*/}}>
             {
                 !isError ?
                     flightDetail ? 
