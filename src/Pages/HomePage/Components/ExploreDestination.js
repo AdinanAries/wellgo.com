@@ -26,7 +26,7 @@ export default function ExploreDestinations(){
                     <div className="wrapper">
                         <div style={{border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10, marginBottom: 50}}>
                             <div style={{display: "flex", justifyContent: "center"}}>
-                                <div style={{cursor: "pointer", textAlign: "center", color: "#d66aca", marginLeft: 20, fontSize: 14, borderBottom: "3px solid #d66aca", padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                <div onClick={show_full_search_form} style={{cursor: "pointer", textAlign: "center", color: "#d66aca", marginLeft: 20, fontSize: 14, borderBottom: "3px solid #d66aca", padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                                     <i style={{marginRight: 10}} className="fa-solid fa-plane-departure"></i>
                                     Flights</div>
                                 <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
@@ -35,7 +35,7 @@ export default function ExploreDestinations(){
                                 <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                                     <i style={{marginRight: 10}} className="fa-solid fa-car"></i>
                                     Cars</div>
-                                <div style={{cursor: "pointer", textAlign: "center", color: "rgba(169, 221, 255, 0.8)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                <div id="landing_page_hero_manu_bar_bot_item" style={{cursor: "pointer", textAlign: "center", color: "rgba(169, 221, 255, 0.8)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                                     <i style={{marginRight: 10}} className="fa-solid fa-robot"></i>
                                     Agent</div>
                                 <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
