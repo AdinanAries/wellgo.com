@@ -625,12 +625,12 @@ footer {
   cursor: pointer;
 }
 .explore_destinations_promo_card {
-  height: calc(100vh - 50px);
+  /*height: calc(100vh - 200px);*/
   padding: 20px 10px;
-  padding-top: 100px;
-  background: /*linear-gradient(90deg, #000000, rgba(255, 255, 255, 0), #000000),
-  linear-gradient(#000000, rgba(255, 255, 255, 0), #000000),*/
-  url("./explore_destination_img.jpg");
+  padding-top: 80px;
+  background: rgb(43, 52, 61);/*linear-gradient(90deg, #000000, rgba(255, 255, 255, 0), #000000),
+  linear-gradient(#000000, rgba(255, 255, 255, 0), #000000),
+  url("./explore_destination_img.jpg");*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

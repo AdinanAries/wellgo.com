@@ -138,7 +138,7 @@ var ChooseUs = ()=>{
         <div>
             <div style={{marginBottom: 0, padding: "10px 0", backgroundColor: "rgb(229, 233, 241)",}}>
                 <div className="wrapper">
-                    <div className='between-jumbotron-and-subsections'>
+                    <div style={{display: "none"}} className='between-jumbotron-and-subsections'>
                         <div className="between-jumbotron-and-subsections_icon" style={{backgroundImage: `url('${smart_phone_img}')`}}></div>
                         <div style={{height: "100%", padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}}>
                             <p style={{fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38}}>

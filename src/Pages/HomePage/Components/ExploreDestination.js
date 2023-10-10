@@ -24,9 +24,35 @@ export default function ExploreDestinations(){
             <div className="explore_destinations_promo_card">
                 <div>
                     <div className="wrapper">
+                        <div style={{border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10, marginBottom: 50}}>
+                            <div style={{display: "flex", justifyContent: "center"}}>
+                                <div style={{cursor: "pointer", textAlign: "center", color: "#d66aca", marginLeft: 20, fontSize: 14, borderBottom: "3px solid #d66aca", padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <i style={{marginRight: 10}} className="fa-solid fa-plane-departure"></i>
+                                    Flights</div>
+                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <i style={{marginRight: 10}} className="fa-solid fa-hotel"></i>
+                                    Stays</div>
+                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <i style={{marginRight: 10}} className="fa-solid fa-car"></i>
+                                    Cars</div>
+                                <div style={{cursor: "pointer", textAlign: "center", color: "rgba(169, 221, 255, 0.8)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <i style={{marginRight: 10}} className="fa-solid fa-robot"></i>
+                                    Agent</div>
+                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <i style={{marginRight: 10}} className="fa-solid fa-globe"></i>
+                                    USD</div>
+                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <i style={{marginRight: 10}} className="fa-solid fa-language"></i>
+                                    English</div>
+                                <div style={{cursor: "pointer", textAlign: "center", color: "rgba(169, 221, 255, 0.8)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <i style={{marginRight: 10}} className="fa-solid fa-bars"></i>
+                                    More
+                                </div>
+                            </div>
+                        </div>
                         <div className="landing_page_jumb_text" style={{marginBottom: 20}}>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28, textAlign: "center"}}>
-                                Cheap Flights</p>
+                                Cheap Travel</p>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontFamily: "'Prompt', sans-serif", fontSize: 15, textAlign: "center"}}>
                                 &#8226; Virtual Agency &#8226;</p>
                         </div>
@@ -107,7 +133,6 @@ export default function ExploreDestinations(){
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <div className="landing_page_scroll_down_indicator">
                     <i className="fa fa-arrow-down"></i>
