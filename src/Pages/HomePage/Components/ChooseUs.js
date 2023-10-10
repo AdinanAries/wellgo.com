@@ -471,7 +471,7 @@ var ChooseUs = ()=>{
                                 <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 5, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Best Deals</p>
                                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 15, fontFamily: "'Prompt', sans-serif"}}>
-                                    This is a place holder text for the description of this info card</p>
+                                    1. We strive to get you the best deals and prices more than the others...</p>
                             </div>
                             <div className="each-choose-us-container">
                                 
@@ -482,7 +482,7 @@ var ChooseUs = ()=>{
                                 <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 5, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Secure Payment</p>
                                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 15, fontFamily: "'Prompt', sans-serif"}}>
-                                    This is a place holder text for the description of this info card</p>
+                                    2. Then provide you with effective security protocols to protect your data...</p>
                             </div>
                             <div className="each-choose-us-container">
                                 
@@ -493,7 +493,7 @@ var ChooseUs = ()=>{
                                 <p style={{color: "rgba(0,0,0,0.7)", fontWeight: "bolder", textAlign: "center", marginBottom: 5, fontFamily: "Courgette", fontFamily: "'Prompt', Sans-serif"}}>
                                     Customer Support</p>
                                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 15, fontFamily: "'Prompt', sans-serif"}}>
-                                    This is a place holder text for the description of this info card</p>
+                                    3. Our helpdesk will be here at all times waiting to support you...</p>
                             </div>
                         </div>
                     </div>
