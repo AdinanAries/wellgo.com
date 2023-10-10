@@ -7,6 +7,7 @@ import trips_icon from "../../../icons/trips_icon.png";
 import explore_icon from "../../../icons/explore_icon.png";
 import user_account_icon from "../../../icons/user_account_icon.png";
 import botIcon from "../../../icons/botIcon.svg";
+import HeroMainMenu from './HeroMainMenu';
 
 import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../../../helpers/PageRoutingFuncs';
 
@@ -24,32 +25,7 @@ export default function ExploreDestinations(){
             <div className="explore_destinations_promo_card">
                 <div>
                     <div className="wrapper">
-                        <div style={{border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10, marginBottom: 50}}>
-                            <div style={{display: "flex", justifyContent: "center"}}>
-                                <div onClick={show_full_search_form} style={{cursor: "pointer", textAlign: "center", color: "#d66aca", marginLeft: 20, fontSize: 14, borderBottom: "3px solid #d66aca", padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10}} className="fa-solid fa-plane-departure"></i>
-                                    Flights</div>
-                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10}} className="fa-solid fa-hotel"></i>
-                                    Stays</div>
-                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10}} className="fa-solid fa-car"></i>
-                                    Cars</div>
-                                <div id="landing_page_hero_manu_bar_bot_item" style={{cursor: "pointer", textAlign: "center", color: "rgba(169, 221, 255, 0.8)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10}} className="fa-solid fa-robot"></i>
-                                    Agent</div>
-                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10}} className="fa-solid fa-globe"></i>
-                                    USD</div>
-                                <div style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10}} className="fa-solid fa-language"></i>
-                                    English</div>
-                                <div style={{cursor: "pointer", textAlign: "center", color: "rgba(169, 221, 255, 0.8)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
-                                    <i style={{marginRight: 10}} className="fa-solid fa-bars"></i>
-                                    More
-                                </div>
-                            </div>
-                        </div>
+                        <HeroMainMenu />
                         <div className="landing_page_jumb_text" style={{marginBottom: 20}}>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28, textAlign: "center"}}>
                                 Cheap Travel</p>
