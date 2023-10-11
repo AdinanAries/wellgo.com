@@ -8,6 +8,8 @@ import FlightLoaderCard from "./FlightLoaderCard";
 import FlightOfferItem from "./FlightOfferItem";
 import SearchFilters from "./SearchFilters";
 import SearchFiltersLoader from "./SearchFiltersLoader";
+import MobileItinTopInfo from "./MobileItinTopInfo";
+import MobileItinTopInfoLoader from "./MobileItinTopInfoLoader";
 
 function add_clouds_to_animated_loader(){
     document.getElementById("animated_loader").innerHTML += `
@@ -87,7 +89,7 @@ export default function ResultsListContainer(props){
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0}}>
             
             <div id="search_results_mobile_top_itin_display">
-
+                { !props.loading ? <MobileItinTopInfo /> : <MobileItinTopInfoLoader /> }
             </div>
             <div className="search_list_main_flex_container">
                 <div id="search_list_main__settings_section" className="search_list_main__settings_section">
