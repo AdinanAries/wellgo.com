@@ -759,7 +759,7 @@ footer {
 .selected_ticket_book_btn {
   cursor: pointer;
   color: white;
-  background-color: #c900b0;
+  background-color: darkslateblue;
   padding: 14px;
   border-radius: 9px;
   text-align: center;
