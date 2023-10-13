@@ -110,7 +110,7 @@ export default function CheckoutPage(props){
                             <div className="site-logo">
                                 <p className="site-logo-img">
                                     <img src={"./WillgoLogo.png"} alt={"to do"} /></p>
-                                <div className="site-logo-txt">
+                                <div style={{display: "none"}} className="site-logo-txt">
                                     <p style={{color: "rgb(23, 87, 148)"}}>
                                         Wellgo<span>.com</span>
                                     </p>
@@ -118,7 +118,7 @@ export default function CheckoutPage(props){
                             </div>
                         </div>
                         <p className="pop-up-close-btn" onClick={props.cancel_checkout} 
-                            style={{cursor: "pointer", color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
+                            style={{cursor: "pointer", color: "rgb(255,0,0)", fontSize: 33, marginRight: 5}}>
                             &times;
                         </p>
                     </div>

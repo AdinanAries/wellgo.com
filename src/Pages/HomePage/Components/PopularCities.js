@@ -16,6 +16,7 @@ import PaginationButtons from '../../../components/PaginationButtons';
 import { shuffle_array } from '../../../helpers/general';
 import EachPopularCity from "./EachPopularCity";
 import EachPopularCityMore from "./EachPopularCityMore";
+import { show_full_search_form } from '../../../helpers/PageRoutingFuncs'
 
 const PopularCities = () => {
     const [data, setData] = useState({
@@ -115,6 +116,7 @@ const PopularCities = () => {
 
     const searchFlightsForPopularCity = (iata) => {
         alert(iata);
+        show_full_search_form();
     }
 
     const addCityToTavourites = (city) => {
