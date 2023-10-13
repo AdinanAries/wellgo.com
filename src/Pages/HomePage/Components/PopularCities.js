@@ -13,6 +13,9 @@ import RomeImg from "../../../citiesImg/Rome.jpg";
 
 import PaginationButtons from '../../../components/PaginationButtons';
 
+import { shuffle_array } from '../../../helpers/general';
+import EachPopularCity from "./EachPopularCity";
+
 const PopularCities = () => {
     const [data, setData] = useState({
         exploreCities: {
@@ -21,43 +24,50 @@ const PopularCities = () => {
                 numberPerPage: 4,
                 numberOfPages: 0,
             },
-            cities: [
+            cities: shuffle_array([
                 {
                     country: "United Kingdom",
                     city: "London",
-                    picture: LondonImg
+                    picture: LondonImg,
+                    iata: "to do"
                 },
                 {
                     country: "Ghana",
                     city: "Accra",
-                    picture: AccraImg
+                    picture: AccraImg,
+                    iata: "to do"
                 },
                 {
                     country: "United States",
                     city: "Los Angeles",
-                    picture: LAImg
+                    picture: LAImg,
+                    iata: "to do"
                 },
                 {
                     country: "France",
                     city: "Paris",
-                    picture: ParisImg
+                    picture: ParisImg,
+                    iata: "to do"
                 },
                 {
                     country: "United States",
                     city: "New York",
-                    picture: NewYorkImg
+                    picture: NewYorkImg,
+                    iata: "to do"
                 },
                 {
                     country: "Italy",
                     city: "Rome",
-                    picture: RomeImg
+                    picture: RomeImg,
+                    iata: "to do"
                 },
                 {
                     country: "Egypt",
                     city: "Cairo",
-                    picture: CairoImg
+                    picture: CairoImg,
+                    iata: "to do"
                 },
-            ]
+            ])
         }
     });
 
@@ -102,6 +112,14 @@ const PopularCities = () => {
         });
     }
 
+    const searchFlightsForPopularCity = (iata) => {
+        alert(iata);
+    }
+
+    const addCityToTavourites = (city) => {
+        alert(city.city);
+    }
+
     useEffect(() => {
         setData({
             exploreCities: {
@@ -127,20 +145,12 @@ const PopularCities = () => {
                 {
                     data.exploreCities.cities.slice(0,3).map(each=>
                         (
-                            <div  className="home_page_each_most_visited_cities">
-                                <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${each.picture}')`}} >
-
-                                </div>
-                                <div className="home_page_each_most_visited_cities_btn">
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>{each.city}</p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                                        {each.country}</p>
-                                    
-                                </div>
-                                <div className="home_page_each_most_visited_cities_bottom">
-                                    
-                                </div>
-                            </div>
+                            <EachPopularCity 
+                                city={each} 
+                                searchFlightsForPopularCity={searchFlightsForPopularCity} 
+                                addCityToTavourites={addCityToTavourites}
+                                
+                            />
                         )
                     )
                 }
