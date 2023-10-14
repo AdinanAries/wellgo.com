@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../../../helpers/PageRoutingFuncs';
+import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
+import CONSTANTS from '../../../Constants/Constants';
 
 const HeroMainMenu = (props) => {
 
@@ -15,10 +17,14 @@ const HeroMainMenu = (props) => {
                 <div className="flights_hero_menu_item main" onClick={show_full_search_form} style={{cursor: "pointer", textAlign: "center", color: "#d66aca", fontSize: 14, borderBottom: "3px solid #d66aca", padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-plane-departure"></i>
                     Flights</div>
-                <div className="stays_hero_menu_item main" style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                <div className="stays_hero_menu_item main" 
+                        onClick={()=>show_prompt_on_Bot_AD_tips_popup("Hey! Unfortunatly, we can't book hotels for now. My Apologies...", CONSTANTS.bot.prompt_types.warn)}
+                        style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-hotel"></i>
                     Stays</div>
-                <div className="cars_hero_menu_item main" style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                <div className="cars_hero_menu_item main" 
+                        onClick={()=>show_prompt_on_Bot_AD_tips_popup("Hey! Unfortunatly, we can't rent cars for now. My Apologies...", CONSTANTS.bot.prompt_types.warn)}
+                        style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-car"></i>
                     Cars</div>
                 <div className="packages_hero_menu_item main" style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>

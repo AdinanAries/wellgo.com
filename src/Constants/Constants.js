@@ -15,6 +15,12 @@ const CONSTANTS = {
     prices: {
         markup_percentage: 10,
     },
+    bot: {
+        prompt_types: {
+            warn: "warn",
+            prompt: "prompt",
+        }
+    },
     envs: [ "PRODUCTION", "DEVELOPMENT" ],
 }
 

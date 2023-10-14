@@ -3,6 +3,7 @@ import HelpSupportChatMessaging from "./HelpSupportChatMessaging";
 import HelpSupportChatStartPage from "./HelpSupportChatStartPage";
 import botIcon from "../icons/botIcon.svg";
 import HelpSupportSettingsPage from "./HelpSupportChatSettingsPage";
+import CONSTANTS from "../Constants/Constants";
 
 export default function HPSupportBtn(){
     return (
@@ -117,6 +118,21 @@ export function show_support_chat_settings_container(){
     document.getElementById("support_chat_start_page_container").style.display="none";
     document.getElementById("support_chat_settings_container").style.display="block";
     document.getElementById("chat_settings_page_bot_status_display").innerHTML = return_bot_chat_status_markup("online")
+}
+
+export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt) {
+    document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
+    if(type===CONSTANTS.bot.prompt_types.prompt)
+        document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`<p>
+            <i class="fa fa-lightbulb-o"></i>
+            ${msg} &#127866;
+        </p>`;
+    else if(type===CONSTANTS.bot.prompt_types.warn){
+        document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`<p>
+            <i style="color: yellow;" class="fa-solid fa-exclamation-triangle"></i>
+            ${msg} &#x1F641;
+        </p>`;
+    }
 }
 
 /*$(document).ready(()=>{
