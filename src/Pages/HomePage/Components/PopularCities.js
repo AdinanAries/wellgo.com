@@ -2,21 +2,19 @@ import { useState, useEffect } from "react";
 
 import citiesIcon from "../../../icons/citiesIcon.svg";
 
-//cities imgs
-import LondonImg from "../../../citiesImg/London.jpg";
-import AccraImg from "../../../citiesImg/AccraGhana.jpg";
-import LAImg from "../../../citiesImg/LA_US.jpg";
-import ParisImg from "../../../citiesImg/Paris.jpg";
-import NewYorkImg from "../../../citiesImg/NewYork.jpg";
-import CairoImg from "../../../citiesImg/Cairo.jpg";
-import RomeImg from "../../../citiesImg/Rome.jpg";
-
 import PaginationButtons from '../../../components/PaginationButtons';
 
 import { shuffle_array } from '../../../helpers/general';
 import EachPopularCity from "./EachPopularCity";
 import EachPopularCityMore from "./EachPopularCityMore";
-import { show_full_search_form } from '../../../helpers/PageRoutingFuncs'
+import { show_full_search_form } from '../../../helpers/PageRoutingFuncs';
+import PopularCitiesList from "../../../data/PopularCitiesList";
+let cities=shuffle_array(PopularCitiesList);
+let favCts=[];
+(localStorage.getItem("favCts")) ?
+    favCts=JSON.parse(localStorage.getItem("favCts")) :
+    localStorage.setItem("favCts", JSON.stringify([])) ;
+
 
 const PopularCities = () => {
     const [data, setData] = useState({
@@ -26,52 +24,11 @@ const PopularCities = () => {
                 numberPerPage: 4,
                 numberOfPages: 0,
             },
-            cities: shuffle_array([
-                {
-                    country: "United Kingdom",
-                    city: "London",
-                    picture: LondonImg,
-                    iata: "to do"
-                },
-                {
-                    country: "Ghana",
-                    city: "Accra",
-                    picture: AccraImg,
-                    iata: "to do"
-                },
-                {
-                    country: "United States",
-                    city: "Los Angeles",
-                    picture: LAImg,
-                    iata: "to do"
-                },
-                {
-                    country: "France",
-                    city: "Paris",
-                    picture: ParisImg,
-                    iata: "to do"
-                },
-                {
-                    country: "United States",
-                    city: "New York",
-                    picture: NewYorkImg,
-                    iata: "to do"
-                },
-                {
-                    country: "Italy",
-                    city: "Rome",
-                    picture: RomeImg,
-                    iata: "to do"
-                },
-                {
-                    country: "Egypt",
-                    city: "Cairo",
-                    picture: CairoImg,
-                    iata: "to do"
-                },
-            ])
+            cities
         }
     });
+
+    const [ favCities, setFavCities ] = useState(favCts);
 
     function nextPage() {
         if(
@@ -120,7 +77,14 @@ const PopularCities = () => {
     }
 
     const addCityToTavourites = (city) => {
-        alert(city.city);
+        if(favCities.includes(city.iata)){
+            let i = favCities.indexOf(city.iata);
+            favCities.splice(i,1);
+        }else{
+            favCities.push(city.iata);
+        }
+        localStorage.setItem("favCts", JSON.stringify(favCities))
+        setFavCities([...favCities]);
     }
 
     useEffect(() => {
@@ -150,9 +114,10 @@ const PopularCities = () => {
                         (
                             <EachPopularCity 
                                 city={each} 
+                                fav={(favCities.includes(each.iata))}
                                 searchFlightsForPopularCity={searchFlightsForPopularCity} 
                                 addCityToTavourites={addCityToTavourites}
-                                
+                                key={each.iata}
                             />
                         )
                     )
@@ -175,7 +140,14 @@ const PopularCities = () => {
                         </div>
                     </div>
                     {
-                        data.exploreCities.cities.slice(begin, end).map(each=><EachPopularCityMore city={each} />
+                        data.exploreCities.cities.slice(begin, end).map(each=>(
+                            <EachPopularCityMore 
+                                city={each}
+                                fav={(favCities.includes(each.iata))}
+                                searchFlightsForPopularCity={searchFlightsForPopularCity} 
+                                addCityToTavourites={addCityToTavourites}
+                                key={each.iata}
+                            />)
                     )}
                 </div>
                 <div style={{paddingTop: 20}}>

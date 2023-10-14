@@ -1,7 +1,7 @@
 const EachPopularCityMore = (prop) => {
-    const { city } = prop;
+    const { city, searchFlightsForPopularCity, addCityToTavourites, fav } = prop;
     return (
-        <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", maxWidth: "300px", textAlign: "center", margin: "auto", borderBottom: "1px solid rgba(0,0,0,0.1)", marginTop: 5, paddingBottom: 5, fontFamily: "'Prompt', Sans-serif"}}>
+        <div className="each_more_popular_city" style={{postion: "relative", cursor: "pointer", color: "rgb(223, 157, 0)", maxWidth: "300px", textAlign: "center", margin: "auto", fontFamily: "'Prompt', Sans-serif"}}>
             <div className="each_more_popular_city_popup">
                 <div style={{width: "100%", marginBottom: 0}}  className="home_page_each_most_visited_cities">
                     <div className="home_page_each_most_visited_cities_top" style={{backgroundImage: `url('${city.picture}')`}}>
@@ -19,7 +19,19 @@ const EachPopularCityMore = (prop) => {
                     </div>
                 </div>
             </div>
-            {city.city} - {city.country}
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                <div style={{textAlign: "initial", color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif"}}>
+                    {city.city} - {city.country}
+                </div>
+                <div style={{position: "absolute", right: 0, top: 0, display: "flex"}}>
+                    <div onClick={()=>addCityToTavourites(city)} style={{}}>
+                        <i style={{color: "orange", cursor: "pointer"}} className={((fav ? "fa-solid" : "fa-regular") + " fa-heart")} aria-hidden={true}></i>
+                    </div>
+                    <div style={{marginLeft: 15}} onClick={()=>searchFlightsForPopularCity(city.iata)}>
+                        <i style={{color: "green", cursor: "pointer"}} className="fa-regular fa-circle-check" aria-hidden={true}></i>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

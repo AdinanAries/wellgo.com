@@ -1,11 +1,11 @@
 const EachPopularCity = (props) => {
-    const { city, searchFlightsForPopularCity, addCityToTavourites } = props;
+    const { city, searchFlightsForPopularCity, addCityToTavourites, fav } = props;
     return (
         <div  className="home_page_each_most_visited_cities">
             <div className="home_page_each_most_visited_cities_top" style={{position: "relative", backgroundImage: `url('${city.picture}')`}} >    
                 <div style={{position: "absolute", paddingRight: 20, right: 0, top: 0, backgroundColor: "rgba(0,0,0,0.1)", display: "flex"}}>
                     <div onClick={()=>addCityToTavourites(city)} style={{padding: "15px 10px"}}>
-                        <i style={{color: "orange", cursor: "pointer"}} className="fa-regular fa-heart" aria-hidden={true}></i>
+                        <i style={{color: "orange", cursor: "pointer"}} className={((fav ? "fa-solid" : "fa-regular") + " fa-heart")} aria-hidden={true}></i>
                     </div>
                     <div onClick={()=>searchFlightsForPopularCity(city.iata)} style={{padding: "15px 10px", marginLeft: 5}}>
                         <i style={{color: "orange", cursor: "pointer"}} className="fa-solid fa-plane-departure" aria-hidden={true}></i>
