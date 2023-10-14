@@ -177,7 +177,7 @@ function SearchForm( props ){
             </div>
             <div>
                 <div className="two-search-inputs-container">
-                    <div style={{display: "flex", width: "65%", marginRight: 5}}>
+                    <div style={{display: "flex", width: "65%"}}>
                         <div style={{position: "relative", width: "calc(50% - 5px)"}} className="search_forms_from_where_input_fld_container">
                             <div id="sp_from_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{zIndex: 10}}>
                                 <p onClick={()=>document.getElementById("sp_from_where_airports_auto_complete_input").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
@@ -207,11 +207,11 @@ function SearchForm( props ){
                                 </div>
                             </div>
                             <div className="main-search_txt_input search_page_input">
-                                <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
+                                <i style={{fontSize: 20, marginRight: 5}} className="fa-solid fa-plane-departure"></i>
                                 <input id="sp_search_forms_from_where_input_fld" onClick={sp_open_from_where_auto_complete_pane} type="text" autoComplete="off" placeholder="from where?" />
                             </div>
                         </div>
-                        <div id="sp_main_switch_inputs_btn" className="switchinputsBtn" style={{boxShadow: "none", border: "1px solid rgba(0,0,0,0.15)"}}
+                        <div id="sp_main_switch_inputs_btn" className="switchinputsBtn"
                             onClick={sp_switch_airports_input_values}>
                             <p style={{textAlign: "center"}}>
                                 <i className="fa fa-exchange"></i>
@@ -246,12 +246,12 @@ function SearchForm( props ){
                                 </div>
                             </div>
                             <div className="main-search_txt_input search_page_input">
-                                <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
+                                <i style={{fontSize: 20, marginRight: 5}} className="fa-solid fa-plane-arrival"></i>
                                 <input id="sp_search_forms_to_where_input_fld" onClick={sp_open_to_where_auto_complete_pane} type="text" autoComplete="off" placeholder="to where?" />
                             </div>
                         </div>
                     </div>
-                    <div style={{width: "25%", marginRight: 5}}>
+                    <div style={{width: "40%", marginRight: 10}}>
                         <div style={{width: "100%"}}>
                             <div className="main-search_txt_input search_page_input">
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-calendar-o"></i>
@@ -259,9 +259,9 @@ function SearchForm( props ){
                             </div>
                         </div>
                     </div>
-                    <div style={{width: "calc(15% - 30px)"}}>
-                        <div onClick={searchOnSubmit} id="sp_search_form_submit_btn" style={{marginTop: 0, padding: 15, boxShadow: "none"}} className="searchBtn">
-                            <i className="fa fa-search" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Search
+                    <div style={{}}>
+                        <div onClick={searchOnSubmit} id="sp_search_form_submit_btn" style={{width: 70, height: 70, marginTop: -10, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}} className="searchBtn">
+                            <i className="fa fa-search" style={{fontSize: 20, color: "rgba(255,255,255,0.4)"}}></i>
                         </div>
                     </div>
                 </div>

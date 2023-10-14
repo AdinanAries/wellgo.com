@@ -40,3 +40,12 @@ export const shuffle_array = (array) => {
     } 
     return array;
 }
+
+export const ellipsify = (str, length=10) => {
+    if (str.length > length) {
+        return (str.substring(0, length) + "...");
+    }
+    else {
+        return str;
+    }
+}

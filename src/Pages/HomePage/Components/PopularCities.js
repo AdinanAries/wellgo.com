@@ -127,7 +127,7 @@ const PopularCities = () => {
             </div>
             <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                 >More To Explore</h1>
-            <div style={{position: "relative", borderTop: "4px solid orange", padding: "15px", background: "rgba(255,255,255)"}}>
+            <div style={{position: "relative", borderTop: "4px solid orange", padding: "25px 5px", background: "rgba(255,255,255)"}}>
                 <div className="more_popular_cities_svg_img" style={{height: 150, width: 150, backgroundImage: `url('${citiesIcon}')`, backgroundRepeat: "no-repeat", backgroundSize: "contain", position: "absolute", top: -50, left: 20, zIndex: 1}}>
                 </div>
                 <div style={{position: "relative", maxWidth: 500, margin: "auto"}}>

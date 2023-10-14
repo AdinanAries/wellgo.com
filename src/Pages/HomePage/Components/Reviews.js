@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { show_full_search_form } from "../../../helpers/PageRoutingFuncs";
-import { shuffle_array } from "../../../helpers/general";
+import { shuffle_array, ellipsify } from "../../../helpers/general";
 
 import reviews_icon from "../../../icons/reviews_icon.svg";
 import reviews_icon2 from "../../../icons/reviews_icon2.svg";
@@ -139,9 +139,9 @@ const Reviews = () => {
     return (
         <div className="home_page_reviews_container">
             <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-            >Customer Satisfaction</h1>
+            >Places Advisors</h1>
             <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: "initial", fontFamily: "'Prompt', Sans-serif",}}
-            >get the luxury of cheap travel</h1>
+            >other's places recommendations</h1>
             <div className="home_page_reviews_wrapper">
 
                 <div onClick={show_full_search_form} className="home_page_reviews_start_search_btn">
@@ -180,8 +180,15 @@ const Reviews = () => {
                             <div id="main_all_ratings_dots" className="all_ratings_dotes">
                             </div>
                         </div>
-                        <p id="main_reviews_rating_number" className="reviews_rating_number" style={{marginTop: 4, color: "rgba(0,0,0,0.55)", backgroundColor: "rgb(229, 233, 241)", /*backgroundColor: "#b8d4f5",*/ fontSize: 22, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", padding: "5px 10px", width: "fit-content"}}>
-                            {parseFloat(reviewers[slice].rated).toFixed(1)}</p>
+                        <p id="main_reviews_rating_number" className="reviews_rating_number" style={{marginTop: 8, color: "rgba(0,0,0,0.7)", backgroundColor: "rgb(229, 233, 241)", fontSize: 17, fontFamily: "'Prompt', Sans-serif", padding: "10px", width: "fit-content"}}>
+                            <span style={{marginRight: 10}}>
+                                <i className="fa-solid fa-city" style={{marginRight: 10, color: "#c751b9"}}></i>
+                                London Bridge,
+                            </span>
+                            <span style={{fontWeight: "initial", color: "green"}}>
+                                {parseFloat(reviewers[slice].rated).toFixed(1)} stars
+                            </span>
+                        </p>
                     </div>
                     <div className="home_page_reviews_each_review_details">
                         <p id="home_page_reviews_selected_reviewer_msg" style={{borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10,fontSize: 19, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(83,0,0,0.8)', letterSpacing: 1}}>
@@ -196,7 +203,7 @@ const Reviews = () => {
                                 {
                                     reviewers.slice(slice,slice+PAGE_SIZE).map((each, i) => <div 
                                                 key={each.name}
-                                                onClick={()=>show_selected_review(slice+i)} style={{marginRight: 15}} className="home_page_other_reviewer">
+                                                onClick={()=>show_selected_review(slice+i)} style={{margin: "0 7.5px"}} className="home_page_other_reviewer">
                                             <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
                                                 <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
                                                     {each.name}
@@ -217,7 +224,7 @@ const Reviews = () => {
                                                 </div>
                                             </div>
                                             <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
-                                                {each.name.split(" ")[0]}
+                                                {ellipsify(each.name.split(" ")[0], 5)}
                                             </p>
                                             <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
                                                 {parseFloat(each.rated).toFixed(1)}

@@ -58,7 +58,7 @@ function SearchForm(props){
                 <div className="two-search-inputs-container">
                     <div className="each_flex-side first">
                         <div className="forms_class_guests_cabin_settings_container">
-                            <div id="forms_main_class_guests_cabin_settings_pane" className="forms_class_guests_cabin_settings_pane"  style={{borderRadius: 30}}>
+                            <div id="forms_main_class_guests_cabin_settings_pane" className="forms_class_guests_cabin_settings_pane"  style={{borderRadius: 8}}>
                                 <p onClick={()=>document.getElementById("forms_main_class_guests_cabin_settings_pane").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
                                 <div id="add_travelers_settings_pane" style={{padding: 15, display: "none"}}>
                                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", fontSize: 17, marginTop: 10, marginBottom: 20}}>
@@ -174,15 +174,15 @@ function SearchForm(props){
                                         Done
                                     </div>
                             </div>
-                            <div id="select_cabin_type_main_input_display" onClick={show_cabin_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div id="select_cabin_type_main_input_display" onClick={show_cabin_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 8}}>
                                 <i style={{fontSize: 15, marginRight: 10}} className="fa fa-level-up"></i>
                                 Cheapest
                             </div>
-                            <div id="add_travelers_main_input_display" onClick={show_travelers_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div id="add_travelers_main_input_display" onClick={show_travelers_settings_pane} className="searchFormChkInputLbl" style={{marginRight: 5, border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 8}}>
                                 <i style={{fontSize: 15, marginRight: 10}} className="fa fa-user"></i>
                                 1 Adult
                             </div>
-                            <div id="select_trip_round_main_input_display" onClick={show_trip_round_settings_pane} className="searchFormChkInputLbl" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 50}}>
+                            <div id="select_trip_round_main_input_display" onClick={show_trip_round_settings_pane} className="searchFormChkInputLbl" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 8}}>
                                 <i style={{fontSize: 15, marginRight: 10}} className="fa fa-repeat"></i>
                                 Round-trip
                             </div>
@@ -191,8 +191,8 @@ function SearchForm(props){
                     </div>
                     <div className="each_flex-side">
                         <div style={{width: "100%"}}>
-                            <div className="main-search_txt_input" style={{border: "none", position: "relative", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
-                                <i style={{fontSize: 20, marginRight: 5}} className="fa fa-calendar-o"></i>
+                            <div className="main-search_txt_input" style={{border: "none", position: "relative", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 8, marginBottom: 5}}>
+                                <i style={{fontSize: 20, marginRight: 5}} className="fa-solid fa-calendar-days"></i>
                                 <input id="departure_return_dates_input" type="text" readOnly="true" placeholder="departure - return"/>
                             </div>
                         </div>
@@ -214,12 +214,12 @@ function SearchForm(props){
                                     </ul>
                                 </div>
                             </div>
-                            <div className="main-search_txt_input" style={{border: "none", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
-                                <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
+                            <div className="main-search_txt_input" style={{border: "none"}}>
+                                <i style={{fontSize: 20, marginRight: 5}} className="fa-solid fa-plane-departure"></i>
                                 <input id="search_forms_from_where_input_fld" onClick={open_from_where_auto_complete_pane} type="text" autoComplete="off" placeholder="from where?" />
                             </div>
                         </div>
-                        <div id="main_switch_inputs_btn" className="switchinputsBtn"  style={{border: "none", boxShadow: "0 0 5px rgba(0,0,0,0.3)",}}
+                        <div id="main_switch_inputs_btn" className="switchinputsBtn"
                             onClick={switch_airports_input_values}>
                             <p style={{textAlign: "center"}}>
                                 <i className="fa fa-exchange"></i>
@@ -253,8 +253,8 @@ function SearchForm(props){
                                     </ul>
                                 </div>
                             </div>
-                            <div className="main-search_txt_input" style={{border: "none", /*backgroundColor: "rgba(0,0,0,0.07)",*/ borderRadius: 50}}>
-                                <i style={{fontSize: 20, marginRight: 5}} className="fa fa-map-marker"></i>
+                            <div className="main-search_txt_input" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 8}}>
+                                <i style={{fontSize: 20, marginRight: 5}} className="fa-solid fa-plane-arrival"></i>
                                 <input id="search_forms_to_where_input_fld" onClick={open_to_where_auto_complete_pane} type="text" autoComplete="off" placeholder="to where?" />
                             </div>
                         </div>
