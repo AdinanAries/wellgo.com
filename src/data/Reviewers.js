@@ -12,7 +12,7 @@ import photo5 from "../explore_destination_img1.jpg";
 import photo6 from "../explore_destination_img2.jpg";
 import photo7 from "../explore_destination_img3.jpg";
 
-export default [
+const Reviewers = [
     {
         name: "Evelin Grigory",
         city: "New York City",
@@ -134,3 +134,5 @@ export default [
         rated: 5
     }
 ]
+
+export default Reviewers;

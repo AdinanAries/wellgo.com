@@ -4,6 +4,7 @@ import HelpSupportChatStartPage from "./HelpSupportChatStartPage";
 import botIcon from "../icons/botIcon.svg";
 import HelpSupportSettingsPage from "./HelpSupportChatSettingsPage";
 import CONSTANTS from "../Constants/Constants";
+import BotAuxMsg from "../Constants/BotAuxMsg";
 
 export default function HPSupportBtn(){
     return (
@@ -120,21 +121,39 @@ export function show_support_chat_settings_container(){
     document.getElementById("chat_settings_page_bot_status_display").innerHTML = return_bot_chat_status_markup("online")
 }
 
+let botPromptHideTimeoutObj;
 export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt) {
-    document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
-    if(type===CONSTANTS.bot.prompt_types.prompt)
-        document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`<p>
-            <i class="fa fa-lightbulb-o"></i>
-            ${msg} &#127866;
-        </p>`;
-    else if(type===CONSTANTS.bot.prompt_types.warn){
-        document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`<p>
-            <i style="color: yellow;" class="fa-solid fa-exclamation-triangle"></i>
-            ${msg} &#x1F641;
-        </p>`;
+    if(botPromptHideTimeoutObj){
+        clearTimeout(botPromptHideTimeoutObj);
     }
 
-    setTimeout(hide_new_chatbot_tip, 4000);
+    document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
+    document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`
+        <p style='color: rgba(255,255,255,0.7);'>    
+            <i class="fa-regular fa-comment-dots"></i>
+            Typing . . .</p>`;
+    let randWait = Math.floor(Math.random() * 3000);
+
+    setTimeout(() => {
+        if(type===CONSTANTS.bot.prompt_types.prompt)
+            document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`<p>
+                <i class="fa fa-lightbulb-o"></i>
+                ${msg} &#127866;
+            </p>`;
+        else if(type===CONSTANTS.bot.prompt_types.warn){
+            let message = BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " " +
+                            BotAuxMsg.bad_mood[Math.floor(Math.random() * BotAuxMsg.bad_mood.length)] + " " +
+                            msg + ". " +
+                            BotAuxMsg.damage_control[Math.floor(Math.random() * BotAuxMsg.damage_control.length)] + " " +
+                            BotAuxMsg.emotions.bad[Math.floor(Math.random() * BotAuxMsg.emotions.bad.length)]
+            document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`<p>
+                    <i style="color: yellow;" class="fa-solid fa-exclamation-triangle"></i>
+                    ${message}
+                </p>`;
+        }
+    }, randWait);
+
+    botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (5000+randWait));
 }
 
 /*$(document).ready(()=>{

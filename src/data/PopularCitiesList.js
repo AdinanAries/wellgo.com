@@ -7,7 +7,7 @@ import NewYorkImg from "../citiesImg/NewYork.jpg";
 import CairoImg from "../citiesImg/Cairo.jpg";
 import RomeImg from "../citiesImg/Rome.jpg";
 
-export default [
+const PopularCitiesList = [
     {
         country: "United Kingdom",
         city: "London",
@@ -51,3 +51,5 @@ export default [
         iata: "CR"
     },
 ];
+
+export default PopularCitiesList;
