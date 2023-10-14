@@ -133,6 +133,8 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
             ${msg} &#x1F641;
         </p>`;
     }
+
+    setTimeout(hide_new_chatbot_tip, 4000);
 }
 
 /*$(document).ready(()=>{
