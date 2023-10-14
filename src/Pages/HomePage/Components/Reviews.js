@@ -167,7 +167,7 @@ const Reviews = () => {
                     <div className="home_page_reviews_each_reviewer_pic">
                         <div className="home_page_reviews_each_reviewer_pic_img_container" style={{display: "flex", flexDirection: "row"}}>
                             <div style={{width: 110, height: 110, border: "4px solid #c751b9", overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                <img id="home_page_reviews_selected_reviewer_img" src={reviewers[slice].img} style={{width: 110, height: "auto"}} alt={"to do"}/>
+                                <img id="home_page_reviews_selected_reviewer_img" src={reviewers[slice].img} style={{width: "100%", height: "100%", objectFit: "cover", objectPosition: "center"}} alt={"to do"}/>
                             </div>
                         </div>
                         <p id="home_page_reviews_selected_reviewer_name" style={{marginTop: 15, fontFamily: "Courgette", color: "#c751b9", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
@@ -194,7 +194,9 @@ const Reviews = () => {
                         <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 35}}>
                             <div style={{display: "flex", flexDirection: "row"}}>
                                 {
-                                    reviewers.slice(slice,slice+PAGE_SIZE).map((each, i) => <div onClick={()=>show_selected_review(slice+i)} style={{marginRight: 15}} className="home_page_other_reviewer">
+                                    reviewers.slice(slice,slice+PAGE_SIZE).map((each, i) => <div 
+                                                key={each.name}
+                                                onClick={()=>show_selected_review(slice+i)} style={{marginRight: 15}} className="home_page_other_reviewer">
                                             <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
                                                 <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
                                                     {each.name}
@@ -211,7 +213,7 @@ const Reviews = () => {
                                             </div>
                                             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                                                 <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                                    <img src={each.img} style={{width: 60, height: "auto"}} alt={"to do"} />
+                                                    <img src={each.img} style={{width: "100%", height: "100%", objectFit: "cover", objectPosition: "center"}} alt={"to do"} />
                                                 </div>
                                             </div>
                                             <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
