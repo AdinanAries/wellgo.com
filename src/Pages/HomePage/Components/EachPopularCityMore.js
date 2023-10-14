@@ -27,7 +27,7 @@ const EachPopularCityMore = (prop) => {
                     <div onClick={()=>addCityToTavourites(city)} style={{}}>
                         <i style={{color: "orange", cursor: "pointer"}} className={((fav ? "fa-solid" : "fa-regular") + " fa-heart")} aria-hidden={true}></i>
                     </div>
-                    <div style={{marginLeft: 15}} onClick={()=>searchFlightsForPopularCity(city.iata)}>
+                    <div style={{marginLeft: 15}} onClick={()=>searchFlightsForPopularCity(city)}>
                         <i style={{color: "green", cursor: "pointer"}} className="fa-regular fa-circle-check" aria-hidden={true}></i>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ const EachPopularCity = (props) => {
                     <div onClick={()=>addCityToTavourites(city)} style={{padding: "15px 10px"}}>
                         <i style={{color: "orange", cursor: "pointer"}} className={((fav ? "fa-solid" : "fa-regular") + " fa-heart")} aria-hidden={true}></i>
                     </div>
-                    <div onClick={()=>searchFlightsForPopularCity(city.iata)} style={{padding: "15px 10px", marginLeft: 5}}>
+                    <div onClick={()=>searchFlightsForPopularCity(city)} style={{padding: "15px 10px", marginLeft: 5}}>
                         <i style={{color: "orange", cursor: "pointer"}} className="fa-solid fa-plane-departure" aria-hidden={true}></i>
                     </div>
                 </div>

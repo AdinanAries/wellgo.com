@@ -71,17 +71,19 @@ const PopularCities = () => {
         });
     }
 
-    const searchFlightsForPopularCity = (iata) => {
-        alert(iata);
+    const searchFlightsForPopularCity = (city) => {
+        global.changeAirportsToInput(
+                            `${city.city} - ${city.name} (${city.IATA})`,
+                            city.IATA, city.ICAO );
         show_full_search_form();
     }
 
     const addCityToTavourites = (city) => {
-        if(favCities.includes(city.iata)){
-            let i = favCities.indexOf(city.iata);
+        if(favCities.includes(city.IATA)){
+            let i = favCities.indexOf(city.IATA);
             favCities.splice(i,1);
         }else{
-            favCities.push(city.iata);
+            favCities.push(city.IATA);
         }
         localStorage.setItem("favCts", JSON.stringify(favCities))
         setFavCities([...favCities]);
@@ -114,10 +116,10 @@ const PopularCities = () => {
                         (
                             <EachPopularCity 
                                 city={each} 
-                                fav={(favCities.includes(each.iata))}
+                                fav={(favCities.includes(each.IATA))}
                                 searchFlightsForPopularCity={searchFlightsForPopularCity} 
                                 addCityToTavourites={addCityToTavourites}
-                                key={each.iata}
+                                key={each.IATA}
                             />
                         )
                     )
@@ -143,10 +145,10 @@ const PopularCities = () => {
                         data.exploreCities.cities.slice(begin, end).map(each=>(
                             <EachPopularCityMore 
                                 city={each}
-                                fav={(favCities.includes(each.iata))}
+                                fav={(favCities.includes(each.IATA))}
                                 searchFlightsForPopularCity={searchFlightsForPopularCity} 
                                 addCityToTavourites={addCityToTavourites}
-                                key={each.iata}
+                                key={each.IATA}
                             />)
                     )}
                 </div>

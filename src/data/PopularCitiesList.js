@@ -10,45 +10,60 @@ import RomeImg from "../citiesImg/Rome.jpg";
 const PopularCitiesList = [
     {
         country: "United Kingdom",
+        name: "London Heathrow",
         city: "London",
         picture: LondonImg,
-        iata: "UK"
+        IATA: "LHR",
+        ICAO: "EGLL"
     },
     {
         country: "Ghana",
+        name: "Kotoka Intl",
         city: "Accra",
         picture: AccraImg,
-        iata: "ACC"
+        IATA: "ACC",
+        ICAO: "DGAA"
     },
     {
         country: "United States",
+        name: "Los Angeles Intl",
         city: "Los Angeles",
         picture: LAImg,
-        iata: "LA"
+        IATA: "LAX",
+        ICAO: "KLAX"
     },
     {
         country: "France",
+        name: "Paris-Le Bourget",
         city: "Paris",
         picture: ParisImg,
-        iata: "PR"
+        IATA: "LBG",
+        ICAO: "LFPB"
     },
     {
         country: "United States",
+        name: "La Guardia",
         city: "New York",
         picture: NewYorkImg,
-        iata: "NY"
+        IATA: "LGA",
+        ICAO: "KLGA"
     },
     {
         country: "Italy",
+        name: "Ciampino\u2013G. B. Pastine Intl",
         city: "Rome",
         picture: RomeImg,
-        iata: "RM"
+        IATA: "CIA",
+        ICAO: "LIRA"
+
     },
     {
         country: "Egypt",
+        name: "Cairo Intl",
         city: "Cairo",
         picture: CairoImg,
-        iata: "CR"
+        IATA: "CAI",
+        ICAO: "HECA"
     },
 ];
 

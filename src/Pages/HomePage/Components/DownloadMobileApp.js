@@ -1,6 +1,11 @@
-import mobile_app_iconsvg from "../../../icons/mobile_app_icon.svg"
+import mobile_app_iconsvg from "../../../icons/mobile_app_icon.svg";
+import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
+import CONSTANTS from "../../../Constants/Constants";
 
 function DownloadMobileApp(){
+    const msgs = [
+        "Let me reach out to IT about this one",
+    ]
     return (
         <div className="wrapper">
             <div className="download_mobile_section">
@@ -15,9 +20,10 @@ function DownloadMobileApp(){
                         <p style={{color: "rgba(0,0,0,0.6)", fontWeight: "bolder", fontSize: 15}}>
                             For better user experience, we recommend that you download our mobile app.</p>
                     </div>
-                    <div className="download_mobile_app_btn_container">
+                    <div onClick={()=>show_prompt_on_Bot_AD_tips_popup(msgs[Math.floor(Math.random() * msgs.length)], CONSTANTS.bot.prompt_types.warn)} className="download_mobile_app_btn_container">
                         <div style={{cursor: "pointer", textAlign: "center", color: "white", backgroundColor: "rgb(43, 52, 61)", padding: "14px", borderRadius: 50, minWidth: 120, boxShadow: "1px 2px 5px rgba(0,0,0,0.5)"}}>
-                            <i className="fa fa-download" style={{marginRight: 7, color: "rgba(255,255,255,0.4)"}}></i>get the app
+                            <i className="fa fa-download" style={{marginRight: 7, color: "rgba(255,255,255,0.4)"}}></i>
+                            get the app
                         </div>
                     </div>
                 </div>

@@ -1450,7 +1450,7 @@ footer {
   cursor: pointer;
 }
 .chatbot_popup_tip_msg p{
-  font-size: 12px;
+  font-size: 14px;
   color: white;
   font-family: 'Prompt', sans-serif;
 }
