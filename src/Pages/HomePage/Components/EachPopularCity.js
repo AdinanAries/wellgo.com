@@ -16,7 +16,8 @@ const EachPopularCity = (props) => {
                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", fontWeight: "bolder", letterSpacing: 1}}>
                     {city.city}</p>
                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: -3, letterSpacing: 1}}>
-                    {city.country}</p>
+                    {city.country}, <span style={{color: "blue", fontSize: 14}}>
+                        $34.20</span></p>
                 
             </div>
             <div className="home_page_each_most_visited_cities_bottom">

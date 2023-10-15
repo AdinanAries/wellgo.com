@@ -908,6 +908,16 @@ footer {
   z-index: 4;
   font-family: 'Prompt', sans-serif;
 }
+.places_reviewers_actions_container {
+  position: absolute;
+  top: 20px;
+  padding: 5px;
+  right: 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /*z-index: 4;*/
+  background: #e0e6ed;
+}
 .home_page_reviews_start_search_btn:hover{
   border: 1px solid #c751b9;
 }

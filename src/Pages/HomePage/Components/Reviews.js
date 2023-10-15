@@ -144,9 +144,35 @@ const Reviews = () => {
             >travelers openions about places</h1>
             <div className="home_page_reviews_wrapper">
 
-                <div onClick={show_full_search_form} className="home_page_reviews_start_search_btn">
+                <div onClick={show_full_search_form} style={{display: "none"}} className="home_page_reviews_start_search_btn">
                     <i style={{marginRight: 10, color: "#c751b9"}} className="fa fa-search"></i>
                     Book Yours Today...
+                </div>
+
+                <div className="places_reviewers_actions_container">
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <div>
+                            <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <i style={{color: "rgb(43, 52, 61)", fontSize: 18}} className="fa-solid fa-angle-left"></i>
+                            </p>
+                        </div>
+                        <div style={{display: "flex", marginLeft: 5}}>
+                            <p style={{width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-regular fa-heart"></i>
+                            </p>
+                            <p style={{marginLeft: 5, width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-solid fa-plane-departure"></i>
+                            </p>
+                            <p style={{marginLeft: 5,width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <i style={{color: "green", fontSize: 18}} className="fa-solid fa-map-location-dot"></i>
+                            </p>
+                        </div>
+                        <div style={{marginLeft: 5}}>
+                            <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <i style={{color: "rgb(43, 52, 61)", fontSize: 18}} className="fa-solid fa-angle-right"></i>
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", left: 0}}>
