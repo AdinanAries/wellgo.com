@@ -1,7 +1,7 @@
 const EachPopularCity = (props) => {
     const { city, searchFlightsForPopularCity, addCityToTavourites, fav } = props;
     return (
-        <div  className="home_page_each_most_visited_cities">
+        <div className="home_page_each_most_visited_cities">
             <div className="home_page_each_most_visited_cities_top" style={{position: "relative", backgroundImage: `url('${city.picture}')`}} >    
                 <div style={{position: "absolute", paddingRight: 20, right: 0, top: 0, backgroundColor: "rgba(0,0,0,0.1)", display: "flex"}}>
                     <div onClick={()=>addCityToTavourites(city)} style={{padding: "15px 10px"}}>

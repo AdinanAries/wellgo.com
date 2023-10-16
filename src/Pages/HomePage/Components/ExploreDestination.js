@@ -66,7 +66,7 @@ export default function ExploreDestinations(){
                                                     Get Help
                                                 </div>
                                             </div>
-                                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", borderLeft: "1px solid rgba(0,0,0,0.1)", paddingLeft: 10}}>
+                                            <div className="landing_page_search_bar_call_btn_container" style={{display: "flex", flexDirection: "column", justifyContent: "center", borderLeft: "1px solid rgba(0,0,0,0.1)", paddingLeft: 10}}>
                                                 <div id="landing_page_search_bar_call_btn" className="searchBtn" style={{boxShadow: "none", background: "none", fontFamily: "'Prompt', sans-serif", borderRadius: 0, marginRight: 10, fontSize: 14}}>
                                                     <i className="fa fa-phone" style={{color: "rgb(46, 46, 46)", fontSize: 19, textShadow: "1px 2px 3px rgba(0,0,0,0.33)"}}></i>
                                                 </div>

@@ -9,7 +9,7 @@ import Reviewers from "../../../data/Reviewers";
 let reviewers = shuffle_array(Reviewers);
 const Reviews = () => {
 
-    const PAGE_SIZE = 4
+    const PAGE_SIZE = 3
     const [ slice, setSlice ] = useState(0);
     let current_reviewer = slice;
     let current=slice;
@@ -153,7 +153,7 @@ const Reviews = () => {
                     <div style={{display: "flex", justifyContent: "space-between"}}>
                         <div>
                             <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <i style={{color: "rgb(43, 52, 61)", fontSize: 18}} className="fa-solid fa-angle-left"></i>
+                                <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-left"></i>
                             </p>
                         </div>
                         <div style={{display: "flex", marginLeft: 5}}>
@@ -169,7 +169,7 @@ const Reviews = () => {
                         </div>
                         <div style={{marginLeft: 5}}>
                             <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <i style={{color: "rgb(43, 52, 61)", fontSize: 18}} className="fa-solid fa-angle-right"></i>
+                                <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-right"></i>
                             </p>
                         </div>
                     </div>
@@ -206,13 +206,15 @@ const Reviews = () => {
                             <div id="main_all_ratings_dots" className="all_ratings_dotes">
                             </div>
                         </div>
-                        <p id="main_reviews_rating_number" className="reviews_rating_number" style={{marginTop: 8, color: "rgba(0,0,0,0.7)", backgroundColor: "rgb(229, 233, 241)", fontSize: 17, fontFamily: "'Prompt', Sans-serif", padding: "10px", width: "fit-content"}}>
+                        <p className="reviews_rating_number" style={{marginTop: 8, color: "rgba(0,0,0,0.7)", backgroundColor: "rgb(229, 233, 241)", fontSize: 17, fontFamily: "'Prompt', Sans-serif", padding: "10px", width: "fit-content"}}>
                             <span style={{marginRight: 10}}>
                                 <i className="fa-solid fa-city" style={{marginRight: 10, color: "#c751b9"}}></i>
                                 London Bridge,
                             </span>
                             <span style={{fontWeight: "initial", color: "green"}}>
-                                {parseFloat(reviewers[slice].rated).toFixed(1)} stars
+                                <span id="main_reviews_rating_number">{parseFloat(reviewers[slice].rated).toFixed(1)}</span>
+                                <span>, </span>
+                                <span>$50.23</span>
                             </span>
                         </p>
                     </div>

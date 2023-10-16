@@ -1066,11 +1066,14 @@ footer {
 #explore_page, #trips_page, #deals_page, #help_page, #login_page{
   padding-top: 60px;
 }
-.home_page_most_visited_cities_list{
+.home_page_most_visited_cities_list {
   padding: 30px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.mobile_home_page_most_visited_cities_list {
+  display: none;
 }
 .home_page_each_most_visited_cities{
   cursor: pointer;
@@ -1560,7 +1563,10 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
-  .between-jumbotron-and-subsections, .home_page_most_visited_cities_list, .why-choose-us-container, #user_account_manager_page{
+  .places_reviewers_actions_container {
+    top: 10px;
+  }
+  .between-jumbotron-and-subsections .why-choose-us-container, #user_account_manager_page{
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
@@ -1582,6 +1588,9 @@ footer {
   }
   .each_more_popular_city:hover .each_more_popular_city_popup{
     display: none;
+  }
+  .home_page_each_most_visited_cities_top{
+    height: 255px;
   }
   .support_chat_div_container{
     /*overscroll-behavior: contain;*/
@@ -1653,15 +1662,6 @@ footer {
   .home_page_most_visited_cities_list{
     padding: 0;
     padding-bottom: 10px;
-  }
-  .home_page_most_visited_cities_list{
-    display: block;
-  }
-  .home_page_each_most_visited_cities{
-    width: 100%;
-    margin-bottom: 3px;
-    border-radius: 0;
-    box-shadow: none;
   }
   .landing_page_jumb_text{
     margin-bottom: 20px !important;
@@ -2111,7 +2111,23 @@ footer {
     padding-bottom: 30px !important;
   }
 }
-
+@media screen and (max-width: 780px) {
+  .home_page_most_visited_cities_list{
+    display: block;
+  }
+  .home_page_each_most_visited_cities{
+    width: 100%;
+    margin-bottom: 3px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .home_page_most_visited_cities_list{
+    display: none !important;
+  }
+  .mobile_home_page_most_visited_cities_list {
+    display: block;
+  }
+}
 @media screen and (max-width: 700px) {
   .checkout_passenger_card {
     width: calc(100% - 4px) !important;
@@ -2123,7 +2139,14 @@ footer {
     display: none;
   }
 }
-
+@media screen and (max-width: 380px) {
+  .landing_page_search_bar_call_btn_container {
+    display: none !important;
+  }
+  .more_to_explore_top_next_prev_btn {
+    display: none !important;
+  }
+}
 /* iphone 5 */
 @media screen and (max-width: 361px){
   * {
