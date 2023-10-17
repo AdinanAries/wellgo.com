@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { show_full_search_form } from "../../../helpers/PageRoutingFuncs";
-import { shuffle_array, ellipsify } from "../../../helpers/general";
+import { shuffle_array, ellipsify, get_horizontal_page_size } from "../../../helpers/general";
 
 import reviews_icon from "../../../icons/reviews_icon.svg";
 import reviews_icon2 from "../../../icons/reviews_icon2.svg";
@@ -9,7 +9,7 @@ import Reviewers from "../../../data/Reviewers";
 let reviewers = shuffle_array(Reviewers);
 const Reviews = () => {
 
-    const PAGE_SIZE = 3
+    const PAGE_SIZE = get_horizontal_page_size(60, 40, 6);
     const [ slice, setSlice ] = useState(0);
     let current_reviewer = slice;
     let current=slice;

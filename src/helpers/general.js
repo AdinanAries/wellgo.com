@@ -49,3 +49,12 @@ export const ellipsify = (str, length=10) => {
         return str;
     }
 }
+
+export const get_horizontal_page_size = (item_width, margin=0, max=10) => {
+    let total_item_width=(item_width+margin);
+    let page_width=(document.body.offsetWidth);
+    let page_size=Math.floor(page_width/total_item_width);
+    if(page_size > max)
+        return max;
+    else return page_size;
+}
