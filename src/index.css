@@ -959,7 +959,7 @@ footer {
   flex-direction: column;
   padding: 30px 10px;
   margin-top: -195px;
-  padding-top: 145px;
+  padding-top: 162px;
   border-radius: 10px;
   /*background-color: white;
   background-color: #b8d4f5;
@@ -1745,6 +1745,7 @@ footer {
   }
   .home_page_reviews_each_review_details {
     margin-top: -177px;
+    padding-top: 145px;
   }
   .get_best_deals_container {
     box-shadow: none;
