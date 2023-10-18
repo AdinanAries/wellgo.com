@@ -6,7 +6,7 @@ import citiesIcon from "../../../icons/citiesIcon.svg";
 
 import PaginationButtons from '../../../components/PaginationButtons';
 
-import { shuffle_array } from '../../../helpers/general';
+import { shuffle_array, get_horizontal_page_size } from '../../../helpers/general';
 import EachPopularCity from "./EachPopularCity";
 import EachPopularCityMore from "./EachPopularCityMore";
 import { show_full_search_form } from '../../../helpers/PageRoutingFuncs';
@@ -19,6 +19,9 @@ let favCts=[];
 
 
 const PopularCities = () => {
+
+    const PAGE_SIZE = get_horizontal_page_size(300, 40, 3);
+
     const [data, setData] = useState({
         exploreCities: {
             pagination: {
@@ -114,7 +117,7 @@ const PopularCities = () => {
                 >see some of most visited cities</h1>
             <div className="home_page_most_visited_cities_list">
                 {
-                    data.exploreCities.cities.slice(0,3).map(each=>
+                    data.exploreCities.cities.slice(0,PAGE_SIZE).map(each=>
                         (
                             
                                 <EachPopularCity 
@@ -123,6 +126,7 @@ const PopularCities = () => {
                                     searchFlightsForPopularCity={searchFlightsForPopularCity} 
                                     addCityToTavourites={addCityToTavourites}
                                     key={each.IATA}
+                                    PAGE_SIZE={PAGE_SIZE}
                                 />
                             
                         )
@@ -132,7 +136,7 @@ const PopularCities = () => {
             <div className="mobile_home_page_most_visited_cities_list">
                 <Carousel >
                     {
-                        data.exploreCities.cities.slice(0,3).map(each=>
+                        data.exploreCities.cities.map( each =>
                             (
                                 
                                     <EachPopularCity 
@@ -141,6 +145,7 @@ const PopularCities = () => {
                                         searchFlightsForPopularCity={searchFlightsForPopularCity} 
                                         addCityToTavourites={addCityToTavourites}
                                         key={each.IATA}
+                                        PAGE_SIZE={PAGE_SIZE}
                                     />
                                 
                             )

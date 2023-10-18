@@ -212,9 +212,9 @@ const Reviews = () => {
                                 London Bridge,
                             </span>
                             <span style={{fontWeight: "initial", color: "green"}}>
-                                <span id="main_reviews_rating_number">{parseFloat(reviewers[slice].rated).toFixed(1)}</span>
-                                <span>, </span>
-                                <span>$50.23</span>
+                                <span style={{fontSize: 14}} id="main_reviews_rating_number">{parseFloat(reviewers[slice].rated).toFixed(1)}</span>
+                                <span style={{fontSize: 14}}>, </span>
+                                <span style={{fontSize: 14}}>$50.23</span>
                             </span>
                         </p>
                     </div>
