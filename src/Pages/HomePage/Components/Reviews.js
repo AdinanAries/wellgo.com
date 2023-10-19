@@ -7,6 +7,10 @@ import reviews_icon from "../../../icons/reviews_icon.svg";
 import reviews_icon2 from "../../../icons/reviews_icon2.svg";
 import Reviewers from "../../../data/Reviewers";
 
+import AccraImg from "../../../citiesImg/AccraGhana.jpg";
+import LAImg from "../../../citiesImg/LA_US.jpg";
+import ParisImg from "../../../citiesImg/Paris.jpg";
+
 let ratedPlaces = shuffle_array(Reviewers);
 let temp=0;
 
@@ -259,6 +263,17 @@ const Reviews = () => {
                                 <span style={{fontSize: 14}}>${TRAVEL_PRICE}</span>
                             </span>
                         </p>
+                        <div style={{top: 65, overflow: "hidden", right: 0, zIndex: -1, position: "absolute", display: "flex"}}>
+                            <div style={{backgroundImage: `url('${AccraImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 162}}>
+                            </div>
+                            <div style={{backgroundImage: `url('${LAImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 150, height: 162}}>
+                            </div>
+                            <div style={{backgroundImage: `url('${ParisImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 150, height: 162}}>
+                                <div style={{color: "white", width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", background: "rgba(0,0,0,0.6)"}}>
+                                    see all...
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="home_page_reviews_each_review_details">
                         <p id="home_page_reviews_selected_reviewer_msg" style={{borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 20,fontSize: 19, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(83,0,0,0.8)', letterSpacing: 1}}>
