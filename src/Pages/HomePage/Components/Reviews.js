@@ -126,36 +126,20 @@ const Reviews = () => {
 
     function show_selected_review(index){
         let i = slice;
-        let s=i+index;
-        
-        //let obj = reviewers[i];
         if(reviewers.length > PAGE_SIZE){
             if(((i+PAGE_SIZE) < reviewers.length) && (index > temp)){
                 setSlice(++i);
-                
             }
             else if(((i+PAGE_SIZE) >= reviewers.length) && (index >= temp)){
                 setSlice(reviewers.length-PAGE_SIZE-1);
-                
             }else if(i>0){
                 setSlice((--i));
             }
-            setCurrent(s);
+            setCurrent(index);
         } else {
             setCurrent(index);
         }
         temp = index;
-
-        /*document.getElementById("home_page_reviews_selected_reviewer_name").innerText = obj.name;
-        document.getElementById("home_page_reviews_selected_reviewer_date").innerText = obj.date;
-        document.getElementById("home_page_reviews_selected_reviewer_msg").innerHTML = `
-            <span style="font-size: 45px; color: #c751b9; margin-right: 10px; font-family: Courgette; position: relative; z-index: 3;">"</span>
-            ${obj.msg}
-        `;
-        document.getElementById("home_page_reviews_selected_reviewer_city").innerText = obj.city;
-        document.getElementById("home_page_reviews_selected_reviewer_img").src = obj.img;
-        document.getElementById("main_all_ratings_dots").innerHTML = return_rating_markup(obj.rated);
-        document.getElementById("main_reviews_rating_number").innerText = (obj.rated.toFixed(1));*/
     }
 
     function show_next_reviewer(){
@@ -176,11 +160,19 @@ const Reviews = () => {
     }
 
     function show_next_city() {
+        current_reviewer=0;
+        setSlice(0);
+        setCurrent(0);
+        temp=0;
         if(currentCityIndex<(ratedPlaces.length-1))
             setCurrentCityIndex((currentCityIndex+1));
     }
 
     function show_prev_city() {
+        current_reviewer=0;
+        setSlice(0);
+        setCurrent(0);
+        temp=0;
         if(currentCityIndex>0)
             setCurrentCityIndex((currentCityIndex-1));
     }
@@ -284,7 +276,7 @@ const Reviews = () => {
                                         <EachReviewer 
                                             key={each.name}
                                             each={each}
-                                            i={i}
+                                            i={(i+slice)}
                                             show_selected_review={show_selected_review}
                                         />
                                     )) :
