@@ -243,12 +243,12 @@ const Reviews = () => {
                                 <span style={{fontSize: 14}}>${TRAVEL_PRICE}</span>
                             </span>
                         </p>
-                        <div style={{top: 10, zIndex: 5, overflow: "hidden", right: 10, position: "absolute", borderRadius: 10, display: "flex", border: "4px solid rgb(199, 81, 185)", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)"}}>
+                        <div className="rated_places_photo_thumbs_container">
                             {
                                 arr.slice(0,PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE).map( each => <div key={each}
                                     style={{backgroundImage: `url('${each}')`, 
                                     backgroundSize: "cover", backgroundPosition: "center", 
-                                    width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===1) ? 250 : 160, height: 158}}>
+                                    width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===1) ? 216 : 160, height: 158}}>
                                 </div>)
                             }
                             

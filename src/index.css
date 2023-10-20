@@ -908,6 +908,17 @@ footer {
   z-index: 4;
   font-family: 'Prompt', sans-serif;
 }
+.rated_places_photo_thumbs_container {
+  top: 10px;
+  z-index: 5;
+  overflow: hidden;
+  right: 10px;
+  position: absolute;
+  border-radius: 10px;
+  display: flex;
+  border: 4px solid rgb(199, 81, 185); 
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
+}
 .places_reviewers_actions_container {
   position: absolute;
   top: 5px;
@@ -2145,6 +2156,17 @@ footer {
   }
 }
 @media screen and (max-width: 380px) {
+  .home_page_reviews_each_reviewer_pic_img_container > div {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .home_page_reviews_each_reviewer_pic {
+    margin-left: 10px;
+  }
+  .rated_places_photo_thumbs_container {
+    top: -10px;
+    right: 0;
+  }
   .landing_page_search_bar_call_btn_container {
     display: none !important;
   }
