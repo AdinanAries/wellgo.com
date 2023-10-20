@@ -11,10 +11,14 @@ import AccraImg from "../../../citiesImg/AccraGhana.jpg";
 import LAImg from "../../../citiesImg/LA_US.jpg";
 import ParisImg from "../../../citiesImg/Paris.jpg";
 
+let arr=[AccraImg, LAImg, ParisImg]
+
 let ratedPlaces = shuffle_array(Reviewers);
 let temp=0;
 
 const Reviews = () => {
+
+    const PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE = get_horizontal_page_size(150, 100, 3)
 
     const PAGE_SIZE = get_horizontal_page_size(60, 40, 6);
     const [ slice, setSlice ] = useState(0);
@@ -194,31 +198,7 @@ const Reviews = () => {
                     Book Yours Today...
                 </div>
 
-                <div className="places_reviewers_actions_container">
-                    <div style={{display: "flex", justifyContent: "space-between"}}>
-                        <div onClick={show_prev_city}>
-                            <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-left"></i>
-                            </p>
-                        </div>
-                        <div style={{display: "flex", marginLeft: 5}}>
-                            <p style={{width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-regular fa-heart"></i>
-                            </p>
-                            <p onClick={show_full_search_form} style={{marginLeft: 5, width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-solid fa-plane-departure"></i>
-                            </p>
-                            <p style={{marginLeft: 5,width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <i style={{color: "green", fontSize: 18}} className="fa-solid fa-map-location-dot"></i>
-                            </p>
-                        </div>
-                        <div onClick={show_next_city} style={{marginLeft: 5}}>
-                            <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-right"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: 100, position: "absolute", zIndex: 1, height: "100%", left: 0}}>
                     <div onClick={show_previous_reviewer} style={{cursor: "pointer", width: 40, height: 40, borderRadius: "100%", backgroundColor: "rgb(43, 52, 61)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)", textAlign: "center", display: "flex", flexDirection: 'column', justifyContent: "center"}}>
@@ -263,15 +243,49 @@ const Reviews = () => {
                                 <span style={{fontSize: 14}}>${TRAVEL_PRICE}</span>
                             </span>
                         </p>
-                        <div style={{top: 65, overflow: "hidden", right: 0, zIndex: -1, position: "absolute", display: "flex"}}>
-                            <div style={{backgroundImage: `url('${AccraImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 162}}>
+                        <div style={{top: 10, zIndex: 5, overflow: "hidden", right: 10, position: "absolute", borderRadius: 10, display: "flex", border: "4px solid rgb(199, 81, 185)", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)"}}>
+                            {
+                                arr.slice(0,PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE).map( each => <div key={each}
+                                    style={{backgroundImage: `url('${each}')`, 
+                                    backgroundSize: "cover", backgroundPosition: "center", 
+                                    width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===1) ? 250 : 160, height: 158}}>
+                                </div>)
+                            }
+                            
+                            <div style={{display: "none", backgroundImage: `url('${LAImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 158}}>
                             </div>
-                            <div style={{backgroundImage: `url('${LAImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 150, height: 162}}>
-                            </div>
-                            <div style={{backgroundImage: `url('${ParisImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 150, height: 162}}>
-                                <div style={{color: "white", width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", background: "rgba(0,0,0,0.6)"}}>
+                            <div style={{display: "none", backgroundImage: `url('${ParisImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 158}}>
+                                <div style={{color: "white", width: "100%", height: "100%", display: "none", justifyContent: "center", alignItems: "center", cursor: "pointer", background: "rgba(0,0,0,0.6)"}}>
                                     see all...
                                 </div>
+                            </div>
+                            <div className="places_reviewers_actions_container">
+                                <div style={{display: "flex", justifyContent: "space-between"}}>
+                                    <div onClick={show_prev_city}>
+                                        <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-left"></i>
+                                        </p>
+                                    </div>
+                                    <div style={{display: "flex", marginLeft: 5}}>
+                                        <p style={{width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-regular fa-heart"></i>
+                                        </p>
+                                        <p onClick={show_full_search_form} style={{marginLeft: 5, width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-solid fa-plane-departure"></i>
+                                        </p>
+                                        <p style={{marginLeft: 5,width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "green", fontSize: 18}} className="fa-solid fa-map-location-dot"></i>
+                                        </p>
+                                    </div>
+                                    <div onClick={show_next_city} style={{marginLeft: 5}}>
+                                        <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-right"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={{padding: 10, width: "100%", fontSize: 13, fontFamily: "'Prompt', Sans-serif", textAlign: "center", bottom: 0, left: 0, position: "absolute", background: "rgba(0,0,0,0.4)", color: "white"}}>
+                                Photos of London Bridge
                             </div>
                         </div>
                     </div>
