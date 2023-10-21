@@ -6,7 +6,7 @@ import citiesIcon from "../../../icons/citiesIcon.svg";
 
 import PaginationButtons from '../../../components/PaginationButtons';
 
-import { shuffle_array, get_horizontal_page_size } from '../../../helpers/general';
+import { shuffle_array, get_horizontal_page_size, toggleAddRemoveCityInFavourites } from '../../../helpers/general';
 import EachPopularCity from "./EachPopularCity";
 import EachPopularCityMore from "./EachPopularCityMore";
 import { show_full_search_form } from '../../../helpers/PageRoutingFuncs';
@@ -84,14 +84,16 @@ const PopularCities = () => {
     }
 
     const addCityToTavourites = (city) => {
-        if(favCities.includes(city.IATA)){
+        toggleAddRemoveCityInFavourites(city, favCities, setFavCities);
+        /*if(favCities.includes(city.IATA)){
             let i = favCities.indexOf(city.IATA);
             favCities.splice(i,1);
         }else{
             favCities.push(city.IATA);
         }
         localStorage.setItem("favCts", JSON.stringify(favCities))
-        setFavCities([...favCities]);
+        setFavCities([...favCities]);*/
+
     }
 
     useEffect(() => {

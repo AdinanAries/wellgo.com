@@ -2146,7 +2146,7 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
-  .home_page_reviews_each_reviewer_pic{
+  .home_page_reviews_each_reviewer_pic {
     margin-top: 93px;
   }
   .home_page_reviews_each_reviewer_pic_img_container > div {
