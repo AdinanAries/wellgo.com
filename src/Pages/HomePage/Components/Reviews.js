@@ -253,14 +253,17 @@ const Reviews = () => {
                             </div>
                         </div>
                         <p className="reviews_rating_number" style={{marginTop: 8, color: "rgba(0,0,0,0.7)", backgroundColor: "rgb(229, 233, 241)", fontSize: 17, fontFamily: "'Prompt', Sans-serif", padding: "10px", width: "fit-content"}}>
-                            <span style={{marginRight: 10}}>
+                            <span>
                                 <i className="fa-solid fa-city" style={{marginRight: 10, color: "#c751b9"}}></i>
-                                {CITY_NAME},
+                                {CITY_NAME} <span style={{color: "rgba(0,0,0,0.17)"}}>|</span>
                             </span>
                             <span style={{fontWeight: "initial", color: "green"}}>
-                                <span style={{fontSize: 14}} id="main_reviews_rating_number">{parseFloat(reviewers[current].rated).toFixed(1)}</span>
-                                <span style={{fontSize: 14}}>, </span>
-                                <span style={{fontSize: 14}}>${TRAVEL_PRICE}</span>
+                                <span style={{fontSize: 14}} id="main_reviews_rating_number"> <i className="fa-solid fa-star" style={{marginRight: 4, fontSize: 11, color: "rbga(0,0,0,0.3)"}}></i>
+                                    {parseFloat(reviewers[current].rated).toFixed(1)}</span>
+                                <span style={{fontSize: 14}}> <span style={{color: "rgba(0,0,0,0.17)"}}>|</span> </span>
+                                <span style={{fontSize: 14, color: "darkslateblue"}}>
+                                    <i className="fa-solid fa-money-bills" style={{marginRight: 4, fontSize: 11, color: "rbga(0,0,0,0.3)"}}></i>
+                                    ${TRAVEL_PRICE}</span>
                             </span>
                         </p>
                         <div className="rated_places_photo_thumbs_container">
