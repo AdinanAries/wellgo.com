@@ -961,6 +961,7 @@ footer {
 }
 .home_page_reviews_each_reviewer_pic {
   min-width: 150px;
+  margin-top: 20px;
   margin-left: 100px;
   position: relative;
   z-index: 3;
@@ -1698,10 +1699,10 @@ footer {
     display: none;
   }
   .reviews_watermark_icon {
-    width: 140px;
+    /*width: 140px;
     height: 140px;
-    right: -10px;
-    top: 27px;
+    right: -10px;*/
+    top: 172px;
   }
   .reviews_watermark_icon2{
     display: none;
@@ -1733,12 +1734,6 @@ footer {
   .home_page_reviews_each_reviewer_pic {
     margin-left: 20px;
   }
-  /*.home_page_reviews_each_reviewer_pic p{
-    text-align: center !important;
-  }
-  .home_page_reviews_each_reviewer_pic_img_container{
-    justify-content: center !important;
-  }*/
   #home_page_reviews_selected_reviewer_msg,
   #home_page_reviews_selected_reviewer_name,
   .page_title {
@@ -2151,23 +2146,38 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
+  .home_page_reviews_each_reviewer_pic{
+    margin-top: 93px;
+  }
   .home_page_reviews_each_reviewer_pic_img_container > div {
-    width: 70px !important;
-    height: 70px !important;
+    width: 60px !important;
+    height: 60px !important;
     z-index: 100;
   }
   .rated_places_photo_thumbs_container {
     width: 100%;
-    top: -10px;
+    top: -93px;
+  }
+  .reviews_watermark_icon{
+    opacity: 0.3;
+  }
+  .places_reviewers_see_photos_btn{
+    text-align: right !important;
+  }
+  .home_page_reviews_each_reviewer_pic_img_container > div {
+    margin-bottom: 30px;
+  }
+  #home_page_reviews_selected_reviewer_city {
+    display: none;
+  }
+  #home_page_reviews_selected_reviewer_name {
+    display: none;
   }
   .checkout_page_header_price_total{
     display: none;
   }
 }
 @media screen and (max-width: 380px) {
-  /*.home_page_reviews_each_reviewer_pic {
-    margin-left: 10px;
-  }*/
   .landing_page_search_bar_call_btn_container {
     display: none !important;
   }
@@ -2183,19 +2193,12 @@ footer {
   .site-logo-txt p{
     display: none;
   }
-  /*.home_page_reviews_each_reviewer_pic_img_container div{
-    width: 90px !important;
-    height: 90px !important;
-  }
-  .home_page_reviews_each_reviewer_pic_img_container div img{
-    width: 90px !important;
-  }*/
   .home_page_reviews_each_review{
     padding-top: 15px !important;
   }
-  .reviews_watermark_icon{
+  /*.reviews_watermark_icon{
     top: 23px;
-  }
+  }*/
   .user_account_pane_main_menu_item p{
     font-size: 13px !important;
   }

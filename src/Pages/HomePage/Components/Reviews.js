@@ -284,7 +284,7 @@ const Reviews = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div style={{padding: 10, width: "100%", fontSize: 13, fontFamily: "'Prompt', Sans-serif", textAlign: "center", bottom: 0, left: 0, position: "absolute", background: "rgba(0,0,0,0.4)", color: "white"}}>
+                            <div className="places_reviewers_see_photos_btn" style={{padding: 10, width: "100%", fontSize: 13, fontFamily: "'Prompt', Sans-serif", textAlign: "center", bottom: 0, left: 0, position: "absolute", background: "rgba(0,0,0,0.5)", color: "white"}}>
                                 See photos of London Bridge
                             </div>
                         </div>
@@ -294,7 +294,10 @@ const Reviews = () => {
                             <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette", position: "relative", zIndex: 3}}>"</span>
                             {reviewers[current].msg}
                         </p>
-                        <p className="mobile_font_13" id="home_page_reviews_selected_reviewer_date" style={{marginTop: 20, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,73,0,0.8)'}}>
+                        <p style={{marginTop: 20, fontFamily: "Courgette", color: "#c751b9", textAlign: "center", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                            {reviewers[current].name}
+                        </p>
+                        <p className="mobile_font_13" id="home_page_reviews_selected_reviewer_date" style={{marginTop: 5, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,73,0,0.8)'}}>
                             {reviewers[current].date}
                         </p>
                         <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 35}}>
@@ -318,146 +321,6 @@ const Reviews = () => {
                                         />
                                     ))
                                 }
-                                {/*<div onClick={()=>show_selected_review(0)} style={{marginRight: 15}} className="home_page_other_reviewer">
-                                    <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
-                                        <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
-                                            Edward Onsoh
-                                        </p>
-                                        <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            Jul 11, 2021
-                                        </p>
-                                        <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            New York City
-                                        </p>
-                                        <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
-                                            This is is each other reviewer message that can be only to some 
-                                            extent. Well add this message later
-                                        </p>
-                                    </div>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                        <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                            <img src={wellgo_reviewer3} style={{width: 60, height: "auto"}} />
-                                        </div>
-                                    </div>
-                                    <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
-                                        Edward
-                                    </p>
-                                    <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                        4.6
-                                    </p>
-                                </div>
-                                <div onClick={()=>show_selected_review(1)} style={{marginRight: 15}} className="home_page_other_reviewer">
-                                    <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
-                                    <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
-                                            Naana Agyeman
-                                        </p>
-                                        <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            Mar 23, 2021
-                                        </p>
-                                        <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            New York City
-                                        </p>
-                                        <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
-                                            This is is each other reviewer message that can be only to some 
-                                            extent. Well add this message later
-                                        </p>
-                                    </div>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                        <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                            <img src={wellgo_reviewer4} style={{width: 60, height: "auto"}} />
-                                        </div>
-                                    </div>
-                                    <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
-                                        Naana
-                                    </p>
-                                    <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                        4.7
-                                    </p>
-                                </div>
-                                <div onClick={()=>show_selected_review(2)} className="mobile_hidden home_page_other_reviewer" style={{marginRight: 15}}>
-                                    <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
-                                        <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
-                                            Regina Daniels
-                                        </p>
-                                        <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            Jul 11, 2021
-                                        </p>
-                                        <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            New York City
-                                        </p>
-                                        <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
-                                            This is is each other reviewer message that can be only to some 
-                                            extent. Well add this message later
-                                        </p>
-                                    </div>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                        <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                            <img src={wellgo_reviewer5} style={{width: 60, height: "auto"}} />
-                                        </div>
-                                    </div>
-                                    <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
-                                        Regina
-                                    </p>
-                                    <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                        5.0
-                                    </p>
-                                </div>
-                                <div onClick={()=>show_selected_review(3)} className="mobile_hidden home_page_other_reviewer" style={{marginRight: 15}}>
-                                    <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
-                                        <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
-                                            Setzo Aldavis
-                                        </p>
-                                        <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            Oct 14, 2021
-                                        </p>
-                                        <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            New York City
-                                        </p>
-                                        <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
-                                            This is is each other reviewer message that can be only to some 
-                                            extent. Well add this message later
-                                        </p>
-                                    </div>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                        <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                            <img src={wellgo_reviewer6} style={{width: 60, height: "auto"}} />
-                                        </div>
-                                    </div>
-                                    <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
-                                        Setzo
-                                    </p>
-                                    <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                        4.9
-                                    </p>
-                                </div>
-                                <div onClick={()=>show_selected_review(4)} className="home_page_other_reviewer">
-                                    <div className="home_page_other_reviewer_bubble speech-bubble-bottom">
-                                        <p style={{fontSize: 15, fontWeight: "bolder", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
-                                            Cecilia Braden
-                                        </p>
-                                        <p style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            Jan 03, 2021
-                                        </p>
-                                        <p style={{fontSize: 13, marginBottom: 10, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                            New York City
-                                        </p>
-                                        <p style={{color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
-                                            This is is each other reviewer message that can be only to some 
-                                            extent. Well add this message later
-                                        </p>
-                                    </div>
-                                    <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                        <div style={{width: 60, height: 60, overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                            <img src={wellgo_reviewer2} style={{width: 60, height: "auto"}} />
-                                        </div>
-                                    </div>
-                                    <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
-                                        Cecilia
-                                    </p>
-                                    <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
-                                        5.0
-                                    </p>
-                                </div>*/}
                             </div>
                         </div>
                     </div>
