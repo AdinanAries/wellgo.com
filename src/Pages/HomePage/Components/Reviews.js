@@ -27,6 +27,7 @@ const Reviews = () => {
     const [ slice, setSlice ] = useState(0);
     const [ current, setCurrent ] = useState(slice);
     const [ currentCityIndex, setCurrentCityIndex ] = useState(0);
+    const [ showPlaceMap, setShowPlaceMap ] = useState(false);
 
     const [ favCities, setFavCities ] = useState(favCts);
     
@@ -200,6 +201,10 @@ const Reviews = () => {
         startSearchToKnownCity(city, airport_name, IATA, ICAO);
     }
 
+    const toggleShowRatedPlaceMap = () => {
+        setShowPlaceMap(!showPlaceMap);
+    }
+
     return (
         <div className="home_page_reviews_container">
             <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
@@ -274,7 +279,10 @@ const Reviews = () => {
                                     see all...
                                 </div>
                             </div>
-                            <div className="places_reviewers_actions_container">
+                            <div style={{zIndex: 2, display: showPlaceMap ? "flex" : "none", alignItems: "center", justifyContent: "center", position: "absolute", top: 0, left: 0, background: "darkblue", width: "100%", height: "100%", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)"}}>
+                                <p style={{textAlign: "center", color: "white"}}>MAP HERE</p>
+                            </div>
+                            <div className="places_reviewers_actions_container"> 
                                 <div style={{display: "flex", justifyContent: "space-between"}}>
                                     <div onClick={show_prev_city}>
                                         <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -288,8 +296,8 @@ const Reviews = () => {
                                         <p onClick={()=>searchFlightsForRatedCity(ratedPlaces[currentCityIndex].place)} style={{marginLeft: 5, width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-solid fa-plane-departure"></i>
                                         </p>
-                                        <p style={{marginLeft: 5,width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                            <i style={{color: "green", fontSize: 18}} className="fa-solid fa-map-location-dot"></i>
+                                        <p onClick={toggleShowRatedPlaceMap} style={{marginLeft: 5,width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "green", fontSize: 18}} className={"fa-solid "+ (showPlaceMap ? "fa-image" : "fa-map-location-dot")}></i>
                                         </p>
                                     </div>
                                     <div onClick={show_next_city} style={{marginLeft: 5}}>
