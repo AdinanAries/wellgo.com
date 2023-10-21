@@ -6,7 +6,11 @@ import citiesIcon from "../../../icons/citiesIcon.svg";
 
 import PaginationButtons from '../../../components/PaginationButtons';
 
-import { shuffle_array, get_horizontal_page_size, toggleAddRemoveCityInFavourites } from '../../../helpers/general';
+import { shuffle_array,
+        get_horizontal_page_size,
+        toggleAddRemoveCityInFavourites,
+        startSearchToKnownCity } from '../../../helpers/general';
+        
 import EachPopularCity from "./EachPopularCity";
 import EachPopularCityMore from "./EachPopularCityMore";
 import { show_full_search_form } from '../../../helpers/PageRoutingFuncs';
@@ -76,11 +80,9 @@ const PopularCities = () => {
         });
     }
 
-    const searchFlightsForPopularCity = (city) => {
-        global.changeAirportsToInput(
-                            `${city.city} - ${city.name} (${city.IATA})`,
-                            city.IATA, city.ICAO );
-        show_full_search_form();
+    const searchFlightsForPopularCity = (city_p) => {
+        const  { city, name, IATA ,ICAO } = city_p;
+        startSearchToKnownCity(city, name, IATA, ICAO);
     }
 
     const addCityToTavourites = (city) => {

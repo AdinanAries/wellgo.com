@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { show_full_search_form } from "../../../helpers/PageRoutingFuncs";
-import { shuffle_array, get_horizontal_page_size, toggleAddRemoveCityInFavourites } from "../../../helpers/general";
+import { shuffle_array,
+        get_horizontal_page_size,
+        toggleAddRemoveCityInFavourites,
+        startSearchToKnownCity } from "../../../helpers/general";
+
 import EachReviewer from "./EachReviewer";
 
 import reviews_icon from "../../../icons/reviews_icon.svg";
 import reviews_icon2 from "../../../icons/reviews_icon2.svg";
 import Reviewers from "../../../data/Reviewers";
-
-import AccraImg from "../../../citiesImg/AccraGhana.jpg";
-import LAImg from "../../../citiesImg/LA_US.jpg";
-import ParisImg from "../../../citiesImg/Paris.jpg";
-
-let arr=[AccraImg, LAImg, ParisImg]
 
 let ratedPlaces = shuffle_array(Reviewers);
 let temp=0;
@@ -35,6 +33,7 @@ const Reviews = () => {
     let reviewers = ratedPlaces[currentCityIndex].reviews;
     const CITY_NAME = ratedPlaces[currentCityIndex].place.name;
     const TRAVEL_PRICE = ratedPlaces[currentCityIndex].place.price;
+    const PICTURES = ratedPlaces[currentCityIndex].place.pictures;
 
     let current_reviewer = slice;
     //let current=slice;
@@ -196,6 +195,11 @@ const Reviews = () => {
         toggleAddRemoveCityInFavourites(city, favCities, setFavCities);
     }
 
+    const searchFlightsForRatedCity = (city_p) => {
+        const  { city, airport_name, IATA ,ICAO } = city_p;
+        startSearchToKnownCity(city, airport_name, IATA, ICAO);
+    }
+
     return (
         <div className="home_page_reviews_container">
             <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
@@ -256,16 +260,16 @@ const Reviews = () => {
                         </p>
                         <div className="rated_places_photo_thumbs_container">
                             {
-                                arr.slice(0,PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE).map( each => <div key={each}
+                                PICTURES.slice(0,PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE).map( each => <div key={each}
                                     style={{backgroundImage: `url('${each}')`, 
                                     backgroundSize: "cover", backgroundPosition: "center", 
                                     width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===1) ? "100%" : 160, height: 158}}>
                                 </div>)
                             }
                             
-                            <div style={{display: "none", backgroundImage: `url('${LAImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 158}}>
+                            <div style={{display: "none", backgroundImage: `url('${PICTURES[1]}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 158}}>
                             </div>
-                            <div style={{display: "none", backgroundImage: `url('${ParisImg}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 158}}>
+                            <div style={{display: "none", backgroundImage: `url('${PICTURES[2]}')`, backgroundSize: "cover", backgroundPosition: "center", width: 160, height: 158}}>
                                 <div style={{color: "white", width: "100%", height: "100%", display: "none", justifyContent: "center", alignItems: "center", cursor: "pointer", background: "rgba(0,0,0,0.6)"}}>
                                     see all...
                                 </div>
@@ -281,7 +285,7 @@ const Reviews = () => {
                                         <p onClick={()=>addCityToTavourites(ratedPlaces[currentCityIndex].place)} style={{width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className={((favCities.includes(ratedPlaces[currentCityIndex].place.IATA)) ? "fa-solid" : "fa-regular") + " fa-heart"}></i>
                                         </p>
-                                        <p onClick={show_full_search_form} style={{marginLeft: 5, width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        <p onClick={()=>searchFlightsForRatedCity(ratedPlaces[currentCityIndex].place)} style={{marginLeft: 5, width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-solid fa-plane-departure"></i>
                                         </p>
                                         <p style={{marginLeft: 5,width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -295,8 +299,8 @@ const Reviews = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="places_reviewers_see_photos_btn" style={{padding: 10, width: "100%", fontSize: 13, fontFamily: "'Prompt', Sans-serif", textAlign: "center", bottom: 0, left: 0, position: "absolute", background: "rgba(0,0,0,0.5)", color: "white"}}>
-                                See photos of London Bridge
+                            <div className="places_reviewers_see_photos_btn" style={{cursor: "pointer", padding: 10, width: "100%", fontSize: 13, fontFamily: "'Prompt', Sans-serif", textAlign: "center", bottom: 0, left: 0, position: "absolute", background: "rgba(0,0,0,0.6)", color: "white"}}>
+                                See photos of <span style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "orangered"}}>{CITY_NAME}</span>
                             </div>
                         </div>
                     </div>

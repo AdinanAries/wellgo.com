@@ -8,15 +8,31 @@ import defaultProf from "../defaultProf2.jpg";
 import photo5 from "../explore_destination_img1.jpg";
 import photo7 from "../explore_destination_img3.jpg";
 
+import AccraImg from "../citiesImg/AccraGhana.jpg";
+import LAImg from "../citiesImg/LA_US.jpg";
+import ParisImg from "../citiesImg/Paris.jpg";
+import pic1 from "../explore_destination_img.jpg";
+import pic2 from "../explore_destination_img1.jpg";
+import pic3 from "../explore_destination_img2.jpg";
+import pic4 from "../explore_destination_img4.jpg";
+import pic5 from '../explore_destination_img3.jpg';
+import pic6 from "../explore_destination_img5.jpg";
+import pic7 from "../explore_destination_img6.jpg";
+import pic8 from "../explore_destination_img7.jpg";
+import pic9 from "../explore_destination_img8.jpg"
+
 const Reviewers = [
     {
         place: {
             name: "London Bridge",
+            city: "London",
+            airport_name: "London Airport",
             price: "24.35",
             gps: "",
             currency: "USD",
-            IATA: "PLS1",
-            ICAO: "IPLS1"
+            IATA: "LHR",
+            ICAO: "EGLL",
+            pictures: [AccraImg, LAImg, ParisImg]
         },
         reviews: [
             {
@@ -64,11 +80,14 @@ const Reviewers = [
     {
         place: {
             name: "Kintampo Water Falls",
+            city: "Kintampo",
+            airport_name: "Accra Airport",
             price: "45.35",
             gps: "",
             currency: "USD",
-            IATA: "PLS2",
-            ICAO: "IPLS2"
+            IATA: "ACC",
+            ICAO: "DGAA",
+            pictures: [pic7, pic8, pic9]
         },
         reviews: [
             {
@@ -106,11 +125,14 @@ const Reviewers = [
     {
         place: {
             name: "Paris Saint Jemain",
+            city: "Paris",
+            airport_name: "Paris Airport",
             price: "25.35",
             gps: "",
             currency: "USD",
-            IATA: "PLS3",
-            ICAO: "IPLS3"
+            IATA: "LBG",
+            ICAO: "LFPB",
+            pictures: [pic1, pic2, pic3]
         },
         reviews: [
             {
@@ -177,12 +199,15 @@ const Reviewers = [
     },
     {
         place: {
-            name: "Paris Saint Jemain",
+            name: "China Tower",
+            city: "Beijing",
+            airport_name: "Beijing Airport",
             price: "25.35",
             gps: "",
             currency: "USD",
-            IATA: "PLS4",
-            ICAO: "IPLS4"
+            IATA: "PEK",
+            ICAO: "ZBAA",
+            pictures: [pic4, pic5, pic6]
         },
         reviews: [
             {

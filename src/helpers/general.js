@@ -1,3 +1,5 @@
+import { show_full_search_form } from "./PageRoutingFuncs";
+
 export const obj_has_empty_prop = (obj) => {
 
     if (typeof obj === "object") {
@@ -75,4 +77,11 @@ export const toggleAddRemoveCityInFavourites = (city, favCities, setFavCities) =
     }
     localStorage.setItem("favCts", JSON.stringify(favCities))
     setFavCities([...favCities]);
+}
+
+export const startSearchToKnownCity = (city, name, IATA, ICAO) => {
+    global.changeAirportsToInput(
+        `${city} - ${name} (${IATA})`,
+        IATA, ICAO );
+    show_full_search_form();
 }
