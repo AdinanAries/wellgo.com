@@ -85,15 +85,6 @@ const PopularCities = () => {
 
     const addCityToTavourites = (city) => {
         toggleAddRemoveCityInFavourites(city, favCities, setFavCities);
-        /*if(favCities.includes(city.IATA)){
-            let i = favCities.indexOf(city.IATA);
-            favCities.splice(i,1);
-        }else{
-            favCities.push(city.IATA);
-        }
-        localStorage.setItem("favCts", JSON.stringify(favCities))
-        setFavCities([...favCities]);*/
-
     }
 
     useEffect(() => {

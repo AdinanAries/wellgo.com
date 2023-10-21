@@ -15,6 +15,8 @@ const Reviewers = [
             price: "24.35",
             gps: "",
             currency: "USD",
+            IATA: "PLS1",
+            ICAO: "IPLS1"
         },
         reviews: [
             {
@@ -65,6 +67,8 @@ const Reviewers = [
             price: "45.35",
             gps: "",
             currency: "USD",
+            IATA: "PLS2",
+            ICAO: "IPLS2"
         },
         reviews: [
             {
@@ -105,6 +109,8 @@ const Reviewers = [
             price: "25.35",
             gps: "",
             currency: "USD",
+            IATA: "PLS3",
+            ICAO: "IPLS3"
         },
         reviews: [
             {
@@ -175,6 +181,8 @@ const Reviewers = [
             price: "25.35",
             gps: "",
             currency: "USD",
+            IATA: "PLS4",
+            ICAO: "IPLS4"
         },
         reviews: [
             {

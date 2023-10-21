@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { show_full_search_form } from "../../../helpers/PageRoutingFuncs";
-import { shuffle_array, get_horizontal_page_size } from "../../../helpers/general";
+import { shuffle_array, get_horizontal_page_size, toggleAddRemoveCityInFavourites } from "../../../helpers/general";
 import EachReviewer from "./EachReviewer";
 
 import reviews_icon from "../../../icons/reviews_icon.svg";
@@ -16,6 +16,11 @@ let arr=[AccraImg, LAImg, ParisImg]
 let ratedPlaces = shuffle_array(Reviewers);
 let temp=0;
 
+let favCts=[];
+(localStorage.getItem("favCts")) ?
+    favCts=JSON.parse(localStorage.getItem("favCts")) :
+    localStorage.setItem("favCts", JSON.stringify([])) ;
+
 const Reviews = () => {
 
     const PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE = get_horizontal_page_size(150, 100, 3)
@@ -24,6 +29,8 @@ const Reviews = () => {
     const [ slice, setSlice ] = useState(0);
     const [ current, setCurrent ] = useState(slice);
     const [ currentCityIndex, setCurrentCityIndex ] = useState(0);
+
+    const [ favCities, setFavCities ] = useState(favCts);
     
     let reviewers = ratedPlaces[currentCityIndex].reviews;
     const CITY_NAME = ratedPlaces[currentCityIndex].place.name;
@@ -185,6 +192,10 @@ const Reviews = () => {
             setCurrentCityIndex((currentCityIndex-1));
     }
 
+    const addCityToTavourites = (city) => {
+        toggleAddRemoveCityInFavourites(city, favCities, setFavCities);
+    }
+
     return (
         <div className="home_page_reviews_container">
             <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
@@ -267,8 +278,8 @@ const Reviews = () => {
                                         </p>
                                     </div>
                                     <div style={{display: "flex", marginLeft: 5}}>
-                                        <p style={{width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                            <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-regular fa-heart"></i>
+                                        <p onClick={()=>addCityToTavourites(ratedPlaces[currentCityIndex].place)} style={{width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className={((favCities.includes(ratedPlaces[currentCityIndex].place.IATA)) ? "fa-solid" : "fa-regular") + " fa-heart"}></i>
                                         </p>
                                         <p onClick={show_full_search_form} style={{marginLeft: 5, width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className="fa-solid fa-plane-departure"></i>
