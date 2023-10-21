@@ -2151,22 +2151,23 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
+  .home_page_reviews_each_reviewer_pic_img_container > div {
+    width: 70px !important;
+    height: 70px !important;
+    z-index: 100;
+  }
+  .rated_places_photo_thumbs_container {
+    width: 100%;
+    top: -10px;
+  }
   .checkout_page_header_price_total{
     display: none;
   }
 }
 @media screen and (max-width: 380px) {
-  .home_page_reviews_each_reviewer_pic_img_container > div {
-    width: 70px !important;
-    height: 70px !important;
-  }
-  .home_page_reviews_each_reviewer_pic {
+  /*.home_page_reviews_each_reviewer_pic {
     margin-left: 10px;
-  }
-  .rated_places_photo_thumbs_container {
-    top: -10px;
-    right: 0;
-  }
+  }*/
   .landing_page_search_bar_call_btn_container {
     display: none !important;
   }
@@ -2182,13 +2183,13 @@ footer {
   .site-logo-txt p{
     display: none;
   }
-  .home_page_reviews_each_reviewer_pic_img_container div{
+  /*.home_page_reviews_each_reviewer_pic_img_container div{
     width: 90px !important;
     height: 90px !important;
   }
   .home_page_reviews_each_reviewer_pic_img_container div img{
     width: 90px !important;
-  }
+  }*/
   .home_page_reviews_each_review{
     padding-top: 15px !important;
   }

@@ -248,7 +248,7 @@ const Reviews = () => {
                                 arr.slice(0,PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE).map( each => <div key={each}
                                     style={{backgroundImage: `url('${each}')`, 
                                     backgroundSize: "cover", backgroundPosition: "center", 
-                                    width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===1) ? 216 : 160, height: 158}}>
+                                    width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===1) ? "100%" : 160, height: 158}}>
                                 </div>)
                             }
                             
@@ -285,7 +285,7 @@ const Reviews = () => {
                                 </div>
                             </div>
                             <div style={{padding: 10, width: "100%", fontSize: 13, fontFamily: "'Prompt', Sans-serif", textAlign: "center", bottom: 0, left: 0, position: "absolute", background: "rgba(0,0,0,0.4)", color: "white"}}>
-                                Photos of London Bridge
+                                See photos of London Bridge
                             </div>
                         </div>
                     </div>
