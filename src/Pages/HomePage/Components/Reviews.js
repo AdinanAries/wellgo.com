@@ -21,13 +21,14 @@ let favCts=[];
 
 const Reviews = () => {
 
-    const PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE = get_horizontal_page_size(150, 100, 3)
+    const PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE = get_horizontal_page_size(150, 20, 3)
 
     const PAGE_SIZE = get_horizontal_page_size(60, 40, 6);
     const [ slice, setSlice ] = useState(0);
     const [ current, setCurrent ] = useState(slice);
     const [ currentCityIndex, setCurrentCityIndex ] = useState(0);
     const [ showPlaceMap, setShowPlaceMap ] = useState(false);
+    const [ showAllActionIcons, setShowAllActionIcons ] = useState(false);
 
     const [ favCities, setFavCities ] = useState(favCts);
     
@@ -205,6 +206,10 @@ const Reviews = () => {
         setShowPlaceMap(!showPlaceMap);
     }
 
+    const toggleShowAllActionIcons = () => {
+        setShowAllActionIcons(!showAllActionIcons);
+    }
+
     return (
         <div className="home_page_reviews_container">
             <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
@@ -268,10 +273,12 @@ const Reviews = () => {
                         </p>
                         <div className="rated_places_photo_thumbs_container">
                             {
-                                PICTURES.slice(0,PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE).map( each => <div key={each}
+                                PICTURES.slice(0,PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE).map( each => <div 
+                                    key={each}
+                                    onClick={toggleShowAllActionIcons}
                                     style={{backgroundImage: `url('${each}')`, 
                                     backgroundSize: "cover", backgroundPosition: "center", 
-                                    width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===1) ? "100%" : 160, height: 158}}>
+                                    width: (PLACES_ADVISORS_PLACE_PICS_PAGE_SIZE===2) ? "50%" : 160, height: 158}}>
                                 </div>)
                             }
                             
@@ -282,17 +289,18 @@ const Reviews = () => {
                                     see all...
                                 </div>
                             </div>
-                            <div style={{zIndex: 2, display: showPlaceMap ? "flex" : "none", alignItems: "center", justifyContent: "center", position: "absolute", top: 0, left: 0, background: "darkblue", width: "100%", height: "100%", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)"}}>
+                            <div onClick={toggleShowAllActionIcons} 
+                                style={{zIndex: 2, display: showPlaceMap ? "flex" : "none", alignItems: "center", justifyContent: "center", position: "absolute", top: 0, left: 0, background: "darkblue", width: "100%", height: "100%", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)"}}>
                                 <p style={{textAlign: "center", color: "white"}}>MAP HERE</p>
                             </div>
                             <div className="places_reviewers_actions_container"> 
                                 <div style={{display: "flex", justifyContent: "space-between"}}>
-                                    <div onClick={show_prev_city}>
+                                    <div onClick={show_prev_city} style={{display: showAllActionIcons ? "block" : "none"}}>
                                         <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-left"></i>
                                         </p>
                                     </div>
-                                    <div style={{display: "flex", marginLeft: 5}}>
+                                    <div style={{display: showAllActionIcons ? "flex" : "none", marginLeft: 5}}>
                                         <p onClick={()=>addCityToTavourites(ratedPlaces[currentCityIndex].place)} style={{width: 35, height: 35, cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <i style={{color: "rgba(0,0,0,0.8)", fontSize: 18}} className={((favCities.includes(ratedPlaces[currentCityIndex].place.IATA)) ? "fa-solid" : "fa-regular") + " fa-heart"}></i>
                                         </p>
@@ -303,9 +311,14 @@ const Reviews = () => {
                                             <i style={{color: "green", fontSize: 18}} className={"fa-solid "+ (showPlaceMap ? "fa-image" : "fa-map-location-dot")}></i>
                                         </p>
                                     </div>
-                                    <div onClick={show_next_city} style={{marginLeft: 5}}>
+                                    <div onClick={show_next_city} style={{marginLeft: 5, display: showAllActionIcons ? "block" : "none"}}>
                                         <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-angle-right"></i>
+                                        </p>
+                                    </div>
+                                    <div onClick={toggleShowAllActionIcons} style={{display: showAllActionIcons ? "none" : "block"}} >
+                                        <p style={{width: 35, height: 35, borderRadius: "100%", cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "#c751b9", fontSize: 18}} className="fa-solid fa-arrow-left"></i>
                                         </p>
                                     </div>
                                 </div>
