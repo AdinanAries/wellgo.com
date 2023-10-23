@@ -219,7 +219,7 @@ const Reviews = () => {
     return (
         <>
             {   
-                showGallery && <FullPageGallery toggleShowGallery={toggleShowGallery}/>
+                showGallery && <FullPageGallery photos={PICTURES} toggleShowGallery={toggleShowGallery}/>
             }
             <div className="home_page_reviews_container">
                 <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
