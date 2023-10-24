@@ -103,3 +103,19 @@ export const convert24HTimeToAMPM = ( time ) => {
   
     return `${h}:${m}${dd}`;
 }
+
+export const calculateTotalTime = (earlier, later) => {
+    let diff_ms = new Date(later).getTime() - new Date(earlier).getTime();
+    let diff_s = diff_ms/1000;
+    let diff_m = diff_s/60;
+    let diff_h = Math.floor(diff_m/60);
+    let diff_rm = (diff_m%60);
+    return {
+        h: diff_h,
+        total_m: diff_m,
+        m: diff_rm,
+        total_s: diff_s,
+        total_ms: diff_ms
+
+    }
+}

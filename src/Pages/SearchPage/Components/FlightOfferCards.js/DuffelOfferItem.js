@@ -1,24 +1,23 @@
 import { markup } from "../../../../helpers/Prices";
-import { convert24HTimeToAMPM } from "../../../../helpers/general";
+import { convert24HTimeToAMPM, calculateTotalTime } from "../../../../helpers/general";
 
 const DuffelOfferItem = (props) => {
-    /**
-     * 
-        conditions_of_carriage_url: "https://www.aa.com/i18n/customer-service/support/conditions-of-carriage.jsp"
-        iata_code: "AA"
-        id: "arl_00009VME7DAGiJjwomhv32"
-        logo_lockup_url: "https://assets.duffel.com/img/airlines/for-light-background/full-color-lockup/AA.svg"
-        logo_symbol_url: "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/AA.svg"
-        name: "American Airlines"
-    */
+
     console.log(props);
     const { total_amount, id, owner, slices } = props.flight;
-    console.log("Chunk:", )
+    
     const AIRCRAFT_NAME = slices[0].segments[0].aircraft?.name;
     const OPERATED_BY = slices[0].segments[0].operating_carrier?.name;
     const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
     const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(slices[0].segments.length - 1)].arriving_at.split("T")[1]);
     const STOPS_COUNT = slices[0].segments.length;
+    const ORIGIN_AIRPORT = `${slices[0].segments[0].origin.name} (${slices[0].segments[0].origin.iata_code})`;
+    const DESTINATION_AIRPORT = `${slices[0].segments[(slices[0].segments.length - 1)].destination.name} (${slices[0].segments[(slices[0].segments.length - 1)].destination.iata_code})`;
+
+    const { h: HOURS, total_m, m: MINUTES, total_s, total_ms } = calculateTotalTime(
+                                                    slices[0].segments[0].departing_at.replace("T", " "),
+                                                    slices[0].segments[(slices[0].segments.length - 1)].arriving_at.replace("T", " ")
+                                                );
 
     return (
         <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}} style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
@@ -27,10 +26,10 @@ const DuffelOfferItem = (props) => {
                     <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
                         {TRIP_START} - {TRIP_ENDS}</p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12,}}>
-                        Montreal (YUB) - New York (LGA)</p>
+                    {ORIGIN_AIRPORT} - {DESTINATION_AIRPORT}</p>
                 </div>
                 <div>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>5h 9m ({STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")} )</p>
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>{HOURS}h {MINUTES}m ({STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")} )</p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>2h 1m in Toronto(yyz)</p>
                 </div>
                 <div className="each_ticket_price_display_container">
