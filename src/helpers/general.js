@@ -85,3 +85,21 @@ export const startSearchToKnownCity = (city, name, IATA, ICAO) => {
         IATA, ICAO );
     show_full_search_form();
 }
+
+export const convert24HTimeToAMPM = ( time ) => {
+    let parts = time.trim().split(":")
+    let hh = parseInt(parts[0]);
+    let m = parseInt(parts[1]);
+    let dd = "am";
+    let h = hh;
+    if (h >= 12) {
+      h = hh - 12;
+      dd = "pm";
+    }
+    if (h === 0) {
+      h = 12;
+    }
+    m = m < 10 ? "0" + m : m;
+  
+    return `${h}:${m}${dd}`;
+}

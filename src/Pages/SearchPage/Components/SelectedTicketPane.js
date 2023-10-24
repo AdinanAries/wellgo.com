@@ -4,6 +4,7 @@ import deltaIcon from "../../../deltaIcon.png";
 import { show_start_checkout_page } from "../../CheckoutPage/CheckoutPage";
 import SelectedTicketInfo from "./SelectedTicketInfo";
 import { useState, useEffect } from "react";
+import { FLIGHT_DATA_ADAPTER } from "../../../helpers/FlightDataAdapter";
 
 export default function SelectedTicketPane(props){
 
@@ -18,7 +19,7 @@ export default function SelectedTicketPane(props){
         try{
             return await fetch(api_url+path)
             .then(res => res.json())
-            .then(data => data)
+            .then(data => FLIGHT_DATA_ADAPTER.adapt(data))
             .catch(err => {
                 console.log(err);
                 return null;
