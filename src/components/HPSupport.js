@@ -6,6 +6,8 @@ import HelpSupportSettingsPage from "./HelpSupportChatSettingsPage";
 import CONSTANTS from "../Constants/Constants";
 import BotAuxMsg from "../Constants/BotAuxMsg";
 
+import notification_sound from "../audio/livechat.mp3";
+
 export default function HPSupportBtn(){
     return (
         <div className="hp_support_container">
@@ -123,6 +125,9 @@ export function show_support_chat_settings_container(){
 
 let botPromptHideTimeoutObj;
 export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt) {
+
+    let audio = new Audio(notification_sound);
+    
     if(botPromptHideTimeoutObj){
         clearTimeout(botPromptHideTimeoutObj);
     }
@@ -151,6 +156,7 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
                     ${message}
                 </p>`;
         }
+        audio.play();
     }, randWait);
 
     botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (5000+randWait));
