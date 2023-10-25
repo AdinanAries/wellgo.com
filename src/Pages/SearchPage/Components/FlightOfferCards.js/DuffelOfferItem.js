@@ -1,5 +1,5 @@
 import { markup } from "../../../../helpers/Prices";
-import { convert24HTimeToAMPM, calculateTotalTime } from "../../../../helpers/general";
+import { convert24HTimeToAMPM, calculateTotalTime, ellipsify } from "../../../../helpers/general";
 
 const DuffelOfferItem = (props) => {
 
@@ -8,16 +8,25 @@ const DuffelOfferItem = (props) => {
     
     const AIRCRAFT_NAME = slices[0].segments[0].aircraft?.name;
     const OPERATED_BY = slices[0].segments[0].operating_carrier?.name;
+    const SEGMENT_LENGTH = slices[0].segments.length;
     const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
-    const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(slices[0].segments.length - 1)].arriving_at.split("T")[1]);
-    const STOPS_COUNT = slices[0].segments.length;
+    const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
+    const STOPS_COUNT = (SEGMENT_LENGTH-1);
     const ORIGIN_AIRPORT = `${slices[0].segments[0].origin.name} (${slices[0].segments[0].origin.iata_code})`;
-    const DESTINATION_AIRPORT = `${slices[0].segments[(slices[0].segments.length - 1)].destination.name} (${slices[0].segments[(slices[0].segments.length - 1)].destination.iata_code})`;
-
-    const { h: HOURS, total_m, m: MINUTES, total_s, total_ms } = calculateTotalTime(
-                                                    slices[0].segments[0].departing_at.replace("T", " "),
-                                                    slices[0].segments[(slices[0].segments.length - 1)].arriving_at.replace("T", " ")
-                                                );
+    const DESTINATION_AIRPORT = `${slices[0].segments[(SEGMENT_LENGTH - 1)].destination.name} (${slices[0].segments[(SEGMENT_LENGTH - 1)].destination.iata_code})`;
+    let STOPSMARKUP = [];
+    if(SEGMENT_LENGTH>1){
+        for(let sg=0; sg<SEGMENT_LENGTH-1; sg++){
+            let flight_stop_arrival = slices[0].segments[sg].arriving_at;
+            let flight_stop_departure = slices[0].segments[sg+1].departing_at;
+            const {h:HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
+            let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slices[0].segments[sg].destination.name)} (${slices[0].segments[sg].destination.iata_code}) `);
+            STOPSMARKUP.push(<p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>{STOP_DETAILS}</p>);
+        }
+    }
+    let duration = slices[0].duration.substring(2);
+    const HOURS =  duration.split("H")[0];
+    const MINUTES = duration.split("H")[1].replace("M","");
 
     return (
         <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}} style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
@@ -29,8 +38,8 @@ const DuffelOfferItem = (props) => {
                     {ORIGIN_AIRPORT} - {DESTINATION_AIRPORT}</p>
                 </div>
                 <div>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>{HOURS}h {MINUTES}m ({STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")} )</p>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>2h 1m in Toronto(yyz)</p>
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>{HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")} )</p>
+                    {STOPSMARKUP.map(each=>each)}
                 </div>
                 <div className="each_ticket_price_display_container">
                     <p className="each_ticket_price_display" style={{color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 27, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
