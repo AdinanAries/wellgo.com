@@ -19,7 +19,7 @@ const DuffelOfferItem = (props) => {
         for(let sg=0; sg<SEGMENT_LENGTH-1; sg++){
             let flight_stop_arrival = slices[0].segments[sg].arriving_at;
             let flight_stop_departure = slices[0].segments[sg+1].departing_at;
-            const {h:HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
+            const {h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
             let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slices[0].segments[sg].destination.city_name)} (${slices[0].segments[sg].destination.iata_code})`);
             STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
                     {STOP_DETAILS}
@@ -27,7 +27,12 @@ const DuffelOfferItem = (props) => {
                 </p>);
         }
     }
-    let duration = slices[0].duration.substring(2);
+    let duration = slices[0].duration; // [P1DT2H30M, PT2H30M]
+    if(duration.includes("D")){
+        duration=duration.replace("P","").replace("T","").replace("D", "d ");
+    }else{
+        duration = duration.substring(2);
+    }
     const HOURS =  duration.split("H")[0];
     const MINUTES = duration.split("H")[1].replace("M","");
 
