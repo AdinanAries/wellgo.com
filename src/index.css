@@ -25,6 +25,24 @@
   flex-direction: column;
   justify-content: center;
 }
+.tooltip_parent {
+  position: relative;
+}
+.tooltip_parent:hover .tooltip {
+  display: block;
+}
+.tooltip {
+  display: none;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.7);
+  background-color: white;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
+  top: calc(100% + 5px);
+  font-size: 12px;
+  padding: 5px;
+  width: fit-content;
+  font-family: 'Prompt', sans-serif;
+}
 .page-popup-cover-content-container{
   background-color: white;
   min-height: 400px;

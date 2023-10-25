@@ -20,8 +20,11 @@ const DuffelOfferItem = (props) => {
             let flight_stop_arrival = slices[0].segments[sg].arriving_at;
             let flight_stop_departure = slices[0].segments[sg+1].departing_at;
             const {h:HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
-            let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slices[0].segments[sg].destination.name)} (${slices[0].segments[sg].destination.iata_code}) `);
-            STOPSMARKUP.push(<p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>{STOP_DETAILS}</p>);
+            let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slices[0].segments[sg].destination.city_name)} (${slices[0].segments[sg].destination.iata_code})`);
+            STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
+                    {STOP_DETAILS}
+                    <div className="tooltip">{`${slices[0].segments[sg].destination.city_name} - ${slices[0].segments[sg].destination.name}`}</div>
+                </p>);
         }
     }
     let duration = slices[0].duration.substring(2);
