@@ -41,7 +41,11 @@ function SearchForm( props ){
                 <div className="each_flex-side first">
                     <div className="forms_class_guests_cabin_settings_container" style={{zIndex: 10}}>
                         <div id="sp_forms_main_class_guests_cabin_settings_pane" className="forms_class_guests_cabin_settings_pane">
-                            <p onClick={()=>document.getElementById("sp_forms_main_class_guests_cabin_settings_pane").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
+                            <p onClick={() => {
+                                    if(document.getElementById("sp_forms_main_class_guests_cabin_settings_pane"))
+                                        document.getElementById("sp_forms_main_class_guests_cabin_settings_pane").style.display = "none"
+                                }
+                            } className="airports_auto_complete_close_btn">&times;</p>
                             <div id="sp_add_travelers_settings_pane" style={{padding: 15, display: "none"}}>
                                 <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", fontWeight: "bolder", fontSize: 17, marginTop: 10, marginBottom: 20}}>
                                     Add Travelers</p>
@@ -152,7 +156,11 @@ function SearchForm( props ){
                                     </div>
                                 </div>
                             </div>
-                            <div onClick={()=>document.getElementById("sp_forms_main_class_guests_cabin_settings_pane").style.display = "none"} style={{cursor: "pointer", padding: 10, margin: 10, marginTop: 0, backgroundColor: "rgb(23, 87, 148)", color: "white", textAlign: "center", borderRadius: 9, textAlign: "center"}}>
+                            <div onClick={()=> {
+                                    if(document.getElementById("sp_forms_main_class_guests_cabin_settings_pane"))
+                                        document.getElementById("sp_forms_main_class_guests_cabin_settings_pane").style.display = "none"
+                                }
+                            } style={{cursor: "pointer", padding: 10, margin: 10, marginTop: 0, backgroundColor: "rgb(23, 87, 148)", color: "white", textAlign: "center", borderRadius: 9, textAlign: "center"}}>
                                 Done
                             </div>
                         </div>
@@ -180,7 +188,11 @@ function SearchForm( props ){
                     <div style={{display: "flex", width: "65%"}}>
                         <div style={{position: "relative", width: "calc(50% - 5px)"}} className="search_forms_from_where_input_fld_container">
                             <div id="sp_from_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{zIndex: 10}}>
-                                <p onClick={()=>document.getElementById("sp_from_where_airports_auto_complete_input").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
+                                <p onClick={() => {
+                                        if(document.getElementById("sp_from_where_airports_auto_complete_input"))
+                                            document.getElementById("sp_from_where_airports_auto_complete_input").style.display = "none"
+                                    }
+                                } className="airports_auto_complete_close_btn">&times;</p>
                                 <input autoComplete="off" id="sp_from_where_airports_auto_complete_input_fld" 
                                     onBlur={()=>{
                                         setTimeout(()=>document.getElementById("sp_from_where_airports_auto_complete_input").style.display = "none",

@@ -27,7 +27,7 @@ const DuffelOfferItem = (props) => {
                 </p>);
         }
     }
-    let duration = slices[0].duration; // [P1DT2H30M, PT2H30M]
+    let duration = slices[0].duration; // [P1DT2H30M, PT23H45M]
     if(duration.includes("D")){
         duration=duration.replace("P","").replace("T","").replace("D", "d ");
     }else{

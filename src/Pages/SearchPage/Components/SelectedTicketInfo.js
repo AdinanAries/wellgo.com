@@ -1,13 +1,21 @@
 import CONSTANTS from "../../../Constants/Constants";
 import ENVIRONMENT from "../../../Constants/Environment";
+import { markup } from "../../../helpers/Prices";
+import { convert24HTimeToAMPM } from "../../../helpers/general";
+
+import SelectedTicketItinSegments from "./SelectedTicketItinSegments";
 
 const SelectedTicketInfo = (props) => {
-    let info = {};
-    if(CONSTANTS.duffel===ENVIRONMENT.data_provider){
-        if(props.flight.data){
-            info.total_price = props.flight.data.total_amount;
-        }
-    }
+
+    const { total_amount, slices, owner } = props.flight.data;
+
+    const SEGMENT_LENGTH = slices[0].segments.length;
+    const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
+    const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
+    const STOPS_COUNT = (SEGMENT_LENGTH-1);
+    const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
+    const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination.city_name;
+    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin.marketing_name
 
     return (
         <div id="selected_ticket_main_details_pane">
@@ -15,163 +23,25 @@ const SelectedTicketInfo = (props) => {
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                         <div>
                             <p style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder", marginBottom: 10}}>
-                                9:45am - 5:23pm (2 stops)
+                                {TRIP_START} - {TRIP_ENDS} ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")} )
                             </p>
                             <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                                New York
+                                {ORIGIN_CITY}
                                 <span style={{margin: "0 10px", color: "rgba(0,0,0,0.4)"}}>
                                     <i className="fa-solid fa-repeat"></i></span>
-                                Canada
+                                {DESTINATION_CITY}
                             </p>
                             <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 2}}>
                                 Nov 25 - Nov 27</p>
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                                <img src={"./deltaIcon.png"} alt={"todo"} style={{width: 27, height: "auto", objectFit: "cover"}} />
-                                Delta
+                                <img src={owner.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
+                                {owner.name}
                                 <span onClick={global.toggle_see_ticket_details_itinerary_details} 
                                     style={{cursor: "pointer", marginLeft: 15, fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
                                     See details <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
                                 </span>
                             </p>
-                            <div id="see_ticket_details_itinerary_details" style={{display: "none", marginTop: 10, marginBottom: 20}}>
-
-                                {/*Take off without stops*/}
-                                <div style={{display: "none", borderLeft: "3px dashed rgba(0,0,0,0.2)", marginTop: 20, padding: "5px 10px", paddingRight: 0, position: "relative"}}>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", position: "absolute", top: "-15px", left: "-6.5px"}}>
-                                        <i className="fa fa-map-marker" style={{color: "rgba(0,0,0,0.3)"}}></i>
-                                    </div>
-                                    <div style={{position: "absolute", left: "-8.5px", backgroundColor: "white", top: "calc(50% - 20px)", borderRadius: "100%"}}>
-                                        <i style={{color: "rgba(0,0,0,0.3)", transform: "rotate(135deg)"}} className="fa fa-plane"></i>
-                                    </div>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", position: "absolute", bottom: "-10px", left: "-6.5px"}}>
-                                        <i className="fa fa-map-marker" style={{color: "rgba(0,0,0,0.3)"}}></i>
-                                    </div>
-                                    <p style={{fontSize: 15, fontFamily: "'Prompt', sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
-                                        9:45am - New York
-                                    </p>
-                                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 2, marginLeft: 20, marginBottom: 20}}>
-                                        La Guardia (LGA)</p>
-                                    <div style={{marginLeft: 20}}>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                                            1h 35m flight</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Operated by WestJet Encore</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Dehavilland DHC-8 400</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Economy/Coach (T)</p>
-                                    </div>
-                                    <p style={{fontSize: 15, marginTop: 20, fontFamily: "'Prompt', sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
-                                        11:20am - Toronto
-                                    </p>
-                                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginLeft: 20, marginTop: 2}}>
-                                        Pearson Intl. (YYZ)</p>
-                                </div>                            
-
-                                {/*Take off with stops*/}
-                                <div style={{borderLeft: "3px dashed rgba(0,0,0,0.2)", marginTop: 20, padding: "5px 10px", paddingRight: 0, position: "relative"}}>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", position: "absolute", top: "-15px", left: "-6.5px"}}>
-                                        <i className="fa fa-map-marker" style={{color: "green"}}></i>
-                                    </div>
-                                    <div style={{position: "absolute", left: "-8.5px", backgroundColor: "white", top: "calc(50% - 20px)", borderRadius: "100%"}}>
-                                        <i style={{color: "rgba(0,0,0,0.3)", transform: "rotate(135deg)"}} className="fa fa-plane"></i>
-                                    </div>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", border: "3px solid crimson", position: "absolute", bottom: "-10px", left: "-7px"}}>
-
-                                    </div>
-                                    <p style={{fontSize: 15, fontFamily: "'Prompt', sans-serif", color: "green"}}>
-                                        9:45am - New York
-                                    </p>
-                                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 2, marginLeft: 20, marginBottom: 20}}>
-                                        La Guardia (LGA)</p>
-                                    <div style={{marginLeft: 20}}>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                                            1h 35m flight</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Operated by WestJet Encore</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Dehavilland DHC-8 400</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Economy/Coach (T)</p>
-                                    </div>
-                                </div>
-
-                                {/*Middle Stop Segments*/}
-                                <div style={{borderLeft: "3px dashed rgba(0,0,0,0.2)", marginTop: 10, padding: "5px 10px", paddingRight: 0, position: "relative"}}>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", position: "absolute", top: "-11px", left: "-6.5px"}}>
-                                        
-                                    </div>
-                                    <div style={{position: "absolute", left: "-8.5px", backgroundColor: "white", top: "calc(50% - 20px)", borderRadius: "100%"}}>
-                                        <i style={{color: "rgba(0,0,0,0.3)", transform: "rotate(135deg)"}} className="fa fa-plane"></i>
-                                    </div>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", border: "3px solid crimson", position: "absolute", bottom: "-10px", left: "-7px"}}>
-                                        
-                                    </div>
-                                    <p style={{fontSize: 15, fontFamily: "'Prompt', sans-serif", color: "crimson"}} >
-                                        11:20am - Toronto
-                                    </p>
-                                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginLeft: 20, marginTop: 2}}>
-                                        Pearson Intl. (YYZ)</p>
-                                    <div style={{backgroundColor: "rgba(255,0,0,0.1)", margin: 10, width: "fit-content", border: "1px solid rgba(255,0,0,0.1)", borderRadius: 6, padding: "10px 20px"}}>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                                            <i className="fa fa-exclamation-triangle" style={{color: "rgba(255,0,0,0.7)", marginRight: 5}}></i>
-                                            Flight Stop
-                                        </p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 5}}>
-                                            1h 35m wait in Toronto</p>
-                                    </div>
-                                    <div style={{marginLeft: 20}}>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                                            1h 35m flight</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Operated by WestJet Encore</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Dehavilland DHC-8 400</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Economy/Coach (T)</p>
-                                    </div>
-                                </div>
-
-                                {/*Arrival with stops*/}
-                                <div style={{borderLeft: "3px dashed rgba(0,0,0,0.2)", marginTop: 10, padding: "5px 10px", paddingRight: 0, position: "relative"}}>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", position: "absolute", top: "-11px", left: "-6.5px"}}>
-                                        
-                                    </div>
-                                    <div style={{position: "absolute", left: "-8.5px", backgroundColor: "white", top: "calc(50% - 20px)", borderRadius: "100%"}}>
-                                        <i style={{color: "rgba(0,0,0,0.3)", transform: "rotate(135deg)"}} className="fa fa-plane"></i>
-                                    </div>
-                                    <div style={{width: 10, height: 10, borderRadius: "100%", position: "absolute", bottom: "-10px", left: "-6.5px"}}>
-                                        <i className="fa fa-map-marker" style={{color: "green"}}></i>
-                                    </div>
-                                    <p style={{fontSize: 15, fontFamily: "'Prompt', sans-serif", color: "crimson"}}>
-                                        11:20am - Toronto
-                                    </p>
-                                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginLeft: 20, marginTop: 2}}>
-                                        Pearson Intl. (YYZ)</p>
-                                    <div style={{backgroundColor: "rgba(255,0,0,0.1)", margin: 10, width: "fit-content", border: "1px solid rgba(255,0,0,0.1)", borderRadius: 6, padding: "10px 20px"}}>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                                            <i className="fa fa-exclamation-triangle" style={{color: "rgba(255,0,0,0.7)", marginRight: 5}}></i>
-                                            Flight Stop
-                                        </p>
-                                        <p style={{fontSize: 13, color: "rgba(0,0,0,0.7)", marginTop: 5}}>1h 35m wait in Toronto</p>
-                                    </div>
-                                    <div style={{marginLeft: 20}}>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                                            1h 35m flight</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Operated by WestJet Encore</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Dehavilland DHC-8 400</p>
-                                        <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
-                                            Economy/Coach (T)</p>
-                                    </div>
-                                    <p style={{fontSize: 15, marginTop: 20, fontFamily: "'Prompt', sans-serif", color: "green"}}>
-                                        11:20am - Toronto
-                                    </p>
-                                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginLeft: 20, marginTop: 2}}>
-                                        Pearson Intl. (YYZ)</p>
-                                </div>
-                            </div>
+                            <SelectedTicketItinSegments segments={slices[0].segments}/>
                         </div>
                         <p className="pop-up-close-btn" onClick={()=>{global.hide_selected_ticket_details_pane(); props.unselectFlightOffer();}} style={{cursor: "pointer", color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
                             &times;
@@ -180,7 +50,7 @@ const SelectedTicketInfo = (props) => {
                 </div>
                 <div style={{padding: 10}}>
                     <p style={{fontSize: 22, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
-                        ${info.total_price}
+                        ${(markup(total_amount).new_price).toFixed(2)}
                     </p>
                     <p style={{color: "crimson", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
                         Rountrip for 1 traveler
@@ -189,7 +59,7 @@ const SelectedTicketInfo = (props) => {
                         Main Cabin
                     </p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 5}}>
-                        Economy
+                        {CABIN_CLASS}
                     </p>
                     <p style={{fontSize: 14, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
                         Seat

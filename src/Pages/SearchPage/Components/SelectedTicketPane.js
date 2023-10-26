@@ -55,6 +55,7 @@ export default function SelectedTicketPane(props){
                 !isError ?
                     flightDetail ? 
                         <SelectedTicketInfo 
+                            key={0}
                             flight={flightDetail}
                             unselectFlightOffer={unselectFlightOffer} 
                             begin_checkout={props.begin_checkout} /> : 
