@@ -19,6 +19,9 @@ const SelectedTicketItinSegments = (props) => {
     const { segments } = props;
     console.log("segments: ", segments);
 
+    // Reset for showing toggling to show or hide segments
+    global.is_itinerary_showing=false;
+
     // For testing
     // segments=segs;
 

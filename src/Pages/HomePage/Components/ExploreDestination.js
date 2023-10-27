@@ -17,6 +17,9 @@ import HeroDropIcon from '../../../helpers/HeroDropIcons';
 
 export default function ExploreDestinations(){
 
+    // Reset for toggling to hide or show the dropdown buttons
+    global.is_landing_page_search_filters_open=false;
+
     useEffect(()=>{
         HeroDropIcon();
     }, [])
