@@ -3,6 +3,7 @@ import { show_login_page, show_full_search_form, show_trips_page, show_deals_pag
 import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
 import CONSTANTS from '../../../Constants/Constants';
 import BotAuxMsg from '../../../Constants/BotAuxMsg';
+import getBotResponse from "../../../Constants/BotResponses";
 
 const HeroMainMenu = (props) => {
 
@@ -20,21 +21,21 @@ const HeroMainMenu = (props) => {
                     Flights</div>
                 <div className="stays_hero_menu_item main" 
                         onClick={()=>show_prompt_on_Bot_AD_tips_popup(
-                                "We can't book hotels for now", 
+                                getBotResponse(CONSTANTS.bot.responses.no_hotel_booking), 
                                 CONSTANTS.bot.prompt_types.warn)}
                         style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-hotel"></i>
                     Stays</div>
                 <div className="cars_hero_menu_item main" 
                         onClick={()=>show_prompt_on_Bot_AD_tips_popup(
-                                "We can't rent cars at the moment",
+                                getBotResponse(CONSTANTS.bot.responses.no_cars_renting),
                                 CONSTANTS.bot.prompt_types.warn)}
                         style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-car"></i>
                     Cars</div>
                 <div className="packages_hero_menu_item main" 
                         onClick={()=>show_prompt_on_Bot_AD_tips_popup(
-                                "We have no packages at the moment", 
+                                getBotResponse(CONSTANTS.bot.responses.no_travel_packages), 
                                 CONSTANTS.bot.prompt_types.warn)}
                         style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-box-open"></i>
@@ -64,14 +65,14 @@ const HeroMainMenu = (props) => {
                     <div style={{display: showDropDown ? "block" : "none", position: "absolute", zIndex: 10, width: 150, padding: 10, top: "80%", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)", right: 0, backgroundColor: "rgb(43, 52, 61)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10}}>
                         <div className="cars_hero_menu_item dropdown" 
                                 onClick={()=>show_prompt_on_Bot_AD_tips_popup(
-                                    "We can't rent cars at the moment",
+                                    getBotResponse(CONSTANTS.bot.responses.no_cars_renting),
                                     CONSTANTS.bot.prompt_types.warn)}
                                 style={{cursor: "not-allowed", textAlign: "initial", color: "rgba(255,255,255,0.4)", fontSize: 14, padding: "10px", fontFamily: "'Prompt', Sans-serif"}}>
                             <i style={{marginRight: 10}} className="fa-solid fa-car"></i>
                             Cars</div>
                         <div className="packages_hero_menu_item dropdown" 
                                 onClick={()=>show_prompt_on_Bot_AD_tips_popup(
-                                    "We dont have any Packages at the moment",
+                                    getBotResponse(CONSTANTS.bot.responses.no_travel_packages),
                                     CONSTANTS.bot.prompt_types.warn)}
                                 style={{cursor: "not-allowed", textAlign: "initial", color: "rgba(255,255,255,0.4)", fontSize: 14, padding: "10px", fontFamily: "'Prompt', Sans-serif"}}>
                             <i style={{marginRight: 10}} className="fa-solid fa-box-open"></i>

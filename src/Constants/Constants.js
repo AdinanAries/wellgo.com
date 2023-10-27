@@ -19,6 +19,11 @@ const CONSTANTS = {
         prompt_types: {
             warn: "warn",
             prompt: "prompt",
+        },
+        responses: {
+            no_hotel_booking: "no hotel booking",
+            no_cars_renting: "no cars renting",
+            no_travel_packages : "no travel packages",
         }
     },
     envs: [ "PRODUCTION", "DEVELOPMENT" ],
