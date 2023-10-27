@@ -194,9 +194,11 @@ function SearchForm( props ){
                                     }
                                 } className="airports_auto_complete_close_btn">&times;</p>
                                 <input autoComplete="off" id="sp_from_where_airports_auto_complete_input_fld" 
-                                    onBlur={()=>{
-                                        setTimeout(()=>document.getElementById("sp_from_where_airports_auto_complete_input").style.display = "none",
-                                            200);
+                                    onBlur={() => {
+                                        setTimeout(() => {
+                                            if(document.getElementById("sp_from_where_airports_auto_complete_input"))
+                                                document.getElementById("sp_from_where_airports_auto_complete_input").style.display = "none";
+                                        }, 200);
                                     }} className="airports_auto_complete_input" type="text" placeholder="Where are you leaving from?"/>
                                 <div className="airports_auto_complete_list_container">
                                     <ul id="sp_flights_auto_complete_from_where_input_list">
@@ -231,11 +233,17 @@ function SearchForm( props ){
                         </div>
                         <div style={{width: "calc(50% - 5px)"}} className="search_forms_to_where_input_fld_container">
                             <div id="sp_to_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{zIndex: 10}}>
-                                <p onClick={()=>document.getElementById("sp_to_where_airports_auto_complete_input").style.display = "none"} className="airports_auto_complete_close_btn">&times;</p>
+                                <p onClick={() => {
+                                        if(document.getElementById("sp_to_where_airports_auto_complete_input"))
+                                            document.getElementById("sp_to_where_airports_auto_complete_input").style.display = "none"
+                                    }
+                                } className="airports_auto_complete_close_btn">&times;</p>
                                 <input autoComplete="off" id="sp_to_where_airports_auto_complete_input_fld" 
                                     onBlur={()=>{
-                                        setTimeout(()=>document.getElementById("sp_to_where_airports_auto_complete_input").style.display = "none",
-                                            200);
+                                        setTimeout(() => {
+                                            if(document.getElementById("sp_to_where_airports_auto_complete_input"))
+                                                document.getElementById("sp_to_where_airports_auto_complete_input").style.display = "none";
+                                        }, 200);
                                     }} className="airports_auto_complete_input" type="text" placeholder="Where are you going to?"/>
                                 <div className="airports_auto_complete_list_container">
                                     <ul id="sp_flights_auto_complete_to_where_input_list">
@@ -285,10 +293,12 @@ function SearchForm( props ){
 let sp_switch_btn_switched = false
 function sp_switch_input_rotate_func(){
     if(!sp_switch_btn_switched){
-        document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate(360deg)";
+        if(document.getElementById("sp_main_switch_inputs_btn"))
+            document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate(360deg)";
         sp_switch_btn_switched = true;
     }else{
-        document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate(0deg)";
+        if(document.getElementById("sp_main_switch_inputs_btn"))
+            document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate(0deg)";
         sp_switch_btn_switched = false;
     }
     

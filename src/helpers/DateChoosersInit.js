@@ -1,6 +1,8 @@
 import CONSTANTS from "../Constants/Constants";
 
 const DateChoosersInit = (type=CONSTANTS.round_trip) => {
+  if(document.getElementById("departure_return_dates_input"))
+    document.getElementById("departure_return_dates_input").value="";
     window.$(function() {
         window.$('#departure_return_dates_input').daterangepicker({
           singleDatePicker: (type===CONSTANTS.one_way),
@@ -30,6 +32,8 @@ const DateChoosersInit = (type=CONSTANTS.round_trip) => {
         });
       });
       
+      if(document.getElementById("sp_departure_return_dates_input"))
+        document.getElementById("sp_departure_return_dates_input").value=""
       window.$(function() {
         window.$('#sp_departure_return_dates_input').daterangepicker({
           singleDatePicker: (type===CONSTANTS.one_way),
