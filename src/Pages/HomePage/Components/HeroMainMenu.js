@@ -7,6 +7,7 @@ import getBotResponse from "../../../Constants/BotResponses";
 
 const HeroMainMenu = (props) => {
 
+    const { siteCurrency, toggle_show_hide_currency_page } = props;
     const [showDropDown, setShowDropDown] = useState(false);
 
     const showDropDownMenu = () => {
@@ -44,12 +45,10 @@ const HeroMainMenu = (props) => {
                     <i style={{marginRight: 10}} className="fa-solid fa-robot"></i>
                     Agent</div>
                 <div className="currency_hero_menu_item main" 
-                        onClick={()=>show_prompt_on_Bot_AD_tips_popup(
-                            "We plan to make multiple currencies available in the future",
-                            CONSTANTS.bot.prompt_types.warn)}
-                        style={{cursor: "not-allowed", textAlign: "center", color: "rgba(255,255,255,0.4)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
+                        onClick={toggle_show_hide_currency_page}
+                        style={{cursor: "pointer", textAlign: "center", color: "rgba(169, 221, 255, 0.8)", marginLeft: 20, fontSize: 14, padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-globe"></i>
-                    USD</div>
+                    {siteCurrency}</div>
                 <div className="language_hero_menu_item main" 
                         onClick={()=>show_prompt_on_Bot_AD_tips_popup(
                             "We are working on including multiple languages at the moment. Only English is available righ now",
@@ -81,12 +80,10 @@ const HeroMainMenu = (props) => {
                             <i style={{marginRight: 10}} className="fa-solid fa-robot"></i>
                             Agent</div>
                         <div className="currency_hero_menu_item dropdown" 
-                            onClick={()=>show_prompt_on_Bot_AD_tips_popup(
-                                "Only US Dollars available at the moment",
-                                CONSTANTS.bot.prompt_types.warn)}
-                                style={{cursor: "not-allowed", textAlign: "initial", color: "rgba(255,255,255,0.4)", fontSize: 14, padding: "10px", fontFamily: "'Prompt', Sans-serif"}}>
+                            onClick={toggle_show_hide_currency_page}
+                                style={{cursor: "pointer", textAlign: "initial", color: "rgba(169, 221, 255, 0.8)", fontSize: 14, padding: "10px", fontFamily: "'Prompt', Sans-serif"}}>
                             <i style={{marginRight: 10}} className="fa-solid fa-globe"></i>
-                            USD</div>
+                            {siteCurrency}</div>
                         <div className="language_hero_menu_item dropdown" 
                                 onClick={()=>show_prompt_on_Bot_AD_tips_popup(
                                     "Only English available at the moment",

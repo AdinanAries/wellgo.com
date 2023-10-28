@@ -12,6 +12,8 @@ import CONSTANTS from "../../../Constants/Constants";
 //backgroundImage: `url('${explore_page_hero}')`,
 
 function Main(props){
+
+    const { siteCurrency, toggle_show_hide_currency_page } = props;
     localStorage.setItem("is_home_page", "yes");
     useEffect(()=>{
         if(props.showSearchForm){
@@ -23,7 +25,7 @@ function Main(props){
             if(global.$(window).width() > CONSTANTS.viewport_threshold)
                 document.querySelector("header").style.background="none";
         }
-    },[])
+    }, []);
 
     return (
         <main>
@@ -48,7 +50,10 @@ function Main(props){
                     </div>
                 </div>
             </div>
-            <ExploreDestinations />
+            <ExploreDestinations 
+                siteCurrency={siteCurrency}
+                toggle_show_hide_currency_page={toggle_show_hide_currency_page} 
+            />
             <ChooseUs />
             
         </main>

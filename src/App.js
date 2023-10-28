@@ -18,7 +18,14 @@ import HPSupport from "./components/HPSupport";
 import { ToastContainer } from "react-toastify";
 import CurrenciesPane from './components/CurrenciesPane';
 import "react-toastify/dist/ReactToastify.css";
+import CONSTANTS from './Constants/Constants';
 
+let CURR=CONSTANTS.default_currency;
+if (localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_curr)) {
+    CURR = localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_curr);
+} else {
+    localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_curr, CURR);
+}
 
 function App() {
 
@@ -26,7 +33,8 @@ function App() {
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
   const [ showHomePageSearchForm, setShowHomePageSearchForm ] = useState(false);
-  const [ toggleShowCurrencyPage, setToggleShowCurrencyPage ] = useState(true);
+  const [ toggleShowCurrencyPage, setToggleShowCurrencyPage ] = useState(false);
+  const [ siteCurrency, setSiteCurrency ] = useState(CURR);
 
   const show_search_page = () => {
     setShowSearchPage(true);
@@ -49,10 +57,17 @@ function App() {
     setToggleShowCurrencyPage(!toggleShowCurrencyPage);
   }
 
+  const SelectSiteCurrency = (CURR) => {
+    setSiteCurrency(CURR);
+    localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_curr, CURR);
+  }
+
   return (
     <div className="">
       {
-        toggleShowCurrencyPage && <CurrenciesPane toggle_show_hide_pane={toggle_show_hide_currency_page} />
+        toggleShowCurrencyPage && <CurrenciesPane 
+          SelectSiteCurrency={SelectSiteCurrency}
+          toggle_show_hide_pane={toggle_show_hide_currency_page} />
       }
       
       <HPSupport />
@@ -70,6 +85,8 @@ function App() {
         showSearchPage={showSearchPage}
         begin_checkout={begin_checkout}
         showSearchForm={showHomePageSearchForm}
+        siteCurrency={siteCurrency}
+        toggle_show_hide_currency_page={toggle_show_hide_currency_page}
       />
       <TripsPage />
       <DealsPage />

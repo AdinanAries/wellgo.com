@@ -7,6 +7,10 @@ const CONSTANTS = {
     duffel: "DUFFEL",
     dev: "DEVELOPMENT",
     prod: "PRODUCTION",
+    default_currency: "USD",
+    local_storage: {
+        wellgo_usr_curr: "wellgo_usr_curr",
+    },
     checkout_pages: {
         info: "INFO_PAGE",
         pnr: "PNR_PAGE",
