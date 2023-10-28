@@ -2083,6 +2083,7 @@ footer {
   }
   .switchinputsBtn {
     right: 40px;
+    transform: rotate(90deg);
   }
   .two-search-inputs-container {
     display: block;

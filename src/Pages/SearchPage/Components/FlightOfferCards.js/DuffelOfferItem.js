@@ -37,14 +37,14 @@ const DuffelOfferItem = (props) => {
                 </p>);
         }
     }
-    let duration = slices[0].duration; // [P1DT2H30M, PT23H45M]
-    if(duration.includes("D")){
-        duration=duration.replace("P","").replace("T","").replace("D", "d ");
+    let duration = slices[0]?.duration; // [P1DT2H30M, PT23H45M]
+    if(duration?.includes("D")){
+        duration=duration?.replace("P","")?.replace("T","")?.replace("D", "d ");
     }else{
-        duration = duration.substring(2);
+        duration = duration?.substring(2);
     }
-    const HOURS =  duration.split("H")[0];
-    const MINUTES = duration.split("H")[1].replace("M","");
+    const HOURS =  duration?.split("H")[0];
+    const MINUTES = duration?.split("H")[1]?.replace("M","");
 
     return (
         <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}} style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>

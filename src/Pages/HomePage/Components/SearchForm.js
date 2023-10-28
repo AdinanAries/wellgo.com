@@ -276,11 +276,18 @@ function SearchForm(props){
 
 let switch_btn_switched = false
 function switch_input_rotate_func(){
+    //let currentRotateValue=document.getElementById("main_switch_inputs_btn").style.transform.replace( /\D+/g, '');
+    let INITIAL_ROTATE=0;
+    let FINAL_ROTATE=360;
+    if(global.$(window).width()<=CONSTANTS.viewport_threshold){
+        INITIAL_ROTATE=90;
+        FINAL_ROTATE=270;
+    }
     if(!switch_btn_switched){
-        document.getElementById("main_switch_inputs_btn").style.transform = "rotate(360deg)";
+        document.getElementById("main_switch_inputs_btn").style.transform = "rotate("+FINAL_ROTATE+"deg)";
         switch_btn_switched = true;
     }else{
-        document.getElementById("main_switch_inputs_btn").style.transform = "rotate(0deg)";
+        document.getElementById("main_switch_inputs_btn").style.transform = "rotate("+INITIAL_ROTATE+"deg)";
         switch_btn_switched = false;
     }
     
