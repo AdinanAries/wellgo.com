@@ -92,7 +92,11 @@ function SearchPageMain(props){
         })();
     },[])
 
-    //console.log(JSON.parse(localStorage.getItem("search_obj")));
+    const SEARCH_OBJ=JSON.parse(localStorage.getItem(CONSTANTS.local_storage.flight_search_object));
+    if(flights.length>0){
+        SEARCH_OBJ.origin_city = flights[0].slices[0].segments[0].origin.city_name;
+        SEARCH_OBJ.destination_city = flights[0].slices[0].segments[0].destination.city_name;
+    }
 
     return (
         <main>
@@ -102,6 +106,7 @@ function SearchPageMain(props){
                     <ResultsListContainer 
                         selectFlightOffer={selectFlightOffer} 
                         flights={flights} loading={loading}
+                        SEARCH_OBJ={SEARCH_OBJ}
                     />
                     {
                         selectedFlightId ? 

@@ -65,6 +65,8 @@ function add_clouds_to_animated_loader(){
 
 export default function ResultsListContainer(props){
 
+    const { SEARCH_OBJ } = props;
+
     let FLIGHTS;
     if(props.flights.length>0){
         FLIGHTS = props.flights.map((each, index) => 
@@ -89,7 +91,9 @@ export default function ResultsListContainer(props){
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0}}>
             
             <div id="search_results_mobile_top_itin_display">
-                { !props.loading ? <MobileItinTopInfo /> : <MobileItinTopInfoLoader /> }
+                { !props.loading ? 
+                    <MobileItinTopInfo SEARCH_OBJ={SEARCH_OBJ} /> 
+                    : <MobileItinTopInfoLoader /> }
             </div>
             <div className="search_list_main_flex_container">
                 <div id="search_list_main__settings_section" className="search_list_main__settings_section">
