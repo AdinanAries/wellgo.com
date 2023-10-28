@@ -15,6 +15,15 @@ const DuffelOfferItem = (props) => {
     const STOPS_COUNT = (SEGMENT_LENGTH-1);
     const ORIGIN_AIRPORT = `${slices[0].segments[0].origin.name} (${slices[0].segments[0].origin.iata_code})`;
     const DESTINATION_AIRPORT = `${slices[0].segments[(SEGMENT_LENGTH - 1)].destination.name} (${slices[0].segments[(SEGMENT_LENGTH - 1)].destination.iata_code})`;
+    const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
+
+    let is_one_way=true;
+    if(slices.length>1){
+        const LAST_SLICE_SEG_LENGTH=slices[(slices.length-1)].segments.length;
+        if(ORIGIN_CITY===slices[(slices.length-1)].segments[LAST_SLICE_SEG_LENGTH-1].destination.city_name){
+            is_one_way=false;
+        }
+    }
     let STOPSMARKUP = [];
     if(SEGMENT_LENGTH>1){
         for(let sg=0; sg<SEGMENT_LENGTH-1; sg++){
@@ -43,7 +52,7 @@ const DuffelOfferItem = (props) => {
                 <div>
                     <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
                         {TRIP_START} - {TRIP_ENDS}</p>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12,}}>
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
                     {ORIGIN_AIRPORT} - {DESTINATION_AIRPORT}</p>
                 </div>
                 <div>
@@ -55,7 +64,8 @@ const DuffelOfferItem = (props) => {
                         <span style={{fontSize: 22, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
                             dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
                         {(markup(total_amount).new_price).toFixed(2)}</p>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>Roundtrip per traveler</p>
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
+                        {is_one_way?"One-way":"Roundtrip"} per traveler</p>
                 </div>
             </div>
             <div style={{marginTop: 5}}>
