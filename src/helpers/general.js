@@ -1,4 +1,5 @@
 import { show_full_search_form } from "./PageRoutingFuncs";
+import CURRENCY_SYMBOLS from "../Constants/CurrencySymbols";
 
 export const obj_has_empty_prop = (obj) => {
 
@@ -59,6 +60,18 @@ export const get_horizontal_page_size = (item_width, margin = 0, max = 10) => {
     if (page_size > max)
         return max;
     else return page_size;
+}
+
+export const get_short_date_MMMDD = (date_string) => {
+    let d_arr = new Date(date_string).toDateString().split(" ");
+    return `${d_arr[1]} ${d_arr[2]}`;
+}
+
+export const get_currency_symbol = (curr) => {
+    const CURRENCIES = CURRENCY_SYMBOLS;
+    if(curr && typeof curr === "string")
+        return CURRENCIES[curr.toUpperCase()];
+    return "$";
 }
 
 /**

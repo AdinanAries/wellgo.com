@@ -33,7 +33,7 @@ export default function ExploreDestinations(){
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28, textAlign: "center"}}>
                                 Cheap Travel</p>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontFamily: "'Prompt', sans-serif", fontSize: 15, textAlign: "center"}}>
-                                &#8226; Virtual Agency &#8226;</p>
+                                &#8226; AI Travel Assistant &#8226;</p>
                         </div>
                         <div>
                             <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.5)", height: 70, maxWidth: 550, margin: "auto", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ zIndex: 5}}>

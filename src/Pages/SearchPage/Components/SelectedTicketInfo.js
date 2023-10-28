@@ -1,13 +1,45 @@
 import CONSTANTS from "../../../Constants/Constants";
 import ENVIRONMENT from "../../../Constants/Environment";
 import { markup } from "../../../helpers/Prices";
-import { convert24HTimeToAMPM } from "../../../helpers/general";
+import { convert24HTimeToAMPM, get_short_date_MMMDD, get_currency_symbol } from "../../../helpers/general";
 
 import SelectedTicketItinSegments from "./SelectedTicketItinSegments";
 
 const SelectedTicketInfo = (props) => {
 
-    const { total_amount, slices, owner } = props.flight.data;
+    const { total_amount, slices, owner, conditions } = props.flight.data;
+
+    let CANCELLATION_INFO=<p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+            <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+            Cancellation not allowed
+        </p>;
+
+    if(conditions.refund_before_departure.allowed){
+        let curr=get_currency_symbol(conditions.refund_before_departure.penalty_currency);
+        CANCELLATION_INFO=<>
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i class="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                Cancellation allowed with <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                {conditions.refund_before_departure.penalty_amount} penalty amount
+            </p>
+        </>
+    }
+
+    let CHANGES_INFO=<p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+            <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+            Changes not allowed
+        </p>;
+
+    if(conditions.change_before_departure.allowed){
+        let curr=get_currency_symbol(conditions.change_before_departure.penalty_currency);
+        CHANGES_INFO=<>
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i class="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                Changes allowed with <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                {conditions.change_before_departure.penalty_amount} penalty amount
+            </p>
+        </>
+    }
 
     const SEGMENT_LENGTH = slices[0].segments.length;
     const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
@@ -15,7 +47,9 @@ const SelectedTicketInfo = (props) => {
     const STOPS_COUNT = (SEGMENT_LENGTH-1);
     const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
     const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination.city_name;
-    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin.marketing_name
+    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin.marketing_name;
+    const DEPARTURE_DATE = get_short_date_MMMDD(slices[0].segments[0].departing_at.replace("T", " "));
+    const ARRIVAL_DATE = get_short_date_MMMDD(slices[0].segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
 
     return (
         <div id="selected_ticket_main_details_pane">
@@ -32,7 +66,7 @@ const SelectedTicketInfo = (props) => {
                                 {DESTINATION_CITY}
                             </p>
                             <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 2}}>
-                                Nov 25 - Nov 27</p>
+                                {DEPARTURE_DATE/*Nov 25*/} - {ARRIVAL_DATE}</p>
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                 <img src={owner.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
                                 {owner.name}
@@ -87,14 +121,8 @@ const SelectedTicketInfo = (props) => {
                     <p style={{fontSize: 14, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
                         Flexibility
                     </p>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                    <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
-                        Cancellation not allowed
-                    </p>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                        <i className="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
-                        No change fees
-                    </p>
+                    {CANCELLATION_INFO}
+                    {CHANGES_INFO}
                 </div>
                 <div className="selected_ticket_book_btn_container">
                     <div onClick={props.begin_checkout/*()=>global.show_start_checkout_page(`${global.stringify_obj_for_template_strings(global.checkout_obj)}`)*/} className="selected_ticket_book_btn">
