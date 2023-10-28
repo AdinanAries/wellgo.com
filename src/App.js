@@ -16,6 +16,7 @@ import DealsPage from "./Pages/DealsPage/DealsPage";
 import HelpPage from "./Pages/HelpPage/HelpPage";
 import HPSupport from "./components/HPSupport";
 import { ToastContainer } from "react-toastify";
+import CurrenciesPane from './components/CurrenciesPane';
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -25,6 +26,7 @@ function App() {
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
   const [ showHomePageSearchForm, setShowHomePageSearchForm ] = useState(false);
+  const [ toggleShowCurrencyPage, setToggleShowCurrencyPage ] = useState(true);
 
   const show_search_page = () => {
     setShowSearchPage(true);
@@ -43,8 +45,17 @@ function App() {
     setIsCheckout(true);
   }
 
+  const toggle_show_hide_currency_page = () => {
+    alert("here")
+    setToggleShowCurrencyPage(!toggleShowCurrencyPage);
+  }
+
   return (
     <div className="">
+      {
+        toggleShowCurrencyPage && <CurrenciesPane toggle_show_hide_pane={toggle_show_hide_currency_page} />
+      }
+      
       <HPSupport />
       <MobileMenu />
       {
