@@ -34,7 +34,7 @@ const CurrenciesPane = (props) => {
                             placeholder="search..." />
                     </div>
                 </div>
-                <div style={{ Height: 400, minWidth: 350, overflow: "auto", padding: "0 10px"}}>
+                <div style={{ height: 400, minWidth: 350, overflow: "auto", padding: "0 10px"}}>
                     {
                         filtered.map(each=>(
                                 <div key={each.abbreviation} style={{cursor: "pointer", display: "flex", justifyContent: "space-between", padding: 10, borderBottom: "1px solid rgba(255,255,255,0.1)", color: "white"}}>
@@ -42,7 +42,7 @@ const CurrenciesPane = (props) => {
                                         <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                             ({each.abbreviation}) </span>
                                         <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                            {ellipsify(each.currency, 25)}
+                                            {ellipsify(each.currency, 30)}
                                         </span>
                                     </p>
                                     <span style={{color: "orange"}} dangerouslySetInnerHTML={{__html: each.symbol}}></span>

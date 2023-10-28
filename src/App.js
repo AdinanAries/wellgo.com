@@ -46,7 +46,6 @@ function App() {
   }
 
   const toggle_show_hide_currency_page = () => {
-    alert("here")
     setToggleShowCurrencyPage(!toggleShowCurrencyPage);
   }
 
