@@ -7,14 +7,25 @@ import SelectedTicketItinSegments from "./SelectedTicketItinSegments";
 
 const SelectedTicketInfo = (props) => {
 
-    const { total_amount, slices, owner, conditions } = props.flight.data;
+    const { total_amount, total_currency, slices, owner, conditions, available_services } = props.flight.data;
+
+    const SEGMENT_LENGTH = slices[0].segments.length;
+    const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
+    const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
+    const STOPS_COUNT = (SEGMENT_LENGTH-1);
+    const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
+    const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination.city_name;
+    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin.marketing_name;
+    const DEPARTURE_DATE = get_short_date_MMMDD(slices[0].segments[0].departing_at.replace("T", " "));
+    const ARRIVAL_DATE = get_short_date_MMMDD(slices[0].segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
+    const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
 
     let CANCELLATION_INFO=<p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
             <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
             Cancellation not allowed
         </p>;
 
-    if(conditions.refund_before_departure.allowed){
+    if(conditions.refund_before_departure?.allowed){
         let curr=get_currency_symbol(conditions.refund_before_departure.penalty_currency);
         CANCELLATION_INFO=<>
             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
@@ -30,7 +41,7 @@ const SelectedTicketInfo = (props) => {
             Changes not allowed
         </p>;
 
-    if(conditions.change_before_departure.allowed){
+    if(conditions.change_before_departure?.allowed){
         let curr=get_currency_symbol(conditions.change_before_departure.penalty_currency);
         CHANGES_INFO=<>
             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
@@ -41,15 +52,35 @@ const SelectedTicketInfo = (props) => {
         </>
     }
 
-    const SEGMENT_LENGTH = slices[0].segments.length;
-    const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
-    const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
-    const STOPS_COUNT = (SEGMENT_LENGTH-1);
-    const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
-    const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination.city_name;
-    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin.marketing_name;
-    const DEPARTURE_DATE = get_short_date_MMMDD(slices[0].segments[0].departing_at.replace("T", " "));
-    const ARRIVAL_DATE = get_short_date_MMMDD(slices[0].segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
+    let CHECKED_BAGS=[]
+    if(available_services.length > 0){
+        for(let ss=0;ss<available_services.length;ss++){
+            if(available_services[ss].type==="baggage"){
+                let curr=get_currency_symbol(available_services[ss].total_currency)
+                CHECKED_BAGS.push(
+                    <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
+                        <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                            <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                            1st checked bag:
+                        </span>
+                        <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: 20}}>
+                            <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                            {available_services[ss].total_amount}
+                        </span>
+                    </p>
+                )
+            }
+        }
+    }
+    if(CHECKED_BAGS.length===0){
+        CHECKED_BAGS.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                no checked bags
+            </p>
+        );
+    }
+     
 
     return (
         <div id="selected_ticket_main_details_pane">
@@ -84,7 +115,9 @@ const SelectedTicketInfo = (props) => {
                 </div>
                 <div style={{padding: 10}}>
                     <p style={{fontSize: 22, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
-                        ${(markup(total_amount).new_price).toFixed(2)}
+                        <span style={{fontSize: 22, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                            dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                        {(markup(total_amount).new_price).toFixed(2)}
                     </p>
                     <p style={{color: "crimson", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
                         Rountrip for 1 traveler
@@ -109,15 +142,7 @@ const SelectedTicketInfo = (props) => {
                         <i className="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
                         Carry-on bag included
                     </p>
-                    <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
-                        <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                            <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
-                            1st checked bag:
-                        </span>
-                        <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: 20}}>
-                            $30
-                        </span>
-                    </p>
+                    {CHECKED_BAGS.map(each=>each)}
                     <p style={{fontSize: 14, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
                         Flexibility
                     </p>

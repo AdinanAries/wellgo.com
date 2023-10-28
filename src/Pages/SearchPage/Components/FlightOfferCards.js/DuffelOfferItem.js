@@ -1,11 +1,12 @@
 import { markup } from "../../../../helpers/Prices";
-import { convert24HTimeToAMPM, calculateTotalTime, ellipsify } from "../../../../helpers/general";
+import { convert24HTimeToAMPM, calculateTotalTime, ellipsify, get_currency_symbol } from "../../../../helpers/general";
 
 const DuffelOfferItem = (props) => {
 
     console.log(props);
-    const { total_amount, id, owner, slices } = props.flight;
+    const { total_amount, total_currency, id, owner, slices } = props.flight;
     
+    const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
     const AIRCRAFT_NAME = slices[0].segments[0].aircraft?.name;
     const OPERATED_BY = slices[0].segments[0].operating_carrier?.name;
     const SEGMENT_LENGTH = slices[0].segments.length;
@@ -50,8 +51,10 @@ const DuffelOfferItem = (props) => {
                     {STOPSMARKUP.map(each=>each)}
                 </div>
                 <div className="each_ticket_price_display_container">
-                    <p className="each_ticket_price_display" style={{color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 27, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
-                        ${(markup(total_amount).new_price).toFixed(2)}</p>
+                    <p className="each_ticket_price_display" style={{color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 22, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
+                        <span style={{fontSize: 22, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                            dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                        {(markup(total_amount).new_price).toFixed(2)}</p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>Roundtrip per traveler</p>
                 </div>
             </div>
