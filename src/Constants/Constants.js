@@ -10,6 +10,7 @@ const CONSTANTS = {
     default_currency: "USD",
     local_storage: {
         wellgo_usr_curr: "wellgo_usr_curr",
+        flight_search_object: "search_obj",
     },
     checkout_pages: {
         info: "INFO_PAGE",
