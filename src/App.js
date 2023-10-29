@@ -9,6 +9,7 @@ import MobileMenu from './components/MobileMenu';
 import TripsPage from "./Pages/TripsPage/TripsPage";
 import LoginPage from './Pages/LoginPage/LoginPage';
 import ExplorePage from './Pages/ExplorePage/ExplorePage';
+import UserAccountPage from "./Pages/UserAccountPage/UserAccountPage";
 //import SearchPage from './Pages/SearchPage/SearchPage';
 //import SelectedTicketPane from './components/SelectedTicketPane';
 import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
@@ -49,6 +50,7 @@ function App() {
   const [ siteCurrency, setSiteCurrency ] = useState(CURR);
   const [ toggleShowLanguagesPage, setToggleShowLanguagesPage ] = useState(false);
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
+  
 
   const show_search_page = () => {
     setShowSearchPage(true);
@@ -123,6 +125,7 @@ function App() {
       <DealsPage />
       <HelpPage />
       <LoginPage />
+      <UserAccountPage />
       <ExplorePage />
       <Footer />
       <ToastContainer 

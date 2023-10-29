@@ -10,10 +10,131 @@ import PaginationButtons from "../../components/PaginationButtons";
 import AccountInfoPage from "./Components/AccountInfoPage";
 import PaymentCardsPage from "./Components/PaymentCardsPage";
 import PassportsPage from "./Components/PassportsPage";
+import EditProfileForm from "./Components/EditProfileForm";
 import { useState } from "react";
 import BookingHistoryPage from "./Components/BookingHistoryPage";
 
-function UserAccountPage({user, passports, bookings, payments}){
+function UserAccountPage(props){
+
+    let [user, setUser] = useState({
+        id: "001",
+        first_name: "Mohammedu",
+        middle_name: "",
+        last_name: "Adinan",
+        dob: "03-23-1992",
+        email: "m.adinan@yahoo.com",
+        mobile: "+1 7327999546",
+        gender: "male"
+    });
+    
+    let [passports, setPassports] = useState([
+        {
+            id: "001",
+            user_id: "001",
+            passport_number: "3452342",
+            issue_date: "02-26-2022",
+            exp_date: "02-26-2026",
+            city: "New York",
+            country: "United States",
+            holder_name: "Mohammed Adinan",
+            holder_gender: "Male",
+            holder_nationality: "American",
+            holder_dob: "03-23-1992",
+            holder_birth_city: "New York"
+        },
+        {
+            id: "002",
+            user_id: "001",
+            passport_number: "436373",
+            issue_date: "03-19-2021",
+            exp_date: "03-19-2025",
+            city: "New York",
+            country: "United States",
+            holder_name: "Salis Munir",
+            holder_gender: "Male",
+            holder_nationality: "American",
+            holder_dob: "03-23-1992",
+            holder_birth_city: "New York"
+        }
+    ]);
+    
+    let [payments, setPayments] = useState([
+        {
+            id: "001",
+            user_id: "001",
+            card_number: "***3424",
+            holder_name: "Mohammed Adinan",
+            exp_date: "03-23-2025",
+            sec_code: "009",
+            billing: {
+                street: "956 Anderson Ave, 1A",
+                city: "Bronx",
+                state: "NY",
+                country: "United States",
+                zip_code: "10453"
+            }
+        },
+        {
+            id: "001",
+            user_id: "001",
+            card_number: "***4532",
+            holder_name: "Emmanuel Poku",
+            exp_date: "06-19-2025",
+            sec_code: "136",
+            billing: {
+                street: "956 Anderson Ave, 1A",
+                city: "Bronx",
+                state: "NY",
+                country: "United States",
+                zip_code: "10453"
+            }
+        }
+    ]);
+
+    let [bookings, setBookings] = useState([
+        {
+            id: "001",
+            user_id: "001",
+            airline: "American Airlines",
+            ariline_code: "",
+            trip_type: "round trip",
+            travellers: [{
+                first_name: "MOhammed",
+                last_name: "Adinan",
+                gender: "male",
+                dob: "03-23-1992",
+            }],
+            takeoff_airport: "Laguardia",
+            takeoff_airport_code: "",
+            takeoff_city: "New York",
+            destination_airport: "Kotoka",
+            destination_airport_code: "",
+            destination_city: "Accra",
+            departure_date: "03-23-2023",
+            return_date: "04-09-2023"
+        },
+        {
+            id: "001",
+            user_id: "001",
+            airline: "Virgin Airlines",
+            ariline_code: "",
+            trip_type: "round trip",
+            travellers: [{
+                first_name: "Mohammed",
+                last_name: "Adinan",
+                gender: "male",
+                dob: "03-23-1992",
+            }],
+            takeoff_airport: "JFK",
+            takeoff_airport_code: "",
+            takeoff_city: "New York",
+            destination_airport: "Charles de Gaulle Intl",
+            destination_airport_code: "",
+            destination_city: "Paris",
+            departure_date: "01-20-2023",
+            return_date: "02-11-2023"
+        }
+    ]);
 
     let [editDOB, setEditDOB] = useState(false);
     let [editGender, setEditGender] = useState(false);
@@ -70,6 +191,7 @@ function UserAccountPage({user, passports, bookings, payments}){
                             nothing_found_icon={nothing_found_icon}
                         />
                     </div>
+                    <EditProfileForm />
                 </div>
     )
 }

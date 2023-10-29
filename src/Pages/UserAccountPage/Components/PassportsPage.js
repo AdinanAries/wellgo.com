@@ -1,5 +1,6 @@
 import PaginationButtons from "../../../components/PaginationButtons";
 import EachPassport from "./EachPassport";
+import PassportsForm from "../../../components/PassportsForm";
 
 const PassportsPage = (props) => {
 
@@ -41,6 +42,7 @@ const PassportsPage = (props) => {
                 <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
                 Add New Passport
             </div>
+            <PassportsForm />
         </div>
     )
 }

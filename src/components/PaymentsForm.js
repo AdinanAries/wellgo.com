@@ -1,6 +1,24 @@
 import credit_card_payment from "../icons/credit_card_payment.svg";
+import { useState } from "react";
 
-function PaymentsForm(){
+function PaymentsForm(props){
+
+    let [ paymentForm, setPaymentForm ] = useState({
+        id: "",
+        user_id: "",
+        card_number: "",
+        holder_name: "",
+        exp_date: "",
+        sec_code: "",
+        billing: {
+            street: "",
+            city: "",
+            state: "",
+            country: "",
+            zip_code: ""
+        }
+    });
+
     return (
         <div id="account_page_add_payments_form" style={{display: "none"}} className="page-popup-cover">
             <div className="page-popup-cover-content-container">

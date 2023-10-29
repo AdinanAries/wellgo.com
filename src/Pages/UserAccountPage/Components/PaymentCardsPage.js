@@ -1,5 +1,6 @@
 import PaginationButtons from "../../../components/PaginationButtons";
 import EachPaymentCard from "./EachPaymentCard";
+import PaymentsForm from "../../../components/PaymentsForm";
 
 const PaymentCardsPage = (props) => {
 
@@ -48,6 +49,7 @@ const PaymentCardsPage = (props) => {
                 <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
                 Add New Payment Method
             </div>
+            <PaymentsForm />
         </div>
     )
 }

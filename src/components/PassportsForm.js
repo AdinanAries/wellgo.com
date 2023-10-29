@@ -1,6 +1,23 @@
 import passport from "../icons/passport.svg";
+import { useState } from "react";
 
-function PassportsForm(){
+function PassportsForm(props){
+
+    let [passportForm, setPassportForm] = useState({
+        id: "",
+        user_id: "",
+        passport_number: "",
+        issue_date: "",
+        exp_date: "",
+        city: "",
+        country: "",
+        holder_name: "",
+        holder_gender: "",
+        holder_nationality: "",
+        holder_dob: "",
+        holder_birth_city: "",
+    });
+
     return (
         <div id="account_page_add_passport_form" style={{display: "none"}} className="page-popup-cover">
             <div className="page-popup-cover-content-container">

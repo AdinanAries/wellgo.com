@@ -1,12 +1,56 @@
 import edit_user_forms_bg from "../../../icons/edit_user_forms_bg.svg";
+import { useState } from "react";
 
-function EditProfileForm({userForm,
-                            editUserFirstName,
-                            editUserLastName,
-                            editUserMiddleName,
-                            editUserEmail,
-                            editUserMobile,
-                            ...rest}){
+const EditProfileForm = (props) => {
+
+    let [userForm, setUserForm] = useState({
+        id: "001",
+        first_name: "Mohammedu",
+        middle_name: "Salifu",
+        last_name: "Adinan",
+        dob: "03-23-1992",
+        email: "m.adinan@yahoo.com",
+        mobile: "+1 732 799 9546",
+        gender: "male",
+        old_password: "",
+        new_password: "",
+        confirm_new_password: ""
+    });
+
+    function editUserFirstName(e){
+        setUserForm({
+            ...userForm,
+            first_name: e.target.value,
+        });
+    }
+
+    function editUserLastName(e){
+        setUserForm({
+            ...userForm,
+            last_name: e.target.value,
+        });
+    }
+
+    function editUserMiddleName(e){
+        setUserForm({
+            ...userForm,
+            middle_name: e.target.value,
+        });
+    }
+
+    function editUserEmail(e){
+        setUserForm({
+            ...userForm,
+            email: e.target.value,
+        });
+    }
+
+    function editUserMobile(e){
+        setUserForm({
+            ...userForm,
+            mobile: e.target.value,
+        });
+    }
     return (
         <div id="account_page_edit_profile_form" style={{display: "none"}} className="page-popup-cover">
             <div className="page-popup-cover-content-container">
