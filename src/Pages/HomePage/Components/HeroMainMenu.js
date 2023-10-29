@@ -74,7 +74,7 @@ const HeroMainMenu = (props) => {
                                 style={{cursor: "not-allowed", textAlign: "initial", color: "rgba(255,255,255,0.4)", fontSize: 14, padding: "10px", fontFamily: "'Prompt', Sans-serif"}}>
                             <i style={{marginRight: 10}} className="fa-solid fa-box-open"></i>
                             Packages</div>
-                        <div className="agent_hero_menu_item dropdown" id="landing_page_hero_manu_bar_bot_item" style={{cursor: "pointer", textAlign: "initial", color: "rgba(169, 221, 255, 0.8)", fontSize: 14, padding: "10px", fontFamily: "'Prompt', Sans-serif"}}>
+                        <div className="agent_hero_menu_item dropdown" id="dropdown_landing_page_hero_manu_bar_bot_item" style={{cursor: "pointer", textAlign: "initial", color: "rgba(169, 221, 255, 0.8)", fontSize: 14, padding: "10px", fontFamily: "'Prompt', Sans-serif"}}>
                             <i style={{marginRight: 10}} className="fa-solid fa-robot"></i>
                             Agent</div>
                         <div className="currency_hero_menu_item dropdown" 

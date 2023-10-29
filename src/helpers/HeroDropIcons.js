@@ -52,6 +52,15 @@ const HeroDropIcon = () => {
         });
     }
 
+    if(document.getElementById("dropdown_landing_page_hero_manu_bar_bot_item")){
+        document.getElementById("dropdown_landing_page_hero_manu_bar_bot_item").addEventListener("click", e=>{
+            if(global.wellgo_bot.status===""){
+              global.show_chat_bot_uprading_message();
+            }
+            global.toggle_show_hp_support_chat_container()
+        });
+    }
+
     if(document.getElementById("landing_page_search_bar_book_w_vta_btn")){
         document.getElementById("landing_page_search_bar_book_w_vta_btn").addEventListener("click", e=>{
             global.start_book_with_vitual_agent();
