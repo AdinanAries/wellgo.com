@@ -56,7 +56,7 @@ const DuffelOfferItem = (props) => {
                     {ORIGIN_AIRPORT} - {DESTINATION_AIRPORT}</p>
                 </div>
                 <div>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>{HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")} )</p>
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>{HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")})</p>
                     {STOPSMARKUP.map(each=>each)}
                 </div>
                 <div className="each_ticket_price_display_container">

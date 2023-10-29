@@ -24,7 +24,7 @@ const PassengerNameRecord = (props) => {
     const [ availableAdultPassengersForInfants, setAvailableAdultPassengersForInfants ] = useState([]);
     const [ allInfantsPassengers, setAllInfantPassengers ] = useState([]);
 
-    const { passengers } = props;
+    const { passengers, prices } = props;
 
     useEffect(()=> {
         setAdultPsngrForInfants();
@@ -101,7 +101,11 @@ const PassengerNameRecord = (props) => {
                     </div>
                 </div>
                 <div className="checkout_page_all_info_flex_right">
-                    <PriceSummary buttonFunction={props.showPaymentPage} buttonText="Payment" />
+                    <PriceSummary 
+                        prices={prices}
+                        buttonFunction={props.showPaymentPage} 
+                        buttonText="Payment" 
+                    />
                 </div>
             </div>
         </div>

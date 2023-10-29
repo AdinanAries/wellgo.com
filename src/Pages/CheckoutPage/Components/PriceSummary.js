@@ -1,4 +1,8 @@
 const PriceSummary = (props) => {
+
+    const { payments, prices } = props;
+    
+
     return (
         <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: 9, padding: 10, margin: 10}}>
             <p style={{fontSize: 19, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
@@ -10,7 +14,7 @@ const PriceSummary = (props) => {
                         Traveler: 1 Adult
                     </p>
                     <p style={{fontSize: 14, fontWeight: "bolder", letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                        $133.28
+                        ${prices.total_amount}
                     </p>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
@@ -18,7 +22,7 @@ const PriceSummary = (props) => {
                         Flight
                     </p>
                     <p style={{fontSize: 14, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                        $101.10
+                        {prices.base_amount}
                     </p>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
@@ -26,7 +30,7 @@ const PriceSummary = (props) => {
                         Taxes and fees
                     </p>
                     <p style={{fontSize: 14, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                        $32.18
+                        ${prices.tax_amount}
                     </p>
                 </div>
             </div>
@@ -41,13 +45,13 @@ const PriceSummary = (props) => {
                     </p>
                 </div>
                 <p style={{fontSize: 17, fontWeight: "bolder", letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                    $133.28
+                    ${prices.total_amount}
                 </p>
             </div>
             <div className="checkout_page_main_checkout_btn_container">
                 <p className="checkout_page_mobile_button_place_total_price_display">
                     <i style={{marginRight: 5}} className="fa fa-info-circle"></i>
-                    The total amout you pay is $133.28. See price summary at the bottom
+                    The total amout you pay is ${prices.total_amount}. See price summary at the bottom
                 </p>
                 {
                     ( !props.isPaymentPage ) ?

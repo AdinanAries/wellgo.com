@@ -19,6 +19,14 @@ const CONSTANTS = {
         pnr: "PNR_PAGE",
         payment: "PAYMENT_PAGE"
     },
+    duffel_checkout: {
+        payment: {
+            types: {
+                balance: "balance",
+                arc_bsp_cash: "arc_bsp_cash",
+            }
+        }
+    },
     prices: {
         markup_percentage: 10,
     },

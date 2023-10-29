@@ -16,7 +16,7 @@ function extractSegmentDuration (duration) {
 }
 
 const SelectedTicketItinSegments = (props) => {
-    const { segments } = props;
+    const { segments, element_id } = props;
     console.log("segments: ", segments);
 
     // Reset for showing toggling to show or hide segments
@@ -217,7 +217,7 @@ const SelectedTicketItinSegments = (props) => {
     }
 
     return (
-        <div id="see_ticket_details_itinerary_details" style={{display: "none", marginTop: 10, marginBottom: 20}}>
+        <div id={element_id} style={{display: "none", marginTop: 10, marginBottom: 20}}>
             {seg_markup.map(seg=>seg)}            
         </div>
     )

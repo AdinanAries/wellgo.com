@@ -67,6 +67,11 @@ export const get_short_date_MMMDD = (date_string) => {
     return `${d_arr[1]} ${d_arr[2]}`;
 }
 
+export const get_short_date_DAYMMMDD = (date_string) => {
+    let d_arr = new Date(date_string).toDateString().split(" ");
+    return `${d_arr[0]}, ${d_arr[1]} ${d_arr[2]}`;
+}
+
 export const get_currency_symbol = (curr) => {
     const CURRENCIES = CURRENCY_SYMBOLS;
     if(curr && typeof curr === "string")

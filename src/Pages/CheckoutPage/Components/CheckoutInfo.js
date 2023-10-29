@@ -1,6 +1,18 @@
 import PriceSummary from "./PriceSummary";
+import CheckoutInfoSliceCard from "./CheckoutInfoSliceCard";
 
 const CheckoutInfo = (props) => {
+
+    const { flight, prices } = props;
+    console.log("Checkout Infor", flight);
+
+    const { total_amount, total_currency, 
+            slices, owner, conditions, 
+            available_services, passengers 
+    } = flight;
+
+    const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />)
+
     return (
         <>
             <div className="checkout_page_all_info_flex_container">
@@ -56,61 +68,14 @@ const CheckoutInfo = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: 9, padding: 10, margin: 10}}>
-                        <p style={{fontSize: 14, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                            Montreal to New York
-                        </p>
-                        <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 10}}>
-                            <img src={"./deltaIcon.png"} style={{width: 27, height: "auto", objectFit: "conver"}} alt={"to do"} />
-                            Delta &#8226; Thu, Nov 25
-                        </p>
-                        <div style={{marginTop: 20}}>
-                            <p style={{fontSize: 15, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                                9:45am - 2:54pm
-                            </p>
-                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 5}}>
-                                5h 9m (1 stop)
-                            </p>
-                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 5}}>
-                                2h 1m in Toronto (YYZ)
-                            </p>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 17, marginTop: 5}}>
-                                <i style={{marginRight: 10}} className="fa fa-wifi"></i>
-                            </p>
-                            <p style={{cursor: "pointer", marginTop: 10, fontSize: 14, color: "#c900b0"}}>
-                                See details <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: 9, padding: 10, margin: 10}}>
-                        <p style={{fontSize: 17, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                            New York to Montreal
-                        </p>
-                        <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 10}}>
-                            <img src={"./deltaIcon.png"} style={{width: 27, height: "auto", objectFit: "cover"}} alt={"to do"}/>
-                            Delta &#8226; Thu, Nov 25
-                        </p>
-                        <div style={{marginTop: 20}}>
-                            <p style={{fontSize: 15, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                                9:45am - 2:54pm
-                            </p>
-                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 5}}>
-                                5h 9m (1 stop)
-                            </p>
-                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 5}}>
-                                2h 1m in Toronto (YYZ)
-                            </p>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 17, marginTop: 5}}>
-                                <i style={{marginRight: 10}} className="fa fa-wifi"></i>
-                            </p>
-                            <p style={{cursor: "pointer", marginTop: 10, fontSize: 14, color: "#c900b0"}}>
-                                See details <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
-                            </p>
-                        </div>
-                    </div>
+                    {SLICES}
                 </div>
                 <div className="checkout_page_all_info_flex_right">
-                    <PriceSummary buttonFunction={props.showPNRPage} buttonText="Passengers" />
+                    <PriceSummary 
+                        buttonFunction={props.showPNRPage} 
+                        buttonText="Passengers" 
+                        prices={prices}
+                    />
                 </div>
             </div>
         </>

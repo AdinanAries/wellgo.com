@@ -6,17 +6,23 @@ import PaymentPage from './Components/PaymentPage';
 import CONSTANTS from '../../Constants/Constants';
 import { create_offer_obj } from "../../test_objects/duffel_objects";
 import { obj_has_empty_prop, calculate_age } from "../../helpers/general";
+import { FLIGHT_DATA_ADAPTER } from "../../helpers/FlightDataAdapter";
 import { toast } from 'react-toastify';
 
 import { useState } from 'react';
 
 export default function CheckoutPage(props){
 
+    const { payload } = props;
+
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
     const [ checkoutPayload, setcheckoutPayload ] = useState({
         meta: {},
-        data: create_offer_obj
+        data: FLIGHT_DATA_ADAPTER.prepareCheckout(payload)
     });
+
+    const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
+    const PRICES=FLIGHT_DATA_ADAPTER.adaptPriceProps(payload);
 
     const showInfoPage = () => {
         setActivePage(CONSTANTS.checkout_pages.info);
@@ -100,7 +106,7 @@ export default function CheckoutPage(props){
         padding: 10,
         color: "rgba(0,0,0,0.2)"
     }
-
+    console.log("checkout payload:", payload)
     return (
         <div id="booking_start_checkout_page_container" style={{display: "block"}}>
             <div className="wrapper">
@@ -145,24 +151,34 @@ export default function CheckoutPage(props){
                         <p className="checkout_page_header_price_total" style={{fontSize: 13, padding: 10, color: "rgba(0,0,0,0.7)"}}>
                                 Total:
                                 <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.6)", fontSize: 13, marginLeft: 5}}>
-                                    $133.23</span>
+                                    ${TOTAL_PRICE}</span>
                         </p>
                     </div>
                 </div>
                 {
                     (activePage===CONSTANTS.checkout_pages.info) ?
-                        <CheckoutInfo showPNRPage={showPNRPage} /> : ""
+                        <CheckoutInfo 
+                            flight={payload}
+                            showPNRPage={showPNRPage}
+                            prices={PRICES}
+                        /> : ""
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.pnr) ?
                         <PassengerNameRecord 
                             setResponsibleAdultForInfant={setResponsibleAdultForInfant}
                             savePassengerInfo={savePassengerInfo}
-                            passengers={checkoutPayload.data.passengers} showPaymentPage={showPaymentPage} /> : ""
+                            passengers={checkoutPayload.data.passengers} 
+                            showPaymentPage={showPaymentPage}
+                            prices={PRICES}
+                        /> : ""
                 }
                 {
                     (activePage===CONSTANTS.checkout_pages.payment) ?
-                        <PaymentPage /> : ""
+                        <PaymentPage 
+                            payments={checkoutPayload.data.payments}
+                            prices={PRICES}
+                        /> : ""
                 }
             </div>
         </div>

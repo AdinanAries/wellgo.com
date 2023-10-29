@@ -14,11 +14,11 @@ function hide_selected_ticket_details_pane(){
 }
 
 var is_itinerary_showing = false;
-function toggle_see_ticket_details_itinerary_details(){
+function toggle_see_ticket_details_itinerary_details(element_id){
     if(is_itinerary_showing){
-        $("#see_ticket_details_itinerary_details").slideUp("fast");
+        window.$("#"+element_id).slideUp("fast");
     }else{
-        $("#see_ticket_details_itinerary_details").slideDown("fast");
+        window.$("#"+element_id).slideDown("fast");
     }
         is_itinerary_showing = !is_itinerary_showing;
 }

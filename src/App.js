@@ -43,6 +43,7 @@ function App() {
   const [ showHome, setShowHome ] = useState(true);
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
+  const [ checkoutPayload, setcheckoutPayload ] = useState({});
   const [ showHomePageSearchForm, setShowHomePageSearchForm ] = useState(false);
   const [ toggleShowCurrencyPage, setToggleShowCurrencyPage ] = useState(false);
   const [ siteCurrency, setSiteCurrency ] = useState(CURR);
@@ -62,8 +63,9 @@ function App() {
     setIsCheckout(false);
   }
 
-  const begin_checkout = () => {
+  const begin_checkout = (data) => {
     setIsCheckout(true);
+    setcheckoutPayload(data);
   }
 
   const toggle_show_hide_currency_page = () => {
@@ -101,6 +103,7 @@ function App() {
       {
         isCheckout ? 
           <CheckoutPage 
+            payload={checkoutPayload}
             cancel_checkout={cancel_checkout}
           /> 
         : ""

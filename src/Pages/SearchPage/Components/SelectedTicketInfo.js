@@ -19,7 +19,11 @@ const SelectedTicketInfo = (props) => {
     }
 ]
  */
-    const { total_amount, total_currency, slices, owner, conditions, available_services, passengers } = props.flight.data;
+    const { data } = props.flight;
+    const { total_amount, total_currency, 
+            slices, owner, conditions, 
+            available_services, passengers 
+    } = data;
 
     const SEGMENT_LENGTH = slices[0].segments.length;
     const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
@@ -174,12 +178,12 @@ const SelectedTicketInfo = (props) => {
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                 <img src={owner.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
                                 {owner.name}
-                                <span onClick={global.toggle_see_ticket_details_itinerary_details} 
+                                <span onClick={()=>global.toggle_see_ticket_details_itinerary_details("see_ticket_details_itinerary_details")} 
                                     style={{cursor: "pointer", marginLeft: 15, fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
                                     See details <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
                                 </span>
                             </p>
-                            <SelectedTicketItinSegments segments={slices[0].segments}/>
+                            <SelectedTicketItinSegments element_id="see_ticket_details_itinerary_details" segments={slices[0].segments}/>
                         </div>
                         <p className="pop-up-close-btn" onClick={()=>{global.hide_selected_ticket_details_pane(); props.unselectFlightOffer();}} style={{cursor: "pointer", color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
                             &times;
@@ -217,7 +221,7 @@ const SelectedTicketInfo = (props) => {
                     {CHANGES_INFO}
                 </div>
                 <div className="selected_ticket_book_btn_container">
-                    <div onClick={props.begin_checkout/*()=>global.show_start_checkout_page(`${global.stringify_obj_for_template_strings(global.checkout_obj)}`)*/} className="selected_ticket_book_btn">
+                    <div onClick={()=>props.begin_checkout(data)/*()=>global.show_start_checkout_page(`${global.stringify_obj_for_template_strings(global.checkout_obj)}`)*/} className="selected_ticket_book_btn">
                         <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)", fontSize: 19}} className="fa fa-check-square-o" aria-hidden="true"></i>
                         Book
                     </div>
