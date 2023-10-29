@@ -17,7 +17,7 @@ import HeroDropIcon from '../../../helpers/HeroDropIcons';
 
 export default function ExploreDestinations(props){
 
-    const { siteCurrency, toggle_show_hide_currency_page } = props;
+    const { siteCurrency, siteLanguage, toggle_show_hide_currency_page, toggle_show_hide_languages_page } = props;
     // Reset for toggling to hide or show the dropdown buttons
     global.is_landing_page_search_filters_open=false;
 
@@ -31,7 +31,9 @@ export default function ExploreDestinations(props){
                     <div className="wrapper">
                         <HeroMainMenu 
                             toggle_show_hide_currency_page={toggle_show_hide_currency_page}
+                            toggle_show_hide_languages_page={toggle_show_hide_languages_page}
                             siteCurrency={siteCurrency} 
+                            siteLanguage={siteLanguage}
                         />
                         <div className="landing_page_jumb_text" style={{marginBottom: 20}}>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28, textAlign: "center"}}>

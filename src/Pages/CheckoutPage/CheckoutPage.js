@@ -126,7 +126,7 @@ export default function CheckoutPage(props){
                         <div style={{display: "flex", flexDirection: "row"}}>
                             <div onClick={showInfoPage} style={{cursor: "pointer", padding: 10, color: (activePage===CONSTANTS.checkout_pages.info) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.6)"}}>
                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                    <i style={{marginRight: 10, opacity: 0.2}} className='fa-solid fa-plane' aria-hidden="false"></i>
+                                    <i style={{marginRight: 10, opacity: 0.2}} className='fa-solid fa-plane-departure' aria-hidden="false"></i>
                                     Flight</p>
                             </div>
                             <div style={nav_separator_style}>{">"}</div>

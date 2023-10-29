@@ -13,7 +13,7 @@ import CONSTANTS from "../../../Constants/Constants";
 
 function Main(props){
 
-    const { siteCurrency, toggle_show_hide_currency_page } = props;
+    const { siteCurrency, siteLanguage, toggle_show_hide_currency_page, toggle_show_hide_languages_page } = props;
     localStorage.setItem("is_home_page", "yes");
     useEffect(()=>{
         if(props.showSearchForm){
@@ -52,7 +52,9 @@ function Main(props){
             </div>
             <ExploreDestinations 
                 siteCurrency={siteCurrency}
+                siteLanguage={siteLanguage}
                 toggle_show_hide_currency_page={toggle_show_hide_currency_page} 
+                toggle_show_hide_languages_page={toggle_show_hide_languages_page}
             />
             <ChooseUs />
             

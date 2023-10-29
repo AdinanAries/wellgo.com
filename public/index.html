@@ -53,6 +53,34 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="text/javascript">
+      function instantiateSearchObj(){
+        var search_obj = {
+          type: "one-way",
+          itinerary: {
+            departure: {
+              airport: "MAD",
+              date: "2022-23-03"
+            },
+            arrival:{
+              airport: "CGD",
+              date: "2022-24-03"
+            },
+            cabin: "ECONOMY",
+            travelers: {
+              adults: 1,
+              children: 0,
+              infants: 0
+            }
+          }
+        }
+        if(localStorage.getItem("search_obj")){
+          //other code here
+        }else{
+          localStorage.setItem("search_obj", JSON.stringify(search_obj));
+        }
+      }
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

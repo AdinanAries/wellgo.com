@@ -8,8 +8,10 @@ const CONSTANTS = {
     dev: "DEVELOPMENT",
     prod: "PRODUCTION",
     default_currency: "USD",
+    default_language: "ENGLISH",
     local_storage: {
         wellgo_usr_curr: "wellgo_usr_curr",
+        wellgo_usr_lang: "wellgo_usr_lang",
         flight_search_object: "search_obj",
     },
     checkout_pages: {

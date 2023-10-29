@@ -1,27 +1,4 @@
-let search_obj = {
-  type: "one-way",
-  itinerary: {
-    departure: {
-      airport: "MAD",
-      date: "2022-23-03"
-    },
-    arrival:{
-      airport: "CGD",
-      date: "2022-24-03"
-    },
-    cabin: "ECONOMY",
-    travelers: {
-      adults: 1,
-      children: 0,
-      infants: 0
-    }
-  }
-}
-if(localStorage.getItem("search_obj")){
-  //other code here
-}else{
-  localStorage.setItem("search_obj", JSON.stringify(search_obj));
-}
+window.instantiateSearchObj();
 
 function add_clouds_to_animated_loader(){
   if(document.getElementById("animated_loader")){
@@ -155,7 +132,7 @@ if(document.getElementById("sp_search_form_submit_btn")){
         document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
     }
 
-    search_submit_function();
+    window.search_submit_function();
 
   });
 }
@@ -166,7 +143,7 @@ let bot_server_base_url = "http://localhost:5001";
 var get_answer_from_bot = (user_query) => {
   //console.log(user_query)
   //console.log("bot status: ", wellgo_bot.status)
-  return $.ajax({
+  return window.$.ajax({
       type: "POST",
       url: `${bot_server_base_url}/query_bot/`,
       data: JSON.stringify({

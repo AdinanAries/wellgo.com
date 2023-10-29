@@ -17,6 +17,7 @@ import HelpPage from "./Pages/HelpPage/HelpPage";
 import HPSupport from "./components/HPSupport";
 import { ToastContainer } from "react-toastify";
 import CurrenciesPane from './components/CurrenciesPane';
+import LanguagesPane from './components/LanguagesPane';
 import "react-toastify/dist/ReactToastify.css";
 import CONSTANTS from './Constants/Constants';
 
@@ -27,6 +28,16 @@ if (localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_curr)) {
     localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_curr, CURR);
 }
 
+let LANG=CONSTANTS.default_language[0]+CONSTANTS.default_language.toLowerCase().substring(1);
+if (localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_lang)) {
+    LANG = localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_lang);
+} else {
+    localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_lang, LANG);
+}
+
+// Instantiating search post obj
+global.instantiateSearchObj();
+
 function App() {
 
   const [ showHome, setShowHome ] = useState(true);
@@ -35,6 +46,8 @@ function App() {
   const [ showHomePageSearchForm, setShowHomePageSearchForm ] = useState(false);
   const [ toggleShowCurrencyPage, setToggleShowCurrencyPage ] = useState(false);
   const [ siteCurrency, setSiteCurrency ] = useState(CURR);
+  const [ toggleShowLanguagesPage, setToggleShowLanguagesPage ] = useState(false);
+  const [ siteLanguage, setSiteLanguage ] = useState(LANG);
 
   const show_search_page = () => {
     setShowSearchPage(true);
@@ -57,9 +70,18 @@ function App() {
     setToggleShowCurrencyPage(!toggleShowCurrencyPage);
   }
 
+  const toggle_show_hide_languages_page = () => {
+    setToggleShowLanguagesPage(!toggleShowLanguagesPage);
+  }
+
   const SelectSiteCurrency = (CURR) => {
     setSiteCurrency(CURR);
     localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_curr, CURR);
+  }
+
+  const SelectSiteLanguage = (LANG) => {
+    setSiteLanguage(LANG);
+    localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_lang, LANG);
   }
 
   return (
@@ -69,7 +91,11 @@ function App() {
           SelectSiteCurrency={SelectSiteCurrency}
           toggle_show_hide_pane={toggle_show_hide_currency_page} />
       }
-      
+      {
+        toggleShowLanguagesPage && <LanguagesPane 
+          SelectSiteLanguage={SelectSiteLanguage}
+          toggle_show_hide_pane={toggle_show_hide_languages_page} />
+      }
       <HPSupport />
       <MobileMenu />
       {
@@ -86,7 +112,9 @@ function App() {
         begin_checkout={begin_checkout}
         showSearchForm={showHomePageSearchForm}
         siteCurrency={siteCurrency}
+        siteLanguage={siteLanguage}
         toggle_show_hide_currency_page={toggle_show_hide_currency_page}
+        toggle_show_hide_languages_page={toggle_show_hide_languages_page}
       />
       <TripsPage />
       <DealsPage />

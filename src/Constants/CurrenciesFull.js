@@ -1,3 +1,5 @@
+// https://gist.githubusercontent.com/stevekinney/8334552/raw/28d6e58f99ba242b7f798a27877e2afce75a5dca/currency-symbols.json
+
 const CURRENCIES_FULL = [
     {
       "currency": "Albania Lek",
