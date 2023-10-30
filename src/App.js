@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
+import UseCurrentPage from './helpers/PageRoutingFuncs';
 
 //components
 import Header from './components/Header';
@@ -44,6 +45,7 @@ function App() {
   const [ showHome, setShowHome ] = useState(true);
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
   const [ checkoutPayload, setcheckoutPayload ] = useState({});
   const [ showHomePageSearchForm, setShowHomePageSearchForm ] = useState(false);
   const [ toggleShowCurrencyPage, setToggleShowCurrencyPage ] = useState(false);
@@ -51,6 +53,12 @@ function App() {
   const [ toggleShowLanguagesPage, setToggleShowLanguagesPage ] = useState(false);
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
   
+  useEffect(()=>{
+    UseCurrentPage({
+      show_search_page,
+      show_home_page
+    })
+  }, [])
 
   const show_search_page = () => {
     setShowSearchPage(true);
@@ -88,6 +96,14 @@ function App() {
     localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_lang, LANG);
   }
 
+  const LogMeIn = () => {
+    setIsLoggedIn(true);
+  }
+
+  const LogMeOut = () => {
+    setIsLoggedIn(false);
+  }
+
   return (
     <div className="">
       {
@@ -110,7 +126,9 @@ function App() {
           /> 
         : ""
       }
-      <Header  show_home_page={show_home_page} />
+      <Header  
+        showSearchPage={showSearchPage}
+        show_home_page={show_home_page} />
       <HomePage 
         show_search_page={show_search_page} 
         showSearchPage={showSearchPage}
@@ -123,9 +141,15 @@ function App() {
       />
       <TripsPage />
       <DealsPage />
-      <HelpPage />
-      <LoginPage />
-      <UserAccountPage />
+      <HelpPage /> 
+      <div className='wrapper'  id="login_page" style={{display: "none"}}>
+        <LoginPage
+          LogMeIn={LogMeIn}
+          isLoggedIn={isLoggedIn} /> 
+        <UserAccountPage 
+          LogMeOut={LogMeOut}
+          isLoggedIn={isLoggedIn} /> 
+      </div>
       <ExplorePage />
       <Footer />
       <ToastContainer 

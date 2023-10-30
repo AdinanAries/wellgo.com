@@ -1,6 +1,6 @@
 const AccountInfoPage = (props) => {
     
-    const { user, show_edit_profile_form, setEditDOB, setEditGender, editDOB, editGender } = props;
+    const { user, show_edit_profile_form, setEditDOB, setEditGender, editDOB, editGender, logoutOnclick } = props;
 
     return (
         <div id="user_account_main_account_pane" style={{marginTop: 20}}>
@@ -23,7 +23,7 @@ const AccountInfoPage = (props) => {
                             <i style={{marginRight: 5}} className="fa fa-pencil"></i>
                             edit profile
                         </p>
-                        <p style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", marginTop: 10, backgroundColor: "crimson", fontSize: 15, padding: "10px 20px", color: "white", cursor: "pointer"}}>
+                        <p onClick={()=>{logoutOnclick();document.getElementById("profile_view_more_options_drop_down").style.display="none"}} style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", marginTop: 10, backgroundColor: "crimson", fontSize: 15, padding: "10px 20px", color: "white", cursor: "pointer"}}>
                             <i style={{marginRight: 5}} className="fa fa-sign-out"></i>
                             logout
                         </p>

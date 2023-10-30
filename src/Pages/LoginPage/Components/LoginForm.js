@@ -1,6 +1,17 @@
-function LoginForm(){
+function LoginForm(props){
+
+    const { isLoggedIn, isShowSignUpForm, LogMeIn, showSignupForm } = props;
+
+    const login_onclick = () => {
+        LogMeIn();
+    }
+
+    function show_signup_form(){
+        showSignupForm();
+    }
+
     return (
-        <div id="main_login_form" style={{display: "block", padding: "30px 5px"}}>
+        <div id="main_login_form" style={{display: ((!isLoggedIn && !isShowSignUpForm) ? "block" : "none"), padding: "30px 5px"}}>
             <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                 <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
                     Log Into Account</p>
@@ -36,15 +47,3 @@ function LoginForm(){
 };
 
 export default LoginForm;
-
-function show_signup_form(){
-    document.getElementById("main_login_form").style.display="none";
-    document.getElementById("main_signup_form").style.display="block";
-    //$("#main_signup_form").slideDown("fast")
-}
-
-function login_onclick(){
-    document.getElementById("main_login_form").style.display="none";
-    document.getElementById("main_signup_form").style.display="none";
-    document.getElementById("user_account_manager_page").style.display="block";
-}

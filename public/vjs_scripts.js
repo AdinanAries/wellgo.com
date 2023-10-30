@@ -2300,9 +2300,9 @@ document.getElementById("landing_page_search_bar_help_pg_btn").addEventListener(
 
 window.onscroll = function() {
   if(localStorage.getItem("is_home_page")){
-    if (window.pageYOffset > 200) { 
+    if (window.pageYOffset > 40) { 
 
-      if($(window).width() > 1000){
+      if(window.$(window).width() > 1000){
         document.querySelector("header").style.backgroundColor="#000000";
       }
       

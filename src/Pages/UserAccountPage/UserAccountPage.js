@@ -11,10 +11,15 @@ import AccountInfoPage from "./Components/AccountInfoPage";
 import PaymentCardsPage from "./Components/PaymentCardsPage";
 import PassportsPage from "./Components/PassportsPage";
 import EditProfileForm from "./Components/EditProfileForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BookingHistoryPage from "./Components/BookingHistoryPage";
 
 function UserAccountPage(props){
+
+    const { isLoggedIn, LogMeOut } = props;
+
+    useEffect(() => {
+    }, []);
 
     let [user, setUser] = useState({
         id: "001",
@@ -139,8 +144,12 @@ function UserAccountPage(props){
     let [editDOB, setEditDOB] = useState(false);
     let [editGender, setEditGender] = useState(false);
 
+    const logoutOnclick = () => {
+        LogMeOut();
+    }
+
     return (
-        <div id="user_account_manager_page" style={{display: "none"}}>
+        <div id="user_account_manager_page" style={{display: (!isLoggedIn ? "none" : "block")}}>
                     <div className="user_account_page_container">
                         <div className="user_account_page_each_child_container">
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 5, marginBottom: 10}}>
@@ -161,6 +170,7 @@ function UserAccountPage(props){
                                 </div>
                             </div>
                             <AccountInfoPage
+                                logoutOnclick={logoutOnclick}
                                 user={user} 
                                 show_edit_profile_form={show_edit_profile_form}
                                 setEditDOB={setEditDOB}

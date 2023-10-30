@@ -1,6 +1,13 @@
-function SignupForm(){
+function SignupForm(props){
+
+    const { LogMeIn, isLoggedIn, isShowSignUpForm, showLoginForm } = props;
+
+    function show_login_form(){
+        showLoginForm();
+    }
+
     return (
-        <div id="main_signup_form" style={{display: "none", padding: "30px 5px"}}>
+        <div id="main_signup_form" style={{display: ((!isLoggedIn && isShowSignUpForm) ? "block" : "none"), padding: "30px 5px"}}>
             <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                 <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
                     Add New Account</p>
@@ -59,9 +66,3 @@ function SignupForm(){
 }
 
 export default SignupForm;
-
-function show_login_form(){
-    document.getElementById("main_signup_form").style.display="none";
-    document.getElementById("main_login_form").style.display="block";
-    //$("#main_login_form").slideDown("fast")
-}

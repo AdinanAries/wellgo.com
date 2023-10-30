@@ -33,6 +33,8 @@ export function show_login_page(){
         document.getElementById("help_page").style.display="none";
     if(document.getElementById("login_page"))
         document.getElementById("login_page").style.display="block";
+
+    localStorage.setItem(CONSTANTS.local_storage.wellgo_page, CONSTANTS.site_pages.account);
 }
 
 export function show_home_page(is_from_search=false){
@@ -76,6 +78,7 @@ export function show_home_page(is_from_search=false){
         document.getElementById("help_page").style.display="none";
     if(document.getElementById("home_page"))
         document.getElementById("home_page").style.display="block";
+    localStorage.setItem(CONSTANTS.local_storage.wellgo_page, CONSTANTS.site_pages.landing);
 }
 
 export function show_search_page(){
@@ -107,7 +110,7 @@ export function show_search_page(){
         document.getElementById("help_page").style.display="none";
     //if(document.getElementById("search_page"))
         //document.getElementById("search_page").style.display="block";
-
+    localStorage.setItem(CONSTANTS.local_storage.wellgo_page, CONSTANTS.site_pages.search);
 }
 
 export function show_trips_page(){
@@ -263,3 +266,21 @@ export function change_nav_active_icon(mobile_id, desktop_id){
     document.getElementById(mobile_id).classList.add("active");
     document.getElementById(desktop_id).classList.add("active");
 }
+
+const UseCurrentPage = (callbacks) => {
+    let page = localStorage.getItem(CONSTANTS.local_storage.wellgo_page);
+    if(CONSTANTS.site_pages.account===page){
+      show_login_page()
+    }
+    if(CONSTANTS.site_pages.landing===page){
+      show_home_page();
+      callbacks.show_home_page();
+      //localStorage.removeItem(CONSTANTS.local_storage.wellgo_page);
+    }
+    if(CONSTANTS.site_pages.search===page){
+      show_search_page();
+      callbacks.show_search_page();
+    }
+}
+
+export default UseCurrentPage;
