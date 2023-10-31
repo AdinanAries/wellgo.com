@@ -54,20 +54,21 @@ function App() {
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
   
   useEffect(()=>{
-    UseCurrentPage({
-      show_search_page,
-      show_home_page
-    })
-  }, [])
+    UseCurrentPage();
+  }, []);
 
   const show_search_page = () => {
     setShowSearchPage(true);
   }
+  // making show_search_page() global
+  window.__show_search_page__=show_search_page;
 
   const show_home_page = (with_search_form=false) => {
     setShowSearchPage(false);
     setShowHomePageSearchForm(with_search_form);
   }
+  // making show_home_page() global
+  window.__show_home_page__=show_home_page;
 
   const cancel_checkout = () => {
     setIsCheckout(false);

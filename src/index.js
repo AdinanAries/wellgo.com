@@ -3,10 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CONSTANTS from './Constants/Constants';
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path={CONSTANTS.site_pages.account} element={<App />} />
+        <Route path={CONSTANTS.site_pages.search} element={<App />} />
+        <Route path={CONSTANTS.site_pages.trips} element={<App />} />
+        <Route path={CONSTANTS.site_pages.deals} element={<App />} />
+        <Route path={CONSTANTS.site_pages.explore} element={<App />} />
+        <Route path={CONSTANTS.site_pages.landing} element={<App />} />
+        <Route path={CONSTANTS.site_pages.support} element={<App />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

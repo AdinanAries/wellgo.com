@@ -1,6 +1,7 @@
 import CONSTANTS from "../Constants/Constants";
 import { chat_bot_new_msg } from "../Pages/HomePage/Components/ExploreDestination";
 import { return_new_rand_msg } from "../chatbot_funcs";
+import App from "../App";
 
 import $ from "jquery";
 
@@ -34,7 +35,7 @@ export function show_login_page(){
     if(document.getElementById("login_page"))
         document.getElementById("login_page").style.display="block";
 
-    localStorage.setItem(CONSTANTS.local_storage.wellgo_page, CONSTANTS.site_pages.account);
+    global.history.pushState({}, "", CONSTANTS.site_pages.account);
 }
 
 export function show_home_page(is_from_search=false){
@@ -78,7 +79,7 @@ export function show_home_page(is_from_search=false){
         document.getElementById("help_page").style.display="none";
     if(document.getElementById("home_page"))
         document.getElementById("home_page").style.display="block";
-    localStorage.setItem(CONSTANTS.local_storage.wellgo_page, CONSTANTS.site_pages.landing);
+    global.history.pushState({}, "", CONSTANTS.site_pages.landing);
 }
 
 export function show_search_page(){
@@ -110,7 +111,7 @@ export function show_search_page(){
         document.getElementById("help_page").style.display="none";
     //if(document.getElementById("search_page"))
         //document.getElementById("search_page").style.display="block";
-    localStorage.setItem(CONSTANTS.local_storage.wellgo_page, CONSTANTS.site_pages.search);
+    global.history.pushState({}, "", CONSTANTS.site_pages.search);
 }
 
 export function show_trips_page(){
@@ -139,6 +140,8 @@ export function show_trips_page(){
         document.getElementById("deals_page").style.display="none";
     if(document.getElementById("trips_page"))
         document.getElementById("trips_page").style.display="block";
+
+    global.history.pushState({}, "", CONSTANTS.site_pages.trips);
 }
 
 export function show_deals_page(){
@@ -170,6 +173,8 @@ export function show_deals_page(){
         document.getElementById("help_page").style.display="none";
     if(document.getElementById("trips_page"))
         document.getElementById("trips_page").style.display="none";
+
+    global.history.pushState({}, "", CONSTANTS.site_pages.deals);
 }
 
 export function show_explore_page(){
@@ -201,6 +206,8 @@ export function show_explore_page(){
         document.getElementById("home_page").style.display="none";
     if(document.getElementById("explore_page"))
         document.getElementById("explore_page").style.display="block";
+
+    global.history.pushState({}, "", CONSTANTS.site_pages.explore);
 }
 
 export function show_help_page(){
@@ -233,6 +240,8 @@ export function show_help_page(){
         document.getElementById("home_page").style.display="none";
     if(document.getElementById("explore_page"))
         document.getElementById("explore_page").style.display="none";
+
+    global.history.pushState({}, "", CONSTANTS.site_pages.support);
 }
 
 export function show_full_search_form(){
@@ -267,19 +276,33 @@ export function change_nav_active_icon(mobile_id, desktop_id){
     document.getElementById(desktop_id).classList.add("active");
 }
 
-const UseCurrentPage = (callbacks) => {
-    let page = localStorage.getItem(CONSTANTS.local_storage.wellgo_page);
+window.addEventListener('popstate', function(e) {
+    UseCurrentPage();
+});
+const UseCurrentPage = () => {
+    let page = window.location.pathname.substring(1);
     if(CONSTANTS.site_pages.account===page){
       show_login_page()
     }
+    if(CONSTANTS.site_pages.support===page){
+        show_help_page()
+    }
+    if(CONSTANTS.site_pages.deals===page){
+        show_deals_page()
+    }
+    if(CONSTANTS.site_pages.explore===page){
+        show_explore_page()
+    }
+    if(CONSTANTS.site_pages.trips===page){
+        show_trips_page()
+    }
     if(CONSTANTS.site_pages.landing===page){
-      show_home_page();
-      callbacks.show_home_page();
-      //localStorage.removeItem(CONSTANTS.local_storage.wellgo_page);
+        show_home_page();
+        window.__show_home_page__();
     }
     if(CONSTANTS.site_pages.search===page){
-      show_search_page();
-      callbacks.show_search_page();
+        show_search_page();
+        window.__show_search_page__();
     }
 }
 
