@@ -2,6 +2,8 @@ import explore_page_hero from "../../../explore_page_hero.jpg";
 
 import deltaIcon from "../../../deltaIcon.png";
 import airplane from "../../../icons/airplane.svg";
+import plane_departure from "../../../airplane-departure.svg"
+import missing_icon from "../../../missing.svg"
 
 import { show_explore_page } from "../../../helpers/PageRoutingFuncs";
 import FlightLoaderCard from "./FlightLoaderCard";
@@ -76,11 +78,15 @@ export default function ResultsListContainer(props){
                 flight={each}
             />);
     }else{
-        FLIGHTS = <div style={{padding: "50px 10px", backgroundColor: "rgba(0,0,0,0.1)", border: "1px solid rgba(0,0,0,0.1)"}}>
-            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 14, textAlign: "center"}}>
+        FLIGHTS = <div style={{padding: "10px", maxWidth: 250, margin: "auto", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <div style={{backgroundImage: `url('${missing_icon}')`, backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", width: "100%", height: "100%", position: "absolute", left: 10, top: -5,  zIndex: 1, opacity: 0.1}}></div>
+            <p style={{textAlign: "center"}}>
+                <img src={plane_departure}  style={{width: "100%", height: "auto", opacity: 0.4}} alt="plane departure"/>
+            </p>
+            <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 14, textAlign: "center", marginTop: 20}}>
                 <i style={{marginRight: 10, color: "goldenrod"}}
                     className="fa-solid fa-exclamation-triangle"></i>
-                Oops! No flights were found</p>
+                Oops! Nothing to show</p>
         </div>
     }
     setTimeout(()=>{
@@ -91,13 +97,19 @@ export default function ResultsListContainer(props){
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0}}>
             
             <div id="search_results_mobile_top_itin_display">
-                { !props.loading ? 
-                    <MobileItinTopInfo SEARCH_OBJ={SEARCH_OBJ} /> 
-                    : <MobileItinTopInfoLoader /> }
+                { 
+                    !props.loading ? 
+                    props.flights.length > 0 && <MobileItinTopInfo SEARCH_OBJ={SEARCH_OBJ} />
+                    : <MobileItinTopInfoLoader />
+                }
             </div>
             <div className="search_list_main_flex_container">
                 <div id="search_list_main__settings_section" className="search_list_main__settings_section">
-                    { !props.loading ? <SearchFilters /> : <SearchFiltersLoader />}
+                    { 
+                        !props.loading ? 
+                        props.flights.length > 0 && <SearchFilters />
+                        : <SearchFiltersLoader />
+                    }
                 </div>
                 <div className="search_list_main_tickets_section">
                     <div id="animated_loader" style={{position: "relative", height: 190, display: props.loading ? "block" : "none"}}>
@@ -119,7 +131,7 @@ export default function ResultsListContainer(props){
                                         </p>
                                     </div>
                                 </div>
-                            : <div className="search_result_inportant_notice_container">
+                            : props.flights.length > 0 && <div className="search_result_inportant_notice_container">
                                 <div>
                                     <p style={{color: "rgba(105,0,0,0.7)", fontSize: 16, fontFamily: "'Prompt', Sans-serif", marginBottom: 10}}>
                                         <i className="fa fa-info-circle" style={{fontsize: 15, color: "orangered", marginRight: 5}}></i>Important Notice
