@@ -36,6 +36,12 @@ if (localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_lang)) {
 } else {
     localStorage.setItem(CONSTANTS.local_storage.wellgo_usr_lang, LANG);
 }
+let AMLOGGEDIN=false;
+if(localStorage.getItem(CONSTANTS.local_storage.logged_in_usr)){
+  AMLOGGEDIN=JSON.parse(localStorage.getItem(CONSTANTS.local_storage.logged_in_usr));
+}else{
+  localStorage.setItem(CONSTANTS.local_storage.logged_in_usr, AMLOGGEDIN);
+}
 
 // Instantiating search post obj
 global.instantiateSearchObj();
@@ -45,7 +51,7 @@ function App() {
   const [ showHome, setShowHome ] = useState(true);
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(AMLOGGEDIN);
   const [ checkoutPayload, setcheckoutPayload ] = useState({});
   const [ showHomePageSearchForm, setShowHomePageSearchForm ] = useState(false);
   const [ toggleShowCurrencyPage, setToggleShowCurrencyPage ] = useState(false);
@@ -99,10 +105,12 @@ function App() {
 
   const LogMeIn = () => {
     setIsLoggedIn(true);
+    localStorage.setItem(CONSTANTS.local_storage.logged_in_usr, true);
   }
 
   const LogMeOut = () => {
     setIsLoggedIn(false);
+    localStorage.setItem(CONSTANTS.local_storage.logged_in_usr, false);
   }
 
   return (

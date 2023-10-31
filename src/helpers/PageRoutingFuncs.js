@@ -1,10 +1,12 @@
 import CONSTANTS from "../Constants/Constants";
 import { chat_bot_new_msg } from "../Pages/HomePage/Components/ExploreDestination";
 import { return_new_rand_msg } from "../chatbot_funcs";
-import App from "../App";
 
 import $ from "jquery";
-
+const url=window.location.href;
+if(url.charAt(url.length-1)==="/"){
+    window.history.pushState(null, "", url.substring(0,url.length-1));
+}
 
 export function show_login_page(){
 

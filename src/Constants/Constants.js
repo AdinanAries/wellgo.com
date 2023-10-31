@@ -13,6 +13,7 @@ const CONSTANTS = {
         wellgo_usr_curr: "wellgo_usr_curr",
         wellgo_usr_lang: "wellgo_usr_lang",
         flight_search_object: "search_obj",
+        logged_in_usr: "logged_in_usr",
     },
     checkout_pages: {
         info: "INFO_PAGE",
