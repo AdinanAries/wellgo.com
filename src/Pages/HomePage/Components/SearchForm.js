@@ -15,8 +15,8 @@ function SearchForm(props){
         // Reset cabin type
         select_cabin_type("economy");
         // Reset trip round
-        select_trip_round("round-trip");
-        // Rest travelers
+        select_trip_round("one-way");
+        // Reset travelers
         let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
         flight_search_data.itinerary.travelers.adults = 1;
         flight_search_data.itinerary.travelers.children = 0;
@@ -152,14 +152,14 @@ function SearchForm(props){
                                         <label htmlFor="trip_round_round_trip_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             Round-trip</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input className="select_trip_round_chk" id="trip_round_round_trip_chk" style={{width: 20, height: 20}} type="radio" defaultChecked/>
+                                            <input className="select_trip_round_chk" id="trip_round_round_trip_chk" style={{width: 20, height: 20}} type="radio" />
                                         </div>
                                     </div>
                                     <div onClick={()=>select_trip_round("one-way")} style={{cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                                         <label htmlFor="trip_round_one_way_chk"><div style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif", height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                                             One-way</div></label>
                                         <div style={{height: 30, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                            <input className="select_trip_round_chk" id="trip_round_one_way_chk" style={{width: 20, height: 20}} type="radio" />
+                                            <input className="select_trip_round_chk" id="trip_round_one_way_chk" style={{width: 20, height: 20}} type="radio" defaultChecked />
                                         </div>
                                     </div>
                                     <div onClick={()=>{}/*()=>select_trip_round("multi-city")*/} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
@@ -184,7 +184,7 @@ function SearchForm(props){
                             </div>
                             <div id="select_trip_round_main_input_display" onClick={show_trip_round_settings_pane} className="searchFormChkInputLbl" style={{border: "none", backgroundColor: "rgba(0,0,0,0.07)", borderRadius: 8}}>
                                 <i style={{fontSize: 15, marginRight: 10}} className="fa fa-repeat"></i>
-                                Round-trip
+                                One-way
                             </div>
                             {/*<i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>*/}
                         </div>

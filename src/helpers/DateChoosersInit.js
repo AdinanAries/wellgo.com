@@ -1,6 +1,6 @@
 import CONSTANTS from "../Constants/Constants";
 
-const DateChoosersInit = (type=CONSTANTS.round_trip) => {
+const DateChoosersInit = (type=CONSTANTS.one_way) => {
   if(document.getElementById("departure_return_dates_input"))
     document.getElementById("departure_return_dates_input").value="";
     window.$(function() {

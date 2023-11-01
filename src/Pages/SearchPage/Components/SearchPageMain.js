@@ -78,12 +78,12 @@ function SearchPageMain(props){
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
                 Economy
             `;
-            document.getElementById("sp_trip_round_round_trip_chk").checked = true;
+            document.getElementById("sp_trip_round_one_way_chk").checked = true;
             document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
-                Round-trip
+                One-way
             `;
-            flight_search_data.type = "round-trip";
+            flight_search_data.type = "one-way";
             flight_search_data.itinerary.cabin = "ECONOMY";
             flight_search_data.itinerary.travelers.adults = 1;
             flight_search_data.itinerary.travelers.children = 0;

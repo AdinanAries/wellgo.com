@@ -65,7 +65,12 @@ const DuffelOfferItem = (props) => {
                             dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
                         {(markup(total_amount).new_price).toFixed(2)}</p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
-                        {is_one_way?"One-way":"Roundtrip"} per traveler</p>
+                        <span style={{fontSize: 12}}>
+                            {is_one_way?"One-way | ":"Roundtrip | "}
+                            <i style={{color: !is_one_way?"green":"orange", fontSize: 12, marginRight: 5}} className={"fa-solid "+(!is_one_way?"fa-check":"fa-exclamation-triangle")}></i>
+                            {!is_one_way?"return flight ":"no return flight "}</span>
+                        
+                    </p>
                 </div>
             </div>
             <div style={{marginTop: 5}}>
