@@ -97,6 +97,10 @@ function SearchPageMain(props){
         SEARCH_OBJ.origin_city = flights[0].slices[0].segments[0].origin.city_name;
         SEARCH_OBJ.destination_city = flights[0].slices[0].segments[0].destination.city_name;
     }
+    useEffect(()=>{
+        global.autoSelectAirportForInputField(SEARCH_OBJ.itinerary.departure.airport, "sp_search_forms_from_where_input_fld");
+        global.autoSelectAirportForInputField(SEARCH_OBJ.itinerary.arrival.airport, "sp_search_forms_to_where_input_fld");
+    }, []);
 
     return (
         <main>

@@ -1,5 +1,31 @@
 import AirportsData from "./Airports";
 
+global.autoSelectAirportForInputField = (IATA_ICAO, field_id) => {
+    if(!IATA_ICAO || typeof IATA_ICAO!=="string"){
+        return false;
+    }
+    let airports = AirportsData.filter(each=>(
+        each.IATA.toLowerCase().trim()===IATA_ICAO.toLowerCase().trim()
+        || each.ICAO.toLowerCase().trim()===IATA_ICAO.toLowerCase().trim()));
+    if(airports.length<1){
+        return false;
+    }
+    let item=airports[0];
+    const airport=`${item.city} - ${item.name} (${item.IATA})`;
+    const iata=item.IATA;
+    const icao=item.ICAO;
+    let html_elem=document.getElementById(field_id);
+    if(html_elem){
+        html_elem.value = airport;
+        if(iata === "\\N" || iata === "N"){
+            html_elem.value = airport.split("(")[0] + " (" + icao + ")";
+        }
+    }
+    
+    return item;
+    
+}
+
 const AutoCompleteInit = () => {
     //Array filter method wrapped in function to improve code reuse
     function filter_airports_array_based_input_value(elem_value){
