@@ -23,41 +23,11 @@ function UserAccountPage(props){
     let [ user, setUser ] = useState({});
     let [ isLoading, setIsLoading ] = useState(true);
     
-    let [passports, setPassports] = useState([]);
-    let [isPassportsLoading, setIsPassportsLoading] = useState(true);
+    let [ passports, setPassports ] = useState([]);
+    let [ isPassportsLoading, setIsPassportsLoading ] = useState(true);
     
-    let [payments, setPayments] = useState([
-        {
-            id: "001",
-            user_id: "001",
-            card_number: "***3424",
-            holder_name: "Mohammed Adinan",
-            exp_date: "03-23-2025",
-            sec_code: "009",
-            billing: {
-                street: "956 Anderson Ave, 1A",
-                city: "Bronx",
-                state: "NY",
-                country: "United States",
-                zip_code: "10453"
-            }
-        },
-        {
-            id: "001",
-            user_id: "001",
-            card_number: "***4532",
-            holder_name: "Emmanuel Poku",
-            exp_date: "06-19-2025",
-            sec_code: "136",
-            billing: {
-                street: "956 Anderson Ave, 1A",
-                city: "Bronx",
-                state: "NY",
-                country: "United States",
-                zip_code: "10453"
-            }
-        }
-    ]);
+    let [ payments, setPayments ] = useState([]);
+    let [ isPaymentCardsLoading, setIsPaymentCardsLoading ] = useState(true);
 
     let [bookings, setBookings] = useState([
         {
@@ -163,11 +133,39 @@ function UserAccountPage(props){
         }
     }
 
+    const fetchPaymentCards = async (path=`\\api\\payment-cards\\all\\${USER_ID}`) => {
+        try{
+            return await fetch(API_URL+path, {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(res => res.json())
+            .then(data => data)
+            .catch(err => {
+                console.log(err);
+                return {isError: true};
+            })
+        } catch (e){
+            console.log(e);
+            return {isError: true};
+        }
+    }
+
     const ShowPassports = async () => {
         let _passports=await fetchPassports();
             console.log("User Passports: ", _passports);
             setPassports(_passports);
             setIsPassportsLoading(false);
+    }
+
+    const ShowPaymentCards = async () => {
+        let _payment_cards=await fetchPaymentCards();
+            console.log("User Payment Cards: ", _payment_cards);
+            setPayments(_payment_cards);
+            setIsPaymentCardsLoading(false);
     }
 
     return (
@@ -202,12 +200,12 @@ function UserAccountPage(props){
                                             <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-user"></i>
                                             Account</p>
                                     </div>
-                                    <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_payment_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
+                                    <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_payment_pane();ShowPaymentCards();}} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
                                         <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                             <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-credit-card"></i>
                                             Payments</p>
                                     </div>
-                                    <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_passport_pane();ShowPassports()}} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
+                                    <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_passport_pane();ShowPassports();}} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
                                         <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                             <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-book"></i>
                                             Passports</p>
@@ -223,6 +221,7 @@ function UserAccountPage(props){
                                     editGender={editGender} 
                                 />
                                 <PaymentCardsPage 
+                                    isLoading={isPaymentCardsLoading}
                                     payments={payments}
                                     card_not_found={card_not_found} 
                                     show_more_payment_method_info={show_more_payment_method_info}

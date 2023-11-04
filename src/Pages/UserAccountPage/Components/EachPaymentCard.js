@@ -3,7 +3,7 @@ const EachPaymentCard = (props) => {
     const { index, each, show_more_payment_method_info, hide_more_payment_method_info } = props;
 
     return (
-        <div style={{padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+        <div style={{padding: 10}}>
             <div id={"show_more_payment_method_info_btn"+index}>
                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                     <i className="fa-solid fa-check" style={{color: "lightgreen", marginRight: 10}}></i>
@@ -35,7 +35,7 @@ const EachPaymentCard = (props) => {
                 <p onClick={()=>hide_more_payment_method_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                     view less ...
                 </p>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10, marginTop: 20}}>
+                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10}}>
                     <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
                         <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
                     </div>
