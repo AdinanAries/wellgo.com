@@ -1,3 +1,5 @@
+import CONSTANTS from "./Constants";
+
 const ENVIRONMENT = {
     data_provider: "DUFFEL",
     wellgo_api_svr: "",
@@ -5,6 +7,11 @@ const ENVIRONMENT = {
     runtime: {
         env: "DEVELOPMENT"
     }
+}
+
+export const getApiHost = () => {
+    return (ENVIRONMENT.runtime.env===CONSTANTS.prod) ?
+        ENVIRONMENT.wellgo_api_svr : ENVIRONMENT.wellgo_dev_api_svr;
 }
 
 export default ENVIRONMENT;

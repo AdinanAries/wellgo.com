@@ -1,22 +1,19 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import SearchResultSearchForm from "./SearchResultSearchForm";
 import ResultsListContainer from "./ResultsListContainer";
 
 import CONSTANTS from "../../../Constants/Constants";
-import ENVIRONMENT from "../../../Constants/Environment";
+import { getApiHost } from "../../../Constants/Environment";
 import SelectedTicketPane from "./SelectedTicketPane";
 
-function SearchPageMain(props){
+const SearchPageMain = (props) => {
 
-    const ref = useRef(null);
     let [ flights, setFlights ] = useState([]);
     let [ loading, setLoading ] = useState(true);
     let [ selectedFlightId, setSelectedFlightId] = useState("");
 
-    let api_url = (ENVIRONMENT.runtime.env===CONSTANTS.prod) ?
-        ENVIRONMENT.wellgo_api_svr : ENVIRONMENT.wellgo_dev_api_svr;
-
+    const API_URL = getApiHost();
     const submitFromSearchPage = async () => {
         setFlights([]);
         setLoading(true);
@@ -31,7 +28,7 @@ function SearchPageMain(props){
 
     const fetchFlightOffers = async (path="\\api\\flights") => {
         try{
-            return await fetch(api_url+path, {
+            return await fetch(API_URL+path, {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',

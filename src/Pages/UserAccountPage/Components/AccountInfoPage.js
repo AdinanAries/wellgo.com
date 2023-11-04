@@ -19,7 +19,7 @@ const AccountInfoPage = (props) => {
                         <p onClick={()=>document.getElementById("profile_view_more_options_drop_down").style.display="none"} style={{fontSize: 30, marginBottom: 5, borderBottom: "1px solid rgba(0,0,0,0.1)", padding: "0 10px", cursor: "pointer", textAlign: "right"}}>
                             &times;
                         </p>
-                        <p onClick={show_edit_profile_form} style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 15, padding: "10px 20px", color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
+                        <p onClick={show_edit_profile_form} style={{whiteSpace: "nowrap", fontFamily: "'Prompt', Sans-serif", fontSize: 15, padding: "10px 20px", color: "rgba(0,0,0,0.7)", cursor: "pointer"}}>
                             <i style={{marginRight: 5}} className="fa fa-pencil"></i>
                             edit profile
                         </p>

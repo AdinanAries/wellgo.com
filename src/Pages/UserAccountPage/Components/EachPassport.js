@@ -3,7 +3,7 @@ const EachPassport = (props) => {
     const { index, each, show_more_passport_info, hide_more_passport_info } = props;
 
     return (
-        <div style={{backgroundColor: "rgb(23, 87, 148,0.1)", borderRadius: 10, boxShadow: "0 0 5px rgba(0,0,0,0.33)", marginBottom: 10, padding: 15}}>
+        <div style={{padding: 15}}>
             <div id={"show_more_passport_info_btn"+index}>
                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                     <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>

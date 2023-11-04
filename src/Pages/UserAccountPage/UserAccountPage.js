@@ -3,65 +3,28 @@ import $ from "jquery";
 import edit_user_forms_bg from "../../icons/edit_user_forms_bg.svg";
 import credit_card_payment from "../../icons/credit_card_payment.svg";
 import passport from "../../icons/passport.svg";
+import loading_icon from "../../icons/loading.svg";
 import nothing_found_icon from "../../icons/nothing_found_icon.svg";
 import card_not_found from "../../icons/card_not_found.svg";
-import not_found_icon from "../../icons/not_found_icon.svg";
-import PaginationButtons from "../../components/PaginationButtons";
 import AccountInfoPage from "./Components/AccountInfoPage";
 import PaymentCardsPage from "./Components/PaymentCardsPage";
 import PassportsPage from "./Components/PassportsPage";
 import EditProfileForm from "./Components/EditProfileForm";
 import { useState, useEffect } from "react";
 import BookingHistoryPage from "./Components/BookingHistoryPage";
+import { getApiHost } from "../../Constants/Environment";
 
 function UserAccountPage(props){
 
     const { isLoggedIn, LogMeOut } = props;
+    const API_URL = getApiHost();
+    const USER_ID = "tempId";
 
-    useEffect(() => {
-    }, []);
-
-    let [user, setUser] = useState({
-        id: "001",
-        first_name: "Mohammedu",
-        middle_name: "",
-        last_name: "Adinan",
-        dob: "03-23-1992",
-        email: "m.adinan@yahoo.com",
-        mobile: "+1 7327999546",
-        gender: "male"
-    });
+    let [ user, setUser ] = useState({});
+    let [ isLoading, setIsLoading ] = useState(true);
     
-    let [passports, setPassports] = useState([
-        {
-            id: "001",
-            user_id: "001",
-            passport_number: "3452342",
-            issue_date: "02-26-2022",
-            exp_date: "02-26-2026",
-            city: "New York",
-            country: "United States",
-            holder_name: "Mohammed Adinan",
-            holder_gender: "Male",
-            holder_nationality: "American",
-            holder_dob: "03-23-1992",
-            holder_birth_city: "New York"
-        },
-        {
-            id: "002",
-            user_id: "001",
-            passport_number: "436373",
-            issue_date: "03-19-2021",
-            exp_date: "03-19-2025",
-            city: "New York",
-            country: "United States",
-            holder_name: "Salis Munir",
-            holder_gender: "Male",
-            holder_nationality: "American",
-            holder_dob: "03-23-1992",
-            holder_birth_city: "New York"
-        }
-    ]);
+    let [passports, setPassports] = useState([]);
+    let [isPassportsLoading, setIsPassportsLoading] = useState(true);
     
     let [payments, setPayments] = useState([
         {
@@ -148,61 +111,146 @@ function UserAccountPage(props){
         LogMeOut();
     }
 
+    useEffect(() => {
+        (async function go(){
+            // User Account
+            let _user=await fetchAccountInfo();
+            console.log("User Account: ", _user);
+            setUser(_user);
+            setIsLoading(false);
+        })();
+    }, []);
+
+    const fetchAccountInfo = async (path=`\\api\\users\\me\\${USER_ID}`) => {
+        try{
+            return await fetch(API_URL+path, {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(res => res.json())
+            .then(data => data)
+            .catch(err => {
+                console.log(err);
+                return {isError: true};
+            })
+        } catch (e){
+            console.log(e);
+            return {isError: true};
+        }
+    }
+
+    const fetchPassports = async (path=`\\api\\passports\\all\\${USER_ID}`) => {
+        try{
+            return await fetch(API_URL+path, {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(res => res.json())
+            .then(data => data)
+            .catch(err => {
+                console.log(err);
+                return {isError: true};
+            })
+        } catch (e){
+            console.log(e);
+            return {isError: true};
+        }
+    }
+
+    const ShowPassports = async () => {
+        let _passports=await fetchPassports();
+            console.log("User Passports: ", _passports);
+            setPassports(_passports);
+            setIsPassportsLoading(false);
+    }
+
     return (
         <div id="user_account_manager_page" style={{display: (!isLoggedIn ? "none" : "block")}}>
-                    <div className="user_account_page_container">
-                        <div className="user_account_page_each_child_container">
-                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 5, marginBottom: 10}}>
-                                <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                        <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-user"></i>
-                                        Account</p>
-                                </div>
-                                <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_payment_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                        <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-credit-card"></i>
-                                        Payments</p>
-                                </div>
-                                <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_passport_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
-                                    <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                        <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-book"></i>
-                                        Passports</p>
-                                </div>
+            {
+                isLoading && <div className="user_account_page_container" style={{padding: "40px 20px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <div style={{marginBottom: 20, padding: "20px"}}>
+                        <div style={{backgroundImage: `url(${loading_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
+                            Please wait...</p>
+                    </div>
+                </div>
+            }
+            {
+                !isLoading &&
+                <>
+                    {
+                    user.isError ? 
+                        <div className="user_account_page_container" style={{padding: "40px 20px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <div style={{marginBottom: 20, padding: "20px"}}>
+                                <div style={{backgroundImage: `url(${nothing_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
+                                <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
+                                    <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
+                                    Something Went Wrong</p>
                             </div>
-                            <AccountInfoPage
-                                logoutOnclick={logoutOnclick}
-                                user={user} 
-                                show_edit_profile_form={show_edit_profile_form}
-                                setEditDOB={setEditDOB}
-                                setEditGender={setEditGender}
-                                editDOB={editDOB}
-                                editGender={editGender} 
-                            />
-                            <PaymentCardsPage 
-                                payments={payments}
-                                card_not_found={card_not_found} 
-                                show_more_payment_method_info={show_more_payment_method_info}
-                                hide_more_payment_method_info={hide_more_payment_method_info}
-                                show_add_new_payment_form={show_add_new_payment_form}
-                            />
-                            <PassportsPage 
-                                passports={passports}
-                                not_found_icon={not_found_icon}
-                                show_more_passport_info={show_more_passport_info}
-                                hide_more_passport_info={hide_more_passport_info}
-                                show_add_new_passport_form={show_add_new_passport_form}
+                        </div> :
+                        <div className="user_account_page_container">
+                            <div className="user_account_page_each_child_container">
+                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 5, marginBottom: 10}}>
+                                    <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
+                                        <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                            <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-user"></i>
+                                            Account</p>
+                                    </div>
+                                    <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={show_main_payment_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
+                                        <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                            <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-credit-card"></i>
+                                            Payments</p>
+                                    </div>
+                                    <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_passport_pane();ShowPassports()}} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
+                                        <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                            <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-book"></i>
+                                            Passports</p>
+                                    </div>
+                                </div>
+                                <AccountInfoPage
+                                    logoutOnclick={logoutOnclick}
+                                    user={user} 
+                                    show_edit_profile_form={show_edit_profile_form}
+                                    setEditDOB={setEditDOB}
+                                    setEditGender={setEditGender}
+                                    editDOB={editDOB}
+                                    editGender={editGender} 
+                                />
+                                <PaymentCardsPage 
+                                    payments={payments}
+                                    card_not_found={card_not_found} 
+                                    show_more_payment_method_info={show_more_payment_method_info}
+                                    hide_more_payment_method_info={hide_more_payment_method_info}
+                                    show_add_new_payment_form={show_add_new_payment_form}
+                                />
+                                <PassportsPage 
+                                    isPassportsLoading={isPassportsLoading}
+                                    passports={passports}
+                                    show_more_passport_info={show_more_passport_info}
+                                    hide_more_passport_info={hide_more_passport_info}
+                                    show_add_new_passport_form={show_add_new_passport_form}
+                                />
+                            </div>
+                            <BookingHistoryPage
+                                toggle_show_booking_history_filters={toggle_show_booking_history_filters}
+                                hide_booking_history_filters={hide_booking_history_filters}
+                                bookings={bookings}
+                                show_booking_history_more_info_pane={show_booking_history_more_info_pane}
+                                nothing_found_icon={nothing_found_icon}
                             />
                         </div>
-                        <BookingHistoryPage
-                            toggle_show_booking_history_filters={toggle_show_booking_history_filters}
-                            hide_booking_history_filters={hide_booking_history_filters}
-                            bookings={bookings}
-                            show_booking_history_more_info_pane={show_booking_history_more_info_pane}
-                            nothing_found_icon={nothing_found_icon}
-                        />
-                    </div>
-                    <EditProfileForm />
-                </div>
+                        
+                    }
+                </>
+            }
+            <EditProfileForm />
+        </div>
     )
 }
 
