@@ -18,7 +18,7 @@ function UserAccountPage(props){
 
     const { isLoggedIn, LogMeOut } = props;
     const API_URL = getApiHost();
-    const USER_ID = "tempId";
+    const USER_ID = "6546b1729bf01245c33cb522";
 
     let [ user, setUser ] = useState({});
     let [ isLoading, setIsLoading ] = useState(true);
@@ -140,24 +140,27 @@ function UserAccountPage(props){
     }
 
     const ShowPassports = async () => {
+        setIsPassportsLoading(true);
         let _passports=await fetchPassports();
-            console.log("User Passports: ", _passports);
-            setPassports(_passports);
-            setIsPassportsLoading(false);
+        console.log("User Passports: ", _passports);
+        setPassports(_passports);
+        setIsPassportsLoading(false);
     }
 
     const ShowPaymentCards = async () => {
+        setIsPaymentCardsLoading(true);
         let _payment_cards=await fetchPaymentCards();
-            console.log("User Payment Cards: ", _payment_cards);
-            setPayments(_payment_cards);
-            setIsPaymentCardsLoading(false);
+        console.log("User Payment Cards: ", _payment_cards);
+        setPayments(_payment_cards);
+        setIsPaymentCardsLoading(false);
     }
 
     const ShowBookingHistory = async (from_date, to_date, page="1", limit="10", type="all", cabin="all") => {
+        setIsBookingHistoryLoading(true);
         let _booking_history=await fetchBookingHistory(from_date, to_date, page, limit);
-            console.log("User Booking History: ", _booking_history);
-            setBookings(_booking_history);
-            setIsBookingHistoryLoading(false);
+        console.log("User Booking History: ", _booking_history);
+        setBookings(_booking_history);
+        setIsBookingHistoryLoading(false);
     }
 
     return (

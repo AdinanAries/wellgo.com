@@ -5,13 +5,15 @@ import nothing_found_icon from "../../../icons/nothing_found_icon.svg";
 
 const BookingHistoryPage = (props) => {
     
-    const { isLoading, toggle_show_booking_history_filters, hide_booking_history_filters, bookings, show_booking_history_more_info_pane } = props;
+    const { isLoading, ShowBookingHistory, toggle_show_booking_history_filters, hide_booking_history_filters, bookings, show_booking_history_more_info_pane } = props;
 
     return (
         <div className="user_account_page_each_child_container user_account_page_second_child_container" style={{borderLeft: "1px solid rgba(0,0,0,0.1)"}}>
             <BookingHistoryFiltersForm
                 toggle_show_booking_history_filters={toggle_show_booking_history_filters}
                 hide_booking_history_filters={hide_booking_history_filters}
+                ShowBookingHistory={ShowBookingHistory}
+
             />
             {isLoading && 
                 <div style={{marginBottom: 20, padding: "20px"}}>

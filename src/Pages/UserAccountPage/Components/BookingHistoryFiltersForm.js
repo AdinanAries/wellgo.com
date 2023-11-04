@@ -1,6 +1,10 @@
 const BookingHistoryFiltersForm = (props) => {
 
-    const { toggle_show_booking_history_filters, hide_booking_history_filters } = props;
+    const { ShowBookingHistory, toggle_show_booking_history_filters, hide_booking_history_filters } = props;
+
+    const searchFiltersOnsubmit = () => {
+        ShowBookingHistory(new Date().toISOString(), new Date(new Date().getDay()+6).toISOString());
+    }
 
     return (
         <div>
@@ -38,7 +42,7 @@ const BookingHistoryFiltersForm = (props) => {
                                 <option>One-way</option>
                                 <option>Multicity</option>
                             </select>
-                            <div onClick={hide_booking_history_filters} style={{cursor: "pointer", padding: 10, backgroundColor: "rgba(53,53,86)", color: "white", borderRadius: 50, textAlign: "center", marginTop: 10}}>
+                            <div onClick={()=>{hide_booking_history_filters();searchFiltersOnsubmit()}} style={{cursor: "pointer", padding: 10, backgroundColor: "rgba(53,53,86)", color: "white", borderRadius: 50, textAlign: "center", marginTop: 10}}>
                                 Done
                             </div>
                         </div>
