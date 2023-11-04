@@ -29,50 +29,8 @@ function UserAccountPage(props){
     let [ payments, setPayments ] = useState([]);
     let [ isPaymentCardsLoading, setIsPaymentCardsLoading ] = useState(true);
 
-    let [bookings, setBookings] = useState([
-        {
-            id: "001",
-            user_id: "001",
-            airline: "American Airlines",
-            ariline_code: "",
-            trip_type: "round trip",
-            travellers: [{
-                first_name: "MOhammed",
-                last_name: "Adinan",
-                gender: "male",
-                dob: "03-23-1992",
-            }],
-            takeoff_airport: "Laguardia",
-            takeoff_airport_code: "",
-            takeoff_city: "New York",
-            destination_airport: "Kotoka",
-            destination_airport_code: "",
-            destination_city: "Accra",
-            departure_date: "03-23-2023",
-            return_date: "04-09-2023"
-        },
-        {
-            id: "001",
-            user_id: "001",
-            airline: "Virgin Airlines",
-            ariline_code: "",
-            trip_type: "round trip",
-            travellers: [{
-                first_name: "Mohammed",
-                last_name: "Adinan",
-                gender: "male",
-                dob: "03-23-1992",
-            }],
-            takeoff_airport: "JFK",
-            takeoff_airport_code: "",
-            takeoff_city: "New York",
-            destination_airport: "Charles de Gaulle Intl",
-            destination_airport_code: "",
-            destination_city: "Paris",
-            departure_date: "01-20-2023",
-            return_date: "02-11-2023"
-        }
-    ]);
+    let [bookings, setBookings] = useState([]);
+    let [ isBookingHistoryLoading, setIsBookingHistoryLoading ] = useState(true);
 
     let [editDOB, setEditDOB] = useState(false);
     let [editGender, setEditGender] = useState(false);
@@ -88,6 +46,9 @@ function UserAccountPage(props){
             console.log("User Account: ", _user);
             setUser(_user);
             setIsLoading(false);
+            // Bookings History
+            let _bookings = ShowBookingHistory(new Date().toISOString(), new Date(new Date().getDay()+6).toISOString());
+            setBookings(_bookings);
         })();
     }, []);
 
@@ -154,6 +115,30 @@ function UserAccountPage(props){
         }
     }
 
+    const fetchBookingHistory = async ( 
+                                        from_date, to_date, page, limit,
+                                        path=`\\api\\bookings\\all\\${USER_ID}`
+                                    ) => {
+        try{
+            return await fetch(API_URL+path+`?p=${page}&l=${limit}&from_date=${from_date}&to_date=${to_date}`, {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(res => res.json())
+            .then(data => data)
+            .catch(err => {
+                console.log(err);
+                return {isError: true};
+            })
+        } catch (e){
+            console.log(e);
+            return {isError: true};
+        }
+    }
+
     const ShowPassports = async () => {
         let _passports=await fetchPassports();
             console.log("User Passports: ", _passports);
@@ -166,6 +151,13 @@ function UserAccountPage(props){
             console.log("User Payment Cards: ", _payment_cards);
             setPayments(_payment_cards);
             setIsPaymentCardsLoading(false);
+    }
+
+    const ShowBookingHistory = async (from_date, to_date, page="1", limit="10", type="all", cabin="all") => {
+        let _booking_history=await fetchBookingHistory(from_date, to_date, page, limit);
+            console.log("User Booking History: ", _booking_history);
+            setBookings(_booking_history);
+            setIsBookingHistoryLoading(false);
     }
 
     return (
@@ -237,6 +229,8 @@ function UserAccountPage(props){
                                 />
                             </div>
                             <BookingHistoryPage
+                                isLoading={isBookingHistoryLoading}
+                                ShowBookingHistory={ShowBookingHistory}
                                 toggle_show_booking_history_filters={toggle_show_booking_history_filters}
                                 hide_booking_history_filters={hide_booking_history_filters}
                                 bookings={bookings}
