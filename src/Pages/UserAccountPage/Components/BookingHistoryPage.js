@@ -58,9 +58,12 @@ const BookingHistoryPage = (props) => {
                             ))
                         }
                     </div>
-                    <div style={{marginTop: 30}}>
-                        <PaginationButtons />
-                    </div>
+                    {
+                        bookings.length > 5 &&
+                        <div style={{marginTop: 30}}>
+                            <PaginationButtons />
+                        </div>
+                    }
                 </>
             }
         </div>
