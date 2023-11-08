@@ -44,7 +44,7 @@ const BookingHistoryPage = (props) => {
                                     Oops nothing found</p>
                             </div>
                         }{
-                            bookings.map(each =>(
+                            bookings.length && bookings.map(each =>(
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>

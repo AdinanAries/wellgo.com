@@ -1,9 +1,97 @@
+import { useState } from "react";
+import LoginErrorCard from "./LoginErrorCard";
+import { getApiHost } from "../../../Constants/Environment";
+
 function LoginForm(props){
+
+    const API_URL = getApiHost();
 
     const { isLoggedIn, isShowSignUpForm, LogMeIn, showSignupForm } = props;
 
-    const login_onclick = () => {
-        LogMeIn();
+    const [ formData, setFormData ] = useState({
+        email: "",
+        password: "",
+    });
+
+    const [ formValidation, setFormValidation ] = useState({
+        type: "warning",
+        isError: false,
+        message: "",
+    })
+
+    const emailOnInput = (e) => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+        });
+        setFormData({
+            ...formData,
+            email: e.target.value
+        });
+    }
+
+    const passwordOnInput = (e) => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+        });
+        setFormData({
+            ...formData,
+            password: e.target.value
+        });
+    }
+    const loginFromServer = async (path=`\\api\\users\\login\\`) => {
+        try{
+            return await fetch(API_URL+path, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => data)
+            .catch(err => {
+                console.log(err);
+                return {isError: true, message: err.message};
+            })
+        } catch (e){
+            console.log(e);
+            return {isError: true, message: e.message};
+        }
+    }
+
+    const login_onclick = async () => {
+        if(!formData.email) {
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "please enter email",
+            });
+            return
+        }
+        if(!formData.password) {
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "please enter password",
+            });
+            return
+        }
+        let res = await loginFromServer();
+        if(res.token){
+            LogMeIn();
+        }else{
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: res.message,
+            })
+        }
+        
     }
 
     function show_signup_form(){
@@ -19,15 +107,23 @@ function LoginForm(props){
                     <div style={{marginBottom: 10}}>
                         <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                             <i className="fa fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="email" placeholder="Email"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                            <input onInput={emailOnInput} value={formData.email}
+                                type="email" placeholder="Email"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                         </div>
                     </div>
                     <div style={{marginBottom: 10}}>
                         <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                             <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="password" placeholder="Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                            <input onInput={passwordOnInput} value={formData.password}
+                                type="password" placeholder="Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                         </div>
                     </div>
+                    {
+                        formValidation.isError && <LoginErrorCard 
+                        message={formValidation.message} 
+                        type={formValidation.type}
+                    />
+                    }
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
                         <div onClick={login_onclick} style={{color: "white", cursor: "pointer", width: "fit-content", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                             <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-sign-in"></i>

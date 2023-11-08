@@ -18,7 +18,6 @@ function UserAccountPage(props){
 
     const { isLoggedIn, LogMeOut } = props;
     const API_URL = getApiHost();
-    const USER_ID = "6546b1729bf01245c33cb522";
 
     let [ user, setUser ] = useState({});
     let [ isLoading, setIsLoading ] = useState(true);
@@ -52,7 +51,7 @@ function UserAccountPage(props){
         })();
     }, []);
 
-    const fetchAccountInfo = async (path=`\\api\\users\\me\\${USER_ID}`) => {
+    const fetchAccountInfo = async (path=`\\api\\users\\me\\`) => {
         try{
             return await fetch(API_URL+path, {
                 method: "GET",
@@ -73,7 +72,7 @@ function UserAccountPage(props){
         }
     }
 
-    const fetchPassports = async (path=`\\api\\passports\\all\\${USER_ID}`) => {
+    const fetchPassports = async (path=`\\api\\passports\\all\\`) => {
         try{
             return await fetch(API_URL+path, {
                 method: "GET",
@@ -94,7 +93,7 @@ function UserAccountPage(props){
         }
     }
 
-    const fetchPaymentCards = async (path=`\\api\\payment-cards\\all\\${USER_ID}`) => {
+    const fetchPaymentCards = async (path=`\\api\\payment-cards\\all\\`) => {
         try{
             return await fetch(API_URL+path, {
                 method: "GET",
@@ -117,7 +116,7 @@ function UserAccountPage(props){
 
     const fetchBookingHistory = async ( 
                                         from_date, to_date, page, limit,
-                                        path=`\\api\\bookings\\all\\${USER_ID}`
+                                        path=`\\api\\bookings\\all\\`
                                     ) => {
         try{
             return await fetch(API_URL+path+`?p=${page}&l=${limit}&from_date=${from_date}&to_date=${to_date}`, {
