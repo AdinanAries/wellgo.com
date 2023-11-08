@@ -16,6 +16,12 @@ import { getApiHost } from "../../Constants/Environment";
 
 function UserAccountPage(props){
 
+    let USER_TOKEN="";
+    if(localStorage.getItem("user_token"))
+        USER_TOKEN=localStorage.getItem("user_token");
+    else
+        localStorage.setItem("user_token",USER_TOKEN);
+
     const { isLoggedIn, LogMeOut } = props;
     const API_URL = getApiHost();
 
@@ -57,7 +63,8 @@ function UserAccountPage(props){
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${USER_TOKEN}`
                 },
             })
             .then(res => res.json())
@@ -78,7 +85,8 @@ function UserAccountPage(props){
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${USER_TOKEN}`
                 },
             })
             .then(res => res.json())
@@ -99,7 +107,8 @@ function UserAccountPage(props){
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${USER_TOKEN}`
                 },
             })
             .then(res => res.json())
@@ -123,7 +132,8 @@ function UserAccountPage(props){
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${USER_TOKEN}`
                 },
             })
             .then(res => res.json())

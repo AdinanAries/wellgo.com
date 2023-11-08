@@ -83,7 +83,9 @@ function LoginForm(props){
         }
         let res = await loginFromServer();
         if(res.token){
+            localStorage.setItem("user_token", res.token);
             LogMeIn();
+            window.location.reload();
         }else{
             setFormValidation({
                 type: "error",

@@ -37,7 +37,7 @@ const AccountInfoPage = (props) => {
                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
                         Email: {user.email}</p>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, color: "rgba(0,0,0,0.7)"}}>
-                        Phone: {user.mobile}</p>
+                        Phone: {user.phone}</p>
                 </div>
                 <div style={{marginBottom: 20}}>
                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", marginBottom: 5, color: "rgb(102, 169, 233)", letterSpacing: 1}}>

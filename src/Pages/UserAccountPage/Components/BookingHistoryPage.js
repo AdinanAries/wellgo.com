@@ -37,14 +37,14 @@ const BookingHistoryPage = (props) => {
                     <div style={{marginTop: 10, height: 400, overflowY: "auto"}}>
                         { 
                             bookings.length < 1 &&
-                            <div style={{display: "none", marginBottom: 20, padding: "20px"}}>
+                            <div style={{marginBottom: 20, padding: "20px"}}>
                                 <div style={{backgroundImage: `url(${nothing_found_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
                                 <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                     <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                     Oops nothing found</p>
                             </div>
                         }{
-                            bookings.length && bookings.map(each =>(
+                            (bookings.length > 0) && bookings.map(each =>(
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
