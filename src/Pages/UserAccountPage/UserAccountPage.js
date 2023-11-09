@@ -15,7 +15,7 @@ import BookingHistoryPage from "./Components/BookingHistoryPage";
 
 //Services
 import { fetchAccountInfo } from "../../services/accountServices";
-import { fetchPassports } from "../../services/passportServices";
+import { fetchPassports, deletePassports } from "../../services/passportServices";
 import { fetchPaymentCards } from "../../services/paymentCardsServices";
 import { fetchBookingHistory } from "../../services/bookingHistoryServices";
 
@@ -61,6 +61,15 @@ function UserAccountPage(props){
         console.log("User Passports: ", _passports);
         setPassports(_passports);
         setIsPassportsLoading(false);
+    }
+
+    const DeletePassport = async (passport) => {
+        let res = await deletePassports(passport);
+        if(res.acknowledged){
+            ShowPassports();
+        }else{
+            alert("Error");
+        }
     }
 
     const ShowPaymentCards = async () => {
@@ -140,6 +149,7 @@ function UserAccountPage(props){
                                     show_add_new_payment_form={show_add_new_payment_form}
                                 />
                                 <PassportsPage 
+                                    DeletePassport={DeletePassport}
                                     isPassportsLoading={isPassportsLoading}
                                     passports={passports}
                                     show_more_passport_info={show_more_passport_info}

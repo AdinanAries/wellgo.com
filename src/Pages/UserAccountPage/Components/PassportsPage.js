@@ -7,7 +7,12 @@ import loading_icon from "../../../icons/loading.svg";
 
 const PassportsPage = (props) => {
 
-    const {isPassportsLoading, passports, show_more_passport_info, hide_more_passport_info, show_add_new_passport_form } = props;
+    const {isPassportsLoading,
+        passports,
+        show_more_passport_info,
+        hide_more_passport_info,
+        show_add_new_passport_form,
+        DeletePassport } = props;
 
     return (
         <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
@@ -37,6 +42,7 @@ const PassportsPage = (props) => {
                         }
                         {!passports.isError && passports.map((each, index)=>(
                             <EachPassport
+                                DeletePassport={DeletePassport}
                                 key={each.id}
                                 index={index} 
                                 each={each} 

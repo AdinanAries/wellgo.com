@@ -1,6 +1,23 @@
+import { useState } from "react";
+import ConfirmDelete from "../../../components/ConfirmDelete";
+
 const EachPassport = (props) => {
 
-    const { index, each, show_more_passport_info, hide_more_passport_info } = props;
+    const { index, each, show_more_passport_info, hide_more_passport_info, DeletePassport } = props;
+
+    const [ isToDelete, setIsToDelete ]= useState(false);
+
+    const cancelDelete = () => {
+        setIsToDelete(false);
+    }
+
+    const beginAction = () => {
+        setIsToDelete(true);
+    }
+
+    const confirmDeletePassport = () => {
+        DeletePassport(each);
+    }
 
     return (
         <div style={{padding: 10}}>
@@ -57,14 +74,24 @@ const EachPassport = (props) => {
                 <p onClick={()=>hide_more_passport_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                     view less ...
                 </p>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10}}>
-                    <div className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
-                        <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
+                {
+                    isToDelete &&
+                    <ConfirmDelete 
+                        submitFunction={confirmDeletePassport}
+                        cancelFunction={cancelDelete}
+                    />
+                }
+                {
+                    !isToDelete &&
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10}}>
+                        <div onClick={beginAction} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
+                            <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
+                        </div>
+                        <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
+                            <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
+                        </div>
                     </div>
-                    <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
-                        <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
-                    </div>
-                </div>
+                }
             </div>
         </div>
     );
