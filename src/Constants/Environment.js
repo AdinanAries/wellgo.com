@@ -14,4 +14,13 @@ export const getApiHost = () => {
         ENVIRONMENT.wellgo_api_svr : ENVIRONMENT.wellgo_dev_api_svr;
 }
 
+export const getUserToken = () => {
+    let token="";
+    if(localStorage.getItem("user_token"))
+        token=localStorage.getItem("user_token");
+    else
+        localStorage.setItem("user_token", token);
+    return token;
+}
+
 export default ENVIRONMENT;

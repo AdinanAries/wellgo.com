@@ -15,12 +15,13 @@ const BookingHistoryPage = (props) => {
                 ShowBookingHistory={ShowBookingHistory}
 
             />
-            {isLoading && 
-                <div style={{marginBottom: 20, padding: "20px"}}>
-                    <div style={{backgroundImage: `url(${loading_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
-                        Please wait...</p>
-                </div>
+            {
+                isLoading && 
+                    <div style={{marginBottom: 20, padding: "20px"}}>
+                        <div style={{backgroundImage: `url(${loading_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
+                            Please wait...</p>
+                    </div>
             }
             {
                 (!isLoading && bookings.isError) && 

@@ -12,19 +12,17 @@ import PassportsPage from "./Components/PassportsPage";
 import EditProfileForm from "./Components/EditProfileForm";
 import { useState, useEffect } from "react";
 import BookingHistoryPage from "./Components/BookingHistoryPage";
-import { getApiHost } from "../../Constants/Environment";
+
+//Services
+import { fetchAccountInfo } from "../../services/accountServices";
+import { fetchPassports } from "../../services/passportServices";
+import { fetchPaymentCards } from "../../services/paymentCardsServices";
+import { fetchBookingHistory } from "../../services/bookingHistoryServices";
 
 function UserAccountPage(props){
 
-    let USER_TOKEN="";
-    if(localStorage.getItem("user_token"))
-        USER_TOKEN=localStorage.getItem("user_token");
-    else
-        localStorage.setItem("user_token",USER_TOKEN);
-
     const { isLoggedIn, LogMeOut } = props;
-    const API_URL = getApiHost();
-
+    
     let [ user, setUser ] = useState({});
     let [ isLoading, setIsLoading ] = useState(true);
     
@@ -56,97 +54,6 @@ function UserAccountPage(props){
             setBookings(_bookings);
         })();
     }, []);
-
-    const fetchAccountInfo = async (path=`\\api\\users\\me\\`) => {
-        try{
-            return await fetch(API_URL+path, {
-                method: "GET",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${USER_TOKEN}`
-                },
-            })
-            .then(res => res.json())
-            .then(data => data)
-            .catch(err => {
-                console.log(err);
-                return {isError: true};
-            })
-        } catch (e){
-            console.log(e);
-            return {isError: true};
-        }
-    }
-
-    const fetchPassports = async (path=`\\api\\passports\\all\\`) => {
-        try{
-            return await fetch(API_URL+path, {
-                method: "GET",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${USER_TOKEN}`
-                },
-            })
-            .then(res => res.json())
-            .then(data => data)
-            .catch(err => {
-                console.log(err);
-                return {isError: true};
-            })
-        } catch (e){
-            console.log(e);
-            return {isError: true};
-        }
-    }
-
-    const fetchPaymentCards = async (path=`\\api\\payment-cards\\all\\`) => {
-        try{
-            return await fetch(API_URL+path, {
-                method: "GET",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${USER_TOKEN}`
-                },
-            })
-            .then(res => res.json())
-            .then(data => data)
-            .catch(err => {
-                console.log(err);
-                return {isError: true};
-            })
-        } catch (e){
-            console.log(e);
-            return {isError: true};
-        }
-    }
-
-    const fetchBookingHistory = async ( 
-                                        from_date, to_date, page, limit,
-                                        path=`\\api\\bookings\\all\\`
-                                    ) => {
-        try{
-            return await fetch(API_URL+path+`?p=${page}&l=${limit}&from_date=${from_date}&to_date=${to_date}`, {
-                method: "GET",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${USER_TOKEN}`
-                },
-            })
-            .then(res => res.json())
-            .then(data => data)
-            .catch(err => {
-                console.log(err);
-                return {isError: true};
-            })
-        } catch (e){
-            console.log(e);
-            return {isError: true};
-        }
-    }
 
     const ShowPassports = async () => {
         setIsPassportsLoading(true);
