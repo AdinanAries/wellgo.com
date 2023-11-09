@@ -3,7 +3,14 @@ import ConfirmDelete from "../../../components/ConfirmDelete";
 
 const EachPassport = (props) => {
 
-    const { index, each, show_more_passport_info, hide_more_passport_info, DeletePassport } = props;
+    const { index,
+        each,
+        show_more_passport_info,
+        hide_more_passport_info,
+        DeletePassport,
+        startPassportEdit,
+        show_add_new_passport_form
+    } = props;
 
     const [ isToDelete, setIsToDelete ]= useState(false);
 
@@ -17,6 +24,11 @@ const EachPassport = (props) => {
 
     const confirmDeletePassport = () => {
         DeletePassport(each);
+    }
+
+    const editPassport = () => {
+        startPassportEdit(each);
+        show_add_new_passport_form();
     }
 
     return (
@@ -87,7 +99,7 @@ const EachPassport = (props) => {
                         <div onClick={beginAction} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
                             <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
                         </div>
-                        <div className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
+                        <div onClick={editPassport} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
                             <i className="fa fa-pencil" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>Edit
                         </div>
                     </div>

@@ -25,7 +25,7 @@ export const fetchPassports = async (path=`\\api\\passports\\all\\`) => {
     }
 }
 
-export const deletePassports = async (passport, path=`\\api\\passports\\delete\\`) => {
+export const deletePassport = async (passport, path=`\\api\\passports\\delete\\`) => {
     try{
         return await fetch(API_URL+path, {
             method: "DELETE",
@@ -48,5 +48,51 @@ export const deletePassports = async (passport, path=`\\api\\passports\\delete\\
     } catch (e){
         console.log(e);
         return {isError: true};
+    }
+}
+
+export const addPassport = async (passport, path=`\\api\\passports\\add\\`) => {
+    try{
+        return await fetch(API_URL+path, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${USER_TOKEN}`
+            },
+            body: JSON.stringify(passport)
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {isError: true, message: err.message};
+        })
+    } catch (e){
+        console.log(e);
+        return {isError: true, message: e.message};
+    }
+}
+
+export const editPassport = async (passport, path=`\\api\\passports\\edit\\`) => {
+    try{
+        return await fetch(API_URL+path, {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${USER_TOKEN}`
+            },
+            body: JSON.stringify(passport)
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {isError: true, message: err.message};
+        })
+    } catch (e){
+        console.log(e);
+        return {isError: true, message: e.message};
     }
 }

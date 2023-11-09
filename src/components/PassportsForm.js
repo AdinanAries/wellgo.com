@@ -1,11 +1,17 @@
 import passport from "../icons/passport.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function PassportsForm(props){
 
+    const {
+        isEdit,
+        currentEditObject,
+        SubmitEditPassport,
+        AddPassport
+    } = props;
+
     let [passportForm, setPassportForm] = useState({
-        id: "",
-        user_id: "",
+        _id: "",
         passport_number: "",
         issue_date: "",
         exp_date: "",
@@ -17,6 +23,19 @@ function PassportsForm(props){
         holder_dob: "",
         holder_birth_city: "",
     });
+
+    /*if(currentEditObject && isEdit){
+        setPassportForm(currentEditObject);
+        console.log("Edit Passport Obj:", passportForm);
+    }*/
+
+    const addPassport = () => {
+        AddPassport(passportForm);
+    }
+
+    const editPassport = () => {
+        SubmitEditPassport(passportForm);
+    }
 
     return (
         <div id="account_page_add_passport_form" style={{display: "none"}} className="page-popup-cover">
@@ -48,20 +67,25 @@ function PassportsForm(props){
                     <div style={{marginBottom: 10}}>
                         <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                             <i className="fa-solid fa-passport" style={{marginLeft: 10}}></i>
-                            <input type="number" placeholder="Passport Number"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                            <input value={passportForm.passport_number}
+                                type="number" placeholder="Passport Number"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                         </div>
                     </div>
                     <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
                         <div style={{marginRight: 10, width: "50%"}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa-solid fa-calendar" style={{marginLeft: 10}}></i>
-                                <input type="number" placeholder="Issue Date"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                <input 
+                                     value={passportForm.issue_date}
+                                    type="number" placeholder="Issue Date"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{width: "calc(50% - 10px)"}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa-solid fa-calendar" style={{marginLeft: 10}}></i>
-                                <input type="number" placeholder="Exp Date"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                <input 
+                                     value={passportForm.exp_date}
+                                    type="number" placeholder="Exp Date"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                     </div>
@@ -69,7 +93,9 @@ function PassportsForm(props){
                         <div style={{marginRight: 10, width: "50%"}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa-solid fa-earth-americas" style={{marginLeft: 10}}></i>
-                                <input type="text" placeholder="Country"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                <input 
+                                     value={passportForm.country}
+                                    type="text" placeholder="Country"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{width: "calc(50% - 10px)"}}>
@@ -84,20 +110,26 @@ function PassportsForm(props){
                     <div style={{marginBottom: 10}}>
                         <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                             <i className="fa-solid fa-user" style={{marginLeft: 10}}></i>
-                            <input type="text" placeholder="Name on Passport"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                            <input 
+                                 value={passportForm.holder_name}
+                                type="text" placeholder="Name on Passport"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                         </div>
                     </div>
                     <div style={{display: "flex", marginBottom: 10, padding: "0"}}>
                         <div style={{marginRight: 10, width: "50%"}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa-solid fa-person-half-dress" style={{marginLeft: 10}}></i>
-                                <input type="text" placeholder="Gender"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                <input 
+                                     value={passportForm.holder_gender}
+                                    type="text" placeholder="Gender"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{width: "calc(50% - 10px)"}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa-solid fa-earth-americas" style={{marginLeft: 10}}></i>
-                                <input type="text" placeholder="Nationality"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                <input 
+                                     value={passportForm.holder_nationality}
+                                    type="text" placeholder="Nationality"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                     </div>
@@ -105,23 +137,27 @@ function PassportsForm(props){
                         <div style={{marginRight: 10, width: "50%"}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa-solid fa-calendar" style={{marginLeft: 10}}></i>
-                                <input type="text" placeholder="Date of Birth"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                <input 
+                                     value={passportForm.holder_dob}
+                                    type="text" placeholder="Date of Birth"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{width: "calc(50% - 10px)"}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa-solid fa-tree-city" style={{marginLeft: 10}}></i>
-                                <input type="text" placeholder="Birth City"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                <input 
+                                     value={passportForm.holder_birth_city}
+                                    type="text" placeholder="Birth City"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", margin: "20px 0", borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                    <div style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                    <div onClick={()=>document.getElementById("account_page_add_passport_form").style.display="none"} style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                         <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
                         Cancel
                     </div>
-                    <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                    <div onClick={(isEdit ? editPassport : addPassport)} style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                         <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-save"></i>
                         Save
                     </div>

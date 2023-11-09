@@ -15,7 +15,7 @@ import BookingHistoryPage from "./Components/BookingHistoryPage";
 
 //Services
 import { fetchAccountInfo } from "../../services/accountServices";
-import { fetchPassports, deletePassports } from "../../services/passportServices";
+import { fetchPassports, deletePassport, addPassport, editPassport } from "../../services/passportServices";
 import { fetchPaymentCards } from "../../services/paymentCardsServices";
 import { fetchBookingHistory } from "../../services/bookingHistoryServices";
 
@@ -64,8 +64,26 @@ function UserAccountPage(props){
     }
 
     const DeletePassport = async (passport) => {
-        let res = await deletePassports(passport);
+        let res = await deletePassport(passport);
         if(res.acknowledged){
+            ShowPassports();
+        }else{
+            alert("Error");
+        }
+    }
+
+    const AddPassport = async (passport) => {
+        let res = await addPassport(passport);
+        if(res._id){
+            ShowPassports();
+        }else{
+            alert("Error");
+        }
+    }
+
+    const SubmitEditPassport = async (passport) => {
+        let res = await editPassport(passport);
+        if(res._id){
             ShowPassports();
         }else{
             alert("Error");
@@ -149,6 +167,8 @@ function UserAccountPage(props){
                                     show_add_new_payment_form={show_add_new_payment_form}
                                 />
                                 <PassportsPage 
+                                    SubmitEditPassport={SubmitEditPassport}
+                                    AddPassport={AddPassport}
                                     DeletePassport={DeletePassport}
                                     isPassportsLoading={isPassportsLoading}
                                     passports={passports}

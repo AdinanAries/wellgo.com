@@ -4,6 +4,7 @@ import PassportsForm from "../../../components/PassportsForm";
 import not_found_icon from "../../../icons/not_found_icon.svg";
 import nothing_found_icon from "../../../icons/nothing_found_icon.svg";
 import loading_icon from "../../../icons/loading.svg";
+import { useState } from "react";
 
 const PassportsPage = (props) => {
 
@@ -12,7 +13,18 @@ const PassportsPage = (props) => {
         show_more_passport_info,
         hide_more_passport_info,
         show_add_new_passport_form,
-        DeletePassport } = props;
+        DeletePassport,
+        AddPassport,
+        SubmitEditPassport
+    } = props;
+
+    const [ isEdit, setIsEdit ] = useState(false);
+    const [ currentEditObject, setCurrentEditObject ] = useState({});
+
+    const startPassportEdit = (obj) => {
+        setIsEdit(true);
+        setCurrentEditObject(obj);
+    }
 
     return (
         <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
@@ -46,6 +58,8 @@ const PassportsPage = (props) => {
                                 key={each.id}
                                 index={index} 
                                 each={each} 
+                                show_add_new_passport_form={show_add_new_passport_form}
+                                startPassportEdit={startPassportEdit}
                                 show_more_passport_info={show_more_passport_info}
                                 hide_more_passport_info={hide_more_passport_info}
                             />
@@ -55,7 +69,12 @@ const PassportsPage = (props) => {
                             <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
                             Add New Passport
                         </div>
-                        <PassportsForm />
+                        <PassportsForm
+                            isEdit={isEdit}
+                            currentEditObject={currentEditObject}
+                            SubmitEditPassport={SubmitEditPassport}
+                            AddPassport={AddPassport} 
+                        />
                     </>
             }
         </div>
