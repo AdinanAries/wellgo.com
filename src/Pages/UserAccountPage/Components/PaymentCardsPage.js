@@ -101,7 +101,7 @@ const PaymentCardsPage = (props) => {
                             }
                             {
                                 payments.map((each, index)=>(
-                                    <EachPaymentCard 
+                                    (payments.length > 0) && <EachPaymentCard 
                                         index={index} 
                                         each={each}
                                         show_add_new_payment_form={show_add_new_payment_form}

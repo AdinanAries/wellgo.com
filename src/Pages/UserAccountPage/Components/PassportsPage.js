@@ -87,7 +87,7 @@ const PassportsPage = (props) => {
                                     Oop! Error on server</p>
                             </div>
                         }
-                        {!passports.isError && passports.map((each, index)=>(
+                        {(!passports.isError) && passports.map((each, index)=>(
                             <EachPassport
                                 DeletePassport={DeletePassport}
                                 key={each.id}
