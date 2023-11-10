@@ -37,7 +37,7 @@ const EachPaymentCard = (props) => {
             <div id={"show_more_payment_method_info_btn"+index}>
                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
                     <i className="fa-solid fa-check" style={{color: "lightgreen", marginRight: 10}}></i>
-                    {each.card_number}
+                    ***{each.card_number.substring(each.card_number.length - 4)}
                     <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
                         , {each.holder_name}
                     </span>
@@ -53,7 +53,7 @@ const EachPaymentCard = (props) => {
                 <div style={{marginLeft: 10, marginTop: 10}}>
                 <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                         <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            Number: </span>{each.card_number}</p>
+                            Number: </span>***{each.card_number.substring(each.card_number.length - 4)}</p>
                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                         <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
                             Exp Date: </span>{each.exp_date}</p>

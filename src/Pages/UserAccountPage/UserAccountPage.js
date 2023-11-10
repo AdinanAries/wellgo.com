@@ -68,7 +68,7 @@ function UserAccountPage(props){
         if(res.acknowledged){
             ShowPassports();
         }else{
-            alert("Error");
+            alert(res.message);
         }
     }
 
@@ -101,9 +101,9 @@ function UserAccountPage(props){
     const DeletePaymentCard = async (card) => {
         let res = await deletePaymentCard(card);
         if(res.acknowledged){
-            ShowPassports();
+            ShowPaymentCards();
         }else{
-            alert("Error");
+            alert(res.message);
         }
     }
 
