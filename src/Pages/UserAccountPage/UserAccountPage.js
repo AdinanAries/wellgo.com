@@ -16,7 +16,7 @@ import BookingHistoryPage from "./Components/BookingHistoryPage";
 //Services
 import { fetchAccountInfo } from "../../services/accountServices";
 import { fetchPassports, deletePassport, addPassport, editPassport } from "../../services/passportServices";
-import { fetchPaymentCards } from "../../services/paymentCardsServices";
+import { fetchPaymentCards, deletePaymentCard, addPaymentCard, editPaymentCard } from "../../services/paymentCardsServices";
 import { fetchBookingHistory } from "../../services/bookingHistoryServices";
 
 function UserAccountPage(props){
@@ -77,7 +77,7 @@ function UserAccountPage(props){
         if(res._id){
             ShowPassports();
         }else{
-            alert("Error");
+            alert(res.message);
         }
     }
 
@@ -96,6 +96,33 @@ function UserAccountPage(props){
         console.log("User Payment Cards: ", _payment_cards);
         setPayments(_payment_cards);
         setIsPaymentCardsLoading(false);
+    }
+
+    const DeletePaymentCard = async (card) => {
+        let res = await deletePaymentCard(card);
+        if(res.acknowledged){
+            ShowPassports();
+        }else{
+            alert("Error");
+        }
+    }
+
+    const AddPaymentCard = async (card) => {
+        let res = await addPaymentCard(card);
+        if(res._id){
+            ShowPaymentCards();
+        }else{
+            alert(res.message);
+        }
+    }
+
+    const SubmitEditPaymentCard = async (card) => {
+        let res = await editPaymentCard(card);
+        if(res._id){
+            ShowPaymentCards();
+        }else{
+            alert(res.message);
+        }
     }
 
     const ShowBookingHistory = async (from_date, to_date, page="1", limit="10", type="all", cabin="all") => {
@@ -159,6 +186,9 @@ function UserAccountPage(props){
                                     editGender={editGender} 
                                 />
                                 <PaymentCardsPage 
+                                    SubmitEditPaymentCard={SubmitEditPaymentCard}
+                                    AddPaymentCard={AddPaymentCard}
+                                    DeletePaymentCard={DeletePaymentCard}
                                     isLoading={isPaymentCardsLoading}
                                     payments={payments}
                                     card_not_found={card_not_found} 

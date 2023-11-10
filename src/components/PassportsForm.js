@@ -142,7 +142,7 @@ function PassportsForm(props){
                             <input 
                                 onInput={setPassportNumber} 
                                 value={passportForm.passport_number}
-                                type="number" placeholder="Passport Number"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
+                                type="text" placeholder="Passport Number"  style={{padding: 16, width: "calc(100% - 45px)", background: "none", border: "none"}}/>
                         </div>
                     </div>
                     <div style={{display: "flex", marginBottom: 10, padding: "0"}}>

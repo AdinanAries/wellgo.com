@@ -4,9 +4,69 @@ import PaymentsForm from "../../../components/PaymentsForm";
 import loading_icon from "../../../icons/loading.svg";
 import nothing_found_icon from "../../../icons/nothing_found_icon.svg";
 
+import { useState } from "react";
+
 const PaymentCardsPage = (props) => {
 
-    const {isLoading, payments, card_not_found, show_more_payment_method_info, hide_more_payment_method_info, show_add_new_payment_form } = props;
+    const {
+        isLoading,
+        payments,
+        card_not_found,
+        show_more_payment_method_info,
+        hide_more_payment_method_info,
+        show_add_new_payment_form,
+        AddPaymentCard,
+        SubmitEditPaymentCard,
+        DeletePaymentCard
+    } = props;
+
+    const NEW_CARD = {
+        id: "",
+        user_id: "",
+        card_number: "",
+        holder_name: "",
+        exp_date: "",
+        sec_code: "",
+        billing: {
+            street: "",
+            city: "",
+            state: "",
+            country: "",
+            zip_code: ""
+        }
+    };
+
+    const [ isEdit, setIsEdit ] = useState(false);
+    let [ paymentForm, setPaymentForm ] = useState(NEW_CARD);
+
+    const cancelIsEdit = () => {
+        setIsEdit(false);
+        setPaymentForm(NEW_CARD);
+    }
+
+    const startPaymentCardEdit = (obj) => {
+        setIsEdit(true);
+        setPaymentForm(obj);
+    }
+
+    const paymentCardFormOnSubmit = () => {
+        if(!isEdit){
+            AddPaymentCard(paymentForm);
+        }else{
+            SubmitEditPaymentCard(paymentForm);
+        }
+    }
+
+    const paymentCardFormStateChangeWrapper = (field, value, isBilling=false) => {
+        if(isBilling){
+            paymentForm.billing[field]=value;
+        }else{
+            paymentForm[field]=value;
+        }
+        setPaymentForm({
+            ...paymentForm
+        })
+    }
 
     return (
         <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10}}>
@@ -43,7 +103,10 @@ const PaymentCardsPage = (props) => {
                                 payments.map((each, index)=>(
                                     <EachPaymentCard 
                                         index={index} 
-                                        each={each} 
+                                        each={each}
+                                        show_add_new_payment_form={show_add_new_payment_form}
+                                        DeletePaymentCard={DeletePaymentCard}
+                                        startPaymentCardEdit={startPaymentCardEdit}
                                         show_more_payment_method_info={show_more_payment_method_info} 
                                         hide_more_payment_method_info={hide_more_payment_method_info}
                                     />
@@ -61,7 +124,12 @@ const PaymentCardsPage = (props) => {
                             <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
                             Add New Payment Method
                         </div>
-                        <PaymentsForm />
+                        <PaymentsForm
+                            stateChange={paymentCardFormStateChangeWrapper}
+                            submitFunction={paymentCardFormOnSubmit}
+                            paymentForm={paymentForm}
+                            cancelIsEdit={cancelIsEdit}
+                        />
                 </>
             }
         </div>

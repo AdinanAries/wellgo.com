@@ -18,7 +18,7 @@ const EachPassport = (props) => {
         setIsToDelete(false);
     }
 
-    const beginAction = () => {
+    const beginDelteAction = () => {
         setIsToDelete(true);
     }
 
@@ -96,7 +96,7 @@ const EachPassport = (props) => {
                 {
                     !isToDelete &&
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 10}}>
-                        <div onClick={beginAction} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
+                        <div onClick={beginDelteAction} className="searchBtn" style={{backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, borderRadius: 50}}>
                             <i className="fa fa-trash" style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}}></i>Delete
                         </div>
                         <div onClick={editPassport} className="searchBtn" style={{boxShadow: "0 0 5px rgba(0,0,0,0.3)", border: "none", fontSize: 14, backgroundColor: "green", borderRadius: 50}}>
