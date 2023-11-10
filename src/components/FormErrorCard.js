@@ -1,4 +1,4 @@
-const LoginErrorCard = (props) => {
+const FormErrorCard = (props) => {
     const { type, message } = props;
     return (
         <div style={{padding: 10}}>
@@ -10,4 +10,4 @@ const LoginErrorCard = (props) => {
     );
 }
 
-export default LoginErrorCard;
+export default FormErrorCard;

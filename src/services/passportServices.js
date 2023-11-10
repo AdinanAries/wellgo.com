@@ -83,7 +83,10 @@ export const editPassport = async (passport, path=`\\api\\passports\\edit\\`) =>
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${USER_TOKEN}`
             },
-            body: JSON.stringify(passport)
+            body: JSON.stringify({
+                id: passport._id,
+                ...passport
+            })
         })
         .then(res => res.json())
         .then(data => data)

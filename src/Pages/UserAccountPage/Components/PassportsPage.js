@@ -8,7 +8,8 @@ import { useState } from "react";
 
 const PassportsPage = (props) => {
 
-    const {isPassportsLoading,
+    const {
+        isPassportsLoading,
         passports,
         show_more_passport_info,
         hide_more_passport_info,
@@ -18,12 +19,46 @@ const PassportsPage = (props) => {
         SubmitEditPassport
     } = props;
 
+    const NEW_PASSPORT = {
+        _id: "",
+        passport_number: "",
+        issue_date: "",
+        exp_date: "",
+        city: "",
+        country: "",
+        holder_name: "",
+        holder_gender: "",
+        holder_nationality: "",
+        holder_dob: "",
+        holder_birth_city: "",
+    };
+
     const [ isEdit, setIsEdit ] = useState(false);
-    const [ currentEditObject, setCurrentEditObject ] = useState({});
+    let [passportForm, setPassportForm] = useState(NEW_PASSPORT);
+
+    const cancelIsEdit = () => {
+        setIsEdit(false);
+        setPassportForm(NEW_PASSPORT);
+    }
 
     const startPassportEdit = (obj) => {
         setIsEdit(true);
-        setCurrentEditObject(obj);
+        setPassportForm(obj);
+    }
+
+    const passportFormOnSubmit = () => {
+        if(!isEdit){
+            AddPassport(passportForm);
+        }else{
+            SubmitEditPassport(passportForm);
+        }
+    }
+
+    const passportFormStateChangeWrapper = (field, value) => {
+        passportForm[field]=value;
+        setPassportForm({
+            ...passportForm
+        })
     }
 
     return (
@@ -70,10 +105,11 @@ const PassportsPage = (props) => {
                             Add New Passport
                         </div>
                         <PassportsForm
+                            stateChange={passportFormStateChangeWrapper}
+                            cancelIsEdit={cancelIsEdit}
                             isEdit={isEdit}
-                            currentEditObject={currentEditObject}
-                            SubmitEditPassport={SubmitEditPassport}
-                            AddPassport={AddPassport} 
+                            passportForm={passportForm}
+                            submitFunction={passportFormOnSubmit}
                         />
                     </>
             }

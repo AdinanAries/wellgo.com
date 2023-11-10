@@ -86,7 +86,7 @@ function UserAccountPage(props){
         if(res._id){
             ShowPassports();
         }else{
-            alert("Error");
+            alert(res.message);
         }
     }
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LoginErrorCard from "./LoginErrorCard";
+import FormErrorCard from "../../../components/FormErrorCard";
 import { getApiHost } from "../../../Constants/Environment";
 
 function LoginForm(props){
@@ -17,7 +17,7 @@ function LoginForm(props){
         type: "warning",
         isError: false,
         message: "",
-    })
+    });
 
     const emailOnInput = (e) => {
         setFormValidation({
@@ -121,7 +121,7 @@ function LoginForm(props){
                         </div>
                     </div>
                     {
-                        formValidation.isError && <LoginErrorCard 
+                        formValidation.isError && <FormErrorCard 
                         message={formValidation.message} 
                         type={formValidation.type}
                     />
