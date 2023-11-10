@@ -7,6 +7,7 @@ import FullPageLoader from "./FullPageLoader";
 function PassportsForm(props){
 
     const {
+        isEdit,
         cancelIsEdit,
         submitFunction,
         passportForm,
@@ -117,7 +118,7 @@ function PassportsForm(props){
                     &times;
                 </p>
                 <div className="page-popup-cover-content-header">
-                    Add New Passport
+                    {isEdit ? "Edit" : "Add"} Passport
                 </div>
                 <div className="steps_form_all_steps_indicators">
                     <div id="user_profile_add_passport_info_nav_btn" style={{width: "50%"}} onClick={show_add_passport_infor} className="steps_form_each_step_indicator_container active passport_form">

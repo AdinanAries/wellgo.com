@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const EditProfileForm = (props) => {
 
-    let [userForm, setUserForm] = useState({
+    /*{
         id: "001",
         first_name: "Mohammedu",
         middle_name: "Salifu",
@@ -15,8 +15,22 @@ const EditProfileForm = (props) => {
         old_password: "",
         new_password: "",
         confirm_new_password: ""
-    });
+    }*/
+    /*{
+        "_id": "6546b1729bf01245c33cb522",
+        "first_name": "John",
+        "middle_name": "Kuku",
+        "last_name": "Doe",
+        "dob": "1992-03-23",
+        "phone": 17327999546,
+        "email": "johndoe@email.com",
+        "password": "$2a$10$f3VT7GlBSmLmaT3pjzK/NeBkAa9NVJKJ7p/A88rHFOucaS/bfwPx2",
+        "__v": 0,
+        "updatedAt": "2023-11-08T01:12:29.979Z"
+    }*/
 
+    const { userForm, setUserForm } = props;
+    
     function editUserFirstName(e){
         setUserForm({
             ...userForm,
@@ -48,7 +62,7 @@ const EditProfileForm = (props) => {
     function editUserMobile(e){
         setUserForm({
             ...userForm,
-            mobile: e.target.value,
+            phone: e.target.value,
         });
     }
     return (
@@ -156,7 +170,7 @@ const EditProfileForm = (props) => {
                                 <i className="fa fa-mobile" style={{marginRight: 10, fontSize: 22, color: "rgb(43, 52, 61)"}}></i>
                                 <input type="text" placeholder="Mobile"
                                     onInput={editUserMobile}
-                                    value={userForm.mobile}
+                                    value={userForm.phone}
                                     style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                             </div>
                         </div>

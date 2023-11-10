@@ -7,6 +7,7 @@ import FormErrorCard from "./FormErrorCard";
 function PaymentsForm(props){
 
     const { 
+        isEdit,
         cancelIsEdit,
         submitFunction,
         paymentForm,
@@ -116,7 +117,7 @@ function PaymentsForm(props){
                     &times;
                 </p>
                 <div className="page-popup-cover-content-header">
-                    Add Payment Method
+                    {isEdit ? "Edit" : "Add"} Payment Method
                 </div>
                 <div className="steps_form_all_steps_indicators">
                     <div id="user_profile_add_payment_method_info_nav_btn" style={{width: "50%"}} onClick={show_add_payment_credit_card_infor} className="steps_form_each_step_indicator_container active payment_method_form">

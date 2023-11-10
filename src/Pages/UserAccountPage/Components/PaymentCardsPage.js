@@ -125,6 +125,7 @@ const PaymentCardsPage = (props) => {
                             Add New Payment Method
                         </div>
                         <PaymentsForm
+                            isEdit={isEdit}
                             stateChange={paymentCardFormStateChangeWrapper}
                             submitFunction={paymentCardFormOnSubmit}
                             paymentForm={paymentForm}

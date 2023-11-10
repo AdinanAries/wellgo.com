@@ -24,6 +24,7 @@ function UserAccountPage(props){
     const { isLoggedIn, LogMeOut } = props;
     
     let [ user, setUser ] = useState({});
+    let [userForm, setUserForm] = useState({});
     let [ isLoading, setIsLoading ] = useState(true);
     
     let [ passports, setPassports ] = useState([]);
@@ -46,8 +47,8 @@ function UserAccountPage(props){
         (async function go(){
             // User Account
             let _user=await fetchAccountInfo();
-            console.log("User Account: ", _user);
             setUser(_user);
+            setUserForm(_user);
             setIsLoading(false);
             // Bookings History
             let _bookings = ShowBookingHistory(new Date().toISOString(), new Date(new Date().getDay()+6).toISOString());
@@ -58,7 +59,6 @@ function UserAccountPage(props){
     const ShowPassports = async () => {
         setIsPassportsLoading(true);
         let _passports=await fetchPassports();
-        console.log("User Passports: ", _passports);
         setPassports(_passports);
         setIsPassportsLoading(false);
     }
@@ -221,7 +221,10 @@ function UserAccountPage(props){
                     }
                 </>
             }
-            <EditProfileForm />
+            <EditProfileForm 
+                userForm={userForm} 
+                setUserForm={setUserForm}
+            />
         </div>
     )
 }
