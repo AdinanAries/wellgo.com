@@ -1,6 +1,9 @@
 import edit_user_forms_bg from "../../../icons/edit_user_forms_bg.svg";
 import { useState } from "react";
 
+import FormErrorCard from "../../../components/FormErrorCard";
+import FullPageLoader from "../../../components/FullPageLoader";
+
 const EditProfileForm = (props) => {
 
     /*{
@@ -29,9 +32,36 @@ const EditProfileForm = (props) => {
         "updatedAt": "2023-11-08T01:12:29.979Z"
     }*/
 
-    const { userForm, setUserForm } = props;
+    const {
+        userForm,
+        setUserForm,
+        updateUserOnSubmit,
+        cancelAcountUpdate,
+        updateUserPasswordOnSubmit
+    } = props;
+
+    userForm.new_password="";
+    userForm.old_password="";
+    userForm.confirm_password="";
+
+    const [ formValidation, setFormValidation ] = useState({
+        type: "warning",
+        isError: false,
+        message: "",
+    });
+
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    const resetFormValidation = () => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+        });
+    }
     
     function editUserFirstName(e){
+        resetFormValidation();
         setUserForm({
             ...userForm,
             first_name: e.target.value,
@@ -39,6 +69,7 @@ const EditProfileForm = (props) => {
     }
 
     function editUserLastName(e){
+        resetFormValidation();
         setUserForm({
             ...userForm,
             last_name: e.target.value,
@@ -46,6 +77,7 @@ const EditProfileForm = (props) => {
     }
 
     function editUserMiddleName(e){
+        resetFormValidation();
         setUserForm({
             ...userForm,
             middle_name: e.target.value,
@@ -53,6 +85,7 @@ const EditProfileForm = (props) => {
     }
 
     function editUserEmail(e){
+        resetFormValidation();
         setUserForm({
             ...userForm,
             email: e.target.value,
@@ -60,16 +93,110 @@ const EditProfileForm = (props) => {
     }
 
     function editUserMobile(e){
+        resetFormValidation();
         setUserForm({
             ...userForm,
             phone: e.target.value,
         });
     }
+
+    const setUserGender = (e) => {
+        resetFormValidation();
+        setUserForm({
+            ...userForm,
+            gender: e.target.value
+        })
+    }
+
+    const setDob = (e) => {
+        resetFormValidation();
+        setUserForm({
+            ...userForm,
+            dob: e.target.value
+        })
+    }
+
+    const setOldUserPassword = (e) => {
+        resetFormValidation();
+        setUserForm({
+            ...userForm,
+            new_password: e.target.value,
+            old_password: e.target.value
+        })
+    }
+
+    const setNewUserPassword = (e) => {
+        resetFormValidation();
+        setUserForm({
+            ...userForm,
+            new_password: e.target.value,
+        })
+    }
+
+    const setUserConfirmPassword = (e) => {
+        resetFormValidation();
+        setUserForm({
+            ...userForm,
+            confirm_password: e.target.value
+        })
+    }
+
+    const submitUpdate = async () => {
+        if(
+            !userForm.first_name ||
+            !userForm.middle_name ||
+            !userForm.last_name ||
+            !userForm.dob ||
+            !userForm.phone ||
+            !userForm.email
+        ){
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "Please make sure the form is completed",
+            });
+            return;
+        }
+
+        // Updating user password in necessary
+        if(userForm.new_password){
+            if(!userForm.old_password || !userForm.confirm_password){
+                setFormValidation({
+                    type: "error",
+                    isError: true,
+                    message: "Please make sure the form is completed",
+                });
+                return;
+            }
+            if(userForm.new_password!==userForm.confirm_password){
+                setFormValidation({
+                    type: "error",
+                    isError: true,
+                    message: "New password does not match with confirm password field",
+                });
+                return;
+            }
+            setIsLoading(true);
+            await updateUserPasswordOnSubmit(userForm);
+        }else{
+            setIsLoading(true);
+            await updateUserOnSubmit(userForm);
+        }
+        setIsLoading(false);
+        document.getElementById("account_page_edit_profile_form").style.display="none";
+    }
+
     return (
         <div id="account_page_edit_profile_form" style={{display: "none"}} className="page-popup-cover">
+            {
+                isLoading && <FullPageLoader />
+            }
             <div className="page-popup-cover-content-container">
                 <div style={{backgroundImage: `url('${edit_user_forms_bg}')`}} className="page-popup-cover-container-svg-bg"></div>
-                <p onClick={()=>document.getElementById("account_page_edit_profile_form").style.display="none"} className="page-popup-cover-close-btn">
+                <p onClick={()=>{
+                        document.getElementById("account_page_edit_profile_form").style.display="none";
+                        cancelAcountUpdate();
+                    }} className="page-popup-cover-close-btn">
                     &times;
                 </p>
                 <div className="page-popup-cover-content-header">
@@ -179,14 +306,22 @@ const EditProfileForm = (props) => {
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                <input type="text" placeholder="Date of Birth" value={userForm.dob} style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                <input 
+                                    onInput={setDob}
+                                    value={userForm.dob}
+                                    type="text" placeholder="Date of Birth" style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                             </div>
                         </div>
                         <div style={{marginBottom: 10}}>
                             <div style={{backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                                 <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                <select style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}>
-                                    <option>Male</option>
+                                <select 
+                                    onChange={setUserGender}
+                                    value={userForm.gender}
+                                    style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}>
+                                    <option value="">Gender at birth</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
                                 </select>
                             </div>
                         </div>
@@ -200,29 +335,47 @@ const EditProfileForm = (props) => {
                                     <p style={{fontSize: 13, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
                                         <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                         Old Password</p>
-                                    <input type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input 
+                                        onInput={setOldUserPassword}
+                                        value={userForm.old_password}
+                                        type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                                 <div style={{position: "relative", padding: 15, backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 5, marginTop: 10, paddingLeft: 16}}>
                                     <p style={{fontSize: 13, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
                                         <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                         New Password</p>
-                                    <input type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input 
+                                        onInput={setNewUserPassword}
+                                        value={userForm.new_password}
+                                        type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                                 <div style={{position: "relative", padding: 15, backgroundColor: "rgba(0, 0, 0, 0.07)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 5, marginTop: 10, paddingLeft: 16}}>
                                     <p style={{fontSize: 13, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
                                         <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                                         Confirm Password</p>
-                                    <input type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                    <input 
+                                        onInput={setUserConfirmPassword}
+                                        value={userForm.confirm_password}
+                                        type="password" placeholder=""  style={{paddingTop: 10, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {
+                    formValidation.isError && <FormErrorCard 
+                        message={formValidation.message} 
+                        type={formValidation.type}
+                    />
+                }
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
-                        <div style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                        <div onClick={()=>{
+                                document.getElementById("account_page_edit_profile_form").style.display="none";
+                                cancelAcountUpdate();
+                            }} style={{color: "white", cursor: "pointer", backgroundColor: "crimson", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                             <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.7)"}} className="fa fa-times"></i>
                             Cancel
                         </div>
-                        <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                        <div onClick={submitUpdate} style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                             <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-check-square-o"></i>
                             Update
                         </div>

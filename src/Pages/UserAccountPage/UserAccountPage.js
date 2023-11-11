@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import BookingHistoryPage from "./Components/BookingHistoryPage";
 
 //Services
-import { fetchAccountInfo } from "../../services/accountServices";
+import { fetchAccountInfo, updateAccountInfo, updateAccountPassword } from "../../services/accountServices";
 import { fetchPassports, deletePassport, addPassport, editPassport } from "../../services/passportServices";
 import { fetchPaymentCards, deletePaymentCard, addPaymentCard, editPaymentCard } from "../../services/paymentCardsServices";
 import { fetchBookingHistory } from "../../services/bookingHistoryServices";
@@ -36,8 +36,8 @@ function UserAccountPage(props){
     let [bookings, setBookings] = useState([]);
     let [ isBookingHistoryLoading, setIsBookingHistoryLoading ] = useState(true);
 
-    let [editDOB, setEditDOB] = useState(false);
-    let [editGender, setEditGender] = useState(false);
+    let [ editDOB, setEditDOB ] = useState(false);
+    let [ editGender, setEditGender ] = useState(false);
 
     const logoutOnclick = () => {
         LogMeOut();
@@ -55,6 +55,32 @@ function UserAccountPage(props){
             setBookings(_bookings);
         })();
     }, []);
+
+    const updateUserOnSubmit = async (user) => {
+        let res = await updateAccountInfo(user);
+        if(res._id){
+            setUser(res);
+            setUserForm(res);
+        }else{
+            alert(res.message)
+        }
+        return
+    }
+
+    const updateUserPasswordOnSubmit = async (user) => {
+        let res = await updateAccountPassword(user);
+        if(res._id){
+            setUser(res);
+            setUserForm(res);
+        }else{
+            alert(res.message)
+        }
+        return
+    }
+
+    const cancelAcountUpdate = () => {
+        setUserForm(user);
+    }
 
     const ShowPassports = async () => {
         setIsPassportsLoading(true);
@@ -183,7 +209,10 @@ function UserAccountPage(props){
                                     setEditDOB={setEditDOB}
                                     setEditGender={setEditGender}
                                     editDOB={editDOB}
-                                    editGender={editGender} 
+                                    editGender={editGender}
+                                    userForm={userForm}
+                                    setUserForm={setUserForm}
+                                    updateUserOnSubmit={updateUserOnSubmit}
                                 />
                                 <PaymentCardsPage 
                                     SubmitEditPaymentCard={SubmitEditPaymentCard}
@@ -224,6 +253,9 @@ function UserAccountPage(props){
             <EditProfileForm 
                 userForm={userForm} 
                 setUserForm={setUserForm}
+                updateUserOnSubmit={updateUserOnSubmit}
+                updateUserPasswordOnSubmit={updateUserPasswordOnSubmit}
+                cancelAcountUpdate={cancelAcountUpdate}
             />
         </div>
     )

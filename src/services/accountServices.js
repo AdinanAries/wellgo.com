@@ -24,3 +24,56 @@ export const fetchAccountInfo = async (path=`\\api\\users\\me\\`) => {
         return {isError: true};
     }
 }
+
+export const updateAccountInfo = async (user, path=`\\api\\users\\edit\\`) => {
+    try{
+        return await fetch(API_URL+path, {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${USER_TOKEN}`
+            },
+            body: JSON.stringify({
+                id: user._id,
+                ...user
+            })
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {isError: true};
+        })
+    } catch (e){
+        console.log(e);
+        return {isError: true};
+    }
+}
+
+export const updateAccountPassword = async (user, path=`\\api\\users\\edit\\password\\`) => {
+    try{
+        return await fetch(API_URL+path, {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${USER_TOKEN}`
+            },
+            body: JSON.stringify({
+                id: user._id,
+                ...user
+            })
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {isError: true};
+        })
+    } catch (e){
+        console.log(e);
+        return {isError: true};
+    }
+}
+

@@ -1,6 +1,54 @@
 const AccountInfoPage = (props) => {
     
-    const { user, show_edit_profile_form, setEditDOB, setEditGender, editDOB, editGender, logoutOnclick } = props;
+    const { user,
+        show_edit_profile_form,
+        setEditDOB,
+        setEditGender,
+        editDOB,
+        editGender,
+        logoutOnclick,
+        userForm,
+        setUserForm,
+        updateUserOnSubmit
+    } = props;
+
+    const setUserGender = (e) => {
+        //resetFormValidation();
+        setUserForm({
+            ...userForm,
+            gender: e.target.value
+        })
+    }
+
+    const setDob = (e) => {
+        //resetFormValidation();
+        setUserForm({
+            ...userForm,
+            dob: e.target.value
+        })
+    }
+
+    const submitUpdate = async () => {
+        if(
+            !userForm.first_name ||
+            !userForm.middle_name ||
+            !userForm.last_name ||
+            !userForm.dob ||
+            !userForm.phone ||
+            !userForm.email
+        ){
+            /*setFormValidation({
+                type: "error",
+                isError: true,
+                message: "Please make sure the form is completed",
+            });*/
+            return;
+        }
+        //setIsLoading(true);
+        await updateUserOnSubmit(userForm);
+        //setIsLoading(false);
+        //document.getElementById("account_page_edit_profile_form").style.display="none";
+    }
 
     return (
         <div id="user_account_main_account_pane" style={{marginTop: 20}}>
@@ -50,7 +98,10 @@ const AccountInfoPage = (props) => {
                     <div style={{display: (!user.dob || editDOB ? "block" : "none"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
                         <p>
                             <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar"></i>
-                            <input style={{padding: 10, border: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth" value={user.dob} />
+                            <input 
+                                onInput={setDob}
+                                value={userForm.dob}
+                                style={{padding: 10, border: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth" />
                             <span onClick={()=>{setEditDOB(false)}}>
                                 <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
                             </span>
@@ -63,16 +114,19 @@ const AccountInfoPage = (props) => {
                         </p>
                     <div style={{display: (!user.gender || editGender ? "block" : "none"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
                         <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-user"></i>
-                        <select style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth">
-                            <option>Add Your Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
+                        <select
+                            onChange={setUserGender}
+                            value={userForm.gender}
+                            style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth">
+                            <option value="">Add Your Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                         <span onClick={()=>{setEditGender(false)}}>
                             <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
                         </span>
                     </div>
-                    <div style={{display: ((user.gender && user.dob) && (!editDOB && !editGender) ? "none" : "block"),cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
+                    <div onClick={submitUpdate} style={{display: ((user.gender && user.dob) && (!editDOB && !editGender) ? "none" : "block"),cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
                         <i className="fa fa-save" style={{color: "rgba(255,255,255,0.6)", marginRight: 10}}></i>
                         Save
                     </div>
