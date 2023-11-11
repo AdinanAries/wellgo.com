@@ -362,11 +362,11 @@ const EditProfileForm = (props) => {
                         </div>
                     </div>
                     {
-                    formValidation.isError && <FormErrorCard 
-                        message={formValidation.message} 
-                        type={formValidation.type}
-                    />
-                }
+                        formValidation.isError && <FormErrorCard 
+                            message={formValidation.message} 
+                            type={formValidation.type}
+                        />
+                    }
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 10}}>
                         <div onClick={()=>{
                                 document.getElementById("account_page_edit_profile_form").style.display="none";

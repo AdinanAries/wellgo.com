@@ -1,3 +1,7 @@
+import { useState } from "react";
+import FormErrorCard from "../../../components/FormErrorCard";
+import FullPageLoader from "../../../components/FullPageLoader";
+
 const AccountInfoPage = (props) => {
     
     const { user,
@@ -12,8 +16,24 @@ const AccountInfoPage = (props) => {
         updateUserOnSubmit
     } = props;
 
+    const [ formValidation, setFormValidation ] = useState({
+        type: "warning",
+        isError: false,
+        message: "",
+    });
+
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    const resetFormValidation = () => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+        });
+    }
+
     const setUserGender = (e) => {
-        //resetFormValidation();
+        resetFormValidation();
         setUserForm({
             ...userForm,
             gender: e.target.value
@@ -21,7 +41,7 @@ const AccountInfoPage = (props) => {
     }
 
     const setDob = (e) => {
-        //resetFormValidation();
+        resetFormValidation();
         setUserForm({
             ...userForm,
             dob: e.target.value
@@ -37,21 +57,25 @@ const AccountInfoPage = (props) => {
             !userForm.phone ||
             !userForm.email
         ){
-            /*setFormValidation({
+            setFormValidation({
                 type: "error",
                 isError: true,
                 message: "Please make sure the form is completed",
-            });*/
+            });
             return;
         }
-        //setIsLoading(true);
+        setIsLoading(true);
         await updateUserOnSubmit(userForm);
-        //setIsLoading(false);
-        //document.getElementById("account_page_edit_profile_form").style.display="none";
+        setEditDOB(false);
+        setEditGender(false);
+        setIsLoading(false);
     }
 
     return (
         <div id="user_account_main_account_pane" style={{marginTop: 20}}>
+            {
+                isLoading && <FullPageLoader />
+            }
             <div style={{display: "flex", flexDirection: "row", position: "relative"}}>
                 <div className="account_page_profile_pic_container" style={{marginRight: 20, borderRadius: "100%", width: 80, height: 80, boxShadow: "0 0 5px rgba(0,0,0,0.5)", backgroundColor: "rgba(0,0,0,0.1)", overflow: "hidden", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                     <i style={{fontSize: 50, color: "rgba(0,0,0,0.4)"}} className="fa fa-user"></i>
@@ -126,6 +150,12 @@ const AccountInfoPage = (props) => {
                             <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
                         </span>
                     </div>
+                    {
+                        formValidation.isError && <FormErrorCard 
+                            message={formValidation.message} 
+                            type={formValidation.type}
+                        />
+                    }
                     <div onClick={submitUpdate} style={{display: ((user.gender && user.dob) && (!editDOB && !editGender) ? "none" : "block"),cursor: "pointer", padding: 16, backgroundColor: "green", color: "white", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", borderRadius: 50, width: 130, fontSize: 14, marginTop: 10}}>
                         <i className="fa fa-save" style={{color: "rgba(255,255,255,0.6)", marginRight: 10}}></i>
                         Save
