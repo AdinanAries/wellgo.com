@@ -1,12 +1,13 @@
 import { useState } from "react";
 import FormErrorCard from "../../../components/FormErrorCard";
+import FullPageLoader from "../../../components/FullPageLoader";
 import { getApiHost } from "../../../Constants/Environment";
+import { loginPost } from "../../../services/accountServices";
 
 function LoginForm(props){
 
-    const API_URL = getApiHost();
-
     const { isLoggedIn, isShowSignUpForm, LogMeIn, showSignupForm } = props;
+    const [ isLoading, setIsLoading ] = useState(false);
 
     const [ formData, setFormData ] = useState({
         email: "",
@@ -42,35 +43,16 @@ function LoginForm(props){
             password: e.target.value
         });
     }
-    const loginFromServer = async (path=`\\api\\users\\login\\`) => {
-        try{
-            return await fetch(API_URL+path, {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(res => res.json())
-            .then(data => data)
-            .catch(err => {
-                console.log(err);
-                return {isError: true, message: err.message};
-            })
-        } catch (e){
-            console.log(e);
-            return {isError: true, message: e.message};
-        }
-    }
-
+    
     const login_onclick = async () => {
+        setIsLoading(true);
         if(!formData.email) {
             setFormValidation({
                 type: "error",
                 isError: true,
                 message: "please enter email",
             });
+            setIsLoading(false);
             return
         }
         if(!formData.password) {
@@ -79,9 +61,10 @@ function LoginForm(props){
                 isError: true,
                 message: "please enter password",
             });
+            setIsLoading(false)
             return
         }
-        let res = await loginFromServer();
+        let res = await loginPost(formData);
         if(res.token){
             localStorage.setItem("user_token", res.token);
             LogMeIn();
@@ -93,6 +76,7 @@ function LoginForm(props){
                 message: res.message,
             })
         }
+        setIsLoading(false);
         
     }
 
@@ -102,6 +86,9 @@ function LoginForm(props){
 
     return (
         <div id="main_login_form" style={{display: ((!isLoggedIn && !isShowSignUpForm) ? "block" : "none"), padding: "30px 5px"}}>
+            {
+                isLoading && <FullPageLoader />
+            }
             <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                 <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
                     Log Into Account</p>
@@ -122,9 +109,9 @@ function LoginForm(props){
                     </div>
                     {
                         formValidation.isError && <FormErrorCard 
-                        message={formValidation.message} 
-                        type={formValidation.type}
-                    />
+                            message={formValidation.message} 
+                            type={formValidation.type}
+                        />
                     }
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
                         <div onClick={login_onclick} style={{color: "white", cursor: "pointer", width: "fit-content", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>

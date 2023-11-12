@@ -1,6 +1,101 @@
+import { useState } from "react";
+import FormErrorCard from "../../../components/FormErrorCard";
+import FullPageLoader from "../../../components/FullPageLoader";
+import { registerPost } from "../../../services/accountServices";
+
 function SignupForm(props){
 
-    const { LogMeIn, isLoggedIn, isShowSignUpForm, showLoginForm } = props;
+    const {
+        LogMeIn, 
+        isLoggedIn, 
+        isShowSignUpForm, 
+        showLoginForm 
+    } = props;
+
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    const [ formData, setFormData ] = useState({
+        id: "001",
+        first_name: "Mohammedu",
+        middle_name: "Salifu",
+        last_name: "Adinan",
+        dob: "03-23-1992",
+        email: "m.adinan@yahoo.com",
+        mobile: "+1 732 799 9546",
+        gender: "male",
+        password: "",
+        confirm_password: "",
+    });
+
+    const [ formValidation, setFormValidation ] = useState({
+        type: "warning",
+        isError: false,
+        message: "",
+    });
+
+    const resetFormValidation = () => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+        });
+    }
+
+    const setPassword = (e) => {
+        resetFormValidation();
+        setFormData({
+            ...formData,
+            password: e.target.value
+        });
+    }
+
+    const setConfirmPassword = (e) => {
+        resetFormValidation();
+        setFormData({
+            ...formData,
+            confirm_password: e.target.value
+        });
+    }
+
+    const signup_onclick = async () => {
+        setIsLoading(true);
+        if(
+            !formData.email ||
+            !formData.first_name ||
+            !formData.last_name
+        ) {
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "Please provide all form fields",
+            });
+            setIsLoading(false);
+            return
+        }
+        if(formData.password !== formData.confirm_password) {
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "Password and confirm password values are not the same",
+            });
+            setIsLoading(false)
+            return
+        }
+        let res = await registerPost(formData);
+        if(res.token){
+            localStorage.setItem("user_token", res.token);
+            LogMeIn();
+            window.location.reload();
+        }else{
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: res.message,
+            })
+        }
+        setIsLoading(false);
+        
+    }
 
     function show_login_form(){
         showLoginForm();
@@ -8,6 +103,9 @@ function SignupForm(props){
 
     return (
         <div id="main_signup_form" style={{display: ((!isLoggedIn && isShowSignUpForm) ? "block" : "none"), padding: "30px 5px"}}>
+            {
+                isLoading && <FullPageLoader />
+            }
             <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                 <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
                     Add New Account</p>
@@ -39,17 +137,29 @@ function SignupForm(props){
                     <div style={{marginBottom: 10}}>
                         <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                             <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="password" placeholder="Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                            <input 
+                                onInput={setPassword}
+                                value={formData.password}
+                                type="password" placeholder="Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                         </div>
                     </div>
                     <div style={{marginBottom: 10}}>
                         <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
                             <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="password" placeholder="Confirm Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                            <input 
+                                onInput={setConfirmPassword}
+                                value={formData.confirm_password}
+                                type="password" placeholder="Confirm Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
                         </div>
                     </div>
+                    {
+                        formValidation.isError && <FormErrorCard 
+                            message={formValidation.message} 
+                            type={formValidation.type}
+                        />
+                    }
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
-                        <div style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
+                        <div onClick={signup_onclick} style={{color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", boxShadow: "0 0 5px rgba(0,0,0,0.5)", textAlign: "center", padding: 14, borderRadius: 50}}>
                             <i style={{marginRight: 10, fontSize: 20, color: "rgba(255,255,255,0.5)"}} className="fa fa-check-square-o"></i>
                             Register
                         </div>

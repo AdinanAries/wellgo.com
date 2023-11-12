@@ -19,21 +19,6 @@ export default function LoginPage(props){
     useEffect(() => {
     }, []);
 
-    let [login, setLogin] = useState({
-        id: "",
-        user_id: "001",
-        username: "m.adinan@yahoo.com",
-        password: "Passord@2014",
-    });
-
-    let [loginForm, setLoginForm] = useState({
-
-    });
-    
-    let [signupForm, setSignupForm] = useState({
-
-    });
-
     return (
         <main>
             <div id="booking_history_more_info_pane" className="display_more_info_pane">
@@ -47,11 +32,9 @@ export default function LoginPage(props){
                     isShowSignUpForm={isShowSignUpForm}
                     showSignupForm={showSignupForm}
                     LogMeIn={LogMeIn}
-                    loginForm={loginForm}
                 />
                 <SignupForm
                     isLoggedIn={isLoggedIn}
-                    signupForm={signupForm}
                     isShowSignUpForm={isShowSignUpForm}
                     showLoginForm={showLoginForm}
                     LogMeIn={LogMeIn}

@@ -47,12 +47,16 @@ function UserAccountPage(props){
         (async function go(){
             // User Account
             let _user=await fetchAccountInfo();
-            setUser(_user);
-            setUserForm(_user);
-            setIsLoading(false);
-            // Bookings History
-            let _bookings = ShowBookingHistory(new Date().toISOString(), new Date(new Date().getDay()+6).toISOString());
-            setBookings(_bookings);
+            if(_user._id){
+                setUser(_user);
+                setUserForm(_user);
+                setIsLoading(false);
+                // Bookings History
+                let _bookings = ShowBookingHistory(new Date().toISOString(), new Date(new Date().getDay()+6).toISOString());
+                setBookings(_bookings);
+            }else{
+                logoutOnclick();
+            }
         })();
     }, []);
 
