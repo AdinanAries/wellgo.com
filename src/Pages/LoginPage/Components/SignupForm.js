@@ -16,13 +16,13 @@ function SignupForm(props){
 
     const [ formData, setFormData ] = useState({
         id: "001",
-        first_name: "Mohammedu",
-        middle_name: "Salifu",
-        last_name: "Adinan",
-        dob: "03-23-1992",
-        email: "m.adinan@yahoo.com",
-        mobile: "+1 732 799 9546",
-        gender: "male",
+        first_name: "",
+        middle_name: "",
+        last_name: "",
+        dob: "",
+        email: "",
+        mobile: "",
+        gender: "",
         password: "",
         confirm_password: "",
     });
@@ -165,9 +165,12 @@ function SignupForm(props){
                         </div>
                     </div>
                     <div style={{marginTop: 10}}>
-                        <p onClick={show_login_form} style={{width: "220px", textAlign: "center", margin: 'auto', marginTop: 5, padding: "15px", fontSize: 14, cursor: "pointer"}}>
+                        <p onClick={show_login_form} style={{width: "320px", textAlign: "center", margin: 'auto', marginTop: 5, padding: "15px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", cursor: "pointer"}}>
                             <i style={{marginRight: 5, color: "rgb(43, 52, 61)"}} className="fa fa-sign-in"></i>
-                            Login with existing account</p>
+                            Already have an account? 
+                            <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "brown", marginLeft: 5}}>
+                            Login</span>
+                        </p>
                     </div>
                 </div>
             </div>
