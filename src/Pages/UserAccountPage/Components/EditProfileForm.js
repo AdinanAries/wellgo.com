@@ -13,7 +13,7 @@ const EditProfileForm = (props) => {
         last_name: "Adinan",
         dob: "03-23-1992",
         email: "m.adinan@yahoo.com",
-        mobile: "+1 732 799 9546",
+        phone: "+1 732 799 9546",
         gender: "male",
         old_password: "",
         new_password: "",
@@ -144,9 +144,7 @@ const EditProfileForm = (props) => {
     const submitUpdate = async () => {
         if(
             !userForm.first_name ||
-            !userForm.middle_name ||
             !userForm.last_name ||
-            !userForm.dob ||
             !userForm.phone ||
             !userForm.email
         ){

@@ -15,13 +15,12 @@ function SignupForm(props){
     const [ isLoading, setIsLoading ] = useState(false);
 
     const [ formData, setFormData ] = useState({
-        id: "001",
         first_name: "",
         middle_name: "",
         last_name: "",
         dob: "",
         email: "",
-        mobile: "",
+        phone: "",
         gender: "",
         password: "",
         confirm_password: "",
@@ -39,6 +38,38 @@ function SignupForm(props){
             isError: false,
             message: "",
         });
+    }
+
+    const setFirstName = (e) => {
+        resetFormValidation();
+        setFormData({
+            ...formData,
+            first_name: e.target.value
+        });
+    }
+
+    const setLastName = (e) => {
+        resetFormValidation();
+        setFormData({
+            ...formData,
+            last_name: e.target.value
+        })
+    }
+
+    const setEmail = (e) => {
+        resetFormValidation();
+        setFormData({
+            ...formData,
+            email: e.target.value
+        })
+    }
+
+    const setPhone = (e) => {
+        resetFormValidation();
+        setFormData({
+            ...formData,
+            phone: e.target.value
+        })
     }
 
     const setPassword = (e) => {
@@ -62,7 +93,9 @@ function SignupForm(props){
         if(
             !formData.email ||
             !formData.first_name ||
-            !formData.last_name
+            !formData.last_name ||
+            !formData.password ||
+            !formData.phone
         ) {
             setFormValidation({
                 type: "error",
@@ -108,48 +141,78 @@ function SignupForm(props){
             }
             <div className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                 <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
-                    Add New Account</p>
+                    Register</p>
                 <div style={{padding: "10px",}}>
-                    <div style={{marginBottom: 10}}>
-                        <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                             <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="text" placeholder="First Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                            First Name</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                            <input 
+                                onInput={setFirstName}
+                                value={formData.first_name}
+                                type="text" placeholder="type here..."  
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
-                    <div style={{marginBottom: 10}}>
-                        <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                             <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="text" placeholder="Middle Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                            Last Name</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                            <input 
+                                onInput={setLastName}
+                                value={formData.last_name}
+                                type="text" placeholder="type here..."
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
-                    <div style={{marginBottom: 10}}>
-                        <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                            <i className="fa fa-user" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="text" placeholder="Last Name"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                            Email</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                            <input 
+                                onInput={setEmail}
+                                value={formData.email}
+                                type="text" placeholder="type here..."
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
-                    <div style={{marginBottom: 10}}>
-                        <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                            <i className="fa fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                            <input type="email" placeholder="Email"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            <i className="fa-solid fa-mobile" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                            Phone</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                            <input 
+                                onInput={setPhone}
+                                value={formData.phone}
+                                type="text" placeholder="type here..."
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
-                    <div style={{marginBottom: 10}}>
-                        <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                            <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            <i className="fa-solid fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                            Password</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                             <input 
                                 onInput={setPassword}
                                 value={formData.password}
-                                type="password" placeholder="Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                type="password" placeholder="type here..."
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
-                    <div style={{marginBottom: 10}}>
-                        <div style={{boxShadow: "0 0 3px rgba(0, 0, 0, 0.33)", border: "none", borderRadius: 50, marginTop: 10, paddingLeft: 16}}>
-                            <i className="fa fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            <i className="fa-solid fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                            Confirm Password</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                             <input 
                                 onInput={setConfirmPassword}
                                 value={formData.confirm_password}
-                                type="password" placeholder="Confirm Password"  style={{padding: 16, paddingLeft: 0, width: "calc(100% - 30px)", background: "none", border: "none"}}/>
+                                type="password" placeholder="type here..."
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
                     {
