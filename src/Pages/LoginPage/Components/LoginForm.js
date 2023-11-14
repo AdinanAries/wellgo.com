@@ -180,7 +180,7 @@ function LoginForm(props){
                             />
                         }
                         <div style={{marginTop: 5}}>
-                            <div onClick={login_onclick} style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
+                            <div style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
                                 Send password reset link
                             </div>
                         </div>
