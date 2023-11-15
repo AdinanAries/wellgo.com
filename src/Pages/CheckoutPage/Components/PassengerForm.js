@@ -135,7 +135,7 @@ const PassengerForm = (props) => {
                         <input 
                             onInput={setDOB}
                             value={passenger.born_on}
-                            type="text" placeholder="type here..."  
+                            type="text" placeholder="YYYY/MM/DD"  
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>
@@ -187,7 +187,7 @@ const PassengerForm = (props) => {
                         <input 
                             onInput={setTravelDocExpiration}
                             value={passenger.identity_documents[0].expires_on}
-                            type="text" placeholder="type here..."  
+                            type="text" placeholder="YYYY/MM"  
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>

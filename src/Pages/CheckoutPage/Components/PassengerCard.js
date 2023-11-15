@@ -58,7 +58,7 @@ const PassengerCard = (props) => {
                             {infant?.given_name} {infant?.family_name}</span>
                     </div> : ""
             }{ 
-                (props.age <= CONSTANTS.infant_age_threshold) ?  
+                (born_on && props.age <= CONSTANTS.infant_age_threshold) ?  
                     <div style={{backgroundColor: "rgba(0,0,0,0.07)"}}>
                         <p style={{padding: 10, fontFamily: "'Prompt', Sans-serif"}}>
                             <span style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
