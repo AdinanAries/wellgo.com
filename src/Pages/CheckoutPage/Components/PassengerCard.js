@@ -3,7 +3,7 @@ import { obj_has_empty_prop } from "../../../helpers/general";
 import CONSTANTS from "../../../Constants/Constants";
 
 const PassengerCard = (props) => {
-    const { given_name, family_name, id, infant_passenger_id } = props.passenger;
+    const { given_name, family_name, id, infant_passenger_id, born_on } = props.passenger;
     let incomplete_passenger = obj_has_empty_prop(props.passenger);
     let adults_arr_infants_select=Array.from(props.availableAdultPassengersForInfants);
 
@@ -28,16 +28,16 @@ const PassengerCard = (props) => {
                     <i className="fa-solid fa-pencil" style={{marginRight: 10}}></i></p>
                 <p style={{fontSize: 14, color: "darkslateblue", fontFamily: "'Prompt', Sans-serif"}}>
                 { 
-                    (props.age <= CONSTANTS.infant_age_threshold) ?
+                    (born_on && props.age <= CONSTANTS.infant_age_threshold) ?
                         <i className="fa-solid fa-baby" 
                             style={{marginRight: 10, fontSize: 18, color: "rgba(0,0,0,0.4)"}}></i> : 
                         <i className="fa-solid fa-user" 
                             style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}}></i>
                 }
-                    {given_name} {family_name}, <span style={{color: "rgba(0,0,0,0.5)", fontSize: 13}}> {props.age} year(s)</span>
+                    {given_name || "First and"} {family_name || "Last name"}, <span style={{color: "rgba(0,0,0,0.5)", fontSize: 13}}> {props.age} year(s)</span>
                 </p>
-                <p style={{color: "rga(0,0,0,0.4)", fontFamily: "'Prompt', Sans-serif", fontSize: 12, marginTop: 5}}>
-                    Click this top area to open this passenger's form
+                <p style={{padding: 10, textAlign: "center", borderRadius: 8, backgroundColor: "darkslateblue", color: "white", fontFamily: "'Prompt', Sans-serif", fontSize: 12, marginTop: 10}}>
+                    Click here to open this passenger's form
                 </p>
             </div>
             {
