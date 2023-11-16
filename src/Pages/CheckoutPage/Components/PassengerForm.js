@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { calculate_age, validateYYYYMMDDInputDates } from "../../../helpers/general";
+import CONSTANTS from "../../../Constants/Constants";
 
 const PassengerForm = (props) => {
     
     const [passenger, setPassenger] = useState(props.passenger);
-
+    const [ age, setAge ]=useState(calculate_age(passenger.born_on))
+ 
     console.log("Passenger: ", passenger);
 
     const setFirstName = (e) => {
@@ -21,7 +24,7 @@ const PassengerForm = (props) => {
         setPassenger({...passenger, gender: e.target.value});
     }
     const setDOB = (e) => {
-        setPassenger({...passenger, born_on: e.target.value});
+        setPassenger({...passenger, born_on: validateYYYYMMDDInputDates(e.target.value)});
     }
     const setTitle = (e) => {
         setPassenger({...passenger, title: e.target.value});
@@ -48,6 +51,10 @@ const PassengerForm = (props) => {
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], type: e.target.value }
         ]});
+    }
+
+    const setPassengerAge = (e) => {
+        setAge(calculate_age(e.target.value));
     }
 
     const setInfantPassengerId = (e) => {
@@ -102,16 +109,47 @@ const PassengerForm = (props) => {
                 </div>
                 <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                        <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                        Email</p>
+                        <i className="fa-solid fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                        Birth Date (YYYY/MM/DD)</p>
                     <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                         <input 
-                            onInput={setEmail} 
-                            value={passenger.email}
-                            type="email" placeholder="type here..."
+                            onBlur={setPassengerAge}
+                            onInput={setDOB}
+                            value={passenger.born_on}
+                            type="text" placeholder="YYYY/MM/DD"  
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>
+                {
+                    (passenger.born_on && (age > CONSTANTS.infant_age_threshold)) &&
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                            Email</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                            <input 
+                                onInput={setEmail} 
+                                value={passenger.email}
+                                type="email" placeholder="type here..."
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                        </div>
+                    </div>
+                }
+                {
+                    (passenger.born_on && (age > CONSTANTS.infant_age_threshold)) &&
+                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            <i className="fa-solid fa-mobile" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                            Phone</p>
+                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                            <input 
+                                onInput={setPhone}
+                                value={passenger.phone_number}
+                                type="text" placeholder="type here..."  
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                        </div>
+                    </div>
+                }
                 <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                         <i className="fa-solid fa-person-half-dress" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
@@ -125,30 +163,6 @@ const PassengerForm = (props) => {
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
-                    </div>
-                </div>
-                <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                        <i className="fa-solid fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                        Birth Date</p>
-                    <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                        <input 
-                            onInput={setDOB}
-                            value={passenger.born_on}
-                            type="text" placeholder="YYYY/MM/DD"  
-                            style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
-                    </div>
-                </div>
-                <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                        <i className="fa-solid fa-mobile" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                        Phone</p>
-                    <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                        <input 
-                            onInput={setPhone}
-                            value={passenger.phone_number}
-                            type="text" placeholder="type here..."  
-                            style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>
                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 14, padding: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
