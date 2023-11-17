@@ -50,6 +50,7 @@ export default function CheckoutPage(props){
     }
 
     const setResponsibleAdultForInfant = (e) => {
+        // vals = [infant_id, adult_id] after split function
         const vals = e.target.value.split(CONSTANTS.special_str_separator);
         let { passengers } = checkoutPayload.data;
         //Previous responsible adult
@@ -57,11 +58,20 @@ export default function CheckoutPage(props){
         if(prev_adult){
             delete prev_adult.infant_passenger_id;
         }
+
         //New responsible adult
         let adult = passengers.find(passenger=>passenger.id===vals[1]);
         let adult_index = passengers.findIndex(passenger=>passenger.id===vals[1]);
         adult.infant_passenger_id=vals[0];
         passengers[adult_index]=adult;
+
+        //Assigning adults phone and email to the infant
+        let infant = passengers.find(passenger=>passenger.id===vals[0]);
+        let infant_index = passengers.findIndex(passenger=>passenger.id===vals[0]);
+        infant.phone_number=adult.phone_number;
+        infant.email=adult.email;
+        passengers[infant_index]=infant;
+
         setcheckoutPayload({
             ...checkoutPayload,
             data: {

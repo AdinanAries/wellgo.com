@@ -24,7 +24,8 @@ const PassengerForm = (props) => {
         setPassenger({...passenger, gender: e.target.value});
     }
     const setDOB = (e) => {
-        setPassenger({...passenger, born_on: validateYYYYMMDDInputDates(e.target.value)});
+        console.log(e);
+        setPassenger({...passenger, born_on: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data)});
     }
     const setTitle = (e) => {
         setPassenger({...passenger, title: e.target.value});

@@ -122,7 +122,66 @@ export const convert24HTimeToAMPM = ( time ) => {
     return `${h}:${m}${dd}`;
 }
 
-export const validateYYYYMMDDInputDates = (date_string, date_separator="/") => {
+export const validateYYYYMMDDInputDates = (date_string, press_key_value, date_separator="/") => {
+
+    const lastChar = date_string.charAt(date_string.length - 1);
+    const nums = date_string.replace(/\D/g,''); // Return only numbers and discard all other string characters
+
+    if(!press_key_value) return // Backspace pressed
+
+    //Special Case
+    if(nums.length===5 && lastChar===date_separator){
+        let YYYY = nums.substring(0, 4);
+        let MM = "0"+nums.substring(4);
+        if(parseInt(MM) < 1){
+            MM="01"
+        }
+        if(parseInt(MM) > 12){
+            MM="12"
+        }
+        return YYYY+date_separator+MM+date_separator;
+    }
+
+    if(nums.length>3 && nums.length<=5){
+        return nums.substring(0, 4)+date_separator+nums.substring(4);
+    }else if(nums.length>5 && nums.length<=8) {
+        let YYYY=nums.substring(0, 4);
+        let MM=nums.substring(4, 6);
+        let DD=nums.substring(6);
+        if(parseInt(MM)>12){
+            MM="12";
+        }
+        if(parseInt(DD)>31){
+            DD="31"
+        }
+        if(parseInt(MM)<1){
+            MM="01"
+        }
+        if(parseInt(DD)<1){
+            DD="01"
+        }
+        return YYYY+date_separator+MM+date_separator+DD;
+    }else if(nums.length > 8){
+        let YYYY=nums.substring(0, 4);
+        let MM=nums.substring(4, 6);
+        let DD=nums.substring(6, nums.length-1);
+        if(parseInt(MM)>12){
+            MM="12";
+        }
+        if(parseInt(DD)>31){
+            DD="31"
+        }
+        if(parseInt(MM)<1){
+            MM="01"
+        }
+        if(parseInt(DD)<1){
+            DD="01"
+        }
+        return YYYY+date_separator+MM+date_separator+DD;
+    }
+}
+
+/*export const validateYYYYMMDDInputDates = (date_string, date_separator="/") => {
     date_string=date_string.trim(); 
     //date_string=date_string.replace(/\D/g, ""); // returning only numbers
     if (date_string==="") {
@@ -176,7 +235,7 @@ export const validateYYYYMMDDInputDates = (date_string, date_separator="/") => {
             return date_string.substring(0, date_string.length-1);
         }
     }
-}
+}*/
 
 export const calculateTotalTime = (earlier, later) => {
     let diff_ms = new Date(later).getTime() - new Date(earlier).getTime();
