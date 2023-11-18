@@ -1308,7 +1308,7 @@ footer {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1005;
+  z-index: 10005;
 }
 .homepage_start_support_btn{
   position: relative;
