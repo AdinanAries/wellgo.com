@@ -10,6 +10,7 @@ import SearchFiltersLoader from "./SearchFiltersLoader";
 import MobileItinTopInfo from "./MobileItinTopInfo";
 import MobileItinTopInfoLoader from "./MobileItinTopInfoLoader";
 import Ads from "./Ads";
+import { duffelStopsAndPrices } from "../../../helpers/FlightsFilterHelpers";
 
 function add_clouds_to_animated_loader(){
     if(document.getElementById("animated_loader")){
@@ -91,7 +92,10 @@ export default function ResultsListContainer(props){
     }
     setTimeout(()=>{
         add_clouds_to_animated_loader();
-    },500)
+    },500);
+
+    // Getting Filter Stops Array
+    let filterStops = duffelStopsAndPrices(props.flights);
 
     return (
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0}}>
@@ -107,8 +111,11 @@ export default function ResultsListContainer(props){
                 <div id="search_list_main__settings_section" className="search_list_main__settings_section">
                     { 
                         !props.loading ? 
-                        props.flights.length > 0 && <SearchFilters />
-                        : <SearchFiltersLoader />
+                        props.flights.length > 0 &&
+                            <SearchFilters 
+                                filterStops={filterStops}
+                            /> :
+                            <SearchFiltersLoader />
                     }
                 </div>
                 <div className="search_list_main_tickets_section">

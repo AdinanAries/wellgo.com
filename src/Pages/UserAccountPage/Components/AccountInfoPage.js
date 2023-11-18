@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormErrorCard from "../../../components/FormErrorCard";
 import FullPageLoader from "../../../components/FullPageLoader";
-import { validateYYYYMMDDInputDates } from "../../../helpers/general";
+import { validateYYYYMMDDInputDates, confirmYYYMMDDDateValidity } from "../../../helpers/general";
 
 const AccountInfoPage = (props) => {
     
@@ -52,12 +52,8 @@ const AccountInfoPage = (props) => {
 
     const submitUpdate = async () => {
         if(
-            !userForm.first_name ||
-            !userForm.middle_name ||
             !userForm.last_name ||
-            !userForm.dob ||
-            !userForm.phone ||
-            !userForm.email
+            !userForm.dob
         ){
             setFormValidation({
                 type: "error",
@@ -66,11 +62,20 @@ const AccountInfoPage = (props) => {
             });
             return;
         }
+        if(!confirmYYYMMDDDateValidity(userForm.dob)){
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "Wrong date of brith format",
+            });
+            return;
+        }
         setIsLoading(true);
         await updateUserOnSubmit(userForm);
-        setEditDOB(false);
+        window.location.reload();
+        /*setEditDOB(false);
         setEditGender(false);
-        setIsLoading(false);
+        setIsLoading(false);*/
     }
 
     return (
@@ -122,16 +127,23 @@ const AccountInfoPage = (props) => {
                             <i style={{marginLeft: 20, cursor: "pointer"}} className="fa-solid fa-pencil"></i></span>
                         </p>
                     <div style={{display: (!user.dob || editDOB ? "block" : "none"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
+                        <p style={{marginTop: 10, fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
+                            <i style={{color: "rgba(0,0,0,0.6)", marginRight: 10}} className="fa fa-calendar"></i>
+                            Your Birth Date <span style={{color: "rgba(0,0,0,0.6)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                                (YYYY/MM/DD)</span>
+                        </p>
                         <p>
-                            <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-calendar"></i>
                             <input 
                                 onInput={setDob}
                                 value={userForm.dob}
-                                style={{padding: 10, border: "none", width: "calc(100% - 60px)"}} 
-                                type="text" placeholder="add your date of birth" />
-                            <span onClick={()=>{setEditDOB(false)}}>
-                                <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
-                            </span>
+                                style={{padding: 10, border: "none", width: "calc(100% - 40px)"}} 
+                                type="text" placeholder="YYYY/MM/DD" />
+                            {
+                                (user.dob) &&
+                                <span onClick={()=>{setEditDOB(false)}}>
+                                    <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
+                                </span>
+                            }
                         </p>
                     </div>
                     <p style={{display: (user.gender && !editGender ? "block" : "none"), fontFamily: "'Prompt', Sans-serif", fontSize: 15, marginBottom: 2, marginTop: 5, color: "rgba(0,0,0,0.7)"}}>
@@ -140,18 +152,24 @@ const AccountInfoPage = (props) => {
                             <i style={{marginLeft: 20, cursor: "pointer"}} className="fa-solid fa-pencil"></i></span>
                         </p>
                     <div style={{display: (!user.gender || editGender ? "block" : "none"), borderBottom: "1px solid rgba(0,0,0,0.1)", maxWidth: 250}}>
-                        <i style={{color: "rgba(0,0,0,0.6)"}} className="fa fa-user"></i>
+                        <p style={{marginTop: 15, fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
+                            <i style={{color: "rgba(0,0,0,0.6)", marginRight: 10}} className="fa fa-user"></i>
+                            Gender:
+                        </p>
                         <select
                             onChange={setUserGender}
                             value={userForm.gender}
-                            style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth">
-                            <option value="">Add Your Gender</option>
+                            style={{padding: 10, border: "none", color: "rgba(0,0,0,0.7)", background: "none", width: "calc(100% - 40px)"}} type="text" placeholder="add your date of birth">
+                            <option value="">Select here...</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                        <span onClick={()=>{setEditGender(false)}}>
-                            <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
-                        </span>
+                        {
+                            (user.gender) &&
+                            <span onClick={()=>{setEditGender(false)}}>
+                                <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
+                            </span>
+                        }
                     </div>
                     {
                         formValidation.isError && <FormErrorCard 
