@@ -4,6 +4,8 @@ import { useState } from "react";
 import FormErrorCard from "../../../components/FormErrorCard";
 import FullPageLoader from "../../../components/FullPageLoader";
 
+import { validateYYYYMMDDInputDates } from "../../../helpers/general";
+
 const EditProfileForm = (props) => {
 
     /*{
@@ -112,7 +114,7 @@ const EditProfileForm = (props) => {
         resetFormValidation();
         setUserForm({
             ...userForm,
-            dob: e.target.value
+            dob: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data)
         })
     }
 

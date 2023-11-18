@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormErrorCard from "../../../components/FormErrorCard";
 import FullPageLoader from "../../../components/FullPageLoader";
+import { validateYYYYMMDDInputDates } from "../../../helpers/general";
 
 const AccountInfoPage = (props) => {
     
@@ -44,8 +45,9 @@ const AccountInfoPage = (props) => {
         resetFormValidation();
         setUserForm({
             ...userForm,
-            dob: e.target.value
-        })
+            dob: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data)
+        });
+        console.log(userForm);
     }
 
     const submitUpdate = async () => {
@@ -125,7 +127,8 @@ const AccountInfoPage = (props) => {
                             <input 
                                 onInput={setDob}
                                 value={userForm.dob}
-                                style={{padding: 10, border: "none", width: "calc(100% - 60px)"}} type="text" placeholder="add your date of birth" />
+                                style={{padding: 10, border: "none", width: "calc(100% - 60px)"}} 
+                                type="text" placeholder="add your date of birth" />
                             <span onClick={()=>{setEditDOB(false)}}>
                                 <i style={{marginLeft: 20, cursor: "pointer", color: "crimson"}} className="fa-solid fa-times"></i>
                             </span>

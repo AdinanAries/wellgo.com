@@ -1,65 +1,106 @@
 import { useState } from "react";
-import { calculate_age, validateYYYYMMDDInputDates } from "../../../helpers/general";
+import { calculate_age, validateYYYYMMDDInputDates, confirmYYYMMDDDateValidity } from "../../../helpers/general";
 import CONSTANTS from "../../../Constants/Constants";
+import FormErrorCard from "../../../components/FormErrorCard";
 
 const PassengerForm = (props) => {
     
     const [passenger, setPassenger] = useState(props.passenger);
-    const [ age, setAge ]=useState(calculate_age(passenger.born_on))
+    const [ age, setAge ]=useState(calculate_age(passenger.born_on));
+    const [ formValidation, setFormValidation ] = useState({
+        type: "warning",
+        isError: false,
+        message: "",
+        isDateFormat: false,
+    });
  
-    console.log("Passenger: ", passenger);
+    const resetFormValidation = () => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+            isDateFormat: false
+        });
+    }
+
+    //console.log("Passenger: ", passenger);
 
     const setFirstName = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, given_name: e.target.value});
     }
 
     const setLastName = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, family_name: e.target.value});
     }
 
     const setEmail = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, email: e.target.value});
     }
     const setGender = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, gender: e.target.value});
     }
     const setDOB = (e) => {
-        console.log(e);
+        resetFormValidation();
         setPassenger({...passenger, born_on: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data)});
     }
     const setTitle = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, title: e.target.value});
     }
     const setPhone = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, phone_number: e.target.value});
     }
     const setTravelDocID = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], unique_identifier: e.target.value }
         ]});
     }
     const setTravelDocExpiration = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], expires_on: e.target.value }
         ]});
     }
     const setTravelDocCountry = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], issuing_country_code: e.target.value }
         ]});
     }
     const setTravelDocType = (e) => {
+        resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], type: e.target.value }
         ]});
     }
 
     const setPassengerAge = (e) => {
+        resetFormValidation();
         setAge(calculate_age(e.target.value));
     }
 
     const setInfantPassengerId = (e) => {
+        resetFormValidation();
         setPassenger({ ...passenger, infant_passenger_id: e.target.value });
+    }
+
+    const onSubmit = () => {
+        if(!confirmYYYMMDDDateValidity(passenger.born_on)){
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "Date of birth is not in correct format",
+                isDateFormat: true
+            });
+            return;
+        }
+        props.savePassengerInfo(passenger, props.index)
     }
 
     return (
@@ -108,7 +149,9 @@ const PassengerForm = (props) => {
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>
-                <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                <div style={{marginBottom: 5, 
+                        backgroundColor: ((formValidation.isError && formValidation.isDateFormat) ? "rgba(255,0,0,0.2)" :
+                        "rgba(0,0,0,0.07)"), padding: 10, borderRadius: 8}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                         <i className="fa-solid fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                         Birth Date (YYYY/MM/DD)</p>
@@ -221,12 +264,18 @@ const PassengerForm = (props) => {
                     </div>
                 </div>
             </div>
+            {
+                    formValidation.isError && <FormErrorCard 
+                        message={formValidation.message} 
+                        type={formValidation.type}
+                    />
+                }
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <div style={{width: "calc(50% - 5px)", backgroundColor: "crimson", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
                     onClick={props.unSelectPassengerCard}
                 >Cancel</div>
                 <div style={{width: "calc(50% - 5px)", backgroundColor: "darkslateblue", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
-                    onClick={()=>props.savePassengerInfo(passenger, props.index)} 
+                    onClick={onSubmit} 
                 >Save</div>
             </div>
         </div>
