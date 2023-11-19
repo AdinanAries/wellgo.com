@@ -7,6 +7,7 @@ import { shuffle_array,
 
 import EachReviewer from "./EachReviewer";
 import FullPageGallery from "../../../components/FullPageGallery";
+import PlacesReviewsScores from "./PlacesReviewsScores";
 
 import reviews_icon from "../../../icons/reviews_icon.svg";
 import reviews_icon2 from "../../../icons/reviews_icon2.svg";
@@ -223,7 +224,7 @@ const Reviews = () => {
             }
             <div className="home_page_reviews_container">
                 <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
-                >Places Advisors</h1>
+                >Places Advisor</h1>
                 <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: "initial", fontFamily: "'Prompt', Sans-serif",}}
                 >travelers openions about places</h1>
                 <div className="home_page_reviews_wrapper">
@@ -341,7 +342,10 @@ const Reviews = () => {
                                 <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette", position: "relative", zIndex: 3}}>"</span>
                                 {reviewers[current].msg}
                             </p>
-                            <p style={{marginTop: 20, fontFamily: "Courgette", color: "#c751b9", textAlign: "center", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                            <div style={{display: "flex", justifyContent: "center", marginTop: 20}}>
+                                <PlacesReviewsScores />
+                            </div>
+                            <p style={{marginTop: 5, fontFamily: "Courgette", color: "#c751b9", textAlign: "center", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                 {reviewers[current].name}
                             </p>
                             <p className="mobile_font_13" id="home_page_reviews_selected_reviewer_date" style={{marginTop: 5, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,73,0,0.8)'}}>
