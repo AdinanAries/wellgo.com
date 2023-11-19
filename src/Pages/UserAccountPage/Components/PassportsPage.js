@@ -35,6 +35,30 @@ const PassportsPage = (props) => {
 
     const [ isEdit, setIsEdit ] = useState(false);
     let [passportForm, setPassportForm] = useState(NEW_PASSPORT);
+    const [pagination, setPagination] = useState({
+        CURRENT_PAGE: 1,
+        PAGE_SIZE: 4,
+        TOTAL_PAGES: 0,
+    });
+
+    function nextPage() {
+        if(
+            (((pagination.CURRENT_PAGE - 1) * pagination.PAGE_SIZE)+pagination.PAGE_SIZE)
+            > passports.length
+        ) return;
+        ++pagination.CURRENT_PAGE;
+        setPagination({...pagination});
+    }
+
+    function prevPage() {
+        if((pagination.CURRENT_PAGE-1) < 1) return;
+        --pagination.CURRENT_PAGE;
+        setPagination({...pagination});
+    }
+
+    function setPage(num) {
+        setPagination({...pagination, CURRENT_PAGE: num});
+    }
 
     const cancelIsEdit = () => {
         setIsEdit(false);
@@ -61,6 +85,8 @@ const PassportsPage = (props) => {
         })
     }
 
+    let begin = ((pagination.CURRENT_PAGE - 1) * pagination.PAGE_SIZE);
+    let end = begin + pagination.PAGE_SIZE;
     return (
         <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
             {   
@@ -87,7 +113,7 @@ const PassportsPage = (props) => {
                                     Oop! Error on server</p>
                             </div>
                         }
-                        {(!passports.isError) && passports.map((each, index)=>(
+                        {(!passports.isError) && passports.slice(begin, end).map((each, index)=>(
                             <EachPassport
                                 DeletePassport={DeletePassport}
                                 key={each.id}
@@ -99,7 +125,17 @@ const PassportsPage = (props) => {
                                 hide_more_passport_info={hide_more_passport_info}
                             />
                         ))}
-                        {(passports.length>5) && <PaginationButtons />}
+                        {(passports.length>pagination.PAGE_SIZE) && <div style={{paddingTop: 20}}>
+                                <PaginationButtons 
+                                    pageSize={pagination.PAGE_SIZE} 
+                                    currentPage={pagination.CURRENT_PAGE} 
+                                    totalItems={passports.length}
+                                    nextPage={nextPage}
+                                    prevPage={prevPage}
+                                    setPage={setPage}
+                                />
+                            </div>
+                        }
                         <div onClick={show_add_new_passport_form} style={{marginTop: 10, padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
                             <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
                             Add New Passport
