@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { get_currency_symbol } from "../../../helpers/general";
+import { get_currency_symbol, ellipsify } from "../../../helpers/general";
 import { markup } from "../../../helpers/Prices";
 
 let filtersByStops={};
@@ -57,13 +57,17 @@ const SearchFilters = (props) => {
                 <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <input onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)} 
-                            id={"filter-by-flights_"+each.count} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                        <p htmlFor={"filter-by-flights_"+each.count} style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop ({each.flights.length})</p>
+                            id={"filter-by-stops_"+each.count} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                        <label htmlFor={"filter-by-stops_"+each.count}>
+                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop ({each.flights.length})</p>
+                        </label>
                     </div>
-                    <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
-                        <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
-                            dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
-                        {(markup(each.lowest).new_price).toFixed(2)}</p>
+                    <label htmlFor={"filter-by-stops_"+each.count}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                            <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
+                            {(markup(each.lowest).new_price).toFixed(2)}</p>
+                    </label>
                 </div>
             );
         } else {
@@ -71,15 +75,19 @@ const SearchFilters = (props) => {
                 <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <input onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)}
-                            style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
-                            {(each.count>1 ? each.count+" Stops" : each.count+" Stop")} ({each.flights.length})
-                        </p>
+                            id={"filter-by-stops_"+each.count} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                        <label htmlFor={"filter-by-stops_"+each.count}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                                {(each.count>1 ? each.count+" Stops" : each.count+" Stop")} ({each.flights.length})
+                            </p>
+                        </label>
                     </div>
-                    <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
-                        <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
-                            dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
-                        {(markup(each.lowest).new_price).toFixed(2)}</p>
+                    <label htmlFor={"filter-by-stops_"+each.count}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                            <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
+                            {(markup(each.lowest).new_price).toFixed(2)}</p>
+                    </label>
                 </div>
             );
         }
@@ -99,13 +107,17 @@ const SearchFilters = (props) => {
             <div onChange={(e)=>filterByAilines(e, each.flights, `airlines_${each.airlineCode}`)}
                 key={each.airlineCode} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                 <div style={{display: "flex", flexDirection: "row"}}>
-                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                    <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>{each.airlineName} ({each.flights.length})</p>
+                    <input id={"filter-by-flights_"+each.airlineCode} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                    <label htmlFor={"filter-by-flights_"+each.airlineCode}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>{ellipsify(each.airlineName, 15)} ({each.flights.length})</p>
+                    </label>
                 </div>
-                <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
-                    <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                <label htmlFor={"filter-by-flights_"+each.airlineCode}>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                        <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
                             dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
                             {(markup(each.lowest).new_price).toFixed(2)}</p>
+                </label>
             </div>
         );
     });
