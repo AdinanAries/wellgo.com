@@ -38,6 +38,30 @@ const PaymentCardsPage = (props) => {
 
     const [ isEdit, setIsEdit ] = useState(false);
     let [ paymentForm, setPaymentForm ] = useState(NEW_CARD);
+    const [pagination, setPagination] = useState({
+        CURRENT_PAGE: 1,
+        PAGE_SIZE: 4,
+        TOTAL_PAGES: 0,
+    });
+
+    function nextPage() {
+        if(
+            (((pagination.CURRENT_PAGE - 1) * pagination.PAGE_SIZE)+pagination.PAGE_SIZE)
+            > payments.length
+        ) return;
+        ++pagination.CURRENT_PAGE;
+        setPagination({...pagination});
+    }
+
+    function prevPage() {
+        if((pagination.CURRENT_PAGE-1) < 1) return;
+        --pagination.CURRENT_PAGE;
+        setPagination({...pagination});
+    }
+
+    function setPage(num) {
+        setPagination({...pagination, CURRENT_PAGE: num});
+    }
 
     const cancelIsEdit = () => {
         setIsEdit(false);
@@ -68,6 +92,8 @@ const PaymentCardsPage = (props) => {
         })
     }
 
+    let begin = ((pagination.CURRENT_PAGE - 1) * pagination.PAGE_SIZE);
+    let end = begin + pagination.PAGE_SIZE;
     return (
         <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10}}>
             {isLoading && 
@@ -100,7 +126,7 @@ const PaymentCardsPage = (props) => {
                                 </div>
                             }
                             {
-                                payments.map((each, index)=>(
+                                payments.slice(begin, end).map((each, index)=>(
                                     (payments.length > 0) && <EachPaymentCard 
                                         index={index} 
                                         each={each}
@@ -115,12 +141,18 @@ const PaymentCardsPage = (props) => {
                             }
                         </div>
                         {
-                            (payments.length > 5) &&
-                            <div style={{padding: "15px 0"}}>
-                                <PaginationButtons />
+                            (payments.length>pagination.PAGE_SIZE) && <div style={{paddingTop: 20}}>
+                                <PaginationButtons 
+                                    pageSize={pagination.PAGE_SIZE} 
+                                    currentPage={pagination.CURRENT_PAGE} 
+                                    totalItems={payments.length}
+                                    nextPage={nextPage}
+                                    prevPage={prevPage}
+                                    setPage={setPage}
+                                />
                             </div>
                         }
-                        <div onClick={show_add_new_payment_form} style={{padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
+                        <div onClick={show_add_new_payment_form} style={{marginTop: 10, padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
                             <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
                             Add New Payment Method
                         </div>
