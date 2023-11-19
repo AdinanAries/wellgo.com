@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-function PaginationButtons({pageSize, currentPage, totalItems, nextPage, prevPage, setPage, ...rest}){
+function PaginationButtons(props){
 
-    let [data, setData] = useState({
-        pageSize: (pageSize || 0),
-        currentPage: (currentPage || 0)
-    });
+    const {
+        pageSize, 
+        currentPage, 
+        totalItems, 
+        nextPage, 
+        prevPage, 
+        setPage
+    } = props
 
     let optionsMarkup=[];
     for(let i=0; i<(Math.ceil(totalItems/pageSize)); i++){
-        if(i+1===currentPage)continue
         optionsMarkup.push(<option value={i+1}>{(((i)*pageSize)+1)} - {((i+1)*pageSize)}</option>)
     }
 
@@ -22,8 +25,9 @@ function PaginationButtons({pageSize, currentPage, totalItems, nextPage, prevPag
                 <i className="fa fa-angle-left"></i>
             </div>
             <div>
-                <select onChange={(evnt)=>setPage(evnt.target.value)} style={{backgroundColor: "rgba(0,0,0,0.07)", border: "1px solid rgba(0,0,0,0.1)", padding: 13, borderRadius: 50, margin: "0 10px"}}>
-                    <option value={currentPage}>{(((currentPage-1)*pageSize)+1)} - {currentPage * pageSize}</option>
+                <select 
+                    value={currentPage}
+                    onChange={(evnt)=>setPage(evnt.target.value)} style={{backgroundColor: "rgba(0,0,0,0.07)", border: "1px solid rgba(0,0,0,0.1)", padding: 13, borderRadius: 50, margin: "0 10px"}}>
                     {optionsMarkup.map(each=>each)}
                 </select>
             </div>
