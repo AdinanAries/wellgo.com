@@ -47,14 +47,20 @@ const SelectedTicketInfo = (props) => {
     let BAGGAGES=[];
     let carry_on_bags_count=0;
     let free_checked_bags_count=0;
-    for(let bb=0;bb<slices[0].segments[0].passengers[0].baggages.length;bb++){
-        if(slices[0].segments[0].passengers[0].baggages[bb].type==="carry_on"){
-            carry_on_bags_count+=slices[0].segments[0].passengers[0].baggages[bb].quantity;
-        }
-        if(slices[0].segments[0].passengers[0].baggages[bb].type==="checked"){
-            free_checked_bags_count+=slices[0].segments[0].passengers[0].baggages[bb].quantity;
-        }
-    }
+    //for(let sl=0;sl<slices.length;sl++){
+        for(let sg=0;sg<slices[0].segments.length;sg++){
+            for(let ps=0; ps<slices[0].segments[sg].passengers.length;ps++){
+                for(let bb=0; bb<slices[0].segments[sg].passengers[ps].baggages.length; bb++){
+                    if(slices[0].segments[sg].passengers[ps].baggages[bb].type==="carry_on"){
+                        carry_on_bags_count+=slices[sg].segments[sg].passengers[ps].baggages[bb].quantity;
+                    }
+                    if(slices[0].segments[sg].passengers[ps].baggages[bb].type==="checked"){
+                        free_checked_bags_count+=slices[0].segments[sg].passengers[ps].baggages[bb].quantity;
+                    }
+                }
+            }
+        }  
+    //}
     if(carry_on_bags_count>0){
         BAGGAGES.push(
             <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 10}}>
@@ -75,7 +81,7 @@ const SelectedTicketInfo = (props) => {
         BAGGAGES.push(
             <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 10}}>
                 <i className="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
-                no free bags included
+                no bags included
             </p>
         )
     }
@@ -113,39 +119,71 @@ const SelectedTicketInfo = (props) => {
     }
 
     let SEATS_SELECTION=[];
-    let CHECKED_BAGS=[]
+    let CHECKED_BAGS=[];
+    let additional_checked_bags_count=[];
+    let seat_selection_count=[];
     if(available_services.length > 0){
         for(let ss=0;ss<available_services.length;ss++){
             if(available_services[ss].type==="baggage"){
-                let curr=get_currency_symbol(available_services[ss].total_currency)
-                CHECKED_BAGS.push(
-                    <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
-                        <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                            <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
-                            additional checked bag:
-                        </span>
-                        <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: 20}}>
-                            <span dangerouslySetInnerHTML={{__html: curr}}></span>
-                            {available_services[ss].total_amount}
-                        </span>
-                    </p>
-                )
+                additional_checked_bags_count.push({
+                    total_currency: available_services[ss].total_currency,
+                    total_amount: available_services[ss].total_amount
+                });
             }
             if(available_services[ss].type==="seat"){
-                SEATS_SELECTION.push(
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                        <i className="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
-                        Seat choice included
-                    </p>
-                )
+                seat_selection_count.push({
+                    item: ""
+                });
             }
         }
     }
+
+    if(additional_checked_bags_count.length>0){
+        CHECKED_BAGS.push(
+            <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
+                <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                    <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                    {additional_checked_bags_count.length}
+                    {" additional purchasable checked "}
+                    {additional_checked_bags_count.length>1 ? "bags" : "bag"}:
+                </span>
+                {
+                    additional_checked_bags_count.map((each, i)=>{
+                        let curr=get_currency_symbol(each.total_currency);
+                        return (
+                            <>
+                                {i>0 && ","}
+                                <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: i<1 ? 15 : 4}}>
+                                    <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                                    {each.total_amount}
+                                </span>
+                            </>
+                        )
+                    })
+                }
+            </p>
+        )
+    }
+
+    if(seat_selection_count.length>0){
+        SEATS_SELECTION.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i className="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                Seat choice included 
+                <span style={{color: "rgba(0,0,0,0.5)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                    {` (${seat_selection_count.length} `}{
+                        seat_selection_count.length>1 ? "seats)" : "seat)"
+                    }
+                </span>
+            </p>
+        )
+    }
+
     if(CHECKED_BAGS.length===0){
         CHECKED_BAGS.push(
             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                 <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
-                no checked bags
+                can't purchase additional checked bags
             </p>
         );
     }
