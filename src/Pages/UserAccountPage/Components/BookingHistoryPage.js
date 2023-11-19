@@ -2,11 +2,45 @@ import PaginationButtons from "../../../components/PaginationButtons";
 import BookingHistoryFiltersForm from "./BookingHistoryFiltersForm";
 import loading_icon from "../../../icons/loading.svg";
 import nothing_found_icon from "../../../icons/nothing_found_icon.svg";
+import { useState } from "react";
 
 const BookingHistoryPage = (props) => {
     
-    const { isLoading, ShowBookingHistory, toggle_show_booking_history_filters, hide_booking_history_filters, bookings, show_booking_history_more_info_pane } = props;
+    const { 
+        isLoading, 
+        ShowBookingHistory, 
+        toggle_show_booking_history_filters, 
+        hide_booking_history_filters, 
+        bookings, 
+        show_booking_history_more_info_pane 
+    } = props;
+    const [pagination, setPagination] = useState({
+        CURRENT_PAGE: 1,
+        PAGE_SIZE: 4,
+        TOTAL_PAGES: 0,
+    });
 
+    function nextPage() {
+        if(
+            (((pagination.CURRENT_PAGE - 1) * pagination.PAGE_SIZE)+pagination.PAGE_SIZE)
+            > bookings.length
+        ) return;
+        ++pagination.CURRENT_PAGE;
+        setPagination({...pagination});
+    }
+
+    function prevPage() {
+        if((pagination.CURRENT_PAGE-1) < 1) return;
+        --pagination.CURRENT_PAGE;
+        setPagination({...pagination});
+    }
+
+    function setPage(num) {
+        setPagination({...pagination, CURRENT_PAGE: num});
+    }
+
+    let begin = ((pagination.CURRENT_PAGE - 1) * pagination.PAGE_SIZE);
+    let end = begin + pagination.PAGE_SIZE;
     return (
         <div className="user_account_page_each_child_container user_account_page_second_child_container" style={{borderLeft: "1px solid rgba(0,0,0,0.1)"}}>
             <BookingHistoryFiltersForm
@@ -45,7 +79,7 @@ const BookingHistoryPage = (props) => {
                                     Oops nothing found</p>
                             </div>
                         }{
-                            (bookings.length > 0) && bookings.map(each =>(
+                            (bookings.length > 0) && bookings.slice(begin, end).map(each =>(
                                 <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
@@ -60,9 +94,15 @@ const BookingHistoryPage = (props) => {
                         }
                     </div>
                     {
-                        bookings.length > 5 &&
-                        <div style={{marginTop: 30}}>
-                            <PaginationButtons />
+                        (bookings.length>pagination.PAGE_SIZE) && <div style={{paddingTop: 20}}>
+                            <PaginationButtons 
+                                pageSize={pagination.PAGE_SIZE} 
+                                currentPage={pagination.CURRENT_PAGE} 
+                                totalItems={bookings.length}
+                                nextPage={nextPage}
+                                prevPage={prevPage}
+                                setPage={setPage}
+                            />
                         </div>
                     }
                 </>
