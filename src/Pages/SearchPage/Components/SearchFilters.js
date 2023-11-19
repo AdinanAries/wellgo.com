@@ -3,9 +3,9 @@ import { markup } from "../../../helpers/Prices";
 
 const SearchFilters = (props) => {
 
-    const { filterStops } = props;
+    const { filterStops, filterAirlines } = props;
 
-    console.log("STOPS FILTER:", filterStops);
+    //console.log("STOPS FILTER:", filterStops);
 
     const STOPS = filterStops.map(each=>{
         /*{
@@ -17,7 +17,7 @@ const SearchFilters = (props) => {
         }*/
         if(each.count===0){
             return (
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop ({each.flights.length})</p>
@@ -30,7 +30,7 @@ const SearchFilters = (props) => {
             );
         } else {
              return (
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
                         <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
@@ -44,6 +44,30 @@ const SearchFilters = (props) => {
                 </div>
             );
         }
+    });
+
+    const AIRLINES = filterAirlines.map(each=>{
+        /*{
+            airlineCode: AIRLINE_CODE,
+            airlineName: AIRLINE_NAME,
+            prices: [TOTAL_AMOUNT],
+            lowest: TOTAL_AMOUNT,
+            highest: TOTAL_AMOUNT,
+            currency: CURRENCY,
+            flights: [FLIGHT]
+        }*/
+        return (
+            <div key={each.airlineCode} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+                <div style={{display: "flex", flexDirection: "row"}}>
+                    <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                    <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>{each.airlineName} ({each.flights.length})</p>
+                </div>
+                <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                    <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                            dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
+                            {(markup(each.lowest).new_price).toFixed(2)}</p>
+            </div>
+        );
     });
 
     return (
@@ -87,34 +111,9 @@ const SearchFilters = (props) => {
                     <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Airlines</p>
                     <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
                 </div>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                    <div style={{display: "flex", flexDirection: "row"}}>
-                        <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Air Canada (22)</p>
-                    </div>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$243</p>
-                </div>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                    <div style={{display: "flex", flexDirection: "row"}}>
-                        <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>American Airlines (11)</p>
-                    </div>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$133</p>
-                </div>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                    <div style={{display: "flex", flexDirection: "row"}}>
-                        <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>United (5)</p>
-                    </div>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$114</p>
-                </div>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
-                    <div style={{display: "flex", flexDirection: "row"}}>
-                        <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>WestJet (3)</p>
-                    </div>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>$132</p>
-                </div>
+                {
+                    AIRLINES.map(each=>each)
+                }
             </div>
 
             <div style={{marginBottom: 30}}>

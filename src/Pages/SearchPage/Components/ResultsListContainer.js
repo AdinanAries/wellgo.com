@@ -10,7 +10,7 @@ import SearchFiltersLoader from "./SearchFiltersLoader";
 import MobileItinTopInfo from "./MobileItinTopInfo";
 import MobileItinTopInfoLoader from "./MobileItinTopInfoLoader";
 import Ads from "./Ads";
-import { duffelStopsAndPrices } from "../../../helpers/FlightsFilterHelpers";
+import { duffelStopsAndPrices, duffelAirlinesAndPrices } from "../../../helpers/FlightsFilterHelpers";
 
 function add_clouds_to_animated_loader(){
     if(document.getElementById("animated_loader")){
@@ -94,8 +94,10 @@ export default function ResultsListContainer(props){
         add_clouds_to_animated_loader();
     },500);
 
-    // Getting Filter Stops Array
+    // Getting Filter - Flight Stops
     let filterStops = duffelStopsAndPrices(props.flights);
+    // Getting Filter - Airlines
+    let filterAirlines = duffelAirlinesAndPrices(props.flights);
 
     return (
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0}}>
@@ -114,6 +116,7 @@ export default function ResultsListContainer(props){
                         props.flights.length > 0 &&
                             <SearchFilters 
                                 filterStops={filterStops}
+                                filterAirlines={filterAirlines}
                             /> :
                             <SearchFiltersLoader />
                     }

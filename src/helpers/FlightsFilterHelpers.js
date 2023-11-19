@@ -48,8 +48,8 @@ export const duffelAirlinesAndPrices = (flightsArr) => {
             const FLIGHT = flightsArr[i];
             const CURRENCY = FLIGHT.total_currency;
             const TOTAL_AMOUNT = parseFloat(FLIGHT.total_amount);
-            const AIRLINE_CODE = "";
-            const AIRLINE_NAME = "";
+            const AIRLINE_CODE = FLIGHT.owner.iata_code;
+            const AIRLINE_NAME = FLIGHT.owner.name;
             let airlineObj = airlinesArr.find(each=>each.airlineCode===AIRLINE_CODE);
             if(airlineObj){
                 airlineObj.prices.push(TOTAL_AMOUNT);
