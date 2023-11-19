@@ -11,6 +11,7 @@ import MobileItinTopInfo from "./MobileItinTopInfo";
 import MobileItinTopInfoLoader from "./MobileItinTopInfoLoader";
 import Ads from "./Ads";
 import { duffelStopsAndPrices, duffelAirlinesAndPrices } from "../../../helpers/FlightsFilterHelpers";
+import { useState } from "react";
 
 function add_clouds_to_animated_loader(){
     if(document.getElementById("animated_loader")){
@@ -69,10 +70,22 @@ function add_clouds_to_animated_loader(){
 export default function ResultsListContainer(props){
 
     const { SEARCH_OBJ } = props;
+    const [ filteredFlights, setFilteredFlights ] = useState([]);
+
+    const filterFlights = (flights) => {
+        setFilteredFlights(flights)
+    }
 
     let FLIGHTS;
-    if(props.flights.length>0){
+    if(props.flights.length>0 && filteredFlights.length<1){
         FLIGHTS = props.flights.map((each, index) => 
+            <FlightOfferItem 
+                selectFlightOffer={props.selectFlightOffer}
+                key={index} 
+                flight={each}
+            />);
+    }else if(filteredFlights.length>0){
+        FLIGHTS = filteredFlights.map((each, index) => 
             <FlightOfferItem 
                 selectFlightOffer={props.selectFlightOffer}
                 key={index} 
@@ -117,6 +130,7 @@ export default function ResultsListContainer(props){
                             <SearchFilters 
                                 filterStops={filterStops}
                                 filterAirlines={filterAirlines}
+                                filterFlights={filterFlights}
                             /> :
                             <SearchFiltersLoader />
                     }

@@ -1,11 +1,48 @@
+import { useState } from "react";
 import { get_currency_symbol } from "../../../helpers/general";
 import { markup } from "../../../helpers/Prices";
 
+let filtersByStops={};
+let filtersByAirlines={};
 const SearchFilters = (props) => {
 
-    const { filterStops, filterAirlines } = props;
+    const { filterStops, filterAirlines, filterFlights } = props;
+    
+    const setFilteredFlights = () => {
+        let filtered=[];
+        Object.values(filtersByStops).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            }); 
+        });
+        Object.values(filtersByAirlines).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            });     
+        });
 
-    //console.log("STOPS FILTER:", filterStops);
+        filterFlights(filtered);
+    }
+
+    const filterByStops = (e, flights, key) => {
+        if(e.target.checked){
+            filtersByStops[key]=flights;
+        }else{
+            filtersByStops[key]=[];
+        }
+        setFilteredFlights();
+    }
+
+    const filterByAilines = (e, flights, key) => {
+        if(e.target.checked){
+            filtersByAirlines[key]=flights;
+        }else{
+            filtersByAirlines[key]=[];
+        }
+        setFilteredFlights();
+    }
 
     const STOPS = filterStops.map(each=>{
         /*{
@@ -19,8 +56,9 @@ const SearchFilters = (props) => {
             return (
                 <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
-                        <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
-                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop ({each.flights.length})</p>
+                        <input onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)} 
+                            id={"filter-by-flights_"+each.count} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                        <p htmlFor={"filter-by-flights_"+each.count} style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop ({each.flights.length})</p>
                     </div>
                     <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
                         <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
@@ -32,7 +70,8 @@ const SearchFilters = (props) => {
              return (
                 <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
-                        <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                        <input onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)}
+                            style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
                         <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
                             {(each.count>1 ? each.count+" Stops" : each.count+" Stop")} ({each.flights.length})
                         </p>
@@ -57,7 +96,8 @@ const SearchFilters = (props) => {
             flights: [FLIGHT]
         }*/
         return (
-            <div key={each.airlineCode} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
+            <div onChange={(e)=>filterByAilines(e, each.flights, `airlines_${each.airlineCode}`)}
+                key={each.airlineCode} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                 <div style={{display: "flex", flexDirection: "row"}}>
                     <input style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
                     <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>{each.airlineName} ({each.flights.length})</p>
