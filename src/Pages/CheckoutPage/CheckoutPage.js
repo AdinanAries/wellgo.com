@@ -7,6 +7,8 @@ import CONSTANTS from '../../Constants/Constants';
 import { create_offer_obj } from "../../test_objects/duffel_objects";
 import { obj_has_empty_prop, calculate_age } from "../../helpers/general";
 import { FLIGHT_DATA_ADAPTER } from "../../helpers/FlightDataAdapter";
+import { show_prompt_on_Bot_AD_tips_popup } from '../../components/HPSupport';
+import getBotResponse from '../../Constants/BotResponses';
 import { toast } from 'react-toastify';
 
 import { useState } from 'react';
@@ -35,6 +37,12 @@ export default function CheckoutPage(props){
     const showPaymentPage = () => {
         if(is_passenger_data_all_set())
             setActivePage(CONSTANTS.checkout_pages.payment);
+        else
+            show_prompt_on_Bot_AD_tips_popup(
+                getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
+                CONSTANTS.bot.prompt_types.warn, 
+                10000
+            );
     }
 
     const savePassengerInfo = (new_info_obj, index) => {

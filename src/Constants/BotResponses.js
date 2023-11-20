@@ -5,6 +5,14 @@ const getBotResponse = (type) => {
 export default getBotResponse;
 
 const BotResponses = {
+    "introduction greetings": [
+        `I'm AD, I'll be assisting you around here... cheers...`,
+        `AD here, I'm your AI assitant. Feel free to reach out anytime. Cheers...`,
+        `Thanks for choosing us. I'm AD, your assistant here... 
+        I was just checking the flight prices, there's been a drop. Cheers..., 
+        I encourage you to book your flights ASAP. Cheers...`,
+        `Cheers... call me AD, I'm your AI assistant. Cheers...`
+    ],
     "no hotel booking": [
         "We can't book hotels for now",
         "Hotel booking isn't allowed at the moment",
@@ -23,5 +31,19 @@ const BotResponses = {
         "Travel packages feature isn't activated at the moment",
         "Please try another time. We have no travel packages at the moment",
         "Travel Packages is deactivated due to site maintenance"
+    ],
+    "incomplete passenger name record": [
+        `In order to continue to payment, you must provide complete information for all  
+        passengers. Also, for all infant passenger, 
+        one adult passenger must be selected for each,
+         as the person responsible for the infant. 
+         You may click on the each passenger card in order to open their form`,
+        `You must provide complete information for all  
+        passengers. And, for each infant passenger, 
+        an adult passenger must be chosen to be responsible for them. 
+        You may click on the each passenger card in order to open their form`,
+        `You cant continue, if passenger information is not completed. 
+        And, each infant passenger must have an adult to fly with them. 
+        Click on each passenger card will open their form`
     ]
 }

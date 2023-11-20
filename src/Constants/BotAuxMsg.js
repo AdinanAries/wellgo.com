@@ -5,7 +5,9 @@ const BotAuxMsg = {
         "Sup,",
         "Bro..",
         "Umm..",
-        "..."
+        "...",
+        "Hey!"
+
 
     ],
     bad_mood: [

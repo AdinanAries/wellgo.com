@@ -46,9 +46,11 @@ const CONSTANTS = {
             prompt: "prompt",
         },
         responses: {
+            introduction_greetings: "introduction greetings",
             no_hotel_booking: "no hotel booking",
             no_cars_renting: "no cars renting",
             no_travel_packages : "no travel packages",
+            uncompleted_pnr: "incomplete passenger name record",
         }
     },
     envs: [ "PRODUCTION", "DEVELOPMENT" ],

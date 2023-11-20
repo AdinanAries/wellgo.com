@@ -5,6 +5,7 @@ import botIcon from "../icons/botIcon.svg";
 import HelpSupportSettingsPage from "./HelpSupportChatSettingsPage";
 import CONSTANTS from "../Constants/Constants";
 import BotAuxMsg from "../Constants/BotAuxMsg";
+import getBotResponse from "../Constants/BotResponses";
 
 import notification_sound from "../audio/livechat.mp3";
 
@@ -70,7 +71,8 @@ export default function HPSupportBtn(){
                 <div id="main_chatbot_popup_tip_msg" className="chatbot_popup_tip_msg">
                     <p>
                         <i className="fa fa-lightbulb-o"></i>
-                        Hey! I'm AD, I'll be assisting you around here... cheers... &#127866;
+                        {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
+                        {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
                     </p>
                 </div>
                 <div id="main_chatbot_popup_tip_img" className="chatbot_popup_tip_img">
@@ -124,7 +126,7 @@ export function show_support_chat_settings_container(){
 }
 
 let botPromptHideTimeoutObj;
-export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt) {
+export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=5000) {
 
     let audio = new Audio(notification_sound);
     
@@ -159,7 +161,7 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
         audio.play();
     }, randWait);
 
-    botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (5000+randWait));
+    botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (duration+randWait));
 }
 
 /*$(document).ready(()=>{
