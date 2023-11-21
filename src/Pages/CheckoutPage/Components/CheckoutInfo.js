@@ -108,6 +108,7 @@ const CheckoutInfo = (props) => {
                     buttonFunction={props.showPNRPage} 
                     buttonText="Passengers" 
                     prices={prices}
+                    total_travelers={flight.passengers.length}
                 />
             </div>
         </div>

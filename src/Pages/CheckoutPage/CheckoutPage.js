@@ -196,6 +196,7 @@ export default function CheckoutPage(props){
                         <PaymentPage 
                             payments={checkoutPayload.data.payments}
                             prices={PRICES}
+                            total_travelers={checkoutPayload.data.passengers.length}
                         /> : ""
                 }
             </div>

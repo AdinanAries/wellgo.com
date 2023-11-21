@@ -1,7 +1,7 @@
 import PriceSummary from "./PriceSummary";
 
 const PaymentPage = (props) => {
-    const { payments, prices } = props;
+    const { payments, prices, total_travelers } = props;
     console.log("Prices:", prices);
     return (
         <div>
@@ -15,7 +15,9 @@ const PaymentPage = (props) => {
                         payments={payments} 
                         buttonFunction={()=>alert("here")} 
                         buttonText="" 
-                        isPaymentPage={true} />
+                        isPaymentPage={true} 
+                        total_travelers={total_travelers}
+                    />
                 </div>
             </div>
         </div>

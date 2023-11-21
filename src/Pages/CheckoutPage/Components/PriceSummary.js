@@ -3,7 +3,7 @@ import { get_currency_symbol } from "../../../helpers/general";
 
 const PriceSummary = (props) => {
 
-    const { payments, prices } = props;
+    const { payments, prices, total_travelers } = props;
     
 
     return (
@@ -14,7 +14,7 @@ const PriceSummary = (props) => {
             <div style={{marginTop: 20, borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 10}}>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                     <p style={{fontSize: 14, letterSpacing: 1, color: "rgba(0,0,0,0.8)", fontWeight: "bolder"}}>
-                        Traveler: 1 Adult
+                        {total_travelers>1 ? (total_travelers+" Travelers"): (total_travelers+" Traveler")}:
                     </p>
                     <p style={{fontSize: 14, fontWeight: "bolder", letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
                         <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 

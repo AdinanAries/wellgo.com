@@ -104,7 +104,8 @@ const PassengerNameRecord = (props) => {
                     <PriceSummary 
                         prices={prices}
                         buttonFunction={props.showPaymentPage} 
-                        buttonText="Payment" 
+                        buttonText="Payment"
+                        total_travelers={passengers.length}
                     />
                 </div>
             </div>
