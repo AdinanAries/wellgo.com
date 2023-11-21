@@ -345,10 +345,10 @@ const Reviews = () => {
                             <div style={{display: "flex", justifyContent: "center", marginTop: 10}}>
                                 <PlacesReviewsScores />
                             </div>
-                            <p style={{marginTop: 5, /*fontFamily: "Courgette",*/ color: "#c751b9", textAlign: "center", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                {reviewers[current].name}
+                            <p style={{marginTop: 5, /*fontFamily: "Courgette",*/ color: "rgba(0,0,0,0.6)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                - {reviewers[current].name} -
                             </p>
-                            <p className="mobile_font_13" id="home_page_reviews_selected_reviewer_date" style={{marginTop: 1, fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,73,0,0.8)'}}>
+                            <p className="mobile_font_13" id="home_page_reviews_selected_reviewer_date" style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,0,0,0.6)'}}>
                                 {reviewers[current].date}
                             </p>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 10}}>

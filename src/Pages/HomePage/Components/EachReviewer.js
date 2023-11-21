@@ -24,10 +24,10 @@ const EachReviewer = (props) => {
                     <img src={each.img} style={{width: "100%", height: "100%", objectFit: "cover", objectPosition: "center"}} alt={"to do"} />
                 </div>
             </div>
-            <p style={{marginTop: 15, textAlign: "center", color: "#c751b9", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
+            <p style={{marginTop: 15, textAlign: "center", color: "rgba(0,0,0,0.6)", fontSize: 15, fontFamily: "'Prompt', Sans-serif"}}>
                 {ellipsify(each.name.split(" ")[0], 5)}
             </p>
-            <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,83,0,0.7)'}}>
+            <p style={{fontSize: 14, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: '#c751b9'}}>
                 {parseFloat(each.rated).toFixed(1)}
             </p>
         </div>
