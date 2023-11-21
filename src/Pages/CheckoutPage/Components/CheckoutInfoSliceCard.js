@@ -40,6 +40,26 @@ const CheckoutInfoSliceCard = (props) => {
         }
     }
 
+    // Amenities
+    // slices[0].segments[0].passengers[0].cabin.amenities.power
+    // slices[0].segments[0].passengers[0].cabin.amenities.seat
+    //slices[0].segments[0].passengers[0].cabin.amenities.wifi
+
+
+let all_amenities={};
+for(let i=0;i < slice.segments.length; i++){
+	for(let j=(slice.segments[i].passengers.length-1);j>=0;j--){
+		let amenities = {};
+		if(slice.segments[i].passengers[j].cabin)
+			if(slice.segments[i].passengers[j].cabin.amenities)
+				amenities=slice.segments[i].passengers[j].cabin.amenities
+		all_amenities={
+			...all_amenities,
+			...amenities
+		}
+	}
+}
+
     let is_itin_showing=false;
     function toggle_see_ticket_details_itinerary_details(element_id){
         if(is_itin_showing){
@@ -73,6 +93,14 @@ const CheckoutInfoSliceCard = (props) => {
                     {STOPSMARKUP.map(each=>each)}
                 </p>
                 <p style={{color: "rgba(0,0,0,0.7)", fontSize: 17, marginTop: 5}}>
+                    {
+                        all_amenities.wifi.available &&
+                        <i style={{marginRight: 10}} className="fa-solid fa-wifi"></i>
+                    }
+                    {
+                        all_amenities.power.available &&
+                        <i style={{marginRight: 10}} className="fa-solid fa-plug-circle-bolt"></i>
+                    }
                     <i style={{marginRight: 10}} className="fa fa-wifi"></i>
                 </p>
                 <p onClick={()=>toggle_see_ticket_details_itinerary_details(index+"checkout_see_ticket_details_itinerary_details")}

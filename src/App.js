@@ -163,7 +163,7 @@ function App() {
       <Footer />
       <ToastContainer 
         className="my-toast-container"
-        position="bottom-left" />
+        position="top-left" />
     </div>
   );
 }
