@@ -1,3 +1,6 @@
+import { markup } from "../../../helpers/Prices";
+import { get_currency_symbol } from "../../../helpers/general";
+
 const PriceSummary = (props) => {
 
     const { payments, prices } = props;
@@ -14,7 +17,9 @@ const PriceSummary = (props) => {
                         Traveler: 1 Adult
                     </p>
                     <p style={{fontSize: 14, fontWeight: "bolder", letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                        ${prices.total_amount}
+                        <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                                dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
+                        {(markup(prices.total_amount).new_price).toFixed(2)}
                     </p>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
@@ -22,7 +27,9 @@ const PriceSummary = (props) => {
                         Flight
                     </p>
                     <p style={{fontSize: 14, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                        {prices.base_amount}
+                        <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
+                        {(markup(prices.base_amount).new_price).toFixed(2)}
                     </p>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
@@ -30,7 +37,9 @@ const PriceSummary = (props) => {
                         Taxes and fees
                     </p>
                     <p style={{fontSize: 14, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                        ${prices.tax_amount}
+                        <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.tax_currency)}}></span>
+                        {(markup(prices.tax_amount).new_price).toFixed(2)}
                     </p>
                 </div>
             </div>
@@ -39,13 +48,15 @@ const PriceSummary = (props) => {
                     <p style={{fontSize: 17, letterSpacing: 1, color: "rgba(0,0,0,0.8)", fontWeight: "bolder"}}>
                         Total
                     </p>
-                    <p style={{fontSize: 12, marginTop: 5, color: "rgba(0,0,0,0.7)"}}>
-                        <i style={{marginRight: 5}} className="fa fa-info-circle"></i>
-                        prices are quoted in US dollars
+                    <p style={{fontSize: 12, marginTop: 5, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
+                        <i style={{marginRight: 10, color: "green"}} className="fa fa-info"></i>
+                        prices are quoted in {prices.total_currency}
                     </p>
                 </div>
                 <p style={{fontSize: 17, fontWeight: "bolder", letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                    ${prices.total_amount}
+                    <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                                dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
+                    {(markup(prices.total_amount).new_price).toFixed(2)}
                 </p>
             </div>
             <div className="checkout_page_main_checkout_btn_container">
