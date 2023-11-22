@@ -4,7 +4,7 @@ import { getApiHost } from "../Constants/Environment";
 
 const API_URL = getApiHost();
 
-export const fetchFlightOffers = async (path="\\api\\flights") => {
+export const fetchFlightOffers = async (path="/api/flights") => {
     try{
         return await fetch(API_URL+path, {
             method: "POST",
@@ -42,5 +42,27 @@ export const getFlightDetail = async (selectedFlightId, path="/api/flights/offer
     }catch(e){
         console.log(e);
         return null;
+    }
+}
+
+export const createFlightOrder = async (payload, path=`/api/flights/orders/create/`) => {
+    try{
+        return await fetch(API_URL+path, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {isError: true, message: err.message};
+        })
+    } catch (e){
+        console.log(e);
+        return {isError: true, message: e.message};
     }
 }

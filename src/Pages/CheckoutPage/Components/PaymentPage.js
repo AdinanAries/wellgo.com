@@ -1,8 +1,15 @@
 import PriceSummary from "./PriceSummary";
 
 const PaymentPage = (props) => {
-    const { payments, prices, total_travelers } = props;
+    const { 
+        payments, 
+        prices, 
+        total_travelers, 
+        createOrderOnSubmit 
+    } = props;
+
     console.log("Prices:", prices);
+    
     return (
         <div>
             <div className="checkout_page_all_info_flex_container">
@@ -13,7 +20,7 @@ const PaymentPage = (props) => {
                     <PriceSummary 
                         prices={prices} 
                         payments={payments} 
-                        buttonFunction={()=>alert("here")} 
+                        buttonFunction={createOrderOnSubmit} 
                         buttonText="" 
                         isPaymentPage={true} 
                         total_travelers={total_travelers}
