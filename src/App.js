@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import UseCurrentPage from './helpers/PageRoutingFuncs';
-
 //components
 import Header from './components/Header';
 import HomePage from './Pages/HomePage/HomePage';
@@ -11,8 +10,6 @@ import TripsPage from "./Pages/TripsPage/TripsPage";
 import LoginPage from './Pages/LoginPage/LoginPage';
 import ExplorePage from './Pages/ExplorePage/ExplorePage';
 import UserAccountPage from "./Pages/UserAccountPage/UserAccountPage";
-//import SearchPage from './Pages/SearchPage/SearchPage';
-//import SelectedTicketPane from './components/SelectedTicketPane';
 import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
 import DealsPage from "./Pages/DealsPage/DealsPage";
 import HelpPage from "./Pages/HelpPage/HelpPage";
@@ -48,7 +45,6 @@ global.instantiateSearchObj();
 
 function App() {
 
-  const [ showHome, setShowHome ] = useState(true);
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
   const [ isLoggedIn, setIsLoggedIn ] = useState(AMLOGGEDIN);
@@ -78,6 +74,7 @@ function App() {
 
   const cancel_checkout = () => {
     setIsCheckout(false);
+    setcheckoutPayload({});
   }
 
   const begin_checkout = (data) => {

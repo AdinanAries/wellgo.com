@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import SearchResultSearchForm from "./SearchResultSearchForm";
 import ResultsListContainer from "./ResultsListContainer";
-
 import CONSTANTS from "../../../Constants/Constants";
-import { getApiHost } from "../../../Constants/Environment";
 import SelectedTicketPane from "./SelectedTicketPane";
 import { fetchFlightOffers } from "../../../services/flightsServices";
 
@@ -14,7 +11,6 @@ const SearchPageMain = (props) => {
     let [ loading, setLoading ] = useState(true);
     let [ selectedFlightId, setSelectedFlightId] = useState("");
 
-    const API_URL = getApiHost();
     const submitFromSearchPage = async () => {
         setFlights([]);
         setLoading(true);

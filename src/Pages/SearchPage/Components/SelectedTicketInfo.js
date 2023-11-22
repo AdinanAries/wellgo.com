@@ -1,24 +1,10 @@
-import CONSTANTS from "../../../Constants/Constants";
-import ENVIRONMENT from "../../../Constants/Environment";
 import { markup } from "../../../helpers/Prices";
 import { convert24HTimeToAMPM, get_short_date_MMMDD, get_currency_symbol } from "../../../helpers/general";
 
 import SelectedTicketItinSegments from "./SelectedTicketItinSegments";
 
 const SelectedTicketInfo = (props) => {
-//data.slices[0].segments[0].passengers[0].baggages
-/**
- * [
-    {
-        "type": "checked",
-        "quantity": 1
-    },
-    {
-        "type": "carry_on",
-        "quantity": 1
-    }
-]
- */
+
     const { data } = props.flight;
     const { total_amount, total_currency, 
             slices, owner, conditions, 

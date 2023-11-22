@@ -12,10 +12,10 @@ import { useState } from 'react';
 
 export default function CheckoutPage(props){
 
-    const { payload } = props;
+    const { payload, cancel_checkout } = props;
 
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
-    const [ isBookingConfirmed, setIsBookingConfirmed] = useState(true);
+    const [ isBookingConfirmed, setIsBookingConfirmed] = useState(false);
     const [ checkoutPayload, setcheckoutPayload ] = useState({
         meta: {},
         data: FLIGHT_DATA_ADAPTER.prepareCheckout(payload)
@@ -121,13 +121,27 @@ export default function CheckoutPage(props){
     const createOrderOnSubmit = async () => {
         let res=await createFlightOrder(checkoutPayload);
         console.log("Flight Order:", res);
+        setIsBookingConfirmed(true);
+    }
+
+    const pickAnotherFlightOnclick = () => {
+        setIsBookingConfirmed(false);
+        cancel_checkout();
+        global.__unselectFlightOffer();
+        global.hide_selected_ticket_details_pane();
+    }
+
+    const goHome = () => {
+        window.location.href="/"
     }
 
     const nav_separator_style = {
         padding: 10,
         color: "rgba(0,0,0,0.2)"
     }
+
     console.log("checkout payload:", checkoutPayload);
+
     return (
         <div id="booking_start_checkout_page_container" style={{display: "block"}}>
             <div className="wrapper">
@@ -160,11 +174,11 @@ export default function CheckoutPage(props){
                                         <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plus"></i>
                                         add ancillaries
                                     </div>
-                                    <div style={{cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                                    <div onClick={pickAnotherFlightOnclick} style={{cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                                         <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plane-departure"></i>
                                         pick another flight
                                     </div>
-                                    <div style={{cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                                    <div onClick={goHome} style={{cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                                         <i style={{marginRight: 10, color: "yellow"}} className="fa-solid fa-home"></i>
                                         go home
                                     </div>

@@ -25,6 +25,7 @@ export default function SelectedTicketPane(props){
         props.unselectFlightOffer();
         setFlightDetail(null);
     }
+    global.__unselectFlightOffer = unselectFlightOffer;
 
     return (
         <div id="selected_ticket_pane" className="display_more_info_pane" 
