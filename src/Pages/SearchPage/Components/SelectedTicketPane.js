@@ -1,10 +1,6 @@
-import CONSTANTS from "../../../Constants/Constants";
-import ENVIRONMENT from "../../../Constants/Environment";
-import deltaIcon from "../../../deltaIcon.png";
-import { show_start_checkout_page } from "../../CheckoutPage/CheckoutPage";
 import SelectedTicketInfo from "./SelectedTicketInfo";
 import { useState, useEffect } from "react";
-import { FLIGHT_DATA_ADAPTER } from "../../../helpers/FlightDataAdapter";
+import { getFlightDetail } from "../../../services/flightsServices";
 
 export default function SelectedTicketPane(props){
 
@@ -12,27 +8,9 @@ export default function SelectedTicketPane(props){
     const [ flightDetail, setFlightDetail ] = useState(null);
     const [isError, setIsError] = useState(false);
 
-    let api_url = (ENVIRONMENT.runtime.env===CONSTANTS.prod) ?
-        ENVIRONMENT.wellgo_api_svr : ENVIRONMENT.wellgo_dev_api_svr;
-
-    const getFlightDetail = async (path="/api/flights/offers/"+selectedFlightId) => {
-        try{
-            return await fetch(api_url+path)
-            .then(res => res.json())
-            .then(data => FLIGHT_DATA_ADAPTER.adapt(data))
-            .catch(err => {
-                console.log(err);
-                return null;
-            });
-        }catch(e){
-            console.log(e);
-            return null;
-        }
-    }
-
     useEffect(()=>{
         (async () => {
-            let data = await getFlightDetail();
+            let data = await getFlightDetail(selectedFlightId);
             console.log("Full Flight Detail: ", data);
             if(data.data) {
                 if(data) setFlightDetail(data);

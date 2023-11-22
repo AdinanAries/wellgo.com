@@ -6,6 +6,7 @@ import ResultsListContainer from "./ResultsListContainer";
 import CONSTANTS from "../../../Constants/Constants";
 import { getApiHost } from "../../../Constants/Environment";
 import SelectedTicketPane from "./SelectedTicketPane";
+import { fetchFlightOffers } from "../../../services/flightsServices";
 
 const SearchPageMain = (props) => {
 
@@ -24,31 +25,6 @@ const SearchPageMain = (props) => {
         else
             setFlights([])
         setLoading(false);
-    }
-
-    const fetchFlightOffers = async (path="\\api\\flights") => {
-        try{
-            return await fetch(API_URL+path, {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    ...JSON.parse(localStorage.getItem(CONSTANTS.local_storage.flight_search_object)),
-                    currency: localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_curr),
-                })
-            })
-            .then(res => res.json())
-            .then(data => data)
-            .catch(err => {
-                console.log(err);
-                return {data: []};
-            })
-        } catch (e){
-            console.log(e);
-            return {data: []};
-        }
     }
 
     const selectFlightOffer = (id) => {
