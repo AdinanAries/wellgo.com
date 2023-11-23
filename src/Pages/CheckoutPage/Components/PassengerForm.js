@@ -10,7 +10,7 @@ const PassengerForm = (props) => {
     const [passenger, setPassenger] = useState(props.passenger);
     const [ age, setAge ]=useState(calculate_age(passenger.born_on));
     const [ phoneSuffix, setPhoneSuffix ] = useState("");
-    const [ phonePrefix, setPhonePrefix ] = useState("+1");
+    const [ phonePrefix, setPhonePrefix ] = useState("");
     const [ formValidation, setFormValidation ] = useState({
         type: "warning",
         isError: false,
@@ -63,11 +63,9 @@ const PassengerForm = (props) => {
     }
     const setCountryCallingCode = (e) => {
         setPhonePrefix(e.target.value);
-        setPhone();
     }
     const setPhoneNumber = (e) => {
         setPhoneSuffix(e.target.value);
-        setPhone();
     }
     const setPhone = () => {
         resetCheckoutConfirmation();
@@ -117,6 +115,7 @@ const PassengerForm = (props) => {
     }
 
     const onSubmit = () => {
+        setPhone();
         if(!confirmYYYMMDDDateValidity(passenger.born_on)){
             setFormValidation({
                 type: "error",
@@ -230,6 +229,7 @@ const PassengerForm = (props) => {
                                 onChange={setCountryCallingCode}
                                 value={phonePrefix}
                                 style={{border: "none", background: "none", padding: 10}}>
+                                <option value="">+CC</option>
                                 <option value="+1">+1</option>
                                 <option value="+233">+233</option>
                             </select>

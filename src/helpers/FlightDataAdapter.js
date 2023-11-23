@@ -335,7 +335,13 @@ export const FLIGHT_DATA_ADAPTER = {
         const TYPE="Flight";
         const AIRLINE_NAME=bookingConfirmationObject.owner.name;
         const AIRLINE_IATA =bookingConfirmationObject.owner.iata_code;
-        const TRIP_TYPE="";
+        let tt="one-way";
+        if(bookingConfirmationObject.slices.length===2){
+            tt="round-trip"
+        }else if(bookingConfirmationObject.slices.length>2){
+            tt="multi-city"
+        }
+        const TRIP_TYPE=tt;
         const TRAVELERS=bookingConfirmationObject.passengers;
         const ORIGIN_AIRPORT_NAME=bookingConfirmationObject.slices[0].origin.name;
         const ORIGIN_AIRPORT_IATA=bookingConfirmationObject.slices[0].origin.iata_code;
@@ -343,8 +349,8 @@ export const FLIGHT_DATA_ADAPTER = {
         const DESTINATION_AIRPORT_NAME=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].destination.name;
         const DESTINATION_AIRPORT_IATA=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].destination.iata_code;
         const DESTINATION_CITY_NAME=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].destination.city_name;
-        const DEPARTURE_DATE="";
-        const RETURN_DATE="";
+        const DEPARTURE_DATE=bookingConfirmationObject.slices[0].segments[0].departing_at;
+        const RETURN_DATE=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].segments[(bookingConfirmationObject.slices.segments.length-1)].arriving_at;
 
         return {
             apiProvider: API_PROVIDER,
