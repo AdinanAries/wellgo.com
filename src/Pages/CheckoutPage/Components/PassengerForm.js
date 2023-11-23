@@ -64,7 +64,7 @@ const PassengerForm = (props) => {
     const setTravelDocExpiration = (e) => {
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
-            { ...passenger.identity_documents[0], expires_on: e.target.value }
+            { ...passenger.identity_documents[0], expires_on: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data) }
         ]});
     }
     const setTravelDocCountry = (e) => {
@@ -96,6 +96,15 @@ const PassengerForm = (props) => {
                 type: "error",
                 isError: true,
                 message: "Date of birth is not in correct format",
+                isDateFormat: true
+            });
+            return;
+        }
+        if(!confirmYYYMMDDDateValidity(passenger.identity_documents[0].expires_on)){
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "Document expiration date is not in correct format",
                 isDateFormat: true
             });
             return;
@@ -154,13 +163,13 @@ const PassengerForm = (props) => {
                         "rgba(0,0,0,0.07)"), padding: 10, borderRadius: 8}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                         <i className="fa-solid fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                        Birth Date (YYYY/MM/DD)</p>
+                        Birth Date (YYYY-MM-DD)</p>
                     <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                         <input 
                             onBlur={setPassengerAge}
                             onInput={setDOB}
                             value={passenger.born_on}
-                            type="text" placeholder="YYYY/MM/DD"  
+                            type="text" placeholder="YYYY-MM-DD"  
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>
@@ -204,8 +213,8 @@ const PassengerForm = (props) => {
                             value={passenger.gender}
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}>
                             <option value="">Select here...</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="m">Male</option>
+                            <option value="f">Female</option>
                         </select>
                     </div>
                 </div>
@@ -240,12 +249,12 @@ const PassengerForm = (props) => {
                 <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                         <i className="fa-solid fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                        Document Expiration</p>
+                        Document Expiration (YYYY-MM-DD)</p>
                     <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                         <input 
                             onInput={setTravelDocExpiration}
                             value={passenger.identity_documents[0].expires_on}
-                            type="text" placeholder="YYYY/MM"  
+                            type="text" placeholder="YYYY-MM-DD"  
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>
@@ -259,7 +268,7 @@ const PassengerForm = (props) => {
                             value={passenger.identity_documents[0].issuing_country_code}
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}>
                             <option value="">Select here...</option>
-                            <option value="USA">United States</option>
+                            <option value="US">United States</option>
                         </select>
                     </div>
                 </div>

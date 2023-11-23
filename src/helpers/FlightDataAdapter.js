@@ -53,6 +53,34 @@ export const FLIGHT_DATA_ADAPTER = {
     /**
      * 
      */
+    addPaymentIntentToCheckout: (checkout_obj, p_intent_id) => {
+        checkout_obj.metadata.payment_intent_id = p_intent_id;
+        return checkout_obj;
+    },
+
+    /**
+     * 
+     * @param {*} data 
+     * @returns 
+     */
+    addServicesToCheckout: (checkout_obj, service) => {
+        checkout_obj.services.push(service);
+        return checkout_obj;
+    },
+
+    /**
+     * 
+     * @param {*} data 
+     * @returns 
+     */
+    setCheckoutPaymentToInstant: (checkout_obj) => {
+        checkout_obj.type="instant";
+        return checkout_obj;
+    },
+
+    /**
+     * 
+     */
     adaptPriceProps: (data) => {
         let prices;
         if(ENVIRONMENT.data_provider===CONSTANTS.duffel){
@@ -114,8 +142,7 @@ const return_duffel_object = (data) => {
           }
         ],
         "passengers": passengers,
-        "metadata": {
-          "payment_intent_id": "pit_00009htYpSCXrwaB9DnUm2"
-        }
+        "metadata": {}
     }
 }
+

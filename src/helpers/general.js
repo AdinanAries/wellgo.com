@@ -122,7 +122,7 @@ export const convert24HTimeToAMPM = ( time ) => {
     return `${h}:${m}${dd}`;
 }
 
-export const validateYYYYMMDDInputDates = (date_string, press_key_value, date_separator="/") => {
+export const validateYYYYMMDDInputDates = (date_string, press_key_value, date_separator="-") => {
 
     const lastChar = date_string.charAt(date_string.length - 1);
     const numberPattern = /\d+/g;
@@ -196,10 +196,10 @@ export const confirmYYYMMDDDateValidity = (date) => {
             (parseInt(date.charAt(1)) || date.charAt(1) === "0") &&
             (parseInt(date.charAt(2)) || date.charAt(2) === "0") &&
             (parseInt(date.charAt(3)) || date.charAt(3) === "0") &&
-            date.charAt(4) === "/" &&
+            date.charAt(4) === "-" &&
             (parseInt(date.charAt(5)) || date.charAt(5) === "0") &&
             (parseInt(date.charAt(6)) || date.charAt(6) === "0") &&
-            date.charAt(7) === "/" &&
+            date.charAt(7) === "-" &&
             (parseInt(date.charAt(8)) || date.charAt(8) === "0" ) &&
             (parseInt(date.charAt(9)) || date.charAt(9) === "0")
         );
