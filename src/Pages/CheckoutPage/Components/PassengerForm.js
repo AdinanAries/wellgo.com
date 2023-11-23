@@ -5,6 +5,8 @@ import FormErrorCard from "../../../components/FormErrorCard";
 
 const PassengerForm = (props) => {
     
+    const { resetcheckoutConfirmation } = props;
+
     const [passenger, setPassenger] = useState(props.passenger);
     const [ age, setAge ]=useState(calculate_age(passenger.born_on));
     const [ phoneSuffix, setPhoneSuffix ] = useState("");
@@ -28,28 +30,34 @@ const PassengerForm = (props) => {
     //console.log("Passenger: ", passenger);
 
     const setFirstName = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, given_name: e.target.value});
     }
 
     const setLastName = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, family_name: e.target.value});
     }
 
     const setEmail = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, email: e.target.value});
     }
     const setGender = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, gender: e.target.value});
     }
     const setDOB = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, born_on: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data)});
     }
     const setTitle = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, title: e.target.value});
     }
@@ -62,29 +70,34 @@ const PassengerForm = (props) => {
         setPhone();
     }
     const setPhone = () => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         let phone = phonePrefix+phoneSuffix
         setPassenger({...passenger, phone_number: phone});
     }
     const setTravelDocID = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], unique_identifier: e.target.value }
         ]});
     }
     const setTravelDocExpiration = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], expires_on: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data) }
         ]});
     }
     const setTravelDocCountry = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], issuing_country_code: e.target.value }
         ]});
     }
     const setTravelDocType = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], type: e.target.value }
@@ -92,11 +105,13 @@ const PassengerForm = (props) => {
     }
 
     const setPassengerAge = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setAge(calculate_age(e.target.value));
     }
 
     const setInfantPassengerId = (e) => {
+        resetcheckoutConfirmation();
         resetFormValidation();
         setPassenger({ ...passenger, infant_passenger_id: e.target.value });
     }
@@ -293,11 +308,11 @@ const PassengerForm = (props) => {
                 </div>
             </div>
             {
-                    formValidation.isError && <FormErrorCard 
-                        message={formValidation.message} 
-                        type={formValidation.type}
-                    />
-                }
+                formValidation.isError && <FormErrorCard 
+                    message={formValidation.message} 
+                    type={formValidation.type}
+                />
+            }
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <div style={{width: "calc(50% - 5px)", backgroundColor: "crimson", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
                     onClick={props.unSelectPassengerCard}

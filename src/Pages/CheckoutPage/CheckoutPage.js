@@ -17,7 +17,12 @@ export default function CheckoutPage(props){
 
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
     const [ isBookingConfirmed, setIsBookingConfirmed] = useState(false);
-    const [ completedOrderDetails, setCompletedOrderDetails ] = useState({})
+    const [ completedOrderDetails, setCompletedOrderDetails ] = useState({});
+    const [ checkoutConfirmation, setcheckoutConfirmation ] = useState({
+        type: "server_error",
+        isError: false,
+        message: "",
+    });
     const [ checkoutPayload, setcheckoutPayload ] = useState({
         meta: {},
         data: FLIGHT_DATA_ADAPTER.prepareCheckout(payload)
@@ -25,6 +30,14 @@ export default function CheckoutPage(props){
 
     const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
     const PRICES=FLIGHT_DATA_ADAPTER.adaptPriceProps(payload);
+
+    const resetcheckoutConfirmation = () => {
+        setcheckoutConfirmation({
+            type: "server_error",
+            isError: false,
+            message: "",
+        });
+    }
 
     const showInfoPage = () => {
         setActivePage(CONSTANTS.checkout_pages.info);
@@ -123,9 +136,11 @@ export default function CheckoutPage(props){
     const createOrderOnSubmit = async () => {
         let res=await createFlightOrder(checkoutPayload);
         console.log("Flight Order:", res);
-        if(res.data.id){
+        if(res.data && res.data.id){
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
+        }else{
+
         }
         
     }
@@ -218,7 +233,8 @@ export default function CheckoutPage(props){
                                 <PassengerNameRecord 
                                     setResponsibleAdultForInfant={setResponsibleAdultForInfant}
                                     savePassengerInfo={savePassengerInfo}
-                                    passengers={checkoutPayload.data.passengers} 
+                                    passengers={checkoutPayload.data.passengers}
+                                    resetcheckoutConfirmation={resetcheckoutConfirmation}
                                     showPaymentPage={showPaymentPage}
                                     prices={PRICES}
                                 /> : ""
@@ -228,6 +244,7 @@ export default function CheckoutPage(props){
                                 <PaymentPage 
                                     payments={checkoutPayload.data.payments}
                                     prices={PRICES}
+                                    checkoutConfirmation={checkoutConfirmation}
                                     createOrderOnSubmit={createOrderOnSubmit}
                                     total_travelers={checkoutPayload.data.passengers.length}
                                 /> : ""

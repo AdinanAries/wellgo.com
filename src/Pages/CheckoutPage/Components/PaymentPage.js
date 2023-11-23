@@ -1,10 +1,12 @@
 import PriceSummary from "./PriceSummary";
+import FormErrorCard from "../../../components/FormErrorCard";
 
 const PaymentPage = (props) => {
     const { 
         payments, 
         prices, 
         total_travelers, 
+        checkoutConfirmation,
         createOrderOnSubmit 
     } = props;
 
@@ -15,6 +17,12 @@ const PaymentPage = (props) => {
             <div className="checkout_page_all_info_flex_container">
                 <div className="checkout_page_all_info_flex_left">
                     <p>Payment</p>
+                    {
+                        checkoutConfirmation.isError && <FormErrorCard 
+                            message={checkoutConfirmation.message} 
+                            type={checkoutConfirmation.type}
+                        />
+                    }
                 </div>
                 <div className="checkout_page_all_info_flex_right">
                     <PriceSummary 
