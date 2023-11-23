@@ -7,6 +7,8 @@ const PassengerForm = (props) => {
     
     const [passenger, setPassenger] = useState(props.passenger);
     const [ age, setAge ]=useState(calculate_age(passenger.born_on));
+    const [ phoneSuffix, setPhoneSuffix ] = useState("");
+    const [ phonePrefix, setPhonePrefix ] = useState("+1");
     const [ formValidation, setFormValidation ] = useState({
         type: "warning",
         isError: false,
@@ -51,9 +53,18 @@ const PassengerForm = (props) => {
         resetFormValidation();
         setPassenger({...passenger, title: e.target.value});
     }
-    const setPhone = (e) => {
+    const setCountryCallingCode = (e) => {
+        setPhonePrefix(e.target.value);
+        setPhone();
+    }
+    const setPhoneNumber = (e) => {
+        setPhoneSuffix(e.target.value);
+        setPhone();
+    }
+    const setPhone = () => {
         resetFormValidation();
-        setPassenger({...passenger, phone_number: e.target.value});
+        let phone = phonePrefix+phoneSuffix
+        setPassenger({...passenger, phone_number: phone});
     }
     const setTravelDocID = (e) => {
         resetFormValidation();
@@ -195,11 +206,19 @@ const PassengerForm = (props) => {
                             <i className="fa-solid fa-mobile" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                             Phone</p>
                         <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                            <select 
+                                onChange={setCountryCallingCode}
+                                value={phonePrefix}
+                                style={{border: "none", background: "none", padding: 10}}>
+                                <option value="+1">+1</option>
+                                <option value="+233">+233</option>
+                            </select>
                             <input 
-                                onInput={setPhone}
-                                value={passenger.phone_number}
-                                type="text" placeholder="type here..."  
-                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                                onInput={setPhoneNumber}
+                                value={phoneSuffix}
+                                type="number" placeholder="type here..."  
+                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", 
+                                width: "calc(100% - 80px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
                 }

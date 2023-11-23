@@ -9,7 +9,7 @@ const OrderCompletedPage = (props) => {
     return (
         <div style={{position: "relative"}}>
             <div style={{padding: "20px 0"}}>
-                <p className="pop-up-close-btn" onClick={props.cancel_checkout} 
+                <p className="pop-up-close-btn" onClick={pickAnotherFlightOnclick} 
                     style={{cursor: "pointer", color: "rgb(255,0,0)", fontSize: 33, position: "absolute", right: 10, top: 10}}>
                     &times;
                 </p>
