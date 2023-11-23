@@ -29,15 +29,15 @@ const OrderCompletedPage = (props) => {
                 </p>
                 <div style={{padding: 10}}>
                     <div style={{display: "flex"}}>
-                    <div style={{cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                    <div style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                             <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plus"></i>
                             add ancillaries
                         </div>
-                        <div onClick={pickAnotherFlightOnclick} style={{cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                        <div onClick={pickAnotherFlightOnclick} style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                             <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plane-departure"></i>
                             pick another flight
                         </div>
-                        <div onClick={goHome} style={{cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                        <div onClick={goHome} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                             <i style={{marginRight: 10, color: "yellow"}} className="fa-solid fa-home"></i>
                             go home
                         </div>
@@ -51,7 +51,7 @@ const OrderCompletedPage = (props) => {
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Segments/Stops</h1>
                         <div>
-                            <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                            <div style={{display: "flex", paddingBottom: 10}}>
                                 <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
                                     <i style={{color: "rgba(0,0,0,0.5)"}}
                                             className="fa-solid fa-plane-departure"></i>
@@ -73,7 +73,7 @@ const OrderCompletedPage = (props) => {
                                     </p>
                                 </div>
                             </div>
-                            <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                            <div style={{display: "flex", paddingBottom: 10}}>
                                 <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
                                     <i style={{color: "rgba(0,0,0,0.5)"}}
                                             className="fa-solid fa-plane-departure"></i>
@@ -100,7 +100,7 @@ const OrderCompletedPage = (props) => {
                             Passengers</h1>
                         <div>
                             <div>
-                                <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                <div style={{display: "flex", paddingBottom: 10}}>
                                     <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
                                         <i style={{color: "rgba(0,0,0,0.5)"}}
                                                 className="fa-solid fa-user"></i>
@@ -114,7 +114,7 @@ const OrderCompletedPage = (props) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                <div style={{display: "flex", paddingBottom: 10}}>
                                     <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
                                         <i style={{color: "rgba(0,0,0,0.5)"}}
                                                 className="fa-solid fa-user"></i>
@@ -127,6 +127,22 @@ const OrderCompletedPage = (props) => {
                                             Nov 23rd, 2023 - Nov 24th, 2023
                                         </p>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                            Important Notice</h1>
+                            <div style={{display: "flex", padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
+                                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                                    <i style={{color: "orange"}}
+                                            className="fa-solid fa-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                        Some Random Text for showing disclaimer and notice messages or information to the user. This is important to communicate important matters to the them.
+                                    </p>
                                 </div>
                             </div>
                         </div>
