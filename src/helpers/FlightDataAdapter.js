@@ -94,6 +94,46 @@ export const FLIGHT_DATA_ADAPTER = {
             }
         }
         return prices
+    },
+
+    /**
+     * 
+     */
+    prepareFlightBookingLogObject: (bookingConfirmationObject) => {
+        const API_PROVIDER="";
+        const BOOKING_ID="";
+        const TYPE="";
+        const AIRLINE_NAME="";
+        const AIRLINE_IATA = "";
+        const TRIP_TYPE="";
+        const TRAVELERS=[];
+        const ORIGIN_AIRPORT_NAME="";
+        const ORIGIN_AIRPORT_IATA="";
+        const ORIGIN_CITY_NAME="";
+        const DESTINATION_AIRPORT_NAME="";
+        const DESTINATION_AIRPORT_IATA="";
+        const DESTINATION_CITY_NAME="";
+        const DEPARTURE_DATE="";
+        const RETURN_DATE="";
+
+        return {
+            apiProvider: API_PROVIDER,
+            providerBookingID: BOOKING_ID,
+            originPayloads: [ bookingConfirmationObject ],
+            type: TYPE,
+            airline: AIRLINE_NAME,
+            ariline_code: AIRLINE_IATA,
+            trip_type: TRIP_TYPE,
+            travellers: TRAVELERS,
+            takeoff_airport: ORIGIN_AIRPORT_NAME,
+            takeoff_airport_code: ORIGIN_AIRPORT_IATA,
+            takeoff_city: ORIGIN_CITY_NAME,
+            destination_airport: DESTINATION_AIRPORT_NAME,
+            destination_airport_code: DESTINATION_AIRPORT_IATA,
+            destination_city: DESTINATION_CITY_NAME,
+            departure_date: DEPARTURE_DATE,
+            return_date: RETURN_DATE,
+        }
     }
 
 }

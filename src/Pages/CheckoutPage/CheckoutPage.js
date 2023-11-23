@@ -7,6 +7,7 @@ import { obj_has_empty_prop, calculate_age } from "../../helpers/general";
 import { FLIGHT_DATA_ADAPTER } from "../../helpers/FlightDataAdapter";
 import { show_prompt_on_Bot_AD_tips_popup } from '../../components/HPSupport';
 import { createFlightOrder } from '../../services/flightsServices';
+import { logFlightBooking } from "../../services/bookingHistoryServices";
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import OrderCompletedPage from './Components/OrderCompletedPage';
@@ -137,6 +138,8 @@ export default function CheckoutPage(props){
         let res=await createFlightOrder(checkoutPayload);
         console.log("Flight Order:", res);
         if(res?.data?.id){
+            let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
+            //let logged=await logFlightBooking(log);
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
         }else{
