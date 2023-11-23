@@ -220,6 +220,11 @@ const PassengerForm = (props) => {
                         <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                             <i className="fa-solid fa-mobile" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
                             Phone</p>
+                        {
+                            passenger.phone_number &&
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                Phone is set to: {passenger.phone_number}</p>
+                        }
                         <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                             <select 
                                 onChange={setCountryCallingCode}
