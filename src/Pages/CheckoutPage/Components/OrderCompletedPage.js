@@ -17,7 +17,7 @@ const OrderCompletedPage = (props) => {
                     <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
                     Reference Number:
                     <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
-                        X2BG213Y2
+                        {completedOrderDetails.booking_reference}
                     </span>
                 </p>
                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
