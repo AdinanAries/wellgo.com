@@ -37,7 +37,7 @@ export const logFlightBooking = async (payload, path=`\\api\\bookings\\add\\`) =
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${USER_TOKEN}`
             },
-            data: JSON.stringify(payload)
+            body: JSON.stringify(payload)
         })
         .then(res => res.json())
         .then(data => data)
