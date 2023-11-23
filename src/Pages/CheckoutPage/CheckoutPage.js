@@ -18,7 +18,7 @@ export default function CheckoutPage(props){
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
     const [ isBookingConfirmed, setIsBookingConfirmed] = useState(false);
     const [ completedOrderDetails, setCompletedOrderDetails ] = useState({});
-    const [ checkoutConfirmation, setcheckoutConfirmation ] = useState({
+    const [ checkoutConfirmation, setCheckoutConfirmation ] = useState({
         type: "server_error",
         isError: false,
         message: "",
@@ -31,8 +31,8 @@ export default function CheckoutPage(props){
     const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
     const PRICES=FLIGHT_DATA_ADAPTER.adaptPriceProps(payload);
 
-    const resetcheckoutConfirmation = () => {
-        setcheckoutConfirmation({
+    const resetCheckoutConfirmation = () => {
+        setCheckoutConfirmation({
             type: "server_error",
             isError: false,
             message: "",
@@ -136,11 +136,15 @@ export default function CheckoutPage(props){
     const createOrderOnSubmit = async () => {
         let res=await createFlightOrder(checkoutPayload);
         console.log("Flight Order:", res);
-        if(res.data && res.data.id){
+        if(res?.data?.id){
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
         }else{
-
+            setCheckoutConfirmation({
+                type: "server_error",
+                isError: true,
+                message: res.message,
+            });
         }
         
     }
@@ -234,7 +238,7 @@ export default function CheckoutPage(props){
                                     setResponsibleAdultForInfant={setResponsibleAdultForInfant}
                                     savePassengerInfo={savePassengerInfo}
                                     passengers={checkoutPayload.data.passengers}
-                                    resetcheckoutConfirmation={resetcheckoutConfirmation}
+                                    resetCheckoutConfirmation={resetCheckoutConfirmation}
                                     showPaymentPage={showPaymentPage}
                                     prices={PRICES}
                                 /> : ""

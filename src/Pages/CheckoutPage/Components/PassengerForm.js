@@ -5,7 +5,7 @@ import FormErrorCard from "../../../components/FormErrorCard";
 
 const PassengerForm = (props) => {
     
-    const { resetcheckoutConfirmation } = props;
+    const { resetCheckoutConfirmation } = props;
 
     const [passenger, setPassenger] = useState(props.passenger);
     const [ age, setAge ]=useState(calculate_age(passenger.born_on));
@@ -30,34 +30,34 @@ const PassengerForm = (props) => {
     //console.log("Passenger: ", passenger);
 
     const setFirstName = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, given_name: e.target.value});
     }
 
     const setLastName = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, family_name: e.target.value});
     }
 
     const setEmail = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, email: e.target.value});
     }
     const setGender = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, gender: e.target.value});
     }
     const setDOB = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, born_on: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data)});
     }
     const setTitle = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, title: e.target.value});
     }
@@ -70,34 +70,34 @@ const PassengerForm = (props) => {
         setPhone();
     }
     const setPhone = () => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         let phone = phonePrefix+phoneSuffix
         setPassenger({...passenger, phone_number: phone});
     }
     const setTravelDocID = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], unique_identifier: e.target.value }
         ]});
     }
     const setTravelDocExpiration = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], expires_on: validateYYYYMMDDInputDates(e.target.value, e.nativeEvent.data) }
         ]});
     }
     const setTravelDocCountry = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], issuing_country_code: e.target.value }
         ]});
     }
     const setTravelDocType = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({...passenger, identity_documents: [
             { ...passenger.identity_documents[0], type: e.target.value }
@@ -105,13 +105,13 @@ const PassengerForm = (props) => {
     }
 
     const setPassengerAge = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setAge(calculate_age(e.target.value));
     }
 
     const setInfantPassengerId = (e) => {
-        resetcheckoutConfirmation();
+        resetCheckoutConfirmation();
         resetFormValidation();
         setPassenger({ ...passenger, infant_passenger_id: e.target.value });
     }

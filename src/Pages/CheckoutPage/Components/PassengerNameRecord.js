@@ -24,7 +24,7 @@ const PassengerNameRecord = (props) => {
     const [ availableAdultPassengersForInfants, setAvailableAdultPassengersForInfants ] = useState([]);
     const [ allInfantsPassengers, setAllInfantPassengers ] = useState([]);
 
-    const { passengers, prices } = props;
+    const { passengers, prices, resetCheckoutConfirmation } = props;
 
     useEffect(()=> {
         setAdultPsngrForInfants();
@@ -80,12 +80,14 @@ const PassengerNameRecord = (props) => {
                                 <PassengerForm 
                                     index={selectedPassengertIndex}
                                     savePassengerInfo={savePassengerInfo}
+                                    resetCheckoutConfirmation={resetCheckoutConfirmation}
                                     passenger={passengers[selectedPassengertIndex]}
                                     unSelectPassengerCard={unSelectPassengerCard}
                                 /> :
                                 passengers.map((each, i) => {
                                     let age = calculate_age(each.born_on);
                                     return <PassengerCard 
+                                        key={each.id}
                                         index={i}
                                         age={age}
                                         setResponsibleAdultForInfant={props.setResponsibleAdultForInfant}
