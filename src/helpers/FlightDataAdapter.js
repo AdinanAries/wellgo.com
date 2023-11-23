@@ -222,6 +222,10 @@ const return_flight_booking_log_object_props = (obj) => {
     }
 }
 
+/**
+ * 
+ * @returns 
+ */
 export const return_duffel_confirmed_order_example = () => {
     return {
         "type": "instant",

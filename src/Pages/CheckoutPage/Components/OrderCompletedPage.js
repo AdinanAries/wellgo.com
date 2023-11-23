@@ -44,9 +44,92 @@ const OrderCompletedPage = (props) => {
                     </div>
                 </div>
                 <div>
-                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                        See Details Below:</p>
-                    <div>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "5px 0"}}>
+                        See Details Below: <span style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
+                            Click to Print</span></p>
+                    <div style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
+                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                            Segments/Stops</h1>
+                        <div>
+                            <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                                    <i style={{color: "rgba(0,0,0,0.5)"}}
+                                            className="fa-solid fa-plane-departure"></i>
+                                </div>
+                                <div>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                        New York - Laguardia Airport
+                                        to
+                                        Accra - Kotoka Int. Airport
+                                    </p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                        Nov 23rd, 2023 - Nov 24th, 2023
+                                    </p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                        Take off: 9:45pm, Aircraft: Boem1455, Checked bags: 4
+                                    </p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                        Amenities: wifi, power, seat 44E
+                                    </p>
+                                </div>
+                            </div>
+                            <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                                    <i style={{color: "rgba(0,0,0,0.5)"}}
+                                            className="fa-solid fa-plane-departure"></i>
+                                </div>
+                                <div>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                        New York - Laguardia Airport
+                                        to
+                                        Accra - Kotoka Int. Airport
+                                    </p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                        Nov 23rd, 2023 - Nov 24th, 2023
+                                    </p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                        Take off: 9:45pm, Aircraft: Boem1455, Checked bags: 4
+                                    </p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                        Amenities: wifi, power, seat 44E
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                            Passengers</h1>
+                        <div>
+                            <div>
+                                <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                                        <i style={{color: "rgba(0,0,0,0.5)"}}
+                                                className="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                            Mohammed Adinan
+                                        </p>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                            Nov 23rd, 2023 - Nov 24th, 2023
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style={{display: "flex", paddingBottom: 10, marginBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                                        <i style={{color: "rgba(0,0,0,0.5)"}}
+                                                className="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                            Mohammed Adinan
+                                        </p>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                            Nov 23rd, 2023 - Nov 24th, 2023
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
