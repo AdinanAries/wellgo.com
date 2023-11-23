@@ -350,7 +350,7 @@ export const FLIGHT_DATA_ADAPTER = {
         const DESTINATION_AIRPORT_IATA=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].destination.iata_code;
         const DESTINATION_CITY_NAME=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].destination.city_name;
         const DEPARTURE_DATE=bookingConfirmationObject.slices[0].segments[0].departing_at;
-        const RETURN_DATE=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].segments[(bookingConfirmationObject.slices.segments.length-1)].arriving_at;
+        const RETURN_DATE=bookingConfirmationObject.slices[(bookingConfirmationObject.slices.length-1)].segments[(bookingConfirmationObject.slices[[(bookingConfirmationObject.slices.length-1)]].segments.length-1)].arriving_at;
 
         return {
             apiProvider: API_PROVIDER,
