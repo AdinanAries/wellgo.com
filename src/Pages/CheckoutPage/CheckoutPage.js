@@ -136,10 +136,10 @@ export default function CheckoutPage(props){
 
     const createOrderOnSubmit = async () => {
         let res=await createFlightOrder(checkoutPayload);
-        console.log("Flight Order:", res);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
-            //let logged=await logFlightBooking(log);
+            let logged=await logFlightBooking(log);
+            console.log("logged:", logged);
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
         }else{

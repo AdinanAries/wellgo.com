@@ -62,17 +62,18 @@ const PassengerForm = (props) => {
         setPassenger({...passenger, title: e.target.value});
     }
     const setCountryCallingCode = (e) => {
+        resetCheckoutConfirmation();
+        resetFormValidation();
+        setPassenger({...passenger, phone_number: (e.target.value+phoneSuffix)});
         setPhonePrefix(e.target.value);
     }
     const setPhoneNumber = (e) => {
-        setPhoneSuffix(e.target.value);
-    }
-    const setPhone = () => {
         resetCheckoutConfirmation();
         resetFormValidation();
-        let phone = phonePrefix+phoneSuffix
-        setPassenger({...passenger, phone_number: phone});
+        setPassenger({...passenger, phone_number: (phonePrefix+e.target.value)});
+        setPhoneSuffix(e.target.value);
     }
+    
     const setTravelDocID = (e) => {
         resetCheckoutConfirmation();
         resetFormValidation();
@@ -115,7 +116,6 @@ const PassengerForm = (props) => {
     }
 
     const onSubmit = () => {
-        setPhone();
         if(!confirmYYYMMDDDateValidity(passenger.born_on)){
             setFormValidation({
                 type: "error",
