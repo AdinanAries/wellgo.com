@@ -16,7 +16,7 @@ const BookingHistoryPage = (props) => {
     } = props;
     const [pagination, setPagination] = useState({
         CURRENT_PAGE: 1,
-        PAGE_SIZE: 4,
+        PAGE_SIZE: 10,
         TOTAL_PAGES: 0,
     });
 

@@ -38,7 +38,7 @@ const SelectedTicketInfo = (props) => {
             for(let ps=0; ps<slices[0].segments[sg].passengers.length;ps++){
                 for(let bb=0; bb<slices[0].segments[sg].passengers[ps].baggages.length; bb++){
                     if(slices[0].segments[sg].passengers[ps].baggages[bb].type==="carry_on"){
-                        carry_on_bags_count+=slices[sg].segments[sg].passengers[ps].baggages[bb].quantity;
+                        carry_on_bags_count+=slices[0].segments[sg].passengers[ps].baggages[bb].quantity;
                     }
                     if(slices[0].segments[sg].passengers[ps].baggages[bb].type==="checked"){
                         free_checked_bags_count+=slices[0].segments[sg].passengers[ps].baggages[bb].quantity;

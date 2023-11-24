@@ -1,3 +1,5 @@
+import { get_short_date_DAYMMMDD, convert24HTimeToAMPM } from "../../../helpers/general";
+
 const OrderCompletedPage = (props) => {
 
     const { 
@@ -5,6 +7,45 @@ const OrderCompletedPage = (props) => {
         goHome,
         completedOrderDetails 
     } = props;
+
+    const SEGMENTS = [];
+    console.log("Order:", completedOrderDetails);
+    completedOrderDetails?.slices?.forEach(slice=>{
+        slice.segments.forEach(segment=> {
+            SEGMENTS.push(
+                <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
+                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                        <i style={{color: "rgba(0,0,0,0.5)"}}
+                                className="fa-solid fa-plane-departure"></i>
+                    </div>
+                    <div>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            {segment.origin.city_name} - {segment.origin.name}
+                            <span style={{margin: "0 10px", fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.6)"}}>
+                                to
+                            </span>
+                            {segment.destination.city_name} - {segment.destination.name}
+                        </p>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                            {get_short_date_DAYMMMDD(segment.departure_datetime) + " ("}
+                            {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1]) + ")"}
+                            <span style={{margin: "0 10px", fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.6)"}}>
+                                to
+                            </span>
+                            {get_short_date_DAYMMMDD(segment.arrival_datetime) + " ("}
+                            {convert24HTimeToAMPM(segment.arrival_datetime.split("T")[1]) + ")"}
+                        </p>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                            Take off: {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1])}, Aircraft: {segment.aircraft.name}, Checked bags: 4, Carry-on bags: 5
+                        </p>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                            Amenities: wifi, power, seat 44E
+                        </p>
+                    </div>
+                </div>
+            )
+        })
+    });
 
     return (
         <div style={{position: "relative"}}>
@@ -48,59 +89,23 @@ const OrderCompletedPage = (props) => {
                         See Details Below: <span style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
                             Click to Print</span></p>
                     <div style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
+                        <div style={{marginBottom: 10}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                New York 
+                                <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>
+                                Accra
+                            </p>
+                        </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Segments/Stops</h1>
-                        <div>
-                            <div style={{display: "flex", paddingBottom: 10}}>
-                                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                                    <i style={{color: "rgba(0,0,0,0.5)"}}
-                                            className="fa-solid fa-plane-departure"></i>
-                                </div>
-                                <div>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                        New York - Laguardia Airport
-                                        to
-                                        Accra - Kotoka Int. Airport
-                                    </p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                        Nov 23rd, 2023 - Nov 24th, 2023
-                                    </p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                        Take off: 9:45pm, Aircraft: Boem1455, Checked bags: 4
-                                    </p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                        Amenities: wifi, power, seat 44E
-                                    </p>
-                                </div>
-                            </div>
-                            <div style={{display: "flex", paddingBottom: 10}}>
-                                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                                    <i style={{color: "rgba(0,0,0,0.5)"}}
-                                            className="fa-solid fa-plane-departure"></i>
-                                </div>
-                                <div>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                        New York - Laguardia Airport
-                                        to
-                                        Accra - Kotoka Int. Airport
-                                    </p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                        Nov 23rd, 2023 - Nov 24th, 2023
-                                    </p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                        Take off: 9:45pm, Aircraft: Boem1455, Checked bags: 4
-                                    </p>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                        Amenities: wifi, power, seat 44E
-                                    </p>
-                                </div>
-                            </div>
+                        <div style={{display: "flex", flexWrap: "wrap"}}>
+                            {SEGMENTS.map(each=>each)}
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Passengers</h1>
                         <div>
-                            <div>
-                                <div style={{display: "flex", paddingBottom: 10}}>
+                            <div style={{display: "flex", flexWrap: "wrap"}}>
+                                <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
                                     <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
                                         <i style={{color: "rgba(0,0,0,0.5)"}}
                                                 className="fa-solid fa-user"></i>
@@ -110,7 +115,10 @@ const OrderCompletedPage = (props) => {
                                             Mohammed Adinan
                                         </p>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                            Nov 23rd, 2023 - Nov 24th, 2023
+                                            m.adinan@yahoo.com, +17327999546
+                                        </p>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                            Seat: 44E, Cabin: economy, Checked bags: 1, Carry-on bags: 1
                                         </p>
                                     </div>
                                 </div>
@@ -124,7 +132,10 @@ const OrderCompletedPage = (props) => {
                                             Mohammed Adinan
                                         </p>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                            Nov 23rd, 2023 - Nov 24th, 2023
+                                            m.adinan@yahoo.com, +17327999546
+                                        </p>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                            Seat: 44E, Cabin: economy, Checked bags: 1, Carry-on bags: 1
                                         </p>
                                     </div>
                                 </div>
@@ -153,5 +164,237 @@ const OrderCompletedPage = (props) => {
     );
 
 }
+
+/*
+return {
+        "type": "instant",
+        "total_currency": "USD",
+        "total_amount": "404.59",
+        "tax_currency": "USD",
+        "tax_amount": "61.72",
+        "synced_at": "2023-11-23T14:37:38Z",
+        "slices": [
+            {
+                "segments": [
+                    {
+                        "passengers": [
+                            {
+                                "seat": null,
+                                "passenger_id": "pas_0000Ac6K7OtiPbsp1NTVxK",
+                                "cabin_class_marketing_name": "Economy",
+                                "cabin_class": "economy",
+                                "baggages": [
+                                    {
+                                        "type": "checked",
+                                        "quantity": 1
+                                    },
+                                    {
+                                        "type": "carry_on",
+                                        "quantity": 1
+                                    }
+                                ]
+                            }
+                        ],
+                        "origin_terminal": "2",
+                        "origin": {
+                            "type": "airport",
+                            "time_zone": "Africa/Accra",
+                            "name": "Kotoka International Airport",
+                            "longitude": -0.167454,
+                            "latitude": 5.605642,
+                            "id": "arp_acc_gh",
+                            "icao_code": "DGAA",
+                            "iata_country_code": "GH",
+                            "iata_code": "ACC",
+                            "iata_city_code": "ACC",
+                            "city_name": "Accra",
+                            "city": null
+                        },
+                        "operating_carrier_flight_number": "10",
+                        "operating_carrier": {
+                            "name": "American Airlines",
+                            "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/AA.svg",
+                            "logo_lockup_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-lockup/AA.svg",
+                            "id": "arl_00009VME7DAGiJjwomhv32",
+                            "iata_code": "AA",
+                            "conditions_of_carriage_url": "https://www.aa.com/i18n/customer-service/support/conditions-of-carriage.jsp"
+                        },
+                        "marketing_carrier_flight_number": "10",
+                        "marketing_carrier": {
+                            "name": "American Airlines",
+                            "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/AA.svg",
+                            "logo_lockup_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-lockup/AA.svg",
+                            "id": "arl_00009VME7DAGiJjwomhv32",
+                            "iata_code": "AA",
+                            "conditions_of_carriage_url": "https://www.aa.com/i18n/customer-service/support/conditions-of-carriage.jsp"
+                        },
+                        "id": "seg_0000Ac6K7P3dohp5WA7RQW",
+                        "duration": "PT11H32M",
+                        "distance": "8221.392679809798",
+                        "destination_terminal": "1",
+                        "destination": {
+                            "type": "airport",
+                            "time_zone": "America/New_York",
+                            "name": "John F. Kennedy International Airport",
+                            "longitude": -73.778519,
+                            "latitude": 40.640556,
+                            "id": "arp_jfk_us",
+                            "icao_code": "KJFK",
+                            "iata_country_code": "US",
+                            "iata_code": "JFK",
+                            "iata_city_code": "NYC",
+                            "city_name": "New York",
+                            "city": {
+                                "type": "city",
+                                "time_zone": null,
+                                "name": "New York",
+                                "longitude": null,
+                                "latitude": null,
+                                "id": "cit_nyc_us",
+                                "icao_code": null,
+                                "iata_country_code": "US",
+                                "iata_code": "NYC",
+                                "iata_city_code": "NYC",
+                                "city_name": null
+                            }
+                        },
+                        "departure_terminal": "2",
+                        "departure_datetime": "2023-11-29T21:40:00",
+                        "departing_at": "2023-11-29T21:40:00",
+                        "arriving_at": "2023-11-30T04:12:00",
+                        "arrival_terminal": "1",
+                        "arrival_datetime": "2023-11-30T04:12:00",
+                        "aircraft": {
+                            "name": "Airbus A319",
+                            "id": "arc_00009VMF8AgpV5sdO0xXAn",
+                            "iata_code": "319"
+                        }
+                    }
+                ],
+                "origin_type": "airport",
+                "origin": {
+                    "type": "airport",
+                    "time_zone": "Africa/Accra",
+                    "name": "Kotoka International Airport",
+                    "longitude": -0.167454,
+                    "latitude": 5.605642,
+                    "id": "arp_acc_gh",
+                    "icao_code": "DGAA",
+                    "iata_country_code": "GH",
+                    "iata_code": "ACC",
+                    "iata_city_code": "ACC",
+                    "city_name": "Accra",
+                    "city": null
+                },
+                "id": "sli_0000Ac6KEffjaAdhv9NCr2",
+                "fare_brand_name": "Basic",
+                "duration": "PT11H32M",
+                "destination_type": "airport",
+                "destination": {
+                    "type": "airport",
+                    "time_zone": "America/New_York",
+                    "name": "John F. Kennedy International Airport",
+                    "longitude": -73.778519,
+                    "latitude": 40.640556,
+                    "id": "arp_jfk_us",
+                    "icao_code": "KJFK",
+                    "iata_country_code": "US",
+                    "iata_code": "JFK",
+                    "iata_city_code": "NYC",
+                    "city_name": "New York",
+                    "city": {
+                        "type": "city",
+                        "time_zone": null,
+                        "name": "New York",
+                        "longitude": null,
+                        "latitude": null,
+                        "id": "cit_nyc_us",
+                        "icao_code": null,
+                        "iata_country_code": "US",
+                        "iata_code": "NYC",
+                        "iata_city_code": "NYC",
+                        "city_name": null
+                    }
+                },
+                "conditions": {
+                    "change_before_departure": {
+                        "penalty_currency": null,
+                        "penalty_amount": null,
+                        "allowed": false
+                    }
+                },
+                "changeable": true
+            }
+        ],
+        "services": [],
+        "payment_status": {
+            "price_guarantee_expires_at": null,
+            "payment_required_by": null,
+            "paid_at": "2023-11-23T14:37:38Z",
+            "awaiting_payment": false
+        },
+        "passengers": [
+            {
+                "type": "adult",
+                "title": "mr",
+                "phone_number": "+17327999546",
+                "loyalty_programme_accounts": [],
+                "infant_passenger_id": null,
+                "id": "pas_0000Ac6K7OtiPbsp1NTVxK",
+                "given_name": "Mohammed",
+                "gender": "m",
+                "family_name": "Adinan",
+                "email": "m.adinan@yahoo.com",
+                "born_on": "1992-03-23"
+            }
+        ],
+        "owner": {
+            "name": "American Airlines",
+            "logo_symbol_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/AA.svg",
+            "logo_lockup_url": "https://assets.duffel.com/img/airlines/for-light-background/full-color-lockup/AA.svg",
+            "id": "arl_00009VME7DAGiJjwomhv32",
+            "iata_code": "AA",
+            "conditions_of_carriage_url": "https://www.aa.com/i18n/customer-service/support/conditions-of-carriage.jsp"
+        },
+        "metadata": {},
+        "live_mode": false,
+        "id": "ord_0000Ac6KEffNbUM7u3CvIm",
+        "documents": [
+            {
+                "unique_identifier": "1",
+                "type": "electronic_ticket",
+                "passenger_ids": [
+                    "pas_0000Ac6K7OtiPbsp1NTVxK"
+                ]
+            }
+        ],
+        "created_at": "2023-11-23T14:37:38.485807Z",
+        "content": "managed",
+        "conditions": {
+            "refund_before_departure": {
+                "penalty_currency": "GBP",
+                "penalty_amount": "50.00",
+                "allowed": true
+            },
+            "change_before_departure": {
+                "penalty_currency": null,
+                "penalty_amount": null,
+                "allowed": false
+            }
+        },
+        "changes": [],
+        "cancelled_at": null,
+        "cancellation": null,
+        "booking_reference": "VXYP4X",
+        "base_currency": "USD",
+        "base_amount": "342.87",
+        "available_actions": [
+            "cancel",
+            "change",
+            "update"
+        ],
+        "airline_initiated_changes": []
+    }
+*/
 
 export default OrderCompletedPage;

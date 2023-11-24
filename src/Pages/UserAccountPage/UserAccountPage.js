@@ -1,8 +1,4 @@
 import $ from "jquery";
-
-import edit_user_forms_bg from "../../icons/edit_user_forms_bg.svg";
-import credit_card_payment from "../../icons/credit_card_payment.svg";
-import passport from "../../icons/passport.svg";
 import loading_icon from "../../icons/loading.svg";
 import nothing_found_icon from "../../icons/nothing_found_icon.svg";
 import card_not_found from "../../icons/card_not_found.svg";
@@ -123,7 +119,6 @@ function UserAccountPage(props){
     const ShowPaymentCards = async () => {
         setIsPaymentCardsLoading(true);
         let _payment_cards=await fetchPaymentCards();
-        console.log("User Payment Cards: ", _payment_cards);
         setPayments(_payment_cards);
         setIsPaymentCardsLoading(false);
     }
@@ -158,7 +153,6 @@ function UserAccountPage(props){
     const ShowBookingHistory = async (from_date, to_date, page="1", limit="10", type="all", cabin="all") => {
         setIsBookingHistoryLoading(true);
         let _booking_history=await fetchBookingHistory(from_date, to_date, page, limit);
-        console.log("User Booking History: ", _booking_history);
         setBookings(_booking_history);
         setIsBookingHistoryLoading(false);
     }
