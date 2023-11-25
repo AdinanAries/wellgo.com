@@ -198,6 +198,21 @@ const PassengerForm = (props) => {
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                     </div>
                 </div>
+                <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                        <i className="fa-solid fa-person-half-dress" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                        Gender</p>
+                    <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                        <select 
+                            onChange={setGender} 
+                            value={passenger.gender}
+                            style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}>
+                            <option value="">Select here...</option>
+                            <option value="m">Male</option>
+                            <option value="f">Female</option>
+                        </select>
+                    </div>
+                </div>
                 {
                     (passenger.born_on && (age > CONSTANTS.infant_age_threshold)) &&
                     <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
@@ -242,21 +257,6 @@ const PassengerForm = (props) => {
                         </div>
                     </div>
                 }
-                <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
-                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                        <i className="fa-solid fa-person-half-dress" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                        Gender</p>
-                    <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                        <select 
-                            onChange={setGender} 
-                            value={passenger.gender}
-                            style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}>
-                            <option value="">Select here...</option>
-                            <option value="m">Male</option>
-                            <option value="f">Female</option>
-                        </select>
-                    </div>
-                </div>
                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 14, padding: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
                     TRAVEL DOCUMENT</p>
                 <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>

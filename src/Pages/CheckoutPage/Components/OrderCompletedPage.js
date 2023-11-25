@@ -9,8 +9,37 @@ const OrderCompletedPage = (props) => {
         completedOrderDetails 
     } = props;
 
+    const FIRST_SLICE_ORIGIN_IATA=(
+        completedOrderDetails?.slices 
+        && completedOrderDetails?.slices[0].segments 
+        && completedOrderDetails?.slices[0].segments[0].origin?.iata_code
+    );
+    const FIRST_SLICE_CITY_NAME=(
+        completedOrderDetails?.slices 
+        && completedOrderDetails?.slices[0].segments 
+        && completedOrderDetails?.slices[0].segments[0].origin?.city_name
+    );
+    const LAST_SLICE_DESTINATION_IATA=(
+        completedOrderDetails?.slices 
+        && completedOrderDetails?.slices[(completedOrderDetails?.slices?.length - 1)].segments 
+        && completedOrderDetails?.slices[(completedOrderDetails?.slices?.length - 1)]
+        .segments[(completedOrderDetails?.slices[(completedOrderDetails?.slices?.length - 1)]?.segments?.length - 1)].destination?.iata_code
+    );
+    const LAST_SLICE_CITY_NAME=(
+        completedOrderDetails?.slices 
+        && completedOrderDetails?.slices[(completedOrderDetails?.slices?.length - 1)].segments 
+        && completedOrderDetails?.slices[(completedOrderDetails?.slices?.length - 1)]
+        .segments[(completedOrderDetails?.slices[(completedOrderDetails?.slices?.length - 1)]?.segments?.length - 1)].destination?.city_name
+    );
+
+    const SLICES_LENGHT = completedOrderDetails?.slices?.length;
+    let is_one_way=(SLICES_LENGHT<2);
+    let is_round_trip=(
+        SLICES_LENGHT===2 
+        && (FIRST_SLICE_ORIGIN_IATA===LAST_SLICE_DESTINATION_IATA)
+    );
+
     const SEGMENTS = [];
-    console.log("Order:", completedOrderDetails);
     completedOrderDetails?.slices?.forEach(slice=>{
         slice.segments.forEach(segment=> {
 
@@ -166,9 +195,10 @@ const OrderCompletedPage = (props) => {
                                 </span>
                             </p>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                New York 
-                                <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>
-                                Accra
+                                {FIRST_SLICE_CITY_NAME} - {FIRST_SLICE_ORIGIN_IATA}
+                                {is_one_way && <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>}
+                                {is_round_trip && <i style={{margin: "0 10px"}} className="fa-solid fa-rotate"></i>}
+                                {LAST_SLICE_CITY_NAME} - {LAST_SLICE_DESTINATION_IATA}
                             </p>
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                 <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
