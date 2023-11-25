@@ -47,7 +47,7 @@ const OrderCompletedPage = (props) => {
             let total_checked_baggages=0;
             let total_carry_on_baggages=0;
             segment.passengers.forEach(passenger=>{
-                seats+= passenger.seat ? `${passenger.seat}, ` : "";
+                seats+= passenger.seat ? `${passenger.seat}, ` : "_";
                 passenger.baggages.forEach(baggage=>{
                     if(baggage.type==="checked"){
                         total_checked_baggages+=parseInt(baggage.quantity);
@@ -88,11 +88,13 @@ const OrderCompletedPage = (props) => {
                             {convert24HTimeToAMPM(segment.arrival_datetime.split("T")[1]) + ")"}
                         </p>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            This flight is operated by {segment.operating_carrier.name}. Please click <a href={segment.operating_carrier.conditions_of_carriage_url}>
+                            This flight is operated by {segment.operating_carrier.name}. Please click <a href={segment.operating_carrier.conditions_of_carriage_url} rel="noreferrer" target="_blank">
                             here</a> to learn more about the airline conditions
                         </p>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            Take off: {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1])}, Aircraft: {segment.aircraft.name}, Checked bags: {total_checked_baggages}, Carry-on bags: {total_carry_on_baggages}
+                            <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                Take off: {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1])}
+                            </span>, Aircraft: {segment.aircraft.name}, Checked bags: {total_checked_baggages}, Carry-on bags: {total_carry_on_baggages}
                         </p>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
                             Amenities: wifi, power | Seats: {seats}
@@ -143,6 +145,83 @@ const OrderCompletedPage = (props) => {
             </div>
         );
     });
+
+    const IMPORTANT_NOTICES=[];
+        /*"conditions": {
+            "refund_before_departure": {
+                "penalty_currency": "GBP",
+                "penalty_amount": "50.00",
+                "allowed": true
+            },
+            "change_before_departure": {
+                "penalty_currency": null,
+                "penalty_amount": null,
+                "allowed": false
+            }
+        }*/
+        if(completedOrderDetails?.conditions?.refund_before_departure?.allowed){
+            IMPORTANT_NOTICES.push(
+                <div style={{display: "flex"}}>
+                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                        <i style={{color: "green"}}
+                                className="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                            Refund allowed with penalty amount of 
+                            {completedOrderDetails?.conditions?.refund_before_departure?.penalty_currency}
+                            {completedOrderDetails?.conditions?.refund_before_departure?.penalty_amount}
+                        </p>
+                    </div>
+                </div>
+            );
+        }else{
+            IMPORTANT_NOTICES.push(
+                <div style={{display: "flex"}}>
+                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                        <i style={{color: "orange"}}
+                                className="fa-solid fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                            No refunds available for this flight
+                        </p>
+                    </div>
+                </div>
+            );
+        }
+
+        if(completedOrderDetails?.conditions?.change_before_departure?.allowed){
+            IMPORTANT_NOTICES.push(
+                <div style={{display: "flex"}}>
+                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                        <i style={{color: "green"}}
+                                className="fa-solid fa-check"></i>
+                    </div>
+                    <div>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                            Changes allowed with penalty amount of 
+                            {completedOrderDetails?.conditions?.change_before_departure?.penalty_currency}
+                            {completedOrderDetails?.conditions?.change_before_departure?.penalty_amount}
+                        </p>
+                    </div>
+                </div>
+            );
+        }else{
+            IMPORTANT_NOTICES.push(
+                <div style={{display: "flex"}}>
+                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                        <i style={{color: "orange"}}
+                                className="fa-solid fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                            Changes are not allowed for this flight
+                        </p>
+                    </div>
+                </div>
+            );
+        }
 
     return (
         <div style={{position: "relative"}}>
@@ -232,25 +311,24 @@ const OrderCompletedPage = (props) => {
 
                         <div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Airline Details</h1>
+                            Sold by</h1>
                         <div>
-                            <div>
-                                <p>Sold by: </p>
-                                <p>Operatored by: </p>
+                            <div style={{marginBottom: 10}}>
+                                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                                    <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
+                                    {completedOrderDetails?.owner?.name}
+                                </p>
+                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                    <a href={completedOrderDetails?.owner?.conditions_of_carriage_url}  rel="noreferrer" target="_blank">
+                                        read more at {completedOrderDetails?.owner?.conditions_of_carriage_url}
+                                    </a>
+                                </p>
                             </div>
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Important Notices</h1>
-                            <div style={{display: "flex", padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
-                                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                                    <i style={{color: "orange"}}
-                                            className="fa-solid fa-exclamation-triangle"></i>
-                                </div>
-                                <div>
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                        Some Random Text for showing disclaimer and notice messages or information to the user. This is important to communicate important matters to the them.
-                                    </p>
-                                </div>
+                            <div style={{padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
+                                {IMPORTANT_NOTICES.map(each=>each)}
                             </div>
                         </div>
                     </div>
