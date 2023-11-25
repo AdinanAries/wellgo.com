@@ -1,5 +1,7 @@
 import SelectedTicketItinSegments from "../../SearchPage/Components/SelectedTicketItinSegments";
 import { get_short_date_DAYMMMDD, convert24HTimeToAMPM } from "../../../helpers/general";
+import { markup } from "../../../helpers/Prices";
+import { get_currency_symbol } from "../../../helpers/general";
 
 const OrderCompletedPage = (props) => {
 
@@ -171,6 +173,7 @@ const OrderCompletedPage = (props) => {
             }
         }*/
         if(completedOrderDetails?.conditions?.refund_before_departure?.allowed){
+            const CURRENCY_SYMBOL=get_currency_symbol(completedOrderDetails?.conditions?.refund_before_departure?.penalty_currency);
             IMPORTANT_NOTICES.push(
                 <div style={{display: "flex"}}>
                     <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
@@ -180,8 +183,9 @@ const OrderCompletedPage = (props) => {
                     <div>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
                             Refund allowed with penalty amount of 
-                            {completedOrderDetails?.conditions?.refund_before_departure?.penalty_currency}
-                            {completedOrderDetails?.conditions?.refund_before_departure?.penalty_amount}
+                            <span style={{marginLeft: 5, fontFamily: "'Prompt', Sans-serif", fontSize: 13}} 
+                                dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                             {(markup(completedOrderDetails?.conditions?.refund_before_departure?.penalty_amount).new_price).toFixed(2)}
                         </p>
                     </div>
                 </div>
@@ -203,6 +207,7 @@ const OrderCompletedPage = (props) => {
         }
 
         if(completedOrderDetails?.conditions?.change_before_departure?.allowed){
+            const CURRENCY_SYMBOL=get_currency_symbol(completedOrderDetails?.conditions?.change_before_departure?.penalty_currency);
             IMPORTANT_NOTICES.push(
                 <div style={{display: "flex"}}>
                     <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
@@ -211,9 +216,10 @@ const OrderCompletedPage = (props) => {
                     </div>
                     <div>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                            Changes allowed with penalty amount of 
-                            {completedOrderDetails?.conditions?.change_before_departure?.penalty_currency}
-                            {completedOrderDetails?.conditions?.change_before_departure?.penalty_amount}
+                            Changes allowed with penalty amount of
+                            <span style={{marginLeft: 5, fontFamily: "'Prompt', Sans-serif", fontSize: 13}} 
+                                dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                             {(markup(completedOrderDetails?.conditions?.change_before_departure?.penalty_amount).new_price).toFixed(2)}
                         </p>
                     </div>
                 </div>
@@ -329,11 +335,18 @@ const OrderCompletedPage = (props) => {
                                     <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
                                     {completedOrderDetails?.owner?.name}
                                 </p>
-                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                    <a href={completedOrderDetails?.owner?.conditions_of_carriage_url}  rel="noreferrer" target="_blank">
-                                        read more at {completedOrderDetails?.owner?.conditions_of_carriage_url}
-                                    </a>
-                                </p>
+                                {
+                                    completedOrderDetails?.owner?.conditions_of_carriage_url ?
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                        <a href={completedOrderDetails?.owner?.conditions_of_carriage_url}  rel="noreferrer" target="_blank">
+                                            read more at {completedOrderDetails?.owner?.conditions_of_carriage_url}
+                                        </a>
+                                    </p> : 
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                        <i style={{color: "orange", marginRight: 10}} className="fa-solid fa-exclamation-triangle"></i>
+                                        Airline website not found
+                                    </p>
+                                }
                             </div>
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
@@ -345,6 +358,32 @@ const OrderCompletedPage = (props) => {
                                 Tax Amount: $70.23</p>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
                                 Total Paid: $530.46</p>
+                        </div>
+                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                            Weather</h1>
+                        <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
+                            <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                                <i style={{color: "rgba(0,0,0,0.5)"}}
+                                        className="fa-solid fa-temperature-high"></i>
+                            </div>
+                            <div>
+                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                    New York -
+                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                        56°</span>
+                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                        | heavy rain</span>
+                                    | please hold an umbrella
+                                </p>
+                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                    Accra -
+                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                        78°</span>
+                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                        | sunny</span>
+                                    | please avoid heavy coats
+                                </p>
+                            </div>
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Important Notices</h1>
