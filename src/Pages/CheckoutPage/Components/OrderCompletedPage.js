@@ -32,6 +32,17 @@ const OrderCompletedPage = (props) => {
         .segments[(completedOrderDetails?.slices[(completedOrderDetails?.slices?.length - 1)]?.segments?.length - 1)].destination?.city_name
     );
 
+    const DESTINATION_IATA=(
+        completedOrderDetails?.slices 
+        && completedOrderDetails?.slices[0].segments 
+        && completedOrderDetails?.slices[0].segments[0].destination?.iata_code
+    );
+    const DESTINATION_CITY_NAME=(
+        completedOrderDetails?.slices 
+        && completedOrderDetails?.slices[0].segments 
+        && completedOrderDetails?.slices[0].segments[0].destination?.city_name
+    );;
+
     const SLICES_LENGHT = completedOrderDetails?.slices?.length;
     let is_one_way=(SLICES_LENGHT<2);
     let is_round_trip=(
@@ -277,7 +288,7 @@ const OrderCompletedPage = (props) => {
                                 {FIRST_SLICE_CITY_NAME} - {FIRST_SLICE_ORIGIN_IATA}
                                 {is_one_way && <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>}
                                 {is_round_trip && <i style={{margin: "0 10px"}} className="fa-solid fa-rotate"></i>}
-                                {LAST_SLICE_CITY_NAME} - {LAST_SLICE_DESTINATION_IATA}
+                                {DESTINATION_CITY_NAME} - {DESTINATION_IATA}
                             </p>
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                 <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
@@ -287,7 +298,7 @@ const OrderCompletedPage = (props) => {
                                 completedOrderDetails?.slices?.map((each, index) => {
                                     return <div>
                                         <span onClick={()=>global.toggle_see_ticket_details_itinerary_details((index+"_completed_order_details_itinerary_details"))} 
-                                            style={{cursor: "pointer", marginLeft: 15, fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
+                                            style={{cursor: "pointer", fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
                                             <i style={{marginRight: 10}} className="fa-solid fa-route"></i>
                                             {each.origin.city_name} to {each.destination.city_name}<i style={{marginLeft: 5, color: "rgba(0,0,0,0.5)"}} className="fa fa-angle-down"></i>
                                         </span>
@@ -327,8 +338,13 @@ const OrderCompletedPage = (props) => {
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Payment Details</h1>
-                        <div style={{marginBottom: 10}}>
-
+                        <div style={{marginBottom: 10, paddingLeft: 10}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                Base Amount: $460.23</p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                Tax Amount: $70.23</p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
+                                Total Paid: $530.46</p>
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Important Notices</h1>
