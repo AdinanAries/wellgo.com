@@ -52,6 +52,19 @@ const OrderCompletedPage = (props) => {
         && (FIRST_SLICE_ORIGIN_IATA===LAST_SLICE_DESTINATION_IATA)
     );
 
+    const _date_time=(
+        completedOrderDetails?.slices
+        && completedOrderDetails?.slices[0]?.segments
+        && completedOrderDetails?.slices[0]?.segments[0]?.departure_datetime
+    )
+    const FLIGHT_DATE=(get_short_date_DAYMMMDD((_date_time || "")));
+    const _time=(
+        completedOrderDetails?.slices
+        && completedOrderDetails?.slices[0]?.segments
+        && completedOrderDetails?.slices[0]?.segments[0]?.departure_datetime.split("T")[1]
+    );
+    const TAKE_OFF_TIME=convert24HTimeToAMPM((_time || ""));
+
     const SEGMENTS = [];
     completedOrderDetails?.slices?.forEach(slice=>{
         slice.segments.forEach(segment=> {
@@ -302,9 +315,17 @@ const OrderCompletedPage = (props) => {
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                                 <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
                                 Your booking reference is
-                                <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
+                                <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.9)", fontSize: 13}}>
                                     {completedOrderDetails.booking_reference}
                                 </span>
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                Please remember your flight is on
+                                <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, margin: "0 10px", color: "black", fontWeight: "bolder"}}>
+                                    {FLIGHT_DATE}</span>
+                                and takes off at
+                                <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, margin: "0 10px", color: "black", fontWeight: "bolder"}}>
+                                    {TAKE_OFF_TIME}</span>
                             </p>
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                 <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
