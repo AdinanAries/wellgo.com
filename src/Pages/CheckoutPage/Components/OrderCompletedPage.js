@@ -254,6 +254,15 @@ const OrderCompletedPage = (props) => {
                         {completedOrderDetails.booking_reference}
                     </span>
                 </p>
+                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                    <i style={{color: "rgba(0,0,0,0.5)", marginRight: 10}}
+                        className="fa-solid fa-temperature-high"></i>
+                    New York (Thu Mar 23) -
+                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                        56°</span>
+                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                        | heavy rain</span>
+                </p>
                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                     <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
                     Your booking has been confirmed!
@@ -263,7 +272,7 @@ const OrderCompletedPage = (props) => {
                 </p>
                 <div style={{padding: 10}}>
                     <div style={{display: "flex"}}>
-                    <div style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                        <div style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                             <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plus"></i>
                             add ancillaries
                         </div>
@@ -283,18 +292,19 @@ const OrderCompletedPage = (props) => {
                             Click to Print</span></p>
                         <div className="printable" style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
                             <div style={{marginBottom: 10}}>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
-                                <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
-                                Reference Number:
-                                <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
-                                    {completedOrderDetails.booking_reference}
-                                </span>
-                            </p>
+                            
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                                 {FIRST_SLICE_CITY_NAME} - {FIRST_SLICE_ORIGIN_IATA}
                                 {is_one_way && <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>}
                                 {is_round_trip && <i style={{margin: "0 10px"}} className="fa-solid fa-rotate"></i>}
                                 {DESTINATION_CITY_NAME} - {DESTINATION_IATA}
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
+                                Your booking reference is
+                                <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
+                                    {completedOrderDetails.booking_reference}
+                                </span>
                             </p>
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                 <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
@@ -368,7 +378,7 @@ const OrderCompletedPage = (props) => {
                             </div>
                             <div>
                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                    New York -
+                                    New York (Thu Mar 23) -
                                     <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                                         56°</span>
                                     <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
@@ -376,7 +386,7 @@ const OrderCompletedPage = (props) => {
                                     | please hold an umbrella
                                 </p>
                                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                    Accra -
+                                    Accra (Thu Mar 23) -
                                     <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                                         78°</span>
                                     <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
