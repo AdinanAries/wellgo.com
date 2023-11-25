@@ -326,6 +326,11 @@ const OrderCompletedPage = (props) => {
                             </div>
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                            Payment Details</h1>
+                        <div style={{marginBottom: 10}}>
+
+                        </div>
+                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Important Notices</h1>
                             <div style={{padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
                                 {IMPORTANT_NOTICES.map(each=>each)}
