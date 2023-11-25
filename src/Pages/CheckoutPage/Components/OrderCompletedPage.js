@@ -1,3 +1,4 @@
+import SelectedTicketItinSegments from "../../SearchPage/Components/SelectedTicketItinSegments";
 import { get_short_date_DAYMMMDD, convert24HTimeToAMPM } from "../../../helpers/general";
 
 const OrderCompletedPage = (props) => {
@@ -12,6 +13,28 @@ const OrderCompletedPage = (props) => {
     console.log("Order:", completedOrderDetails);
     completedOrderDetails?.slices?.forEach(slice=>{
         slice.segments.forEach(segment=> {
+
+            let seats="";
+            let total_checked_baggages=0;
+            let total_carry_on_baggages=0;
+            segment.passengers.forEach(passenger=>{
+                seats+= passenger.seat ? `${passenger.seat}, ` : "";
+                passenger.baggages.forEach(baggage=>{
+                    if(baggage.type==="checked"){
+                        total_checked_baggages+=parseInt(baggage.quantity);
+                    }
+                    if(baggage.type==="carry_on"){
+                        total_carry_on_baggages+=parseInt(baggage.quantity);
+                    }
+                });
+
+                completedOrderDetails.passengers.forEach(flight_passenger=>{
+                    if(passenger.passenger_id===flight_passenger.id){
+                        flight_passenger.extras=passenger;
+                    }
+                });
+            });
+
             SEGMENTS.push(
                 <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
                     <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
@@ -36,10 +59,14 @@ const OrderCompletedPage = (props) => {
                             {convert24HTimeToAMPM(segment.arrival_datetime.split("T")[1]) + ")"}
                         </p>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            Take off: {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1])}, Aircraft: {segment.aircraft.name}, Checked bags: 4, Carry-on bags: 5
+                            This flight is operated by {segment.operating_carrier.name}. Please click <a href={segment.operating_carrier.conditions_of_carriage_url}>
+                            here</a> to learn more about the airline conditions
                         </p>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            Amenities: wifi, power, seat 44E
+                            Take off: {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1])}, Aircraft: {segment.aircraft.name}, Checked bags: {total_checked_baggages}, Carry-on bags: {total_carry_on_baggages}
+                        </p>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                            Amenities: wifi, power | Seats: {seats}
                         </p>
                     </div>
                 </div>
@@ -47,11 +74,52 @@ const OrderCompletedPage = (props) => {
         })
     });
 
+    // Generating passengers markup
+    const PASSENGERS=[];
+    completedOrderDetails?.passengers?.forEach(passenger=>{
+
+        let seat=passenger.extras.seat || "unspecified";
+        let total_checked_baggages=0;
+        let total_carry_on_baggages=0;
+        let cabin_class = passenger.extras.cabin_class;
+        let email=passenger.email;
+        let phone=passenger.phone_number;
+        let name = `${passenger.given_name} ${passenger.family_name}`
+        passenger.extras.baggages.forEach(baggage=>{
+            if(baggage.type==="checked"){
+                total_checked_baggages+=parseInt(baggage.quantity);
+            }
+            if(baggage.type==="carry_on"){
+                total_carry_on_baggages+=parseInt(baggage.quantity);
+            }
+        });
+
+        PASSENGERS.push(
+            <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
+                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                    <i style={{color: "rgba(0,0,0,0.5)"}}
+                            className="fa-solid fa-user"></i>
+                </div>
+                <div>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                        {name}
+                    </p>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                        {email}, {phone}
+                    </p>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                        Seat: {seat}, Cabin: {cabin_class}, Checked bags: {total_checked_baggages}, Carry-on bags: {total_carry_on_baggages}
+                    </p>
+                </div>
+            </div>
+        );
+    });
+
     return (
         <div style={{position: "relative"}}>
             <div style={{padding: "20px 0"}}>
                 <p className="pop-up-close-btn" onClick={pickAnotherFlightOnclick} 
-                    style={{cursor: "pointer", color: "rgb(255,0,0)", fontSize: 33, position: "absolute", right: 10, top: 10}}>
+                    style={{cursor: "pointer", zIndex: 1, color: "rgb(255,0,0)", fontSize: 33, position: "absolute", right: 10, top: 10}}>
                     &times;
                 </p>
                 <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
@@ -86,15 +154,38 @@ const OrderCompletedPage = (props) => {
                 </div>
                 <div>
                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "5px 0"}}>
-                        See Details Below: <span style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
+                        See Details Below: <span onClick={window.print} style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
                             Click to Print</span></p>
-                    <div style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
-                        <div style={{marginBottom: 10}}>
+                        <div className="printable" style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
+                            <div style={{marginBottom: 10}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
+                                <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
+                                Reference Number:
+                                <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
+                                    {completedOrderDetails.booking_reference}
+                                </span>
+                            </p>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                                 New York 
                                 <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>
                                 Accra
                             </p>
+                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                                <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
+                                {completedOrderDetails?.owner?.name}
+                            </p>
+                            {
+                                completedOrderDetails?.slices?.map((each, index) => {
+                                    return <div>
+                                        <span onClick={()=>global.toggle_see_ticket_details_itinerary_details((index+"_completed_order_details_itinerary_details"))} 
+                                            style={{cursor: "pointer", marginLeft: 15, fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
+                                            <i style={{marginRight: 10}} className="fa-solid fa-route"></i>
+                                            {each.origin.city_name} to {each.destination.city_name}<i style={{marginLeft: 5, color: "rgba(0,0,0,0.5)"}} className="fa fa-angle-down"></i>
+                                        </span>
+                                        <SelectedTicketItinSegments element_id={(index+"_completed_order_details_itinerary_details")} segments={each.segments}/>
+                                    </div>
+                                })
+                            }
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Segments/Stops</h1>
@@ -105,46 +196,21 @@ const OrderCompletedPage = (props) => {
                             Passengers</h1>
                         <div>
                             <div style={{display: "flex", flexWrap: "wrap"}}>
-                                <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
-                                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                                        <i style={{color: "rgba(0,0,0,0.5)"}}
-                                                className="fa-solid fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                            Mohammed Adinan
-                                        </p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                            m.adinan@yahoo.com, +17327999546
-                                        </p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                            Seat: 44E, Cabin: economy, Checked bags: 1, Carry-on bags: 1
-                                        </p>
-                                    </div>
-                                </div>
-                                <div style={{display: "flex", paddingBottom: 10}}>
-                                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                                        <i style={{color: "rgba(0,0,0,0.5)"}}
-                                                className="fa-solid fa-user"></i>
-                                    </div>
-                                    <div>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                            Mohammed Adinan
-                                        </p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                            m.adinan@yahoo.com, +17327999546
-                                        </p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                            Seat: 44E, Cabin: economy, Checked bags: 1, Carry-on bags: 1
-                                        </p>
-                                    </div>
-                                </div>
+                                {PASSENGERS.map(each=>each)}
                             </div>
                         </div>
 
                         <div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Important Notice</h1>
+                            Airline Details</h1>
+                        <div>
+                            <div>
+                                <p>Sold by: </p>
+                                <p>Operatored by: </p>
+                            </div>
+                        </div>
+                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                            Important Notices</h1>
                             <div style={{display: "flex", padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
                                 <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
                                     <i style={{color: "orange"}}

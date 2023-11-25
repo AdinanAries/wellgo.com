@@ -1,6 +1,17 @@
 :root {
   --app-height: 100%;
 }
+@media print {
+    body {
+      visibility: hidden;
+    }
+    .printable {
+      visibility: visible;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+}
 * {
   box-sizing: border-box;
   margin: 0;
