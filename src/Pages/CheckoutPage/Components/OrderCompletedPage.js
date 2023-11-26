@@ -66,7 +66,19 @@ const OrderCompletedPage = (props) => {
     const TAKE_OFF_TIME=convert24HTimeToAMPM((_time || ""));
 
     const SEGMENTS = [];
-    completedOrderDetails?.slices?.forEach(slice=>{
+    completedOrderDetails?.slices?.forEach((slice, index)=>{
+
+        SEGMENTS.push(<div style={{marginBottom: 10}}>
+            <span onClick={()=>global.toggle_see_ticket_details_itinerary_details((index+"_completed_order_details_itinerary_details"))} 
+                style={{cursor: "pointer", fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
+                <i style={{marginRight: 10}} className="fa-solid fa-route"></i>
+                {slice.origin.city_name} to {slice.destination.city_name}
+                <span style={{color: "brown", textDecoration: "underline", fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginLeft: 10}}>
+                    show route</span>
+            </span>
+            <SelectedTicketItinSegments element_id={(index+"_completed_order_details_itinerary_details")} segments={slice.segments}/>
+        </div>);
+
         slice.segments.forEach(segment=> {
 
             let seats="";
@@ -91,40 +103,45 @@ const OrderCompletedPage = (props) => {
             });
 
             SEGMENTS.push(
-                <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
-                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                        <i style={{color: "rgba(0,0,0,0.5)"}}
-                                className="fa-solid fa-plane-departure"></i>
-                    </div>
+                <div style={{display: "flex", paddingBottom: 13, paddingLeft: 20}}>
                     <div>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                            {segment.origin.city_name} - {segment.origin.name}
+                            {segment.origin.iata_code}, {segment.origin.city_name}
                             <span style={{margin: "0 10px", fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.6)"}}>
                                 to
                             </span>
-                            {segment.destination.city_name} - {segment.destination.name}
+                            {segment.destination.iata_code}, {segment.destination.city_name}
                         </p>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            {get_short_date_DAYMMMDD(segment.departure_datetime) + " ("}
-                            {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1]) + ")"}
-                            <span style={{margin: "0 10px", fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.6)"}}>
-                                to
-                            </span>
-                            {get_short_date_DAYMMMDD(segment.arrival_datetime) + " ("}
-                            {convert24HTimeToAMPM(segment.arrival_datetime.split("T")[1]) + ")"}
-                        </p>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            This flight is operated by {segment.operating_carrier.name}. Please click <a href={segment.operating_carrier.conditions_of_carriage_url} rel="noreferrer" target="_blank">
-                            here</a> to learn more about the airline conditions
-                        </p>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                Take off: {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1])}
-                            </span>, Aircraft: {segment.aircraft.name}, Checked bags: {total_checked_baggages}, Carry-on bags: {total_carry_on_baggages}
-                        </p>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            Amenities: wifi, power | Seats: {seats}
-                        </p>
+                        <div style={{paddingLeft: 10}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                {segment.origin.name}
+                                <span style={{margin: "0 10px", fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.6)"}}>
+                                    to
+                                </span>
+                                {segment.destination.name}
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                {get_short_date_DAYMMMDD(segment.departure_datetime) + " ("}
+                                {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1]) + ")"}
+                                <span style={{margin: "0 10px", fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.6)"}}>
+                                    to
+                                </span>
+                                {get_short_date_DAYMMMDD(segment.arrival_datetime) + " ("}
+                                {convert24HTimeToAMPM(segment.arrival_datetime.split("T")[1]) + ")"}
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                This flight is operated by {segment.operating_carrier.name}. {segment.operating_carrier.conditions_of_carriage_url && <a href={segment.operating_carrier.conditions_of_carriage_url} rel="noreferrer" target="_blank">
+                                Please click here to learn more about the airline conditions</a>}
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                    Take off: {convert24HTimeToAMPM(segment.departure_datetime.split("T")[1])}
+                                </span>, Aircraft: {segment.aircraft.name}, Checked bags: {total_checked_baggages}, Carry-on bags: {total_carry_on_baggages}
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                Amenities: wifi, power | Seats: {seats}
+                            </p>
+                        </div>
                     </div>
                 </div>
             )
@@ -173,18 +190,6 @@ const OrderCompletedPage = (props) => {
     });
 
     const IMPORTANT_NOTICES=[];
-        /*"conditions": {
-            "refund_before_departure": {
-                "penalty_currency": "GBP",
-                "penalty_amount": "50.00",
-                "allowed": true
-            },
-            "change_before_departure": {
-                "penalty_currency": null,
-                "penalty_amount": null,
-                "allowed": false
-            }
-        }*/
         if(completedOrderDetails?.conditions?.refund_before_departure?.allowed){
             const CURRENCY_SYMBOL=get_currency_symbol(completedOrderDetails?.conditions?.refund_before_departure?.penalty_currency);
             IMPORTANT_NOTICES.push(
@@ -327,26 +332,10 @@ const OrderCompletedPage = (props) => {
                                 <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, margin: "0 10px", color: "black", fontWeight: "bolder"}}>
                                     {TAKE_OFF_TIME}</span>
                             </p>
-                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                                <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
-                                {completedOrderDetails?.owner?.name}
-                            </p>
-                            {
-                                completedOrderDetails?.slices?.map((each, index) => {
-                                    return <div>
-                                        <span onClick={()=>global.toggle_see_ticket_details_itinerary_details((index+"_completed_order_details_itinerary_details"))} 
-                                            style={{cursor: "pointer", fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
-                                            <i style={{marginRight: 10}} className="fa-solid fa-route"></i>
-                                            {each.origin.city_name} to {each.destination.city_name}<i style={{marginLeft: 5, color: "rgba(0,0,0,0.5)"}} className="fa fa-angle-down"></i>
-                                        </span>
-                                        <SelectedTicketItinSegments element_id={(index+"_completed_order_details_itinerary_details")} segments={each.segments}/>
-                                    </div>
-                                })
-                            }
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Segments/Stops</h1>
-                        <div style={{display: "flex", flexWrap: "wrap"}}>
+                            Flights</h1>
+                        <div>
                             {SEGMENTS.map(each=>each)}
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
