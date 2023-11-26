@@ -34,6 +34,38 @@ const Reviewers = [
             ICAO: "EGLL",
             pictures: [AccraImg, LAImg, ParisImg]
         },
+        scores: {
+            safety: {
+                rating: 7,
+                notes: "Good to know",
+                url: ""
+            },
+            subway: {
+                rating: 8,
+                notes: "Got it thank you",
+                url: ""
+            },
+            taxi: {
+                rating: 5,
+                notes: "Give me a break",
+                url: ""
+            },
+            bus: {
+                rating: 8,
+                notes: "Dont go there",
+                url: ""
+            },
+            cost: {
+                rating: 4,
+                notes: "Ture message",
+                url: ""
+            },
+            urbanization: {
+                rating: 7,
+                notes: "Start from any where",
+                url: ""
+            }
+        },
         reviews: [
             {
                 name: "Evelin Grigory",
@@ -89,6 +121,38 @@ const Reviewers = [
             ICAO: "DGAA",
             pictures: [pic7, pic8, pic9]
         },
+        scores: {
+            safety: {
+                rating: 8,
+                notes: "Sounds Right",
+                url: ""
+            },
+            subway: {
+                rating: 4,
+                notes: "We are moving, regardless",
+                url: ""
+            },
+            taxi: {
+                rating: 7,
+                notes: "Let's hope for the best",
+                url: ""
+            },
+            bus: {
+                rating: 6,
+                notes: "Better days ahead",
+                url: ""
+            },
+            cost: {
+                rating: 9,
+                notes: "Stop dreaming, start doing",
+                url: ""
+            },
+            urbanization: {
+                rating: 5,
+                notes: "We outside",
+                url: ""
+            }
+        },
         reviews: [
             {
                 name: "Setzo Aldavis",
@@ -133,6 +197,38 @@ const Reviewers = [
             IATA: "LBG",
             ICAO: "LFPB",
             pictures: [pic1, pic2, pic3]
+        },
+        scores: {
+            safety: {
+                rating: 5,
+                notes: "Give it a try",
+                url: ""
+            },
+            subway: {
+                rating: 9,
+                notes: "Sold to the game",
+                url: ""
+            },
+            taxi: {
+                rating: 5,
+                notes: "Starting to make an impact",
+                url: ""
+            },
+            bus: {
+                rating: 7,
+                notes: "Go there and prove it",
+                url: ""
+            },
+            cost: {
+                rating: 5,
+                notes: "Its ok to be dumb",
+                url: ""
+            },
+            urbanization: {
+                rating: 8,
+                notes: "Try not to loose yourself",
+                url: ""
+            }
         },
         reviews: [
             {
@@ -208,6 +304,38 @@ const Reviewers = [
             IATA: "PEK",
             ICAO: "ZBAA",
             pictures: [pic4, pic5, pic6]
+        },
+        scores: {
+            safety: {
+                rating: 9,
+                notes: "This is the safest place on earth",
+                url: ""
+            },
+            subway: {
+                rating: 8,
+                notes: "Lost of effort",
+                url: ""
+            },
+            taxi: {
+                rating: 9,
+                notes: "Ok.. enough",
+                url: ""
+            },
+            bus: {
+                rating: 4,
+                notes: "Give yourself a treat...",
+                url: ""
+            },
+            cost: {
+                rating: 9,
+                notes: "Go for it",
+                url: ""
+            },
+            urbanization: {
+                rating: 8,
+                notes: "Start from somewhere",
+                url: ""
+            }
         },
         reviews: [
             {

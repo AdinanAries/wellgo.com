@@ -39,6 +39,7 @@ const Reviews = () => {
     const CITY_NAME = ratedPlaces[currentCityIndex].place.name;
     const TRAVEL_PRICE = ratedPlaces[currentCityIndex].place.price;
     const PICTURES = ratedPlaces[currentCityIndex].place.pictures;
+    const SCORES = ratedPlaces[currentCityIndex].scores;
 
     let current_reviewer = slice;
     //let current=slice;
@@ -343,7 +344,7 @@ const Reviews = () => {
                                 {reviewers[current].msg}
                             </p>
                             <div style={{display: "flex", justifyContent: "center", marginTop: 10}}>
-                                <PlacesReviewsScores />
+                                <PlacesReviewsScores  scores={SCORES}/>
                             </div>
                             <p style={{marginTop: 5, /*fontFamily: "Courgette",*/ color: "rgba(0,0,0,0.6)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                 - {reviewers[current].name} -
