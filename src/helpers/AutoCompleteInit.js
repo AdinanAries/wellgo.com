@@ -589,6 +589,7 @@ const AutoCompleteInit = () => {
     }
 
     function sp_return_history_markup(obj, type){
+        if(!obj) return "";
         if(type === "origin"){
             return `
                 <li><div onclick="sp_changeAirportsFromInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
