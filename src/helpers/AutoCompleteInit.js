@@ -436,6 +436,7 @@ const AutoCompleteInit = () => {
     }
 
     function return_history_markup(obj, type){
+        if(!obj) return "";
         if(type === "origin"){
             return `
                 <li><div onclick="changeAirportsFromInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
