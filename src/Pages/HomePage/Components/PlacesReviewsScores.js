@@ -100,8 +100,8 @@ const PlacesReviewsScores = (props) => {
                         </p>
                     </div>
                     <div style={{fontFamily: "'Prompt', Sans-serif", textAlign: "center", position: "relative", display: "flex", justifyContent: "center", alignItems: "center", width: 50, height: 50, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)"}}>
-                        <i style={{fontSize: 20, color: "rgb(199, 81, 185)"}} className="fa-solid fa-train-subway"></i>
-                        <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: 22, height: 22, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", position: "absolute", top: 0, right: -7, color: "white", backgroundColor: "rgb(199, 81, 185)"}}>
+                        <i style={{fontSize: 20, color: scores.subway.rating ? "rgb(199, 81, 185)" : "rgba(0,0,0,0.4)"}} className="fa-solid fa-train-subway"></i>
+                        <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: 22, height: 22, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", position: "absolute", top: 0, right: -7, color: "white", backgroundColor: scores.subway.rating ? "rgb(199, 81, 185)" : "rgba(0,0,0,0.4)"}}>
                             {scores.subway.rating}</p>
                     </div>
                 </div>

@@ -205,8 +205,8 @@ const Reviewers = [
                 url: ""
             },
             subway: {
-                rating: 9,
-                notes: "Sold to the game",
+                rating: 0,
+                notes: "This city doensn't have a subway system",
                 url: ""
             },
             taxi: {
