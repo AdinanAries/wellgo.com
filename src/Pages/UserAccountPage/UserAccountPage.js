@@ -151,6 +151,7 @@ function UserAccountPage(props){
     }
 
     const ShowBookingHistory = async (filters=null, page=1, limit=100) => {
+        console.log("Booking Filters:", filters);
         let departure_date = filters?.departure_date || "";
         let return_date = filters?.return_date || "";
         let trip_type = filters?.trip_type || "";
