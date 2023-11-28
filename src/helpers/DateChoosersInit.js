@@ -62,8 +62,14 @@ const DateChoosersInit = (type=CONSTANTS.one_way) => {
           //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
       });
-      if(document.getElementById("booking_history_date_range_input"))
+      if(document.getElementById("booking_history_date_range_input")){
         document.getElementById("booking_history_date_range_input").value="";
+        if(type===CONSTANTS.one_way){
+          document.getElementById("booking_history_date_range_input").placeholder="departure date"
+        }else{
+          document.getElementById("booking_history_date_range_input").placeholder="departure - return dates"
+        }
+      }
       window.$(function() {
         window.$('#booking_history_date_range_input').daterangepicker({
           opens: 'left',
@@ -78,7 +84,7 @@ const DateChoosersInit = (type=CONSTANTS.one_way) => {
             if(document.getElementById("booking_history_date_range_input"))
                 document.getElementById("booking_history_date_range_input").value = start.toString().substring(0,11) + ((type===CONSTANTS.round_trip) ? " - "+ end.toString().substring(0,11) : "");
           }, 100);
-      
+          
           const _departure = start.format('YYYY-MM-DD');
           const _return = end.format('YYYY-MM-DD');
           global._setFlightHistoryFilterDates(_departure, _return);
