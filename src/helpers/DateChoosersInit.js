@@ -62,9 +62,12 @@ const DateChoosersInit = (type=CONSTANTS.one_way) => {
           //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
       });
+      if(document.getElementById("booking_history_date_range_input"))
+        document.getElementById("booking_history_date_range_input").value="";
       window.$(function() {
         window.$('#booking_history_date_range_input').daterangepicker({
           opens: 'left',
+          singleDatePicker: (type===CONSTANTS.one_way),
           autoUpdateInput: false,
           locale: {
             cancelLabel: 'Clear'
@@ -73,16 +76,13 @@ const DateChoosersInit = (type=CONSTANTS.one_way) => {
       
           setTimeout(()=>{
             if(document.getElementById("booking_history_date_range_input"))
-                document.getElementById("booking_history_date_range_input").value = start.toString().substring(0,11) +" - "+ end.toString().substring(0,11);
+                document.getElementById("booking_history_date_range_input").value = start.toString().substring(0,11) + ((type===CONSTANTS.round_trip) ? " - "+ end.toString().substring(0,11) : "");
           }, 100);
       
-          /*let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
-          flight_search_data.itinerary.departure.date = start.format('YYYY-MM-DD');
-          flight_search_data.itinerary.arrival.date = end.format('YYYY-MM-DD');
+          const _departure = start.format('YYYY-MM-DD');
+          const _return = end.format('YYYY-MM-DD');
+          global._setFlightHistoryFilterDates(_departure, _return);
       
-          window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));*/
-      
-          //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
       });
 }

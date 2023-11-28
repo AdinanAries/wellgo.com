@@ -4,11 +4,11 @@ const API_URL = getApiHost();
 const USER_TOKEN = getUserToken();
 
 export const fetchBookingHistory = async ( 
-    from_date, to_date, page, limit,
+    departure_date="", return_date="", trip_type="", cabin_type="", page=1, limit=100,
     path=`\\api\\bookings\\all\\`
 ) => {
     try{
-        return await fetch(API_URL+path+`?p=${page}&l=${limit}&from_date=${from_date}&to_date=${to_date}`, {
+        return await fetch(API_URL+path+`?p=${page}&l=${limit}&departure_date=${departure_date}&trip_type=${trip_type}&cabin_type=${cabin_type}&return_date=${return_date}`, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',

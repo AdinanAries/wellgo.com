@@ -48,7 +48,7 @@ function UserAccountPage(props){
                 setUserForm(_user);
                 setIsLoading(false);
                 // Bookings History
-                let _bookings = ShowBookingHistory(new Date().toISOString(), new Date(new Date().getDay()+6).toISOString());
+                let _bookings = ShowBookingHistory();
                 setBookings(_bookings);
             }else{
                 logoutOnclick();
@@ -150,9 +150,13 @@ function UserAccountPage(props){
         }
     }
 
-    const ShowBookingHistory = async (from_date, to_date, page="1", limit="10", type="all", cabin="all") => {
+    const ShowBookingHistory = async (filters=null, page=1, limit=100) => {
+        let departure_date = filters?.departure_date || "";
+        let return_date = filters?.return_date || "";
+        let trip_type = filters?.trip_type || "";
+        let cabin_type = filters?.cabin_type || "";
         setIsBookingHistoryLoading(true);
-        let _booking_history=await fetchBookingHistory(from_date, to_date, page, limit);
+        let _booking_history=await fetchBookingHistory(departure_date, return_date, trip_type, cabin_type, page, limit);
         setBookings(_booking_history);
         setIsBookingHistoryLoading(false);
     }
