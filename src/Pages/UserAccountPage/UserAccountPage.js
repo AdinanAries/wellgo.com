@@ -51,7 +51,10 @@ function UserAccountPage(props){
                 let _bookings = ShowBookingHistory();
                 setBookings(_bookings);
             }else{
-                logoutOnclick();
+                setIsLoading(false);
+                setUser(_user);
+                if(_user?.status && _user?.status === 401)
+                    logoutOnclick();
             }
         })();
     }, []);
@@ -162,6 +165,10 @@ function UserAccountPage(props){
         setIsBookingHistoryLoading(false);
     }
 
+    const reloadPage = () => {
+        window.location.reload();
+    }
+
     return (
         <div id="user_account_manager_page" style={{display: (!isLoggedIn ? "none" : "block")}}>
             {
@@ -184,6 +191,10 @@ function UserAccountPage(props){
                                 <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
                                     <i style={{marginRight: 15, fontSize: 19, color: "orangered", textShadow: "1px 2px 3px rgba(0,0,0,0.2)"}} className="fa fa-exclamation-triangle"></i>
                                     Something Went Wrong</p>
+                                <p onClick={reloadPage} style={{cursor: "pointer", fontSize: 14, fontWeight: "bolder", marginTop: 20, textAlign: "center"}}>
+                                    <i className="fa-solid fa-refresh"
+                                        style={{marginRight: 10}}></i>
+                                    RELOAD PAGE</p>
                             </div>
                         </div> :
                         <div className="user_account_page_container">

@@ -1,4 +1,4 @@
-import { getApiHost, getUserToken } from "../Constants/Environment";
+import { getApiHost, getUserToken, deleteUserToken } from "../Constants/Environment";
 
 const API_URL = getApiHost();
 const USER_TOKEN = getUserToken();
@@ -14,14 +14,18 @@ export const fetchAccountInfo = async (path=`\\api\\users\\me\\`) => {
             },
         })
         .then(res => res.json())
-        .then(data => data)
+        .then(data => {
+            if(data?.status && data?.status === 401)
+                deleteUserToken();
+            return data
+        })
         .catch(err => {
             console.log(err);
-            return {isError: true};
+            return {isError: true, message: err.message};
         })
     } catch (e){
         console.log(e);
-        return {isError: true};
+        return {isError: true, message: e.message};
     }
 }
 
