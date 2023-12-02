@@ -15,37 +15,46 @@ const CheckoutInfo = (props) => {
             available_services, passengers 
     } = flight;
 
-    const [ includedCheckedBagsTotal, setincludedCheckedBagsTotal] = useState(0);
+    const [ includedCheckedBagsTotal, setIncludedCheckedBagsTotal] = useState(0);
     const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
     
     const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />);
 
     const addCheckedBag = (eachPrice=0, max_numer=0) => {
-        if(includedCheckedBagsNumber<max_numer){
+        //if(includedCheckedBagsNumber<max_numer){
             const incremented = includedCheckedBagsNumber+1;
             setIncludedCheckedBagsNumber(incremented);
-            setincludedCheckedBagsTotal((incremented*eachPrice));
-        }
+            setIncludedCheckedBagsTotal((incremented*eachPrice));
+        //}
     }
 
     const removeCheckedBag = (eachPrice=0) => {
         if(includedCheckedBagsNumber>0){
             const decremented = includedCheckedBagsNumber-1;
             setIncludedCheckedBagsNumber(decremented);
-            setincludedCheckedBagsTotal((decremented*eachPrice));
+            setIncludedCheckedBagsTotal((decremented*eachPrice));
         }
     }
 
     const resetAncillaries = () => {
-        setincludedCheckedBagsTotal(0);
+        setIncludedCheckedBagsTotal(0);
         setIncludedCheckedBagsNumber(0);
         global.hide_add_ancillaries_container();
     }
 
     const saveAncillaries = () => {
         resetPriceExtras();
-        if(includedCheckedBagsNumber>0)
-            addServiceToPrices("Checked bags", includedCheckedBagsNumber, includedCheckedBagsTotal);
+        // Including ancillary services in prices
+        setTimeout(()=>{
+            if(includedCheckedBagsNumber>0){
+                addServiceToPrices(
+                    "Checked bags",
+                    includedCheckedBagsNumber,
+                    includedCheckedBagsTotal
+                );
+            }
+        }, 30);
+        
     }
 
     const saveAncillariesOnclick = () => {

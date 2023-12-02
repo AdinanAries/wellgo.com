@@ -11,7 +11,6 @@ const PriceSummary = (props) => {
     const EXTRAS_MARKUP = [];
     extras.forEach(each=>{
         overallTotal=(overallTotal+each.total);
-        alert(overallTotal);
         EXTRAS_MARKUP.push(
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
                 <p style={{fontSize: 14, letterSpacing: 1, color: "rgba(0,0,0,0.7)"}}>

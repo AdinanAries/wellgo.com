@@ -174,6 +174,7 @@ export default function CheckoutPage(props){
 
     const resetPriceExtras = () => {
         PRICES.extras=[];
+        SET_PRICES({...PRICES});
     }
 
     const nav_separator_style = {
