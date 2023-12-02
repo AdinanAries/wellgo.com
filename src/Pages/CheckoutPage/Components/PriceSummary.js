@@ -1,10 +1,30 @@
 import { markup } from "../../../helpers/Prices";
 import { get_currency_symbol } from "../../../helpers/general";
+import { useEffect, useState } from "react";
 
 const PriceSummary = (props) => {
 
     const { payments, prices, total_travelers } = props;
+    let overallTotal = parseFloat(prices.total_amount);
     
+    const { extras } = prices;
+    const EXTRAS_MARKUP = [];
+    extras.forEach(each=>{
+        overallTotal=(overallTotal+each.total);
+        alert(overallTotal);
+        EXTRAS_MARKUP.push(
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
+                <p style={{fontSize: 14, letterSpacing: 1, color: "rgba(0,0,0,0.7)"}}>
+                    {each.name} ({each.quantity})
+                </p>
+                <p style={{fontSize: 14, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
+                    <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                            dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
+                    {(markup(each.total).new_price).toFixed(2)}
+                </p>
+            </div>
+        );
+    });
 
     return (
         <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: 9, padding: 10, margin: 10}}>
@@ -32,6 +52,7 @@ const PriceSummary = (props) => {
                         {(markup(prices.base_amount).new_price).toFixed(2)}
                     </p>
                 </div>
+                {EXTRAS_MARKUP.map(each=>each)}
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
                     <p style={{fontSize: 14, letterSpacing: 1, color: "rgba(0,0,0,0.7)"}}>
                         Taxes and fees
@@ -56,7 +77,7 @@ const PriceSummary = (props) => {
                 <p style={{fontSize: 17, fontWeight: "bolder", letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
                     <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
                                 dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
-                    {(markup(prices.total_amount).new_price).toFixed(2)}
+                    {(markup(overallTotal).new_price).toFixed(2)}
                 </p>
             </div>
             <div className="checkout_page_main_checkout_btn_container">

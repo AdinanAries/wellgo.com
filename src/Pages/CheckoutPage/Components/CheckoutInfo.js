@@ -2,10 +2,11 @@ import PriceSummary from "./PriceSummary";
 import CheckoutInfoSliceCard from "./CheckoutInfoSliceCard";
 import { markup } from "../../../helpers/Prices";
 import { get_currency_symbol } from "../../../helpers/general";
+import { useState } from "react";
 
 const CheckoutInfo = (props) => {
 
-    const { flight, prices, adapted_available_services } = props;
+    const { flight, prices, adapted_available_services, addServiceToPrices, resetPriceExtras } = props;
     console.log("Checkout Infor", flight);
     console.log("Available Services", adapted_available_services);
 
@@ -14,7 +15,43 @@ const CheckoutInfo = (props) => {
             available_services, passengers 
     } = flight;
 
-    const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />)
+    const [ includedCheckedBagsTotal, setincludedCheckedBagsTotal] = useState(0);
+    const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
+    
+    const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />);
+
+    const addCheckedBag = (eachPrice=0, max_numer=0) => {
+        if(includedCheckedBagsNumber<max_numer){
+            const incremented = includedCheckedBagsNumber+1;
+            setIncludedCheckedBagsNumber(incremented);
+            setincludedCheckedBagsTotal((incremented*eachPrice));
+        }
+    }
+
+    const removeCheckedBag = (eachPrice=0) => {
+        if(includedCheckedBagsNumber>0){
+            const decremented = includedCheckedBagsNumber-1;
+            setIncludedCheckedBagsNumber(decremented);
+            setincludedCheckedBagsTotal((decremented*eachPrice));
+        }
+    }
+
+    const resetAncillaries = () => {
+        setincludedCheckedBagsTotal(0);
+        setIncludedCheckedBagsNumber(0);
+        global.hide_add_ancillaries_container();
+    }
+
+    const saveAncillaries = () => {
+        resetPriceExtras();
+        if(includedCheckedBagsNumber>0)
+            addServiceToPrices("Checked bags", includedCheckedBagsNumber, includedCheckedBagsTotal);
+    }
+
+    const saveAncillariesOnclick = () => {
+        saveAncillaries();
+        global.hide_add_ancillaries_container();
+    }
 
     const BAGGAGES=[];
     for(let i=0; i<adapted_available_services.length; i++){
@@ -66,16 +103,16 @@ const CheckoutInfo = (props) => {
                         </div>
                         <div style={{marginLeft: 10, display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
                                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginBottom: 10, textAlign: "right"}}>
-                                    Total: $0.00
+                                    Total: ${(markup(includedCheckedBagsTotal).new_price).toFixed(2)}
                                </p>
                                 <div style={{display: "flex"}}>
-                                    <p style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <p onClick={()=>removeCheckedBag(TOTAL_AMOUNT)} style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         -
                                     </p>
                                     <p style={{fontSize: 14, width: 30, height: 35, borderRadius: "100%", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                        0
+                                        {includedCheckedBagsNumber}
                                     </p>
-                                    <p style={{backgroundColor: "white", fontSize: 16, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <p onClick={()=>addCheckedBag(TOTAL_AMOUNT, QUANTITY)} style={{backgroundColor: "white", fontSize: 16, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         +
                                     </p>
                                 </div>
@@ -103,6 +140,10 @@ const CheckoutInfo = (props) => {
         <div className="checkout_page_all_info_flex_container">
             <div className="checkout_page_all_info_flex_left">
                 <div className="checkout-page-ancillary-container" style={{marginTop: 10}}>
+                    <div onClick={global.start_add_luggage_ancillary} className="checkout-page-each-ancillary">
+                        <p><img src={"./luggage_icon.png"} alt={"to do"}/></p>
+                        <p>Add Luggage</p>
+                    </div>
                     <div onClick={global.start_select_seat_ancillary} className="checkout-page-each-ancillary">
                         <p><img src={"./flight_seat.png"} alt={"to do"} /></p>
                         <p>Select Seat</p>
@@ -110,10 +151,6 @@ const CheckoutInfo = (props) => {
                     <div onClick={global.start_add_meal_ancillary} className="checkout-page-each-ancillary">
                         <p><img src={"./meal-icon.png"} alt={"to do"}/></p>
                         <p>Add Meal</p>
-                    </div>
-                    <div onClick={global.start_add_luggage_ancillary} className="checkout-page-each-ancillary">
-                        <p><img src={"./luggage_icon.png"} alt={"to do"}/></p>
-                        <p>Add Luggage</p>
                     </div>
                 </div>
                 <div id="add_ancillaries_container">
@@ -170,11 +207,11 @@ const CheckoutInfo = (props) => {
                         </p>
                     </div>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, padding: "10px 0", borderTop: "1px solid rgba(0,0,0,0.1)"}}>
-                        <div onClick={global.cancel_add_ancillaries_container} style={{backgroundColor: "white", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
+                        <div onClick={resetAncillaries} style={{backgroundColor: "white", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
                             <i style={{marginRight: 10, color: "orangered"}} className="fa fa-times"></i>
                             Cancel
                         </div>
-                        <div style={{backgroundColor: "white", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
+                        <div onClick={saveAncillariesOnclick} style={{backgroundColor: "white", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
                             <i style={{marginRight: 10, color: "green"}} className="fa fa-check"></i>
                             Save
                         </div>

@@ -16,6 +16,7 @@ export default function CheckoutPage(props){
 
     const { payload, cancel_checkout } = props;
 
+    const [ PRICES, SET_PRICES ] = useState(FLIGHT_DATA_ADAPTER.adaptPriceProps(payload));
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
     const [ isBookingConfirmed, setIsBookingConfirmed] = useState(false);
     const [ completedOrderDetails, setCompletedOrderDetails ] = useState({});
@@ -30,7 +31,6 @@ export default function CheckoutPage(props){
     });
 
     const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
-    const PRICES=FLIGHT_DATA_ADAPTER.adaptPriceProps(payload);
     const AVAILABLE_SERVICES=FLIGHT_DATA_ADAPTER.return_available_services(payload);
 
     const resetCheckoutConfirmation = () => {
@@ -163,6 +163,19 @@ export default function CheckoutPage(props){
         window.location.href="/"
     }
 
+    const addServiceToPrices = (_name, _qunatity, _total) => {
+        PRICES.extras.push({
+            name: _name,
+            quantity: _qunatity,
+            total: _total
+        });
+        SET_PRICES({...PRICES});
+    }
+
+    const resetPriceExtras = () => {
+        PRICES.extras=[];
+    }
+
     const nav_separator_style = {
         padding: 10,
         color: "rgba(0,0,0,0.2)"
@@ -233,6 +246,8 @@ export default function CheckoutPage(props){
                                     flight={payload}
                                     showPNRPage={showPNRPage}
                                     prices={PRICES}
+                                    addServiceToPrices={addServiceToPrices}
+                                    resetPriceExtras={resetPriceExtras}
                                     adapted_available_services={AVAILABLE_SERVICES}
                                 /> : ""
                         }

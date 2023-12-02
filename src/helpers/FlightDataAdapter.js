@@ -90,7 +90,8 @@ export const FLIGHT_DATA_ADAPTER = {
                 tax_amount: data.tax_amount,
                 tax_currency: data.tax_currency,
                 base_amount: data.base_amount,
-                base_currency: data.base_currency
+                base_currency: data.base_currency,
+                extras: []
             }
         }
         return prices
