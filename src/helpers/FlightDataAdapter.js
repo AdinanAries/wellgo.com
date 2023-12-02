@@ -98,6 +98,19 @@ export const FLIGHT_DATA_ADAPTER = {
 
     /**
      * 
+     * @param {*} 
+     * @returns 
+     */
+    return_available_services : (data) => {
+        let services = [];
+        if(ENVIRONMENT.data_provider===CONSTANTS.duffel){
+            services=data.available_services;
+        }
+        return services;
+    },
+
+    /**
+     * 
      */
     prepareFlightBookingLogObject: (bookingConfirmationObject) => {
         

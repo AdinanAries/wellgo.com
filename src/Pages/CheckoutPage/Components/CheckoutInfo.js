@@ -1,10 +1,13 @@
 import PriceSummary from "./PriceSummary";
 import CheckoutInfoSliceCard from "./CheckoutInfoSliceCard";
+import { markup } from "../../../helpers/Prices";
+import { get_currency_symbol } from "../../../helpers/general";
 
 const CheckoutInfo = (props) => {
 
-    const { flight, prices } = props;
+    const { flight, prices, adapted_available_services } = props;
     console.log("Checkout Infor", flight);
+    console.log("Available Services", adapted_available_services);
 
     const { total_amount, total_currency, 
             slices, owner, conditions, 
@@ -12,6 +15,89 @@ const CheckoutInfo = (props) => {
     } = flight;
 
     const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />)
+
+    const BAGGAGES=[];
+    for(let i=0; i<adapted_available_services.length; i++){
+        /**
+         * {
+                "type": "baggage",
+                "total_currency": "USD",
+                "total_amount": "25.40",
+                "segment_ids": [
+                    "seg_0000AcP2kwhhlQXyvF3U1I"
+                ],
+                "passenger_ids": [
+                    "pas_0000AcP2kwXQNeK8PMFGzq"
+                ],
+                "metadata": {
+                    "type": "checked",
+                    "maximum_weight_kg": 23,
+                    "maximum_length_cm": null,
+                    "maximum_height_cm": null,
+                    "maximum_depth_cm": null
+                },
+                "maximum_quantity": 1,
+                "id": "ase_0000AcP2qTyZUEqLYsaIQj"
+            }
+         */
+        if(adapted_available_services[i].type==="baggage"){
+            const CURRENCY_SYMBOL = get_currency_symbol(adapted_available_services[i].total_currency);
+            const TOTAL_AMOUNT = adapted_available_services[i].total_amount;
+            const QUANTITY = adapted_available_services[i]?.maximum_quantity || 0;
+            const MAX_WEIGHT_KG = (adapted_available_services[i]?.metadata && adapted_available_services[i]?.metadata?.maximum_weight_kg)
+            BAGGAGES.push(
+                <div style={{padding: 10, marginBotton: 10, cursor: "pointer", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <div>
+                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                {
+                                    QUANTITY && ("Quantity: "+QUANTITY)
+                                }
+                            </p>
+                            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginBottom: 5}}>
+                                {
+                                    MAX_WEIGHT_KG && ("Maximum weight: "+MAX_WEIGHT_KG+"kg")
+                                }
+                            </p>
+                            <p style={{color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
+                                <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "initial"}}>Each price:</span> <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                                    dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                                {(markup(TOTAL_AMOUNT).new_price).toFixed(2)}</p>
+                        </div>
+                        <div style={{marginLeft: 10, display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
+                                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginBottom: 10, textAlign: "right"}}>
+                                    Total: $0.00
+                               </p>
+                                <div style={{display: "flex"}}>
+                                    <p style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        -
+                                    </p>
+                                    <p style={{fontSize: 14, width: 30, height: 35, borderRadius: "100%", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        0
+                                    </p>
+                                    <p style={{backgroundColor: "white", fontSize: 16, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        +
+                                    </p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    if(BAGGAGES.length<1){
+        BAGGAGES.push(
+            <div style={{padding: 10, border: "1px solid rgba(0,0,0,0.1)", display: "flex", backgroundColor: "rgba(255,0,0,0.1)", justifyContent: "center"}}>
+                <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14, marginRight: 10}}>
+                    <i style={{color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
+                </span>
+                <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14}}>
+                    Checked bags inclusion not available at this time
+                </span>
+            </div>
+        );
+    }
 
     return (
         <div className="checkout_page_all_info_flex_container">
@@ -65,18 +151,11 @@ const CheckoutInfo = (props) => {
                         </div>
                     </div>
                     <div id="luggage_ancillary_settings_container" className="each_ancillary_setting_container">
-                        <p style={{textAlign: "center", fontSize: 15, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                            Include Checked Bags
+                        <p style={{fontSize: 14, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
+                            Include Bags:
                         </p>
                         <div style={{padding: "10px 0"}}>
-                            <div style={{padding: 10, border: "1px solid rgba(0,0,0,0.1)", display: "flex", backgroundColor: "rgba(255,0,0,0.1)", justifyContent: "center"}}>
-                                <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14, marginRight: 10}}>
-                                    <i style={{color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
-                                </span>
-                                <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14}}>
-                                    Checked bags inclusion not available at this time
-                                </span>
-                            </div>
+                            {BAGGAGES.map(each=>each)}
                         </div>
                     </div>
                     <div style={{margin: "10px 0"}}>

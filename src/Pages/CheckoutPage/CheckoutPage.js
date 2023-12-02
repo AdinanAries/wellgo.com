@@ -31,6 +31,7 @@ export default function CheckoutPage(props){
 
     const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
     const PRICES=FLIGHT_DATA_ADAPTER.adaptPriceProps(payload);
+    const AVAILABLE_SERVICES=FLIGHT_DATA_ADAPTER.return_available_services(payload);
 
     const resetCheckoutConfirmation = () => {
         setCheckoutConfirmation({
@@ -232,6 +233,7 @@ export default function CheckoutPage(props){
                                     flight={payload}
                                     showPNRPage={showPNRPage}
                                     prices={PRICES}
+                                    adapted_available_services={AVAILABLE_SERVICES}
                                 /> : ""
                         }
                         {
