@@ -6,7 +6,15 @@ import { useState } from "react";
 
 const CheckoutInfo = (props) => {
 
-    const { flight, prices, adapted_available_services, addServiceToPrices, resetPriceExtras } = props;
+    const { 
+        flight, 
+        prices, 
+        adapted_available_services, 
+        addServiceToPrices, 
+        resetPriceExtras, 
+        includeBookingAncillary
+    } = props;
+
     console.log("Checkout Infor", flight);
     console.log("Available Services", adapted_available_services);
 
@@ -17,23 +25,64 @@ const CheckoutInfo = (props) => {
 
     const [ includedCheckedBagsTotal, setIncludedCheckedBagsTotal] = useState(0);
     const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
+    const [ servicesForPost, setServicesForPost ] = useState([]);
     
     const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />);
 
-    const addCheckedBag = (eachPrice=0, max_numer=0) => {
+    const addCheckedBag = (eachPrice=0, max_numer=0, service=null) => {
+        const incremented = includedCheckedBagsNumber+1;
         //if(includedCheckedBagsNumber<max_numer){
-            const incremented = includedCheckedBagsNumber+1;
             setIncludedCheckedBagsNumber(incremented);
             setIncludedCheckedBagsTotal((incremented*eachPrice));
         //}
+        
+        // Include object in services
+        if(service){
+            setServicesForPost(prevState=>{
+                let object = prevState.find(each=>each.id===service.id);
+                if(object /*&& incremented<max_numer*/){
+                    object.quantity=(incremented);
+                    let objIndex = prevState.findIndex(each=>each.id===service.id);
+                    prevState[objIndex]=object;
+                }else if(!object){
+                    object = {
+                        quantity: 1,
+                        id: service.id
+                    };
+                    prevState.push(object);
+                }
+                return prevState;
+            });
+        }
+        console.log("Selected Services", servicesForPost);
     }
 
-    const removeCheckedBag = (eachPrice=0) => {
+    const removeCheckedBag = (eachPrice=0, service=null) => {
+        const decremented = includedCheckedBagsNumber-1;
         if(includedCheckedBagsNumber>0){
-            const decremented = includedCheckedBagsNumber-1;
             setIncludedCheckedBagsNumber(decremented);
             setIncludedCheckedBagsTotal((decremented*eachPrice));
         }
+
+        // Removing object from services
+        if(servicesForPost.length>0){
+            setServicesForPost(prevState => {
+                let object = prevState.find(each=>each.id===service.id);
+                if(object){
+                    let objIndex = prevState.findIndex(each=>each.id===service.id);
+                    if(decremented<1){
+                        if (objIndex !== -1) {
+                            prevState.splice(objIndex, 1);
+                        }
+                    }else{
+                        object.quantity=(decremented);
+                        prevState[objIndex]=object;
+                    }
+                }
+                return prevState;
+            });
+        }
+        console.log("Selected Services", servicesForPost);
     }
 
     const resetAncillaries = () => {
@@ -87,10 +136,11 @@ const CheckoutInfo = (props) => {
             }
          */
         if(adapted_available_services[i].type==="baggage"){
-            const CURRENCY_SYMBOL = get_currency_symbol(adapted_available_services[i].total_currency);
-            const TOTAL_AMOUNT = adapted_available_services[i].total_amount;
-            const QUANTITY = adapted_available_services[i]?.maximum_quantity || 0;
-            const MAX_WEIGHT_KG = (adapted_available_services[i]?.metadata && adapted_available_services[i]?.metadata?.maximum_weight_kg)
+            const SERVICE = adapted_available_services[i];
+            const CURRENCY_SYMBOL = get_currency_symbol(SERVICE.total_currency);
+            const TOTAL_AMOUNT = SERVICE.total_amount;
+            const QUANTITY = SERVICE?.maximum_quantity || 0;
+            const MAX_WEIGHT_KG = (SERVICE?.metadata && SERVICE?.metadata?.maximum_weight_kg);
             BAGGAGES.push(
                 <div style={{padding: 10, marginBotton: 10, cursor: "pointer", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                     <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -115,13 +165,13 @@ const CheckoutInfo = (props) => {
                                     Total: ${(markup(includedCheckedBagsTotal).new_price).toFixed(2)}
                                </p>
                                 <div style={{display: "flex"}}>
-                                    <p onClick={()=>removeCheckedBag(TOTAL_AMOUNT)} style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <p onClick={()=>removeCheckedBag(TOTAL_AMOUNT, SERVICE)} style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         -
                                     </p>
                                     <p style={{fontSize: 14, width: 30, height: 35, borderRadius: "100%", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         {includedCheckedBagsNumber}
                                     </p>
-                                    <p onClick={()=>addCheckedBag(TOTAL_AMOUNT, QUANTITY)} style={{backgroundColor: "white", fontSize: 16, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <p onClick={()=>addCheckedBag(TOTAL_AMOUNT, QUANTITY, SERVICE)} style={{backgroundColor: "white", fontSize: 16, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         +
                                     </p>
                                 </div>

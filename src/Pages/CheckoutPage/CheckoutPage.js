@@ -177,6 +177,17 @@ export default function CheckoutPage(props){
         SET_PRICES({...PRICES});
     }
 
+    const includeBookingAncillary = (_service) => {
+        let data = checkoutPayload.data;
+        data = FLIGHT_DATA_ADAPTER.addServicesToCheckout(data, _service);
+        setcheckoutPayload({
+            ...checkoutPayload,
+            data: {
+                ...data 
+            }
+        });
+    }
+
     const nav_separator_style = {
         padding: 10,
         color: "rgba(0,0,0,0.2)"
@@ -249,6 +260,7 @@ export default function CheckoutPage(props){
                                     prices={PRICES}
                                     addServiceToPrices={addServiceToPrices}
                                     resetPriceExtras={resetPriceExtras}
+                                    includeBookingAncillary={includeBookingAncillary}
                                     adapted_available_services={AVAILABLE_SERVICES}
                                 /> : ""
                         }
