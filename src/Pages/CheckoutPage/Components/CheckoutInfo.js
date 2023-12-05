@@ -12,7 +12,8 @@ const CheckoutInfo = (props) => {
         adapted_available_services, 
         addServiceToPrices, 
         resetPriceExtras, 
-        includeBookingAncillary
+        includeBookingAncillaries,
+        removeAllBookingAncillaries
     } = props;
 
     console.log("Checkout Infor", flight);
@@ -86,8 +87,13 @@ const CheckoutInfo = (props) => {
     }
 
     const resetAncillaries = () => {
+        resetPriceExtras();
+        // Reset all local state
         setIncludedCheckedBagsTotal(0);
         setIncludedCheckedBagsNumber(0);
+        setServicesForPost([]);
+        // Reset actual checkout payload
+        removeAllBookingAncillaries();
         global.hide_add_ancillaries_container();
     }
 
@@ -101,8 +107,9 @@ const CheckoutInfo = (props) => {
                     includedCheckedBagsNumber,
                     includedCheckedBagsTotal
                 );
+                includeBookingAncillaries(servicesForPost)
             }
-        }, 30);
+        }, 5);
         
     }
 
@@ -213,8 +220,8 @@ const CheckoutInfo = (props) => {
                     </div>
                 </div>
                 <div id="add_ancillaries_container">
-                    <div onClick={global.hide_add_ancillaries_container} style={{backgroundColor: "white", cursor: "pointer", width: 35, height: 35, textAlign: "center", border: "1px solid rgba(0,0,0,0.1)", borderRadius: "100%", position: "absolute", zIndex: 1, top: 10, right: 10, color: "rgba(0,0,0,0.7)", fontSize: 19, display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                        <i className="fa fa-angle-up"></i>
+                    <div onClick={global.hide_add_ancillaries_container} style={{backgroundColor: "white", cursor: "pointer", fontSize: 14, textAlign: "center", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8, padding: 10, position: "absolute", zIndex: 1, top: 10, right: 10, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
+                        <i style={{marginRight: 10, color: "orangered"}} className="fa fa-times"></i>Close
                     </div>
                     <div id="seat_ancillary_settings_container" className="each_ancillary_setting_container">
                         <p style={{textAlign: "center", fontSize: 15, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
@@ -266,13 +273,13 @@ const CheckoutInfo = (props) => {
                         </p>
                     </div>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, padding: "10px 0", borderTop: "1px solid rgba(0,0,0,0.1)"}}>
-                        <div onClick={resetAncillaries} style={{backgroundColor: "white", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
-                            <i style={{marginRight: 10, color: "orangered"}} className="fa fa-times"></i>
-                            Cancel
+                        <div onClick={resetAncillaries} style={{fontFamily: "'Prompt', Sans-serif", backgroundColor: "white", padding: "10px 15px", border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
+                            <i style={{marginRight: 10, color: "orangered"}} className="fa-solid fa-arrow-rotate-left"></i>
+                            Undo all
                         </div>
-                        <div onClick={saveAncillariesOnclick} style={{backgroundColor: "white", padding: 10, border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
+                        <div onClick={saveAncillariesOnclick} style={{fontFamily: "'Prompt', Sans-serif", backgroundColor: "white", padding: "10px 15px", border: "1px solid rgba(0,0,0,0.1)", fontSize: 14, borderRadius: 50, cursor: "pointer"}}>
                             <i style={{marginRight: 10, color: "green"}} className="fa fa-check"></i>
-                            Save
+                            Save ancillaries
                         </div>
                     </div>
                 </div>

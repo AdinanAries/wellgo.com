@@ -63,8 +63,35 @@ export const FLIGHT_DATA_ADAPTER = {
      * @param {*} data 
      * @returns 
      */
-    addServicesToCheckout: (checkout_obj, service) => {
-        checkout_obj.services.push(service);
+    addServicesToCheckout: (checkout_obj, services=[], key_prop="id") => {
+        if (Array.isArray(services)) {
+            for(let i=0;i<services.length;i++){
+                let object = checkout_obj.services.find(each=>each[key_prop]===services[i][key_prop]);
+                if(object){
+                    let objIndex = checkout_obj.services.findIndex(each=>each[key_prop]===services[i][key_prop]);
+                    checkout_obj.services[objIndex]=services[i];
+                }else{
+                    checkout_obj.services.push(services[i]);
+                }
+            }
+        } else {
+            let object = checkout_obj.services.find(each=>each[key_prop]===services[key_prop]);
+            if(object){
+                let objIndex = checkout_obj.services.findIndex(each=>each[key_prop]===services[key_prop]);
+                checkout_obj.services[objIndex]=services;
+            }else{
+                checkout_obj.services.push(services);
+            }
+        }
+        
+        return checkout_obj;
+    },
+
+    /**
+     * 
+     */
+    clearCheckoutIncludedServices: (checkout_obj) => {
+        checkout_obj.services=[];
         return checkout_obj;
     },
 

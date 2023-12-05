@@ -177,15 +177,30 @@ export default function CheckoutPage(props){
         SET_PRICES({...PRICES});
     }
 
-    const includeBookingAncillary = (_service) => {
-        let data = checkoutPayload.data;
-        data = FLIGHT_DATA_ADAPTER.addServicesToCheckout(data, _service);
+    const includeBookingAncillaries = (_services=[]) => {
+        const data_with_services_included = FLIGHT_DATA_ADAPTER.addServicesToCheckout(
+                                                checkoutPayload.data, 
+                                                _services
+                                            );
         setcheckoutPayload({
             ...checkoutPayload,
             data: {
-                ...data 
+                ...data_with_services_included 
             }
         });
+    }
+
+    const removeAllBookingAncillaries = () => {
+        const data_with_all_services_removed = FLIGHT_DATA_ADAPTER.clearCheckoutIncludedServices(
+                                                checkoutPayload.data
+                                            );
+        setcheckoutPayload({
+            ...checkoutPayload,
+            data: {
+                ...data_with_all_services_removed 
+            }
+        });
+
     }
 
     const nav_separator_style = {
@@ -260,7 +275,8 @@ export default function CheckoutPage(props){
                                     prices={PRICES}
                                     addServiceToPrices={addServiceToPrices}
                                     resetPriceExtras={resetPriceExtras}
-                                    includeBookingAncillary={includeBookingAncillary}
+                                    includeBookingAncillaries={includeBookingAncillaries}
+                                    removeAllBookingAncillaries={removeAllBookingAncillaries}
                                     adapted_available_services={AVAILABLE_SERVICES}
                                 /> : ""
                         }
