@@ -169,8 +169,10 @@ const CheckoutInfo = (props) => {
                         </div>
                         <div style={{marginLeft: 10, display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
                                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginBottom: 10, textAlign: "right"}}>
-                                    Total: ${(markup(includedCheckedBagsTotal).new_price).toFixed(2)}
-                               </p>
+                                    Total: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "initial"}}>Each price:</span> <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                                        dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                                    {(markup(includedCheckedBagsTotal).new_price).toFixed(2)}
+                                </p>
                                 <div style={{display: "flex"}}>
                                     <p onClick={()=>removeCheckedBag(TOTAL_AMOUNT, SERVICE)} style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         -

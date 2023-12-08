@@ -136,6 +136,14 @@ export default function CheckoutPage(props){
     }
 
     const createOrderOnSubmit = async () => {
+        // 1. Including sncillaries totals into price
+        const { extras } = PRICES;
+        for(let i=0;i<extras.length;i++){
+            let overallTotal = parseFloat(checkoutPayload.data.total_amount);
+            overallTotal=(overallTotal+extras[i].total);
+            checkoutPayload.data.total_amount=overallTotal;
+        }
+        // 2. Creating flight order
         let res=await createFlightOrder(checkoutPayload);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
