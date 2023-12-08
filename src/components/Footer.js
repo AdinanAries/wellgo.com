@@ -21,23 +21,22 @@ function Footer(){
                             <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
                                 About Us</p>
                             <p className="footer_about_text" style={{color: "white", textAlign: "center", letterSpacing: 0.5, fontFamily: "Courgette", maxWidth: 250}}>
-                            Wellgo.com is a virtual travel agency with AI virtual agents...</p>
+                            Wellgo.com is a virtual travel agency with AI travel assistants...</p>
                         </div>
-                    </div>
-                    {/*<div className="footer_section_each_flex_section_container">
-                        <div>
-                            <p style={{fontWeight: "bolder", color: "#c900b0", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
-                                Recieve Price Updates</p>
-                            <p style={{color: "white", textAlign: "center", letterSpacing: 0.5, fontSize: 14}}>
-                                Subscribe your email to get latest price updates</p>
-                            <div style={{marginTop: 10, borderRadius: 9, overflow: "hidden", border: "1px solid rgba(0,0,0,0.35)"}}>
-                                <input style={{width: "100%", padding: 15, border: "none", borderRadius: 0}} type="email" placeholder="enter your email here"/>
-                                <div style={{padding: 14, color: "white", backgroundColor: "rgb(34, 91, 138)", textAlign: "center", cursor: "pointer"}}>
-                                    <i className="fa fa-check" style={{marginRight: 5, color: "rgba(255,255,255,0.4)"}}></i>subscribe
+                        <p style={{fontFamily: "'Courgette', Sans-serif", textAlign: "center", marginTop: 10, color: "white", letterSpacing: 0.5, fontSize: 13}}>
+                            <i style={{marginRight: 10, opacity: 0.4}} className="fa-solid fa-envelope"></i>
+                            Subscribe to get latest price updates</p>
+                        <div style={{borderRadius: 50, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.1)", marginTop: 10}}>
+                            <div style={{display: "flex"}}>
+                                <input 
+                                    style={{color: "white", fontFamily: "'Prompt', Sans-serif", fontSize: 13, width: "calc(100% - 100px)", padding: "10px 20px", border: "none", background: "none", borderRadius: 0}}
+                                    type="email" placeholder="Email"/>
+                                <div style={{width: 100, fontFamily: "'Prompt', Sans-serif", fontSize: 13, padding: 9, color: "white", backgroundColor: "rgba(34, 91, 138, 0.3)", textAlign: "center", cursor: "pointer"}}>
+                                    <i className="fa fa-check" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Submit
                                 </div>
                             </div>
                         </div>
-                    </div>*/}
+                    </div>
                     <div>
                         <div className="footer_section_each_flex_section_container" style={{marginBottom: 20}}>
                             <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>

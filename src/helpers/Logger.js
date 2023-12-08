@@ -33,6 +33,18 @@ const Logger = {
             body: "",
         }, client_device_info=null, type="", activity_ref=null) => {
 
+    },
+
+    /**
+     * 
+     * 
+     */
+    construct_html_message: (type="", header="", body="") => {
+        return `
+            <div style="padding: 10px;">
+
+            </div>
+        `;
     }
     
 }

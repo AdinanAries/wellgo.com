@@ -1,4 +1,9 @@
 const CONSTANTS = {
+    our_company: {
+        name: "to be discovered",
+        product: "Wellgo",
+        product_market_name: "to be discovered",
+    },
     viewport_threshold: 1000,
     infant_age_threshold: 5,
     special_str_separator: " [$/*S#_P#_R#T*/$] ",
