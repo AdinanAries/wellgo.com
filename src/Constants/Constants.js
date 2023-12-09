@@ -20,6 +20,11 @@ const CONSTANTS = {
         flight_search_object: "search_obj",
         logged_in_usr: "logged_in_usr",
     },
+    log_types: {
+        activity: "activity",
+        warning: "warning",
+        error: "error",
+    },
     checkout_pages: {
         info: "INFO_PAGE",
         pnr: "PNR_PAGE",

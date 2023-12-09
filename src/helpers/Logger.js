@@ -1,14 +1,63 @@
+import { postLog } from "../services/activityServices";
+import { verifyUserToken } from "../services/sessionServices";
+import CONSTANTS from "../Constants/Constants";
+import { getAnonymousID } from "../Constants/Environment";
+
+
+const getClient = async () => {
+    let client={}
+    let verify_res = await verifyUserToken();
+    if(verify_res.valid){
+        // Logged user details
+        client.user=verify_res.data;
+        client.anonymous_id="";
+    }else{
+        // Anonymous id for non-logged-in users
+        client.user={};
+        client.anonymous_id=getAnonymousID();
+    }
+    // Browser
+    client.device=navigator.userAgent;
+    return client;
+}
+
+/**
+ * 
+ * 
+ */
+const construct_html_message = (type="", header_text="", body_text="") => {
+    return `
+        <div style="padding: 10px;">
+            <h1>${header_text}</p>
+            <p>${body_text}</p>
+        </div>
+    `;
+}
+
 const Logger = {
     /**
      * 
      * @param {*} type 
      */
-    log_activity: (
+    log_activity: async (
         msgObj={
             title: "",
             body: "",
-        }, client_device_info=null, type="") => {
-
+        }, 
+        type=CONSTANTS.log_types.activity
+    ) => {
+            let res;
+            let client = await getClient();
+            let post_obj = {
+                client: client,
+                title: msgObj.title,
+                body: msgObj.body
+            }
+            if(type===CONSTANTS.log_types.activity){
+                post_obj.type=CONSTANTS.log_types.activity;
+                res = await postLog(post_obj);
+            }
+            return res;
     },
 
     /**
@@ -19,7 +68,7 @@ const Logger = {
         msgObj={
             title: "",
             body: "",
-        }, client_device_info=null, type="", activity_ref=null) => {
+        }, type="", activity_ref=null) => {
 
     },
 
@@ -31,21 +80,9 @@ const Logger = {
         msgObj={
             title: "",
             body: "",
-        }, client_device_info=null, type="", activity_ref=null) => {
+        }, type="", activity_ref=null) => {
 
     },
-
-    /**
-     * 
-     * 
-     */
-    construct_html_message: (type="", header="", body="") => {
-        return `
-            <div style="padding: 10px;">
-
-            </div>
-        `;
-    }
     
 }
 

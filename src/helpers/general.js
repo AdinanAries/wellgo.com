@@ -1,6 +1,10 @@
 import { show_full_search_form } from "./PageRoutingFuncs";
 import CURRENCY_SYMBOLS from "../Constants/CurrencySymbols";
 
+export const create_anonymous_user_id = () => {
+    return "anonymous_id";
+}
+
 export const obj_has_empty_prop = (obj) => {
 
     if (typeof obj === "object") {

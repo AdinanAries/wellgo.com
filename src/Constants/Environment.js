@@ -1,4 +1,5 @@
 import CONSTANTS from "./Constants";
+import { create_anonymous_user_id } from "../helpers/general";
 
 const ENVIRONMENT = {
     data_provider: "DUFFEL",
@@ -25,6 +26,17 @@ export const getUserToken = () => {
 
 export const deleteUserToken = () => {
     localStorage.setItem("user_token", null);
+}
+
+export const getAnonymousID = () => {
+    let id="";
+    if(localStorage.getItem("anonymous_id")){
+        id=localStorage.getItem("anonymous_id");
+    }else{
+        id=create_anonymous_user_id();
+        localStorage.setItem("anonymous_id", id);
+    }
+    return id;
 }
 
 export default ENVIRONMENT;
