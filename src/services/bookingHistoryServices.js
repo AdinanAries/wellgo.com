@@ -1,4 +1,4 @@
-import { getApiHost, getUserToken } from "../Constants/Environment";
+import { getApiHost, getUserToken, getAnonymousID } from "../Constants/Environment";
 import { verifyUserToken } from "./sessionServices";
 
 const API_URL = getApiHost();
@@ -36,6 +36,7 @@ export const logFlightBooking = async (payload, path=`\\api\\bookings\\add\\`) =
         res = await postFlightBookingLog(payload, (API_URL+path), USER_TOKEN);
     }else{
         const url = (API_URL+"\\api\\bookings\\anonymous-user\\add\\")
+        payload.anonymous_id = getAnonymousID();
         res = await postFlightBookingLog(payload, url);
     }
     return res;

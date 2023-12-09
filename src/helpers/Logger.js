@@ -43,6 +43,8 @@ const Logger = {
         msgObj={
             title: "",
             body: "",
+            resource_id: "",
+            resource_type: "",
         }, 
         type=CONSTANTS.log_types.activity
     ) => {
@@ -51,7 +53,9 @@ const Logger = {
             let post_obj = {
                 client: client,
                 title: msgObj.title,
-                body: msgObj.body
+                body: msgObj.body,
+                resource_id: msgObj.resource_id,
+                resource_type: msgObj.resource_type,
             }
             if(type===CONSTANTS.log_types.activity){
                 post_obj.type=CONSTANTS.log_types.activity;

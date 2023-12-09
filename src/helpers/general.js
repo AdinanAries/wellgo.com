@@ -113,12 +113,16 @@ export const toggleAddRemoveCityInFavourites = (city, favCities, setFavCities) =
         Logger.log_activity({
             title: "City/Airport removed from favorites",
             body: `The user removed ${city.IATA} from their favorite cities/airports`,
+            resource_id: "",
+            resource_type: "User Favorites",
         });
     } else {
         favCities.push(city.IATA);
         Logger.log_activity({
             title: "City/Airport added to favorites",
             body: `The user included ${city.IATA} in their favorite cities/airports`,
+            resource_id: "",
+            resource_type: "User Favorites",
         });
     }
     localStorage.setItem("favCts", JSON.stringify(favCities))
