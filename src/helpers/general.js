@@ -1,5 +1,6 @@
 import { show_full_search_form } from "./PageRoutingFuncs";
 import CURRENCY_SYMBOLS from "../Constants/CurrencySymbols";
+import Logger from "./Logger";
 
 export const create_anonymous_user_id = () => {
     return "anonymous_id";
@@ -98,8 +99,16 @@ export const toggleAddRemoveCityInFavourites = (city, favCities, setFavCities) =
     if (favCities.includes(city.IATA)) {
         let i = favCities.indexOf(city.IATA);
         favCities.splice(i, 1);
+        Logger.log_activity({
+            title: "City removed from favorites",
+            body: `The user removed ${city.IATA} from their favorite cities`,
+        });
     } else {
         favCities.push(city.IATA);
+        Logger.log_activity({
+            title: "City added to favorites",
+            body: `The user included ${city.IATA} in their favorite cities`,
+        });
     }
     localStorage.setItem("favCts", JSON.stringify(favCities))
     setFavCities([...favCities]);
