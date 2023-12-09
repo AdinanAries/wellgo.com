@@ -1,4 +1,5 @@
 import { getApiHost, getUserToken } from "../Constants/Environment";
+import { verifyUserToken } from "./sessionServices";
 
 const API_URL = getApiHost();
 const USER_TOKEN = getUserToken();
@@ -29,13 +30,25 @@ export const fetchBookingHistory = async (
 }
 
 export const logFlightBooking = async (payload, path=`\\api\\bookings\\add\\`) => {
+    let res={};
+    const verify_res = await verifyUserToken();
+    if(verify_res.valid){
+        res = await postFlightBookingLog(payload, (API_URL+path), USER_TOKEN);
+    }else{
+        const url = (API_URL+"\\api\\bookings\\anonymous-user\\add\\")
+        res = await postFlightBookingLog(payload, url);
+    }
+    return res;
+}
+
+const postFlightBookingLog = async (payload, url, user_token="") => {
     try{
-        return await fetch(API_URL+path, {
+        return await fetch(url, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${USER_TOKEN}`
+                'Authorization': `Bearer ${user_token}`
             },
             body: JSON.stringify(payload)
         })

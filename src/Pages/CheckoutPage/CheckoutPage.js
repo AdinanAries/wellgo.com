@@ -136,7 +136,7 @@ export default function CheckoutPage(props){
     }
 
     const createOrderOnSubmit = async () => {
-        // 1. Including sncillaries totals into price
+        // 1. Including ancillaries totals into price
         const { extras } = PRICES;
         for(let i=0;i<extras.length;i++){
             let overallTotal = parseFloat(checkoutPayload.data.total_amount);
