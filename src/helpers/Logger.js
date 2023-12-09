@@ -2,7 +2,8 @@ import { postLog } from "../services/activityServices";
 import { verifyUserToken } from "../services/sessionServices";
 import CONSTANTS from "../Constants/Constants";
 import { getAnonymousID } from "../Constants/Environment";
-
+import { return_flight_booking_log_object_props } from "./FlightDataAdapter";
+import { markup } from "./Prices"
 
 const getClient = async () => {
     let client={}
@@ -31,6 +32,49 @@ const construct_html_message = (type="", header_text="", body_text="") => {
             <h1>${header_text}</p>
             <p>${body_text}</p>
         </div>
+    `;
+}
+
+export const getBookingConfirmedLogMessage = (booking, type="flight") => {
+    
+    let initial = "";
+    let details = "";
+    if(type==="flight") {
+        const {
+            API_PROVIDER,
+            BOOKING_ID,
+            TYPE,
+            AIRLINE_NAME,
+            AIRLINE_IATA,
+            TRIP_TYPE,
+            TRAVELERS,
+            ORIGIN_AIRPORT_NAME,
+            TOTAL_AMOUNT,
+            TOTAL_CURRENCY,
+            ORIGIN_AIRPORT_IATA,
+            ORIGIN_CITY_NAME,
+            DESTINATION_AIRPORT_NAME,
+            DESTINATION_AIRPORT_IATA,
+            DESTINATION_CITY_NAME,
+            DEPARTURE_DATE,
+            RETURN_DATE
+        } = return_flight_booking_log_object_props(booking);  
+        initial=`Flight from ${ORIGIN_CITY_NAME} - ${ORIGIN_AIRPORT_NAME} to ${DESTINATION_CITY_NAME} - ${DESTINATION_AIRPORT_NAME} has been confirmed!`;
+        const SOLD_PRICE=markup(TOTAL_AMOUNT).new_price;
+        const MARKUP_AMOUNT=markup(TOTAL_AMOUNT).markup;
+        details=`{
+            "info": "${initial}",
+            "booking_id": "${BOOKING_ID}",
+            "provider": "${API_PROVIDER}",
+            "provider_price": "${TOTAL_AMOUNT}",
+            "prices_currency": "${TOTAL_CURRENCY}",
+            "sold_price": "${SOLD_PRICE}",
+            "profit_amount": "${MARKUP_AMOUNT}"
+        }`;
+    }
+
+    return `
+        ${details}
     `;
 }
 

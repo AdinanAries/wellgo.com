@@ -11,6 +11,7 @@ import { logFlightBooking } from "../../services/bookingHistoryServices";
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import OrderCompletedPage from './Components/OrderCompletedPage';
+import Logger, { getBookingConfirmedLogMessage } from '../../helpers/Logger';
 
 export default function CheckoutPage(props){
 
@@ -147,9 +148,18 @@ export default function CheckoutPage(props){
         let res=await createFlightOrder(checkoutPayload);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
-            let logged=await logFlightBooking(log);
+            // 3. Adding to booking history
+            const logged = await logFlightBooking(log);
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
+            // 4. Logging booking as user activity
+            Logger.log_activity({
+                title: "Flight Booking Confirmed",
+                body: getBookingConfirmedLogMessage(res.data),
+                resource_id: logged._id,
+                resource_type: "Booking History",
+            });
+
         }else{
             setCheckoutConfirmation({
                 type: "server_error",

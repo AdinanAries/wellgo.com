@@ -233,7 +233,7 @@ const return_duffel_object = (data) => {
 /**
  * 
  */
-const return_flight_booking_log_object_props = (obj) => {
+export const return_flight_booking_log_object_props = (obj) => {
     if(CONSTANTS.duffel===ENVIRONMENT.data_provider){
         let tt="one-way";
         if(obj.slices.length===2){
@@ -256,6 +256,8 @@ const return_flight_booking_log_object_props = (obj) => {
             DESTINATION_AIRPORT_IATA: obj.slices[(obj.slices.length-1)].destination.iata_code,
             DESTINATION_CITY_NAME: obj.slices[(obj.slices.length-1)].destination.city_name,
             DEPARTURE_DATE: obj.slices[0].segments[0].departing_at,
+            TOTAL_AMOUNT: obj.total_amount,
+            TOTAL_CURRENCY: obj.total_currency,
             RETURN_DATE: obj.slices[(obj.slices.length-1)].segments[(obj.slices[[(obj.slices.length-1)]].segments.length-1)].arriving_at,
         }
     }else{
