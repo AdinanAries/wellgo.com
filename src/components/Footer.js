@@ -33,6 +33,10 @@ function Footer(props){
             return;
         }
         let res = await registerPriceAlertsUser(priceAlertForm);
+        if(res?.status===400){
+            alert("You have already subscribed");
+            return;
+        }
         if(res._id){
             alert("You have subscribed to price alerts");
             setPriceAlertForm({
