@@ -160,7 +160,7 @@ export default function CheckoutPage(props){
                 title: "Flight Booking Confirmed",
                 body: getBookingConfirmedLogMessage(res.data),
                 resource_id: logged._id,
-                resource_type: "Booking History",
+                resource_type: CONSTANTS.resource_types.booking_history,
             });
 
         }else{

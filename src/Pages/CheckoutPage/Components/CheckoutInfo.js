@@ -222,7 +222,7 @@ const CheckoutInfo = (props) => {
                     </div>
                 </div>
                 <div id="add_ancillaries_container">
-                    <div onClick={global.hide_add_ancillaries_container} style={{backgroundColor: "white", cursor: "pointer", fontSize: 14, textAlign: "center", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8, padding: 10, position: "absolute", zIndex: 1, top: 10, right: 10, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
+                    <div onClick={global.hide_add_ancillaries_container} style={{backgroundColor: "white", cursor: "pointer", fontSize: 14, textAlign: "center", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8, padding: 10, position: "absolute", zIndex: 1, top: 0, right: 10, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
                         <i style={{marginRight: 10, color: "orangered"}} className="fa fa-times"></i>Close
                     </div>
                     <div id="seat_ancillary_settings_container" className="each_ancillary_setting_container">

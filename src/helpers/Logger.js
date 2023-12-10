@@ -1,4 +1,4 @@
-import { postLog } from "../services/activityServices";
+import { postLog, logError } from "../services/activityServices";
 import { verifyUserToken } from "../services/sessionServices";
 import CONSTANTS from "../Constants/Constants";
 import { getAnonymousID } from "../Constants/Environment";
@@ -35,8 +35,7 @@ const construct_html_message = (type="", header_text="", body_text="") => {
     `;
 }
 
-export const getBookingConfirmedLogMessage = (booking, type="flight") => {
-    
+export const getBookingConfirmedLogMessage = (booking, type="flight") => { 
     let initial = "";
     let details = "";
     if(type==="flight") {
@@ -104,6 +103,9 @@ const Logger = {
             if(type===CONSTANTS.log_types.activity){
                 post_obj.type=CONSTANTS.log_types.activity;
                 res = await postLog(post_obj);
+            }if(type===CONSTANTS.log_types.error){
+                post_obj.type=CONSTANTS.log_types.error;
+                res = await logError(post_obj);
             }
             return res;
     },

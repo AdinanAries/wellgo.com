@@ -25,6 +25,10 @@ const CONSTANTS = {
         warning: "warning",
         error: "error",
     },
+    resource_types: {
+        booking_history: "Booking History",
+        user_favorites: "User Favorites",
+    },
     checkout_pages: {
         info: "INFO_PAGE",
         pnr: "PNR_PAGE",

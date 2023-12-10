@@ -1,6 +1,7 @@
 import { show_full_search_form } from "./PageRoutingFuncs";
 import CURRENCY_SYMBOLS from "../Constants/CurrencySymbols";
 import Logger from "./Logger";
+import CONSTANTS from "../Constants/Constants";
 
 const getRandomHex = (size=20) => {
     return [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
@@ -114,7 +115,7 @@ export const toggleAddRemoveCityInFavourites = (city, favCities, setFavCities) =
             title: "City/Airport removed from favorites",
             body: `The user removed ${city.IATA} from their favorite cities/airports`,
             resource_id: "",
-            resource_type: "User Favorites",
+            resource_type: CONSTANTS.resource_types.user_favorites,
         });
     } else {
         favCities.push(city.IATA);
@@ -122,7 +123,7 @@ export const toggleAddRemoveCityInFavourites = (city, favCities, setFavCities) =
             title: "City/Airport added to favorites",
             body: `The user included ${city.IATA} in their favorite cities/airports`,
             resource_id: "",
-            resource_type: "User Favorites",
+            resource_type: CONSTANTS.resource_types.user_favorites,
         });
     }
     localStorage.setItem("favCts", JSON.stringify(favCities))
