@@ -137,12 +137,15 @@ export default function CheckoutPage(props){
     }
 
     const createOrderOnSubmit = async () => {
+        // Reset payments amount in case function runs multiple times
+        checkoutPayload.data.payments[0].amount=PRICES.total_amount;
         // 1. Including ancillaries totals into price
         const { extras } = PRICES;
         for(let i=0;i<extras.length;i++){
-            let overallTotal = parseFloat(checkoutPayload.data.total_amount);
-            overallTotal=(overallTotal+extras[i].total);
-            checkoutPayload.data.total_amount=overallTotal;
+            let overallTotal = parseFloat(checkoutPayload.data.payments[0].amount);
+            alert(overallTotal);
+            overallTotal=(overallTotal+extras[i].total).toFixed(2);
+            checkoutPayload.data.payments[0].amount=overallTotal;
         }
         // 2. Creating flight order
         let res=await createFlightOrder(checkoutPayload);
@@ -166,6 +169,7 @@ export default function CheckoutPage(props){
                 isError: true,
                 message: res.message,
             });
+            checkoutPayload.data.payments[0].amount=PRICES.total_amount;
         }
         
     }

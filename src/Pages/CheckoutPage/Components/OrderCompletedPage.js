@@ -265,12 +265,10 @@ const OrderCompletedPage = (props) => {
     extras.forEach(each=>{
         overallTotal=(overallTotal+each.total);
         EXTRAS_MARKUP.push(
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
-                <p style={{fontSize: 12, letterSpacing: 1, color: "rgba(0,0,0,0.7)"}}>
-                    {each.name} ({each.quantity})
-                </p>
-                <p style={{fontSize: 14, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                    <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+            <div>
+                <p style={{fontSize: 13, letterSpacing: 1, color: "rgba(0,0,0,0.9)"}}>
+                    {each.name} ({each.quantity}):
+                    <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginLeft: 5}} 
                             dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
                     {(markup(each.total).new_price).toFixed(2)}
                 </p>
