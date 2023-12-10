@@ -8,7 +8,8 @@ const OrderCompletedPage = (props) => {
     const { 
         pickAnotherFlightOnclick,
         goHome,
-        completedOrderDetails 
+        completedOrderDetails,
+        prices
     } = props;
 
     const FIRST_SLICE_ORIGIN_IATA=(
@@ -190,73 +191,92 @@ const OrderCompletedPage = (props) => {
     });
 
     const IMPORTANT_NOTICES=[];
-        if(completedOrderDetails?.conditions?.refund_before_departure?.allowed){
-            const CURRENCY_SYMBOL=get_currency_symbol(completedOrderDetails?.conditions?.refund_before_departure?.penalty_currency);
-            IMPORTANT_NOTICES.push(
-                <div style={{display: "flex"}}>
-                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                        <i style={{color: "green"}}
-                                className="fa-solid fa-check"></i>
-                    </div>
-                    <div>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                            Refund allowed with penalty amount of 
-                            <span style={{marginLeft: 5, fontFamily: "'Prompt', Sans-serif", fontSize: 13}} 
-                                dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
-                             {(markup(completedOrderDetails?.conditions?.refund_before_departure?.penalty_amount).new_price).toFixed(2)}
-                        </p>
-                    </div>
+    if(completedOrderDetails?.conditions?.refund_before_departure?.allowed){
+        const CURRENCY_SYMBOL=get_currency_symbol(completedOrderDetails?.conditions?.refund_before_departure?.penalty_currency);
+        IMPORTANT_NOTICES.push(
+            <div style={{display: "flex"}}>
+                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                    <i style={{color: "green"}}
+                            className="fa-solid fa-check"></i>
                 </div>
-            );
-        }else{
-            IMPORTANT_NOTICES.push(
-                <div style={{display: "flex"}}>
-                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                        <i style={{color: "orange"}}
-                                className="fa-solid fa-exclamation-triangle"></i>
-                    </div>
-                    <div>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                            No refunds available for this flight
-                        </p>
-                    </div>
+                <div>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                        Refund allowed with penalty amount of 
+                        <span style={{marginLeft: 5, fontFamily: "'Prompt', Sans-serif", fontSize: 13}} 
+                            dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                            {(markup(completedOrderDetails?.conditions?.refund_before_departure?.penalty_amount).new_price).toFixed(2)}
+                    </p>
                 </div>
-            );
-        }
+            </div>
+        );
+    }else{
+        IMPORTANT_NOTICES.push(
+            <div style={{display: "flex"}}>
+                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                    <i style={{color: "orange"}}
+                            className="fa-solid fa-exclamation-triangle"></i>
+                </div>
+                <div>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                        No refunds available for this flight
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
-        if(completedOrderDetails?.conditions?.change_before_departure?.allowed){
-            const CURRENCY_SYMBOL=get_currency_symbol(completedOrderDetails?.conditions?.change_before_departure?.penalty_currency);
-            IMPORTANT_NOTICES.push(
-                <div style={{display: "flex"}}>
-                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                        <i style={{color: "green"}}
-                                className="fa-solid fa-check"></i>
-                    </div>
-                    <div>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                            Changes allowed with penalty amount of
-                            <span style={{marginLeft: 5, fontFamily: "'Prompt', Sans-serif", fontSize: 13}} 
-                                dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
-                             {(markup(completedOrderDetails?.conditions?.change_before_departure?.penalty_amount).new_price).toFixed(2)}
-                        </p>
-                    </div>
+    if(completedOrderDetails?.conditions?.change_before_departure?.allowed){
+        const CURRENCY_SYMBOL=get_currency_symbol(completedOrderDetails?.conditions?.change_before_departure?.penalty_currency);
+        IMPORTANT_NOTICES.push(
+            <div style={{display: "flex"}}>
+                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                    <i style={{color: "green"}}
+                            className="fa-solid fa-check"></i>
                 </div>
-            );
-        }else{
-            IMPORTANT_NOTICES.push(
-                <div style={{display: "flex"}}>
-                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                        <i style={{color: "orange"}}
-                                className="fa-solid fa-exclamation-triangle"></i>
-                    </div>
-                    <div>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                            Changes are not allowed for this flight
-                        </p>
-                    </div>
+                <div>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                        Changes allowed with penalty amount of
+                        <span style={{marginLeft: 5, fontFamily: "'Prompt', Sans-serif", fontSize: 13}} 
+                            dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
+                            {(markup(completedOrderDetails?.conditions?.change_before_departure?.penalty_amount).new_price).toFixed(2)}
+                    </p>
                 </div>
-            );
-        }
+            </div>
+        );
+    }else{
+        IMPORTANT_NOTICES.push(
+            <div style={{display: "flex"}}>
+                <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                    <i style={{color: "orange"}}
+                            className="fa-solid fa-exclamation-triangle"></i>
+                </div>
+                <div>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                        Changes are not allowed for this flight
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    let overallTotal = parseFloat(prices.total_amount);
+    const { extras } = prices;
+    const EXTRAS_MARKUP = [];
+    extras.forEach(each=>{
+        overallTotal=(overallTotal+each.total);
+        EXTRAS_MARKUP.push(
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 10}}>
+                <p style={{fontSize: 12, letterSpacing: 1, color: "rgba(0,0,0,0.7)"}}>
+                    {each.name} ({each.quantity})
+                </p>
+                <p style={{fontSize: 14, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
+                    <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                            dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
+                    {(markup(each.total).new_price).toFixed(2)}
+                </p>
+            </div>
+        );
+    });
 
     return (
         <div style={{position: "relative"}}>
@@ -373,11 +393,18 @@ const OrderCompletedPage = (props) => {
                             Payment Details</h1>
                         <div style={{marginBottom: 10, paddingLeft: 10}}>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                Base Amount: $460.23</p>
+                                Base Amount: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                    dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
+                                    {(markup(prices.base_amount).new_price).toFixed(2)}</p>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                Tax Amount: $70.23</p>
+                                Tax Amount: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                    dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.tax_currency)}}></span>
+                                    {(markup(prices.tax_amount).new_price).toFixed(2)}</p>
+                            {EXTRAS_MARKUP.map(each=>each)}
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
-                                Total Paid: $530.46</p>
+                                Total Paid: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                    dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
+                                {(markup(overallTotal).new_price).toFixed(2)}</p>
                         </div>
                         <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
                             Weather</h1>

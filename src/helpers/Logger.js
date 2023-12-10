@@ -62,15 +62,15 @@ export const getBookingConfirmedLogMessage = (booking, type="flight") => {
         initial=`Flight from ${ORIGIN_CITY_NAME} - ${ORIGIN_AIRPORT_NAME} to ${DESTINATION_CITY_NAME} - ${DESTINATION_AIRPORT_NAME} has been confirmed!`;
         const SOLD_PRICE=markup(TOTAL_AMOUNT).new_price;
         const MARKUP_AMOUNT=markup(TOTAL_AMOUNT).markup;
-        details=`{
-            "info": "${initial}",
-            "booking_id": "${BOOKING_ID}",
-            "provider": "${API_PROVIDER}",
-            "provider_price": "${TOTAL_AMOUNT}",
-            "prices_currency": "${TOTAL_CURRENCY}",
-            "sold_price": "${SOLD_PRICE}",
-            "profit_amount": "${MARKUP_AMOUNT}"
-        }`;
+        details+="{";
+        details+=`"info": "${initial}",`;
+        details+=`"booking_id": "${BOOKING_ID}",`;
+        details+=`"provider": "${API_PROVIDER}",`;
+        details+=`"provider_price": "${TOTAL_AMOUNT}",`;
+        details+=`"prices_currency": "${TOTAL_CURRENCY}",`;
+        details+=`"sold_price": "${SOLD_PRICE}",`;
+        details+=`"profit_amount": "${MARKUP_AMOUNT}"`;
+        details+="}";
     }
 
     return `

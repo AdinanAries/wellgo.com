@@ -238,6 +238,7 @@ export default function CheckoutPage(props){
                         pickAnotherFlightOnclick={pickAnotherFlightOnclick}
                         goHome={goHome}
                         completedOrderDetails={completedOrderDetails}
+                        prices={PRICES}
                     /> :
                     <>
                         <div style={{paddingTop: 10, display: "flex", flexDirection: "column", justifyContent: "center"}}>
