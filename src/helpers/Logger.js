@@ -1,4 +1,4 @@
-import { postLog, logError } from "../services/activityServices";
+import { postLog, logError, logBookingError } from "../services/activityServices";
 import { verifyUserToken } from "../services/sessionServices";
 import CONSTANTS from "../Constants/Constants";
 import { getAnonymousID } from "../Constants/Environment";
@@ -106,6 +106,9 @@ const Logger = {
             }if(type===CONSTANTS.log_types.error){
                 post_obj.type=CONSTANTS.log_types.error;
                 res = await logError(post_obj);
+            }if(type===CONSTANTS.log_types.booking_error){
+                post_obj.type=CONSTANTS.log_types.error;
+                res = await logBookingError(post_obj);
             }
             return res;
     },
@@ -114,7 +117,7 @@ const Logger = {
      * 
      * 
      */
-    alert_email: (
+    alert_by_email: (
         msgObj={
             title: "",
             body: "",
@@ -126,7 +129,7 @@ const Logger = {
      * 
      * 
      */
-    alert_text: (
+    alert_by_text: (
         msgObj={
             title: "",
             body: "",

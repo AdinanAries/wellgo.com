@@ -24,6 +24,7 @@ const CONSTANTS = {
         activity: "activity",
         warning: "warning",
         error: "error",
+        booking_error: "booking-error"
     },
     resource_types: {
         booking_history: "Booking History",
