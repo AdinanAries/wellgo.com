@@ -125,3 +125,25 @@ export const registerPost = async (formData, path=`\\api\\users\\register\\`) =>
     }
 }
 
+export const registerPriceAlertsUser = async (payload, path="\\api\\users\\price-alerts\\subscribe\\") => {
+    try{
+        return await fetch(API_URL+path, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {isError: true, message: err.message};
+        })
+    } catch (e){
+        console.log(e);
+        return {isError: true, message: e.message};
+    }
+}
+

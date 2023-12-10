@@ -2,6 +2,8 @@ import { show_full_search_form } from "./PageRoutingFuncs";
 import CURRENCY_SYMBOLS from "../Constants/CurrencySymbols";
 import Logger from "./Logger";
 import CONSTANTS from "../Constants/Constants";
+import { getAnonymousID } from "../Constants/Environment";
+import { verifyUserToken } from "../services/sessionServices";
 
 const getRandomHex = (size=20) => {
     return [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
@@ -272,4 +274,21 @@ export const calculateTotalTime = (earlier, later) => {
         total_ms: diff_ms
 
     }
+}
+
+export const getClient = async () => {
+    let client={}
+    let verify_res = await verifyUserToken();
+    if(verify_res.valid){
+        // Logged user details
+        client.user=verify_res.data;
+        client.anonymous_id="";
+    }else{
+        // Anonymous id for non-logged-in users
+        client.user={};
+        client.anonymous_id=getAnonymousID();
+    }
+    // Browser
+    client.device=navigator.userAgent;
+    return client;
 }

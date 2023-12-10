@@ -1,26 +1,8 @@
 import { postLog, logError, logBookingError } from "../services/activityServices";
-import { verifyUserToken } from "../services/sessionServices";
 import CONSTANTS from "../Constants/Constants";
-import { getAnonymousID } from "../Constants/Environment";
 import { return_flight_booking_log_object_props } from "./FlightDataAdapter";
 import { markup } from "./Prices"
-
-const getClient = async () => {
-    let client={}
-    let verify_res = await verifyUserToken();
-    if(verify_res.valid){
-        // Logged user details
-        client.user=verify_res.data;
-        client.anonymous_id="";
-    }else{
-        // Anonymous id for non-logged-in users
-        client.user={};
-        client.anonymous_id=getAnonymousID();
-    }
-    // Browser
-    client.device=navigator.userAgent;
-    return client;
-}
+import { getClient } from "./general";
 
 /**
  * 
@@ -103,10 +85,12 @@ const Logger = {
             if(type===CONSTANTS.log_types.activity){
                 post_obj.type=CONSTANTS.log_types.activity;
                 res = await postLog(post_obj);
-            }if(type===CONSTANTS.log_types.error){
+            }
+            if(type===CONSTANTS.log_types.error){
                 post_obj.type=CONSTANTS.log_types.error;
                 res = await logError(post_obj);
-            }if(type===CONSTANTS.log_types.booking_error){
+            }
+            if(type===CONSTANTS.log_types.booking_error){
                 post_obj.type=CONSTANTS.log_types.error;
                 res = await logBookingError(post_obj);
             }

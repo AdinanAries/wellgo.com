@@ -1,6 +1,33 @@
+import { useState } from 'react';
 import WillgoLogo from '../WillgoLogo.png';
+import { getClient } from "../helpers/general";
+import { registerPriceAlertsUser } from "../services/accountServices";
 
-function Footer(){
+function Footer(props){
+
+    const [ priceAlertForm, setPriceAlertForm ] = useState({
+        client: getClient(),
+        email: ""
+    });
+
+    const setPriceAlertEmail = (e) => {
+        setPriceAlertForm({
+            ...priceAlertForm,
+            email: e.target.value
+        })
+    }
+
+    const subscribeForPriceAlerts = async () => {
+        if(priceAlertForm.email===""){
+            alert("Please enter your email");
+            return;
+        }
+        let res = await registerPriceAlertsUser(priceAlertForm);
+        if(res._id){
+            alert("You have subscribed to price alerts");
+        }
+    }
+
     return (
         <footer>
             <div className="wrapper" style={{paddingTop: 20}}>
@@ -29,9 +56,11 @@ function Footer(){
                         <div style={{borderRadius: 50, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.1)", marginTop: 10}}>
                             <div style={{display: "flex"}}>
                                 <input 
+                                    onInput={setPriceAlertEmail}
+                                    value={priceAlertForm.email}
                                     style={{color: "white", fontFamily: "'Prompt', Sans-serif", fontSize: 13, width: "calc(100% - 100px)", padding: "10px 20px", border: "none", background: "none", borderRadius: 0}}
                                     type="email" placeholder="Email"/>
-                                <div style={{width: 100, fontFamily: "'Prompt', Sans-serif", fontSize: 13, padding: 9, color: "white", backgroundColor: "rgba(34, 91, 138, 0.3)", textAlign: "center", cursor: "pointer"}}>
+                                <div onClick={subscribeForPriceAlerts} style={{width: 100, fontFamily: "'Prompt', Sans-serif", fontSize: 13, padding: 9, color: "white", backgroundColor: "rgba(34, 91, 138, 0.3)", textAlign: "center", cursor: "pointer"}}>
                                     <i className="fa fa-check" style={{marginRight: 10, color: "rgba(255,255,255,0.4)"}}></i>Submit
                                 </div>
                             </div>
