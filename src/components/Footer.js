@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import WillgoLogo from '../WillgoLogo.png';
 import { getClient } from "../helpers/general";
 import { registerPriceAlertsUser } from "../services/accountServices";
@@ -6,15 +6,25 @@ import { registerPriceAlertsUser } from "../services/accountServices";
 function Footer(props){
 
     const [ priceAlertForm, setPriceAlertForm ] = useState({
-        client: getClient(),
+        client: {},
         email: ""
     });
+
+    useEffect(()=>{
+        (async function go(){
+            let client = await getClient();
+            setPriceAlertForm({
+                ...priceAlertForm,
+                client: client
+            });
+        })();
+    },[])
 
     const setPriceAlertEmail = (e) => {
         setPriceAlertForm({
             ...priceAlertForm,
             email: e.target.value
-        })
+        });
     }
 
     const subscribeForPriceAlerts = async () => {
@@ -25,6 +35,10 @@ function Footer(props){
         let res = await registerPriceAlertsUser(priceAlertForm);
         if(res._id){
             alert("You have subscribed to price alerts");
+            setPriceAlertForm({
+                ...priceAlertForm,
+                email: ""
+            });
         }
     }
 
