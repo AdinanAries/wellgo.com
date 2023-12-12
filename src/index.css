@@ -1481,8 +1481,9 @@ footer {
   animation: pop-in 0.2s ease-out;
 }
 .chatbot_popup_tip_msg{
-  background-color: rgb(46, 46, 46);;
-  width: 200px;
+  background-color: rgb(46, 46, 46);
+  border: 2px solid rgb(255, 136, 0);
+  min-width: 300px;
   position: absolute;
   bottom: 53px;
   right: 40px;

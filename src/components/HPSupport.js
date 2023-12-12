@@ -136,8 +136,8 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
 
     document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
     document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`
-        <p style='color: rgba(255,255,255,0.7);'>    
-            <i class="fa-regular fa-comment-dots"></i>
+        <p style='color: rgba(255,255,255,0.7); font-family: "Prompt", Sans-serif; font-size: 14px;'>    
+            <i style="color: orange;" class="fa-regular fa-comment-dots"></i>
             Typing . . .</p>`;
     let randWait = Math.floor(Math.random() * 3000);
 
@@ -158,7 +158,7 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
                     ${message}
                 </p>`;
         }
-        audio.play();
+        //audio.play();
     }, randWait);
 
     botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (duration+randWait));
