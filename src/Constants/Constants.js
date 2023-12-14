@@ -66,6 +66,7 @@ const CONSTANTS = {
             no_cars_renting: "no cars renting",
             no_travel_packages : "no travel packages",
             uncompleted_pnr: "incomplete passenger name record",
+            not_logged_in_on_checkout_complete: "checkout completed but user is not logged in",
         }
     },
     envs: [ "PRODUCTION", "DEVELOPMENT" ],

@@ -2,7 +2,10 @@ import SelectedTicketItinSegments from "../../SearchPage/Components/SelectedTick
 import { get_short_date_DAYMMMDD, convert24HTimeToAMPM } from "../../../helpers/general";
 import { markup } from "../../../helpers/Prices";
 import { get_currency_symbol } from "../../../helpers/general";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CONSTANTS from "../../../Constants/Constants";
+import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
+import getBotResponse from "../../../Constants/BotResponses";
 
 const OrderCompletedPage = (props) => {
 
@@ -21,6 +24,16 @@ const OrderCompletedPage = (props) => {
         setShowBookingDetails(true);
         //setIsLoggedIn(true);
     }
+
+    useEffect(()=>{
+        if(!isLoggedIn && !showBookingDetails){
+            show_prompt_on_Bot_AD_tips_popup(
+                getBotResponse(CONSTANTS.bot.responses.not_logged_in_on_checkout_complete),
+                CONSTANTS.bot.prompt_types.warn, 
+                500000
+            );
+        }
+    }, []);
 
     const FIRST_SLICE_ORIGIN_IATA=(
         completedOrderDetails?.slices 
@@ -324,7 +337,7 @@ const OrderCompletedPage = (props) => {
                         <div style={{paddingTop: 5}}>
                             <div style={{display: "flex"}}>
                                 <div onClick={continueToDetails} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
-                                    continue without loggin in
+                                    continue without logging in
                                     <i style={{marginLeft: 10, color: "yellow"}} className="fa-solid fa-arrow-right"></i>
                                 </div>
                             </div>
@@ -385,12 +398,17 @@ const OrderCompletedPage = (props) => {
                             </div>
                         </div>
                         <div>
+                            {
+                                !isLoggedIn && <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, backgroundColor: "rgba(255,0,0,0.2)", border: "1px solid rgba(255,0,0,0.2)", borderRadius: 4, maxWidth: 230, padding: "5px 10px"}}>
+                                    <i style={{marginRight: 10, color: "red"}} className="fa-solid fa-exclamation-triangle"></i>
+                                    You are not logged in...
+                                </p>
+                            }
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "5px 0"}}>
                                 See Details Below: <span onClick={window.print} style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
                                     Click to Print</span></p>
                                 <div className="printable" style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
                                     <div style={{marginBottom: 10}}>
-                                    
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                                         {FIRST_SLICE_CITY_NAME} - {FIRST_SLICE_ORIGIN_IATA}
                                         {is_one_way && <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>}
