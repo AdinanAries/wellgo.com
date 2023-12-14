@@ -2,6 +2,7 @@ import SelectedTicketItinSegments from "../../SearchPage/Components/SelectedTick
 import { get_short_date_DAYMMMDD, convert24HTimeToAMPM } from "../../../helpers/general";
 import { markup } from "../../../helpers/Prices";
 import { get_currency_symbol } from "../../../helpers/general";
+import { useState } from "react";
 
 const OrderCompletedPage = (props) => {
 
@@ -11,6 +12,15 @@ const OrderCompletedPage = (props) => {
         completedOrderDetails,
         prices
     } = props;
+
+    // Use this flag to remind user to login so booking can be saved to their account
+    const [isLoggedIn, setIsLoggedIn ] = useState(false); 
+    const [showBookingDetails, setShowBookingDetails] = useState(false);
+
+    const continueToDetails = () => {
+        setShowBookingDetails(true);
+        //setIsLoggedIn(true);
+    }
 
     const FIRST_SLICE_ORIGIN_IATA=(
         completedOrderDetails?.slices 
@@ -299,145 +309,199 @@ const OrderCompletedPage = (props) => {
                     <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                         | heavy rain</span>
                 </p>
-                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                    <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
-                    Your booking has been confirmed!
-                    <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 14}}>
-                        What's next?
-                    </span>
-                </p>
-                <div style={{padding: 10}}>
-                    <div style={{display: "flex"}}>
-                        <div style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
-                            <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plus"></i>
-                            add ancillaries
-                        </div>
-                        <div onClick={pickAnotherFlightOnclick} style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
-                            <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plane-departure"></i>
-                            pick another flight
-                        </div>
-                        <div onClick={goHome} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
-                            <i style={{marginRight: 10, color: "yellow"}} className="fa-solid fa-home"></i>
-                            go home
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "5px 0"}}>
-                        See Details Below: <span onClick={window.print} style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
-                            Click to Print</span></p>
-                        <div className="printable" style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
-                            <div style={{marginBottom: 10}}>
-                            
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                {FIRST_SLICE_CITY_NAME} - {FIRST_SLICE_ORIGIN_IATA}
-                                {is_one_way && <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>}
-                                {is_round_trip && <i style={{margin: "0 10px"}} className="fa-solid fa-rotate"></i>}
-                                {DESTINATION_CITY_NAME} - {DESTINATION_IATA}
-                            </p>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
-                                Your booking reference is
-                                <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.9)", fontSize: 13}}>
-                                    {completedOrderDetails.booking_reference}
-                                </span>
-                            </p>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                Please remember your flight is on
-                                <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, margin: "0 10px", color: "black", fontWeight: "bolder"}}>
-                                    {FLIGHT_DATE}</span>
-                                and takes off at
-                                <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, margin: "0 10px", color: "black", fontWeight: "bolder"}}>
-                                    {TAKE_OFF_TIME}</span>
-                            </p>
-                        </div>
-                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Flights</h1>
-                        <div>
-                            {SEGMENTS.map(each=>each)}
-                        </div>
-                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Passengers</h1>
-                        <div>
-                            <div style={{display: "flex", flexWrap: "wrap"}}>
-                                {PASSENGERS.map(each=>each)}
+                {
+                    (!showBookingDetails && !isLoggedIn) ? <div style={{paddingTop: 15}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", color: "crimson"}}>
+                            <i style={{marginRight: 10, color: "red"}} className="fa-solid fa-exclamation-triangle"></i>
+                            You are not logged in!
+                        </p>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            If you have an account, logging in will ensure that this booking is saved to your account
+                            <br/><span style={{fontFamily: "'Prompt', Sans-serif", color: "blue", fontSize: 14}}>
+                                You may login and continue or may continue without logging in
+                            </span>
+                        </p>
+                        <div style={{paddingTop: 5}}>
+                            <div style={{display: "flex"}}>
+                                <div onClick={continueToDetails} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                                    continue without loggin in
+                                    <i style={{marginLeft: 10, color: "yellow"}} className="fa-solid fa-arrow-right"></i>
+                                </div>
+                            </div>
+                            <div style={{marginTop: 10, maxWidth: 450, borderRadius: 8, border: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
+                                <p style={{paddingBottom: 5, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
+                                    Login & Continue</p>
+                                <div>
+                                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                            <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                            Email</p>
+                                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                                            <input
+                                                type="email" placeholder="type here..."
+                                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                                        </div>
+                                    </div>
+                                    <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                                        <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                            <i className="fa-solid fa-key" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                            Password</p>
+                                        <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                                            <input 
+                                                type="password" placeholder="type here..."
+                                                style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                                        </div>
+                                    </div>
+                                    <div onClick={()=>alert("login & continue")} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7, marginTop: 5}}>
+                                        <i style={{marginRight: 10, color: "white"}} className="fa-solid fa-sign-in"></i>
+                                        Login
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                    </div> :
+                    showBookingDetails && <div>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                            <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
+                            Your booking has been confirmed!
+                            <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 14}}>
+                                What's next?
+                            </span>
+                        </p>
+                        <div style={{padding: 10}}>
+                            <div style={{display: "flex"}}>
+                                <div style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                                    <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plus"></i>
+                                    add ancillaries
+                                </div>
+                                <div onClick={pickAnotherFlightOnclick} style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                                    <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plane-departure"></i>
+                                    pick another flight
+                                </div>
+                                <div onClick={goHome} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
+                                    <i style={{marginRight: 10, color: "yellow"}} className="fa-solid fa-home"></i>
+                                    go home
+                                </div>
+                            </div>
+                        </div>
                         <div>
-                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Sold by</h1>
-                        <div>
-                            <div style={{marginBottom: 10}}>
-                                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                                    <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
-                                    {completedOrderDetails?.owner?.name}
-                                </p>
-                                {
-                                    completedOrderDetails?.owner?.conditions_of_carriage_url ?
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "5px 0"}}>
+                                See Details Below: <span onClick={window.print} style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
+                                    Click to Print</span></p>
+                                <div className="printable" style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
+                                    <div style={{marginBottom: 10}}>
+                                    
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                        <a href={completedOrderDetails?.owner?.conditions_of_carriage_url}  rel="noreferrer" target="_blank">
-                                            read more at {completedOrderDetails?.owner?.conditions_of_carriage_url}
-                                        </a>
-                                    </p> : 
-                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                        <i style={{color: "orange", marginRight: 10}} className="fa-solid fa-exclamation-triangle"></i>
-                                        Airline website not found
+                                        {FIRST_SLICE_CITY_NAME} - {FIRST_SLICE_ORIGIN_IATA}
+                                        {is_one_way && <i style={{margin: "0 10px"}} className="fa-solid fa-arrow-right"></i>}
+                                        {is_round_trip && <i style={{margin: "0 10px"}} className="fa-solid fa-rotate"></i>}
+                                        {DESTINATION_CITY_NAME} - {DESTINATION_IATA}
                                     </p>
-                                }
-                            </div>
-                        </div>
-                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Payment Details</h1>
-                        <div style={{marginBottom: 10, paddingLeft: 10}}>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                Base Amount: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
-                                    dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
-                                    {(markup(prices.base_amount).new_price).toFixed(2)}</p>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                Tax Amount: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
-                                    dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.tax_currency)}}></span>
-                                    {(markup(prices.tax_amount).new_price).toFixed(2)}</p>
-                            {EXTRAS_MARKUP.map(each=>each)}
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
-                                Total Paid: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
-                                    dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
-                                {(markup(overallTotal).new_price).toFixed(2)}</p>
-                        </div>
-                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Weather</h1>
-                        <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
-                            <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                                <i style={{color: "rgba(0,0,0,0.5)"}}
-                                        className="fa-solid fa-temperature-high"></i>
-                            </div>
-                            <div>
-                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                    New York (Thu Mar 23) -
-                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                                        56°</span>
-                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                        | heavy rain</span>
-                                    | please hold an umbrella
-                                </p>
-                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                    Accra (Thu Mar 23) -
-                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                                        78°</span>
-                                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                        | sunny</span>
-                                    | please avoid heavy coats
-                                </p>
-                            </div>
-                        </div>
-                        <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
-                            Important Notices</h1>
-                            <div style={{padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
-                                {IMPORTANT_NOTICES.map(each=>each)}
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                        <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
+                                        Your booking reference is
+                                        <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.9)", fontSize: 13}}>
+                                            {completedOrderDetails.booking_reference}
+                                        </span>
+                                    </p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
+                                        Please remember your flight is on
+                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, margin: "0 10px", color: "black", fontWeight: "bolder"}}>
+                                            {FLIGHT_DATE}</span>
+                                        and takes off at
+                                        <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, margin: "0 10px", color: "black", fontWeight: "bolder"}}>
+                                            {TAKE_OFF_TIME}</span>
+                                    </p>
+                                </div>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                    Flights</h1>
+                                <div>
+                                    {SEGMENTS.map(each=>each)}
+                                </div>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                    Passengers</h1>
+                                <div>
+                                    <div style={{display: "flex", flexWrap: "wrap"}}>
+                                        {PASSENGERS.map(each=>each)}
+                                    </div>
+                                </div>
+
+                                <div>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                    Sold by</h1>
+                                <div>
+                                    <div style={{marginBottom: 10}}>
+                                        <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                                            <img src={completedOrderDetails?.owner?.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
+                                            {completedOrderDetails?.owner?.name}
+                                        </p>
+                                        {
+                                            completedOrderDetails?.owner?.conditions_of_carriage_url ?
+                                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                                <a href={completedOrderDetails?.owner?.conditions_of_carriage_url}  rel="noreferrer" target="_blank">
+                                                    read more at {completedOrderDetails?.owner?.conditions_of_carriage_url}
+                                                </a>
+                                            </p> : 
+                                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                                <i style={{color: "orange", marginRight: 10}} className="fa-solid fa-exclamation-triangle"></i>
+                                                Airline website not found
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                    Payment Details</h1>
+                                <div style={{marginBottom: 10, paddingLeft: 10}}>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                        Base Amount: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                            dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
+                                            {(markup(prices.base_amount).new_price).toFixed(2)}</p>
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                        Tax Amount: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                            dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.tax_currency)}}></span>
+                                            {(markup(prices.tax_amount).new_price).toFixed(2)}</p>
+                                    {EXTRAS_MARKUP.map(each=>each)}
+                                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
+                                        Total Paid: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
+                                            dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
+                                        {(markup(overallTotal).new_price).toFixed(2)}</p>
+                                </div>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                    Weather</h1>
+                                <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
+                                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
+                                        <i style={{color: "rgba(0,0,0,0.5)"}}
+                                                className="fa-solid fa-temperature-high"></i>
+                                    </div>
+                                    <div>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                            New York (Thu Mar 23) -
+                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                                56°</span>
+                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                                | heavy rain</span>
+                                            | please hold an umbrella
+                                        </p>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                                            Accra (Thu Mar 23) -
+                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                                78°</span>
+                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                                | sunny</span>
+                                            | please avoid heavy coats
+                                        </p>
+                                    </div>
+                                </div>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                    Important Notices</h1>
+                                    <div style={{padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
+                                        {IMPORTANT_NOTICES.map(each=>each)}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     );

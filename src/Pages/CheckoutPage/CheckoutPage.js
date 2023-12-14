@@ -19,7 +19,7 @@ export default function CheckoutPage(props){
 
     const [ PRICES, SET_PRICES ] = useState(FLIGHT_DATA_ADAPTER.adaptPriceProps(payload));
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
-    const [ isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+    const [ isBookingConfirmed, setIsBookingConfirmed] = useState(true);
     const [ completedOrderDetails, setCompletedOrderDetails ] = useState({});
     const [ checkoutConfirmation, setCheckoutConfirmation ] = useState({
         type: "server_error",
