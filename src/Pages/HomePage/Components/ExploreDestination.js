@@ -50,8 +50,11 @@ export default function ExploreDestinations(props){
                                     </div>
 
                                     <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
-                                        <p id="landing_page_search_input_text_display" className="static_search_bar_text" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
-                                            &#128400; Hey...</p>
+                                        <p className="static_search_bar_text">
+                                            <span id="landing_page_search_input_text_display" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left", fontWeight: "bolder"}}>
+                                                &#128400; Hey...</span>
+                                            <span className="blinking_cursor" style={{borderLeft: "2px solid orangered", fontSize: 20}}></span>
+                                        </p>
                                     </div>
                                     <div id="landing_page_search_form_show_filters_btn" style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
