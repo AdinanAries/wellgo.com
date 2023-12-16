@@ -127,6 +127,7 @@ function App() {
       {
         isCheckout ? 
           <CheckoutPage 
+            LogMeIn={LogMeIn}
             payload={checkoutPayload}
             cancel_checkout={cancel_checkout}
           /> 

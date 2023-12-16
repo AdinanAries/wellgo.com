@@ -2,10 +2,14 @@ import SelectedTicketItinSegments from "../../SearchPage/Components/SelectedTick
 import { get_short_date_DAYMMMDD, convert24HTimeToAMPM } from "../../../helpers/general";
 import { markup } from "../../../helpers/Prices";
 import { get_currency_symbol } from "../../../helpers/general";
+import { verifyUserToken } from "../../../services/sessionServices";
+import { loginPost } from "../../../services/accountServices";
 import { useEffect, useState } from "react";
 import CONSTANTS from "../../../Constants/Constants";
 import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
 import getBotResponse from "../../../Constants/BotResponses";
+import loading_icon from "../../../icons/loading.svg";
+import FormErrorCard from "../../../components/FormErrorCard";
 
 const OrderCompletedPage = (props) => {
 
@@ -13,12 +17,23 @@ const OrderCompletedPage = (props) => {
         pickAnotherFlightOnclick,
         goHome,
         completedOrderDetails,
-        prices
+        prices,
+        LogMeIn
     } = props;
 
     // Use this flag to remind user to login so booking can be saved to their account
     const [isLoggedIn, setIsLoggedIn ] = useState(false); 
     const [showBookingDetails, setShowBookingDetails] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [ formData, setFormData ] = useState({
+        email: "",
+        password: "",
+    });
+    const [ formValidation, setFormValidation ] = useState({
+        type: "warning",
+        isError: false,
+        message: "",
+    });
 
     const continueToDetails = () => {
         setShowBookingDetails(true);
@@ -26,14 +41,89 @@ const OrderCompletedPage = (props) => {
     }
 
     useEffect(()=>{
-        if(!isLoggedIn && !showBookingDetails){
-            show_prompt_on_Bot_AD_tips_popup(
-                getBotResponse(CONSTANTS.bot.responses.not_logged_in_on_checkout_complete),
-                CONSTANTS.bot.prompt_types.warn, 
-                500000
-            );
-        }
+        (async function go(){
+            let verify_res = await verifyUserToken();
+            if(verify_res.valid){
+                // User is logged in
+                const user=verify_res.data;
+                setShowBookingDetails(true);
+                setIsLoggedIn(true);
+            }else{
+                // User is not logged in
+                setShowBookingDetails(false);
+                setIsLoggedIn(false);
+                show_prompt_on_Bot_AD_tips_popup(
+                    getBotResponse(CONSTANTS.bot.responses.not_logged_in_on_checkout_complete),
+                    CONSTANTS.bot.prompt_types.warn, 
+                    500000
+                );
+            }
+            setIsLoading(false);
+        })()
     }, []);
+
+    const emailOnInput = (e) => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+        });
+        setFormData({
+            ...formData,
+            email: e.target.value
+        });
+    }
+
+    const passwordOnInput = (e) => {
+        setFormValidation({
+            type: "warning",
+            isError: false,
+            message: "",
+        });
+        setFormData({
+            ...formData,
+            password: e.target.value
+        });
+    }
+
+    const login_onclick = async () => {
+        setIsLoading(true);
+        if(!formData.email) {
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "please enter email",
+            });
+            setIsLoading(false);
+            return
+        }
+        if(!formData.password) {
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: "please enter password",
+            });
+            setIsLoading(false)
+            return
+        }
+        let res = await loginPost(formData);
+        if(res.token){
+            localStorage.setItem("user_token", res.token);
+            LogMeIn();
+            setIsLoggedIn(true);
+            setShowBookingDetails(true); 
+        }else{
+            setFormValidation({
+                type: "error",
+                isError: true,
+                message: res.message,
+            });
+            setIsLoggedIn(false);
+            setShowBookingDetails(false);
+        }
+        setIsLoading(false);
+        
+    }
 
     const FIRST_SLICE_ORIGIN_IATA=(
         completedOrderDetails?.slices 
@@ -323,7 +413,15 @@ const OrderCompletedPage = (props) => {
                         | heavy rain</span>
                 </p>
                 {
-                    (!showBookingDetails && !isLoggedIn) ? <div style={{paddingTop: 15}}>
+                    isLoading && 
+                        <div style={{marginTop: 10, padding: "20px", maxWidth: 250, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8}}>
+                            <div style={{backgroundImage: `url(${loading_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 90, height: 90, margin: "auto"}}></div>
+                            <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
+                                Please wait...</p>
+                        </div>
+                }
+                {
+                    ((!showBookingDetails && !isLoggedIn) && !isLoading) ? <div style={{paddingTop: 15}}>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", color: "crimson"}}>
                             <i style={{marginRight: 10, color: "red"}} className="fa-solid fa-exclamation-triangle"></i>
                             You are not logged in!
@@ -351,6 +449,8 @@ const OrderCompletedPage = (props) => {
                                             Email</p>
                                         <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                                             <input
+                                                onInput={emailOnInput} 
+                                                value={formData.email}
                                                 type="email" placeholder="type here..."
                                                 style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                                         </div>
@@ -361,11 +461,19 @@ const OrderCompletedPage = (props) => {
                                             Password</p>
                                         <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                                             <input 
+                                                onInput={passwordOnInput} 
+                                                value={formData.password}
                                                 type="password" placeholder="type here..."
                                                 style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                                         </div>
                                     </div>
-                                    <div onClick={()=>alert("login & continue")} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7, marginTop: 5}}>
+                                    {
+                                        formValidation.isError && <FormErrorCard 
+                                            message={formValidation.message} 
+                                            type={formValidation.type}
+                                        />
+                                    }
+                                    <div onClick={login_onclick} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7, marginTop: 5}}>
                                         <i style={{marginRight: 10, color: "white"}} className="fa-solid fa-sign-in"></i>
                                         Login
                                     </div>
@@ -373,7 +481,7 @@ const OrderCompletedPage = (props) => {
                             </div>
                         </div>
                     </div> :
-                    showBookingDetails && <div>
+                    (showBookingDetails && !isLoading) && <div>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                             <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
                             Your booking has been confirmed!

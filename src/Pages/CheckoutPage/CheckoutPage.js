@@ -15,7 +15,7 @@ import Logger, { getBookingConfirmedLogMessage } from '../../helpers/Logger';
 
 export default function CheckoutPage(props){
 
-    const { payload, cancel_checkout } = props;
+    const { payload, cancel_checkout, LogMeIn } = props;
 
     const [ PRICES, SET_PRICES ] = useState(FLIGHT_DATA_ADAPTER.adaptPriceProps(payload));
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
@@ -239,6 +239,7 @@ export default function CheckoutPage(props){
                 {
                     isBookingConfirmed ?
                     <OrderCompletedPage 
+                        LogMeIn={LogMeIn}
                         pickAnotherFlightOnclick={pickAnotherFlightOnclick}
                         goHome={goHome}
                         completedOrderDetails={completedOrderDetails}
