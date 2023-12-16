@@ -1,15 +1,16 @@
-//import explore_destination_img from "../explore_destination_img.jpg";
-
-import WillgoLogo from '../../../WillgoLogo.png';
-import search_bar_flight_icon from "../../../icons/search_bar_flight_icon.png";
 import deals_icon from "../../../icons/deals_icon.png";
 import trips_icon from "../../../icons/trips_icon.png";
 import explore_icon from "../../../icons/explore_icon.png";
-import user_account_icon from "../../../icons/user_account_icon.png";
 import botIcon from "../../../icons/botIcon.svg";
 import HeroMainMenu from './HeroMainMenu';
 
-import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../../../helpers/PageRoutingFuncs';
+import { 
+    show_full_search_form, 
+    show_trips_page, 
+    show_deals_page, 
+    show_help_page, 
+    show_explore_page 
+} from '../../../helpers/PageRoutingFuncs';
 
 import $ from "jquery"
 import { useEffect } from 'react';
@@ -45,23 +46,20 @@ export default function ExploreDestinations(props){
                             <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.5)", height: 70, maxWidth: 550, margin: "auto", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ zIndex: 5}}>
                                 <div id="landing_page_search_input_text_display_container" style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                     <div id="landing_page_search_form_bar_bot_img" style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
-                                        {/*<i style={{color: "rgba(0,0,0,0.5)"}} className="fa fa-search"></i>*/}
                                         <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
                                     </div>
 
                                     <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                         <p className="static_search_bar_text">
-                                            <span id="landing_page_search_input_text_display" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left", fontWeight: "bolder"}}>
+                                            <span id="landing_page_search_input_text_display" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
                                                 &#128400; Hey...</span>
-                                            <span className="blinking_cursor" style={{borderLeft: "2px solid orangered", fontSize: 20}}></span>
+                                            <span id="hero_section_bot_typing_blinking_cursor" className="blinking_cursor" style={{borderLeft: "2px solid white", fontSize: 20}}></span>
                                         </p>
                                     </div>
                                     <div id="landing_page_search_form_show_filters_btn" style={{position: "relative", zIndex: 2, borderRadius: "100%", display: "flex", flexDirection: "column", justifyContent: "center", width: 55, height: 50, margin: 10, boxShadow: "0 0 5px rgba(0,0,0,0.5)"}}>
                                         <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                                            {/*<p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                                <img src={search_bar_flight_icon} style={{width: 26, height: "auto"}} /></p>*/}
                                             <p  style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                                                <i id="landing_page_search_form_show_filters_btn_caret" style={{/*marginLeft: 7,*/ fontSize: 16, color: "rgba(0,0,0,0.7)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
+                                                <i id="landing_page_search_form_show_filters_btn_caret" style={{fontSize: 16, color: "rgba(0,0,0,0.7)", transition: "all 0.3s"}} className="fa fa-angle-down"></i></p>
                                         </div>
                                     </div>
                                 </div>

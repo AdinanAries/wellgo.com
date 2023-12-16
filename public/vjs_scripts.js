@@ -287,7 +287,6 @@ function clear_flight_results_showed_by_bot(){
       <i style="margin-right: 10px; color: red;" class="fa fa-exclamation-triangle"></i> AD deleted a message...</span>
     `;
     each.style.pointerEvents="none";
-    //each.style.height="0";
   });
 }
 function select_a_flight_from_bot_list(){
@@ -315,9 +314,6 @@ document.getElementById("main_bot_view_flights_all_details_cancel_btn").addEvent
 });
 document.getElementById("main_bot_view_selected_flights_all_details_cancel_btn").addEventListener("click", e=>{
   document.getElementById("main_bot_view_selected_flights_all_details").style.display="none";
-  //document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
-  //selectedAFlight=false;
-  //document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
 });
 function main_bot_view_flights_all_details_func(){
   document.getElementById("main_bot_view_flights_all_details").style.display="block";
@@ -1340,8 +1336,9 @@ async function run_chat_instance(){
   
 }
 
-function default_run_chat_instance(msg){
-  document.querySelector("#main_support_chat_user_input_txt_container textarea").value = msg;
+function default_run_chat_instance(msg=""){
+  if(msg)
+    document.querySelector("#main_support_chat_user_input_txt_container textarea").value = msg;
   setTimeout(run_chat_instance, 300);
 }
 
@@ -1947,7 +1944,6 @@ async function default_run_chat_instance_old(msg){
             show_interapting_message(`We need your address next, it should look like 
             '<span class="support_chat_bot_msg_highlights">street address, town, city, country zipcode</span>'
             ..eg. '<span class="support_chat_bot_msg_highlights">234 Rector Street, Manhattan, New York, USA 10232</span>'`, "none");
-            //bot_reply_msg= "Please enter your address information!";
             scroll_chat=false;
           }else{
             let err_reply_msgs = [
@@ -1957,7 +1953,6 @@ async function default_run_chat_instance_old(msg){
             ];
             bot_reply_msg = err_reply_msgs[Math.floor(Math.random() * err_reply_msgs.length)]
           }
-          //alert("pnr recording");
         }
         
       }
@@ -1965,11 +1960,7 @@ async function default_run_chat_instance_old(msg){
     }
 
     //---------------------end of flight booking process-------------------------------------//
-  
 
-  /*if(bot_reply){
-    bot_reply_msg = bot_reply.msg;
-    wellgo_bot.status = bot_reply.type;*/
   }else{
     bot_reply_msg = "Opps! My server failed. My bad...";
   }
@@ -2018,7 +2009,6 @@ document.querySelector("#main_support_chat_user_input_txt_container textarea").a
 
 async function get_bot_query_autocomplete_wrapper(e){
   let autocompleted = await get_bot_query_autocomplete(e.target.value);
-  //console.log("autocompleted: ", autocompleted.q)
   if(autocompleted.q===""){
     document.getElementById("suggested_bot_query_display").innerHTML = "";
   }else{
@@ -2059,7 +2049,6 @@ function toggle_show_hp_support_chat_container(){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
       }
       $("#support_chat_container").slideUp("fast");
-      //document.getElementById("support_chat_container").style.display = "none";
       if(document.getElementById("chatbot_provided_manual_channels"))
         document.getElementById("chatbot_provided_manual_channels").style.display="none";
       document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
@@ -2115,7 +2104,6 @@ function typeWriter() {
       let idxOfClosingTagFirstBraket = txt.indexOf("<", indexOfTagClosing_1+1);
       let nestCount=0
       for(;txt.substring(idxOfClosingTagFirstBraket+1, idxOfClosingTagFirstBraket+2)!=="/";){
-          //console.warn(txt.substring(idxOfClosingTagFirstBraket+1, idxOfClosingTagFirstBraket+2))
           nestCount++;
           idxOfClosingTagFirstBraket = txt.indexOf("<", idxOfClosingTagFirstBraket+1);
           indexOfTagClosing_2=txt.indexOf(">", idxOfClosingTagFirstBraket+1);
@@ -2125,15 +2113,12 @@ function typeWriter() {
           indexOfTagClosing_2 = txt.indexOf(">", indexOfTagClosing_2 + 1);
       }
 
-      //console.warn('tag: ', txt.substring(ig, (indexOfTagClosing_2+1)));
       document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, (indexOfTagClosing_2+1));
         ig = (indexOfTagClosing_2+1);
     }else{
         document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(ig); 
         ig++;
     }
-    //document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(i);
-    //i++;
     setTimeout(typeWriter, speed);
   }
 }
@@ -2291,13 +2276,6 @@ document.getElementById("landing_page_search_bar_help_pg_btn").addEventListener(
   toggle_main_page_search_filters()
 });
 
-//console.log(document.getElementById("hp_support_user_submit_chat_btn"))
-
-/*if($(document).width() > 700){
-  document.querySelector("header").style.backgroundColor="#000000";
-  document.querySelector("").style.color = "";
-}*/
-
 window.onscroll = function() {
   if(localStorage.getItem("is_home_page")){
     if (window.pageYOffset > 40) { 
@@ -2315,32 +2293,6 @@ window.onscroll = function() {
     }
   }
 }
-/*const fixChatBotHeight = () => {
-  const div = document.getElementById("support_chat_container");
-  div.style.setProperty("--app-height", `${window.innerHeight}px`);
-}
-window.addEventListener("resize", fixChatBotHeight)
-fixChatBotHeight();
-window.addEventListener('touchmove', function(e) {
-  if(document.getElementById('support_chat_container').style.display==="none"){
-    //scroll page
-  }else {
-    e.preventDefault();
-  }
-  
-}, false);
-
-window.addEventListener('scroll', function(e) {
-  if(document.getElementById('support_chat_container').style.display==="none"){
-    //scroll page
-  }else{
-    e.preventDefault();
-  }
-  
-}, false);*/
-
-
-// Extracting Currencies
 
 const NAME_TO_DO_CURRENCY_SYMBOLS = [
   {

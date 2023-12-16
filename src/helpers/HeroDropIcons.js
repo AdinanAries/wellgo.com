@@ -8,6 +8,8 @@ const HeroDropIcon = () => {
                     document.getElementById("landing_page_search_form_bar").style.borderWidth = "1px";
                 if(document.getElementById("landing_page_search_input_text_display"))
                     document.getElementById("landing_page_search_input_text_display").style.color = "white";
+                if(document.getElementById("hero_section_bot_typing_blinking_cursor"))
+                    document.getElementById("hero_section_bot_typing_blinking_cursor").style.borderColor = "white";
             }, 200);
             if(document.getElementById("landing_page_search_filters_container"))
                 global.$("#landing_page_search_filters_container").slideUp("fast");
@@ -19,7 +21,9 @@ const HeroDropIcon = () => {
             if(document.getElementById("landing_page_search_form_bar"))
                 document.getElementById("landing_page_search_form_bar").style.borderWidth = "0";
             if(document.getElementById("landing_page_search_input_text_display"))
-                document.getElementById("landing_page_search_input_text_display").style.color = "rgba(0,0,0,0.7)";
+                document.getElementById("landing_page_search_input_text_display").style.color = "rgba(0,0,0,0.9)";
+            if(document.getElementById("hero_section_bot_typing_blinking_cursor"))
+                document.getElementById("hero_section_bot_typing_blinking_cursor").style.borderColor = "black";
             if(document.getElementById("landing_page_search_filters_container"))
                 global.$("#landing_page_search_filters_container").slideDown("fast");
             if(document.getElementById("landing_page_search_form_show_filters_btn_caret"))

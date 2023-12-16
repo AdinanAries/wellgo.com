@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { show_login_page, show_full_search_form, show_trips_page, show_deals_page, show_help_page, show_explore_page } from '../../../helpers/PageRoutingFuncs';
+import { show_full_search_form } from '../../../helpers/PageRoutingFuncs';
 import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
 import CONSTANTS from '../../../Constants/Constants';
-import BotAuxMsg from '../../../Constants/BotAuxMsg';
 import getBotResponse from "../../../Constants/BotResponses";
 
 const HeroMainMenu = (props) => {

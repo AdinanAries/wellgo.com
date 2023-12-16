@@ -2,14 +2,9 @@ import SearchForm from "./SearchForm";
 import ChooseUs from "./ChooseUs";
 import ExploreDestinations from "./ExploreDestination";
 
-
-import explore_page_hero from "../../../explore_page_hero.jpg";
-
 import { show_explore_page } from "../../../helpers/PageRoutingFuncs";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CONSTANTS from "../../../Constants/Constants";
-
-//backgroundImage: `url('${explore_page_hero}')`,
 
 function Main(props){
 

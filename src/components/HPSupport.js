@@ -98,11 +98,6 @@ function return_bot_chat_loading_markup(){
     `
 }
 
-/*export function show_new_chatbot_tip(msg){
-    document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
-    setTimeout(()=>hide_new_chatbot_tip(),15000);
-}*/
-
 export function hide_new_chatbot_tip(){
     $("#main_chat_bot_tips_poppup_section").slideUp("fast");
 }
@@ -164,7 +159,4 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
     botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (duration+randWait));
 }
 
-/*$(document).ready(()=>{
-    setTimeout(()=>show_new_chatbot_tip("msg"),10000);
-});*/
 
