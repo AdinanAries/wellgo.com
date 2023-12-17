@@ -6,7 +6,13 @@ import getBotResponse from "../../../Constants/BotResponses";
 
 const HeroMainMenu = (props) => {
 
-    const { siteCurrency, siteLanguage, toggle_show_hide_currency_page, toggle_show_hide_languages_page } = props;
+    const { 
+        siteCurrency, 
+        siteLanguage, 
+        toggle_show_hide_currency_page, 
+        toggle_show_hide_languages_page 
+    } = props;
+    
     const [showDropDown, setShowDropDown] = useState(false);
 
     const showDropDownMenu = () => {

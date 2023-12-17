@@ -14,7 +14,7 @@ export default function ExplorePage(){
                         We apologize for any inconvenience
                     </p>
                 </div>
-                <div style={{/*marginBottom: 30,*/ height: 500, padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", textShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
+                <div style={{height: 500, padding: 20, display: "flex", flexDirection: "column", justifyContent: "center", textShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
                     <p style={{color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 38}}>
                         Read, Travel,</p>
                     <p style={{marginTop: -9,color: "white", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 30 }}>
