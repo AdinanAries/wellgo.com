@@ -11,6 +11,7 @@ import { fetchRatedPlaces } from "../../../services/ratedPlacesServices";
 import EachReviewer from "./EachReviewer";
 import FullPageGallery from "../../../components/FullPageGallery";
 import PlacesReviewsScores from "./PlacesReviewsScores";
+import loading_icon from "../../../icons/loading.svg";
 
 import reviews_icon from "../../../icons/reviews_icon.svg";
 import reviews_icon2 from "../../../icons/reviews_icon2.svg";
@@ -37,36 +38,34 @@ const Reviews = () => {
     const [ ratedPlaces, setRatedPlaces ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(true);
 
+    const [ reviewers, setReviewers ] = useState([]);
+    const [ CITY_NAME, setCityName ] = useState("");
+    const [ TRAVEL_PRICE, setTravelPrice ] = useState("");
+    const [ PICTURES, setPictures ] = useState({});
+    const [ SCORES, setScores ] = useState(0);
+
     const [ favCities, setFavCities ] = useState(favCts);
     
     let current_reviewer = slice;
     //let current=slice;
 
-    let reviewers = [];
-    let CITY_NAME = "";
-    let TRAVEL_PRICE = "";
-    let PICTURES = []
-    let SCORES = 0;
-
     useEffect(()=>{
         (async function go(){
-            const places = await shuffle_array(await fetchRatedPlaces());
+            //const places = shuffle_array(await fetchRatedPlaces());
+            const places = shuffle_array(Reviewers)
+            setReviewers(places[currentCityIndex].reviews);
+            setCityName(places[currentCityIndex].place.name);
+            setTravelPrice(places[currentCityIndex].place.price);
+            setPictures(places[currentCityIndex].place.pictures);
+            setScores(places[currentCityIndex].scores);
             console.log("RatedPlaces", places);
             if((Array.isArray(places) && places.length>0)){
-                setRatedPlaces( prevState => {
-                    prevState = places;
-                    reviewers = places[currentCityIndex].reviews;
-                    CITY_NAME = places[currentCityIndex].place.name;
-                    TRAVEL_PRICE = places[currentCityIndex].place.price;
-                    PICTURES = places[currentCityIndex].place.pictures;
-                    SCORES = places[currentCityIndex].scores;
-                    return prevState;
-                });
+                setRatedPlaces([...places]);
             }
             setIsLoading(false);
         })();
         //document.getElementById("main_all_ratings_dots").innerHTML = return_rating_markup(reviewers[0].rated);
-    }, [])
+    }, [currentCityIndex, current])
     
     function return_rating_markup(rating_num){
         if(rating_num === 5){
@@ -244,7 +243,7 @@ const Reviews = () => {
                 showGallery && <FullPageGallery photos={PICTURES} toggleShowGallery={toggleShowGallery}/>
             }
             {
-                !isLoading ?
+                !isLoading  ?
                 <div className="home_page_reviews_container">
                     <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                     >Places Advisor</h1>
@@ -275,18 +274,20 @@ const Reviews = () => {
                             <div className="home_page_reviews_each_reviewer_pic">
                                 <div className="home_page_reviews_each_reviewer_pic_img_container" style={{display: "flex", flexDirection: "row"}}>
                                     <div style={{width: 110, height: 110, border: "4px solid #c751b9", overflow: 'hidden', borderRadius: "100%", backgroundColor: "rgba(0,0,0,0.2)", boxShadow: "1px 2px 4px rgba(0,0,0,0.4)"}}>
-                                        <img id="home_page_reviews_selected_reviewer_img" src={reviewers[current].img} style={{width: "100%", height: "100%", objectFit: "cover", objectPosition: "center"}} alt={"to do"}/>
+                                        <img id="home_page_reviews_selected_reviewer_img" src={reviewers[current]?.img} 
+                                        style={{width: "100%", height: "100%", objectFit: "cover", objectPosition: "center"}} 
+                                        alt="SelectedReviwer"/>
                                     </div>
                                 </div>
                                 <p id="home_page_reviews_selected_reviewer_name" style={{marginTop: 15, fontFamily: "Courgette", color: "#c751b9", fontSize: 17, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                    {reviewers[current].name}
+                                    {reviewers[current]?.name}
                                 </p>
                                 <p  className="mobile_font_13" id="home_page_reviews_selected_reviewer_city" style={{marginBottom: 10,fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,73,0,0.8)'}}>
-                                    {reviewers[current].city}
+                                    {reviewers[current]?.city}
                                 </p>
                                 <div className="reviews_rating" style={{display: "flex", flexDirection: "row"}}>
                                     <div id="main_all_ratings_dots" className="all_ratings_dotes">
-                                        {return_rating_markup(reviewers[current].rated)}
+                                        {return_rating_markup(reviewers[current]?.rated)}
                                     </div>
                                 </div>
                                 <p className="reviews_rating_number" style={{marginTop: 8, color: "rgba(0,0,0,0.7)", backgroundColor: "rgb(229, 233, 241)", fontSize: 17, fontFamily: "'Prompt', Sans-serif", padding: "10px", width: "fit-content"}}>
@@ -296,7 +297,7 @@ const Reviews = () => {
                                     </span>
                                     <span style={{fontWeight: "initial", color: "green"}}>
                                         <span style={{fontSize: 14}} id="main_reviews_rating_number"> <i className="fa-solid fa-star" style={{marginRight: 4, fontSize: 11, color: "rbga(0,0,0,0.3)"}}></i>
-                                            {parseFloat(reviewers[current].rated).toFixed(1)}</span>
+                                            {parseFloat(reviewers[current]?.rated).toFixed(1)}</span>
                                         <span style={{fontSize: 14}}> <span style={{color: "rgba(0,0,0,0.17)"}}>|</span> </span>
                                         <span style={{fontSize: 14, color: "darkslateblue"}}>
                                             <i className="fa-solid fa-money-bills" style={{marginRight: 4, fontSize: 11, color: "rbga(0,0,0,0.3)"}}></i>
@@ -363,16 +364,16 @@ const Reviews = () => {
                             <div className="home_page_reviews_each_review_details">
                                 <p id="home_page_reviews_selected_reviewer_msg" style={{borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 20,fontSize: 19, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(83,0,0,0.8)', letterSpacing: 1}}>
                                     <span style={{fontSize: 45, color: "#c751b9", marginRight: 10, fontFamily: "Courgette", position: "relative", zIndex: 3}}>"</span>
-                                    {reviewers[current].msg}
+                                    {reviewers[current]?.msg}
                                 </p>
                                 <div style={{display: "flex", justifyContent: "center", marginTop: 10}}>
-                                    <PlacesReviewsScores  scores={SCORES}/>
+                                    {SCORES && <PlacesReviewsScores  scores={SCORES}/>}
                                 </div>
                                 <p style={{marginTop: 5, /*fontFamily: "Courgette",*/ color: "rgba(0,0,0,0.6)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                    - {reviewers[current].name} -
+                                    - {reviewers[current]?.name} -
                                 </p>
                                 <p className="mobile_font_13" id="home_page_reviews_selected_reviewer_date" style={{fontSize: 13, textAlign: "center", fontFamily: "'Prompt', Sans-serif", color: 'rgba(0,0,0,0.6)'}}>
-                                    {reviewers[current].date}
+                                    {reviewers[current]?.date}
                                 </p>
                                 <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 10}}>
                                     <div style={{display: "flex", flexDirection: "row"}}>
@@ -401,8 +402,14 @@ const Reviews = () => {
                         </div>
                     </div>
                 </div> :
-                <div>
-                    Loading...
+                <div style={{marginBottom: 20, padding: "20px"}}>
+                    <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+                    >Places Advisor</h1>
+                    <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: "initial", fontFamily: "'Prompt', Sans-serif",}}
+                    >travelers openions about places</h1>
+                    <div style={{backgroundImage: `url(${loading_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 80, height: 80, margin: "auto"}}></div>
+                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", marginTop: 20}}>
+                        Please wait...</p>
                 </div>
             }
         </>
