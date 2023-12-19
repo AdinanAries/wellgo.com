@@ -25,7 +25,7 @@ export default function ExploreDestinations(props){
 
     useEffect(()=>{
         HeroDropIcon();
-        //chat_bot_new_msg(getBotNoticeMessage());
+        chat_bot_new_msg(getBotGreeting());
         setInterval(() => {
             chat_bot_new_msg(getBotNoticeMessage());
         }, 20000);
