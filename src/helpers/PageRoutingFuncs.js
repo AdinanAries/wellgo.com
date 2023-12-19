@@ -1,6 +1,4 @@
 import CONSTANTS from "../Constants/Constants";
-import { chat_bot_new_msg } from "../Pages/HomePage/Components/ExploreDestination";
-import { return_new_rand_msg } from "../chatbot_funcs";
 
 import $ from "jquery";
 const url=window.location.href;
