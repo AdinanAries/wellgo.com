@@ -44,8 +44,6 @@ export function show_home_page(is_from_search=false){
     
     localStorage.setItem("is_home_page", "yes");
 
-    chat_bot_new_msg(return_new_rand_msg());
-
     if(document.getElementById("selected_ticket_pane"))
         document.getElementById("selected_ticket_pane").style.display="none";
     if($(window).width() > CONSTANTS.viewport_threshold)

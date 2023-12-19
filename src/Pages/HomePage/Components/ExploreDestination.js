@@ -3,6 +3,7 @@ import trips_icon from "../../../icons/trips_icon.png";
 import explore_icon from "../../../icons/explore_icon.png";
 import botIcon from "../../../icons/botIcon.svg";
 import HeroMainMenu from './HeroMainMenu';
+import getBotNoticeMessage, { getBotGreeting } from "../../../Constants/BotNoticeMsg";
 
 import { 
     show_full_search_form, 
@@ -24,6 +25,10 @@ export default function ExploreDestinations(props){
 
     useEffect(()=>{
         HeroDropIcon();
+        //chat_bot_new_msg(getBotNoticeMessage());
+        setInterval(() => {
+            chat_bot_new_msg(getBotNoticeMessage());
+        }, 20000);
     }, [])
 
     return (
@@ -52,7 +57,7 @@ export default function ExploreDestinations(props){
                                     <div onClick={show_full_search_form} style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", width: "calc(100% - 110px)"}}>
                                         <p className="static_search_bar_text">
                                             <span id="landing_page_search_input_text_display" style={{color: "white", fontFamily: "'Prompt', sans-serif", textAlign: "left"}}>
-                                                &#128400; Hey...</span>
+                                                </span>
                                             <span id="hero_section_bot_typing_blinking_cursor" className="blinking_cursor" style={{borderLeft: "2px solid white", fontSize: 20}}></span>
                                         </p>
                                     </div>
@@ -129,7 +134,7 @@ export default function ExploreDestinations(props){
 }
 
 var i = 0;
-var txt = "Greetings! &#128400; Search flights or get help, below &#128071;"; /*The text click to start search...*/
+var txt = getBotGreeting(); /*The text click to start search...*/
 var speed = 30; /* The speed/duration of the effect in milliseconds */
 
 export function chat_bot_new_msg(txt_p){
