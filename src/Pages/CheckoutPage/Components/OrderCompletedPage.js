@@ -109,9 +109,13 @@ const OrderCompletedPage = (props) => {
         let res = await loginPost(formData);
         if(res.token){
             localStorage.setItem("user_token", res.token);
+            // To Do: Set user ID for the booking
+            /**
+             * To do goes here...
+             */
             LogMeIn();
             setIsLoggedIn(true);
-            setShowBookingDetails(true); 
+            setShowBookingDetails(true);
         }else{
             setFormValidation({
                 type: "error",
