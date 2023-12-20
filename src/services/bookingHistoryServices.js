@@ -64,3 +64,25 @@ const postFlightBookingLog = async (payload, url, user_token="") => {
         return {isError: true, message: e.message};
     }
 }
+
+export const updateFlightBookingLogId = async (booking_id, path=`\\api\\bookings\\set-user-id\\`) => {
+    try{
+        return await fetch(API_URL+path+`${booking_id}`, {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${USER_TOKEN}`
+            },
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {isError: true, message: err.message};
+        })
+    } catch (e){
+        console.log(e);
+        return {isError: true, message: e.message};
+    }
+}

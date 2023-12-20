@@ -20,6 +20,7 @@ export default function CheckoutPage(props){
     const [ PRICES, SET_PRICES ] = useState(FLIGHT_DATA_ADAPTER.adaptPriceProps(payload));
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
     const [ isBookingConfirmed, setIsBookingConfirmed] = useState(false);
+    const [ comfirmedBookingResourceID, setComfirmedBookingResourceID ] = useState("");
     const [ completedOrderDetails, setCompletedOrderDetails ] = useState({});
     const [ checkoutConfirmation, setCheckoutConfirmation ] = useState({
         type: "server_error",
@@ -155,6 +156,7 @@ export default function CheckoutPage(props){
             const logged = await logFlightBooking(log);
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
+            setComfirmedBookingResourceID(logged._id);
             // 4. Logging booking as user activity
             Logger.log_activity({
                 title: "Flight Booking Confirmed",
@@ -239,6 +241,7 @@ export default function CheckoutPage(props){
                 {
                     isBookingConfirmed ?
                     <OrderCompletedPage 
+                        bookingID={comfirmedBookingResourceID}
                         LogMeIn={LogMeIn}
                         pickAnotherFlightOnclick={pickAnotherFlightOnclick}
                         goHome={goHome}

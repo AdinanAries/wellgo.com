@@ -10,6 +10,7 @@ import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport"
 import getBotResponse from "../../../Constants/BotResponses";
 import loading_icon from "../../../icons/loading.svg";
 import FormErrorCard from "../../../components/FormErrorCard";
+import { updateFlightBookingLogId } from "../../../services/bookingHistoryServices";
 
 const OrderCompletedPage = (props) => {
 
@@ -18,7 +19,8 @@ const OrderCompletedPage = (props) => {
         goHome,
         completedOrderDetails,
         prices,
-        LogMeIn
+        LogMeIn,
+        bookingID
     } = props;
 
     // Use this flag to remind user to login so booking can be saved to their account
@@ -110,9 +112,7 @@ const OrderCompletedPage = (props) => {
         if(res.token){
             localStorage.setItem("user_token", res.token);
             // To Do: Set user ID for the booking
-            /**
-             * To do goes here...
-             */
+            await updateFlightBookingLogId(bookingID);
             LogMeIn();
             setIsLoggedIn(true);
             setShowBookingDetails(true);
