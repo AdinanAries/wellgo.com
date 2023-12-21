@@ -828,6 +828,9 @@ function return_start_checkout_info(json_obj){
 function return_each_user_chat_message_markup(msg){
     return `
         <div class="support_chat_user_sent_msg_container">
+            <div class="support_chat_bot_sent_msg_container_user_profile_pic">
+                <i class="fa-solid fa-user"></i>
+            </div>
             <div class="support_chat_user_sent_msg_inner_container">
                 <p>${msg}</p>
             </div>
@@ -877,7 +880,7 @@ function typingFunc(txt, speed, ig, para_id) {
           }
       setTimeout(()=>typingFunc(txt, speed, ig, para_id), speed);
     }
-  }
+}
 
 let bot_reply_inner_p_id_counter=-1;
 function return_each_bot_chat_message_markup(bot_reply){
@@ -886,6 +889,9 @@ function return_each_bot_chat_message_markup(bot_reply){
     setTimeout(()=>typingFunc(bot_reply, 10, 0, `bot_reply_chat_inner_p${bot_reply_inner_p_id_counter}`), 50);
     return `
         <div class="support_chat_bot_sent_msg_container">
+            <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
+                <i class="fa-solid fa-robot"></i>
+            </div>
             <div class="support_chat_bot_sent_msg_inner_container">
                 <p id="bot_reply_chat_inner_p${bot_reply_inner_p_id_counter}"></p>
             </div>
@@ -896,6 +902,9 @@ function return_each_bot_chat_message_markup(bot_reply){
 function return_each_bot_chat_message_markup_without_typing(bot_reply){
     return `
         <div class="support_chat_bot_sent_msg_container">
+            <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
+                <i class="fa-solid fa-robot"></i>
+            </div>
             <div class="support_chat_bot_sent_msg_inner_container">
                 <p>${bot_reply}</p>
             </div>

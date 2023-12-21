@@ -2140,6 +2140,9 @@ $(document).ready(()=>{
 function show_chat_bot_uprading_message(){
   document.getElementById("hp_support_chat_items").innerHTML = `
       <div class="support_chat_bot_sent_msg_container">
+        <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
+          <i class="fa-solid fa-robot"></i>
+        </div>
         <div class="support_chat_bot_sent_msg_inner_container">
             <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
         </div>
@@ -2234,6 +2237,9 @@ function start_book_with_vitual_agent(){
 
     document.getElementById("hp_support_chat_items").innerHTML = `
       <div class="support_chat_bot_sent_msg_container">
+        <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
+          <i class="fa-solid fa-robot"></i>
+        </div>
         <div class="support_chat_bot_sent_msg_inner_container">
             <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
         </div>
