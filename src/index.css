@@ -1429,7 +1429,7 @@ footer {
   position: absolute;
   z-index: 1;
   top: -15px;
-  left: 0;
+  left: 10px;
   width: 34px;
   height: 35px;
   background-color: #eee;
@@ -1444,8 +1444,11 @@ footer {
   border: 3px solid rgb(218, 232, 238);
   right: 0;
 }
-.support_chat_bot_sent_msg_container_bot_profile_pic i, .support_chat_bot_sent_msg_container_user_profile_pic i {
-  color: rgba(0, 0, 0, 0.2);
+.support_chat_bot_sent_msg_container_bot_profile_pic i {
+  color: rgb(134, 18, 147);
+}
+.support_chat_bot_sent_msg_container_user_profile_pic i {
+  color: rgb(18, 110, 147);
 }
 .support_chat_bot_sent_msg_inner_container{
   max-width: calc(100% - 20px);
