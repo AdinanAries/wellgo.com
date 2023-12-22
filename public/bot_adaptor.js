@@ -1,28 +1,128 @@
-var wellgo_bot = {
-    //status: "begin_air_booking",
-    status: "",
-    last_query: "can i book a flight",
-    step: "", 
-    about: "countries, cities, and airports"
+//bot_flight_booking_stages_dailog
+var virtual_assistant = {
+    state: {
+        status: "",
+        status_names: {
+            BEGIN_AIR_BOOKING: "begin_air_booking"
+        },
+        last_query: "can i book a flight",
+        step: "", 
+        about: "countries, cities, and airports",
+        scroll_chat: true,
+        isTripRoundFirstEntered: true,
+        isPNRFirstEntered: true,
+        isDatesFirstEntered: true,
+        isCabinClassFirstEntered: true,
+        isSearchingFlightFirstEnter: true,
+        isGettingTravelersFirstEntered: true,
+        selectedOriginAirport: "",
+        selectedDestinationAirport: "",
+        selectedAFlight: false,
+        hasBotReturnedResults: true
+    },
+    server: {
+        msgs: {
+            failed: [
+                "Opps! My server failed. My bad..."
+            ]
+        }
+    },
+    steps: {
+        names: {
+            TRIP_ROUND: "trip-round",
+            ORIGIN_DESTINATION: "origin-destination",
+            TRAVEL_DATES: "departure-return-dates",
+            CABIN_CLASS: "cabin-class",
+            FLIGHT_SEARCH: "searching-flight",
+            TRAVELER_COUNT: "getting-travelers",
+            PNR_RECORD: "pnr-recording",
+        },
+        origin_destination: {
+            error_msgs: [
+                `Are we still booking a flight for you?... if yes, say something like '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... Else say '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>' so we can do something else...`,
+                `Umm... I'm expecting something like '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... 
+                or we can do another thing if you say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>'`
+            ],
+            start_over_msgs: [
+                `K.. cool.. in order to get the new airports please say something like 
+                '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... Else say '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>' so we can do something else...`
+            ],
+            start_over_msgs_in_origin_detination_stage: [
+                `Yab! I should be expecting your airport inputs..
+                say something like '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... Else say '
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>' so we can do something else...`
+            ],
+            airports_found_confirmation_msgs: [
+                `Cool.. I found a couple airports 🛫, select your departure and destination airports and then say '<span class="support_chat_bot_msg_highlights">
+                done</span>' after that...`,
+                `👍 Please.. look through the following airports 🛫, select your departure and destination and then reply '<span class="support_chat_bot_msg_highlights">
+                done</span>' when you finish`,
+                `Perfect! these 👇 airports 🛫 matched your reply.. Please select yours and reply with '<span class="support_chat_bot_msg_highlights">done</span>' to confirm`,
+                `Great! These airports 👇 were found for your previous reply. Please select yours and reply '<span class="support_chat_bot_msg_highlights">done</span>' to proceed`,
+                `Looking good 🙂... Please select your 🛫 airports from the list below and reply with '<span class="support_chat_bot_msg_highlights">done</span>' so I can confirm` ,
+                `🙂 We're not wasting any of your time 🕐. Please select your airports and 'then say <span class="support_chat_bot_msg_highlights">done</span>' so we can proceed quickly`,
+                `Hey Umm! 🤔 The lists below 👇 have departure and destination airports. Please select yours then reply with '<span class="support_chat_bot_msg_highlights">done</span>', then we will proceed.`,
+                `Got it. 🤔 We found you some airports for depature and destination. You may pick yours and reply saying '<span class="support_chat_bot_msg_highlights">done</span>' to confirm with me`,
+                `😃 You know.. when the prices get good like they are right now, we dont waste any time booking your flight. I have found a couple airports listed below 👇. Please select yours and reply '<span class="support_chat_bot_msg_highlights">done</span>' to proceed quickly`,
+                `Getting there 💪... I have found a couple airports. Please select your departure and destination then reply with '<span class="support_chat_bot_msg_highlights">done</span>' so I can confirm.`,
+            ]
+        },
+        trip_round: {
+            start_msgs: [
+                `K.. cool 😎... do you want a return flight?... say '<span class="support_chat_bot_msg_highlights">
+                round trip</span>' if you do or say '
+                <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`,
+                `Looking good... 💪 Now do you want a "return flight" as well?...<br/> 
+                Say '<span class="support_chat_bot_msg_highlights">
+                round trip</span>' if so. Also say '
+                <span class="support_chat_bot_msg_highlights">one way</span>' if you want only the departure`,
+                `Awsome 🙂...  Are we booking a return flight as well?... If so say '<span class="support_chat_bot_msg_highlights">
+                round trip</span>'. For booking only the departure flight say '
+                <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`
+            ]
+        }
+    }
 }
 
-var bot_flight_booking_stages_dailog = [
-    {
-        step: "origin-destination",
-        error_msgs: [
-            `Are we still booking a flight for you?... if yes, say something like '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... Else say '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>' so we can do something else...`,
-            `Umm... I'm expecting something like '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
-            <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... 
-            or we can do another thing if you say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>'`
-        ]
+var virtual_assistant_functions = {
+    return_server_failed_error: () => {
+        return virtual_assistant.server.msgs.failed[
+            Math.floor(Math.random() * virtual_assistant.server.msgs.failed.length)];
+    },
+    get_start_over_message: (origin_destination_stage=false) => {
+        if(origin_destination_stage){
+            return virtual_assistant.steps.origin_destination.start_over_msgs_in_origin_detination_stage[
+                Math.floor(Math.random() * 
+                virtual_assistant.steps.origin_destination.start_over_msgs_in_origin_detination_stage.length)];
+        }
+        return virtual_assistant.steps.origin_destination.start_over_msgs[
+            Math.floor(Math.random() * 
+            virtual_assistant.steps.origin_destination.start_over_msgs.length)];
+    },
+    get_airports_found_confirmation_message: () => {
+        return virtual_assistant.steps.origin_destination.airports_found_confirmation_msgs[
+            Math.floor(Math.random() * 
+            virtual_assistant.steps.origin_destination.airports_found_confirmation_msgs.length)];
+    },
+    get_trip_round_start_message: () => {
+        return virtual_assistant.steps.trip_round.start_msgs[
+            Math.floor(Math.random() * 
+            virtual_assistant.steps.trip_round.start_msgs.length)];
     }
-]
+
+}
 
 function validate_user_airports_input_for_bot(inputs){
     if(inputs.split(" ").includes("to")){
@@ -38,7 +138,7 @@ function validate_user_airports_input_for_bot(inputs){
     }else{
         return {
             isValid: false,
-            msg: bot_flight_booking_stages_dailog[0].error_msgs[Math.floor(Math.random() * bot_flight_booking_stages_dailog[0].error_msgs.length)]
+            msg: virtual_assistant.steps.origin_destination.error_msgs[Math.floor(Math.random() * virtual_assistant.steps.origin_destination.error_msgs.length)]
         }
     }
 }

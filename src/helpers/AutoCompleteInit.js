@@ -27,7 +27,7 @@ global.autoSelectAirportForInputField = (IATA_ICAO, field_id) => {
 }
 
 const AutoCompleteInit = () => {
-    //Array filter method wrapped in function to improve code reuse
+    // Array filter method wrapped in function to improve code reuse
     function filter_airports_array_based_input_value(elem_value){
 
         return AirportsData.filter(each => {
@@ -50,6 +50,9 @@ const AutoCompleteInit = () => {
         });
 
     }
+
+    // Making filter function global;
+    window.filter_airports_array_based_input_value=filter_airports_array_based_input_value;
 
     if(document.getElementById("from_where_airports_auto_complete_input_fld")){
         document.getElementById("from_where_airports_auto_complete_input_fld").addEventListener("input", (evnt)=>{
