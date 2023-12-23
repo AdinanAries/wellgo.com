@@ -55,7 +55,10 @@ let virtual_assistant = {
                       , or something like '<span class="support_chat_bot_msg_highlights">United States to France</span>'
                         , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
             ]
-        }
+        },
+        no_bot_status_msgs: [
+            "I'm unable to help you with that... sorry..."
+        ]
     },
     stop_current_activity_commands: [
         "stop",
@@ -342,6 +345,10 @@ let virtual_assistant_functions = {
     return_server_failed_error: () => {
         return virtual_assistant.server.msgs.failed[
             Math.floor(Math.random() * virtual_assistant.server.msgs.failed.length)];
+    },
+    return_no_bot_status_message: () => {
+        return virtual_assistant.starters.no_bot_status_msgs[
+            Math.floor(Math.random() * virtual_assistant.starters.no_bot_status_msgs.length)];
     },
     is_airports_change_values_command: (value) => {
         return virtual_assistant.steps.origin_destination.change_values_commands.includes(value);

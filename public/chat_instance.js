@@ -18,7 +18,6 @@ let get_answer_from_bot = (user_query) => {
         contentType: "application/jSON; charset=utf-8",
         dataType: "json",
         success: res => {
-            console.log(res)
             return res
         },
         error: err => {
@@ -78,21 +77,28 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
     if(bot_reply.type !== "")
       wellgo_bot.status = bot_reply.type;
     
-    //----------------------change requests - flight booking process---------------------------------------//
-    bot_reply_msg=window.virtual_assistant_flight_booking_change_values_assessment(
-      TEXT_ELE, bot_reply_msg
-    )
+    if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
+      || bot_reply.type===wellgo_bot.status_names.BEGIN_AIR_BOOKING
+    ){
+      //----------------------change requests - flight booking process---------------------------------------//
+      bot_reply_msg=window.virtual_assistant_flight_booking_change_values_assessment(
+        TEXT_ELE, bot_reply_msg
+      )
 
-    //----------------------flight booking process---------------------------------------//
-    let flight_eval_res=window.virtual_assistant_flight_booking_values_assessment(
-      TEXT_ELE, bot_reply_msg, bot_reply
-    )
-    bot_reply_msg=flight_eval_res.bot_reply_msg;
-    bot_reply=flight_eval_res.bot_reply;
-
+      //----------------------flight booking process---------------------------------------//
+      let flight_eval_res=window.virtual_assistant_flight_booking_values_assessment(
+        TEXT_ELE, bot_reply_msg, bot_reply
+      )
+      bot_reply_msg=flight_eval_res.bot_reply_msg;
+      bot_reply=flight_eval_res.bot_reply;
+    } 
+    // Last condition for bot status - if server did not return an aswer with status
+    else if(!bot_reply.type) {
+      bot_reply_msg=window.virtual_assistant_functions.return_no_bot_status_message();
+    }
     //---------------------end of flight booking process-------------------------------------//
-
-  }else{
+  
+  } else {
     bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
   }
   
