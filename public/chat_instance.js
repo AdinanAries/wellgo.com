@@ -87,7 +87,7 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
             window.window.show_interapting_message(window.virtual_assistant_functions.get_start_over_message(IN_ORIGIN_DESTINATION_STAGE), "none");
           }else{
             window.show_user_interapting_message(TEXT_ELE.value.trim(), true);
-            window.window.show_interapting_message(window.virtual_assistant_functions.get_start_over_message(), "none");
+            window.show_interapting_message(window.virtual_assistant_functions.get_start_over_message(), "none");
           }
           wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
           wellgo_bot.scroll_chat=true;
