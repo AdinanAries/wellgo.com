@@ -75,11 +75,11 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
       if(bot_reply.type !== "")
         wellgo_bot.status = bot_reply.type;
       
-        // eslint-disable-next-line no-lone-blocks
-        {
-          if(TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeairports" 
-          || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="startover"
-          || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="startagain"){
+      // eslint-disable-next-line no-lone-blocks
+      {
+        if(TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeairports" 
+        || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="startover"
+        || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="startagain"){
         
           if(wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
             window.show_user_interapting_message(TEXT_ELE.value.trim(), true);
