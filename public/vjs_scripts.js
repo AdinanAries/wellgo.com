@@ -228,7 +228,7 @@ let select_destination_airports_suggested_by_bot = (iata, icao, elemid) => {
 }
 window.select_destination_airports_suggested_by_bot=select_destination_airports_suggested_by_bot;
 
-function clear_airports_suggested_by_bot_ids(){
+let clear_airports_suggested_by_bot_ids = () => {
   Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
     each.id="";
   });
@@ -249,7 +249,6 @@ let clear_flight_results_showed_by_bot = () => {
 }
 window.clear_flight_results_showed_by_bot=clear_flight_results_showed_by_bot;
 
-
 let select_a_flight_from_bot_list = () => {
   if(document.getElementById("select_a_ticket_from_bot_list_chck").checked){
     document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="flex";
@@ -264,24 +263,29 @@ window.select_a_flight_from_bot_list=select_a_flight_from_bot_list;
 document.getElementById("main_bot_view_flights_all_details_select_btn").addEventListener("click",e=>{
   select_a_flight_from_bot_list();
 });
+
 document.getElementById("main_bot_view_flights_all_details_deselect_btn").addEventListener("click",e=>{
   document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
   window.wellgo_bot.selectedAFlight=false;
   document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
 });
+
 document.getElementById("main_bot_view_flights_all_details_cancel_btn").addEventListener("click", e=>{
   document.getElementById("main_bot_view_flights_all_details").style.display="none";
   document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
   window.wellgo_bot.selectedAFlight=false;
   document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
 });
+
 document.getElementById("main_bot_view_selected_flights_all_details_cancel_btn").addEventListener("click", e=>{
   document.getElementById("main_bot_view_selected_flights_all_details").style.display="none";
 });
+
 let main_bot_view_flights_all_details_func = () => {
   document.getElementById("main_bot_view_flights_all_details").style.display="block";
 }
 window.main_bot_view_flights_all_details_func=main_bot_view_flights_all_details_func;
+
 let main_bot_view_selected_flights_all_details_func = () => {
   document.getElementById("main_bot_view_selected_flights_all_details").style.display="block";
 }
@@ -302,8 +306,8 @@ document.querySelector("#main_support_chat_user_input_txt_container textarea").a
   }
 });
 
-async function get_bot_query_autocomplete_wrapper(e){
-  let autocompleted = await get_bot_query_autocomplete(e.target.value);
+let get_bot_query_autocomplete_wrapper = async (e) =>{
+  let autocompleted = await window.get_bot_query_autocomplete(e.target.value);
   if(autocompleted.q===""){
     document.getElementById("suggested_bot_query_display").innerHTML = "";
   }else{
@@ -318,6 +322,7 @@ async function get_bot_query_autocomplete_wrapper(e){
   }
   
 }
+window.get_bot_query_autocomplete_wrapper=get_bot_query_autocomplete_wrapper;
 
 document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
   if(e.target.value===""){
@@ -329,10 +334,9 @@ document.querySelector("#main_support_chat_user_input_txt_container textarea").a
   
 });
 
-
-var ig = 0;
+let ig = 0;
 let is_chat_container_shown = false;
-function toggle_show_hp_support_chat_container(){
+let toggle_show_hp_support_chat_container = () => {
     document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_loading_markup();
     if(is_chat_container_shown){
 
@@ -372,11 +376,12 @@ function toggle_show_hp_support_chat_container(){
     }
     is_chat_container_shown = !is_chat_container_shown;
 }
+window.toggle_show_hp_support_chat_container=toggle_show_hp_support_chat_container;
 
-var txt = ""; /* The text */
-var speed = 20; /* The speed/duration of the effect in milliseconds */
+let txt = ""; /* The text */
+let speed = 20; /* The speed/duration of the effect in milliseconds */
 
-function typeWriter() {
+let typeWriter = () => {
   if (ig < txt.length) {
 
     if(txt.substring(ig, ig+5).toLowerCase() === "<br/>"){
@@ -417,22 +422,25 @@ function typeWriter() {
     setTimeout(typeWriter, speed);
   }
 }
+window.typeWriter=typeWriter;
 
-function show_new_chatbot_tip(msg){
+let show_new_chatbot_tip = (msg) => {
     document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
     setTimeout(()=>hide_new_chatbot_tip(),15000);
 }
+window.show_new_chatbot_tip=show_new_chatbot_tip;
 
-function hide_new_chatbot_tip(){
+let hide_new_chatbot_tip = () => {
     window.$("#main_chat_bot_tips_poppup_section").slideUp("fast");
 }
+window.hide_new_chatbot_tip=hide_new_chatbot_tip;
 
 window.$(document).ready(()=>{
   setTimeout(()=>show_new_chatbot_tip("msg"),10000);
   setTimeout(()=>window.toggle_main_page_search_filters(), 3500);
 });
 
-function show_chat_bot_uprading_message(){
+let show_chat_bot_uprading_message = () => {
   document.getElementById("hp_support_chat_items").innerHTML = `
       <div class="support_chat_bot_sent_msg_container">
         <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
@@ -483,6 +491,7 @@ function show_chat_bot_uprading_message(){
     ]
     txt = all_txt[Math.floor(Math.random() * all_txt.length)];
 }
+window.show_chat_bot_uprading_message=show_chat_bot_uprading_message;
 
 document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
   if(window.wellgo_bot.status===""){
@@ -551,6 +560,7 @@ let start_book_with_vitual_agent = () => {
   window.wellgo_bot.step = window.BOT_STEPS.ORIGIN_DESTINATION;
 }
 window.start_book_with_vitual_agent=start_book_with_vitual_agent;
+global.start_book_with_vitual_agent=start_book_with_vitual_agent;
 
 document.getElementById("landing_page_search_bar_call_btn").addEventListener("click", e=>{
   alert("placing your call now");

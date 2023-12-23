@@ -2,6 +2,8 @@ let wellgo_bot = window.virtual_assistant.state;
 const BOT_STEPS = window.virtual_assistant.steps.names;
 let bot_server_base_url = "http://localhost:5001";
 //let bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+window.BOT_STEPS=BOT_STEPS;
+window.wellgo_bot=wellgo_bot;
 
 let get_answer_from_bot = (user_query) => {
     //console.log(user_query)
@@ -50,7 +52,7 @@ let get_bot_query_autocomplete = (input_q)=>{
 }
 window.get_bot_query_autocomplete=get_bot_query_autocomplete;
 
-window.run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_container textarea") => {
+let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_container textarea") => {
 
     const TEXT_ELE=document.querySelector(input_txt_fld);
   
@@ -838,11 +840,12 @@ window.run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_t
     }
     
 }
+window.run_chat_instance=run_chat_instance;
   
 let default_run_chat_instance = (msg="") => {
     if(msg)
       document.querySelector("#main_support_chat_user_input_txt_container textarea").value = msg;
-    setTimeout(window.run_chat_instance, 300);
+    setTimeout(run_chat_instance, 300);
 }
 // Making default run chat instance function global
 window.default_run_chat_instance=default_run_chat_instance;
