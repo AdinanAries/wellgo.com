@@ -805,9 +805,9 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
          && wellgo_bot.step===""){
         const IdleBotStopMgs=[
-          `Stop? 😏 But We're already not doing any booking or cancellation to stop...`,
-          `Hey! If we were booking a flight or doing anything at all, that's when saying stop would mean something.`,
-          `You got me confused. Sorry, Stop what? 😐`
+          `${TEXT_ELE.value.trim()}? 😏 But We're already not doing any booking or cancellation to stop...`,
+          `Hey! If we had started any booking, then saying "${TEXT_ELE.value.trim()}" could help.`,
+          `You got me confused. Please explain what you mean by "${TEXT_ELE.value.trim()}" 😐`
         ]
         window.show_interapting_message(IdleBotStopMgs[Math.floor(Math.random() * IdleBotStopMgs.length)],"none")
         //return;
