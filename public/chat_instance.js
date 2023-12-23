@@ -54,85 +54,91 @@ window.get_bot_query_autocomplete=get_bot_query_autocomplete;
 
 let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_container textarea") => {
 
-    const TEXT_ELE=document.querySelector(input_txt_fld);
+  document.getElementById("main_support_chat_user_input_txt_container").style.opacity=0;
+  document.getElementById("main_support_chat_user_input_txt_wait_while_loading_status").style.display="block";
+
+  const TEXT_ELE=document.querySelector(input_txt_fld);
+
+  wellgo_bot.scroll_chat=true;
+  if(TEXT_ELE.value.trim() !== "")
+    document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_loading_markup("loading...");
+  let bot_reply=undefined;
+  let bot_reply_msg;
+  try{
+    bot_reply = await get_answer_from_bot(TEXT_ELE.value.trim());
+  }catch(e){
+    bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
+  }
   
-    wellgo_bot.scroll_chat=true;
-    if(TEXT_ELE.value.trim() !== "")
-      document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_loading_markup("loading...");
-    let bot_reply=undefined;
-    let bot_reply_msg;
-    try{
-      bot_reply = await get_answer_from_bot(TEXT_ELE.value.trim());
-    }catch(e){
-      bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
-    }
+  if(bot_reply){
+    bot_reply_msg = bot_reply.msg;
+
+    // If type === "" it means server did not return any valid response for current bot status
+    // So don't reset the status unless user says stop
+    if(bot_reply.type !== "")
+      wellgo_bot.status = bot_reply.type;
     
-    if(bot_reply){
-      bot_reply_msg = bot_reply.msg;
+    //----------------------change requests - flight booking process---------------------------------------//
+    bot_reply_msg=window.virtual_assistant_flight_booking_change_values_assessment(
+      TEXT_ELE, bot_reply_msg
+    )
+
+    //----------------------flight booking process---------------------------------------//
+    let flight_eval_res=window.virtual_assistant_flight_booking_values_assessment(
+      TEXT_ELE, bot_reply_msg, bot_reply
+    )
+    bot_reply_msg=flight_eval_res.bot_reply_msg;
+    bot_reply=flight_eval_res.bot_reply;
+
+    //---------------------end of flight booking process-------------------------------------//
+
+  }else{
+    bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
+  }
   
-      // If type === "" it means server did not return any valid response for current bot status
-      // So don't reset the status unless user says stop
-      if(bot_reply.type !== "")
-        wellgo_bot.status = bot_reply.type;
-      
-      //----------------------change requests - flight booking process---------------------------------------//
-      bot_reply_msg=window.virtual_assistant_flight_booking_change_values_assessment(
-        TEXT_ELE, bot_reply_msg
-      )
-  
-      //----------------------flight booking process---------------------------------------//
-      let flight_eval_res=window.virtual_assistant_flight_booking_values_assessment(
-        TEXT_ELE, bot_reply_msg, bot_reply
-      )
-      bot_reply_msg=flight_eval_res.bot_reply_msg;
-      bot_reply=flight_eval_res.bot_reply;
-  
-      //---------------------end of flight booking process-------------------------------------//
-  
-    }else{
-      bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
+  if(TEXT_ELE.value.trim() === "" || TEXT_ELE.value.trim() === "type your message here..."){
+    //dont add empty input to chat displayed items
+    document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
+  }else{
+    if(TEXT_ELE.value !== "$%#%%%#@@&&&**(*)"){
+      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_user_chat_message_markup(TEXT_ELE.value.trim());
     }
-    
-    if(TEXT_ELE.value.trim() === "" || TEXT_ELE.value.trim() === "type your message here..."){
-      //dont add empty input to chat displayed items
-      document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
-    }else{
-      if(TEXT_ELE.value !== "$%#%%%#@@&&&**(*)"){
-        document.getElementById("hp_support_chat_items").innerHTML += window.return_each_user_chat_message_markup(TEXT_ELE.value.trim());
+    setTimeout(()=>{
+      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup(bot_reply_msg);
+      if(wellgo_bot.scroll_chat){
+        window.$("#hp_support_chat_items").scrollTop(
+          window.$("#hp_support_chat_items").prop("scrollHeight")
+        );
+      }else{
+        document.getElementById("hp_support_chat_items").scrollBy(0, 100);
       }
-      setTimeout(()=>{
-        document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup(bot_reply_msg);
-        if(wellgo_bot.scroll_chat){
-          window.$("#hp_support_chat_items").scrollTop(
-            window.$("#hp_support_chat_items").prop("scrollHeight")
-          );
-        }else{
-          document.getElementById("hp_support_chat_items").scrollBy(0, 100);
-        }
-        document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
-        document.getElementById("suggested_bot_query_display").innerHTML = "";
-      }, 1000)
-      
-    }
-    if(window.virtual_assistant_functions
-        .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
-      && wellgo_bot.step===""){
-      const IdleBotStopMgs=[
-        `${TEXT_ELE.value.trim()}? 😏 But We're already not doing any booking or cancellation to stop...`,
-        `Hey! If we had started any booking, then saying "${TEXT_ELE.value.trim()}" could help.`,
-        `You got me confused. Please explain what you mean by "${TEXT_ELE.value.trim()}" 😐`
-      ]
-      window.show_interapting_message(IdleBotStopMgs[Math.floor(Math.random() * IdleBotStopMgs.length)],"none")
-      //return;
-    }
-    TEXT_ELE.value = "type your message here...";
-    if(wellgo_bot.scroll_chat){
-      window.$("#hp_support_chat_items").scrollTop(
-        window.$("#hp_support_chat_items").prop("scrollHeight")
-      );
-    }else{
-      document.getElementById("hp_support_chat_items").scrollBy(0, 100);
-    }
+      document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
+      document.getElementById("suggested_bot_query_display").innerHTML = "";
+    }, 1000)
+    
+  }
+  if(window.virtual_assistant_functions
+      .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
+    && wellgo_bot.step===""){
+    const IdleBotStopMgs=[
+      `${TEXT_ELE.value.trim()}? 😏 But We're already not doing any booking or cancellation to stop...`,
+      `Hey! If we had started any booking, then saying "${TEXT_ELE.value.trim()}" could help.`,
+      `You got me confused. Please explain what you mean by "${TEXT_ELE.value.trim()}" 😐`
+    ]
+    window.show_interapting_message(IdleBotStopMgs[Math.floor(Math.random() * IdleBotStopMgs.length)],"none")
+    //return;
+  }
+  TEXT_ELE.value = "type your message here...";
+  if(wellgo_bot.scroll_chat){
+    window.$("#hp_support_chat_items").scrollTop(
+      window.$("#hp_support_chat_items").prop("scrollHeight")
+    );
+  }else{
+    document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+  }
+
+  document.getElementById("main_support_chat_user_input_txt_container").style.opacity=1;
+  document.getElementById("main_support_chat_user_input_txt_wait_while_loading_status").style.display="none";
     
 }
 window.run_chat_instance=run_chat_instance;

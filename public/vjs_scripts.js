@@ -560,7 +560,7 @@ let start_book_with_vitual_agent = () => {
   window.wellgo_bot.step = window.BOT_STEPS.ORIGIN_DESTINATION;
 }
 window.start_book_with_vitual_agent=start_book_with_vitual_agent;
-global.start_book_with_vitual_agent=start_book_with_vitual_agent;
+//global.start_book_with_vitual_agent=start_book_with_vitual_agent;
 
 document.getElementById("landing_page_search_bar_call_btn").addEventListener("click", e=>{
   alert("placing your call now");
