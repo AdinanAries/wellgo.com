@@ -79,6 +79,49 @@ var virtual_assistant = {
                 `Getting there 💪... I have found a couple airports. Please select your departure and destination then reply with '<span class="support_chat_bot_msg_highlights">done</span>' so I can confirm.`,
             ]
         },
+        cabin_class: {
+            start_msgs: [
+                `Alright... Almost done. Please provide flight class.. You should say one of the following.. '
+                <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
+                economy</span>', '<span class="support_chat_bot_msg_highlights">
+                business</span>', '<span class="support_chat_bot_msg_highlights">
+                premium</span>', or '<span class="support_chat_bot_msg_highlights">
+                cheapest</span>'`,
+                `Kk! Flight class next... You should say one of the following.. '
+                <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
+                economy</span>', '<span class="support_chat_bot_msg_highlights">
+                business</span>', '<span class="support_chat_bot_msg_highlights">
+                premium</span>', or '<span class="support_chat_bot_msg_highlights">
+                cheapest</span>'`,
+                `Perfect 👍... What flight class.. You should say one of the following.. '
+                <span class="support_chat_bot_msg_highlights">
+                first class</span>', '<span class="support_chat_bot_msg_highlights">
+                economy</span>', '<span class="support_chat_bot_msg_highlights">
+                business</span>', '<span class="support_chat_bot_msg_highlights">
+                premium</span>', or '<span class="support_chat_bot_msg_highlights">
+                cheapest</span>'`,
+            ],
+            validation_error_msgs: [
+                `Your answer should be one of '<span class="support_chat_bot_msg_highlights">
+                first class</span>', '<span class="support_chat_bot_msg_highlights">
+                economy</span>', '<span class="support_chat_bot_msg_highlights">
+                business</span>', '<span class="support_chat_bot_msg_highlights">
+                premium</span>', or '<span class="support_chat_bot_msg_highlights">
+                cheapest</span>'`,
+                `You should say either '<span class="support_chat_bot_msg_highlights">
+                first class</span>', or '<span class="support_chat_bot_msg_highlights">
+                economy</span>', or '<span class="support_chat_bot_msg_highlights">
+                business</span>', or '<span class="support_chat_bot_msg_highlights">
+                premium</span>', or '<span class="support_chat_bot_msg_highlights">
+                cheapest</span>'`,
+                `Umm... your answer didn't match any of '<span class="support_chat_bot_msg_highlights">
+                first class</span>', '<span class="support_chat_bot_msg_highlights">
+                economy</span>', '<span class="support_chat_bot_msg_highlights">
+                business</span>', '<span class="support_chat_bot_msg_highlights">
+                premium</span>', or '<span class="support_chat_bot_msg_highlights">
+                cheapest</span>'`
+            ]
+        },
         trip_round: {
             start_msgs: [
                 `K.. cool 😎... do you want a return flight?... say '<span class="support_chat_bot_msg_highlights">
@@ -91,7 +134,94 @@ var virtual_assistant = {
                 `Awsome 🙂...  Are we booking a return flight as well?... If so say '<span class="support_chat_bot_msg_highlights">
                 round trip</span>'. For booking only the departure flight say '
                 <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`
+            ],
+            
+        },
+        getting_travelers: {
+            start_msgs: [
+                `Now... Let's see how may people you're booking for... Say something like '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+                `How many people are getting on the flight... You could say '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+                `How many people are you booking for... You could say '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+            ],
+            validation_error_msgs: [
+                `You should say something like '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or something like
+                '<span class="support_chat_bot_msg_highlights">1 child</span>' 
+                ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+                `I'm expecting you to say something like '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`,
+                `Say something like '<span class="support_chat_bot_msg_highlights">
+                1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
+                1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
+                children refer to 2 to 17 years, infants refer to below 2 years, ...
+                and only 'adult/adults, child/children, and infant/infants are allowed`
             ]
+        },
+        travel_dates: {
+            one_way_start_msgs: [
+                `Good! Now lets get your travel date 📆. Please Say something like '<span class="support_chat_bot_msg_highlights">
+                February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+                February</span> is the month and <span class="support_chat_bot_msg_highlights">
+                23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+                2022</span> is the year...`,
+                `Getting there 💪🏼... When is your travel. Say something like '<span class="support_chat_bot_msg_highlights">
+                February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+                February</span> is the month and <span class="support_chat_bot_msg_highlights">
+                23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+                2022</span> is the year...`,
+                `👍 OK time to get your traveling date! Please Say something like '<span class="support_chat_bot_msg_highlights">
+                February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+                February</span> is the month and <span class="support_chat_bot_msg_highlights">
+                23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+                2022</span> is the year...`,
+            ],
+            rount_trip_start_msgs: [
+                `Cool.. Now lets get your departure and return date. Please Say something like '<span class="support_chat_bot_msg_highlights">
+                February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+                February</span> is the month and <span class="support_chat_bot_msg_highlights">
+                23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+                2022</span> is the year...`,
+                `Getting there 💪🏼... When is your travel. Say something like '<span class="support_chat_bot_msg_highlights">
+                February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+                February</span> is the month and <span class="support_chat_bot_msg_highlights">
+                23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+                2022</span> is the year...`,
+                `👍 OK time to get your traveling date! Please Say something like '<span class="support_chat_bot_msg_highlights">
+                February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
+                February</span> is the month and <span class="support_chat_bot_msg_highlights">
+                23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
+                2022</span> is the year...`,
+            ],
+
         }
     }
 }
@@ -120,6 +250,37 @@ var virtual_assistant_functions = {
         return virtual_assistant.steps.trip_round.start_msgs[
             Math.floor(Math.random() * 
             virtual_assistant.steps.trip_round.start_msgs.length)];
+    },
+    get_travelers_input_validation_error_message: () => {
+        return virtual_assistant.steps.getting_travelers.validation_error_msgs[
+            Math.floor(Math.random() *
+            virtual_assistant.steps.getting_travelers.validation_error_msgs.length)]
+    },
+    get_travelers_input_start_message: () => {
+        return virtual_assistant.steps.getting_travelers.start_msgs[
+            Math.floor(Math.random() *
+            virtual_assistant.steps.getting_travelers.start_msgs.length)]
+    },
+    get_cabin_class_input_validation_error_message: () => {
+        return virtual_assistant.steps.cabin_class.validation_error_msgs[
+            Math.floor(Math.random() *
+            virtual_assistant.steps.cabin_class.validation_error_msgs.length)]
+    },
+    get_cabin_class_input_start_message: () => {
+        return virtual_assistant.steps.cabin_class.start_msgs[
+            Math.floor(Math.random() *
+            virtual_assistant.steps.cabin_class.start_msgs.length)]
+    },
+    get_travel_dates_start_message: (cabin_type="one-way") => {
+        if(cabin_type==="one-way"){
+            return virtual_assistant.steps.travel_dates.one_way_start_msgs[
+                Math.floor(Math.random() *
+                virtual_assistant.steps.travel_dates.one_way_start_msgs.length)]
+        }else if(cabin_type==="round-trip"){
+            return virtual_assistant.steps.travel_dates.rount_trip_start_msgs[
+                Math.floor(Math.random() *
+                virtual_assistant.steps.travel_dates.rount_trip_start_msgs.length)]
+        }
     }
 
 }

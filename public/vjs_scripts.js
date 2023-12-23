@@ -313,13 +313,15 @@ function main_bot_view_selected_flights_all_details_func(){
 
 async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_txt_container textarea"){
 
+  const TEXT_ELE=document.querySelector(input_txt_fld);
+
   wellgo_bot.scroll_chat=true;
-  if(document.querySelector(input_txt_fld).value.trim() !== "")
+  if(TEXT_ELE.value.trim() !== "")
     document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_loading_markup("loading...");
   let bot_reply=undefined;
   let bot_reply_msg;
   try{
-    bot_reply = await get_answer_from_bot(document.querySelector(input_txt_fld).value.trim());
+    bot_reply = await get_answer_from_bot(TEXT_ELE.value.trim());
   }catch(e){
     bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
   }
@@ -334,16 +336,16 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
     
       // eslint-disable-next-line no-lone-blocks
       {
-        if(document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changeairports" 
-        || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="startover"
-        || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="startagain"){
+        if(TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeairports" 
+        || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="startover"
+        || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="startagain"){
       
         if(wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), true);
+          show_user_interapting_message(TEXT_ELE.value.trim(), true);
           const IN_ORIGIN_DESTINATION_STAGE=true;
           show_interapting_message(window.virtual_assistant_functions.get_start_over_message(IN_ORIGIN_DESTINATION_STAGE), "none");
         }else{
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), true);
+          show_user_interapting_message(TEXT_ELE.value.trim(), true);
           show_interapting_message(window.virtual_assistant_functions.get_start_over_message(), "none");
         }
         wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
@@ -361,18 +363,18 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         wellgo_bot.hasBotReturnedResults=true;
         
       }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION 
-        && (document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changetrip" 
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changetripround"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="addreturnflight")){
+        && (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetrip" 
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetripround"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="addreturnflight")){
       
         if(wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), true);
+          show_user_interapting_message(TEXT_ELE.value.trim(), true);
           show_interapting_message(`Yab! I should be expecting your  inputs..
             say something like '<span class="support_chat_bot_msg_highlights">
             round trip</span>' to include return flights... or something like'
             <span class="support_chat_bot_msg_highlights">one way</span>' for one way flights`, "none");
         }else{
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
         }
         wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
         wellgo_bot.scroll_chat=true;
@@ -389,16 +391,16 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         wellgo_bot.hasBotReturnedResults=true;
         
       }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND &&
-      (document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changedates" 
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changedate"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changetraveldates"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changetraveldate")){
+      (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changedates" 
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changedate"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetraveldates"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetraveldate")){
       
         if(wellgo_bot.step===BOT_STEPS.TRAVEL_DATES){
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`I got it...`, "none");
         }else{
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`OK...`, "none");
         }
         wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
@@ -416,16 +418,16 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         wellgo_bot.hasBotReturnedResults=true;
         
       }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES &&
-      (document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changecabinclass" 
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changeflightclass"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changeclass"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changecabin")){
+      (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changecabinclass" 
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflightclass"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeclass"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changecabin")){
       
         if(wellgo_bot.step===BOT_STEPS.CABIN_CLASS){
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`I got it...`, "none");
         }else{
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`OK...`, "none");
         }
         wellgo_bot.step=BOT_STEPS.CABIN_CLASS;
@@ -443,16 +445,16 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         wellgo_bot.hasBotReturnedResults=true;
         
       }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES && wellgo_bot.step!==BOT_STEPS.CABIN_CLASS &&
-      (document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changetravelers" 
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttravelers"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changetraveler"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttraveler")){
+      (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetravelers" 
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttravelers"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetraveler"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttraveler")){
       
         if(wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT){
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`I got it...`, "none");
         }else{
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`OK...`, "none");
         }
         wellgo_bot.step=BOT_STEPS.TRAVELER_COUNT;
@@ -470,16 +472,16 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         wellgo_bot.hasBotReturnedResults=true;
         
       }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES && wellgo_bot.step!==BOT_STEPS.CABIN_CLASS && wellgo_bot.step!==BOT_STEPS.TRAVELER_COUNT &&
-      (document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changeflight" 
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="pickanotherflight"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="chooseanotherflight"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changeflightschedule")){
+      (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflight" 
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="pickanotherflight"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="chooseanotherflight"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflightschedule")){
       
         if(wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH){
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`I got it...`, "none");
         }else{
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`OK...`, "none");
         }
         wellgo_bot.step=BOT_STEPS.FLIGHT_SEARCH;
@@ -497,16 +499,16 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         wellgo_bot.hasBotReturnedResults=true;
         
       }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES && wellgo_bot.step!==BOT_STEPS.CABIN_CLASS && wellgo_bot.step!==BOT_STEPS.FLIGHT_SEARCH && wellgo_bot.step!==BOT_STEPS.TRAVELER_COUNT &&
-      (document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changepassengerrecords" 
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="restartpassengerrecords"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changepnr"
-      || document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="changepassengernamerecord")){
+      (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changepassengerrecords" 
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="restartpassengerrecords"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changepnr"
+      || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changepassengernamerecord")){
       
         if(wellgo_bot.step===BOT_STEPS.PNR_RECORD){
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`I got it...`, "none");
         }else{
-          show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), "passive");
+          show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           show_interapting_message(`OK...`, "none");
         }
         wellgo_bot.step=BOT_STEPS.PNR_RECORD;
@@ -532,8 +534,8 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
     {
       if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
         && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
-        let validation = window.validate_user_airports_input_for_bot(document.querySelector(input_txt_fld).value.trim());
-        if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "stop"){
+        let validation = window.validate_user_airports_input_for_bot(TEXT_ELE.value.trim());
+        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
           
           bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
@@ -550,7 +552,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
             clear_airports_suggested_by_bot_ids()
 
-        }else if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "done"){
+        }else if(TEXT_ELE.value.trim().toLowerCase() === "done"){
           
           if(wellgo_bot.selectedOriginAirport==="" && wellgo_bot.selectedDestinationAirport===""){
             bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. '
@@ -564,7 +566,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
             wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
           }
         }else{
-          if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "yes" && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
+          if(TEXT_ELE.value.trim().toLowerCase() === "yes" && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
             wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
           }else{
             wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
@@ -683,7 +685,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
       bot_reply_msg = window.virtual_assistant_functions.get_trip_round_start_message();
 
       if(!wellgo_bot.isTripRoundFirstEntered){
-        if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "stop"){
+        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
           /*let stop_booking_reply_msgs = [
             "Alright... no promblem",
             "Cool...",
@@ -705,22 +707,22 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
 
         }else{
 
-          if((document.querySelector(input_txt_fld).value.trim().toLowerCase() === "round trip"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "one way"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "one-way"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "oneway"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "roundtrip"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "round-trip") 
+          if((TEXT_ELE.value.trim().toLowerCase() === "round trip"
+              || TEXT_ELE.value.trim().toLowerCase() === "one way"
+              || TEXT_ELE.value.trim().toLowerCase() === "one-way"
+              || TEXT_ELE.value.trim().toLowerCase() === "oneway"
+              || TEXT_ELE.value.trim().toLowerCase() === "roundtrip"
+              || TEXT_ELE.value.trim().toLowerCase() === "round-trip") 
               && wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
             wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
             let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
-            if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "one way"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "one-way"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "oneway"){
+            if(TEXT_ELE.value.trim().toLowerCase() === "one way"
+              || TEXT_ELE.value.trim().toLowerCase() === "one-way"
+              || TEXT_ELE.value.trim().toLowerCase() === "oneway"){
                 flight_search_data.type = "one-way";
-            }else if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "round trip"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "round-trip"
-              || document.querySelector(input_txt_fld).value.trim().toLowerCase() === "roundtrip"){
+            }else if(TEXT_ELE.value.trim().toLowerCase() === "round trip"
+              || TEXT_ELE.value.trim().toLowerCase() === "round-trip"
+              || TEXT_ELE.value.trim().toLowerCase() === "roundtrip"){
                 flight_search_data.type = "round-trip";
             }
             window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
@@ -744,7 +746,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           
         }
       }
-      if(document.querySelector(input_txt_fld).value.trim().toLowerCase() !== "stop"){
+      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
         wellgo_bot.isTripRoundFirstEntered=false;
       }
     }
@@ -753,47 +755,17 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
       && wellgo_bot.step===BOT_STEPS.TRAVEL_DATES){
       wellgo_bot.isTripRoundFirstEntered=true;
-      let travel_dates_init_messages =[]
+      let travel_dates_init_message="";
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
-        travel_dates_init_messages = [
-          `Good! Now lets get your travel date 📆. Please Say something like '<span class="support_chat_bot_msg_highlights">
-          February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
-          February</span> is the month and <span class="support_chat_bot_msg_highlights">
-          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`,
-          `Getting there 💪🏼... When is your travel. Say something like '<span class="support_chat_bot_msg_highlights">
-          February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
-          February</span> is the month and <span class="support_chat_bot_msg_highlights">
-          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`,
-          `👍 OK time to get your traveling date! Please Say something like '<span class="support_chat_bot_msg_highlights">
-          February 23, 2022</span>' where <span class="support_chat_bot_msg_highlights">
-          February</span> is the month and <span class="support_chat_bot_msg_highlights">
-          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`,
-        ]
+        travel_dates_init_message = 
+          window.virtual_assistant_functions.get_travel_dates_start_message("one-way");
       }else if(JSON.parse(localStorage.getItem("search_obj")).type==="round-trip"){
-        travel_dates_init_messages = [
-          `Cool.. Now lets get your departure and return date. Please Say something like '<span class="support_chat_bot_msg_highlights">
-          February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
-          February</span> is the month and <span class="support_chat_bot_msg_highlights">
-          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`,
-          `Getting there 💪🏼... When is your travel. Say something like '<span class="support_chat_bot_msg_highlights">
-          February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
-          February</span> is the month and <span class="support_chat_bot_msg_highlights">
-          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`,
-          `👍 OK time to get your traveling date! Please Say something like '<span class="support_chat_bot_msg_highlights">
-          February 23, 2022 to February 28, 2022</span>' where <span class="support_chat_bot_msg_highlights">
-          February</span> is the month and <span class="support_chat_bot_msg_highlights">
-          23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
-          2022</span> is the year...`,
-        ]
+        travel_dates_init_message = 
+          window.virtual_assistant_functions.get_travel_dates_start_message("round-trip");
       }
-      bot_reply_msg = travel_dates_init_messages[Math.floor(Math.random() * travel_dates_init_messages.length)];
+      bot_reply_msg = travel_dates_init_message;
       if(!wellgo_bot.isDatesFirstEntered){
-        if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "stop"){
+        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
           /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
@@ -816,7 +788,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
 
         }else{
           let validation = window.validate_user_dates_input_for_bot(
-            document.querySelector(input_txt_fld).value.trim(), 
+            TEXT_ELE.value.trim(), 
             JSON.parse(localStorage.getItem("search_obj")).type
           )
           console.log("date validation: ", validation);
@@ -828,7 +800,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           }
         }
       }
-      if(document.querySelector(input_txt_fld).value.trim().toLowerCase() !== "stop"){
+      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
         wellgo_bot.isDatesFirstEntered=false;
       }
     }
@@ -838,31 +810,9 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
       && wellgo_bot.step===BOT_STEPS.CABIN_CLASS){
       wellgo_bot.isDatesFirstEntered=true;
       wellgo_bot.hasBotReturnedResults=true;
-      let travel_cabin_init_messages = [
-        `Alright... Almost done. Please provide flight class.. You should say one of the following.. '
-        <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
-        economy</span>', '<span class="support_chat_bot_msg_highlights">
-        business</span>', '<span class="support_chat_bot_msg_highlights">
-        premium</span>', or '<span class="support_chat_bot_msg_highlights">
-        cheapest</span>'`,
-        `Kk! Flight class next... You should say one of the following.. '
-        <span class="support_chat_bot_msg_highlights">first class</span>', '<span class="support_chat_bot_msg_highlights">
-        economy</span>', '<span class="support_chat_bot_msg_highlights">
-        business</span>', '<span class="support_chat_bot_msg_highlights">
-        premium</span>', or '<span class="support_chat_bot_msg_highlights">
-        cheapest</span>'`,
-        `Perfect 👍... What flight class.. You should say one of the following.. '
-        <span class="support_chat_bot_msg_highlights">
-        first class</span>', '<span class="support_chat_bot_msg_highlights">
-        economy</span>', '<span class="support_chat_bot_msg_highlights">
-        business</span>', '<span class="support_chat_bot_msg_highlights">
-        premium</span>', or '<span class="support_chat_bot_msg_highlights">
-        cheapest</span>'`,
-      ]
-      
-      bot_reply_msg = travel_cabin_init_messages[Math.floor(Math.random() * travel_cabin_init_messages.length)];
+      bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_start_message();
       if(!wellgo_bot.isCabinClassFirstEntered){
-        if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "stop"){
+        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
           /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
@@ -885,68 +835,24 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         }else{
 
           if(
-            document.querySelector(input_txt_fld).value.trim().toLowerCase() === "first class" ||
-            document.querySelector(input_txt_fld).value.trim().toLowerCase() === "economy" ||
-            document.querySelector(input_txt_fld).value.trim().toLowerCase() === "business" ||
-            document.querySelector(input_txt_fld).value.trim().toLowerCase() === "premium" ||
-            document.querySelector(input_txt_fld).value.trim().toLowerCase() === "cheapest"
+            TEXT_ELE.value.trim().toLowerCase() === "first class" ||
+            TEXT_ELE.value.trim().toLowerCase() === "economy" ||
+            TEXT_ELE.value.trim().toLowerCase() === "business" ||
+            TEXT_ELE.value.trim().toLowerCase() === "premium" ||
+            TEXT_ELE.value.trim().toLowerCase() === "cheapest"
             ){
 
               //set cabin class here
               wellgo_bot.step = BOT_STEPS.TRAVELER_COUNT;
-
-              let num_travelers_msg=[
-                `Now... Let's see how may people you're booking for... Say something like '<span class="support_chat_bot_msg_highlights">
-                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
-                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
-                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
-                children refer to 2 to 17 years, infants refer to below 2 years, ...
-                and only 'adult/adults, child/children, and infant/infants are allowed`,
-                `How many people are getting on the flight... You could say '<span class="support_chat_bot_msg_highlights">
-                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
-                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
-                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
-                children refer to 2 to 17 years, infants refer to below 2 years, ...
-                and only 'adult/adults, child/children, and infant/infants are allowed`,
-                `How many people are you booking for... You could say '<span class="support_chat_bot_msg_highlights">
-                1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
-                1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
-                1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
-                children refer to 2 to 17 years, infants refer to below 2 years, ...
-                and only 'adult/adults, child/children, and infant/infants are allowed`,
-              ]
-              bot_reply_msg = num_travelers_msg[Math.floor(Math.random() * num_travelers_msg.length)];
+              bot_reply_msg = window.virtual_assistant_functions.get_travelers_input_start_message();
 
           }else{
-            let err_msgs = [
-              `Your answer should be one of '<span class="support_chat_bot_msg_highlights">
-              first class</span>', '<span class="support_chat_bot_msg_highlights">
-              economy</span>', '<span class="support_chat_bot_msg_highlights">
-              business</span>', '<span class="support_chat_bot_msg_highlights">
-              premium</span>', or '<span class="support_chat_bot_msg_highlights">
-              cheapest</span>'`,
-              `You should say either '<span class="support_chat_bot_msg_highlights">
-              first class</span>', or '<span class="support_chat_bot_msg_highlights">
-              economy</span>', or '<span class="support_chat_bot_msg_highlights">
-              business</span>', or '<span class="support_chat_bot_msg_highlights">
-              premium</span>', or '<span class="support_chat_bot_msg_highlights">
-              cheapest</span>'`,
-              `Umm... your answer didn't match any of '<span class="support_chat_bot_msg_highlights">
-              first class</span>', '<span class="support_chat_bot_msg_highlights">
-              economy</span>', '<span class="support_chat_bot_msg_highlights">
-              business</span>', '<span class="support_chat_bot_msg_highlights">
-              premium</span>', or '<span class="support_chat_bot_msg_highlights">
-              cheapest</span>'`
-            ]
-            bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
+            bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_validation_error_message();
           }
           
         }
       }
-      if(document.querySelector(input_txt_fld).value.trim().toLowerCase() !== "stop"){
+      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
         wellgo_bot.isCabinClassFirstEntered=false;
       }
       
@@ -957,11 +863,11 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
       && wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT){
       wellgo_bot.isCabinClassFirstEntered=true;
 
-      //document.querySelector(input_txt_fld).value = `1 adult, 0 child, 0 infant`;
-      //document.querySelector(input_txt_fld).focus();
+      //TEXT_ELE.value = `1 adult, 0 child, 0 infant`;
+      //TEXT_ELE.focus();
 
       if(!wellgo_bot.isGettingTravelersFirstEntered){
-        if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "stop"){
+        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
           /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
@@ -983,41 +889,17 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           wellgo_bot.selectedDestinationAirport="";
 
         }else{
-          let validation = validate_travelers_input_for_bot(document.querySelector(input_txt_fld).value.trim().toLowerCase())
+          let validation = window.validate_travelers_input_for_bot(TEXT_ELE.value.trim().toLowerCase())
           console.log("validation: ", validation);
           if(!validation.isValid){
-            let err_msgs = [
-              `You should say something like '<span class="support_chat_bot_msg_highlights">
-              1 adult</span>' ... or something like
-              '<span class="support_chat_bot_msg_highlights">1 child</span>' 
-              ... or '<span class="support_chat_bot_msg_highlights">
-              1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
-              1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
-              children refer to 2 to 17 years, infants refer to below 2 years, ...
-              and only 'adult/adults, child/children, and infant/infants are allowed`,
-              `I'm expecting you to say something like '<span class="support_chat_bot_msg_highlights">
-              1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
-              1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
-              1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
-              1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
-              children refer to 2 to 17 years, infants refer to below 2 years, ...
-              and only 'adult/adults, child/children, and infant/infants are allowed`,
-              `Say something like '<span class="support_chat_bot_msg_highlights">
-              1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
-              1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
-              1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
-              1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
-              children refer to 2 to 17 years, infants refer to below 2 years, ...
-              and only 'adult/adults, child/children, and infant/infants are allowed`
-            ]
-            bot_reply_msg = err_msgs[Math.floor(Math.random()*err_msgs.length)];
+            bot_reply_msg = window.virtual_assistant_functions.get_travelers_input_validation_error_message();
           }else{
             wellgo_bot.step = BOT_STEPS.FLIGHT_SEARCH;
             bot_reply_msg = `Great! give me a minute to get you some flight schedules`;
           }
         }
       }
-      if(document.querySelector(input_txt_fld).value.trim().toLowerCase() !== "stop"){
+      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
         wellgo_bot.isGettingTravelersFirstEntered=false;
       }
     }
@@ -1086,10 +968,10 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           wellgo_bot.selectedDestinationAirport="";
           clear_flight_results_showed_by_bot();
 
-        }else if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "done"){
+        }else if(TEXT_ELE.value.trim().toLowerCase() === "done"){
           
-          show_user_interapting_message(document.querySelector(input_txt_fld).value, false);
-          document.querySelector(input_txt_fld).value="";
+          show_user_interapting_message(TEXT_ELE.value, false);
+          TEXT_ELE.value="";
 
           if(!wellgo_bot.selectedAFlight){
             wellgo_bot.scroll_chat=true;
@@ -1155,7 +1037,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           
         }
       }
-      if(document.querySelector(input_txt_fld).value.trim().toLowerCase() !== "stop"){
+      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
         wellgo_bot.isSearchingFlightFirstEnter=false
       }
     }}
@@ -1169,7 +1051,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         setTimeout(()=>show_pnr_form("none"),5000);
         bot_reply_msg = "";
       }else{
-        if(document.querySelector(input_txt_fld).value.trim().toLowerCase() === "stop"){
+        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
           /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
@@ -1192,9 +1074,9 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           clear_flight_results_showed_by_bot();
 
         }else{
-          let name_parts = document.querySelector(input_txt_fld).value.trim().split(" ");
+          let name_parts = TEXT_ELE.value.trim().split(" ");
           if(name_parts.length === 2){
-            show_user_interapting_message(document.querySelector(input_txt_fld).value.trim(), true);
+            show_user_interapting_message(TEXT_ELE.value.trim(), true);
             show_interapting_message(`Perfect...`, "none");
             show_interapting_message(`We need your address next, it should look like 
             '<span class="support_chat_bot_msg_highlights">street address, town, city, country zipcode</span>'
@@ -1217,7 +1099,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
 
     //---------------------end of flight booking process-------------------------------------//
   
-    if(document.querySelector(input_txt_fld).value.trim().toLowerCase().replaceAll(" ", "")==="stop" && wellgo_bot.step===""){
+    if(TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="stop" && wellgo_bot.step===""){
       const IdleBotStopMgs=[
         `Stop? 😏 But We're already not doing any booking or cancellation to stop...`,
         `Hey! If we were booking a flight or doing anything at all, that's when saying stop would mean something.`,
@@ -1243,12 +1125,12 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
     bot_reply_msg = svr_err_mgs[Math.floor(Math.random() * svr_err_mgs.length)];
   }
   
-  if(document.querySelector(input_txt_fld).value.trim() === "" || document.querySelector(input_txt_fld).value.trim() === "type your message here..."){
+  if(TEXT_ELE.value.trim() === "" || TEXT_ELE.value.trim() === "type your message here..."){
     //dont add empty input to chat displayed items
     document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
   }else{
-    if(document.querySelector(input_txt_fld).value !== "$%#%%%#@@&&&**(*)"){
-      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_user_chat_message_markup(document.querySelector(input_txt_fld).value.trim());
+    if(TEXT_ELE.value !== "$%#%%%#@@&&&**(*)"){
+      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_user_chat_message_markup(TEXT_ELE.value.trim());
     }
     setTimeout(()=>{
       document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup(bot_reply_msg);
@@ -1264,7 +1146,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
     }, 1000)
     
   }
-  document.querySelector(input_txt_fld).value = "type your message here...";
+  TEXT_ELE.value = "type your message here...";
   if(wellgo_bot.scroll_chat){
     window.$("#hp_support_chat_items").scrollTop(
       window.$("#hp_support_chat_items").prop("scrollHeight")
