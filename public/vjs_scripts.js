@@ -60,16 +60,16 @@ function add_clouds_to_animated_loader(){
 }
 
 function show_start_checkout_page(obj){
-  document.getElementById("booking_start_checkout_page_container").innerHTML = return_start_checkout_info(obj);
+  document.getElementById("booking_start_checkout_page_container").innerHTML = window.return_start_checkout_info(obj);
   document.getElementById("booking_start_checkout_page_container").style.display = "block";
 }
 
 function show_add_ancillaries_container(){
-  $("#add_ancillaries_container").slideDown("fast");
+  window.$("#add_ancillaries_container").slideDown("fast");
 }
 
 function hide_add_ancillaries_container(){
-  $("#add_ancillaries_container").slideUp("fast");
+  window.$("#add_ancillaries_container").slideUp("fast");
 }
 
 function start_select_seat_ancillary(){
@@ -108,11 +108,11 @@ document.getElementById("home_search_form_submit_btn").addEventListener("click",
   if(document.getElementById("animated_loader"))
     document.getElementById("animated_loader").style.display = "block";
   if(document.getElementById("search_result_important_notice"))
-    document.getElementById("search_result_important_notice").innerHTML = return_search_results_important_notice_loader();
+    document.getElementById("search_result_important_notice").innerHTML = window.return_search_results_important_notice_loader();
   if(document.getElementById("search_list_main__settings_section"))
-    document.getElementById("search_list_main__settings_section").innerHTML = return_search_results_filters_and_sort_loader();
+    document.getElementById("search_list_main__settings_section").innerHTML = window.return_search_results_filters_and_sort_loader();
   if(document.getElementById("search_results_mobile_top_itin_display"))
-    document.getElementById("search_results_mobile_top_itin_display").innerHTML = return_search_results_mobile_top_itin_display_loader();
+    document.getElementById("search_results_mobile_top_itin_display").innerHTML = window.return_search_results_mobile_top_itin_display_loader();
   for(let i=0; i<6; i++){
     //document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
   }
@@ -129,12 +129,12 @@ if(document.getElementById("sp_search_form_submit_btn")){
 
     add_clouds_to_animated_loader();
     document.getElementById("animated_loader").style.display = "block";
-    document.getElementById("search_result_important_notice").innerHTML = return_search_results_important_notice_loader();
-    document.getElementById("search_list_main__settings_section").innerHTML = return_search_results_filters_and_sort_loader();
-    document.getElementById("search_results_mobile_top_itin_display").innerHTML = return_search_results_mobile_top_itin_display_loader();
+    document.getElementById("search_result_important_notice").innerHTML = window.return_search_results_important_notice_loader();
+    document.getElementById("search_list_main__settings_section").innerHTML = window.return_search_results_filters_and_sort_loader();
+    document.getElementById("search_results_mobile_top_itin_display").innerHTML = window.return_search_results_mobile_top_itin_display_loader();
     for(let i=0; i<6; i++){
       if(document.getElementById("search_results_list_items"))
-        document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
+        document.getElementById("search_results_list_items").innerHTML += window.return_ticket_card_loader();
     }
 
     window.search_submit_function();
@@ -535,8 +535,8 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
       if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
         && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
         let validation = window.validate_user_airports_input_for_bot(TEXT_ELE.value.trim());
-        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
-          
+        if(window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
@@ -681,17 +681,10 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
     //step two: trip-round
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
       && wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
-
       bot_reply_msg = window.virtual_assistant_functions.get_trip_round_start_message();
-
       if(!wellgo_bot.isTripRoundFirstEntered){
-        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
-          /*let stop_booking_reply_msgs = [
-            "Alright... no promblem",
-            "Cool...",
-            "Got it..."
-          ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
+        if(window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
@@ -704,15 +697,10 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           wellgo_bot.isGettingTravelersFirstEntered=true;
           wellgo_bot.selectedOriginAirport="";
           wellgo_bot.selectedDestinationAirport="";
-
         }else{
 
-          if((TEXT_ELE.value.trim().toLowerCase() === "round trip"
-              || TEXT_ELE.value.trim().toLowerCase() === "one way"
-              || TEXT_ELE.value.trim().toLowerCase() === "one-way"
-              || TEXT_ELE.value.trim().toLowerCase() === "oneway"
-              || TEXT_ELE.value.trim().toLowerCase() === "roundtrip"
-              || TEXT_ELE.value.trim().toLowerCase() === "round-trip") 
+          if(window.virtual_assistant_functions.verify_trip_round_if_query_accepted(
+              TEXT_ELE.value.trim().toLowerCase()) 
               && wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
             wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
             let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
@@ -726,32 +714,19 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
                 flight_search_data.type = "round-trip";
             }
             window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
-
           }else{
-            let stop_trip_round_err_reply_msgs = [
-              `I should be expecting you to say either '<span class="support_chat_bot_msg_highlights">
-              round trip</span>' or '<span class="support_chat_bot_msg_highlights">
-              one way</span>'`,
-              `You should say '<span class="support_chat_bot_msg_highlights">
-              round trip</span>' to include return flights or say '<span class="support_chat_bot_msg_highlights">
-              one way</span>' for only departure flights`,
-              `Ummm. You're supposed to say '<span class="support_chat_bot_msg_highlights">
-              one way</span>' or '<span class="support_chat_bot_msg_highlights">
-              round trip</span>'`
-            ];
-            bot_reply_msg = stop_trip_round_err_reply_msgs[Math.floor(Math.random() * stop_trip_round_err_reply_msgs.length)]
+            bot_reply_msg = window.virtual_assistant_functions.get_trip_round_input_validation_error_message();
             wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
-
-          }
-          
+          }  
         }
       }
-      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
+      if(!window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isTripRoundFirstEntered=false;
       }
     }
 
-    //step three: travel dates
+    // Step three: travel dates
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
       && wellgo_bot.step===BOT_STEPS.TRAVEL_DATES){
       wellgo_bot.isTripRoundFirstEntered=true;
@@ -765,17 +740,11 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
       }
       bot_reply_msg = travel_dates_init_message;
       if(!wellgo_bot.isDatesFirstEntered){
-        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
-          /*let stop_booking_reply_msgs = [
-            "Ok cool...",
-            "Got it... Let me know...",
-            "Sure, no problem"
-          ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
+        if(window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
-
           wellgo_bot.scroll_chat=true;
           wellgo_bot.isTripRoundFirstEntered=true;
           wellgo_bot.isPNRFirstEntered=true;
@@ -800,28 +769,23 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           }
         }
       }
-      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
+      if(!window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isDatesFirstEntered=false;
       }
     }
 
-    //step four: cabin class
+    // Step four: cabin class
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
       && wellgo_bot.step===BOT_STEPS.CABIN_CLASS){
       wellgo_bot.isDatesFirstEntered=true;
       wellgo_bot.hasBotReturnedResults=true;
       bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_start_message();
       if(!wellgo_bot.isCabinClassFirstEntered){
-        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
-          /*let stop_booking_reply_msgs = [
-            "Ok cool...",
-            "Got it... Let me know...",
-            "Sure, no problem"
-          ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
+        if(window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           wellgo_bot.status = "";
           wellgo_bot.step = "";
-
           wellgo_bot.scroll_chat=true;
           wellgo_bot.isTripRoundFirstEntered=true;
           wellgo_bot.isPNRFirstEntered=true;
@@ -831,28 +795,24 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           wellgo_bot.isGettingTravelersFirstEntered=true;
           wellgo_bot.selectedOriginAirport="";
           wellgo_bot.selectedDestinationAirport="";
-
         }else{
-
           if(
             TEXT_ELE.value.trim().toLowerCase() === "first class" ||
             TEXT_ELE.value.trim().toLowerCase() === "economy" ||
             TEXT_ELE.value.trim().toLowerCase() === "business" ||
             TEXT_ELE.value.trim().toLowerCase() === "premium" ||
             TEXT_ELE.value.trim().toLowerCase() === "cheapest"
-            ){
-
-              //set cabin class here
-              wellgo_bot.step = BOT_STEPS.TRAVELER_COUNT;
-              bot_reply_msg = window.virtual_assistant_functions.get_travelers_input_start_message();
-
+          ){
+            // Set cabin class here
+            wellgo_bot.step = BOT_STEPS.TRAVELER_COUNT;
+            bot_reply_msg = window.virtual_assistant_functions.get_travelers_input_start_message();
           }else{
             bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_validation_error_message();
-          }
-          
+          }  
         }
       }
-      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
+      if(!window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isCabinClassFirstEntered=false;
       }
       
@@ -867,7 +827,8 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
       //TEXT_ELE.focus();
 
       if(!wellgo_bot.isGettingTravelersFirstEntered){
-        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
+        if(window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           /*let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
@@ -899,7 +860,8 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           }
         }
       }
-      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
+      if(!window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isGettingTravelersFirstEntered=false;
       }
     }
@@ -921,7 +883,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           ${interim_msg[Math.floor(Math.random() * interim_msg.length)]}
           <br/><br/>`, false, false);
           let itns = `<p style="font-weight: bolder; font-size: 12px; margin-bottom: 10px;">Flight Schedules</p>`;
-          for(i=0;i<5;i++){
+          for(let i=0;i<5;i++){
             itns += `
               <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,0,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out; min-width: 270px;">
                 $133.33 
@@ -947,7 +909,8 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
       }, 6000)
       
       if(!wellgo_bot.isSearchingFlightFirstEnter){
-        if(document.querySelector().value.trim().toLowerCase() === "stop"){
+        if(window.virtual_assistant_functions
+            .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           let stop_booking_reply_msgs = [
             "Ok cool...",
             "Got it... Let me know...",
@@ -989,10 +952,10 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
             wellgo_bot.selectedAFlight=false;
             document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
             clear_flight_results_showed_by_bot();
-            $("#hp_support_chat_items").scrollTop($("#hp_support_chat_items").prop("scrollHeight"));
+            window.$("#hp_support_chat_items").scrollTop(window.$("#hp_support_chat_items").prop("scrollHeight"));
             wellgo_bot.step="traveler-details-collection";
             let slctedItn = `Oh nice pick! ... <br/><br/>
-                <p id="search_result_by_bot_${i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,244,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
+                <p id="search_result_by_bot_{i}" class="search_result_by_bot" onclick="main_bot_view_selected_flights_all_details_func()" style="margin-bottom: 5px; background-color: rgba(244,244,0,0.1); cursor: pointer; padding: 20px; font-size: 17px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; transition: all 0.2s ease-out;">
                   $133.33 
                   <span style="font-size: 13px; color: rgba(0,51,0,0.8);"> &#8226; economy </span>
                   <br/>
@@ -1037,7 +1000,8 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
           
         }
       }
-      if(TEXT_ELE.value.trim().toLowerCase() !== "stop"){
+      if(!window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isSearchingFlightFirstEnter=false
       }
     }}
@@ -1051,17 +1015,11 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
         setTimeout(()=>show_pnr_form("none"),5000);
         bot_reply_msg = "";
       }else{
-        if(TEXT_ELE.value.trim().toLowerCase() === "stop"){
-          /*let stop_booking_reply_msgs = [
-            "Ok cool...",
-            "Got it... Let me know...",
-            "Sure, no problem"
-          ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]*/
+        if(window.virtual_assistant_functions
+           .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
           wellgo_bot.status = "";
           wellgo_bot.step = "";
-
           wellgo_bot.scroll_chat=true;
           wellgo_bot.isTripRoundFirstEntered=true;
           wellgo_bot.isPNRFirstEntered=true;
@@ -1099,7 +1057,9 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
 
     //---------------------end of flight booking process-------------------------------------//
   
-    if(TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="stop" && wellgo_bot.step===""){
+    if(window.virtual_assistant_functions
+        .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
+       && wellgo_bot.step===""){
       const IdleBotStopMgs=[
         `Stop? 😏 But We're already not doing any booking or cancellation to stop...`,
         `Hey! If we were booking a flight or doing anything at all, that's when saying stop would mean something.`,
@@ -1110,19 +1070,7 @@ async function run_chat_instance(input_txt_fld="#main_support_chat_user_input_tx
     }
 
   }else{
-    let svr_err_mgs = [
-      `Opps! 😒 My server failed. My bad. This one is on me..`,
-      `Eh! I think we are having some internet issues. Or Did my server fail? 🤦🏾‍♂️`,
-      `Ummm... wait 😕, could it be your internet or my server crushed.
-      <br/>I'm unable to help you without my server being online.
-      <br/>I'll put in a ticket to alert the technical team.
-      <br/>But also make sure its not your internet.`,
-      `... I can't reach my server. Please check your internet. I think its not working. 
-        <br/>Or Maybe my server crushed`,
-      `I can't imagine my life without the server. Oh no! 🤦🏾‍♂️🤦🏾‍♂️🤦🏾‍♂️ my server is not online right now.<br/>
-      Please, also make sure that your internet it working.`
-    ]
-    bot_reply_msg = svr_err_mgs[Math.floor(Math.random() * svr_err_mgs.length)];
+    bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
   }
   
   if(TEXT_ELE.value.trim() === "" || TEXT_ELE.value.trim() === "type your message here..."){
@@ -1174,7 +1122,7 @@ document.getElementById("hp_support_user_submit_chat_btn").addEventListener("cli
 document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
   e.preventDefault();
   e.which = e.which || e.keyCode;
-  if(e.which == 13) {
+  if(e.which === 13) {
     run_chat_instance();
     document.querySelector("#main_support_chat_user_input_txt_container textarea").blur();
   }
@@ -1211,7 +1159,7 @@ document.querySelector("#main_support_chat_user_input_txt_container textarea").a
 var ig = 0;
 let is_chat_container_shown = false;
 function toggle_show_hp_support_chat_container(){
-    document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_loading_markup();
+    document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_loading_markup();
     if(is_chat_container_shown){
 
       document.body.style.position="initial";
@@ -1221,21 +1169,21 @@ function toggle_show_hp_support_chat_container(){
       if(wellgo_bot.status===""){
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
       }
-      $("#support_chat_container").slideUp("fast");
+      window.$("#support_chat_container").slideUp("fast");
       if(document.getElementById("chatbot_provided_manual_channels"))
         document.getElementById("chatbot_provided_manual_channels").style.display="none";
       document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
       ig=0;
     }else{
 
-      if($(window).width() <= 700){
+      if(window.$(window).width() <= 700){
         document.body.style.position="fixed";
         document.body.style.width="100vw";
         document.body.style.height="100vh";
       }
 
       setTimeout(()=>{
-          document.getElementById("main_chat_bot_status_display").innerHTML=return_bot_chat_status_markup("online");
+          document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
       },1000)
       hide_new_chatbot_tip();
       if(wellgo_bot.status===""){
@@ -1302,12 +1250,12 @@ function show_new_chatbot_tip(msg){
 }
 
 function hide_new_chatbot_tip(){
-    $("#main_chat_bot_tips_poppup_section").slideUp("fast");
+    window.$("#main_chat_bot_tips_poppup_section").slideUp("fast");
 }
 
-$(document).ready(()=>{
+window.$(document).ready(()=>{
   setTimeout(()=>show_new_chatbot_tip("msg"),10000);
-  setTimeout(()=>toggle_main_page_search_filters(), 3500);
+  setTimeout(()=>window.toggle_main_page_search_filters(), 3500);
 });
 
 function show_chat_bot_uprading_message(){
@@ -1438,7 +1386,7 @@ function start_book_with_vitual_agent(){
     document.getElementById("chatbot_greenting_message_p").innerHTML = start_air_booking_intro[Math.floor(Math.random()*start_air_booking_intro.length)];
   }
   toggle_show_hp_support_chat_container();
-  toggle_main_page_search_filters();
+  window.toggle_main_page_search_filters();
   wellgo_bot.status = wellgo_bot.status_names.BEGIN_AIR_BOOKING;
 
   wellgo_bot.step = BOT_STEPS.ORIGIN_DESTINATION;
@@ -1446,14 +1394,14 @@ function start_book_with_vitual_agent(){
 
 document.getElementById("landing_page_search_bar_call_btn").addEventListener("click", e=>{
   alert("placing your call now");
-  toggle_main_page_search_filters();
+  window.toggle_main_page_search_filters();
 });
 
 document.getElementById("landing_page_search_bar_show_main_search_form_btn").addEventListener("click", e=>{
-  toggle_main_page_search_filters()
+  window.toggle_main_page_search_filters();
 });
 document.getElementById("landing_page_search_bar_help_pg_btn").addEventListener("click", e=>{
-  toggle_main_page_search_filters()
+  window.toggle_main_page_search_filters();
 });
 
 window.onscroll = function() {
@@ -1466,7 +1414,7 @@ window.onscroll = function() {
       
     } else { 
       
-      if($(window).width() > 1000){
+      if(window.$(window).width() > 1000){
         document.querySelector("header").style.background="none";
       }
 

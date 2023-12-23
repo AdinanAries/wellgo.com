@@ -23,10 +23,34 @@ var virtual_assistant = {
     server: {
         msgs: {
             failed: [
-                "Opps! My server failed. My bad..."
+                "Opps! My server failed. My bad...",
+                `Opps! 😒 My server failed. My bad. This one is on me..`,
+                `Eh! I think we are having some internet issues. Or Did my server fail? 🤦🏾‍♂️`,
+                `Ummm... wait 😕, could it be your internet or my server crushed.
+                <br/>I'm unable to help you without my server being online.
+                <br/>I'll put in a ticket to alert the technical team.
+                <br/>But also make sure its not your internet.`,
+                `... I can't reach my server. Please check your internet. I think its not working. 
+                    <br/>Or Maybe my server crushed`,
+                `I can't imagine my life without the server. Oh no! 🤦🏾‍♂️🤦🏾‍♂️🤦🏾‍♂️ my server is not online right now.<br/>
+                Please, also make sure that your internet it working.`
             ]
         }
     },
+    stop_current_activity_commands: [
+        "stop",
+        "stop booking",
+        "stop the booking",
+        "end booking",
+        "no more booking",
+        "not booking anymore",
+        "i'm not booking anymore",
+        "i'am not booking",
+        "not booking no more",
+        "let's stop",
+        "let's stop booking",
+        "I want to stop booking",
+    ],
     steps: {
         names: {
             TRIP_ROUND: "trip-round",
@@ -135,6 +159,21 @@ var virtual_assistant = {
                 round trip</span>'. For booking only the departure flight say '
                 <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`
             ],
+            input_validation_error: [
+                `I should be expecting you to say either '<span class="support_chat_bot_msg_highlights">
+                round trip</span>' or '<span class="support_chat_bot_msg_highlights">
+                one way</span>'`,
+                `You should say '<span class="support_chat_bot_msg_highlights">
+                round trip</span>' to include return flights or say '<span class="support_chat_bot_msg_highlights">
+                one way</span>' for only departure flights`,
+                `Ummm. You're supposed to say '<span class="support_chat_bot_msg_highlights">
+                one way</span>' or '<span class="support_chat_bot_msg_highlights">
+                round trip</span>'`
+            ],
+            accepted_queries: [
+                "round trip", "one way", "one-way", "oneway", "roundtrip", "round-trip"
+
+            ]
             
         },
         getting_travelers: {
@@ -251,6 +290,11 @@ var virtual_assistant_functions = {
             Math.floor(Math.random() * 
             virtual_assistant.steps.trip_round.start_msgs.length)];
     },
+    get_trip_round_input_validation_error_message: () => {
+        return virtual_assistant.steps.trip_round.input_validation_error[
+            Math.floor(Math.random() * 
+            virtual_assistant.steps.trip_round.input_validation_error.length)];
+    },
     get_travelers_input_validation_error_message: () => {
         return virtual_assistant.steps.getting_travelers.validation_error_msgs[
             Math.floor(Math.random() *
@@ -281,9 +325,17 @@ var virtual_assistant_functions = {
                 Math.floor(Math.random() *
                 virtual_assistant.steps.travel_dates.rount_trip_start_msgs.length)]
         }
+    },
+    verify_trip_round_if_query_accepted: (value) => {
+        return virtual_assistant.steps.trip_round.accepted_queries.includes(value);
+    },
+    is_stop_current_activity_command: (value) => {
+        return virtual_assistant.stop_current_activity_commands.includes(value);
     }
 
 }
+
+//alert(virtual_assistant_functions.is_stop_current_activity_command("stop booking"));
 
 function validate_user_airports_input_for_bot(inputs){
     if(inputs.split(" ").includes("to")){
