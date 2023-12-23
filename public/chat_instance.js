@@ -158,8 +158,10 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
           //will change this later
           wellgo_bot.hasBotReturnedResults=true;
           
-        }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES &&
-        (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changecabinclass" 
+        }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION 
+          && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND 
+          && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES 
+          && (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changecabinclass" 
         || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflightclass"
         || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeclass"
         || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changecabin")){
@@ -185,11 +187,17 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
           //will change this later
           wellgo_bot.hasBotReturnedResults=true;
           
-        }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES && wellgo_bot.step!==BOT_STEPS.CABIN_CLASS &&
-        (TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetravelers" 
-        || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttravelers"
-        || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetraveler"
-        || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttraveler")){
+        }else if(wellgo_bot.step!==BOT_STEPS.ORIGIN_DESTINATION 
+          && wellgo_bot.step!==BOT_STEPS.TRIP_ROUND 
+          && wellgo_bot.step!==BOT_STEPS.TRAVEL_DATES 
+          && wellgo_bot.step!==BOT_STEPS.CABIN_CLASS 
+          && (
+            TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetravelers" 
+            || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttravelers"
+            || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changetraveler"
+            || TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")==="changeflighttraveler"
+          )
+        ){
         
           if(wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT){
             window.show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
