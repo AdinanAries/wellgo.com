@@ -1,5 +1,5 @@
 //bot_flight_booking_stages_dailog
-var virtual_assistant = {
+let virtual_assistant = {
     state: {
         status: "",
         status_names: {
@@ -34,6 +34,26 @@ var virtual_assistant = {
                     <br/>Or Maybe my server crushed`,
                 `I can't imagine my life without the server. Oh no! 🤦🏾‍♂️🤦🏾‍♂️🤦🏾‍♂️ my server is not online right now.<br/>
                 Please, also make sure that your internet it working.`
+            ]
+        }
+    },
+    starters: {
+        begin_air_booking: {
+            start_msgs: [
+                `Hey! &#128400;... We're only 4 steps away...
+                    please tell me from where you are traveling and to where you are going. You should say something like 
+                    '<span class="support_chat_bot_msg_highlights">New York to Paris</span>',
+                      or something like '<span class="support_chat_bot_msg_highlights">
+                      United States to France</span>'...
+                      , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
+                `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 
+                '<span class="support_chat_bot_msg_highlights">New York to Paris</span>'
+                      , or something like '<span class="support_chat_bot_msg_highlights">United States to France</span>'
+                        , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
+                `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 
+                '<span class="support_chat_bot_msg_highlights">New York to Paris</span>'
+                      , or something like '<span class="support_chat_bot_msg_highlights">United States to France</span>'
+                        , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
             ]
         }
     },
@@ -264,8 +284,16 @@ var virtual_assistant = {
         }
     }
 }
+window.virtual_assistant=virtual_assistant;
 
-var virtual_assistant_functions = {
+let virtual_assistant_functions = {
+    get_starter_message: (activity_type) => {
+        if(activity_type===virtual_assistant.state.status_names.BEGIN_AIR_BOOKING){
+            return virtual_assistant.starters.begin_air_booking.start_msgs[
+                Math.floor(Math.random() * 
+                virtual_assistant.starters.begin_air_booking.start_msgs.length)]
+        }
+    },
     return_server_failed_error: () => {
         return virtual_assistant.server.msgs.failed[
             Math.floor(Math.random() * virtual_assistant.server.msgs.failed.length)];
@@ -334,7 +362,7 @@ var virtual_assistant_functions = {
     }
 
 }
-
+window.virtual_assistant_functions=virtual_assistant_functions;
 //alert(virtual_assistant_functions.is_stop_current_activity_command("stop booking"));
 
 function validate_user_airports_input_for_bot(inputs){

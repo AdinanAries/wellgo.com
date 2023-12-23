@@ -1,36 +1,36 @@
-function show_selected_ticket_details_pane(){
-    if($(window).width() <= 700){
+window.show_selected_ticket_details_pane = () => {
+    if(window.$(window).width() <= 700){
         document.body.style.position="fixed";
         document.body.style.width="100vw";
         document.body.style.height="100vh";
     }
     //document.getElementById("selected_ticket_pane").style.display = "block";
 }
-function hide_selected_ticket_details_pane(){
+window.hide_selected_ticket_details_pane = () => {
     document.body.style.position="initial";
       document.body.style.width="auto";
       document.body.style.height="auto";
       //document.getElementById("selected_ticket_pane").style.display="none"
 }
 
-var is_itinerary_showing = false;
-function toggle_see_ticket_details_itinerary_details(element_id){
-    if(is_itinerary_showing){
+window.is_itinerary_showing = false;
+window.toggle_see_ticket_details_itinerary_details = (element_id) => {
+    if(window.is_itinerary_showing){
         window.$("#"+element_id).slideUp("fast");
     }else{
         window.$("#"+element_id).slideDown("fast");
     }
-        is_itinerary_showing = !is_itinerary_showing;
+        window.is_itinerary_showing = !window.is_itinerary_showing;
 }
 
-var is_itinerary_showing_for_bot_list = false;
-function bot_toggle_see_ticket_details_itinerary_details(){
-    if(is_itinerary_showing_for_bot_list){
-        $("#bot_see_ticket_details_itinerary_details").slideUp("fast");
+window.is_itinerary_showing_for_bot_list = false;
+window.bot_toggle_see_ticket_details_itinerary_details = () => {
+    if(window.is_itinerary_showing_for_bot_list){
+        window.$("#bot_see_ticket_details_itinerary_details").slideUp("fast");
     }else{
-        $("#bot_see_ticket_details_itinerary_details").slideDown("fast");
+        window.$("#bot_see_ticket_details_itinerary_details").slideDown("fast");
     }
-    is_itinerary_showing_for_bot_list = !is_itinerary_showing_for_bot_list;
+    window.is_itinerary_showing_for_bot_list = !window.is_itinerary_showing_for_bot_list;
 }
 
 //helpers
@@ -38,7 +38,7 @@ let replacement_codes = [
     "@#wellgoqoute#@",
     "@#wellgodoubleqoute#@"
 ]
-function stringify_obj_for_template_strings(obj){
+window.stringify_obj_for_template_strings = (obj) => {
     return JSON.stringify(obj).replaceAll("'", replacement_codes[0]).replaceAll('"', replacement_codes[1]);
 }
 function parse_obj_for_template_strings(string_p){
@@ -46,7 +46,7 @@ function parse_obj_for_template_strings(string_p){
 }
 
 //markups
-function return_each_ticket(item){
+window.return_each_ticket = (item) => {
     return `
         <div onclick="show_selected_ticket_details_pane()" style="cursor: pointer; background-color: rgba(255,255,255,0.7); border-radius: 9px; margin-bottom: 10px; padding: 15px 10px;">
             <div class="each_ticket_upper_flex" style="flex-direction: row; justify-content: space-between;">
@@ -78,7 +78,7 @@ function return_each_ticket(item){
     `;
 }
 
-function return_selected_ticket_item(item){
+window.return_selected_ticket_item = (item) => {
     let checkout_obj = {name: "anything"}
     return `
         <div id="selected_ticket_main_details_pane">
@@ -271,7 +271,7 @@ function return_selected_ticket_item(item){
                     </p>
                 </div>
                 <div class="selected_ticket_book_btn_container">
-                    <div onclick="show_start_checkout_page('${stringify_obj_for_template_strings(checkout_obj)}');" class="selected_ticket_book_btn">
+                    <div onclick="show_start_checkout_page('${window.stringify_obj_for_template_strings(checkout_obj)}');" class="selected_ticket_book_btn">
                         <i style="margin-right: 2px; color: rgba(255,255,255,0.5); font-size: 19px;" class="fa fa-check-square-o" aria-hidden="true"></i>
                         Book
                     </div>
@@ -281,7 +281,7 @@ function return_selected_ticket_item(item){
     `;
 }
 
-function return_selected_ticket_item_from_bot_list(item){
+window.return_selected_ticket_item_from_bot_list = (item) => {
     let checkout_obj = {name: "anything"}
     return `
         <div>
@@ -475,7 +475,7 @@ function return_selected_ticket_item_from_bot_list(item){
     `;
 }
 
-function return_search_results_important_notice(obj){
+window.return_search_results_important_notice = (obj) => {
     return `
         <div class="search_result_inportant_notice_container">
             <div>
@@ -491,7 +491,7 @@ function return_search_results_important_notice(obj){
         </div>
     `;
 }
-function return_search_results_filters_and_sort(obj){
+window.return_search_results_filters_and_sort = (obj) => {
     return `
         <div>
             <div id="mobile_sort_and_filter_title_and_sort">
@@ -611,7 +611,7 @@ function return_search_results_filters_and_sort(obj){
         </div>
     `;
 }
-function return_search_results_mobile_top_itin_display(obj){
+window.return_search_results_mobile_top_itin_display = (obj) => {
     return `
         <div id="itinerary_and_filter_icon">
             <div>
@@ -628,7 +628,7 @@ function return_search_results_mobile_top_itin_display(obj){
         </div>
     `;
 }
-function return_start_checkout_info(json_obj){
+window.return_start_checkout_info = (json_obj) => {
 
     let js_obj = parse_obj_for_template_strings(json_obj);
     console.log(js_obj);
@@ -825,7 +825,7 @@ function return_start_checkout_info(json_obj){
     `;
 }
 
-function return_each_user_chat_message_markup(msg){
+window.return_each_user_chat_message_markup = (msg) => {
     return `
         <div class="support_chat_user_sent_msg_container">
             <div class="support_chat_bot_sent_msg_container_user_profile_pic">
@@ -838,7 +838,7 @@ function return_each_user_chat_message_markup(msg){
     `;
 }
 
-function typingFunc(txt, speed, ig, para_id) {
+window.typingFunc = (txt, speed, ig, para_id) => {
     if (ig < txt.length) {
           /*if(txt.charAt(ig) === "&" && txt.charAt(ig+1) === "#"){
               document.getElementById(para_id).innerHTML += txt.substring(ig, ig+8);
@@ -871,22 +871,21 @@ function typingFunc(txt, speed, ig, para_id) {
                 indexOfTagClosing_2 = txt.indexOf(">", indexOfTagClosing_2 + 1);
             }
 
-            //console.warn('tag: ', txt.substring(ig, (indexOfTagClosing_2+1)));
             document.getElementById(para_id).innerHTML += txt.substring(ig, (indexOfTagClosing_2+1));
               ig = (indexOfTagClosing_2+1);
           }else{
               document.getElementById(para_id).innerHTML += txt.charAt(ig); 
               ig++;
           }
-      setTimeout(()=>typingFunc(txt, speed, ig, para_id), speed);
+      setTimeout(()=>window.typingFunc(txt, speed, ig, para_id), speed);
     }
 }
 
 let bot_reply_inner_p_id_counter=-1;
-function return_each_bot_chat_message_markup(bot_reply){
+window.return_each_bot_chat_message_markup = (bot_reply) => {
     console.warn('reply', bot_reply);
     bot_reply_inner_p_id_counter++;
-    setTimeout(()=>typingFunc(bot_reply, 10, 0, `bot_reply_chat_inner_p${bot_reply_inner_p_id_counter}`), 50);
+    setTimeout(()=>window.typingFunc(bot_reply, 10, 0, `bot_reply_chat_inner_p${bot_reply_inner_p_id_counter}`), 50);
     return `
         <div class="support_chat_bot_sent_msg_container">
             <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
@@ -899,7 +898,7 @@ function return_each_bot_chat_message_markup(bot_reply){
     `;
 }
 
-function return_each_bot_chat_message_markup_without_typing(bot_reply){
+window.return_each_bot_chat_message_markup_without_typing = (bot_reply) => {
     return `
         <div class="support_chat_bot_sent_msg_container">
             <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
@@ -912,7 +911,7 @@ function return_each_bot_chat_message_markup_without_typing(bot_reply){
     `;
 }
 
-function return_PNR_form(){
+window.return_PNR_form = () => {
     return `
      <div style="border: 1px solid rgba(0,0,0,0.1); padding: 5px; margin-bottom: 10px; background-color: rgba(0,0,0,0.1)">
         <p style="text-align: center; font-weight: bolder; color: rgba(0,0,0,0.8); font-size: 14px;">
@@ -956,7 +955,7 @@ function return_PNR_form(){
     `
 }
 
-function return_bot_chat_status_markup(status){
+window.return_bot_chat_status_markup = (status) => {
     //statuses: online, offline, other...
     return `
         <p style="width: 8px; height: 8px; background-color: green; margin-right: 5px; margin-top: 6px; border-radius: 100%;"></p>
@@ -965,7 +964,7 @@ function return_bot_chat_status_markup(status){
 }
 
 //loaders
-function return_search_results_important_notice_loader(){
+window.return_search_results_important_notice_loader = () => {
     return `
         <div style="animation: item_slide_down 0.5s ease-in; marginBottom: 20" class="search_result_inportant_notice_container">
             <div>
@@ -981,7 +980,7 @@ function return_search_results_important_notice_loader(){
         </div>
     `;
 }
-function return_ticket_card_loader(){
+window.return_ticket_card_loader = () => {
     return `
         <div style="cursor: pointer; background-color: rgba(255,255,255,0.7); border-radius: 9px; margin-bottom: 20px; padding: 15px 10px; animation: item_slide_down 0.5s ease-in;">
             <div class="each_ticket_upper_flex" style="flex-direction: row; justify-content: space-between;">
@@ -1005,7 +1004,7 @@ function return_ticket_card_loader(){
         </div>
     `;
 }
-function return_search_results_filters_and_sort_loader(){
+window.return_search_results_filters_and_sort_loader = () => {
     return `
         <div style="margin-top: 20px;">
             <div style="margin-bottom: 40px;">
@@ -1043,7 +1042,7 @@ function return_search_results_filters_and_sort_loader(){
         </div>
     `;
 }
-function return_search_results_mobile_top_itin_display_loader(){
+window.return_search_results_mobile_top_itin_display_loader = () => {
     return `
         <div style="animation: item_slide_down 0.5s ease-in;" id="itinerary_and_filter_icon">
             <div>
@@ -1060,12 +1059,12 @@ function return_search_results_mobile_top_itin_display_loader(){
         </div>
     `;
 }
-function return_bot_chat_loading_markup(type="loading"){
+window.return_bot_chat_loading_markup = (type="loading") => {
     return `
         <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">${type}...</p>
     `
 }
 
 //document.getElementById("selected_ticket_pane").innerHTML = return_selected_ticket_item({});
-document.getElementById("selected_ticket_pane_for_bot_list").innerHTML = return_selected_ticket_item_from_bot_list({});
-document.getElementById("ticket_info_pane_for_selected_ticket_from_bot_list").innerHTML = return_selected_ticket_item_from_bot_list({});
+document.getElementById("selected_ticket_pane_for_bot_list").innerHTML = window.return_selected_ticket_item_from_bot_list({});
+document.getElementById("ticket_info_pane_for_selected_ticket_from_bot_list").innerHTML = window.return_selected_ticket_item_from_bot_list({});
