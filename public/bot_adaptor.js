@@ -121,6 +121,11 @@ let virtual_assistant = {
                 `Got it. 🤔 We found you some airports for depature and destination. You may pick yours and reply saying '<span class="support_chat_bot_msg_highlights">done</span>' to confirm with me`,
                 `😃 You know.. when the prices get good like they are right now, we dont waste any time booking your flight. I have found a couple airports listed below 👇. Please select yours and reply '<span class="support_chat_bot_msg_highlights">done</span>' to proceed quickly`,
                 `Getting there 💪... I have found a couple airports. Please select your departure and destination then reply with '<span class="support_chat_bot_msg_highlights">done</span>' so I can confirm.`,
+            ],
+            change_values_commands: [
+                "changeairports", "change airports", 
+                "startover", "start over",
+                "startagain", "start again"
             ]
         },
         cabin_class: {
@@ -164,6 +169,13 @@ let virtual_assistant = {
                 business</span>', '<span class="support_chat_bot_msg_highlights">
                 premium</span>', or '<span class="support_chat_bot_msg_highlights">
                 cheapest</span>'`
+            ],
+            change_values_commands: [
+                "changecabinclass", "change cabin class",
+                "changeflightclass", "change flight class",
+                "changeclass", "change class",
+                "changecabin", "change cabin",
+                "changetravelclass", "change travel class",
             ]
         },
         trip_round: {
@@ -192,9 +204,12 @@ let virtual_assistant = {
             ],
             accepted_queries: [
                 "round trip", "one way", "one-way", "oneway", "roundtrip", "round-trip"
-
+            ],
+            change_values_commands: [
+                "changetrip", "change trip",
+                "changetripround", "change trip round",
+                "addreturnflight", "add return flight"
             ]
-            
         },
         getting_travelers: {
             start_msgs: [
@@ -243,6 +258,12 @@ let virtual_assistant = {
                 1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`
+            ],
+            change_values_commands: [
+                "changetravelers", "change travelers",
+                "changeflighttravelers", "change flight travelers",
+                "changetraveler", "change traveler",
+                "changeflighttraveler", "change flight traveler"
             ]
         },
         travel_dates: {
@@ -280,7 +301,31 @@ let virtual_assistant = {
                 23</span> is the date of month and <span class="support_chat_bot_msg_highlights">
                 2022</span> is the year...`,
             ],
-
+            change_values_commands: [
+                "changedates", "change dates",
+                "changedate", "change date",
+                "changetraveldates", "change travel dates",
+                "changetraveldate", "change travel date"
+            ]
+        },
+        searching_flights: {
+            change_values_commands: [
+                "changeflight", "change flight",
+                "pickanotherflight", "pick another flight",
+                "chooseanotherflight", "choose another flight",
+                "changeflightschedule", "change flight schedule"
+            ]
+        },
+        pnr_recording: {
+            change_values_commands: [
+                "changepassengerrecords", "change passenger records",
+                "restartpassengerrecords", "restart passenger records",
+                "changepnr", "change pnr",
+                "changepassengernamerecord", "change passenger name record",
+                "changepassengerdetails", "change passenger details",
+                "changetravelerdetails", "change traveler details",
+                "changetravelersdetails", "change travelers details"
+            ]
         }
     }
 }
@@ -297,6 +342,27 @@ let virtual_assistant_functions = {
     return_server_failed_error: () => {
         return virtual_assistant.server.msgs.failed[
             Math.floor(Math.random() * virtual_assistant.server.msgs.failed.length)];
+    },
+    is_airports_change_values_command: (value) => {
+        return virtual_assistant.steps.origin_destination.change_values_commands.includes(value);
+    },
+    is_trip_round_change_values_command: (value) => {
+        return virtual_assistant.steps.trip_round.change_values_commands.includes(value);
+    },
+    is_travel_dates_change_values_command: (value) => {
+        return virtual_assistant.steps.travel_dates.change_values_commands.includes(value);
+    },
+    is_cabin_class_change_values_command: (value) => {
+        return virtual_assistant.steps.cabin_class.change_values_commands.includes(value);
+    },
+    is_travelers_change_values_command: (value) => {
+        return virtual_assistant.steps.getting_travelers.change_values_commands.includes(value);
+    },
+    is_flight_search_change_values_command: (value) => {
+        return virtual_assistant.steps.searching_flights.change_values_commands.includes(value);
+    },
+    is_pnr_change_values_command: (value) => {
+        return virtual_assistant.steps.pnr_recording.change_values_commands.includes(value);
     },
     get_start_over_message: (origin_destination_stage=false) => {
         if(origin_destination_stage){
