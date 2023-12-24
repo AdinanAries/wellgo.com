@@ -412,7 +412,10 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
           }
         }else{
-          if(TEXT_ELE.value.trim().toLowerCase() === "yes" && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
+          if(window.virtual_assistant_functions
+            .is_saying_yes_command(TEXT_ELE.value.trim().toLowerCase())
+            && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION
+          ){
             wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
           }else{
             wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
@@ -516,8 +519,6 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           }
           
         }
-        
-
     }
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
       && wellgo_bot.step===""){

@@ -74,6 +74,11 @@ let virtual_assistant = {
         "let's stop booking",
         "I want to stop booking",
     ],
+    saying_yes_commands: [
+        "yes", "absolutely", "sure", "perfect!", "perfect", "absolutely!",
+        "yes!", "exactly", "exactly!", "sure!", "continue", "continue!",
+        "proceed", "proceed!",
+    ],
     in_activity_stop_current_activity_bot_responses: [
         "Ok cool...",
         "Got it... Let me know...",
@@ -353,7 +358,7 @@ let virtual_assistant = {
 }
 window.virtual_assistant=virtual_assistant;
 
-let virtual_assistant_functions = {
+window.virtual_assistant_functions = {
     reset_bot_status: () => {
         virtual_assistant.state.status = "";
         virtual_assistant.state.step = "";
@@ -471,6 +476,9 @@ let virtual_assistant_functions = {
     is_stop_current_activity_command: (value) => {
         return virtual_assistant.stop_current_activity_commands.includes(value);
     },
+    is_saying_yes_command: (value) => {
+        return virtual_assistant.saying_yes_commands.includes(value);
+    },
     get_in_activity_stop_command_reponse: () => {
         return virtual_assistant.in_activity_stop_current_activity_bot_responses[
             Math.floor(Math.random() *
@@ -482,14 +490,12 @@ let virtual_assistant_functions = {
     },
 
 }
-window.virtual_assistant_functions=virtual_assistant_functions;
-//alert(virtual_assistant_functions.is_stop_current_activity_command("stop booking"));
 
-function validate_user_airports_input_for_bot(inputs){
+window.validate_user_airports_input_for_bot = (inputs) => {
     if(inputs.split(" ").includes("to")){
         let itin_obj = {
-            from: inputs.split("to")[0].trim(),
-            to: inputs.split("to")[1].trim()
+            from: inputs.split(" to ")[0].trim(),
+            to: inputs.split(" to ")[1].trim()
         }
         return {
             isValid: true,
@@ -504,7 +510,7 @@ function validate_user_airports_input_for_bot(inputs){
     }
 }
 
-function validate_user_dates_input_for_bot(inputs, trip_round){
+window.validate_user_dates_input_for_bot = (inputs, trip_round) => {
     //console.log(trip_round)
     if(trip_round==="one-way"){
 
@@ -646,7 +652,7 @@ function validate_user_dates_input_for_bot(inputs, trip_round){
     }
 }
 
-function validate_travelers_input_for_bot(input){
+window.validate_travelers_input_for_bot = (input) => {
     let resp_obj = {
         isValid: false,
         adults: 0,
