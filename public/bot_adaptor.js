@@ -74,6 +74,11 @@ let virtual_assistant = {
         "let's stop booking",
         "I want to stop booking",
     ],
+    in_activity_stop_current_activity_bot_responses: [
+        "Ok cool...",
+        "Got it... Let me know...",
+        "Sure, no problem",
+    ],
     steps: {
         names: {
             TRIP_ROUND: "trip-round",
@@ -173,6 +178,7 @@ let virtual_assistant = {
                 premium</span>', or '<span class="support_chat_bot_msg_highlights">
                 cheapest</span>'`
             ],
+            accepted_queries: [ "first class", "economy", "business", "premium", "cheapest" ],
             change_values_commands: [
                 "changecabinclass", "change cabin class",
                 "changeflightclass", "change flight class",
@@ -317,7 +323,13 @@ let virtual_assistant = {
                 "pickanotherflight", "pick another flight",
                 "chooseanotherflight", "choose another flight",
                 "changeflightschedule", "change flight schedule"
-            ]
+            ],
+            selected_a_flight_confirm_commands: [
+                "done", "selected", "finished", "i have selected a flight",
+                "i have selected", "i have chosen one", "i have chosen my flight",
+                "i have selected one", "i have finished", "i have selected my flight",
+                "i have chosen a flight",
+            ],
         },
         pnr_recording: {
             change_values_commands: [
@@ -335,6 +347,19 @@ let virtual_assistant = {
 window.virtual_assistant=virtual_assistant;
 
 let virtual_assistant_functions = {
+    reset_bot_status: () => {
+        virtual_assistant.state.status = "";
+        virtual_assistant.state.step = "";
+        virtual_assistant.state.scroll_chat=true;
+        virtual_assistant.state.isTripRoundFirstEntered=true;
+        virtual_assistant.state.isPNRFirstEntered=true;
+        virtual_assistant.state.isDatesFirstEntered=true;
+        virtual_assistant.state.isCabinClassFirstEntered=true;
+        virtual_assistant.state.isSearchingFlightFirstEnter=true;
+        virtual_assistant.state.isGettingTravelersFirstEntered=true;
+        virtual_assistant.state.selectedOriginAirport="";
+        virtual_assistant.state.selectedDestinationAirport="";
+    },
     get_starter_message: (activity_type) => {
         if(activity_type===virtual_assistant.state.status_names.BEGIN_AIR_BOOKING){
             return virtual_assistant.starters.begin_air_booking.start_msgs[
@@ -367,6 +392,9 @@ let virtual_assistant_functions = {
     },
     is_flight_search_change_values_command: (value) => {
         return virtual_assistant.steps.searching_flights.change_values_commands.includes(value);
+    },
+    is_selected_a_flight_confirmation_command: (value) => {
+        return virtual_assistant.steps.searching_flights.selected_a_flight_confirm_commands.includes(value);
     },
     is_pnr_change_values_command: (value) => {
         return virtual_assistant.steps.pnr_recording.change_values_commands.includes(value);
@@ -430,9 +458,17 @@ let virtual_assistant_functions = {
     verify_trip_round_if_query_accepted: (value) => {
         return virtual_assistant.steps.trip_round.accepted_queries.includes(value);
     },
+    verify_cabin_class_if_query_accepted: (value) => {
+        return virtual_assistant.steps.cabin_class.accepted_queries.includes(value);
+    },
     is_stop_current_activity_command: (value) => {
         return virtual_assistant.stop_current_activity_commands.includes(value);
-    }
+    },
+    get_in_activity_stop_command_reponse: () => {
+        return virtual_assistant.in_activity_stop_current_activity_bot_responses[
+            Math.floor(Math.random() *
+            virtual_assistant.in_activity_stop_current_activity_bot_responses.length)]
+    },
 
 }
 window.virtual_assistant_functions=virtual_assistant_functions;

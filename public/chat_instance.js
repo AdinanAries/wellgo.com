@@ -5,6 +5,21 @@ let bot_server_base_url = "http://localhost:5001";
 window.BOT_STEPS=BOT_STEPS;
 window.wellgo_bot=wellgo_bot;
 
+
+//----------------------to remove--------------------------------
+wellgo_bot.status = "";
+wellgo_bot.step = "";
+wellgo_bot.scroll_chat=true;
+wellgo_bot.isTripRoundFirstEntered=true;
+wellgo_bot.isPNRFirstEntered=true;
+wellgo_bot.isDatesFirstEntered=true;
+wellgo_bot.isCabinClassFirstEntered=true;
+wellgo_bot.isSearchingFlightFirstEnter=true;
+wellgo_bot.isGettingTravelersFirstEntered=true;
+wellgo_bot.selectedOriginAirport="";
+wellgo_bot.selectedDestinationAirport="";
+//------------------------------------------------------
+
 let get_answer_from_bot = (user_query) => {
     //console.log(user_query)
     //console.log("bot status: ", wellgo_bot.status)
@@ -380,17 +395,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
-          wellgo_bot.status = "";
-          wellgo_bot.step = "";
-          wellgo_bot.scroll_chat=true;
-          wellgo_bot.isTripRoundFirstEntered=true;
-          wellgo_bot.isPNRFirstEntered=true;
-          wellgo_bot.isDatesFirstEntered=true;
-          wellgo_bot.isCabinClassFirstEntered=true;
-          wellgo_bot.isSearchingFlightFirstEnter=true;
-          wellgo_bot.isGettingTravelersFirstEntered=true;
-          wellgo_bot.selectedOriginAirport="";
-          wellgo_bot.selectedDestinationAirport="";
+          window.virtual_assistant_functions.reset_bot_status();
           if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
             window.clear_airports_suggested_by_bot_ids()
 
@@ -528,17 +533,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
-          wellgo_bot.status = "";
-          wellgo_bot.step = "";
-          wellgo_bot.scroll_chat=true;
-          wellgo_bot.isTripRoundFirstEntered=true;
-          wellgo_bot.isPNRFirstEntered=true;
-          wellgo_bot.isDatesFirstEntered=true;
-          wellgo_bot.isCabinClassFirstEntered=true;
-          wellgo_bot.isSearchingFlightFirstEnter=true;
-          wellgo_bot.isGettingTravelersFirstEntered=true;
-          wellgo_bot.selectedOriginAirport="";
-          wellgo_bot.selectedDestinationAirport="";
+          window.virtual_assistant_functions.reset_bot_status();
         }else{
 
           if(window.virtual_assistant_functions.verify_trip_round_if_query_accepted(
@@ -585,17 +580,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
-          wellgo_bot.status = "";
-          wellgo_bot.step = "";
-          wellgo_bot.scroll_chat=true;
-          wellgo_bot.isTripRoundFirstEntered=true;
-          wellgo_bot.isPNRFirstEntered=true;
-          wellgo_bot.isDatesFirstEntered=true;
-          wellgo_bot.isCabinClassFirstEntered=true;
-          wellgo_bot.isSearchingFlightFirstEnter=true;
-          wellgo_bot.isGettingTravelersFirstEntered=true;
-          wellgo_bot.selectedOriginAirport="";
-          wellgo_bot.selectedDestinationAirport="";
+          window.virtual_assistant_functions.reset_bot_status();
 
         }else{
           let validation = window.validate_user_dates_input_for_bot(
@@ -626,24 +611,12 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
       if(!wellgo_bot.isCabinClassFirstEntered){
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
-          wellgo_bot.status = "";
-          wellgo_bot.step = "";
-          wellgo_bot.scroll_chat=true;
-          wellgo_bot.isTripRoundFirstEntered=true;
-          wellgo_bot.isPNRFirstEntered=true;
-          wellgo_bot.isDatesFirstEntered=true;
-          wellgo_bot.isCabinClassFirstEntered=true;
-          wellgo_bot.isSearchingFlightFirstEnter=true;
-          wellgo_bot.isGettingTravelersFirstEntered=true;
-          wellgo_bot.selectedOriginAirport="";
-          wellgo_bot.selectedDestinationAirport="";
+          window.virtual_assistant_functions.reset_bot_status();
         }else{
-          if(
-            TEXT_ELE.value.trim().toLowerCase() === "first class" ||
-            TEXT_ELE.value.trim().toLowerCase() === "economy" ||
-            TEXT_ELE.value.trim().toLowerCase() === "business" ||
-            TEXT_ELE.value.trim().toLowerCase() === "premium" ||
-            TEXT_ELE.value.trim().toLowerCase() === "cheapest"
+          if( window.virtual_assistant_functions
+              .verify_cabin_class_if_query_accepted(
+                TEXT_ELE.value.trim().toLowerCase()
+              )
           ){
             // Set cabin class here
             wellgo_bot.step = BOT_STEPS.TRAVELER_COUNT;
@@ -672,18 +645,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
-          wellgo_bot.status = "";
-          wellgo_bot.step = "";
-          wellgo_bot.scroll_chat=true;
-          wellgo_bot.isTripRoundFirstEntered=true;
-          wellgo_bot.isPNRFirstEntered=true;
-          wellgo_bot.isDatesFirstEntered=true;
-          wellgo_bot.isCabinClassFirstEntered=true;
-          wellgo_bot.isSearchingFlightFirstEnter=true;
-          wellgo_bot.isGettingTravelersFirstEntered=true;
-          wellgo_bot.selectedOriginAirport="";
-          wellgo_bot.selectedDestinationAirport="";
-
+          window.virtual_assistant_functions.reset_bot_status();
         }else{
           let validation = window.validate_travelers_input_for_bot(TEXT_ELE.value.trim().toLowerCase())
           console.log("validation: ", validation);
@@ -746,31 +708,16 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
       if(!wellgo_bot.isSearchingFlightFirstEnter){
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
-          let stop_booking_reply_msgs = [
-            "Ok cool...",
-            "Got it... Let me know...",
-            "Sure, no problem"
-          ];
-          bot_reply_msg = stop_booking_reply_msgs[Math.floor(Math.random() * stop_booking_reply_msgs.length)]
-          wellgo_bot.status = "";
-          wellgo_bot.step = "";
-
-          wellgo_bot.scroll_chat=true;
-          wellgo_bot.isTripRoundFirstEntered=true;
-          wellgo_bot.isPNRFirstEntered=true;
-          wellgo_bot.isDatesFirstEntered=true;
-          wellgo_bot.isCabinClassFirstEntered=true;
-          wellgo_bot.isSearchingFlightFirstEnter=true;
-          wellgo_bot.isGettingTravelersFirstEntered=true;
-          wellgo_bot.selectedOriginAirport="";
-          wellgo_bot.selectedDestinationAirport="";
+          bot_reply_msg = window.virtual_assistant_functions.get_in_activity_stop_command_reponse();
+          window.virtual_assistant_functions.reset_bot_status();
           window.clear_flight_results_showed_by_bot();
-
-        }else if(TEXT_ELE.value.trim().toLowerCase() === "done"){
-          
+        }else if(window.virtual_assistant_functions
+            .is_selected_a_flight_confirmation_command(
+              TEXT_ELE.value.trim().toLowerCase()
+            )
+        ){  
           window.show_user_interapting_message(TEXT_ELE.value, false);
           TEXT_ELE.value="";
-
           if(!wellgo_bot.selectedAFlight){
             wellgo_bot.scroll_chat=true;
             let rpl_msgs = [
@@ -853,17 +800,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
       if(window.virtual_assistant_functions
          .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         bot_reply_msg=bot_reply.msg;
-        wellgo_bot.status = "";
-        wellgo_bot.step = "";
-        wellgo_bot.scroll_chat=true;
-        wellgo_bot.isTripRoundFirstEntered=true;
-        wellgo_bot.isPNRFirstEntered=true;
-        wellgo_bot.isDatesFirstEntered=true;
-        wellgo_bot.isCabinClassFirstEntered=true;
-        wellgo_bot.isSearchingFlightFirstEnter=true;
-        wellgo_bot.isGettingTravelersFirstEntered=true;
-        wellgo_bot.selectedOriginAirport="";
-        wellgo_bot.selectedDestinationAirport="";
+        window.virtual_assistant_functions.reset_bot_status();
         window.clear_flight_results_showed_by_bot();
 
       }else{
