@@ -146,6 +146,12 @@ let virtual_assistant = {
                 "changeairports", "change airports", 
                 "startover", "start over",
                 "startagain", "start again"
+            ],
+            selected_a_airport_confirm_commands: [
+                "done", "selected", "finished", "i have selected my airports",
+                "i have selected", "i have chosen one", "i have chosen my airport",
+                "i have selected one", "i have finished", "i have selected my airports",
+                "i have chosen an airport",
             ]
         },
         cabin_class: {
@@ -407,6 +413,9 @@ window.virtual_assistant_functions = {
     },
     is_selected_a_flight_confirmation_command: (value) => {
         return virtual_assistant.steps.searching_flights.selected_a_flight_confirm_commands.includes(value);
+    },
+    is_selected_airports_confirmation_command: (value) => {
+        return virtual_assistant.steps.origin_destination.selected_a_airport_confirm_commands.includes(value);
     },
     is_pnr_change_values_command: (value) => {
         return virtual_assistant.steps.pnr_recording.change_values_commands.includes(value);

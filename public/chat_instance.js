@@ -106,19 +106,32 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
       )
       bot_reply_msg=flight_eval_res.bot_reply_msg;
       bot_reply=flight_eval_res.bot_reply;
+
+      // Saying stop when flight booking has started yet no bot step has been set
+      if(!wellgo_bot.step
+        && window.virtual_assistant_functions
+              .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
+      ){
+        bot_reply_msg=window.virtual_assistant_functions.get_in_activity_stop_command_reponse();
+        window.virtual_assistant_functions.reset_bot_status();
+        wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
+      }
     }
     // if bot does not have any status yet user says stop
-    else if(window.virtual_assistant_functions
-        .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
-      && wellgo_bot.step===""){
+    else if(
+      !bot_reply.type
+      && window.virtual_assistant_functions
+            .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
+    ){
       bot_reply_msg=window.virtual_assistant_functions
         .get_idle_bot_stop_current_activity_response(TEXT_ELE.value.trim());
     }
     // Last condition for bot status - if server did not return an aswer with status
     else if(
-        !bot_reply.type && !window.virtual_assistant_functions
-                              .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
-      ) {
+        !bot_reply.type 
+        && !window.virtual_assistant_functions
+              .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
+    ){
       bot_reply_msg=window.virtual_assistant_functions.return_no_bot_status_message();
     }
     //---------------------end of flight booking process-------------------------------------//
@@ -385,9 +398,9 @@ window.virtual_assistant_flight_booking_change_values_assessment
 =virtual_assistant_flight_booking_change_values_assessment;
 
 let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_msg, bot_reply) => {
-  // Step one: origin - destination
   // eslint-disable-next-line no-lone-blocks
   {
+    // Step one: origin - destination
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
       && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
         let validation = window.validate_user_airports_input_for_bot(TEXT_ELE.value.trim());
@@ -398,8 +411,10 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
             window.clear_airports_suggested_by_bot_ids()
 
-        }else if(TEXT_ELE.value.trim().toLowerCase() === "done"){
-          
+        }else if(window.virtual_assistant_functions
+            .is_selected_airports_confirmation_command(
+              TEXT_ELE.value.trim().toLowerCase())
+        ){
           if(wellgo_bot.selectedOriginAirport==="" && wellgo_bot.selectedDestinationAirport===""){
             bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. '
             <span class="support_chat_bot_msg_highlights">Kotoka to Laguardia</span>'`
@@ -503,21 +518,15 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
                   `;
                   if(i>4)break;
                 }
-
                 bot_reply_msg += `<br/><span style="font-family: 'Prompt', sans-serif; font-size: 14px">
                   and incase you don't see your airport then re-enter cities or airports. eg. '<span class="support_chat_bot_msg_highlights">
                   New York to Paris</span>' or...</span>`
-
               }
-              
-              
             }else{
               bot_reply_msg = validation.msg;
               wellgo_bot.status = wellgo_bot.status_names.BEGIN_AIR_BOOKING;
-
             }
-          }
-          
+          }   
         }
     }
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
@@ -786,44 +795,45 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
         wellgo_bot.isSearchingFlightFirstEnter=false
       }
     }
-  }
-  //step seven: pnr recording
-  if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
-    && wellgo_bot.step===BOT_STEPS.PNR_RECORD){
-    if(wellgo_bot.isPNRFirstEntered){
-      //setTimeout(()=>window.show_interapting_message(`So lets do that now...`, "none", false),2000);
-      //setTimeout(()=>window.show_interapting_message(`Please complete the following flight passenger form`, "none", false),2000);
-      setTimeout(()=>window.show_pnr_form("none"),5000);
-      bot_reply_msg = "";
-    }else{
-      if(window.virtual_assistant_functions
-         .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
-        bot_reply_msg=bot_reply.msg;
-        window.virtual_assistant_functions.reset_bot_status();
-        window.clear_flight_results_showed_by_bot();
 
+    //step seven: pnr recording
+    if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING 
+      && wellgo_bot.step===BOT_STEPS.PNR_RECORD){
+      if(wellgo_bot.isPNRFirstEntered){
+        //setTimeout(()=>window.show_interapting_message(`So lets do that now...`, "none", false),2000);
+        //setTimeout(()=>window.show_interapting_message(`Please complete the following flight passenger form`, "none", false),2000);
+        setTimeout(()=>window.show_pnr_form("none"),5000);
+        bot_reply_msg = "";
       }else{
-        let name_parts = TEXT_ELE.value.trim().split(" ");
-        if(name_parts.length === 2){
-          window.show_user_interapting_message(TEXT_ELE.value.trim(), true);
-          window.show_interapting_message(`Perfect...`, "none");
-          window.show_interapting_message(`We need your address next, it should look like 
-          '<span class="support_chat_bot_msg_highlights">street address, town, city, country zipcode</span>'
-          ..eg. '<span class="support_chat_bot_msg_highlights">234 Rector Street, Manhattan, New York, USA 10232</span>'`, "none");
-          //bot_reply_msg= "Please enter your address information!";
-          wellgo_bot.scroll_chat=false;
+        if(window.virtual_assistant_functions
+          .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
+          bot_reply_msg=bot_reply.msg;
+          window.virtual_assistant_functions.reset_bot_status();
+          window.clear_flight_results_showed_by_bot();
+
         }else{
-          let err_reply_msgs = [
-            "Please name must be in two parts: first and last name",
-            "Oops.. name must be a first and last name",
-            "Make sure, you've input your first and last name.. try again please"
-          ];
-          bot_reply_msg = err_reply_msgs[Math.floor(Math.random() * err_reply_msgs.length)]
+          let name_parts = TEXT_ELE.value.trim().split(" ");
+          if(name_parts.length === 2){
+            window.show_user_interapting_message(TEXT_ELE.value.trim(), true);
+            window.show_interapting_message(`Perfect...`, "none");
+            window.show_interapting_message(`We need your address next, it should look like 
+            '<span class="support_chat_bot_msg_highlights">street address, town, city, country zipcode</span>'
+            ..eg. '<span class="support_chat_bot_msg_highlights">234 Rector Street, Manhattan, New York, USA 10232</span>'`, "none");
+            //bot_reply_msg= "Please enter your address information!";
+            wellgo_bot.scroll_chat=false;
+          }else{
+            let err_reply_msgs = [
+              "Please name must be in two parts: first and last name",
+              "Oops.. name must be a first and last name",
+              "Make sure, you've input your first and last name.. try again please"
+            ];
+            bot_reply_msg = err_reply_msgs[Math.floor(Math.random() * err_reply_msgs.length)]
+          }
+          //alert("pnr recording");
         }
-        //alert("pnr recording");
       }
+      wellgo_bot.isPNRFirstEntered=false
     }
-    wellgo_bot.isPNRFirstEntered=false
   }
   return {
     bot_reply, bot_reply_msg
