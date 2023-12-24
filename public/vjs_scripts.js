@@ -372,7 +372,7 @@ let toggle_show_hp_support_chat_container = () => {
         if(document.getElementById("chatbot_provided_manual_channels"))
             document.getElementById("chatbot_provided_manual_channels").style.display="block";
           document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
-      },1200);
+      },  (txt.length*speed));
     }
     is_chat_container_shown = !is_chat_container_shown;
 }
@@ -525,17 +525,8 @@ let start_book_with_vitual_agent = () => {
 
   if(window.wellgo_bot.status===""){
     //reseting everything
-    window.wellgo_bot.status = "";
-    window.wellgo_bot.step = "";
-    window.wellgo_bot.scroll_chat=true;
-    window.wellgo_bot.isTripRoundFirstEntered=true;
-    window.wellgo_bot.isPNRFirstEntered=true;
-    window.wellgo_bot.isDatesFirstEntered=true;
-    window.wellgo_bot.isCabinClassFirstEntered=true;
-    window.wellgo_bot.isSearchingFlightFirstEnter=true;
-    window.wellgo_bot.isGettingTravelersFirstEntered=true;
-    window.wellgo_bot.selectedOriginAirport="";
-    window.wellgo_bot.selectedDestinationAirport="";
+    window.virtual_assistant_functions.reset_bot_status();
+    
     if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
       clear_airports_suggested_by_bot_ids()
     document.getElementById("hp_support_chat_items").innerHTML = `
@@ -548,10 +539,12 @@ let start_book_with_vitual_agent = () => {
         </div>
       </div>
     `;
-    txt = "";
-    document.getElementById("chatbot_greenting_message_p").innerHTML
+    txt = window.virtual_assistant_functions.get_starter_message(
+      window.wellgo_bot.status_names.BEGIN_AIR_BOOKING);
+    
+    /*document.getElementById("chatbot_greenting_message_p").innerHTML
     = window.virtual_assistant_functions.get_starter_message(
-          window.wellgo_bot.status_names.BEGIN_AIR_BOOKING);
+          window.wellgo_bot.status_names.BEGIN_AIR_BOOKING);*/
   }
   toggle_show_hp_support_chat_container();
   window.toggle_main_page_search_filters();
