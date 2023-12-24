@@ -106,9 +106,19 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
       )
       bot_reply_msg=flight_eval_res.bot_reply_msg;
       bot_reply=flight_eval_res.bot_reply;
-    } 
+    }
+    // if bot does not have any status yet user says stop
+    else if(window.virtual_assistant_functions
+        .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
+      && wellgo_bot.step===""){
+      bot_reply_msg=window.virtual_assistant_functions
+        .get_idle_bot_stop_current_activity_response(TEXT_ELE.value.trim());
+    }
     // Last condition for bot status - if server did not return an aswer with status
-    else if(!bot_reply.type) {
+    else if(
+        !bot_reply.type && !window.virtual_assistant_functions
+                              .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
+      ) {
       bot_reply_msg=window.virtual_assistant_functions.return_no_bot_status_message();
     }
     //---------------------end of flight booking process-------------------------------------//
@@ -137,17 +147,6 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
       document.getElementById("suggested_bot_query_display").innerHTML = "";
     }, 1000)
     
-  }
-  if(window.virtual_assistant_functions
-      .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())
-    && wellgo_bot.step===""){
-    const IdleBotStopMgs=[
-      `${TEXT_ELE.value.trim()}? 😏 But We're already not doing any booking or cancellation to stop...`,
-      `Hey! If we had started any booking, then saying "${TEXT_ELE.value.trim()}" could help.`,
-      `You got me confused. Please explain what you mean by "${TEXT_ELE.value.trim()}" 😐`
-    ]
-    window.show_interapting_message(IdleBotStopMgs[Math.floor(Math.random() * IdleBotStopMgs.length)],"none")
-    //return;
   }
   TEXT_ELE.value = "type your message here...";
   if(wellgo_bot.scroll_chat){
@@ -581,7 +580,6 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg=bot_reply.msg;
           window.virtual_assistant_functions.reset_bot_status();
-
         }else{
           let validation = window.validate_user_dates_input_for_bot(
             TEXT_ELE.value.trim(), 

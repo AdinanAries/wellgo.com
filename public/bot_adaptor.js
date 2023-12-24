@@ -79,6 +79,13 @@ let virtual_assistant = {
         "Got it... Let me know...",
         "Sure, no problem",
     ],
+    idle_bot_stop_current_activity_responses: (user_query) => {
+        return [
+            `${user_query.trim()}? 😏 But We're already not doing any booking or cancellation to stop...`,
+            `Hey! If we had started any booking, then saying "${user_query.trim()}" could help.`,
+            `You got me confused. Please explain what you mean by "${user_query.trim()}" 😐`,
+        ]
+    },
     steps: {
         names: {
             TRIP_ROUND: "trip-round",
@@ -468,6 +475,10 @@ let virtual_assistant_functions = {
         return virtual_assistant.in_activity_stop_current_activity_bot_responses[
             Math.floor(Math.random() *
             virtual_assistant.in_activity_stop_current_activity_bot_responses.length)]
+    },
+    get_idle_bot_stop_current_activity_response: (value) => {
+        let responses = virtual_assistant.idle_bot_stop_current_activity_responses(value);
+        return responses[Math.floor(Math.random() * responses.length)];
     },
 
 }
