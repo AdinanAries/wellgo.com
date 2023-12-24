@@ -430,11 +430,19 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             .is_saying_yes_command(TEXT_ELE.value.trim().toLowerCase())
             && wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION
           ){
-            wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
+            if(wellgo_bot.selectedOriginAirport==="" && wellgo_bot.selectedDestinationAirport===""){
+              bot_reply_msg=`Please select your airports above or enter new ones in the form of airport-name to another-airport-name.. eg. '
+              <span class="support_chat_bot_msg_highlights">Kotoka to Laguardia</span>'`
+            }else if(wellgo_bot.selectedOriginAirport===""){
+              bot_reply_msg=`umm... You did not select departure airport`
+            }else if(wellgo_bot.selectedDestinationAirport===""){
+              bot_reply_msg=`Please select your destination airport`
+            }else{
+              wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
+            }
           }else{
             wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
             if(validation.isValid){
-              
               //find airports here;
               //if origin and destination airports contains more that one element, then give you a list using div containers to select from
               //after selection, set wellgo_bot.step="departure-arrival-dates"
@@ -443,7 +451,6 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
               console.log(origin_airpots);
               console.log(destination_airports);
               if(origin_airpots.length === 1 && destination_airports.length === 1){
-
                 // Origin airport
                 // Code: wellgo_bot.selectedOriginAirport=origin_airpots[0].IATA;
                 // Code: add_origin_input_airport_to_history(origin_airpots[0].IATA)
