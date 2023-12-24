@@ -114,7 +114,6 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
       ){
         bot_reply_msg=window.virtual_assistant_functions.get_in_activity_stop_command_reponse();
         window.virtual_assistant_functions.reset_bot_status();
-        wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
       }
     }
     // if bot does not have any status yet user says stop
