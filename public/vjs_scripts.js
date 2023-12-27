@@ -368,11 +368,16 @@ let toggle_show_hp_support_chat_container = () => {
         typeWriter();
       }
       document.getElementById("support_chat_container").style.display = "block";
+      let show_text_fld_wait_time=1200;
+      if(window.wellgo_bot.status===""){
+        show_text_fld_wait_time=((txt.length*speed)/2);
+      }
       setTimeout(()=>{
         if(document.getElementById("chatbot_provided_manual_channels"))
             document.getElementById("chatbot_provided_manual_channels").style.display="block";
+        if(document.getElementById("main_support_chat_user_input_txt_container"))
           document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
-      },  (txt.length*speed));
+      }, show_text_fld_wait_time);
     }
     is_chat_container_shown = !is_chat_container_shown;
 }

@@ -7,6 +7,9 @@ window.wellgo_bot=wellgo_bot;
 
 
 //----------------------to remove--------------------------------
+/**
+ * To Do: Always try to construct a perfect query for the UI
+ */
 wellgo_bot.status = "";
 wellgo_bot.step = "";
 wellgo_bot.scroll_chat=true;

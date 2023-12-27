@@ -86,9 +86,9 @@ let virtual_assistant = {
     ],
     idle_bot_stop_current_activity_responses: (user_query) => {
         return [
-            `${user_query.trim()}? 😏 But We're already not doing any booking or cancellation to stop...`,
-            `Hey! If we had started any booking, then saying "${user_query.trim()}" could help.`,
-            `You got me confused. Please explain what you mean by "${user_query.trim()}" 😐`,
+            `<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">${user_query.trim()}</span>? 😏 But We're already not doing any booking or cancellation to stop...`,
+            `Hey! If we had started any booking, then saying "<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">${user_query.trim()}</span>" could help.`,
+            `You got me confused. Please explain what you mean by "<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">${user_query.trim()}</span>" 😐`,
         ]
     },
     steps: {
@@ -346,7 +346,7 @@ let virtual_assistant = {
                 "done", "selected", "finished", "i have selected a flight",
                 "i have selected", "i have chosen one", "i have chosen my flight",
                 "i have selected one", "i have finished", "i have selected my flight",
-                "i have chosen a flight",
+                "i have chosen a flight", "continue", "proceed", "let go", "forward",
             ],
         },
         pnr_recording: {

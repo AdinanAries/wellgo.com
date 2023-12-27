@@ -11,7 +11,7 @@ var ChooseUs = ()=>{
                 <div className="wrapper">
                     <DownloadApp />
                     <div style={{width: 90, margin: "auto", marginBottom: 0, marginTop: 5, height: 5, backgroundColor: "rgba(0,0,0,0.8)", borderRadius: 500}}></div>
-                    <Reviews />
+                    {/*<Reviews />*/}
                     <PopularCities />
                     <OurPromises />
                     <DownloadMobileApp />
