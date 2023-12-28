@@ -25,7 +25,7 @@ const EachPopularCityMore = (prop) => {
                 </div>
             </div>
             <div style={{display: "flex", justifyContent: "space-between", padding: "0 10px", paddingBottom: 4, marginBottom: 5, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                <div style={{textAlign: "initial", color: "rgb(174, 101, 0)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                <div  onClick={()=>document.getElementById(("each_more_popular_city_popup_"+city.city)).style.display="block"} style={{textAlign: "initial", color: "rgb(174, 101, 0)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                     {city.city} - <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.8)"}}>
                     1h 40m, $160</span>
                     

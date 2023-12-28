@@ -1061,7 +1061,8 @@ footer {
   border-radius: 20px;
   padding: 0;
   width: 400px;
-  margin-left: -125px;
+  /*margin-left: -125px;*/
+  margin-left: 0;
   overflow: hidden;
 }
 .speech-bubble-bottom:after {
