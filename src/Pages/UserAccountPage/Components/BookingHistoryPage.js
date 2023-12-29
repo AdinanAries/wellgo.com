@@ -81,13 +81,13 @@ const BookingHistoryPage = (props) => {
                             </div>
                         }{
                             (bookings.length > 0) && bookings.slice(begin, end).map(each =>(
-                                <div style={{display: "block", borderBottom: "1px solid rgba(0,0,0,0.1)", padding: 10}}>
+                                <div style={{display: "block", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         {each.takeoff_city} ({each.takeoff_airport_code}) - {each.destination_city} ({each.destination_airport_code})</p>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
                                         {get_date_format_DAYMMMDDYYYY(each.departure_date)} - {get_date_format_DAYMMMDDYYYY(each.return_date)}</p>
-                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, marginTop: "10px", color: "rgba(0,0,0,0.6)"}}>
+                                    <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, color: "rgb(199, 81, 185)"}}>
                                         view more ...
                                     </p>
                                 </div>

@@ -791,7 +791,7 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 10px;
   overflow: auto;
-  padding-bottom: 80px;
+  padding-bottom: 150px;
 }
 .selected_ticket_book_btn_container {
   position: fixed;
@@ -1656,6 +1656,9 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
+  #search_results_mobile_top_itin_display{
+    margin-top: -40px;
+  }
   .mobile-remove-border-radius {
     border-radius: 0 !important;
   }
@@ -1690,6 +1693,7 @@ footer {
   .each_more_popular_city_popup{
     margin-left: 0;
     width: calc(100vw - 12px);
+    max-width: 500px;
   }
   .each_more_popular_city:hover .each_more_popular_city_popup{
     
@@ -1756,8 +1760,8 @@ footer {
   }
   .user_account_page_second_child_container{
     border-left: none !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: rgba(0, 0, 0, 0.1);
+    /*border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);*/
     padding-top: 20px;
   }
   .more_popular_cities_svg_img{
@@ -1882,7 +1886,7 @@ footer {
     box-shadow: none;
   }
   #booking_start_checkout_page_container {
-    padding-bottom: 165px;
+    padding-bottom: 200px;
     z-index: 1005;
   }
   .checkout_page_main_checkout_btn {
