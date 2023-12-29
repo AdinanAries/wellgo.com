@@ -79,7 +79,7 @@ const AccountInfoPage = (props) => {
     }
 
     return (
-        <div id="user_account_main_account_pane" style={{marginTop: 20}}>
+        <div id="user_account_main_account_pane" style={{marginTop: 10}}>
             {
                 isLoading && <FullPageLoader />
             }
@@ -182,7 +182,8 @@ const AccountInfoPage = (props) => {
                         Save
                     </div>
                 </div>
-                <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", textAlign: "center", fontSize: 15, borderRadius: 6, padding: 14, color: "white", backgroundColor: "rgb(23, 87, 148)", boxShadow: "1px 2px 3px rgba(0,0,0,0.33)"}}>
+                <p style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 14, color: "blue", textDecoration: "underline"}}>
+                    <i class="fa-solid fa-wallet" style={{marginRight: 10}}></i>
                     Frequent Flyer and Membership</p>
             </div>
         </div>

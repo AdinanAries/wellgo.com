@@ -138,9 +138,9 @@ const PassportsPage = (props) => {
                                 />
                             </div>
                         }
-                        <div onClick={show_add_new_passport_form} style={{marginTop: 10, padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 9, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
+                        <div onClick={show_add_new_passport_form} style={{width: 170,marginTop: 10, padding: 14, cursor: "pointer", background: "rgb(23, 87, 148)", color: "white", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.33)", textAlign: "center"}}>
                             <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)"}} className="fa fa-plus"></i>
-                            Add New Passport
+                            Add Passport
                         </div>
                         <PassportsForm
                             stateChange={passportFormStateChangeWrapper}
