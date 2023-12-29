@@ -185,7 +185,8 @@ function SearchForm( props ){
             </div>
             <div>
                 <div className="two-search-inputs-container">
-                    <div style={{display: "flex", width: "65%"}}>
+                    <div className="search_page_search_form_origin_destination_inputs_container" 
+                        style={{display: "flex", width: "65%"}}>
                         <div style={{position: "relative", width: "calc(50% - 5px)"}} className="search_forms_from_where_input_fld_container">
                             <div id="sp_from_where_airports_auto_complete_input" className="airports_inputs_with_auto_complete" style={{zIndex: 10}}>
                                 <p onClick={() => {
@@ -271,7 +272,7 @@ function SearchForm( props ){
                             </div>
                         </div>
                     </div>
-                    <div style={{width: "40%", marginRight: 10}}>
+                    <div className="search_page_form_dates_input_container" style={{width: "40%", marginRight: 10}}>
                         <div style={{width: "100%"}}>
                             <div className="main-search_txt_input search_page_input">
                                 <i style={{fontSize: 20, marginRight: 5}} className="fa fa-calendar-o"></i>
