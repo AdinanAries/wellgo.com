@@ -198,7 +198,8 @@ function UserAccountPage(props){
                             </div>
                         </div> :
                         <div>
-                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, marginBottom: 15, marginRight: 10, maxWidth: 430}}>
+                            <div className="user_account_main_top_menu_container"
+                                style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 20, paddingRight: 10, maxWidth: 430}}>
                                 <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} 
                                     style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
                                     <div style={{display: "flex", alignItems: "center"}}>

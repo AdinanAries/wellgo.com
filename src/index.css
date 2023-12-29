@@ -1656,6 +1656,10 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
+  .user_account_main_top_menu_container {
+    background-color: white;
+    padding-bottom: 15px;
+  }
   #search_results_mobile_top_itin_display{
     margin-top: -40px;
   }
@@ -1753,6 +1757,7 @@ footer {
     margin: 0;
     border-radius: 0;
     padding: 0;
+    box-shadow: none;
   }
   .user_account_page_each_child_container{
     width: 100%;
