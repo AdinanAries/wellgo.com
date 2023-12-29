@@ -48,7 +48,7 @@ export default function ExploreDestinations(props){
                                 &#8226; AI Travel Assistant &#8226;</p>
                         </div>
                         <div>
-                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)",border: "1px solid rgba(255,255,255,0.5)", height: 70, maxWidth: 550, margin: "auto", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ zIndex: 5}}>
+                            <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)", /*border: "1px solid rgba(255,255,255,0.5)",*/ height: 70, maxWidth: 550, margin: "auto", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ zIndex: 5}}>
                                 <div id="landing_page_search_input_text_display_container" style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                     <div id="landing_page_search_form_bar_bot_img" style={{position: "relative", zIndex: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "white", margin: 10, width: 55, height: 50, borderRadius: "100%"}}>
                                         <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>

@@ -20,7 +20,7 @@ const HeroMainMenu = (props) => {
     }
 
     return (
-        <div style={{position: "relative", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10, marginBottom: 40}}>
+        <div style={{position: "relative", /*border: "1px solid rgba(255,255,255,0.07)",*/ borderRadius: 10, marginBottom: 30}}>
             <div style={{display: "flex", justifyContent: "center"}}>
                 <div className="flights_hero_menu_item main" onClick={show_full_search_form} style={{cursor: "pointer", textAlign: "center", color: "#d66aca", fontSize: 14, borderBottom: "3px solid #d66aca", padding: "20px 10px", fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10}} className="fa-solid fa-plane-departure"></i>
