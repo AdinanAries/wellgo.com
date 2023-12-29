@@ -96,6 +96,8 @@ const PaymentCardsPage = (props) => {
     let end = begin + pagination.PAGE_SIZE;
     return (
         <div id="user_account_main_payment_pane" style={{display: "none", marginTop: 10}}>
+            <p style={{fontWeight: "bolder", fontSize: 14, color: "rgba(0,0,0,0.7)", marginBottom: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                Debit/Credit Cards</p>
             {isLoading && 
                 <div style={{marginBottom: 20, padding: "20px"}}>
                     <div style={{backgroundImage: `url(${loading_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>

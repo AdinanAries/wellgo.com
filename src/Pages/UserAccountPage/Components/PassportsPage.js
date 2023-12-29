@@ -89,6 +89,8 @@ const PassportsPage = (props) => {
     let end = begin + pagination.PAGE_SIZE;
     return (
         <div id="user_account_main_passports_pane" style={{display: "none", marginTop: 10}}>
+            <p style={{fontWeight: "bolder", fontSize: 14, color: "rgba(0,0,0,0.7)", marginBottom: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                Travel Passports</p>
             {   
                 isPassportsLoading ? <div style={{marginBottom: 20, padding: "20px"}}>
                         <div style={{backgroundImage: `url(${loading_icon})`, backgroundSize: "contain", backgroundRepeat: "no-repeat", width: 150, height: 150, margin: "auto"}}></div>

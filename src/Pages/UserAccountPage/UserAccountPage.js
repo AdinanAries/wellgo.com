@@ -197,70 +197,100 @@ function UserAccountPage(props){
                                     RELOAD PAGE</p>
                             </div>
                         </div> :
-                        <div className="user_account_page_container">
-                            <div className="user_account_page_each_child_container">
-                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", borderBottom: "1px solid rgba(0,0,0,0.1)", paddingBottom: 5, marginBottom: 10}}>
-                                    <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                            <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-user"></i>
-                                            Account</p>
-                                    </div>
-                                    <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_payment_pane();ShowPaymentCards();}} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer", borderRight: "1px solid rgba(0,0,0,0.1)"}}>
-                                        <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                            <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-credit-card"></i>
-                                            Payments</p>
-                                    </div>
-                                    <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_passport_pane();ShowPassports();}} style={{display: "flex", flexDirection: "column", justifyContent: "center", width: "33%", height: 40, cursor: "pointer",}}>
-                                        <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                            <i style={{color: "#c751b9", marginRight: 10}} className="fa fa-book"></i>
-                                            Passports</p>
+                        <div>
+                            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, marginBottom: 10, marginRight: 10, maxWidth: 430}}>
+                                <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} 
+                                    style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
+                                    <div style={{display: "flex", alignItems: "center"}}>
+                                        <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
+                                            <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-user"></i>
+                                        </p>
+                                        <div>
+                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                                                User</p>
+                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                Your Account</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <AccountInfoPage
-                                    logoutOnclick={logoutOnclick}
-                                    user={user} 
-                                    show_edit_profile_form={show_edit_profile_form}
-                                    setEditDOB={setEditDOB}
-                                    setEditGender={setEditGender}
-                                    editDOB={editDOB}
-                                    editGender={editGender}
-                                    userForm={userForm}
-                                    setUserForm={setUserForm}
-                                    updateUserOnSubmit={updateUserOnSubmit}
-                                />
-                                <PaymentCardsPage 
-                                    SubmitEditPaymentCard={SubmitEditPaymentCard}
-                                    AddPaymentCard={AddPaymentCard}
-                                    DeletePaymentCard={DeletePaymentCard}
-                                    isLoading={isPaymentCardsLoading}
-                                    payments={payments}
-                                    card_not_found={card_not_found} 
-                                    show_more_payment_method_info={show_more_payment_method_info}
-                                    hide_more_payment_method_info={hide_more_payment_method_info}
-                                    show_add_new_payment_form={show_add_new_payment_form}
-                                />
-                                <PassportsPage 
-                                    SubmitEditPassport={SubmitEditPassport}
-                                    AddPassport={AddPassport}
-                                    DeletePassport={DeletePassport}
-                                    isPassportsLoading={isPassportsLoading}
-                                    passports={passports}
-                                    show_more_passport_info={show_more_passport_info}
-                                    hide_more_passport_info={hide_more_passport_info}
-                                    show_add_new_passport_form={show_add_new_passport_form}
+                                <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" 
+                                    onClick={()=>{show_main_payment_pane();ShowPaymentCards();}} 
+                                    style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
+                                    <div style={{display: "flex", alignItems: "center"}}>
+                                        <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
+                                            <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-credit-card"></i>
+                                        </p>
+                                        <div>
+                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                                                Cards</p>
+                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                Debit/Credit</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_passport_pane();ShowPassports();}} 
+                                    style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
+                                    <div style={{display: "flex", alignItems: "center"}}>
+                                        <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
+                                            <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-book"></i>
+                                        </p>
+                                        <div>
+                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                                                Passports</p>
+                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                Travel Documents</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="user_account_page_container">
+                                <div className="user_account_page_each_child_container">
+                                    
+                                    <AccountInfoPage
+                                        logoutOnclick={logoutOnclick}
+                                        user={user} 
+                                        show_edit_profile_form={show_edit_profile_form}
+                                        setEditDOB={setEditDOB}
+                                        setEditGender={setEditGender}
+                                        editDOB={editDOB}
+                                        editGender={editGender}
+                                        userForm={userForm}
+                                        setUserForm={setUserForm}
+                                        updateUserOnSubmit={updateUserOnSubmit}
+                                    />
+                                    <PaymentCardsPage 
+                                        SubmitEditPaymentCard={SubmitEditPaymentCard}
+                                        AddPaymentCard={AddPaymentCard}
+                                        DeletePaymentCard={DeletePaymentCard}
+                                        isLoading={isPaymentCardsLoading}
+                                        payments={payments}
+                                        card_not_found={card_not_found} 
+                                        show_more_payment_method_info={show_more_payment_method_info}
+                                        hide_more_payment_method_info={hide_more_payment_method_info}
+                                        show_add_new_payment_form={show_add_new_payment_form}
+                                    />
+                                    <PassportsPage 
+                                        SubmitEditPassport={SubmitEditPassport}
+                                        AddPassport={AddPassport}
+                                        DeletePassport={DeletePassport}
+                                        isPassportsLoading={isPassportsLoading}
+                                        passports={passports}
+                                        show_more_passport_info={show_more_passport_info}
+                                        hide_more_passport_info={hide_more_passport_info}
+                                        show_add_new_passport_form={show_add_new_passport_form}
+                                    />
+                                </div>
+                                <BookingHistoryPage
+                                    isLoading={isBookingHistoryLoading}
+                                    ShowBookingHistory={ShowBookingHistory}
+                                    toggle_show_booking_history_filters={toggle_show_booking_history_filters}
+                                    hide_booking_history_filters={hide_booking_history_filters}
+                                    bookings={bookings}
+                                    show_booking_history_more_info_pane={show_booking_history_more_info_pane}
+                                    nothing_found_icon={nothing_found_icon}
                                 />
                             </div>
-                            <BookingHistoryPage
-                                isLoading={isBookingHistoryLoading}
-                                ShowBookingHistory={ShowBookingHistory}
-                                toggle_show_booking_history_filters={toggle_show_booking_history_filters}
-                                hide_booking_history_filters={hide_booking_history_filters}
-                                bookings={bookings}
-                                show_booking_history_more_info_pane={show_booking_history_more_info_pane}
-                                nothing_found_icon={nothing_found_icon}
-                            />
                         </div>
-                        
                     }
                 </>
             }

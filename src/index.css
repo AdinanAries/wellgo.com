@@ -615,9 +615,11 @@ footer {
   border-radius: 9px;
   overflow: hidden;
 }
-.user_account_pane_main_menu_item.active{
-  background-color: rgba(0,0,0,0.1);
-  border: 1px solid rgba(0,0,0,0.1);
+.user_account_pane_main_menu_item.active ._icon {
+  background:  #bd3cae !important;
+}
+.user_account_pane_main_menu_item.active ._icon i{
+  color: white !important;
 }
 .forms_class_guests_cabin_settings_pane {
   top: 0;
