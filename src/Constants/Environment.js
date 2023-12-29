@@ -4,7 +4,8 @@ import { create_anonymous_user_id } from "../helpers/general";
 const ENVIRONMENT = {
     data_provider: "DUFFEL",
     wellgo_api_svr: "",
-    wellgo_dev_api_svr: "http://localhost:4000",
+    //wellgo_dev_api_svr: "http://localhost:4000",
+    wellgo_dev_api_svr: "https://wellgo-backend-a2628ce79736.herokuapp.com",
     runtime: {
         env: "DEVELOPMENT"
     }
