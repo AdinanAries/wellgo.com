@@ -245,13 +245,16 @@ const SelectedTicketInfo = (props) => {
                     {CHANGES_INFO}
                 </div>
                 <div className="selected_ticket_book_btn_container">
-                    <div onClick={()=>{
-                            props.begin_checkout(data);
-                            setTimeout(()=>{
-                                global.__unselectFlightOffer();
-                                global.hide_selected_ticket_details_pane();
-                            },300);
-                        }/*()=>global.show_start_checkout_page(`${global.stringify_obj_for_template_strings(global.checkout_obj)}`)*/} className="selected_ticket_book_btn">
+                    <div onClick={
+                            ()=>{
+                                props.begin_checkout(data);
+                                setTimeout(()=>{
+                                    global.__unselectFlightOffer();
+                                    global.hide_selected_ticket_details_pane();
+                                },300);
+                            }
+                            /*()=>global.show_start_checkout_page(`${global.stringify_obj_for_template_strings(global.checkout_obj)}`)*/
+                        } className="selected_ticket_book_btn">
                         <i style={{marginRight: 10, color: "rgba(255,255,255,0.5)", fontSize: 19}} className="fa fa-check-square-o" aria-hidden="true"></i>
                         Book
                     </div>
