@@ -22,7 +22,6 @@ function SearchForm( props ){
             flight_search_data.itinerary.arrival.date
         );
         sp_select_cabin_type(flight_search_data.itinerary.cabin.toLowerCase());
-        // Temporaty variables for loop
         const travelers={};
         travelers.adults=flight_search_data.itinerary.travelers.adults;
         travelers.children=flight_search_data.itinerary.travelers.children;
