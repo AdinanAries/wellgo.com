@@ -16,17 +16,19 @@ function SearchForm( props ){
             flight_search_data.itinerary.arrival.date
         );
         AutoCompleteInit();
-        // Rest cabin, travelers
         sp_select_trip_round(
             flight_search_data.type,
             flight_search_data.itinerary.departure.date,
             flight_search_data.itinerary.arrival.date
         );
         sp_select_cabin_type(flight_search_data.itinerary.cabin.toLowerCase());
-        flight_search_data.itinerary.travelers.adults = 1;
-        flight_search_data.itinerary.travelers.children = 0;
-        flight_search_data.itinerary.travelers.infants = 0;
-        window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+        // Temporaty variables for loop
+        const travelers={};
+        travelers.adults=flight_search_data.itinerary.travelers.adults;
+        travelers.children=flight_search_data.itinerary.travelers.children;
+        travelers.infants=flight_search_data.itinerary.travelers.infants;
+        sp_set_default_travelers(travelers);
+        
     },[]);
 
     const isAllSearchInputsSet = () => {
@@ -457,12 +459,12 @@ function sp_select_trip_round(type="one-way", start_date="", end_date=""){
 }
 
 let travelers = {
-    adults: 1,
+    adults: 0,
     children: 0,
     infants: 0,
 }
 function sp_add_traveler(type="adult"){
-
+    
     if((travelers.adults + travelers.children + travelers.infants) > 14){
         alert("only maximum of 15 travelers allowed")
         return;
@@ -548,6 +550,9 @@ function sp_remove_traveler(type="adult"){
     }
 
     if(type === "adult"){
+        if((travelers.adults-1)<0){
+            return;
+        }
         travelers.adults -= 1;
         if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -602,8 +607,10 @@ function sp_remove_traveler(type="adult"){
 
         document.getElementById("sp_add_travelers_display_adults_number").innerHTML = travelers.adults;
     }else if(type === "child"){
+        if((travelers.children-1)<0){
+            return;
+        }
         travelers.children -= 1;
-
         if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
@@ -659,8 +666,10 @@ function sp_remove_traveler(type="adult"){
 
         document.getElementById("sp_add_travelers_display_children_number").innerHTML = travelers.children;
     }else if(type === "infant"){
+        if((travelers.infants-1)<0){
+            return;
+        }
         travelers.infants -= 1;
-
         if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
@@ -721,6 +730,87 @@ function sp_remove_traveler(type="adult"){
     flight_search_data.itinerary.travelers.adults = travelers.adults;
     flight_search_data.itinerary.travelers.children = travelers.children;
     flight_search_data.itinerary.travelers.infants = travelers.infants;
+    window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+}
+
+function sp_set_default_travelers(travelers_p){
+
+    document.getElementById("sp_add_travelers_display_adults_number").innerHTML="0";
+    document.getElementById("sp_add_travelers_display_children_number").innerHTML="0";
+    document.getElementById("sp_add_travelers_display_infants_number").innerHTML="0";
+
+    travelers=travelers_p;
+
+    if((travelers_p.adults + travelers_p.children + travelers_p.infants) > 14){
+        alert("only maximum of 15 travelers allowed")
+        return;
+    }
+
+    if(travelers_p?.adults>0){
+        if(travelers_p.adults > 1 && travelers_p.infants === 0 && travelers_p.children === 0){
+            document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers_p.adults} Adults
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
+        }else{
+            (travelers_p.adults + travelers_p.children + travelers_p.infants) > 1 ?
+                document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers_p.adults + travelers_p.children + travelers_p.infants} Travelers
+                ` : document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers_p.adults} Adult
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
+                    `
+        }
+
+        document.getElementById("sp_add_travelers_display_adults_number").innerHTML = travelers_p.adults;
+    }
+    if(travelers_p?.children>0){
+        if(travelers_p.children > 1 && travelers_p.infants === 0 && travelers_p.adults === 0){
+            document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers_p.children} Children
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
+        }else{
+            (travelers_p.adults + travelers_p.children + travelers_p.infants) > 1 ?
+                document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers_p.adults + travelers_p.children + travelers_p.infants} Travelers
+                `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                        <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                        ${travelers_p.children} Child
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
+                    `
+        }
+        document.getElementById("sp_add_travelers_display_children_number").innerHTML = travelers_p.children;
+    }
+    if(travelers_p?.infants>0){
+        if(travelers_p.infants > 1 && travelers_p.children === 0 && travelers_p.adults === 0){
+            document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                ${travelers_p.infants} Infants
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
+        }else{
+            (travelers_p.adults + travelers_p.children + travelers_p.infants) > 1 ?
+                document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers_p.adults + travelers_p.children + travelers_p.infants} Travelers
+                `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
+                    <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
+                    ${travelers_p.infants} Infant
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
+            `
+        }
+        
+        document.getElementById("sp_add_travelers_display_infants_number").innerHTML = travelers_p.infants;
+    }
+
+    //adding current travelers setting to local storage
+    let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+    flight_search_data.itinerary.travelers.adults = travelers_p.adults;
+    flight_search_data.itinerary.travelers.children = travelers_p.children;
+    flight_search_data.itinerary.travelers.infants = travelers_p.infants;
     window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 

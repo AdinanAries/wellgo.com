@@ -14,12 +14,12 @@ function SearchForm(props){
         AutoCompleteInit();
         select_cabin_type(flight_search_data.itinerary.cabin.toLowerCase());
         select_trip_round(flight_search_data.type);
-        // Reset travelers
-        flight_search_data.itinerary.travelers.adults = 1;
-        flight_search_data.itinerary.travelers.children = 0;
-        flight_search_data.itinerary.travelers.infants = 0;
+        // // Reset travelers
+        flight_search_data.itinerary.travelers.adults=1;
+        flight_search_data.itinerary.travelers.children=0;
+        flight_search_data.itinerary.travelers.infants=0;
         window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
-
+        
     },[]);
 
     //const show_search_page=props.show_search_page;
@@ -432,7 +432,7 @@ function add_traveler(type="adult"){
     if(type === "adult"){
         travelers.adults += 1;
 
-        if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
+        if(travelers.adults > 1 && travelers.infants === 0 && travelers.children === 0){
             document.getElementById("add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                 ${travelers.adults} Adults`;
@@ -451,7 +451,7 @@ function add_traveler(type="adult"){
     }else if(type === "child"){
         travelers.children += 1;
 
-        if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
+        if(travelers.children > 1 && travelers.infants === 0 && travelers.adults === 0){
             document.getElementById("add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                 ${travelers.children} Children`;
@@ -469,7 +469,7 @@ function add_traveler(type="adult"){
     }else if(type === "infant"){
         travelers.infants += 1;
 
-        if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
+        if(travelers.infants > 1 && travelers.children === 0 && travelers.adults === 0){
             document.getElementById("add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                 ${travelers.infants} Infants`;
@@ -503,6 +503,9 @@ function remove_traveler(type="adult"){
     }
 
     if(type === "adult"){
+        if((travelers.adults-1)<0){
+            return;
+        }
         travelers.adults -= 1;
         if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
             document.getElementById("add_travelers_main_input_display").innerHTML = `
@@ -551,8 +554,10 @@ function remove_traveler(type="adult"){
 
         document.getElementById("add_travelers_display_adults_number").innerHTML = travelers.adults;
     }else if(type === "child"){
+        if((travelers.children-1)<0){
+            return;
+        }
         travelers.children -= 1;
-
         if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
             document.getElementById("add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
@@ -600,8 +605,10 @@ function remove_traveler(type="adult"){
 
         document.getElementById("add_travelers_display_children_number").innerHTML = travelers.children;
     }else if(type === "infant"){
+        if((travelers.infants-1)<0){
+            return;
+        }
         travelers.infants -= 1;
-
         if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
             document.getElementById("add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
