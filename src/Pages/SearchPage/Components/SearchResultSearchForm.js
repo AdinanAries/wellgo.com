@@ -17,18 +17,12 @@ function SearchForm( props ){
         );
         AutoCompleteInit();
         // Rest cabin, travelers
-        /*document.getElementById("sp_select_cabin_economy_chk").checked = true;
-        document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
-            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
-            Economy
-        `;*/
         sp_select_trip_round(
             flight_search_data.type,
             flight_search_data.itinerary.departure.date,
             flight_search_data.itinerary.arrival.date
         );
         sp_select_cabin_type(flight_search_data.itinerary.cabin.toLowerCase());
-        flight_search_data.itinerary.cabin = "ECONOMY";
         flight_search_data.itinerary.travelers.adults = 1;
         flight_search_data.itinerary.travelers.children = 0;
         flight_search_data.itinerary.travelers.infants = 0;
