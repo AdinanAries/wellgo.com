@@ -1928,16 +1928,18 @@ footer {
     right: 10px !important;
     top: 10px !important;
     border-radius: 100%;
-    background-color: rgb(223, 112, 112);
+    /*background-color: rgb(223, 112, 112);*/
     width: 40px;
     height: 40px;
     color: rgba(0, 0, 0, 0.6) !important;
     display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     z-index: 10;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);*/
   }
   .selected_ticket_book_btn_container {
     position: fixed;
@@ -1966,6 +1968,11 @@ footer {
   }
   #sp_search_form_submit_btn {
     margin-top: 10px !important;
+    width: 50px !important;
+    height: 50px !important;
+  }
+  #sp_search_form_submit_btn i{
+    font-size: 15px !important;
   }
   #search_results_page_search_form .two-search-inputs-container{
     padding: 0 10px;
@@ -1982,7 +1989,16 @@ footer {
     height: 40px !important;
   }
   #search_results_page_search_form {
-    
+    margin-top: -10px !important;
+  }
+  #sp_select_cabin_type_main_input_display i[class="fa fa-angle-down"]{
+    display: none !important;
+  }
+  #sp_add_travelers_main_input_display i[class="fa fa-angle-down"]{
+    display: none !important;
+  }
+  #sp_select_trip_round_main_input_display i[class="fa fa-angle-down"]{
+    display: none !important;
   }
   .search_list_main_flex_container {
     display: block;
@@ -2195,6 +2211,10 @@ footer {
     border-radius: 0 !important;
     height: calc(100vh);
     box-shadow: none;
+  }
+  #sp_from_where_airports_auto_complete_input, #sp_to_where_airports_auto_complete_input{
+    top: 60px;
+    height: calc(100vh - 60px);
   }
   .why-choose-us-container {
     margin-top: -0px;

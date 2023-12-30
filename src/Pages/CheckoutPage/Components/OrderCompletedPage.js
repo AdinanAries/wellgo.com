@@ -396,26 +396,28 @@ const OrderCompletedPage = (props) => {
     return (
         <div style={{position: "relative"}}>
             <div style={{padding: "20px 0"}}>
-                <p className="pop-up-close-btn" onClick={pickAnotherFlightOnclick} 
-                    style={{cursor: "pointer", zIndex: 1, color: "rgb(255,0,0)", fontSize: 33, position: "absolute", right: 10, top: 10}}>
-                    &times;
-                </p>
-                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
-                    <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
-                    Reference Number:
-                    <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
-                        {completedOrderDetails.booking_reference}
-                    </span>
-                </p>
-                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                    <i style={{color: "rgba(0,0,0,0.5)", marginRight: 10}}
-                        className="fa-solid fa-temperature-high"></i>
-                    New York (Thu Mar 23) -
-                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                        56°</span>
-                    <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                        | heavy rain</span>
-                </p>
+                <div style={{padding: "0 10px"}}>
+                    <p className="pop-up-close-btn" onClick={pickAnotherFlightOnclick} 
+                        style={{cursor: "pointer", zIndex: 1, color: "rgb(255,0,0)", fontSize: 33, position: "absolute", right: 10, top: 10}}>
+                        &times;
+                    </p>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
+                        <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
+                        Reference Number:
+                        <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
+                            {completedOrderDetails.booking_reference}
+                        </span>
+                    </p>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                        <i style={{color: "rgba(0,0,0,0.5)", marginRight: 10}}
+                            className="fa-solid fa-temperature-high"></i>
+                        New York (Thu Mar 23) -
+                        <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                            56°</span>
+                        <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                            | heavy rain</span>
+                    </p>
+                </div>
                 {
                     isLoading && 
                         <div style={{marginTop: 10, padding: "20px", maxWidth: 250, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8}}>
@@ -486,7 +488,7 @@ const OrderCompletedPage = (props) => {
                         </div>
                     </div> :
                     (showBookingDetails && !isLoading) && <div>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: 10}}>
                             <i style={{marginRight: 10, color: "green"}} className="fa-solid fa-check"></i>
                             Your booking has been confirmed!
                             <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 14}}>
@@ -495,13 +497,9 @@ const OrderCompletedPage = (props) => {
                         </p>
                         <div style={{padding: 10}}>
                             <div style={{display: "flex"}}>
-                                <div style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
-                                    <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plus"></i>
-                                    add ancillaries
-                                </div>
                                 <div onClick={pickAnotherFlightOnclick} style={{textAlign: "center", cursor: "pointer", marginRight: 5, padding: 10, color: "white", backgroundColor: "darkslateblue", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                                     <i style={{marginRight: 10, color: "lightblue"}} className="fa-solid fa-plane-departure"></i>
-                                    pick another flight
+                                    book another flight
                                 </div>
                                 <div onClick={goHome} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                                     <i style={{marginRight: 10, color: "yellow"}} className="fa-solid fa-home"></i>
@@ -516,7 +514,7 @@ const OrderCompletedPage = (props) => {
                                     You are not logged in...
                                 </p>
                             }
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "5px 0"}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: 10}}>
                                 See Details Below: <span onClick={window.print} style={{cursor: "pointer", color: "darkslateblue", fontFamily: "'Prompt', Sans-serif", textDecoration: "underline"}}>
                                     Click to Print</span></p>
                                 <div className="printable" style={{border: "1px dashed rgba(0,0,0,0.1)", padding: 10}}>
@@ -543,12 +541,12 @@ const OrderCompletedPage = (props) => {
                                             {TAKE_OFF_TIME}</span>
                                     </p>
                                 </div>
-                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 25}}>
                                     Flights</h1>
                                 <div>
                                     {SEGMENTS.map(each=>each)}
                                 </div>
-                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 15}}>
                                     Passengers</h1>
                                 <div>
                                     <div style={{display: "flex", flexWrap: "wrap"}}>
@@ -557,7 +555,7 @@ const OrderCompletedPage = (props) => {
                                 </div>
 
                                 <div>
-                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 15}}>
                                     Sold by</h1>
                                 <div>
                                     <div style={{marginBottom: 10}}>
@@ -579,7 +577,7 @@ const OrderCompletedPage = (props) => {
                                         }
                                     </div>
                                 </div>
-                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 25}}>
                                     Payment Details</h1>
                                 <div style={{marginBottom: 10, paddingLeft: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
@@ -596,7 +594,7 @@ const OrderCompletedPage = (props) => {
                                             dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
                                         {(markup(overallTotal).new_price).toFixed(2)}</p>
                                 </div>
-                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 25}}>
                                     Weather</h1>
                                 <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
                                     <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
@@ -622,7 +620,7 @@ const OrderCompletedPage = (props) => {
                                         </p>
                                     </div>
                                 </div>
-                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10}}>
+                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 25}}>
                                     Important Notices</h1>
                                     <div style={{padding: 10, marginBottom: 10, backgroundColor: "rgba(0,255,0,0.1)", border: "1px solid rgba(0,255,0,0.1)", borderRadius: 4}}>
                                         {IMPORTANT_NOTICES.map(each=>each)}

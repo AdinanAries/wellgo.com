@@ -138,7 +138,7 @@ const PassengerForm = (props) => {
     }
 
     return (
-        <div style={{border: "1px solid rgba(0,0,0,0.07)", padding: 10, width: "calc(100% - 22px)", borderRadius: 6}}>
+        <div style={{width: "calc(100%)"}}>
             <p>{
                 (passenger.infant_passenger_id) }</p>
             <div style={{padding: "10px 0"}}>
@@ -257,7 +257,7 @@ const PassengerForm = (props) => {
                         </div>
                     </div>
                 }
-                <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 14, padding: 10, marginTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+                <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 14, padding: 10, marginTop: 20}}>
                     TRAVEL DOCUMENT</p>
                 <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>

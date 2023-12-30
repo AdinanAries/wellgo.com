@@ -209,7 +209,8 @@ const SelectedTicketInfo = (props) => {
                             </p>
                             <SelectedTicketItinSegments element_id="see_ticket_details_itinerary_details" segments={slices[0].segments}/>
                         </div>
-                        <p className="pop-up-close-btn" onClick={()=>{global.hide_selected_ticket_details_pane(); props.unselectFlightOffer();}} style={{cursor: "pointer", color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
+                        <p className="pop-up-close-btn" onClick={()=>{global.hide_selected_ticket_details_pane(); props.unselectFlightOffer();}} 
+                            style={{cursor: "pointer", color: "rgba(0,0,0,0.6)", border: "1px solid rgba(0,0,0,0.1)", width: 40, height: 40, borderRadius: "100%", fontSize: 22, marginRight: 5, display: "flex", justifyContent: "center", alignItems: "center"}}>
                             &times;
                         </p>
                     </div>
