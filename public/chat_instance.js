@@ -1,7 +1,7 @@
 let wellgo_bot = window.virtual_assistant.state;
 const BOT_STEPS = window.virtual_assistant.steps.names;
-let bot_server_base_url = "http://localhost:5001";
-//let bot_server_base_url = "https://wellgo-vta.herokuapp.com";
+//let bot_server_base_url = "http://localhost:5001";
+let bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 window.BOT_STEPS=BOT_STEPS;
 window.wellgo_bot=wellgo_bot;
 
