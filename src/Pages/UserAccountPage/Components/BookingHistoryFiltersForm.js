@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DateChoosersInit from "../../../helpers/DateChoosersInit";
+import { BhDateChoosersInit } from "../../../helpers/DateChoosersInit";
 import CONSTANTS from "../../../Constants/Constants";
 
 const BookingHistoryFiltersForm = (props) => {
@@ -30,9 +30,9 @@ const BookingHistoryFiltersForm = (props) => {
 
     const setFilterTripType = (e) => {
         if(e.target.value!=="*"){
-            DateChoosersInit(e.target.value);
+            BhDateChoosersInit(e.target.value);
         }else{
-            DateChoosersInit(CONSTANTS.one_way);
+            BhDateChoosersInit(CONSTANTS.one_way);
         }
         setFiltersForm({
             ...filtersForm,
@@ -48,7 +48,7 @@ const BookingHistoryFiltersForm = (props) => {
     }
 
     useEffect(()=>{
-        DateChoosersInit();
+        BhDateChoosersInit();
     }, []);
 
     return (

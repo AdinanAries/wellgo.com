@@ -9,15 +9,12 @@ import CONSTANTS from "../../../Constants/Constants";
 function SearchForm(props){
 
     useEffect(()=>{
-        DateChoosersInit();
-        AutoCompleteInit();
-
-        // Reset cabin type
-        select_cabin_type("economy");
-        // Reset trip round
-        select_trip_round("one-way");
-        // Reset travelers
         let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+        DateChoosersInit(flight_search_data.type.toUpperCase());
+        AutoCompleteInit();
+        select_cabin_type(flight_search_data.itinerary.cabin.toLowerCase());
+        select_trip_round(flight_search_data.type);
+        // Reset travelers
         flight_search_data.itinerary.travelers.adults = 1;
         flight_search_data.itinerary.travelers.children = 0;
         flight_search_data.itinerary.travelers.infants = 0;

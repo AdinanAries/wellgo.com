@@ -40,26 +40,8 @@ const SearchPageMain = (props) => {
             else
                 setFlights([]);
             setLoading(false);
-            // Rest cabin, round, travelers
-            let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
-            document.getElementById("sp_select_cabin_economy_chk").checked = true;
-            document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
-                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
-                Economy
-            `;
-            document.getElementById("sp_trip_round_one_way_chk").checked = true;
-            document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
-                <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
-                One-way
-            `;
-            flight_search_data.type = "one-way";
-            flight_search_data.itinerary.cabin = "ECONOMY";
-            flight_search_data.itinerary.travelers.adults = 1;
-            flight_search_data.itinerary.travelers.children = 0;
-            flight_search_data.itinerary.travelers.infants = 0;
-            window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
         })();
-    },[])
+    }, [])
 
     const SEARCH_OBJ=JSON.parse(localStorage.getItem(CONSTANTS.local_storage.flight_search_object));
     if(flights.length>0){

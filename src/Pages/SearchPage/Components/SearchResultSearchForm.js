@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import AutoCompleteInit from "../../../helpers/AutoCompleteInit";
-import DateChoosersInit from "../../../helpers/DateChoosersInit";
+import { SpDateChoosersInit } from "../../../helpers/DateChoosersInit";
 import CONSTANTS from "../../../Constants/Constants";
 
 import { show_search_page } from "../../../helpers/PageRoutingFuncs";
@@ -9,8 +9,30 @@ import { show_search_page } from "../../../helpers/PageRoutingFuncs";
 function SearchForm( props ){
 
     useEffect(()=>{
-        DateChoosersInit();
+        let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+        SpDateChoosersInit(
+            flight_search_data.type.toUpperCase(),
+            flight_search_data.itinerary.departure.date,
+            flight_search_data.itinerary.arrival.date
+        );
         AutoCompleteInit();
+        // Rest cabin, travelers
+        /*document.getElementById("sp_select_cabin_economy_chk").checked = true;
+        document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
+            <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
+            Economy
+        `;*/
+        sp_select_trip_round(
+            flight_search_data.type,
+            flight_search_data.itinerary.departure.date,
+            flight_search_data.itinerary.arrival.date
+        );
+        sp_select_cabin_type(flight_search_data.itinerary.cabin.toLowerCase());
+        flight_search_data.itinerary.cabin = "ECONOMY";
+        flight_search_data.itinerary.travelers.adults = 1;
+        flight_search_data.itinerary.travelers.children = 0;
+        flight_search_data.itinerary.travelers.infants = 0;
+        window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
     },[]);
 
     const isAllSearchInputsSet = () => {
@@ -361,6 +383,7 @@ function sp_select_cabin_type(type="economy"){
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             Cheapest
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.itinerary.cabin = "LCC";
     }else if(type === "economy"){
@@ -368,6 +391,7 @@ function sp_select_cabin_type(type="economy"){
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             Economy
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.itinerary.cabin = "ECONOMY";
     }else if(type === "premium"){
@@ -375,6 +399,7 @@ function sp_select_cabin_type(type="economy"){
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             Premium
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.itinerary.cabin = "PREMIUM";
     }else if(type === "business"){
@@ -382,6 +407,7 @@ function sp_select_cabin_type(type="economy"){
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="font-size: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             Business
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.itinerary.cabin = "BUSINESS";
     }else if(type === "first"){
@@ -389,13 +415,14 @@ function sp_select_cabin_type(type="economy"){
         document.getElementById("sp_select_cabin_type_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-level-up"></i>
             First
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.itinerary.cabin = "FIRST";
     }
     window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 }
 
-function sp_select_trip_round(type="one-way"){
+function sp_select_trip_round(type="one-way", start_date="", end_date=""){
     let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
 
     Array.from(document.getElementsByClassName("sp_select_trip_round_chk")).forEach( each=> {
@@ -406,9 +433,10 @@ function sp_select_trip_round(type="one-way"){
         document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
             Round-trip
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.type = "round-trip";
-        DateChoosersInit(CONSTANTS.round_trip);
+        SpDateChoosersInit(CONSTANTS.round_trip, start_date, end_date);
         if(document.getElementById("sp_departure_return_dates_input"))
             document.getElementById("sp_departure_return_dates_input").placeholder="departure - return";
     }else if(type === "one-way"){
@@ -416,9 +444,10 @@ function sp_select_trip_round(type="one-way"){
         document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
             <i style="font-size: 15px; margin-right: 10px" class="fa fa-repeat"></i>
             One-way
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.type = "one-way";
-        DateChoosersInit(CONSTANTS.one_way);
+        SpDateChoosersInit(CONSTANTS.one_way, start_date, end_date);
         if(document.getElementById("sp_departure_return_dates_input"))
             document.getElementById("sp_departure_return_dates_input").placeholder="departure";
     }else if(type === "multi-city"){
@@ -426,6 +455,7 @@ function sp_select_trip_round(type="one-way"){
         document.getElementById("sp_select_trip_round_main_input_display").innerHTML = `
             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-repeat"></i>
             Multi-city
+            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
         `;
         flight_search_data.type = "multi-city";
     }
@@ -450,7 +480,8 @@ function sp_add_traveler(type="adult"){
         if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                ${travelers.adults} Adults`;
+                ${travelers.adults} Adults
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
         }else{
             (travelers.adults + travelers.children + travelers.infants) > 1 ?
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -459,6 +490,7 @@ function sp_add_traveler(type="adult"){
                 ` : document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.adults} Adult
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                     `
         }
 
@@ -469,7 +501,8 @@ function sp_add_traveler(type="adult"){
         if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                ${travelers.children} Children`;
+                ${travelers.children} Children
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
         }else{
             (travelers.adults + travelers.children + travelers.infants) > 1 ?
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -478,6 +511,7 @@ function sp_add_traveler(type="adult"){
                 `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.children} Child
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                     `
         }
             document.getElementById("sp_add_travelers_display_children_number").innerHTML = travelers.children;
@@ -487,7 +521,8 @@ function sp_add_traveler(type="adult"){
         if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                ${travelers.infants} Infants`;
+                ${travelers.infants} Infants
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
         }else{
             (travelers.adults + travelers.children + travelers.infants) > 1 ?
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -496,6 +531,7 @@ function sp_add_traveler(type="adult"){
                 `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                     ${travelers.infants} Infant
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
             `
         }
         
@@ -522,7 +558,8 @@ function sp_remove_traveler(type="adult"){
         if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                ${travelers.adults} Adults`;
+                ${travelers.adults} Adults
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
         }else if(travelers.adults < 1 && travelers.infants > 0 && travelers.children == 0){
             if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -536,13 +573,15 @@ function sp_remove_traveler(type="adult"){
                     `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.infants} Infant
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                 `
             }
         }else if(travelers.adults < 1 && travelers.infants == 0 && travelers.children > 0){
             if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                    ${travelers.children} Children`;
+                    ${travelers.children} Children
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
             }else{
                 (travelers.adults + travelers.children + travelers.infants) > 1 ?
                     document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -551,6 +590,7 @@ function sp_remove_traveler(type="adult"){
                     `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                             ${travelers.children} Child
+                            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                         `
             }
         }else{
@@ -558,9 +598,11 @@ function sp_remove_traveler(type="adult"){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                     ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                 ` : document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.adults} Adult
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                     `
         }
 
@@ -571,35 +613,42 @@ function sp_remove_traveler(type="adult"){
         if(travelers.children > 1 && travelers.infants == 0 && travelers.adults == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                ${travelers.children} Children`;
+                ${travelers.children} Children
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
         }else if(travelers.adults == 0 && travelers.infants > 0 && travelers.children < 1){
             if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                    ${travelers.infants} Infants`;
+                    ${travelers.infants} Infants
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
             }else{
                 (travelers.adults + travelers.children + travelers.infants) > 1 ?
                     document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.adults + travelers.children + travelers.infants} Travelers
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                     `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.infants} Infant
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                 `
             }
         }else if(travelers.adults > 0 && travelers.infants == 0 && travelers.children < 1){
             if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                    ${travelers.adults} Adults`;
+                    ${travelers.adults} Adults
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
             }else{
                 (travelers.adults + travelers.children + travelers.infants) > 1 ?
                     document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.adults + travelers.children + travelers.infants} Travelers
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                     ` : document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                             ${travelers.adults} Adult
+                            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                         `
             }
         }else{
@@ -610,6 +659,7 @@ function sp_remove_traveler(type="adult"){
                 `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.children} Child
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                     `
         }
 
@@ -620,12 +670,14 @@ function sp_remove_traveler(type="adult"){
         if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
             document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                 <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                ${travelers.infants} Infants`;
+                ${travelers.infants} Infants
+                <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
         }else if(travelers.adults == 0 && travelers.infants < 1 && travelers.children > 0){
             if(travelers.infants > 1 && travelers.children == 0 && travelers.adults == 0){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                    ${travelers.infants} Infants`;
+                    ${travelers.infants} Infants
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
             }else{
                 (travelers.adults + travelers.children + travelers.infants) > 1 ?
                     document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -634,13 +686,15 @@ function sp_remove_traveler(type="adult"){
                     `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                         <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                         ${travelers.infants} Infant
+                        <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                 `
             }
         }else if(travelers.adults > 0 && travelers.infants < 1 && travelers.children == 0){
             if(travelers.adults > 1 && travelers.infants == 0 && travelers.children == 0){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
-                    ${travelers.adults} Adults`;
+                    ${travelers.adults} Adults
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>`;
             }else{
                 (travelers.adults + travelers.children + travelers.infants) > 1 ?
                     document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
@@ -649,6 +703,7 @@ function sp_remove_traveler(type="adult"){
                     ` : document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                             <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                             ${travelers.adults} Adult
+                            <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                         `
             }
         }else{
@@ -656,9 +711,11 @@ function sp_remove_traveler(type="adult"){
                 document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                     ${travelers.adults + travelers.children + travelers.infants} Travelers
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
                 `: document.getElementById("sp_add_travelers_main_input_display").innerHTML = `
                     <i style="fontSize: 15px; margin-right: 10px" class="fa fa-user"></i>
                     ${travelers.infants} Infant
+                    <i style={{marginLeft: 10, color: "rgb(43, 52, 61)"}} className="fa fa-angle-down"></i>
             `
         }
         
