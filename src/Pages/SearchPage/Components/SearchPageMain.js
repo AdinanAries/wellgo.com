@@ -54,7 +54,7 @@ const SearchPageMain = (props) => {
     }, []);
 
     return (
-        <main>
+        <main style={{background: "white"}}>
             <div className="wrapper">
                 <div style={{paddingTop: 90}}>
                     <SearchResultSearchForm submitFromSearchPage={submitFromSearchPage} />

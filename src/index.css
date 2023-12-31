@@ -415,7 +415,7 @@ footer {
 }
 .search_page_input{
   box-shadow: none !important;
-  /*border: 1px solid rgba(0,0,0,0.15) !important;*/
+  border: 1px solid rgba(0,0,0,0.1) !important;
 }
 .main-search_txt_input input[type="text"],
 .main-search_txt_input input[type="number"] {
@@ -429,6 +429,10 @@ footer {
 }
 .main-search_txt_input i {
   color: rgb(37, 55, 63);
+}
+.search_page_input input[type="text"],
+.search_page_input input[type="number"] {
+  font-size: 14px !important;
 }
 .searchBtn {
   border-radius: 50px;
@@ -1656,7 +1660,7 @@ footer {
 
 @media screen and (max-width: 1000px) {
   .cm-toggle {
-    margin-right: 20px !important;
+    margin-right: 25px !important;
   }
   .user_account_main_top_menu_container {
     background-color: white;
@@ -2627,7 +2631,7 @@ path {
 	left: 0;
 	top: -3px;
 	border-radius: 50%;
-	background: rgb(255, 255, 255);
+	background: rgb(23, 87, 148);
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
@@ -2638,7 +2642,8 @@ path {
 }
 /* Background color when toggle button will be active */
 .cm-toggle:checked:after {
-	background: #16a085;
+	/*background: #16a085;*/
+  background: #2dacd3;
 }
 
 /* Transition for smoothness */

@@ -298,7 +298,7 @@ function SearchForm( props ){
                         </div>
                     </div>
                     <div style={{}}>
-                        <div onClick={searchOnSubmit} id="sp_search_form_submit_btn" style={{width: 70, height: 70, marginTop: -10, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}} className="searchBtn">
+                        <div onClick={searchOnSubmit} id="sp_search_form_submit_btn" style={{width: 55, height: 55, marginTop: -5, display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}} className="searchBtn">
                             <i className="fa fa-search" style={{fontSize: 20, color: "rgba(255,255,255,0.4)"}}></i>
                         </div>
                     </div>
