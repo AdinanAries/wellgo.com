@@ -121,6 +121,18 @@
 .page-popup-cover-close-btn:hover{
   background-color: rgba(0, 0, 0, 0.1);
 }
+.classic_popup_pane {
+  position: absolute;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  min-width: 300px;
+  min-height: 300px;
+  top: calc(100% + 5px);
+  right: 0;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+  z-index: 101;
+}
 input:focus, select:focus, textarea:focus {
   outline: none;
 }
@@ -2749,4 +2761,8 @@ body input[type=range]::-ms-thumb {
 }
 body input[type=range]::-ms-thumb:active {
   cursor: grabbing;
+}
+
+.hover_bg-grey:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
 }

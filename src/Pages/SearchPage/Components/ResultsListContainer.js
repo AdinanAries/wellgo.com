@@ -10,6 +10,9 @@ import SearchFiltersLoader from "./SearchFiltersLoader";
 import MobileItinTopInfo from "./MobileItinTopInfo";
 import MobileItinTopInfoLoader from "./MobileItinTopInfoLoader";
 import Ads from "./Ads";
+import FlightPricesGrid from "./FlightPricesGrid";
+import DurationFilter from "./DurationFilter";
+import BagsFilter from "./BagsFilter";
 import { markup } from "../../../helpers/Prices";
 import { duffelStopsAndPrices, duffelAirlinesAndPrices, getMinAndMaxPrice, filterByMaxPrice } from "../../../helpers/FlightsFilterHelpers";
 import { useEffect, useState } from "react";
@@ -77,6 +80,33 @@ export default function ResultsListContainer(props){
     const [ flightsMaxPrice, setFlightsMaxPrice ] = useState(0);
     const [ flightsSliderMaxPrice, setFlightsSliderMaxPrice ] = useState(0);
     const [ SLIDER_MIN_PERCENT, setSliderMinPercent ] = useState(0);
+    const [ isShowPriceGrid, setIsShowPriceGrid ] = useState(false);
+    const [ isShowBagsFilter, setIsShowBagsFilter ] = useState(false);
+    const [ isShowDurationFilter, setIsShowDurationFilter ] = useState(false);
+
+    const showPricesGrid = () => {
+        setIsShowPriceGrid(true);
+    }
+
+    const hidePricesGrid = () => {
+        setIsShowPriceGrid(false);
+    }
+
+    const showBagsFilter = () => {
+        setIsShowBagsFilter(true);
+    }
+
+    const hideBagsFilter = () => {
+        setIsShowBagsFilter(false);
+    }
+
+    const showDurationFilter = () => {
+        setIsShowDurationFilter(true);
+    }
+
+    const hideDurationFilter = () => {
+        setIsShowDurationFilter(false);
+    }
 
     useEffect(()=>{
         const PRICE_RANGE = getMinAndMaxPrice(props.flights);
@@ -209,28 +239,50 @@ export default function ResultsListContainer(props){
                                                     value={priceSlider} type="range" />
                                             </div>
                                             <div style={{marginLeft: 20, display: "flex"}}>
-                                                <div className="mobile_hidden" style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
-                                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                                        Bags
-                                                    </p>
-                                                    <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
-                                                        className="fa-solid fa-caret-down"></i>
+                                                <div style={{position: "relative"}}>
+                                                    {
+                                                        isShowBagsFilter && 
+                                                        <BagsFilter hideBagsFilter={hideBagsFilter} />
+                                                    }
+                                                    <div onClick={showBagsFilter}
+                                                        className="mobile_hidden hover_bg-grey" style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                            Bags
+                                                        </p>
+                                                        <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                            className="fa-solid fa-caret-down"></i>
+                                                    </div>
                                                 </div>
-                                                <div className="mobile_hidden" style={{marginLeft: 5, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
-                                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                                        Duration
-                                                    </p>
-                                                    <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
-                                                        className="fa-solid fa-caret-down"></i>
+                                                <div style={{position: "relative"}}>
+                                                    {
+                                                        isShowDurationFilter && 
+                                                        <DurationFilter 
+                                                            hideDurationFilter={hideDurationFilter} />
+                                                    }
+                                                    <div onClick={showDurationFilter}
+                                                        className="mobile_hidden hover_bg-grey" style={{marginLeft: 5, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                            Duration
+                                                        </p>
+                                                        <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                            className="fa-solid fa-caret-down"></i>
+                                                    </div>
                                                 </div>
-                                                <div style={{marginLeft: 5, cursor: "pointer", padding: "7px 13px", display: "flex", alignItems: "center"}}>
-                                                    <i style={{marginRight: 10, color: "blue", fontSize: 14}}
-                                                        class="fa-solid fa-chart-column"></i>
-                                                    <p style={{color: "blue", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                                        Price Grid
-                                                    </p>
-                                                    <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
-                                                        className="fa-solid fa-caret-down"></i>
+                                                <div style={{position: "relative"}}>
+                                                    {   isShowPriceGrid &&
+                                                        <FlightPricesGrid hidePricesGrid={hidePricesGrid} />
+                                                    }
+                                                    <div onClick={showPricesGrid}
+                                                        className="hover_bg-grey"
+                                                        style={{ marginLeft: 5, cursor: "pointer", padding: "7px 13px", display: "flex", alignItems: "center", borderRadius: 50}}>
+                                                        <i style={{marginRight: 10, color: "blue", fontSize: 14}}
+                                                            class="fa-solid fa-chart-column"></i>
+                                                        <p style={{color: "blue", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                            Price Grid
+                                                        </p>
+                                                        <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                            className="fa-solid fa-caret-down"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
