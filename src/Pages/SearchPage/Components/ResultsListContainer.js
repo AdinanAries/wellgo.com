@@ -183,7 +183,7 @@ export default function ResultsListContainer(props){
                                                 <input className="styled-slider slider-progress" min="0" max="100" type="range" />
                                             </div>
                                             <div style={{marginLeft: 20, display: "flex"}}>
-                                                <div style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                <div className="mobile_hidden" style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
                                                     <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                                         Bags
                                                     </p>
@@ -197,8 +197,10 @@ export default function ResultsListContainer(props){
                                                     <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
                                                         className="fa-solid fa-caret-down"></i>
                                                 </div>
-                                                <div className="mobile_hidden" style={{marginLeft: 5, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
-                                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                <div style={{marginLeft: 5, cursor: "pointer", padding: "7px 13px", display: "flex", alignItems: "center"}}>
+                                                    <i style={{marginRight: 10, color: "blue", fontSize: 14}}
+                                                        class="fa-solid fa-chart-column"></i>
+                                                    <p style={{color: "blue", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                                         Price Grid
                                                     </p>
                                                     <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
