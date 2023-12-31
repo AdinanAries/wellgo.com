@@ -71,6 +71,19 @@ export default function ResultsListContainer(props){
 
     const { SEARCH_OBJ } = props;
     const [ filteredFlights, setFilteredFlights ] = useState([]);
+    const [ priceSlider, setPriceSlider ] = useState(100);
+    const [ flightsMinPrice, setFlightsMinPrice ] = useState(80);
+    const [ flightsMaxPrice, setFlightsMaxPrice ] = useState(150);
+    const [ flightsSliderMaxPrice, setFlightsSliderMaxPrice ] = useState(150);
+
+    const slidePriceFilter = (e) => {
+        let _value=e.target.value;
+        setPriceSlider(_value);
+        const _price = parseFloat((_value/100)*flightsMaxPrice).toFixed(0);
+        setFlightsSliderMaxPrice(_price);
+    }
+
+    const SLIDER_MIN_PERCENT=((flightsMinPrice*100)/flightsMaxPrice)
 
     const filterFlights = (flights) => {
         setFilteredFlights(flights)
@@ -84,7 +97,7 @@ export default function ResultsListContainer(props){
                 key={index} 
                 flight={each}
             />);
-    }else if(filteredFlights.length>0){
+    }else if(Array.isArray(filteredFlights) && filteredFlights.length>0){
         FLIGHTS = filteredFlights.map((each, index) => 
             <FlightOfferItem 
                 selectFlightOffer={props.selectFlightOffer}
@@ -171,16 +184,20 @@ export default function ResultsListContainer(props){
                                             <div>
                                                 <div style={{display: "flex", justifyContent: "space-between"}}>
                                                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                                        $80
+                                                        ${flightsMinPrice}
                                                     </p>
                                                     <p style={{color: "crimson", fontSize: 10, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                                        $105
+                                                        ${flightsSliderMaxPrice}
                                                     </p>
                                                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                                        $150
+                                                        ${flightsMaxPrice}
                                                     </p>
                                                 </div>
-                                                <input className="styled-slider slider-progress" min="0" max="100" type="range" />
+                                                <input 
+                                                    onInput={slidePriceFilter}
+                                                    className="styled-slider slider-progress" 
+                                                    min={SLIDER_MIN_PERCENT} max="100" 
+                                                    value={priceSlider} type="range" />
                                             </div>
                                             <div style={{marginLeft: 20, display: "flex"}}>
                                                 <div className="mobile_hidden" style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
