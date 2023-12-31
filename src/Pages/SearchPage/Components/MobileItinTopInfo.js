@@ -18,7 +18,7 @@ const MobileItinTopInfo = (props) => {
     return (
         <div id="itinerary_and_filter_icon">
             <div>
-                <p style={{fontSize: 16, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
+                <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
                     {SEARCH_OBJ.origin_city}
                     <span style={{margin: "0 10px", color: "rgba(0,0,0,0.4)"}}>
                         <i className={is_one_way?"fa-solid fa-arrow-right":"fa-solid fa-rotate"}></i></span>
