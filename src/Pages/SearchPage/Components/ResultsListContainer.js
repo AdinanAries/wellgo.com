@@ -10,8 +10,9 @@ import SearchFiltersLoader from "./SearchFiltersLoader";
 import MobileItinTopInfo from "./MobileItinTopInfo";
 import MobileItinTopInfoLoader from "./MobileItinTopInfoLoader";
 import Ads from "./Ads";
-import { duffelStopsAndPrices, duffelAirlinesAndPrices } from "../../../helpers/FlightsFilterHelpers";
-import { useState } from "react";
+import { markup } from "../../../helpers/Prices";
+import { duffelStopsAndPrices, duffelAirlinesAndPrices, getMinAndMaxPrice } from "../../../helpers/FlightsFilterHelpers";
+import { useEffect, useState } from "react";
 
 function add_clouds_to_animated_loader(){
     if(document.getElementById("animated_loader")){
@@ -72,9 +73,17 @@ export default function ResultsListContainer(props){
     const { SEARCH_OBJ } = props;
     const [ filteredFlights, setFilteredFlights ] = useState([]);
     const [ priceSlider, setPriceSlider ] = useState(100);
-    const [ flightsMinPrice, setFlightsMinPrice ] = useState(80);
-    const [ flightsMaxPrice, setFlightsMaxPrice ] = useState(150);
-    const [ flightsSliderMaxPrice, setFlightsSliderMaxPrice ] = useState(150);
+    const [ flightsMinPrice, setFlightsMinPrice ] = useState(0);
+    const [ flightsMaxPrice, setFlightsMaxPrice ] = useState(0);
+    const [ flightsSliderMaxPrice, setFlightsSliderMaxPrice ] = useState(0);
+    const [ SLIDER_MIN_PERCENT, setSliderMinPercent ] = useState(0);
+
+    useEffect(()=>{
+        const PRICE_RANGE = getMinAndMaxPrice(props.flights);
+        setFlightsMaxPrice(markup(PRICE_RANGE.max_price).new_price.toFixed(0));
+        setFlightsMinPrice(markup(PRICE_RANGE.min_price).new_price.toFixed(0));
+        setSliderMinPercent(markup((PRICE_RANGE.min_price*100)/flightsMaxPrice).new_price);
+    });
 
     const slidePriceFilter = (e) => {
         let _value=e.target.value;
@@ -82,8 +91,6 @@ export default function ResultsListContainer(props){
         const _price = parseFloat((_value/100)*flightsMaxPrice).toFixed(0);
         setFlightsSliderMaxPrice(_price);
     }
-
-    const SLIDER_MIN_PERCENT=((flightsMinPrice*100)/flightsMaxPrice)
 
     const filterFlights = (flights) => {
         setFilteredFlights(flights)

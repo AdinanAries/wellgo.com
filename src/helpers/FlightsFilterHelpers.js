@@ -73,3 +73,27 @@ export const duffelAirlinesAndPrices = (flightsArr) => {
 
     return airlinesArr;
 }
+
+export const getMinAndMaxPrice = (flightsArr) => {
+    if(flightsArr.length>0){
+        let min_price=Math.ceil(parseFloat(flightsArr[0].total_amount));
+        let max_price=Math.ceil(parseFloat(flightsArr[0].total_amount));
+        for(let i=0; i<flightsArr.length; i++){
+            const FLIGHT = flightsArr[i];
+            const FLIGHT_PRICE = Math.ceil(parseFloat(FLIGHT.total_amount));
+            if(FLIGHT_PRICE<min_price){
+                min_price=FLIGHT_PRICE
+            }
+            if(FLIGHT_PRICE>max_price){
+                max_price=FLIGHT_PRICE;
+            }
+        }
+        return {
+            min_price, max_price
+        }
+    }
+    return {
+        min_price: 0,
+        max_price: 0
+    }
+}
