@@ -1,6 +1,6 @@
 const FlightLoaderCard = (props) => {
     return (
-        <div style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 20, padding: "15px 10px", animation: "item_slide_down 0.5s ease-in"}}>
+        <div style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 5, padding: "15px 10px", animation: "item_slide_down 0.5s ease-in"}}>
             <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <div className="ticket_loader_info_1">
                     <p className="info_item_loader" style={{borderRadius: 50, fontSize: 12, height: 40}}>

@@ -47,7 +47,7 @@ const DuffelOfferItem = (props) => {
     const MINUTES = duration?.split("H")[1]?.replace("M","");
 
     return (
-        <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}} style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 10, padding: "15px 10px"}}>
+        <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}} style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 5, padding: "15px 10px"}}>
             <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <div>
                     <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>

@@ -27,9 +27,9 @@ const MobileItinTopInfo = (props) => {
                 <p style={{fontSize: 13, color: "rgba(0,0,0,0.7)", marginTop: 2}}>
                     {START_DATE}{!is_one_way && ` - ${END_DATE}`}</p>
             </div>
-            <div style={{display: "flex", alignItems: "center"}}>
-                <p onClick={()=>document.getElementById('search_list_main__settings_section').style.display='block'}
-                 style={{marginRight: 10, display: "flex", justifyContent: "center", alignItems: "center", width: 34, height: 34, backgroundColor: "rgba(0,0,0,0.1)", borderRadius: "100%"}}>
+            <div onClick={()=>document.getElementById('search_list_main__settings_section').style.display='block'}
+                style={{display: "flex", alignItems: "center"}}>
+                <p style={{marginRight: 10, display: "flex", justifyContent: "center", alignItems: "center", width: 34, height: 34, backgroundColor: "rgba(0,0,0,0.1)", borderRadius: "100%"}}>
                     <i className="fa fa-sliders" aria-hidden="true"></i>
                 </p>
                 <div>

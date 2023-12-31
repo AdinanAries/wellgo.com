@@ -143,7 +143,7 @@ export default function ResultsListContainer(props){
                     <div id="search_result_important_notice">
                         {
                             props.loading ? 
-                                <div style={{animation: "item_slide_down 0.5s ease-in", marginBottom: 20}} className="search_result_inportant_notice_container">
+                                <div style={{animation: "item_slide_down 0.5s ease-in", marginBottom: 5}} className="search_result_inportant_notice_container">
                                     <div>
                                         <p  className="info_item_loader" style={{color: "rgba(0,0,0,0)", fontSize: 16, fontFamily: "'Prompt', Sans-serif", width: "fit-content", fontWeight: "bolder", marginBottom: 10}}>
                                             <i className="fa fa-info-circle" style={{fontSize: 15, marginRight: 5}}></i>Important Notice

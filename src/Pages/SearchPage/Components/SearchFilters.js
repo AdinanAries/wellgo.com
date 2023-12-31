@@ -56,14 +56,14 @@ const SearchFilters = (props) => {
             return (
                 <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
-                        <input onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)} 
-                            id={"filter-by-stops_"+each.count} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                        <input className="cm-toggle" onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)} 
+                            id={"filter-by-stops_"+each.count} style={{marginRight: 5}} type="checkbox" />
                         <label htmlFor={"filter-by-stops_"+each.count}>
-                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 15}}>Nonstop ({each.flights.length})</p>
+                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13}}>Nonstop ({each.flights.length})</p>
                         </label>
                     </div>
                     <label htmlFor={"filter-by-stops_"+each.count}>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 13}}>
                             <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
                                 dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
                             {(markup(each.lowest).new_price).toFixed(2)}</p>
@@ -74,16 +74,16 @@ const SearchFilters = (props) => {
              return (
                 <div key={each.count} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
-                        <input onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)}
-                            id={"filter-by-stops_"+each.count} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                        <input className="cm-toggle" onChange={(e)=>filterByStops(e, each.flights, `stops_${each.count}`)}
+                            id={"filter-by-stops_"+each.count} style={{marginRight: 5}} type="checkbox" />
                         <label htmlFor={"filter-by-stops_"+each.count}>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 13}}>
                                 {(each.count>1 ? each.count+" Stops" : each.count+" Stop")} ({each.flights.length})
                             </p>
                         </label>
                     </div>
                     <label htmlFor={"filter-by-stops_"+each.count}>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 13}}>
                             <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
                                 dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
                             {(markup(each.lowest).new_price).toFixed(2)}</p>
@@ -107,13 +107,14 @@ const SearchFilters = (props) => {
             <div onChange={(e)=>filterByAilines(e, each.flights, `airlines_${each.airlineCode}`)}
                 key={each.airlineCode} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                 <div style={{display: "flex", flexDirection: "row"}}>
-                    <input id={"filter-by-flights_"+each.airlineCode} style={{width: 19, height: 19, marginRight: 5}} type="checkbox" />
+                    <input className="cm-toggle" id={"filter-by-flights_"+each.airlineCode} 
+                        style={{marginRight: 5}} type="checkbox" />
                     <label htmlFor={"filter-by-flights_"+each.airlineCode}>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>{ellipsify(each.airlineName, 15)} ({each.flights.length})</p>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 13}}>{ellipsify(each.airlineName, 15)} ({each.flights.length})</p>
                     </label>
                 </div>
                 <label htmlFor={"filter-by-flights_"+each.airlineCode}>
-                    <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 15}}>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 13}}>
                         <span style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
                             dangerouslySetInnerHTML={{__html: get_currency_symbol(each.currency)}}></span>
                             {(markup(each.lowest).new_price).toFixed(2)}</p>
@@ -125,7 +126,7 @@ const SearchFilters = (props) => {
     return (
         <div>
             <div id="mobile_sort_and_filter_title_and_sort">
-                <div style={{height: 50, borderBottom: "1px solid rgba(0,0,0,0.1)", display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                <div style={{height: 40, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                         <p style={{color: "rgba(0,0,0,0.5)", fontWeight: "bolder", display: "flex", flexDirection: "column", justifyContent: "center"}}>
                             Sort and Filter
@@ -135,16 +136,21 @@ const SearchFilters = (props) => {
                         </p>
                     </div>
                 </div>
-                <div style={{marginTop: 20, marginBottom: 35}}>
-                    <p style={{color: "rgba(0,0,0,0.5)", fontSize: 17}}>Sort by</p>
-                    <select style={{padding: 14, marginTop: 12, width: "100%", border: "1px solid rgba(0,0,0,0.15)", borderRadius: 9, color: "rgba(0,0,0,0.7)"}}>
-                        <option>
-                            Price (Lowest)
-                        </option>
-                    </select>
+                <div style={{marginTop: 10, marginBottom: 35}}>
+                    <div style={{display: "flex", alignItems: "center", backgroundColor: "rgba(0,0,0,0.1)", padding: 10, borderRadius: 50}}>
+                        <p>
+                            <i style={{fontSize: 17, color: "rgba(0,0,0,0.5)", marginRight: 5}} 
+                                class="fa-solid fa-arrow-down-1-9"></i>
+                        </p>
+                        <select style={{border: "none", background: "none", fontSize: 13, width: "100%", color: "rgba(0,0,0,0.7)"}}>
+                            <option>
+                                Price (Lowest)
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <p style={{color: "rgba(0,0,0,0.5)", fontSize: 17, marginBottom: 30}}>
+            <p style={{color: "rgba(0,0,0,0.5)", fontSize: 14, marginBottom: 30}}>
                 <i style={{marginRight: 7}} className="fa fa-sliders" aria-hidden="true"></i>
                 Filter by</p>
 
@@ -168,7 +174,7 @@ const SearchFilters = (props) => {
                 }
             </div>
 
-            <div style={{marginBottom: 30}}>
+            <div style={{marginBottom: 30, display: "none"}}>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 15}}>
                     <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>Travel and baggage</p>
                     <p style={{fontWeight: "bolder", color: "rgba(0,0,0,0.7)", fontSize: 14}}>From</p>
