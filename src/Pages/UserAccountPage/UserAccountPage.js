@@ -198,48 +198,49 @@ function UserAccountPage(props){
                             </div>
                         </div> :
                         <div>
-                            <div className="user_account_main_top_menu_container"
-                                style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 20, paddingRight: 10, maxWidth: 430}}>
-                                <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} 
-                                    style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
-                                    <div style={{display: "flex", alignItems: "center"}}>
-                                        <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
-                                            <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-user"></i>
-                                        </p>
-                                        <div>
-                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
-                                                User</p>
-                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                                Your Account</p>
+                            <div className="user_account_main_top_menu_container">
+                                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingTop: 20, paddingRight: 10, maxWidth: 430}}>
+                                    <div id="user_account_pane_account_menu_item" className="user_account_pane_main_menu_item active" onClick={show_main_account_pane} 
+                                        style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
+                                        <div style={{display: "flex", alignItems: "center"}}>
+                                            <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
+                                                <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-user"></i>
+                                            </p>
+                                            <div>
+                                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                                                    User</p>
+                                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                    Your Account</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" 
-                                    onClick={()=>{show_main_payment_pane();ShowPaymentCards();}} 
-                                    style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
-                                    <div style={{display: "flex", alignItems: "center"}}>
-                                        <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
-                                            <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-credit-card"></i>
-                                        </p>
-                                        <div>
-                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
-                                                Cards</p>
-                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                                Debit/Credit</p>
+                                    <div id="user_account_pane_payment_menu_item" className="user_account_pane_main_menu_item" 
+                                        onClick={()=>{show_main_payment_pane();ShowPaymentCards();}} 
+                                        style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
+                                        <div style={{display: "flex", alignItems: "center"}}>
+                                            <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
+                                                <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-credit-card"></i>
+                                            </p>
+                                            <div>
+                                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                                                    Cards</p>
+                                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                    Debit/Credit</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_passport_pane();ShowPassports();}} 
-                                    style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
-                                    <div style={{display: "flex", alignItems: "center"}}>
-                                        <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
-                                            <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-book"></i>
-                                        </p>
-                                        <div>
-                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
-                                                Passports</p>
-                                            <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                                Travel Documents</p>
+                                    <div id="user_account_pane_passport_menu_item" className="user_account_pane_main_menu_item" onClick={()=>{show_main_passport_pane();ShowPassports();}} 
+                                        style={{display: "flex", flexDirection: "column", justifyContent: "center", marginLeft: 10, cursor: "pointer", alignItems: "center"}}>
+                                        <div style={{display: "flex", alignItems: "center"}}>
+                                            <p className="_icon" style={{fontFamily: "'Prompt', Sans-serif", width: 34, height: 34, marginRight: 10, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "rgba(223,23,234,0.2)"}}>
+                                                <i style={{color: "#c751b9", fontSize: 13}} className="fa fa-book"></i>
+                                            </p>
+                                            <div>
+                                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                                                    Passports</p>
+                                                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                    Travel Documents</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
