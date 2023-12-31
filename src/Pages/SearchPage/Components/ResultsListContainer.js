@@ -11,7 +11,7 @@ import MobileItinTopInfo from "./MobileItinTopInfo";
 import MobileItinTopInfoLoader from "./MobileItinTopInfoLoader";
 import Ads from "./Ads";
 import { markup } from "../../../helpers/Prices";
-import { duffelStopsAndPrices, duffelAirlinesAndPrices, getMinAndMaxPrice } from "../../../helpers/FlightsFilterHelpers";
+import { duffelStopsAndPrices, duffelAirlinesAndPrices, getMinAndMaxPrice, filterByMaxPrice } from "../../../helpers/FlightsFilterHelpers";
 import { useEffect, useState } from "react";
 
 function add_clouds_to_animated_loader(){
@@ -80,16 +80,18 @@ export default function ResultsListContainer(props){
 
     useEffect(()=>{
         const PRICE_RANGE = getMinAndMaxPrice(props.flights);
-        setFlightsMaxPrice(markup(PRICE_RANGE.max_price).new_price.toFixed(0));
-        setFlightsMinPrice(markup(PRICE_RANGE.min_price).new_price.toFixed(0));
-        setSliderMinPercent(markup((PRICE_RANGE.min_price*100)/flightsMaxPrice).new_price);
+        setFlightsMaxPrice(PRICE_RANGE.max_price);
+        setFlightsMinPrice(PRICE_RANGE.min_price);
+        setSliderMinPercent((PRICE_RANGE.min_price*100)/PRICE_RANGE.max_price);
+        //setFlightsSliderMaxPrice(PRICE_RANGE.max_price);
     });
 
     const slidePriceFilter = (e) => {
         let _value=e.target.value;
         setPriceSlider(_value);
-        const _price = parseFloat((_value/100)*flightsMaxPrice).toFixed(0);
+        const _price = Math.ceil(parseFloat((_value/100)*flightsMaxPrice)).toFixed(0);
         setFlightsSliderMaxPrice(_price);
+        setFilteredFlights(filterByMaxPrice(props.flights, _price));
     }
 
     const filterFlights = (flights) => {
@@ -191,13 +193,13 @@ export default function ResultsListContainer(props){
                                             <div>
                                                 <div style={{display: "flex", justifyContent: "space-between"}}>
                                                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                                        ${flightsMinPrice}
+                                                        ${(markup(flightsMinPrice).new_price.toFixed(0))}
                                                     </p>
                                                     <p style={{color: "crimson", fontSize: 10, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                                        ${flightsSliderMaxPrice}
+                                                        ${(markup(flightsSliderMaxPrice).new_price.toFixed(0))}
                                                     </p>
                                                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                                        ${flightsMaxPrice}
+                                                        ${(markup(flightsMaxPrice).new_price.toFixed(0))}
                                                     </p>
                                                 </div>
                                                 <input 
