@@ -72,7 +72,7 @@ export default function ResultsListContainer(props){
 
     const { SEARCH_OBJ } = props;
     const [ filteredFlights, setFilteredFlights ] = useState([]);
-    const [ priceSlider, setPriceSlider ] = useState(100);
+    const [ priceSlider, setPriceSlider ] = useState(101);
     const [ flightsMinPrice, setFlightsMinPrice ] = useState(0);
     const [ flightsMaxPrice, setFlightsMaxPrice ] = useState(0);
     const [ flightsSliderMaxPrice, setFlightsSliderMaxPrice ] = useState(0);
@@ -83,13 +83,13 @@ export default function ResultsListContainer(props){
         setFlightsMaxPrice(PRICE_RANGE.max_price);
         setFlightsMinPrice(PRICE_RANGE.min_price);
         setSliderMinPercent((PRICE_RANGE.min_price*100)/PRICE_RANGE.max_price);
-        //setFlightsSliderMaxPrice(PRICE_RANGE.max_price);
     });
 
     const slidePriceFilter = (e) => {
+        console.log(e.target.value)
         let _value=e.target.value;
         setPriceSlider(_value);
-        const _price = Math.ceil(parseFloat((_value/100)*flightsMaxPrice)).toFixed(0);
+        const _price = Math.ceil((_value/100)*flightsMaxPrice);
         setFlightsSliderMaxPrice(_price);
         setFilteredFlights(filterByMaxPrice(props.flights, _price));
     }
@@ -205,7 +205,7 @@ export default function ResultsListContainer(props){
                                                 <input 
                                                     onInput={slidePriceFilter}
                                                     className="styled-slider slider-progress" 
-                                                    min={SLIDER_MIN_PERCENT} max="100" 
+                                                    min={SLIDER_MIN_PERCENT} max="101" 
                                                     value={priceSlider} type="range" />
                                             </div>
                                             <div style={{marginLeft: 20, display: "flex"}}>

@@ -104,7 +104,7 @@ export const filterByMaxPrice = (flightsArr, max_price) => {
         for(let i=0; i<flightsArr.length; i++){
             const FLIGHT = flightsArr[i];
             const FLIGHT_PRICE = parseFloat(FLIGHT.total_amount);
-            if(FLIGHT_PRICE<max_price){
+            if(FLIGHT_PRICE<=max_price){
                 tempArr.push(FLIGHT);
             }
         }
