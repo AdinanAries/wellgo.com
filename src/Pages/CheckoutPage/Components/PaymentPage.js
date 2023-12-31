@@ -9,19 +9,36 @@ const PaymentPage = (props) => {
         checkoutConfirmation,
         createOrderOnSubmit 
     } = props;
-
-    console.log("Prices:", prices);
     
     return (
         <div>
             <div className="checkout_page_all_info_flex_container">
                 <div className="checkout_page_all_info_flex_left">
-                    <p>Payment</p>
+                    <div style={{padding: 10}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder", fontSize: 13, color: "rgba(0,0,0,0.6)"}}>
+                            <i style={{marginRight: 10}} className="fa-solid fa-credit-card"></i>
+                            Payment Method
+                        </p>
+                        <div style={{padding: 10, marginTop: 10, minHeight: 100, background: "rgba(0,0,0,0.1)"}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
+                                This app is still in test mode, you may process without adding card details...
+                            </p>
+                            <p style={{marginTop: 10, fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
+                                <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
+                                PAYMENT FORM DISABLED
+                            </p>
+                        </div>
+                    </div>
                     {
-                        checkoutConfirmation.isError && <FormErrorCard 
-                            message={checkoutConfirmation.message} 
-                            type={checkoutConfirmation.type}
-                        />
+                        
+                        checkoutConfirmation.isError && <div 
+                            style={{backgroundColor: "rgba(255,0,0,0.1)", border: "1px solid rgba(255,0,0,0.1)"}}>
+                            <FormErrorCard 
+                                fontSize={14}
+                                message={checkoutConfirmation.message} 
+                                type={checkoutConfirmation.type}
+                            />
+                        </div>
                     }
                 </div>
                 <div className="checkout_page_all_info_flex_right">

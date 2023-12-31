@@ -158,7 +158,6 @@ export default function CheckoutPage(props){
         const { extras } = PRICES;
         for(let i=0;i<extras.length;i++){
             let overallTotal = parseFloat(checkoutPayload.data.payments[0].amount);
-            alert(overallTotal);
             overallTotal=(overallTotal+extras[i].total).toFixed(2);
             checkoutPayload.data.payments[0].amount=overallTotal;
         }
