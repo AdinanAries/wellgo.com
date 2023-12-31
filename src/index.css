@@ -753,11 +753,10 @@ footer {
   margin-top: 10px;
 }
 .search_result_inportant_notice_container {
-  margin: 10px;
-  background-color: rgba(255, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 0, 0, 0.1);
+  border-radius: 8px;
 }
 #close_filter_and_sort_btn {
   display: none;
@@ -1656,6 +1655,9 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
+  .cm-toggle {
+    margin-right: 20px !important;
+  }
   .user_account_main_top_menu_container {
     background-color: white;
     padding-bottom: 15px;
@@ -2031,7 +2033,6 @@ footer {
   }
   .search_result_inportant_notice_container {
     margin: 0;
-    background: none;
     border: none;
     margin-bottom: 5px;
   }
@@ -2652,3 +2653,95 @@ path {
 	-o-transition: ease .3s;
 }
 
+
+/*slider*/
+body input[type=range] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+}
+body input[type=range]:focus {
+  outline-color: #f8b195;
+}
+body input[type=range]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 50px;
+  height: 4px;
+  background: #f67280;
+  background: -webkit-linear-gradient(left, #f67280 0%, #c06c84 50%, #355c7d 100%);
+  background: linear-gradient(to right, #f67280 0%, #c06c84 50%, #355c7d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#f67280", endColorstr="#355c7d", GradientType=1 );
+}
+body input[type=range]::-moz-range-track {
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50px;
+  height: 4px;
+  background: #f67280;
+  background: -moz-linear-gradient(left, #f67280 0%, #c06c84 50%, #355c7d 100%);
+  background: linear-gradient(to right, #f67280 0%, #c06c84 50%, #355c7d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#f67280", endColorstr="#355c7d", GradientType=1 );
+}
+body input[type=range]::-ms-track {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50px;
+  height: 4px;
+  background: #f67280;
+  background: -moz-linear-gradient(left, #f67280 0%, #c06c84 50%, #355c7d 100%);
+  background: -webkit-linear-gradient(left, #f67280 0%, #c06c84 50%, #355c7d 100%);
+  background: linear-gradient(to right, #f67280 0%, #c06c84 50%, #355c7d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#f67280", endColorstr="#355c7d", GradientType=1 );
+}
+body input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  bottom: 8px;
+  background: #222 url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png") center no-repeat;
+  background-size: 50%;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+}
+body input[type=range]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+body input[type=range]::-moz-range-thumb {
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  bottom: 8px;
+  background: #222 url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png") center no-repeat;
+  background-size: 50%;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+}
+body input[type=range]::-moz-range-thumb:active {
+  cursor: grabbing;
+}
+body input[type=range]::-ms-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  bottom: 8px;
+  background: #222 url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png") center no-repeat;
+  background-size: 50%;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+}
+body input[type=range]::-ms-thumb:active {
+  cursor: grabbing;
+}

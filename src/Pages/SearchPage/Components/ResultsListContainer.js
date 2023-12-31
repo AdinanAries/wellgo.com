@@ -157,14 +157,56 @@ export default function ResultsListContainer(props){
                                 </div>
                             : props.flights.length > 0 && <div className="search_result_inportant_notice_container">
                                 <div>
-                                    <p style={{color: "rgba(105,0,0,0.7)", fontSize: 16, fontFamily: "'Prompt', Sans-serif", marginBottom: 10}}>
-                                        <i className="fa fa-info-circle" style={{fontsize: 15, color: "orangered", marginRight: 5}}></i>Important Notice
+                                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 16, fontFamily: "'Prompt', Sans-serif", marginBottom: 5}}>
+                                        <i className="fa-solid fa-tags" style={{fontsize: 14, color: "orangered", marginRight: 10}}></i>
+                                        Prices
                                     </p>
-                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 14}}>
+                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
                                         Prices displayed include taxes and may change based on availability. 
                                         You can review any additional fees before checkout. 
                                         Prices are not final until you complete your purchase.
                                     </p>
+                                    <div style={{padding: 10, marginTop: 10}}>
+                                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                                            <div>
+                                                <div style={{display: "flex", justifyContent: "space-between"}}>
+                                                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                        $80
+                                                    </p>
+                                                    <p style={{color: "crimson", fontSize: 10, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        $105
+                                                    </p>
+                                                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                                        $150
+                                                    </p>
+                                                </div>
+                                                <input className="styled-slider slider-progress" min="0" max="100" type="range" />
+                                            </div>
+                                            <div style={{marginLeft: 20, display: "flex"}}>
+                                                <div style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        Bags
+                                                    </p>
+                                                    <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                        className="fa-solid fa-caret-down"></i>
+                                                </div>
+                                                <div className="mobile_hidden" style={{marginLeft: 5, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        Duration
+                                                    </p>
+                                                    <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                        className="fa-solid fa-caret-down"></i>
+                                                </div>
+                                                <div className="mobile_hidden" style={{marginLeft: 5, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                    <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                        Price Grid
+                                                    </p>
+                                                    <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                        className="fa-solid fa-caret-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         }
