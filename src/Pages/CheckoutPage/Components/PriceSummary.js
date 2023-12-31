@@ -83,7 +83,11 @@ const PriceSummary = (props) => {
                 <p className="checkout_page_mobile_button_place_total_price_display">
                     <i style={{marginRight: 5}} className="fa fa-info-circle"></i>
                     The total amout you pay is 
-                    <span style={{color: "crimson", fontWeight: "bolder"}}> ${prices.total_amount}</span>. See price summary at the bottom
+                    <span style={{color: "crimson", fontWeight: "bolder"}}> <span 
+                        style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif"}} 
+                        dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.total_currency)}}></span>
+                            {(markup(overallTotal).new_price).toFixed(2)}
+                    </span>. See price summary at the bottom
                 </p>
                 {
                     ( !props.isPaymentPage ) ?

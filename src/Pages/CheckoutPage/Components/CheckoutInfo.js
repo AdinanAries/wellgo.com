@@ -32,16 +32,16 @@ const CheckoutInfo = (props) => {
 
     const addCheckedBag = (eachPrice=0, max_numer=0, service=null) => {
         const incremented = includedCheckedBagsNumber+1;
-        //if(includedCheckedBagsNumber<max_numer){
+        if(includedCheckedBagsNumber<max_numer){
             setIncludedCheckedBagsNumber(incremented);
             setIncludedCheckedBagsTotal((incremented*eachPrice));
-        //}
+        }
         
         // Include object in services
         if(service){
             setServicesForPost(prevState=>{
                 let object = prevState.find(each=>each.id===service.id);
-                if(object /*&& incremented<max_numer*/){
+                if(object && incremented<max_numer){
                     object.quantity=(incremented);
                     let objIndex = prevState.findIndex(each=>each.id===service.id);
                     prevState[objIndex]=object;
@@ -289,7 +289,7 @@ const CheckoutInfo = (props) => {
             </div>
             <div className="checkout_page_all_info_flex_right">
                 <PriceSummary 
-                    buttonFunction={props.showPNRPage} 
+                    buttonFunction={props.showPNRPage}
                     buttonText="Passengers" 
                     prices={prices}
                     total_travelers={flight.passengers.length}

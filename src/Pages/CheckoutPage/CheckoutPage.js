@@ -3,13 +3,14 @@ import PassengerNameRecord from './Components/PassengerNameRecord';
 import PaymentPage from './Components/PaymentPage';
 import CONSTANTS from '../../Constants/Constants';
 import getBotResponse from '../../Constants/BotResponses';
-import { obj_has_empty_prop, calculate_age } from "../../helpers/general";
+import { obj_has_empty_prop, calculate_age, get_currency_symbol } from "../../helpers/general";
+import { markup } from '../../helpers/Prices';
 import { FLIGHT_DATA_ADAPTER } from "../../helpers/FlightDataAdapter";
 import { show_prompt_on_Bot_AD_tips_popup } from '../../components/HPSupport';
 import { createFlightOrder } from '../../services/flightsServices';
 import { logFlightBooking } from "../../services/bookingHistoryServices";
 import { toast } from 'react-toastify';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import OrderCompletedPage from './Components/OrderCompletedPage';
 import Logger, { getBookingConfirmedLogMessage } from '../../helpers/Logger';
 
@@ -18,6 +19,7 @@ export default function CheckoutPage(props){
     const { payload, cancel_checkout, LogMeIn } = props;
 
     const [ PRICES, SET_PRICES ] = useState(FLIGHT_DATA_ADAPTER.adaptPriceProps(payload));
+    const [ overallTotal, setOverallTotal ] = useState(0);
     const [ activePage, setActivePage ] = useState(CONSTANTS.checkout_pages.info);
     const [ isBookingConfirmed, setIsBookingConfirmed] = useState(false);
     const [ comfirmedBookingResourceID, setComfirmedBookingResourceID ] = useState("");
@@ -31,8 +33,20 @@ export default function CheckoutPage(props){
         meta: {},
         data: FLIGHT_DATA_ADAPTER.prepareCheckout(payload)
     });
+    // code: const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
+    useEffect(()=>{
+        calcOverall_Total();
+    })
 
-    const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
+    const calcOverall_Total = () => {
+        let price = parseFloat(PRICES.total_amount);
+        const { extras } = PRICES;
+        extras.forEach(each=>{
+            price=price+each.total;
+        });
+        setOverallTotal(price);
+    }
+
     const AVAILABLE_SERVICES=FLIGHT_DATA_ADAPTER.return_available_services(payload);
 
     const resetCheckoutConfirmation = () => {
@@ -202,6 +216,7 @@ export default function CheckoutPage(props){
     }
 
     const includeBookingAncillaries = (_services=[]) => {
+        calcOverall_Total();
         const data_with_services_included = FLIGHT_DATA_ADAPTER.addServicesToCheckout(
                                                 checkoutPayload.data, 
                                                 _services
@@ -215,6 +230,7 @@ export default function CheckoutPage(props){
     }
 
     const removeAllBookingAncillaries = () => {
+        calcOverall_Total()
         const data_with_all_services_removed = FLIGHT_DATA_ADAPTER.clearCheckoutIncludedServices(
                                                 checkoutPayload.data
                                             );
@@ -224,7 +240,6 @@ export default function CheckoutPage(props){
                 ...data_with_all_services_removed 
             }
         });
-
     }
 
     const nav_separator_style = {
@@ -290,7 +305,10 @@ export default function CheckoutPage(props){
                                 <p className="checkout_page_header_price_total" style={{fontSize: 13, padding: 10, color: "rgba(0,0,0,0.7)"}}>
                                         Total:
                                         <span style={{fontFamily: "'Prompt', Sans-serif", color: "red", fontSize: 13, marginLeft: 5}}>
-                                            ${TOTAL_PRICE}</span>
+                                            <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif"}} 
+                                                dangerouslySetInnerHTML={{__html: get_currency_symbol(PRICES.total_currency)}}></span>
+                                                {markup(overallTotal).new_price.toFixed(2)}
+                                        </span>
                                 </p>
                             </div>
                         </div>
