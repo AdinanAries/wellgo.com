@@ -16,8 +16,8 @@ const SelectedTicketInfo = (props) => {
     const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
     const STOPS_COUNT = (SEGMENT_LENGTH-1);
     const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
-    const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination.city_name;
-    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin.marketing_name;
+    const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination?.city_name;
+    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin?.marketing_name;
     const DEPARTURE_DATE = get_short_date_MMMDD(slices[0].segments[0].departing_at.replace("T", " "));
     const ARRIVAL_DATE = get_short_date_MMMDD(slices[0].segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
     const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
@@ -25,7 +25,7 @@ const SelectedTicketInfo = (props) => {
     let is_one_way=true;
     if(slices.length>1){
         const LAST_SLICE_SEG_LENGTH=slices[(slices.length-1)].segments.length;
-        if(ORIGIN_CITY===slices[(slices.length-1)].segments[LAST_SLICE_SEG_LENGTH-1].destination.city_name){
+        if(ORIGIN_CITY===slices[(slices.length-1)].segments[LAST_SLICE_SEG_LENGTH-1].destination?.city_name){
             is_one_way=false;
         }
     }
