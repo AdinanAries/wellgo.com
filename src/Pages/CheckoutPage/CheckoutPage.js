@@ -33,10 +33,82 @@ export default function CheckoutPage(props){
         meta: {},
         data: FLIGHT_DATA_ADAPTER.prepareCheckout(payload)
     });
+    const [ stage, setStage ] = useState({percentage: 0, step: "", message: ""});
     // code: const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
     useEffect(()=>{
         calcOverall_Total();
-    })
+    });
+
+    const endCheckoutProcessing = () => {
+        setStage({percentage: 0, step: "", message: ""});
+    }
+
+    const PROCESSOR_INTERVAL = 1000;
+    const startProcessingPayment = () => {
+        let i=0;
+        return new Promise((resolve)=>{
+            const intvl = setInterval(()=>{
+                i+=10;
+                setStage({percentage: i, step: "Payment", message: "Processing Payment"});
+                if(i===40){
+                    clearInterval(intvl)
+                    resolve(true);
+                }
+                if(i===100){
+                    endCheckoutProcessing();
+                    resolve(true);
+                }
+            }, PROCESSOR_INTERVAL);
+        });
+    }
+
+    const startProcessingBookingOrder = () => {
+        let i=40;
+        return new Promise((resolve)=>{
+            const intvl = setInterval(()=>{
+                i+=10;
+                setStage({percentage: i, step: "Order", message: "Ordering booking from the airline"});
+                if(i===70){
+                    clearInterval(intvl);
+                    resolve(true);
+                }
+                if(i===100){
+                    endCheckoutProcessing();
+                    resolve(true);
+                }
+            }, PROCESSOR_INTERVAL);
+        });
+    }
+
+    const startProcessingBookingOrderError = () => {
+        let i=70;
+        return new Promise((resolve)=>{
+            const intvl = setInterval(()=>{
+                i+=10;
+                setStage({percentage: i, step: "Error", message: "Oops! An Error Occurred"});
+                if(i===100){
+                    endCheckoutProcessing();
+                    clearInterval(intvl)
+                    resolve(true);
+                }
+            }, PROCESSOR_INTERVAL);
+        });
+    }
+
+    const startProcessingBookingLog = () => {
+        let i=70;
+        return new Promise((resolve)=>{
+            const intvl = setInterval(()=>{
+                i+=10;
+                setStage({percentage: i, step: "Log", message: "Logging your booking"});
+                if(i===100){
+                    endCheckoutProcessing();
+                    clearInterval(intvl)
+                    resolve(true);
+                }
+            }, PROCESSOR_INTERVAL);
+        });
+    }
 
     const calcOverall_Total = () => {
         let price = parseFloat(PRICES.total_amount);
@@ -154,6 +226,7 @@ export default function CheckoutPage(props){
     const createOrderOnSubmit = async () => {
         // Reset payments amount in case function runs multiple times
         checkoutPayload.data.payments[0].amount=PRICES.total_amount;
+
         // 1. Including ancillaries totals into price
         const { extras } = PRICES;
         for(let i=0;i<extras.length;i++){
@@ -161,12 +234,16 @@ export default function CheckoutPage(props){
             overallTotal=(overallTotal+extras[i].total).toFixed(2);
             checkoutPayload.data.payments[0].amount=overallTotal;
         }
-        // 2. Creating flight order
+        // 2. Processing Payment
+        await startProcessingPayment();
+        // 3. Creating flight order
         let res=await createFlightOrder(checkoutPayload);
+        await startProcessingBookingOrder();
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
-            // 3. Adding to booking history
+            // 4. Adding to booking history
             const logged = await logFlightBooking(log);
+            await startProcessingBookingLog();
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
             setComfirmedBookingResourceID(logged._id);
@@ -177,8 +254,8 @@ export default function CheckoutPage(props){
                 resource_id: logged._id,
                 resource_type: CONSTANTS.resource_types.booking_history,
             });
-
         }else{
+            await startProcessingBookingOrderError();
             setCheckoutConfirmation({
                 type: "server_error",
                 isError: true,
@@ -250,6 +327,14 @@ export default function CheckoutPage(props){
 
     return (
         <div id="booking_start_checkout_page_container" style={{display: "block"}}>
+            {
+                (stage.percentage) ?
+                <SubmitCheckoutInProgress 
+                    stage={stage} 
+                    setStage={setStage} 
+                    endCheckoutProcessing={endCheckoutProcessing}
+                /> : ""
+            }
             <div className="wrapper">
                 
                 {
@@ -350,4 +435,31 @@ export default function CheckoutPage(props){
             </div>
         </div>
     );
+}
+
+const SubmitCheckoutInProgress = (props) => {
+
+    const { stage, setStage, endCheckoutProcessing } = props;
+
+    return <div style={{position: "fixed", zIndex: 1001, top: 0, left: 0, width: "100vw", height: "100vh", background: "rgba(0,0,0,0.3)"}}>
+        <div style={{width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <div style={{padding: "20px", backgroundColor: "white", borderRadius: 8}}>
+                <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginBottom: 10}}>
+                    {stage.percentage}% {stage.message}
+                </p>
+                <div style={{width: 300, background: "rgba(0,0,0,0.1)", borderRadius: 8, overflow: "hidden"}}>
+                    <div style={{backgroundColor: ((stage.step.toLowerCase()==="error") ? "crimson" : "green"), width: (stage.percentage+"%"), padding: 5}}></div>
+                </div>
+                {
+                    (stage.percentage===100) &&
+                    <div onClick={endCheckoutProcessing} 
+                        style={{cursor: "pointer", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 14, padding: "10px 20px", marginTop: 15, borderRadius: 50, 
+                        backgroundColor: ((stage.step.toLowerCase()==="error") ? "crimson" : "green"), color: "white"}}>
+                        <i style={{marginRight: 10}}
+                            className={((stage.step.toLowerCase()==="error") ? "fa-solid fa-times" : "fa-solid fa-check")}></i>
+                        {(stage.step.toLowerCase()==="error") ? "Close" : "Done"}</div>
+                }
+            </div>
+        </div>
+    </div>
 }

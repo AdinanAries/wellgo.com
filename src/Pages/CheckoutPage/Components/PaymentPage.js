@@ -38,6 +38,32 @@ const PaymentPage = (props) => {
                                 message={checkoutConfirmation.message} 
                                 type={checkoutConfirmation.type}
                             />
+                            <div style={{padding: 10, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+                                <p  style={{marginBottom: 8, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sanserif", fontWeight: "bolder", fontSize: 13}}>
+                                    Emergency Contact</p>
+                                <p style={{fontFamily: "'Prompt', Sanserif", fontSize: 13}}>
+                                    Call: <span style={{letterSpacing: 1, color: "green",fontFamily: "'Prompt', Sanserif", fontSize: 13}}>
+                                        +1 7327999546 </span>
+                                </p>
+                                <p style={{fontFamily: "'Prompt', Sanserif", fontSize: 13}}>
+                                    Email: <span style={{letterSpacing: 1, color: "green",fontFamily: "'Prompt', Sanserif", fontSize: 13}}>
+                                    adinanaries@outlook.com </span>
+                                 </p>
+                                 <div style={{display: "flex", alignItems: "center", marginTop: 10}}>
+                                    <div style={{marginRight: 10, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "100%", width: 57, height: 57, backgroundColor: "rgba(0,0,0,0.1)", border: "1px solid rgba(0,0,0,0.1)"}}>
+                                        <div>
+                                            <p style={{textAlign: "center", fontSize: 22, marginTop: -5}}>
+                                                <i style={{color: "rgba(0,0,0,0.7)"}} className="fa-solid fa-robot"></i>
+                                            </p>
+                                            <p style={{fontSize: 9, fontFamily: "'Prompt', Sanserif"}}>
+                                                Bot AD</p>
+                                        </div>
+                                    </div>
+                                    <p style={{fontFamily: "'Prompt', Sanserif", fontSize: 13}}>
+                                        Hey! we're with you every step of the way. Please reach out...
+                                    </p>
+                                 </div>
+                            </div>
                         </div>
                     }
                 </div>
