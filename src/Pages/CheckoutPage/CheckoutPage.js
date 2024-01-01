@@ -46,6 +46,7 @@ export default function CheckoutPage(props){
     const PROCESSOR_INTERVAL = 1000;
     const startProcessingPayment = () => {
         let i=0;
+        setStage({percentage: 1, step: "Payment", message: "Processing Payment"});
         return new Promise((resolve)=>{
             const intvl = setInterval(()=>{
                 i+=10;
