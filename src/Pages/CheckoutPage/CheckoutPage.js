@@ -237,13 +237,13 @@ export default function CheckoutPage(props){
         // 2. Processing Payment
         await startProcessingPayment();
         // 3. Creating flight order
-        let res=await createFlightOrder(checkoutPayload);
         await startProcessingBookingOrder();
+        let res=await createFlightOrder(checkoutPayload);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
             // 4. Adding to booking history
-            const logged = await logFlightBooking(log);
             await startProcessingBookingLog();
+            const logged = await logFlightBooking(log);
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
             setComfirmedBookingResourceID(logged._id);
