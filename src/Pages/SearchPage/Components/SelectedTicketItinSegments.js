@@ -25,16 +25,16 @@ const SelectedTicketItinSegments = (props) => {
     // For testing
     // segments=segs;
 
-    const ORIGIN_CITY = segments[0].origin.city_name;
-    const ORIGIN_AIRPORT = `${segments[0].origin.name} (${segments[0].origin.iata_code})`;
+    const ORIGIN_CITY = segments[0].origin?.city_name;
+    const ORIGIN_AIRPORT = `${segments[0].origin.name} (${segments[0].origin?.iata_code})`;
     const ORIGIN_TAKEOFF_TIME = convert24HTimeToAMPM(segments[0].departing_at.split("T")[1]);
     const { h: TAKE_OFF_HOURS, m: TAKE_OFF_MINUTES} = extractSegmentDuration(segments[0].duration);
-    const TAKE_OFF_CARRIER_OPERATOR = segments[0].operating_carrier.name;
-    const TAKE_OFF_CARRIER_AIRCRAFT = segments[0].aircraft.name;
+    const TAKE_OFF_CARRIER_OPERATOR = segments[0].operating_carrier?.name;
+    const TAKE_OFF_CARRIER_AIRCRAFT = segments[0].aircraft?.name;
     const TAKE_OFF_CABIN_TYPE = segments[0].passengers[0]?.cabin?.marketing_name;
     
-    const DESTINATION_CITY = segments[segments.length-1].destination.city_name;
-    const DESTINATION_AIRPORT = `${segments[segments.length-1].destination.name} (${segments[segments.length-1].destination.iata_code})`;
+    const DESTINATION_CITY = segments[segments.length-1].destination?.city_name;
+    const DESTINATION_AIRPORT = `${segments[segments.length-1].destination?.name} (${segments[segments.length-1].destination.iata_code})`;
     const DESTINATION_ARRIVAL_TIME = convert24HTimeToAMPM(segments[(segments.length-1)].arriving_at.split("T")[1]);
     
     let seg_markup=[];
@@ -76,13 +76,13 @@ const SelectedTicketItinSegments = (props) => {
     } else {
         // First array item (departure airport)
         
-        const { h: LAST_ROUND_HOURS, m: LAST_ROUND_MINUTES} = extractSegmentDuration(segments[(segments.length-1)].duration);
-        const LAST_ROUND_CARRIER_OPERATOR = segments[(segments.length-1)].operating_carrier.name;
-        const LAST_ROUND_CARRIER_AIRCRAFT = segments[(segments.length-1)].aircraft.name;
+        const { h: LAST_ROUND_HOURS, m: LAST_ROUND_MINUTES} = extractSegmentDuration(segments[(segments.length-1)]?.duration);
+        const LAST_ROUND_CARRIER_OPERATOR = segments[(segments.length-1)].operating_carrier?.name;
+        const LAST_ROUND_CARRIER_AIRCRAFT = segments[(segments.length-1)].aircraft?.name;
         const LAST_ROUND_CABIN_TYPE = segments[(segments.length-1)].passengers[0]?.cabin?.marketing_name;
 
-        const LAST_STOP_CITY = segments[segments.length-1].origin.city_name;
-        const LAST_STOP_AIRPORT = `${segments[segments.length-1].origin.name} (${segments[segments.length-1].origin.iata_code})`;
+        const LAST_STOP_CITY = segments[segments.length-1].origin?.city_name;
+        const LAST_STOP_AIRPORT = `${segments[segments.length-1].origin?.name} (${segments[segments.length-1].origin?.iata_code})`;
         const LAST_STOP_TAKEOFF_TIME = convert24HTimeToAMPM(segments[(segments.length-1)].departing_at.split("T")[1]);
 
         const LAST_STOP_ARRIVAL_TIME = convert24HTimeToAMPM(segments[(segments.length-2)].arriving_at.split("T")[1]);
@@ -122,13 +122,13 @@ const SelectedTicketItinSegments = (props) => {
         // Middile array items: flight stops
         for(let i=1;i<(segments.length-1);i++){
 
-            const _STOP_CITY = segments[i].origin.city_name;
-            const _STOP_AIRPORT = `${segments[i].origin.name} (${segments[i].origin.iata_code})`;
+            const _STOP_CITY = segments[i].origin?.city_name;
+            const _STOP_AIRPORT = `${segments[i].origin?.name} (${segments[i].origin?.iata_code})`;
             const _STOP_ARRIVAL_TIME = convert24HTimeToAMPM(segments[i-1].arriving_at.split("T")[1]);
             const _STOP_TAKEOFF_TIME = convert24HTimeToAMPM(segments[i].departing_at.split("T")[1]);
             const { h: _STOP_TRAVEL_HOURS, m: _STOP_TRAVEL_MINUTES} = extractSegmentDuration(segments[i].duration);
-            const _STOP_TRAVEL_CARRIER_OPERATOR = segments[i].operating_carrier.name;
-            const _STOP_TRAVEL_CARRIER_AIRCRAFT = segments[i].aircraft.name;
+            const _STOP_TRAVEL_CARRIER_OPERATOR = segments[i].operating_carrier?.name;
+            const _STOP_TRAVEL_CARRIER_AIRCRAFT = segments[i].aircraft?.name;
             const _STOP_TRAVEL_CABIN_TYPE = segments[i].passengers[0]?.cabin?.marketing_name;
             
             const {h: STOP_WAIT_TIME_HOURS, m: STOP_WAIT_TIME_MINUTES} = calculateTotalTime(

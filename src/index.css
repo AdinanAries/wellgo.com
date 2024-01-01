@@ -1668,9 +1668,17 @@ footer {
   .checkout_passengers_container {
     padding-left: 10px;
   }
+  .search-page-wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 @media screen and (max-width: 1000px) {
+  .search-page-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .cm-toggle {
     margin-right: 25px !important;
   }

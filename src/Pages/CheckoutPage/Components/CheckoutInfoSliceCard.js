@@ -6,16 +6,16 @@ const CheckoutInfoSliceCard = (props) => {
     const { slice, index, } = props;
     
     const OPERATED_BY = slice.segments[0].operating_carrier?.name;
-    const OPERATOR_LOGO = slice.segments[0].operating_carrier.logo_symbol_url;
+    const OPERATOR_LOGO = slice.segments[0].operating_carrier?.logo_symbol_url;
     const SEGMENT_LENGTH = slice.segments.length;
     const TRIP_START = convert24HTimeToAMPM(slice.segments[0].departing_at.split("T")[1]);
     const TRIP_ENDS = convert24HTimeToAMPM(slice.segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
     const STOPS_COUNT = (SEGMENT_LENGTH-1);
-    const ORIGIN_CITY = slice.segments[0].origin.city_name;
-    const DESTINATION_CITY = slice.segments[(SEGMENT_LENGTH - 1)].destination.city_name;
-    const CABIN_CLASS = slice.segments[0].passengers[0].cabin.marketing_name;
-    const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice.segments[0].departing_at.replace("T", " "));
-    const ARRIVAL_DATE = get_short_date_DAYMMMDD(slice.segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
+    const ORIGIN_CITY = slice.segments[0].origin?.city_name;
+    const DESTINATION_CITY = slice.segments[(SEGMENT_LENGTH - 1)].destination?.city_name;
+    const CABIN_CLASS = slice.segments[0].passengers[0].cabin?.marketing_name;
+    const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0].departing_at.replace("T", " "));
+    const ARRIVAL_DATE = get_short_date_DAYMMMDD(slice?.segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
     //const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
     let duration = slice?.duration; // [P1DT2H30M, PT23H45M]
     if(duration?.includes("D")){
@@ -32,10 +32,10 @@ const CheckoutInfoSliceCard = (props) => {
             let flight_stop_arrival = slice.segments[sg].arriving_at;
             let flight_stop_departure = slice.segments[sg+1].departing_at;
             const {h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
-            let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slice.segments[sg].destination.city_name)} (${slice.segments[sg].destination.iata_code})`);
+            let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slice.segments[sg].destination?.city_name)} (${slice.segments[sg].destination?.iata_code})`);
             STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
                     {STOP_DETAILS}
-                    <div className="tooltip">{`${slice.segments[sg].destination.city_name} - ${slice.segments[sg].destination.name}`}</div>
+                    <div className="tooltip">{`${slice.segments[sg].destination?.city_name} - ${slice.segments[sg].destination?.name}`}</div>
                 </p>);
         }
     }
@@ -51,8 +51,8 @@ for(let i=0;i < slice.segments.length; i++){
 	for(let j=(slice.segments[i].passengers.length-1);j>=0;j--){
 		let amenities = {};
 		if(slice.segments[i].passengers[j].cabin)
-			if(slice.segments[i].passengers[j].cabin.amenities)
-				amenities=slice.segments[i].passengers[j].cabin.amenities
+			if(slice.segments[i].passengers[j].cabin?.amenities)
+				amenities=slice.segments[i].passengers[j].cabin?.amenities
 		all_amenities={
 			...all_amenities,
 			...amenities
@@ -94,11 +94,11 @@ for(let i=0;i < slice.segments.length; i++){
                 </p>
                 <p style={{color: "rgba(0,0,0,0.7)", fontSize: 17, marginTop: 5}}>
                     {
-                        all_amenities.wifi.available &&
+                        all_amenities?.wifi?.available &&
                         <i style={{marginRight: 10}} className="fa-solid fa-wifi"></i>
                     }
                     {
-                        all_amenities.power.available &&
+                        all_amenities?.power?.available &&
                         <i style={{marginRight: 10}} className="fa-solid fa-plug-circle-bolt"></i>
                     }
                     <i style={{marginRight: 10}} className="fa fa-wifi"></i>
