@@ -245,7 +245,14 @@ export default function ResultsListContainer(props){
                                                         <BagsFilter hideBagsFilter={hideBagsFilter} />
                                                     }
                                                     <div onClick={showBagsFilter}
+                                                        className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
+                                                        <i style={{color: "rgba(0,0,0,0.7)", fontSize: 20}} 
+                                                            className="fa-solid fa-person-walking-luggage"></i>    
+                                                    </div>
+                                                    <div onClick={showBagsFilter}
                                                         className="mobile_hidden hover_bg-grey" style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                        <i style={{marginRight: 10, color: "rgba(0,0,0,0.7)", fontSize: 14}} 
+                                                            className="fa-solid fa-person-walking-luggage"></i>
                                                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                                             Bags
                                                         </p>
@@ -260,7 +267,14 @@ export default function ResultsListContainer(props){
                                                             hideDurationFilter={hideDurationFilter} />
                                                     }
                                                     <div onClick={showDurationFilter}
+                                                        className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
+                                                        <i style={{color: "rgba(0,0,0,0.7)", fontSize: 20}} 
+                                                            className="fa-solid fa-clock"></i>    
+                                                    </div>
+                                                    <div onClick={showDurationFilter}
                                                         className="mobile_hidden hover_bg-grey" style={{marginLeft: 5, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                        <i style={{marginRight: 10, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                            className="fa-solid fa-clock"></i>
                                                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                                             Duration
                                                         </p>
@@ -273,7 +287,12 @@ export default function ResultsListContainer(props){
                                                         <FlightPricesGrid hidePricesGrid={hidePricesGrid} />
                                                     }
                                                     <div onClick={showPricesGrid}
-                                                        className="hover_bg-grey"
+                                                        className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
+                                                        <i style={{color: "blue", fontSize: 20}} 
+                                                            className="fa-solid fa-chart-column"></i>    
+                                                    </div>
+                                                    <div onClick={showPricesGrid}
+                                                        className="mobile_hidden hover_bg-grey"
                                                         style={{ marginLeft: 5, cursor: "pointer", padding: "7px 13px", display: "flex", alignItems: "center", borderRadius: 50}}>
                                                         <i style={{marginRight: 10, color: "blue", fontSize: 14}}
                                                             class="fa-solid fa-chart-column"></i>
