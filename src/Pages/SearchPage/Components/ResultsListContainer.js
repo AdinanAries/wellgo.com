@@ -250,7 +250,7 @@ export default function ResultsListContainer(props){
                                                             className="fa-solid fa-person-walking-luggage"></i>    
                                                     </div>
                                                     <div onClick={showBagsFilter}
-                                                        className="mobile_hidden hover_bg-grey" style={{cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                        className="mobile_hidden hover_bg-grey" style={{cursor: "pointer", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
                                                         <i style={{marginRight: 10, color: "rgba(0,0,0,0.7)", fontSize: 14}} 
                                                             className="fa-solid fa-person-walking-luggage"></i>
                                                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
@@ -272,7 +272,7 @@ export default function ResultsListContainer(props){
                                                             className="fa-solid fa-clock"></i>    
                                                     </div>
                                                     <div onClick={showDurationFilter}
-                                                        className="mobile_hidden hover_bg-grey" style={{marginLeft: 5, cursor: "pointer", border: "1px solid rgba(0,0,0,0.1)", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                        className="mobile_hidden hover_bg-grey" style={{marginLeft: 5, cursor: "pointer", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
                                                         <i style={{marginRight: 10, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
                                                             className="fa-solid fa-clock"></i>
                                                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
