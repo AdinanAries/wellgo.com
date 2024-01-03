@@ -1,6 +1,42 @@
 const BagsFilter = (props) => {
     
-    const { hideBagsFilter } = props;
+    const { 
+        hideBagsFilter,
+        checkedBagsFilterQuantity,
+        carryOnBagsFilterQuantity,
+        setCheckedBagsFilterQuantity,
+        setCarryOnBagsFilterQuantity
+    } = props;
+    const MAX_CHECKED_BAGS=6;
+    const MAX_CARRY_ON_BAGS=6
+
+    const increaseCheckedBags = () => {
+        if(checkedBagsFilterQuantity<MAX_CHECKED_BAGS){
+            setCheckedBagsFilterQuantity(checkedBagsFilterQuantity+1);
+        } else {
+            alert("only a maximum of "+MAX_CHECKED_BAGS);
+        }
+    }
+
+    const decreaseCheckedBags = () => {
+        if(checkedBagsFilterQuantity>0){
+            setCheckedBagsFilterQuantity(checkedBagsFilterQuantity-1);
+        }
+    }
+
+    const increaseCarryOnBags = () => {
+        if(carryOnBagsFilterQuantity<MAX_CHECKED_BAGS){
+            setCarryOnBagsFilterQuantity(carryOnBagsFilterQuantity+1);
+        } else {
+            alert("only a maximum of "+MAX_CARRY_ON_BAGS);
+        }
+    }
+
+    const decreaseCarryOnBags = () => {
+        if(carryOnBagsFilterQuantity>0){
+            setCarryOnBagsFilterQuantity(carryOnBagsFilterQuantity-1);
+        }
+    }
 
     return <div className="classic_popup_pane" style={{right: -90}}>
         <p onClick={hideBagsFilter} className="hover_bg-grey"
@@ -17,13 +53,13 @@ const BagsFilter = (props) => {
                     <p style={{fontSize: 14, color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
                         Carry-on bag</p>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <div className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <div onClick={decreaseCarryOnBags} className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
                             -
                         </div>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "0 10px", color: "rgba(0,0,0,0.7)"}}>
-                            0
+                            {carryOnBagsFilterQuantity}
                         </p>
-                        <div className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <div onClick={increaseCarryOnBags} className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
                             +
                         </div>
                     </div>
@@ -32,13 +68,13 @@ const BagsFilter = (props) => {
                     <p style={{fontSize: 14, color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
                         Checked bag</p>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <div className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <div onClick={decreaseCheckedBags} className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
                             -
                         </div>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, margin: "0 10px", color: "rgba(0,0,0,0.7)"}}>
-                            0
+                            {checkedBagsFilterQuantity}
                         </p>
-                        <div className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <div onClick={increaseCheckedBags} className="hover_bg-grey" style={{cursor: "pointer", width: 35, height: 35, borderRadius: 5, border: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "center", alignItems: "center"}}>
                             +
                         </div>
                     </div>

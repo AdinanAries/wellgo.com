@@ -94,6 +94,8 @@ export default function ResultsListContainer(props){
     const [ flightsSliderMaxDuration, setFlightsSliderMaxDuration ] = useState(0);
     const [ durationSlider, setDurationSlider ] = useState(101);
     const [ D_SLIDER_MIN_PERCENT, setDSliderMinPercent ] = useState(0);
+    const [ checkedBagsFilterQuantity, setCheckedBagsFilterQuantity] = useState(0);
+    const [ carryOnBagsFilterQuantity, setCarryOnBagsFilterQuantity] = useState(0);
 
     const showPricesGrid = () => {
         setIsShowPriceGrid(true);
@@ -267,7 +269,13 @@ export default function ResultsListContainer(props){
                                                 <div style={{position: "relative"}}>
                                                     {
                                                         isShowBagsFilter && 
-                                                        <BagsFilter hideBagsFilter={hideBagsFilter} />
+                                                        <BagsFilter 
+                                                            checkedBagsFilterQuantity={checkedBagsFilterQuantity}
+                                                            carryOnBagsFilterQuantity={carryOnBagsFilterQuantity}
+                                                            setCheckedBagsFilterQuantity={setCheckedBagsFilterQuantity}
+                                                            setCarryOnBagsFilterQuantity={setCarryOnBagsFilterQuantity}
+                                                            hideBagsFilter={hideBagsFilter} 
+                                                        />
                                                     }
                                                     <div onClick={showBagsFilter}
                                                         className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
