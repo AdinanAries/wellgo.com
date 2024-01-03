@@ -63,8 +63,10 @@ let add_clouds_to_animated_loader = () => {
 window.add_clouds_to_animated_loader=add_clouds_to_animated_loader;
 
 let show_start_checkout_page = (obj) => {
-  document.getElementById("booking_start_checkout_page_container").innerHTML = window.return_start_checkout_info(obj);
-  document.getElementById("booking_start_checkout_page_container").style.display = "block";
+  if(document.getElementById("booking_start_checkout_page_container")){
+    document.getElementById("booking_start_checkout_page_container").innerHTML = window.return_start_checkout_info(obj);
+    document.getElementById("booking_start_checkout_page_container").style.display = "block";
+  }
 }
 window.show_start_checkout_page=show_start_checkout_page;
 
@@ -80,17 +82,23 @@ window.hide_add_ancillaries_container=hide_add_ancillaries_container;
 
 let start_select_seat_ancillary = () => {
   show_add_ancillaries_container();
-  document.getElementById("seat_ancillary_settings_container").style.display="block";
-  document.getElementById("meal_ancillary_settings_container").style.display="none";
-  document.getElementById("luggage_ancillary_settings_container").style.display="none";
+  if(document.getElementById("seat_ancillary_settings_container"))
+    document.getElementById("seat_ancillary_settings_container").style.display="block";
+  if(document.getElementById("meal_ancillary_settings_container"))
+    document.getElementById("meal_ancillary_settings_container").style.display="none";
+  if(document.getElementById("luggage_ancillary_settings_container"))
+    document.getElementById("luggage_ancillary_settings_container").style.display="none";
 }
 window.start_select_seat_ancillary=start_select_seat_ancillary;
 
 let start_add_luggage_ancillary = () => {
   show_add_ancillaries_container();
-  document.getElementById("seat_ancillary_settings_container").style.display="none";
-  document.getElementById("meal_ancillary_settings_container").style.display="none";
-  document.getElementById("luggage_ancillary_settings_container").style.display="block";
+  if(document.getElementById("seat_ancillary_settings_container"))
+    document.getElementById("seat_ancillary_settings_container").style.display="none";
+  if(document.getElementById("meal_ancillary_settings_container"))
+    document.getElementById("meal_ancillary_settings_container").style.display="none";
+  if(document.getElementById("luggage_ancillary_settings_container"))
+    document.getElementById("luggage_ancillary_settings_container").style.display="block";
 }
 window.start_add_luggage_ancillary=start_add_luggage_ancillary;
 
@@ -108,28 +116,30 @@ let cancel_add_ancillaries_container = () => {
 window.cancel_add_ancillaries_container=cancel_add_ancillaries_container;
 
 //search function
-document.getElementById("home_search_form_submit_btn").addEventListener("click", e => {
-  e.preventDefault();
+if(document.getElementById("home_search_form_submit_btn")){
+  document.getElementById("home_search_form_submit_btn").addEventListener("click", e => {
+    e.preventDefault();
 
-  if(document.getElementById("search_results_list_items"))
-    document.getElementById("search_results_list_items").innerHTML = '';
+    if(document.getElementById("search_results_list_items"))
+      document.getElementById("search_results_list_items").innerHTML = '';
 
-  add_clouds_to_animated_loader();
-  if(document.getElementById("animated_loader"))
-    document.getElementById("animated_loader").style.display = "block";
-  if(document.getElementById("search_result_important_notice"))
-    document.getElementById("search_result_important_notice").innerHTML = window.return_search_results_important_notice_loader();
-  if(document.getElementById("search_list_main__settings_section"))
-    document.getElementById("search_list_main__settings_section").innerHTML = window.return_search_results_filters_and_sort_loader();
-  if(document.getElementById("search_results_mobile_top_itin_display"))
-    document.getElementById("search_results_mobile_top_itin_display").innerHTML = window.return_search_results_mobile_top_itin_display_loader();
-  for(let i=0; i<6; i++){
-    //document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
-  }
+    add_clouds_to_animated_loader();
+    if(document.getElementById("animated_loader"))
+      document.getElementById("animated_loader").style.display = "block";
+    if(document.getElementById("search_result_important_notice"))
+      document.getElementById("search_result_important_notice").innerHTML = window.return_search_results_important_notice_loader();
+    if(document.getElementById("search_list_main__settings_section"))
+      document.getElementById("search_list_main__settings_section").innerHTML = window.return_search_results_filters_and_sort_loader();
+    if(document.getElementById("search_results_mobile_top_itin_display"))
+      document.getElementById("search_results_mobile_top_itin_display").innerHTML = window.return_search_results_mobile_top_itin_display_loader();
+    for(let i=0; i<6; i++){
+      //document.getElementById("search_results_list_items").innerHTML += return_ticket_card_loader();
+    }
 
-  //search_submit_function();
+    //search_submit_function();
 
-});
+  });
+}
 
 if(document.getElementById("sp_search_form_submit_btn")){
   document.getElementById("sp_search_form_submit_btn").addEventListener("click", e =>{
@@ -139,10 +149,14 @@ if(document.getElementById("sp_search_form_submit_btn")){
       document.getElementById("search_results_list_items").innerHTML = '';
 
     add_clouds_to_animated_loader();
-    document.getElementById("animated_loader").style.display = "block";
-    document.getElementById("search_result_important_notice").innerHTML = window.return_search_results_important_notice_loader();
-    document.getElementById("search_list_main__settings_section").innerHTML = window.return_search_results_filters_and_sort_loader();
-    document.getElementById("search_results_mobile_top_itin_display").innerHTML = window.return_search_results_mobile_top_itin_display_loader();
+    if(document.getElementById("animated_loader"))
+      document.getElementById("animated_loader").style.display = "block";
+    if(document.getElementById("search_result_important_notice"))
+      document.getElementById("search_result_important_notice").innerHTML = window.return_search_results_important_notice_loader();
+    if(document.getElementById("search_list_main__settings_section"))
+      document.getElementById("search_list_main__settings_section").innerHTML = window.return_search_results_filters_and_sort_loader();
+    if(document.getElementById("search_results_mobile_top_itin_display"))
+      document.getElementById("search_results_mobile_top_itin_display").innerHTML = window.return_search_results_mobile_top_itin_display_loader();
     for(let i=0; i<6; i++){
       if(document.getElementById("search_results_list_items"))
         document.getElementById("search_results_list_items").innerHTML += window.return_ticket_card_loader();
@@ -155,37 +169,47 @@ if(document.getElementById("sp_search_form_submit_btn")){
 
 let show_interapting_message = (msg, scroll_to_bottom, do_typing=true) => {
   if(do_typing){
-    document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup(msg);
+    if(document.getElementById("hp_support_chat_items"))
+      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup(msg);
   }else{
-    document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup_without_typing(msg);
+    if(document.getElementById("hp_support_chat_items"))
+      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup_without_typing(msg);
   }
   if(scroll_to_bottom===true){
-    window.$("#hp_support_chat_items").scrollTop(window.$("#hp_support_chat_items").prop("scrollHeight"));
+    if(document.getElementById("hp_support_chat_items"))
+      window.$("#hp_support_chat_items").scrollTop(window.$("#hp_support_chat_items").prop("scrollHeight"));
   }else if(scroll_to_bottom==="none"){
     //do nothing or don't scroll
   }else{
-    document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+    if(document.getElementById("hp_support_chat_items"))
+      document.getElementById("hp_support_chat_items").scrollBy(0, 100);
   }
 }
 window.show_interapting_message=show_interapting_message;
 
 let show_pnr_form = (scroll_to_bottom) => {
-  document.getElementById("hp_support_chat_items").innerHTML += window.return_PNR_form();
+  if(document.getElementById("hp_support_chat_items"))
+    document.getElementById("hp_support_chat_items").innerHTML += window.return_PNR_form();
   if(scroll_to_bottom===true){
-    window.$("#hp_support_chat_items").scrollTop(window.$("#hp_support_chat_items").prop("scrollHeight"));
+    if(document.getElementById("hp_support_chat_items"))
+      window.$("#hp_support_chat_items").scrollTop(window.$("#hp_support_chat_items").prop("scrollHeight"));
   }else if(scroll_to_bottom==="none"){
     //do nothing or don't scroll
   }else{
-    document.getElementById("hp_support_chat_items").scrollBy(0, 100);
+    if(document.getElementById("hp_support_chat_items"))
+      document.getElementById("hp_support_chat_items").scrollBy(0, 100);
   }
 }
 window.show_pnr_form=show_pnr_form;
 
 let show_user_interapting_message = (msg, clear_input) => {
-  document.getElementById("hp_support_chat_items").innerHTML += window.return_each_user_chat_message_markup(msg);
+  if(document.getElementById("hp_support_chat_items"))
+    document.getElementById("hp_support_chat_items").innerHTML += window.return_each_user_chat_message_markup(msg);
   if(clear_input===true){
-    document.querySelector("#main_support_chat_user_input_txt_container textarea").value="";
+    if(document.querySelector("#main_support_chat_user_input_txt_container textarea"))
+      document.querySelector("#main_support_chat_user_input_txt_container textarea").value="";
   }else if(clear_input==="passive"){
+    if(document.querySelector("#main_support_chat_user_input_txt_container textarea"))
     document.querySelector("#main_support_chat_user_input_txt_container textarea").value="$%#%%%#@@&&&**(*)";
   }else{
     //do nothing for now
@@ -197,7 +221,8 @@ let select_departure_airports_suggested_by_bot = (iata, icao,elemid) => {
   Array.from(document.querySelectorAll(".departure_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(244,0,0,0.1)"
   });
-  document.getElementById(elemid).style.backgroundColor="rgba(244,0,0,0.3)";
+  if(document.getElementById(elemid))
+    document.getElementById(elemid).style.backgroundColor="rgba(244,0,0,0.3)";
   window.wellgo_bot.selectedOriginAirport=iata;
   //add_origin_input_airport_to_history(iata)
   let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
@@ -219,7 +244,8 @@ let select_destination_airports_suggested_by_bot = (iata, icao, elemid) => {
   Array.from(document.querySelectorAll(".destination_airport_suggested_by_bot")).forEach(each=>{
     each.style.backgroundColor="rgba(0,244,0,0.1)"
   });
-  document.getElementById(elemid).style.backgroundColor="rgba(0,244,0,0.3)";
+  if(document.getElementById(elemid))
+    document.getElementById(elemid).style.backgroundColor="rgba(0,244,0,0.3)";
   window.wellgo_bot.selectedDestinationAirport=iata
   //add_destination_input_airport_to_history(iata)
   let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
@@ -599,3 +625,4 @@ window.onscroll = function() {
   }
 }
 
+//alert("here");
