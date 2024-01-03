@@ -1,6 +1,22 @@
+import { useState, useEffect } from "react";
+import { getUserFriendlyDurationStringFromTotalMunites } from "../../../helpers/general";
+
+
 const DurationFilter = (props) => {
     
-    const { hideDurationFilter } = props;
+    const { 
+        hideDurationFilter,
+        flightsMinDuration,
+        flightsMaxDuration,
+        SLIDER_MIN_PERCENT,
+        slideDurationFilter,
+        durationSlider,
+        flightsSliderMaxDuration
+    } = props;
+
+    useEffect(()=>{
+        
+    });
 
     return <div className="classic_popup_pane" style={{right: -50}}>
         <p onClick={hideDurationFilter} className="hover_bg-grey"
@@ -15,17 +31,33 @@ const DurationFilter = (props) => {
             <div style={{marginTop: 20, marginBottom: 20}}>
                 <div style={{display: "flex", justifyContent: "space-between"}}>
                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                        0h 0m
+                        {
+                            getUserFriendlyDurationStringFromTotalMunites(
+                                flightsMinDuration
+                            )
+                        }
                     </p>
                     <p style={{color: "crimson", fontSize: 10, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                        0h 0m
+                        {
+                            getUserFriendlyDurationStringFromTotalMunites(
+                                Math.ceil(flightsSliderMaxDuration)
+                            )
+                        }
                     </p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                        0h 0m
+                        {
+                            getUserFriendlyDurationStringFromTotalMunites(
+                                flightsMaxDuration
+                            )
+                        }
                     </p>
                 </div>
-                <input style={{width: "100%"}} className="styled-slider slider-progress" 
-                    min="0" max="101" type="range" />
+                <input className="styled-slider slider-progress"
+                    onInput={slideDurationFilter}
+                    style={{width: "100%"}} 
+                    min={SLIDER_MIN_PERCENT}
+                    value={durationSlider}
+                    max="101" type="range" />
             </div>
         </div>
     </div>

@@ -2,7 +2,6 @@ import deltaIcon from "../../../deltaIcon.png";
 import airplane from "../../../icons/airplane.svg";
 import plane_departure from "../../../airplane-departure.svg"
 import missing_icon from "../../../missing.svg"
-
 import FlightLoaderCard from "./FlightLoaderCard";
 import FlightOfferItem from "./FlightOfferItem";
 import SearchFilters from "./SearchFilters";
@@ -14,7 +13,14 @@ import FlightPricesGrid from "./FlightPricesGrid";
 import DurationFilter from "./DurationFilter";
 import BagsFilter from "./BagsFilter";
 import { markup } from "../../../helpers/Prices";
-import { duffelStopsAndPrices, duffelAirlinesAndPrices, getMinAndMaxPrice, filterByMaxPrice } from "../../../helpers/FlightsFilterHelpers";
+import { 
+    duffelStopsAndPrices, 
+    duffelAirlinesAndPrices, 
+    getMinAndMaxPrice, 
+    filterByMaxPrice,
+    getMinAndMaxDuration,
+    filterByMaxDuration
+} from "../../../helpers/FlightsFilterHelpers";
 import { useEffect, useState } from "react";
 
 function add_clouds_to_animated_loader(){
@@ -83,6 +89,11 @@ export default function ResultsListContainer(props){
     const [ isShowPriceGrid, setIsShowPriceGrid ] = useState(false);
     const [ isShowBagsFilter, setIsShowBagsFilter ] = useState(false);
     const [ isShowDurationFilter, setIsShowDurationFilter ] = useState(false);
+    const [ flightsMinDuration, setFlightsMinDuration ] = useState(0);
+    const [ flightsMaxDuration, setFlightsMaxDuration ] = useState(0);
+    const [ flightsSliderMaxDuration, setFlightsSliderMaxDuration ] = useState(0);
+    const [ durationSlider, setDurationSlider ] = useState(101);
+    const [ D_SLIDER_MIN_PERCENT, setDSliderMinPercent ] = useState(0);
 
     const showPricesGrid = () => {
         setIsShowPriceGrid(true);
@@ -109,19 +120,33 @@ export default function ResultsListContainer(props){
     }
 
     useEffect(()=>{
+        // Price
         const PRICE_RANGE = getMinAndMaxPrice(props.flights);
         setFlightsMaxPrice(PRICE_RANGE.max_price);
         setFlightsMinPrice(PRICE_RANGE.min_price);
         setSliderMinPercent((PRICE_RANGE.min_price*100)/PRICE_RANGE.max_price);
+
+        // Duration
+        const DURATION_RANGE = getMinAndMaxDuration(props.flights);
+        setFlightsMaxDuration(DURATION_RANGE.max_duration);
+        setFlightsMinDuration(DURATION_RANGE.min_duration);
+        setDSliderMinPercent((DURATION_RANGE.min_duration*100)/DURATION_RANGE.max_duration);
     });
 
     const slidePriceFilter = (e) => {
-        console.log(e.target.value)
         let _value=e.target.value;
         setPriceSlider(_value);
         const _price = Math.ceil((_value/100)*flightsMaxPrice);
         setFlightsSliderMaxPrice(_price);
         setFilteredFlights(filterByMaxPrice(props.flights, _price));
+    }
+
+    const slideDurationFilter = (e) => {
+        let _value=e.target.value;
+        setDurationSlider(_value);
+        const _duration = (_value/100)*flightsMaxDuration;
+        setFlightsSliderMaxDuration(_duration);
+        setFilteredFlights(filterByMaxDuration(props.flights, _duration));
     }
 
     const filterFlights = (flights) => {
@@ -264,7 +289,14 @@ export default function ResultsListContainer(props){
                                                     {
                                                         isShowDurationFilter && 
                                                         <DurationFilter 
-                                                            hideDurationFilter={hideDurationFilter} />
+                                                            flightsMinDuration={flightsMinDuration}
+                                                            flightsMaxDuration={flightsMaxDuration}
+                                                            SLIDER_MIN_PERCENT={D_SLIDER_MIN_PERCENT}
+                                                            slideDurationFilter={slideDurationFilter}
+                                                            durationSlider={durationSlider}
+                                                            flightsSliderMaxDuration={flightsSliderMaxDuration}
+                                                            hideDurationFilter={hideDurationFilter} 
+                                                        />
                                                     }
                                                     <div onClick={showDurationFilter}
                                                         className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>

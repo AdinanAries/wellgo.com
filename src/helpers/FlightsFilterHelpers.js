@@ -1,3 +1,5 @@
+import { getTotalMinutesFromDurationString } from "./general";
+
 export const getMinNumber = (numArr) => {
     return Math.min(...numArr);
 }
@@ -105,6 +107,53 @@ export const filterByMaxPrice = (flightsArr, max_price) => {
             const FLIGHT = flightsArr[i];
             const FLIGHT_PRICE = parseFloat(FLIGHT.total_amount);
             if(FLIGHT_PRICE<=max_price){
+                tempArr.push(FLIGHT);
+            }
+        }
+        return tempArr;
+    }
+    return [];
+}
+
+export const getMinAndMaxDuration = (flightsArr) => {
+    if(flightsArr.length>0){
+        let min_duration=getTotalMinutesFromDurationString(
+            flightsArr[0].slices[0]?.duration
+        );
+        let max_duration=getTotalMinutesFromDurationString(
+            flightsArr[0].slices[0]?.duration
+        );
+        for(let i=0; i<flightsArr.length; i++){
+            const FLIGHT = flightsArr[i];
+            const FLIGHT_DURATION = getTotalMinutesFromDurationString(
+                FLIGHT.slices[0]?.duration
+            );
+            if(FLIGHT_DURATION<min_duration){
+                min_duration=FLIGHT_DURATION
+            }
+            if(FLIGHT_DURATION>max_duration){
+                max_duration=FLIGHT_DURATION;
+            }
+        }
+        return {
+            min_duration, max_duration
+        }
+    }
+    return {
+        min_duration: 0,
+        max_duration: 0
+    }
+}
+
+export const filterByMaxDuration = (flightsArr, max_duration) => {
+    const tempArr=[];
+    if(flightsArr.length>0){
+        for(let i=0; i<flightsArr.length; i++){
+            const FLIGHT = flightsArr[i];
+            const FLIGHT_DURATION = getTotalMinutesFromDurationString(
+                FLIGHT.slices[0]?.duration
+            );
+            if(FLIGHT_DURATION<=Math.ceil(max_duration)){
                 tempArr.push(FLIGHT);
             }
         }

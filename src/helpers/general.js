@@ -292,3 +292,50 @@ export const getClient = async () => {
     client.device=navigator.userAgent;
     return client;
 }
+
+export const getTotalMinutesFromDurationString = (_duration) => {
+    let duration =_duration?.replace("P","")?.replace("T",""); // [P1DT2H30M, PT23H45M]
+    let d_string="";
+    let h_string="";
+    let m_string="";
+    if(duration?.includes("D")){
+        d_string=duration.split("D")[0].trim();
+        duration=duration.split("D")[1].trim();
+    }
+    if(duration?.includes("H")){
+        h_string=duration.split("H")[0].trim();
+        duration=duration.split("H")[1]
+    }
+    if(duration?.includes("M")){
+        m_string=duration.split("M")[0].trim();
+        duration=duration.split("M")[0];
+    }
+    let Days = d_string ? parseInt(d_string) : 0;
+    let Hours =  h_string ? parseInt(h_string) : 0;
+    let Minutes = m_string ? parseInt(m_string) : 0;
+
+    Hours = ((Days * 24) + Hours);
+    Minutes = ((Hours * 60) + Minutes);
+    return Minutes;
+}
+
+export const getUserFriendlyDurationStringFromTotalMunites = (total_minutes) => {
+    if(total_minutes){
+        let total_hours = Math.trunc(total_minutes/60);
+        let mm=total_minutes%60;
+        let hh=total_hours%24;
+        let dd=Math.trunc(total_hours/24);
+        let stringDuration=""
+        if(dd){
+            stringDuration+=(dd+"d ");
+        }
+        if(hh){
+            stringDuration+=(hh+"h ");
+        }
+        if(mm){
+            stringDuration+=(mm+"m");
+        }
+        return stringDuration;
+    }
+    return "0h 0m";
+}
