@@ -266,6 +266,24 @@ export default function ResultsListContainer(props){
                                                     value={priceSlider} type="range" />
                                             </div>
                                             <div style={{marginLeft: 20, display: "flex"}}>
+                                            <div style={{position: "relative"}}>
+                                                    
+                                                    <div
+                                                        className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
+                                                        <i style={{color: "rgba(0,0,0,0.7)", fontSize: 20}} 
+                                                            className="fa-solid fa-clock"></i>    
+                                                    </div>
+                                                    <div
+                                                        className="mobile_hidden hover_bg-grey" style={{cursor: "pointer", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
+                                                        <i style={{marginRight: 10, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                            className="fa-solid fa-clock"></i>
+                                                        <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
+                                                            Time
+                                                        </p>
+                                                        <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
+                                                            className="fa-solid fa-caret-down"></i>
+                                                    </div>
+                                                </div>
                                                 <div style={{position: "relative"}}>
                                                     {
                                                         isShowBagsFilter && 
@@ -309,12 +327,12 @@ export default function ResultsListContainer(props){
                                                     <div onClick={showDurationFilter}
                                                         className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
                                                         <i style={{color: "rgba(0,0,0,0.7)", fontSize: 20}} 
-                                                            className="fa-solid fa-clock"></i>    
+                                                            className="fa-solid fa-stopwatch"></i>    
                                                     </div>
                                                     <div onClick={showDurationFilter}
                                                         className="mobile_hidden hover_bg-grey" style={{marginLeft: 5, cursor: "pointer", padding: "7px 13px", borderRadius: 8, display: "flex", alignItems: "center"}}>
-                                                        <i style={{marginRight: 10, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
-                                                            className="fa-solid fa-clock"></i>
+                                                        <i style={{marginRight: 10, color: "rgba(0,0,0,0.7)", fontSize: 14}} 
+                                                            className="fa-solid fa-stopwatch"></i>
                                                         <p style={{color: "rgba(0,0,0,0.7)", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
                                                             Duration
                                                         </p>
@@ -337,7 +355,7 @@ export default function ResultsListContainer(props){
                                                         <i style={{marginRight: 10, color: "blue", fontSize: 14}}
                                                             class="fa-solid fa-chart-column"></i>
                                                         <p style={{color: "blue", fontSize: 13, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}>
-                                                            Price Grid
+                                                            Prices
                                                         </p>
                                                         <i style={{marginLeft: 15, color: "rgba(0,0,0,0.7)", fontSize: 13}} 
                                                             className="fa-solid fa-caret-down"></i>

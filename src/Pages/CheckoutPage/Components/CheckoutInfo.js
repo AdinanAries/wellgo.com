@@ -1,8 +1,9 @@
 import PriceSummary from "./PriceSummary";
 import CheckoutInfoSliceCard from "./CheckoutInfoSliceCard";
 import { markup } from "../../../helpers/Prices";
-import { get_currency_symbol } from "../../../helpers/general";
+import { get_currency_symbol, convert24HTimeToAMPM, get_short_date_MMMDD } from "../../../helpers/general";
 import { useState } from "react";
+import refund from "../../../refund.jpg";
 
 const CheckoutInfo = (props) => {
 
@@ -28,6 +29,196 @@ const CheckoutInfo = (props) => {
     const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
     const [ servicesForPost, setServicesForPost ] = useState([]);
     
+    const SEGMENT_LENGTH = slices[0].segments.length;
+    const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
+    const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
+    const STOPS_COUNT = (SEGMENT_LENGTH-1);
+    const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin?.marketing_name;
+    const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
+    const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination?.city_name;
+    const ORIGIN_AIRPORT = `${slices[0].segments[0].origin.iata_code}`;
+    const DESTINATION_AIRPORT = `${slices[0].segments[(SEGMENT_LENGTH - 1)].destination.iata_code}`;
+    
+    const DEPARTURE_DATE = get_short_date_MMMDD(slices[0].segments[0].departing_at.replace("T", " "));
+    const ARRIVAL_DATE = get_short_date_MMMDD(slices[0].segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
+    
+    let BAGGAGES_MARKUP=[];
+    let carry_on_bags_count=0;
+    let free_checked_bags_count=0;
+    //for(let sl=0;sl<slices.length;sl++){
+        for(let sg=0;sg<slices[0].segments.length;sg++){
+            for(let ps=0; ps<slices[0].segments[sg].passengers.length;ps++){
+                for(let bb=0; bb<slices[0].segments[sg].passengers[ps].baggages.length; bb++){
+                    if(slices[0].segments[sg].passengers[ps].baggages[bb].type==="carry_on"){
+                        carry_on_bags_count+=slices[0].segments[sg].passengers[ps].baggages[bb].quantity;
+                    }
+                    if(slices[0].segments[sg].passengers[ps].baggages[bb].type==="checked"){
+                        free_checked_bags_count+=slices[0].segments[sg].passengers[ps].baggages[bb].quantity;
+                    }
+                }
+            }
+        }  
+    //}
+
+    if(carry_on_bags_count>0){
+        BAGGAGES_MARKUP.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 10}}>
+                <i className="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                {carry_on_bags_count} Carry-on {(carry_on_bags_count>1)?"bags":"bag"} included
+            </p>
+        )
+    }
+    if(free_checked_bags_count>0){
+        BAGGAGES_MARKUP.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 10}}>
+                <i className="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                {free_checked_bags_count} free checked {(free_checked_bags_count>1)?"bags":"bag"} included
+            </p>
+        )
+    }
+    if(free_checked_bags_count===0 && carry_on_bags_count===0){
+        BAGGAGES_MARKUP.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 10}}>
+                <i className="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                no bags included
+            </p>
+        )
+    }
+
+    let CANCELLATION_INFO=<div style={{position: "relative", display: "flex", alignItems: "center", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 9, padding: 10, margin: 10}}>
+            <img style={{width: 70, height: "auto"}}
+                src={refund} 
+                alt="refund image" />
+            <div style={{marginLeft: 20}}>
+                <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontWeight: "bolder"}}>
+                    Refund Policy
+                </p>
+                <p style={{color: "crimson", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                    Cancellation is NOT allowed for this flight
+                </p>
+            </div>
+        </div>;
+
+    if(conditions?.refund_before_departure?.allowed){
+        let curr=get_currency_symbol(conditions?.refund_before_departure?.penalty_currency);
+        CANCELLATION_INFO=<div style={{position: "relative", display: "flex", alignItems: "center", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 9, padding: 10, margin: 10}}>
+                <img style={{width: 70, height: "auto"}}
+                    src={refund} 
+                    alt="refund image" />
+                <div style={{marginLeft: 20}}>
+                    <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontWeight: "bolder"}}>
+                        Refund Policy
+                    </p>
+                    <p style={{color: "green", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                        Cancellation allowed with <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                        {conditions.refund_before_departure.penalty_amount} penalty amount
+                    </p>
+                </div>
+            </div>
+    }
+
+    let CHANGES_INFO=<p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+            <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+            Changes not allowed
+        </p>;
+
+    if(conditions.change_before_departure?.allowed){
+        let curr=get_currency_symbol(conditions.change_before_departure.penalty_currency);
+        CHANGES_INFO=<>
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i class="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                Changes allowed with <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                {conditions.change_before_departure.penalty_amount} penalty amount
+            </p>
+        </>
+    }
+
+    let SEATS_SELECTION=[];
+    let CHECKED_BAGS=[];
+    let additional_checked_bags_count=[];
+    let seat_selection_count=[];
+    if(available_services.length > 0){
+        for(let ss=0;ss<available_services.length;ss++){
+            if(available_services[ss].type==="baggage"){
+                additional_checked_bags_count.push({
+                    total_currency: available_services[ss].total_currency,
+                    total_amount: available_services[ss].total_amount
+                });
+            }
+            if(available_services[ss].type==="seat"){
+                seat_selection_count.push({
+                    item: ""
+                });
+            }
+        }
+    }
+
+    if(additional_checked_bags_count.length>0){
+        CHECKED_BAGS.push(
+            <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
+                <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
+                    <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                    {additional_checked_bags_count.length}
+                    {" additional purchasable checked "}
+                    {additional_checked_bags_count.length>1 ? "bags" : "bag"}:
+                </span>
+                {
+                    additional_checked_bags_count.map((each, i)=>{
+                        let curr=get_currency_symbol(each.total_currency);
+                        return (
+                            <>
+                                {i>0 && ","}
+                                <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: i<1 ? 15 : 4}}>
+                                    <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                                    {each.total_amount}
+                                </span>
+                            </>
+                        )
+                    })
+                }
+            </p>
+        )
+    }
+
+    if(seat_selection_count.length>0){
+        SEATS_SELECTION.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i className="fa fa-check" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                Seat choice included 
+                <span style={{color: "rgba(0,0,0,0.5)", fontSize: 13, fontFamily: "'Prompt', Sans-serif"}}>
+                    {` (${seat_selection_count.length} `}{
+                        seat_selection_count.length>1 ? "seats)" : "seat)"
+                    }
+                </span>
+            </p>
+        )
+    }
+
+    if(CHECKED_BAGS.length===0){
+        CHECKED_BAGS.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i class="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                can't purchase additional checked bags
+            </p>
+        );
+    }
+    if(SEATS_SELECTION.length===0){
+        SEATS_SELECTION.push(
+            <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                <i className="fa fa-times" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                Seat choice not included
+            </p>
+        );
+    }
+
+    let is_one_way=true;
+    if(slices.length>1){
+        const LAST_SLICE_SEG_LENGTH=slices[(slices.length-1)].segments.length;
+        if(ORIGIN_CITY===slices[(slices.length-1)].segments[LAST_SLICE_SEG_LENGTH-1].destination.city_name){
+            is_one_way=false;
+        }
+    }
+
     const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />);
 
     const addCheckedBag = (eachPrice=0, max_numer=0, service=null) => {
@@ -207,6 +398,38 @@ const CheckoutInfo = (props) => {
     return (
         <div className="checkout_page_all_info_flex_container">
             <div className="checkout_page_all_info_flex_left">
+                <div style={{margin: 10, marginBottom: 0}}>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                        <div>
+                            <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "darkslateblue"}}>
+                                {ORIGIN_CITY} {">"} {ORIGIN_AIRPORT} 
+                                <span style={{margin: "0 15px", color: "rgba(0,0,0,0.5)"}}>
+                                    <i className={is_one_way ? "fa-solid fa-arrow-right" : "fa-solid fa-exchange"}></i></span>
+                                {DESTINATION_CITY} {">"} {DESTINATION_AIRPORT}
+                            </p>
+                            <div style={{display: "flex"}}>
+                                <p style={{color: "green", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
+                                    {owner.name}
+                                </p>
+                                <p style={{margin: "0 5px", marginTop: -6.5, fontSize: 18, color: "rgba(0,0,0,0.5)"}}>
+                                    .</p>
+                                <p style={{color: "green", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
+                                    {is_one_way ? "one way" : "round trip"}
+                                </p>
+                                <p style={{margin: "0 5px", marginTop: -6.5, fontSize: 18, color: "rgba(0,0,0,0.5)"}}>
+                                    .</p>
+                                <p style={{color: "green", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
+                                    {passengers.length>1?(`${passengers.length} travelers`):"1 traveler"}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                </div>
                 <div className="checkout-page-ancillary-container" style={{marginTop: 10}}>
                     <div onClick={global.start_add_luggage_ancillary} className="checkout-page-each-ancillary">
                         <p><img src={"./luggage_icon.png"} alt={"to do"}/></p>
@@ -285,7 +508,32 @@ const CheckoutInfo = (props) => {
                         </div>
                     </div>
                 </div>
+                {CANCELLATION_INFO}
                 {SLICES}
+                <div style={{border: "1px solid rgba(0,0,0,0.1)", borderRadius: 9, padding: 10, margin: 10}}>
+                    <p style={{fontSize: 14, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
+                        Flight Details
+                    </p>
+                    <p style={{fontSize: 12, marginTop: 10, fontFamily: "'Prompt', sans-serif", color: "green"}}>
+                        Main Cabin
+                    </p>
+                    <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 5}}>
+                        {CABIN_CLASS}
+                    </p>
+                    <p style={{fontSize: 12, marginTop: 15, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
+                        Seat
+                    </p>
+                    {SEATS_SELECTION.map(each=>each)}
+                    <p style={{fontSize: 12, marginTop: 15, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
+                        Bags
+                    </p>
+                    {BAGGAGES_MARKUP.map(each=>each)}
+                    {CHECKED_BAGS.map(each=>each)}
+                    <p style={{fontSize: 12, marginTop: 15, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
+                        Flexibility
+                    </p>
+                    {CHANGES_INFO}
+                </div>
             </div>
             <div className="checkout_page_all_info_flex_right">
                 <PriceSummary 
