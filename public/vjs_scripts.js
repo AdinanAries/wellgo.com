@@ -287,132 +287,162 @@ let select_a_flight_from_bot_list = () => {
     document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="flex";
     window.wellgo_bot.selectedAFlight=true;
   }else{
-    document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+    if(document.getElementById("main_bot_view_flights_all_details_selected_cover"))
+      document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
     window.wellgo_bot.selectedAFlight=false;
   }
 }
 window.select_a_flight_from_bot_list=select_a_flight_from_bot_list;
 
-document.getElementById("main_bot_view_flights_all_details_select_btn").addEventListener("click",e=>{
-  select_a_flight_from_bot_list();
-});
+if(document.getElementById("main_bot_view_flights_all_details_select_btn")){
+  document.getElementById("main_bot_view_flights_all_details_select_btn").addEventListener("click",e=>{
+    select_a_flight_from_bot_list();
+  });
+}
 
-document.getElementById("main_bot_view_flights_all_details_deselect_btn").addEventListener("click",e=>{
-  document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
-  window.wellgo_bot.selectedAFlight=false;
-  document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
-});
+if(document.getElementById("main_bot_view_flights_all_details_deselect_btn")){
+  document.getElementById("main_bot_view_flights_all_details_deselect_btn").addEventListener("click",e=>{
+    if(document.getElementById("main_bot_view_flights_all_details_selected_cover"))
+      document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+    window.wellgo_bot.selectedAFlight=false;
+    if(document.getElementById("select_a_ticket_from_bot_list_chck"))
+      document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
+  });
+}
 
-document.getElementById("main_bot_view_flights_all_details_cancel_btn").addEventListener("click", e=>{
-  document.getElementById("main_bot_view_flights_all_details").style.display="none";
-  document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
-  window.wellgo_bot.selectedAFlight=false;
-  document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
-});
+if(document.getElementById("main_bot_view_flights_all_details_cancel_btn")){
+  document.getElementById("main_bot_view_flights_all_details_cancel_btn").addEventListener("click", e=>{
+    if(document.getElementById("main_bot_view_flights_all_details"))
+      document.getElementById("main_bot_view_flights_all_details").style.display="none";
+    if(document.getElementById("main_bot_view_flights_all_details_selected_cover"))
+      document.getElementById("main_bot_view_flights_all_details_selected_cover").style.display="none";
+    window.wellgo_bot.selectedAFlight=false;
+    if(document.getElementById("select_a_ticket_from_bot_list_chck"))
+      document.getElementById("select_a_ticket_from_bot_list_chck").checked=false;
+  });
+}
 
-document.getElementById("main_bot_view_selected_flights_all_details_cancel_btn").addEventListener("click", e=>{
-  document.getElementById("main_bot_view_selected_flights_all_details").style.display="none";
-});
+if(document.getElementById("main_bot_view_selected_flights_all_details_cancel_btn")){
+  document.getElementById("main_bot_view_selected_flights_all_details_cancel_btn").addEventListener("click", e=>{
+    document.getElementById("main_bot_view_selected_flights_all_details").style.display="none";
+  });
+}
 
 let main_bot_view_flights_all_details_func = () => {
-  document.getElementById("main_bot_view_flights_all_details").style.display="block";
+  if(document.getElementById("main_bot_view_flights_all_details"))
+    document.getElementById("main_bot_view_flights_all_details").style.display="block";
 }
 window.main_bot_view_flights_all_details_func=main_bot_view_flights_all_details_func;
 
 let main_bot_view_selected_flights_all_details_func = () => {
-  document.getElementById("main_bot_view_selected_flights_all_details").style.display="block";
+  if(document.getElementById("main_bot_view_selected_flights_all_details"))
+    document.getElementById("main_bot_view_selected_flights_all_details").style.display="block";
 }
 window.main_bot_view_selected_flights_all_details_func=main_bot_view_selected_flights_all_details_func;
 
 //chat functions
-document.getElementById("hp_support_user_submit_chat_btn").addEventListener("click", e=>{
-  e.preventDefault();
-  window.run_chat_instance();
-});
-
-document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
-  e.preventDefault();
-  e.which = e.which || e.keyCode;
-  if(e.which === 13) {
+if(document.getElementById("hp_support_user_submit_chat_btn")){
+  document.getElementById("hp_support_user_submit_chat_btn").addEventListener("click", e=>{
+    e.preventDefault();
     window.run_chat_instance();
-    document.querySelector("#main_support_chat_user_input_txt_container textarea").blur();
-  }
-});
+  });
+}
+
+if(document.querySelector("#main_support_chat_user_input_txt_container textarea")){
+  document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
+    e.preventDefault();
+    e.which = e.which || e.keyCode;
+    if(e.which === 13) {
+      window.run_chat_instance();
+      document.querySelector("#main_support_chat_user_input_txt_container textarea").blur();
+    }
+  });
+}
 
 let get_bot_query_autocomplete_wrapper = async (e) =>{
   let autocompleted = await window.get_bot_query_autocomplete(e.target.value);
   if(autocompleted.q===""){
-    document.getElementById("suggested_bot_query_display").innerHTML = "";
+    if(document.getElementById("suggested_bot_query_display"))
+      document.getElementById("suggested_bot_query_display").innerHTML = "";
   }else{
     let displayed_q = autocompleted.q.length > 30 ? `${autocompleted.q.substring(0,30)}...` : autocompleted.q;
-    document.getElementById("suggested_bot_query_display").innerHTML = `
-      <div onclick="default_run_chat_instance('${displayed_q}');" style="cursor: pointer;" class="support_chat_user_input_input_suggestions">
-        <p style="color: rgba(0,0,0,0.9); font-size: 14px; font-family: 'Prompt', sans-serif;">
-            <i class="fa fa-lightbulb-o" style="margin-right: 5px; color: rgba(0,55,55,0.9);"></i>
-            ${displayed_q}</p>
-      </div>
-    `;
+    if(document.getElementById("suggested_bot_query_display"))
+      document.getElementById("suggested_bot_query_display").innerHTML = `
+        <div onclick="default_run_chat_instance('${displayed_q}');" style="cursor: pointer;" class="support_chat_user_input_input_suggestions">
+          <p style="color: rgba(0,0,0,0.9); font-size: 14px; font-family: 'Prompt', sans-serif;">
+              <i class="fa fa-lightbulb-o" style="margin-right: 5px; color: rgba(0,55,55,0.9);"></i>
+              ${displayed_q}</p>
+        </div>
+      `;
   }
   
 }
 window.get_bot_query_autocomplete_wrapper=get_bot_query_autocomplete_wrapper;
 
-document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
-  if(e.target.value===""){
-    document.getElementById("suggested_bot_query_display").innerHTML = "";
-    //return;
-  }else{
-    get_bot_query_autocomplete_wrapper(e)
-  }
-  
-});
+if(document.querySelector("#main_support_chat_user_input_txt_container textarea")){
+  document.querySelector("#main_support_chat_user_input_txt_container textarea").addEventListener("keyup", e=>{
+    if(e.target.value===""){
+      if(document.getElementById("suggested_bot_query_display"))
+        document.getElementById("suggested_bot_query_display").innerHTML = "";
+      //return;
+    }else{
+      get_bot_query_autocomplete_wrapper(e)
+    }
+    
+  });
+}
 
 let ig = 0;
 let is_chat_container_shown = false;
 let toggle_show_hp_support_chat_container = () => {
+  if(document.getElementById("main_chat_bot_status_display"))
     document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_loading_markup();
-    if(is_chat_container_shown){
+  if(is_chat_container_shown){
 
-      document.body.style.position="initial";
-      document.body.style.width="auto";
-      document.body.style.height="auto";
+    document.body.style.position="initial";
+    document.body.style.width="auto";
+    document.body.style.height="auto";
 
-      if(window.wellgo_bot.status===""){
+    if(window.wellgo_bot.status===""){
+      if(document.getElementById("chatbot_greenting_message_p"))
         document.getElementById("chatbot_greenting_message_p").innerHTML = '';
-      }
-      window.$("#support_chat_container").slideUp("fast");
-      if(document.getElementById("chatbot_provided_manual_channels"))
-        document.getElementById("chatbot_provided_manual_channels").style.display="none";
-      document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
-      ig=0;
-    }else{
-
-      if(window.$(window).width() <= 700){
-        document.body.style.position="fixed";
-        document.body.style.width="100vw";
-        document.body.style.height="100vh";
-      }
-
-      setTimeout(()=>{
-          document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
-      },1000)
-      hide_new_chatbot_tip();
-      if(window.wellgo_bot.status===""){
-        typeWriter();
-      }
-      document.getElementById("support_chat_container").style.display = "block";
-      let show_text_fld_wait_time=1200;
-      if(window.wellgo_bot.status===""){
-        show_text_fld_wait_time=((txt.length*speed)/2);
-      }
-      setTimeout(()=>{
-        if(document.getElementById("chatbot_provided_manual_channels"))
-            document.getElementById("chatbot_provided_manual_channels").style.display="block";
-        if(document.getElementById("main_support_chat_user_input_txt_container"))
-          document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
-      }, show_text_fld_wait_time);
     }
-    is_chat_container_shown = !is_chat_container_shown;
+    window.$("#support_chat_container").slideUp("fast");
+    if(document.getElementById("chatbot_provided_manual_channels"))
+      document.getElementById("chatbot_provided_manual_channels").style.display="none";
+    if(document.getElementById("main_support_chat_user_input_txt_container"))
+      document.getElementById("main_support_chat_user_input_txt_container").style.display="none";
+    ig=0;
+  }else{
+
+    if(window.$(window).width() <= 700){
+      document.body.style.position="fixed";
+      document.body.style.width="100vw";
+      document.body.style.height="100vh";
+    }
+
+    setTimeout(()=>{
+      if(document.getElementById("main_chat_bot_status_display"))
+        document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
+    },1000)
+    hide_new_chatbot_tip();
+    if(window.wellgo_bot.status===""){
+      typeWriter();
+    }
+    if(document.getElementById("support_chat_container"))
+      document.getElementById("support_chat_container").style.display = "block";
+    let show_text_fld_wait_time=1200;
+    if(window.wellgo_bot.status===""){
+      show_text_fld_wait_time=((txt.length*speed)/2);
+    }
+    setTimeout(()=>{
+      if(document.getElementById("chatbot_provided_manual_channels"))
+          document.getElementById("chatbot_provided_manual_channels").style.display="block";
+      if(document.getElementById("main_support_chat_user_input_txt_container"))
+        document.getElementById("main_support_chat_user_input_txt_container").style.display="block";
+    }, show_text_fld_wait_time);
+  }
+  is_chat_container_shown = !is_chat_container_shown;
 }
 window.toggle_show_hp_support_chat_container=toggle_show_hp_support_chat_container;
 
@@ -423,9 +453,11 @@ let typeWriter = () => {
   if (ig < txt.length) {
 
     if(txt.substring(ig, ig+5).toLowerCase() === "<br/>"){
-      document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, ig+5);
+      if(document.getElementById("chatbot_greenting_message_p"))
+        document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, ig+5);
       ig = ig+5;
     }else if(txt.charAt(ig) === "&" && txt.charAt(ig+1) === "#"){
+      if(document.getElementById("chatbot_greenting_message_p"))
         document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, ig+8);
         ig = ig+9;
     }else if(
@@ -451,11 +483,13 @@ let typeWriter = () => {
           indexOfTagClosing_2 = txt.indexOf(">", indexOfTagClosing_2 + 1);
       }
 
-      document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, (indexOfTagClosing_2+1));
-        ig = (indexOfTagClosing_2+1);
+      if(document.getElementById("chatbot_greenting_message_p"))
+        document.getElementById("chatbot_greenting_message_p").innerHTML += txt.substring(ig, (indexOfTagClosing_2+1));
+      ig = (indexOfTagClosing_2+1);
     }else{
+      if(document.getElementById("chatbot_greenting_message_p"))
         document.getElementById("chatbot_greenting_message_p").innerHTML += txt.charAt(ig); 
-        ig++;
+      ig++;
     }
     setTimeout(typeWriter, speed);
   }
@@ -463,12 +497,14 @@ let typeWriter = () => {
 window.typeWriter=typeWriter;
 
 let show_new_chatbot_tip = (msg) => {
+  if(document.getElementById("main_chat_bot_tips_poppup_section"))
     document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
     setTimeout(()=>hide_new_chatbot_tip(),15000);
 }
 window.show_new_chatbot_tip=show_new_chatbot_tip;
 
 let hide_new_chatbot_tip = () => {
+  if(document.getElementById("main_chat_bot_tips_poppup_section"))
     window.$("#main_chat_bot_tips_poppup_section").slideUp("fast");
 }
 window.hide_new_chatbot_tip=hide_new_chatbot_tip;
@@ -479,29 +515,30 @@ window.$(document).ready(()=>{
 });
 
 let show_chat_bot_uprading_message = () => {
-  document.getElementById("hp_support_chat_items").innerHTML = `
-      <div class="support_chat_bot_sent_msg_container">
-        <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
-          <i class="fa-solid fa-robot"></i>
-        </div>
-        <div class="support_chat_bot_sent_msg_inner_container">
-            <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
-        </div>
-      </div>
-      <div id="chatbot_provided_manual_channels" style="display: none; animation: pop-in 0.2s ease-out;">
-        <div style="display: flex; flex-direction: row; padding: 20px 0;">
-          <div style="cursor: pointer; margin-right: 10px; background-color: rgba(122,21,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
-              <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
-                  <i style="margin-right: 10px" class="fa fa-phone"></i>
-                  Call</p>
+  if(document.getElementById("hp_support_chat_items"))
+    document.getElementById("hp_support_chat_items").innerHTML = `
+        <div class="support_chat_bot_sent_msg_container">
+          <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
+            <i class="fa-solid fa-robot"></i>
           </div>
-          <div style="cursor: pointer; margin-right: 10px; background-color: rgba(21,122,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
-              <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
-                  <i style="margin-right: 10px;" class="fa fa-envelope"></i>
-                  Email</p>
+          <div class="support_chat_bot_sent_msg_inner_container">
+              <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
           </div>
         </div>
-      </div>
+        <div id="chatbot_provided_manual_channels" style="display: none; animation: pop-in 0.2s ease-out;">
+          <div style="display: flex; flex-direction: row; padding: 20px 0;">
+            <div style="cursor: pointer; margin-right: 10px; background-color: rgba(122,21,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+                <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
+                    <i style="margin-right: 10px" class="fa fa-phone"></i>
+                    Call</p>
+            </div>
+            <div style="cursor: pointer; margin-right: 10px; background-color: rgba(21,122,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+                <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
+                    <i style="margin-right: 10px;" class="fa fa-envelope"></i>
+                    Email</p>
+            </div>
+          </div>
+        </div>
     `;
     let bot_name='Alien Dough'
     let all_txt=[
@@ -531,30 +568,38 @@ let show_chat_bot_uprading_message = () => {
 }
 window.show_chat_bot_uprading_message=show_chat_bot_uprading_message;
 
-document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
-  if(window.wellgo_bot.status===""){
-    show_chat_bot_uprading_message();
-  }
-  toggle_show_hp_support_chat_container();
-});
+if(document.getElementById("main_homepage_start_support_btn")){
+  document.getElementById("main_homepage_start_support_btn").addEventListener("click", e=>{
+    if(window.wellgo_bot.status===""){
+      show_chat_bot_uprading_message();
+    }
+    toggle_show_hp_support_chat_container();
+  });
+}
 
-document.getElementById("main_chatbot_popup_tip_msg").addEventListener("click", e=>{
-  if(window.wellgo_bot.status===""){
-    show_chat_bot_uprading_message();
-  }
-  toggle_show_hp_support_chat_container();
-});
+if(document.getElementById("main_chatbot_popup_tip_msg")){
+  document.getElementById("main_chatbot_popup_tip_msg").addEventListener("click", e=>{
+    if(window.wellgo_bot.status===""){
+      show_chat_bot_uprading_message();
+    }
+    toggle_show_hp_support_chat_container();
+  });
+}
 
-document.getElementById("main_chatbot_popup_tip_img").addEventListener("click", e=>{
-  if(window.wellgo_bot.status===""){
-    show_chat_bot_uprading_message()
-  }
-  toggle_show_hp_support_chat_container();
-});
+if(document.getElementById("main_chatbot_popup_tip_img")){
+  document.getElementById("main_chatbot_popup_tip_img").addEventListener("click", e=>{
+    if(window.wellgo_bot.status===""){
+      show_chat_bot_uprading_message()
+    }
+    toggle_show_hp_support_chat_container();
+  });
+}
 
-document.getElementById("main_chat_hp_support_container_close_btn").addEventListener("click", e=>{
-  toggle_show_hp_support_chat_container();
-});
+if(document.getElementById("main_chat_hp_support_container_close_btn")){
+  document.getElementById("main_chat_hp_support_container_close_btn").addEventListener("click", e=>{
+    toggle_show_hp_support_chat_container();
+  });
+}
 
 let is_landing_page_search_filters_open = false;
 window.is_landing_page_search_filters_open=is_landing_page_search_filters_open;
@@ -567,16 +612,17 @@ let start_book_with_vitual_agent = () => {
     
     if(document.querySelectorAll(".departure_airport_suggested_by_bot"))
       clear_airports_suggested_by_bot_ids()
-    document.getElementById("hp_support_chat_items").innerHTML = `
-      <div class="support_chat_bot_sent_msg_container">
-        <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
-          <i class="fa-solid fa-robot"></i>
+    if(document.getElementById("hp_support_chat_items"))
+      document.getElementById("hp_support_chat_items").innerHTML = `
+        <div class="support_chat_bot_sent_msg_container">
+          <div class="support_chat_bot_sent_msg_container_bot_profile_pic">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="support_chat_bot_sent_msg_inner_container">
+              <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
+          </div>
         </div>
-        <div class="support_chat_bot_sent_msg_inner_container">
-            <p id="chatbot_greenting_message_p" style="font-family: 'Prompt', sans-serif; font-size: 15px;"></p>
-        </div>
-      </div>
-    `;
+      `;
     txt = window.virtual_assistant_functions.get_starter_message(
       window.wellgo_bot.status_names.BEGIN_AIR_BOOKING);
     
@@ -593,17 +639,23 @@ let start_book_with_vitual_agent = () => {
 window.start_book_with_vitual_agent=start_book_with_vitual_agent;
 //global.start_book_with_vitual_agent=start_book_with_vitual_agent;
 
-document.getElementById("landing_page_search_bar_call_btn").addEventListener("click", e=>{
-  alert("placing your call now");
-  window.toggle_main_page_search_filters();
-});
+if(document.getElementById("landing_page_search_bar_call_btn")){
+  document.getElementById("landing_page_search_bar_call_btn").addEventListener("click", e=>{
+    alert("placing your call now");
+    window.toggle_main_page_search_filters();
+  });
+}
 
-document.getElementById("landing_page_search_bar_show_main_search_form_btn").addEventListener("click", e=>{
-  window.toggle_main_page_search_filters();
-});
-document.getElementById("landing_page_search_bar_help_pg_btn").addEventListener("click", e=>{
-  window.toggle_main_page_search_filters();
-});
+if(document.getElementById("landing_page_search_bar_show_main_search_form_btn")){
+  document.getElementById("landing_page_search_bar_show_main_search_form_btn").addEventListener("click", e=>{
+    window.toggle_main_page_search_filters();
+  });
+}
+if(document.getElementById("landing_page_search_bar_help_pg_btn")){
+  document.getElementById("landing_page_search_bar_help_pg_btn").addEventListener("click", e=>{
+    window.toggle_main_page_search_filters();
+  });
+}
 
 window.onscroll = function() {
   if(localStorage.getItem("is_home_page")){
