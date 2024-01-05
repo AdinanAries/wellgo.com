@@ -787,9 +787,6 @@ footer {
 .each_ticket_upper_flex {
   display: flex;
 }
-.each_ticket_price_display {
-  text-align: right;
-}
 .display_more_info_pane {
   display: none;
   animation: pop-in 0.2s ease-out;
@@ -1698,6 +1695,9 @@ footer {
     padding-left: 0;
     padding-right: 0;
   }
+  .mobile_content_display_block_container {
+    display: block !important;
+  }
   .cm-toggle {
     margin-right: 25px !important;
   }
@@ -2003,11 +2003,12 @@ footer {
   .each_ticket_price_display {
     text-align: left;
   }
+  .each_ticket_item_container p{
+    text-align: left !important;
+    margin-left: 40px !important;
+  }
   .each_ticket_price_display_container {
     margin: 10px 0;
-    padding: 10px 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .search_page_form_dates_input_container{
     width: 100% !important;

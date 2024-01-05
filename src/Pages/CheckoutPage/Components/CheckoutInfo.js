@@ -408,17 +408,17 @@ const CheckoutInfo = (props) => {
                                 {DESTINATION_CITY} {">"} {DESTINATION_AIRPORT}
                             </p>
                             <div style={{display: "flex"}}>
-                                <p style={{color: "green", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
+                                <p style={{color: "#c751b9", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
                                     {owner.name}
                                 </p>
                                 <p style={{margin: "0 5px", marginTop: -6.5, fontSize: 18, color: "rgba(0,0,0,0.5)"}}>
                                     .</p>
-                                <p style={{color: "green", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
+                                <p style={{color: "#c751b9", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
                                     {is_one_way ? "one way" : "round trip"}
                                 </p>
                                 <p style={{margin: "0 5px", marginTop: -6.5, fontSize: 18, color: "rgba(0,0,0,0.5)"}}>
                                     .</p>
-                                <p style={{color: "green", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
+                                <p style={{color: "#c751b9", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
                                     {passengers.length>1?(`${passengers.length} travelers`):"1 traveler"}
                                 </p>
                             </div>

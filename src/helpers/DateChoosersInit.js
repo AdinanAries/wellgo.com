@@ -38,12 +38,21 @@ export const SpDateChoosersInit = (type=CONSTANTS.one_way, start_date="", end_da
     document.getElementById("sp_departure_return_dates_input").value="";
   if(type===CONSTANTS.one_way){
     document.getElementById("sp_departure_return_dates_input").placeholder="departure date";
-    if(start_date)
+    if(start_date){
       document.getElementById("sp_departure_return_dates_input").value=start_date;
+      setTimeout(()=>{
+        document.getElementById("sp_departure_return_dates_input").value = new Date(start_date+"T00:00").toString().substring(0,11);
+      }, 100);
+    }
   }else if(type===CONSTANTS.round_trip){
     document.getElementById("sp_departure_return_dates_input").placeholder="departure - return dates";
-    if(start_date && end_date)
+    if(start_date && end_date){
       document.getElementById("sp_departure_return_dates_input").value=start_date+" - "+end_date;
+      setTimeout(()=>{
+        if(document.getElementById("sp_departure_return_dates_input"))
+            document.getElementById("sp_departure_return_dates_input").value = new Date(start_date+"T00:00").toString().substring(0,11) + " - " + new Date(end_date+"T00:00").toString().substring(0,11);
+      }, 100);
+    }
   }
   window.$(function() {
     window.$('#sp_departure_return_dates_input').daterangepicker({

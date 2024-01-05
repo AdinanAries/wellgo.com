@@ -4,7 +4,7 @@ import { convert24HTimeToAMPM, calculateTotalTime, ellipsify, get_currency_symbo
 const DuffelOfferItem = (props) => {
 
     console.log(props);
-    const { total_amount, total_currency, id, owner, slices } = props.flight;
+    const { total_amount, total_currency, id, owner, slices, passengers } = props.flight;
     
     const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
     const AIRCRAFT_NAME = slices[0].segments[0].aircraft?.name;
@@ -31,7 +31,7 @@ const DuffelOfferItem = (props) => {
             let flight_stop_departure = slices[0].segments[sg+1].departing_at;
             const {h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
             let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slices[0].segments[sg].destination.city_name)} (${slices[0].segments[sg].destination.iata_code})`);
-            STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
+            STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12, zIndex: 1, textAlign: "center"}}>
                     {STOP_DETAILS}
                     <div className="tooltip">{`${slices[0].segments[sg].destination.city_name} - ${slices[0].segments[sg].destination.name}`}</div>
                 </p>);
@@ -47,42 +47,45 @@ const DuffelOfferItem = (props) => {
     const MINUTES = duration?.split("H")[1]?.replace("M","");
 
     return (
-        <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}} 
-            style={{cursor: "pointer", backgroundColor: "rgba(255,255,255,0.7)", borderRadius: 9, marginBottom: 5, padding: "15px 10px", border: "1px solid rgba(0,0,0,0.1)"}}>
-            <div className="each_ticket_upper_flex" style={{flexDirection: "row", justifyContent: "space-between"}}>
+        <div className="each_ticket_item_container"
+            style={{cursor: "pointer", padding: 15, borderTop: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "space-between"}}>
+            <div  onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}}
+                className="mobile_content_display_block_container" 
+                style={{width: "calc(100% - 60px)", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
                 <div>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontWeight: "bolder", fontSize: 16, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
-                        {TRIP_START} - {TRIP_ENDS}</p>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
-                    {ORIGIN_AIRPORT} - {DESTINATION_AIRPORT}</p>
+                    <div style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontWeight: "bolder", marginBottom: 5}}>
+                        <img src={owner.logo_symbol_url/*"./deltaIcon.png"*/} alt={"test"} style={{width: 30, height: "auto", objectFit: "cover", marginRight: 7}} />
+                        {TRIP_START} - {TRIP_ENDS}
+                    </div>
+                    <p style={{marginLeft: 40, color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
+                        {owner.name}
+                    </p>
                 </div>
                 <div>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>{HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")})</p>
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, textAlign: "center", marginBottom: 5}}>
+                        {HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "nonstop")})</p>
                     {STOPSMARKUP.map(each=>each)}
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 10, textAlign: "center"}}>
+                        <span style={{fontSize: 12}}>
+                            {is_one_way?"one way":"round trip"}</span>
+                    </p>
                 </div>
                 <div className="each_ticket_price_display_container">
-                    <p className="each_ticket_price_display" style={{color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 22, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
-                        <span style={{fontSize: 22, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                    <p className="each_ticket_price_display" style={{textAlign: "center", color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 18, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
+                        <span style={{fontSize: 18, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
                             dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
                         {(markup(total_amount).new_price).toFixed(2)}</p>
-                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
-                        <span style={{fontSize: 12}}>
-                            {is_one_way?"One-way | ":"Roundtrip | "}
-                            <i style={{color: !is_one_way?"green":"orange", fontSize: 12, marginRight: 5}} className={"fa-solid "+(!is_one_way?"fa-check":"fa-exclamation-triangle")}></i>
-                            {!is_one_way?"return flight ":"no return flight "}</span>
-                        
+                    <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 10, textAlign: "center"}}>
+                        {passengers.length>1?(`${passengers.length} passengers`):"1 passenger"}
                     </p>
                 </div>
             </div>
-            <div style={{marginTop: 5}}>
-                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 10}}>
-                    <img src={owner.logo_symbol_url/*"./deltaIcon.png"*/} alt={"test"} style={{width: 27, height: "auto", objectFit: "cover", marginRight: 7}} />
-                    {owner.name} &#8226; {AIRCRAFT_NAME} {OPERATED_BY && "operated by " + OPERATED_BY}
-                </p>
-                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
-                    2 cleaning and safety practices
-                </p>
+            <div className="hover_bg-grey"
+                    style={{display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "100%", fontSize: 18, width: 40, height: 40, color: "rgba(0,0,0,0.7)"}}>
+                    <i className="fa-solid fa-angle-down"></i>
             </div>
+            <p style={{display: "none", color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
+                {AIRCRAFT_NAME} {OPERATED_BY && "operated by " + OPERATED_BY}</p>
         </div>
     );
 }
