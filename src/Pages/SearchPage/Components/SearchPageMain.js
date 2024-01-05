@@ -11,18 +11,6 @@ const SearchPageMain = (props) => {
     let [ loading, setLoading ] = useState(true);
     let [ selectedFlightId, setSelectedFlightId] = useState("");
 
-    const submitFromSearchPage = async () => {
-        setFlights([]);
-        setLoading(true);
-        let res = await fetchFlightOffers();
-        console.log(res);
-        if(res.data)
-            (res.data.length>0) ? setFlights(res.data) : setFlights([]);
-        else
-            setFlights([])
-        setLoading(false);
-    }
-
     const selectFlightOffer = (id) => {
         setSelectedFlightId(id);
     }
@@ -32,16 +20,22 @@ const SearchPageMain = (props) => {
     }
 
     useEffect(() => {
-        (async function go() {
-            let res = await fetchFlightOffers();
+        setFlightsResults();
+    }, [])
+
+    const setFlightsResults = async () => {
+        let res = await fetchFlightOffers();
             console.log(res);
             if(res.data)
                 (res.data.length>0) ? setFlights(res.data) : setFlights([]);
             else
                 setFlights([]);
             setLoading(false);
-        })();
-    }, [])
+    }
+
+    const submitFromSearchPage = async () => {
+        window.location.reload();
+    }
 
     const SEARCH_OBJ=JSON.parse(localStorage.getItem(CONSTANTS.local_storage.flight_search_object));
     if(flights.length>0){

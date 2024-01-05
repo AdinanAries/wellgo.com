@@ -81,7 +81,7 @@ const BookingHistoryPage = (props) => {
                             </div>
                         }{
                             (bookings.length > 0) && bookings.slice(begin, end).map(each =>(
-                                <div style={{display: "block", padding: 10}}>
+                                <div key={each._id} style={{display: "block", padding: 10}}>
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                                         <i className="fa fa-route" style={{marginRight: 10, color: "rgba(12, 109, 133, 0.5)"}}></i>
                                         {each.takeoff_city} ({each.takeoff_airport_code}) - {each.destination_city} ({each.destination_airport_code})</p>

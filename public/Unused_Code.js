@@ -1,3 +1,17 @@
+//React Component - SearchPageMain
+const submitFromSearchPage = async () => {
+  setFlights([]);
+  setLoading(true);
+  let res = await fetchFlightOffers();
+  console.log(res);
+  if(res.data)
+      (res.data.length>0) ? setFlights(res.data) : setFlights([]);
+  else
+      setFlights([])
+  setLoading(false);
+}
+
+
 // Obsolete function for enforcing date format in YYYY/MM/DD
 export const validateYYYYMMDDInputDates = (date_string, date_separator="/") => {
     date_string=date_string.trim(); 
