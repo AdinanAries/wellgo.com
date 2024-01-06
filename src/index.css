@@ -2010,10 +2010,6 @@ footer {
   .each_ticket_price_display {
     text-align: left;
   }
-  .each_ticket_item_container p{
-    text-align: left !important;
-    margin-left: 40px !important;
-  }
   .each_ticket_price_display_container {
     margin: 10px 0;
   }
@@ -2338,6 +2334,10 @@ footer {
 @media screen and (max-width: 700px) {
   .checkout_passenger_card {
     width: calc(100% - 4px) !important;
+  }
+  .each_ticket_item_container p{
+    text-align: left !important;
+    margin-left: 40px !important;
   }
   .mobile_content_display_block_container {
     display: block !important;
