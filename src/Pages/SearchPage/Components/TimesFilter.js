@@ -3,7 +3,7 @@ const TimesFilter = (props) => {
     
     const { hideTimesFilter } = props;
 
-    return <div className="classic_popup_pane" style={{right: -160}}>
+    return <div className="classic_popup_pane" style={{right: -135}}>
         <p onClick={hideTimesFilter} className="hover_bg-grey"
             style={{zIndex: 1, cursor: "pointer", fontFamily: "'Pompt', Sans-serif", position: "absolute", top: 4, right: 10, fontSize: 20, color: "rgba(0,0,0,0.7)", width: 35, height: 35, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
             x</p>

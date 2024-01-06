@@ -106,7 +106,7 @@ const DuffelOfferItem = (props) => {
                 style={{cursor: "pointer", padding: 15, borderTop: "1px solid rgba(0,0,0,0.1)", display: "flex", justifyContent: "space-between"}}>
                 <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}}
                     className="mobile_content_display_block_container" 
-                    style={{width: "calc(100% - 100px)", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
+                    style={{width: "calc(100% - 110px)", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
                     <div>
                         <div style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontWeight: "bolder", marginBottom: 5}}>
                             <img src={owner.logo_symbol_url/*"./deltaIcon.png"*/} alt={"test"} style={{width: 30, height: "auto", objectFit: "cover", marginRight: 7}} />
@@ -131,8 +131,8 @@ const DuffelOfferItem = (props) => {
                         </p>
                     </div>
                 </div>
-                <div>
-                    <div style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 0,color: "rgba(0,0,0,0.7)", fontWeight: "bolder", fontSize: 11}}>
+                <div style={{borderLeft: "1px dashed rgba(0,0,0,0.1)", paddingLeft: 15}}>
+                    <div style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 0, color: "rgba(0,0,0,0.7)", fontWeight: "bolder", fontSize: 11}}>
                         {ORIGIN_IATA}
                         <span style={{margin: "0 10px", color: "rgba(0,0,0,0.4)"}}>
                             <i style={{fontSize: 11}}
