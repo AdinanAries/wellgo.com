@@ -52,7 +52,7 @@ const DuffelOfferItem = (props) => {
         const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0].departing_at.replace("T", " "));
         const TRIP=( index ? "Return" : "Take-Off");
         ITIN_SEGMENTS.push(
-            <div style={{marginLeft: (index>0) && 25}}>
+            <div>
                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
                     <i style={{marginRight: 10, fontSize: 11}}
                         className="fa-solid fa-plane-departure"></i>
@@ -174,7 +174,8 @@ const DuffelOfferItem = (props) => {
                     </span>
                     
                 </div>
-                <div style={{display: "flex", justifyContent: "space-between",}}>
+                <div className="mobile_content_display_block_container"
+                    style={{display: "flex", justifyContent: "space-between",}}>
                     {ITIN_SEGMENTS.map(each=>each)}
                 </div>
                 <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}}

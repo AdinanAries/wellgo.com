@@ -1695,9 +1695,6 @@ footer {
     padding-left: 0;
     padding-right: 0;
   }
-  .mobile_content_display_block_container {
-    display: block !important;
-  }
   .cm-toggle {
     margin-right: 25px !important;
   }
@@ -2331,6 +2328,9 @@ footer {
 @media screen and (max-width: 700px) {
   .checkout_passenger_card {
     width: calc(100% - 4px) !important;
+  }
+  .mobile_content_display_block_container {
+    display: block !important;
   }
 }
 
