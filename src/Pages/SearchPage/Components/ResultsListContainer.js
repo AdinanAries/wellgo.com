@@ -210,7 +210,7 @@ export default function ResultsListContainer(props){
         });
 
         // Step 2: Finding the Cross Items (like && operator does)
-        filtered.forEach( item => {
+        /*filtered.forEach( item => {
             let take=true;
             let found=false;
             let has_price_filters=false;
@@ -279,7 +279,7 @@ export default function ResultsListContainer(props){
             
             if(take)
                 cross_filtered.push(item);
-        });
+        });*/
         
         setFilteredFlights(filtered);
     }
