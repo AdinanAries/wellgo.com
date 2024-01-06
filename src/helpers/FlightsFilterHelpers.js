@@ -161,3 +161,38 @@ export const filterByMaxDuration = (flightsArr, max_duration) => {
     }
     return [];
 }
+
+export const duffelTimesAndPrices = (flightsArr) => {
+    let TimesArr = [];
+
+    if(flightsArr && Array.isArray(flightsArr) && flightsArr?.length > 0){
+        for(let i=0; i<flightsArr.length; i++){
+            // Values
+            const FLIGHT = flightsArr[i];
+            const CURRENCY = FLIGHT.total_currency;
+            const TOTAL_AMOUNT = parseFloat(FLIGHT.total_amount);
+            const _TIME = FLIGHT.slices[0].segments[0].departing_at?.split("T")[1].replaceAll(":","_"); //"2024-01-08T12:36:00"
+            const AIRLINE_NAME = FLIGHT.owner.name;
+            let airlineObj = TimesArr.find(each=>each.takeOffTime===_TIME);
+            if(airlineObj){
+                airlineObj.prices.push(TOTAL_AMOUNT);
+                airlineObj.lowest = getMinNumber(airlineObj.prices);
+                airlineObj.highest = getMaxNumber(airlineObj.prices);
+                airlineObj.currency = CURRENCY;
+                airlineObj.flights.push(FLIGHT);
+            }else{
+                TimesArr.push({
+                    takeOffTime: _TIME,
+                    airlineName: AIRLINE_NAME,
+                    prices: [TOTAL_AMOUNT],
+                    lowest: TOTAL_AMOUNT,
+                    highest: TOTAL_AMOUNT,
+                    currency: CURRENCY,
+                    flights: [FLIGHT]
+                });
+            }
+        }
+    }
+
+    return TimesArr;
+}

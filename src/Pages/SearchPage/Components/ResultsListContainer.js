@@ -14,13 +14,15 @@ import DurationFilter from "./DurationFilter";
 import BagsFilter from "./BagsFilter";
 import TimesFilter from "./TimesFilter";
 import { markup } from "../../../helpers/Prices";
+import { get_currency_symbol } from "../../../helpers/general";
 import { 
     duffelStopsAndPrices, 
     duffelAirlinesAndPrices, 
     getMinAndMaxPrice, 
     filterByMaxPrice,
     getMinAndMaxDuration,
-    filterByMaxDuration
+    filterByMaxDuration,
+    duffelTimesAndPrices
 } from "../../../helpers/FlightsFilterHelpers";
 import { useEffect, useState } from "react";
 
@@ -78,6 +80,11 @@ function add_clouds_to_animated_loader(){
     }
 }
 
+let filtersByStops={};
+let filtersByAirlines={};
+let filtersByTimes={};
+let filtersByPrice={};
+let filtersByDuration={};
 export default function ResultsListContainer(props){
 
     const { SEARCH_OBJ } = props;
@@ -150,7 +157,9 @@ export default function ResultsListContainer(props){
         setPriceSlider(_value);
         const _price = Math.ceil((_value/100)*flightsMaxPrice);
         setFlightsSliderMaxPrice(_price);
-        setFilteredFlights(filterByMaxPrice(props.flights, _price));
+        //setFilteredFlights(filterByMaxPrice(props.flights, _price));
+        filtersByPrice["_by_price_range"]=filterByMaxPrice(props.flights, _price);
+        filterFlights();
     }
 
     const slideDurationFilter = (e) => {
@@ -158,11 +167,121 @@ export default function ResultsListContainer(props){
         setDurationSlider(_value);
         const _duration = (_value/100)*flightsMaxDuration;
         setFlightsSliderMaxDuration(_duration);
-        setFilteredFlights(filterByMaxDuration(props.flights, _duration));
+        //setFilteredFlights(filterByMaxDuration(props.flights, _duration));
+        filtersByDuration["_by_duration_range"]=filterByMaxDuration(props.flights, _duration);
+        filterFlights();
     }
 
-    const filterFlights = (flights) => {
-        setFilteredFlights(flights)
+    const filterFlights = () => {
+        setFilteredFlights([]);
+        let filtered=[];
+        let cross_filtered=[];
+
+        // Step 1: Merging all
+        Object.values(filtersByPrice).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            });     
+        });
+        Object.values(filtersByDuration).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            });     
+        });
+        Object.values(filtersByStops).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            }); 
+        });
+        Object.values(filtersByAirlines).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            });     
+        });
+        Object.values(filtersByTimes).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            });     
+        });
+
+        // Step 2: Finding the Cross Items (like && operator does)
+        filtered.forEach( item => {
+            let take=true;
+            let found=false;
+            let has_price_filters=false;
+            Object.values(filtersByPrice).forEach(each=>{
+                has_price_filters=true;
+                each.forEach(inner=>{
+                    if(item.id===inner.id){
+                        found=true;
+                    }
+                });     
+            });
+            if(has_price_filters && !found)
+                take=false;
+
+            let has_duration_filters=false;
+            found=false;
+            Object.values(filtersByDuration).forEach(each=>{
+                has_duration_filters=true;
+                each.forEach(inner=>{
+                    if(item.id===inner.id){
+                        found=true;
+                    }
+                });     
+            });
+            if(has_duration_filters && !found)
+                take=false;
+            
+            let has_stops_filters=false;
+            found=false;
+            Object.values(filtersByStops).forEach(each=>{
+                has_stops_filters=true;
+                each.forEach(inner=>{
+                    if(item.id===inner.id){
+                        found=true;
+                    }
+                });
+            });
+            if(has_stops_filters && !found)
+                take=false;
+
+            let has_airline_filters=false;
+            found=false;
+            Object.values(filtersByAirlines).forEach(each=>{
+                has_airline_filters=true;
+                each.forEach(inner=>{
+                    if(item.id===inner.id){
+                        found=true;
+                    }
+                });     
+            });
+            if(has_airline_filters && !found)
+                take=false;
+
+            let has_time_filters=false;
+            found=false;
+            Object.values(filtersByTimes).forEach(each=>{
+                has_time_filters=true;
+                each.forEach(inner=>{
+                    if(item.id===inner.id){
+                        found=true;
+                    }
+                });     
+            });
+            if(has_time_filters && !found)
+                take=false;
+            
+            if(take)
+                cross_filtered.push(item);
+        });
+        
+        setFilteredFlights(filtered);
     }
 
     let FLIGHTS;
@@ -202,6 +321,8 @@ export default function ResultsListContainer(props){
     let filterStops = duffelStopsAndPrices(props.flights);
     // Getting Filter - Airlines
     let filterAirlines = duffelAirlinesAndPrices(props.flights);
+    // Getting Filter - Take-off Times
+    let filterTimes = duffelTimesAndPrices(props.flights);
 
     return (
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0}}>
@@ -222,6 +343,8 @@ export default function ResultsListContainer(props){
                                 filterStops={filterStops}
                                 filterAirlines={filterAirlines}
                                 filterFlights={filterFlights}
+                                filtersByStops={filtersByStops}
+                                filtersByAirlines={filtersByAirlines}
                             /> :
                             <SearchFiltersLoader />
                     }
@@ -282,6 +405,9 @@ export default function ResultsListContainer(props){
                                                     {
                                                         isShowTimesFilter &&
                                                         <TimesFilter 
+                                                            filterTimes={filterTimes}
+                                                            filtersByTimes={filtersByTimes}
+                                                            filterFlights={filterFlights}
                                                             hideTimesFilter={hideTimesFilter}
                                                         />
                                                     }

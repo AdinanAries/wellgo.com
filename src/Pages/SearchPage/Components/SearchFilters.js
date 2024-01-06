@@ -2,29 +2,15 @@ import { useState } from "react";
 import { get_currency_symbol, ellipsify } from "../../../helpers/general";
 import { markup } from "../../../helpers/Prices";
 
-let filtersByStops={};
-let filtersByAirlines={};
 const SearchFilters = (props) => {
 
-    const { filterStops, filterAirlines, filterFlights } = props;
-    
-    const setFilteredFlights = () => {
-        let filtered=[];
-        Object.values(filtersByStops).forEach(each=>{
-            each.forEach(inner=>{
-                if(!filtered.find(f_each=>f_each.id===inner.id))
-                    filtered.push(inner)
-            }); 
-        });
-        Object.values(filtersByAirlines).forEach(each=>{
-            each.forEach(inner=>{
-                if(!filtered.find(f_each=>f_each.id===inner.id))
-                    filtered.push(inner)
-            });     
-        });
-
-        filterFlights(filtered);
-    }
+    const { 
+        filterStops, // array of stop filters
+        filterAirlines, // array of airline filters
+        filterFlights, // runs filter function to appy filters
+        filtersByStops, // global object to keep filter by stops
+        filtersByAirlines // global object to keep filter by airlines
+    } = props;
 
     const filterByStops = (e, flights, key) => {
         if(e.target.checked){
@@ -32,7 +18,7 @@ const SearchFilters = (props) => {
         }else{
             filtersByStops[key]=[];
         }
-        setFilteredFlights();
+        filterFlights();
     }
 
     const filterByAilines = (e, flights, key) => {
@@ -41,7 +27,7 @@ const SearchFilters = (props) => {
         }else{
             filtersByAirlines[key]=[];
         }
-        setFilteredFlights();
+        filterFlights();
     }
 
     const STOPS = filterStops.map(each=>{
