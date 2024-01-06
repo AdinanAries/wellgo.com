@@ -171,6 +171,7 @@ export default function ResultsListContainer(props){
             <FlightOfferItem 
                 selectFlightOffer={props.selectFlightOffer}
                 key={index} 
+                index={index}
                 flight={each}
             />);
     }else if(Array.isArray(filteredFlights) && filteredFlights.length>0){
@@ -178,6 +179,7 @@ export default function ResultsListContainer(props){
             <FlightOfferItem 
                 selectFlightOffer={props.selectFlightOffer}
                 key={index} 
+                index={index}
                 flight={each}
             />);
     }else{

@@ -8,7 +8,9 @@ const FlightOfferItem = (props) => {
     if(CONSTANTS.duffel===ENVIRONMENT.data_provider) {
         return <DuffelOfferItem
             selectFlightOffer={props.selectFlightOffer}
-            flight={props.flight} />
+            flight={props.flight} 
+            index={props.index}
+        />
     } else {
         return <div>
             <p>Unknown Data Provider</p>

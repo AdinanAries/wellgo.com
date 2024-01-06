@@ -22,6 +22,8 @@ const SelectedTicketItinSegments = (props) => {
     // Reset for showing toggling to show or hide segments
     global.is_itinerary_showing=false;
 
+    const ELEM_DISPLAY = props?.display || "none";
+
     // For testing
     // segments=segs;
 
@@ -217,7 +219,7 @@ const SelectedTicketItinSegments = (props) => {
     }
 
     return (
-        <div id={element_id} style={{display: "none", marginTop: 10, marginBottom: 20}}>
+        <div id={element_id} style={{display: ELEM_DISPLAY, marginTop: 10, marginBottom: 20}}>
             {seg_markup.map(seg=>seg)}            
         </div>
     )
