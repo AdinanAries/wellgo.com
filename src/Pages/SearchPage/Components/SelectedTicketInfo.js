@@ -125,28 +125,19 @@ const SelectedTicketInfo = (props) => {
     }
 
     if(additional_checked_bags_count.length>0){
+        let curr=get_currency_symbol(additional_checked_bags_count[0].total_currency);
         CHECKED_BAGS.push(
             <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
                 <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
                     <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
                     {additional_checked_bags_count.length}
-                    {" additional purchasable checked "}
+                    {" Purchasable checked "}
                     {additional_checked_bags_count.length>1 ? "bags" : "bag"}:
+                    <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: 15}}>
+                        <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                        {additional_checked_bags_count[0].total_amount} each
+                    </span>
                 </span>
-                {
-                    additional_checked_bags_count.map((each, i)=>{
-                        let curr=get_currency_symbol(each.total_currency);
-                        return (
-                            <>
-                                {i>0 && ","}
-                                <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: i<1 ? 15 : 4}}>
-                                    <span dangerouslySetInnerHTML={{__html: curr}}></span>
-                                    {each.total_amount}
-                                </span>
-                            </>
-                        )
-                    })
-                }
             </p>
         )
     }
@@ -188,13 +179,13 @@ const SelectedTicketInfo = (props) => {
                 <div style={{padding: 10, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                         <div>
-                            <p style={{fontSize: 15, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder", marginBottom: 10}}>
+                            <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder", marginBottom: 10}}>
                                 {TRIP_START} - {TRIP_ENDS} ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")} )
                             </p>
-                            <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
+                            <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
                                 {ORIGIN_CITY}
                                 <span style={{margin: "0 10px", color: "rgba(0,0,0,0.4)"}}>
-                                    <i className={is_one_way ? "fa-solid fa-arrow-right" : "fa-solid fa-repeat"}></i></span>
+                                    <i className={is_one_way ? "fa-solid fa-arrow-right" : "fa-solid fa-exchange"}></i></span>
                                 {DESTINATION_CITY}
                             </p>
                             <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 2}}>
@@ -203,8 +194,8 @@ const SelectedTicketInfo = (props) => {
                                 <img src={owner.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
                                 {owner.name}
                                 <span onClick={()=>global.toggle_see_ticket_details_itinerary_details("see_ticket_details_itinerary_details")} 
-                                    style={{cursor: "pointer", marginLeft: 15, fontSize: 14, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
-                                    See details <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
+                                    style={{cursor: "pointer", marginLeft: 15, fontSize: 12, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
+                                    Flight Route <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
                                 </span>
                             </p>
                             <SelectedTicketItinSegments element_id="see_ticket_details_itinerary_details" segments={slices[0].segments}/>
@@ -224,22 +215,22 @@ const SelectedTicketInfo = (props) => {
                     <p style={{color: "crimson", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
                         {is_one_way ? "One-way":"Rountrip"} for {passengers.length>1?(`${passengers.length} travelers`):"1 traveler"}
                     </p>
-                    <p style={{fontSize: 14, marginTop: 20, fontFamily: "'Prompt', sans-serif", color: "green"}}>
+                    <p style={{fontSize: 12, marginTop: 20, fontFamily: "'Prompt', sans-serif", color: "green"}}>
                         Main Cabin
                     </p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 5}}>
                         {CABIN_CLASS}
                     </p>
-                    <p style={{fontSize: 14, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
+                    <p style={{fontSize: 12, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
                         Seat
                     </p>
                     {SEATS_SELECTION.map(each=>each)}
-                    <p style={{fontSize: 14, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
+                    <p style={{fontSize: 12, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
                         Bags
                     </p>
                     {BAGGAGES.map(each=>each)}
                     {CHECKED_BAGS.map(each=>each)}
-                    <p style={{fontSize: 14, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
+                    <p style={{fontSize: 12, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
                         Flexibility
                     </p>
                     {CANCELLATION_INFO}

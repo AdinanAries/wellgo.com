@@ -18,6 +18,8 @@ const DuffelOfferItem = (props) => {
         slices, 
         passengers 
     } = props.flight;
+    const EMISSIONS = props.flight?.total_emissions_kg
+    console.log(props.flight);
     
     const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
     const AIRCRAFT_NAME = slices[0].segments[0].aircraft?.name;
@@ -46,9 +48,9 @@ const DuffelOfferItem = (props) => {
 
     }
 
+    let all_amenities={};
     const ITIN_SEGMENTS=[];
     slices.forEach((slice, index)=>{
-        
         const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0].departing_at.replace("T", " "));
         const TRIP=( index ? "Return" : "Take-Off");
         ITIN_SEGMENTS.push(
@@ -69,6 +71,20 @@ const DuffelOfferItem = (props) => {
                 />
             </div>
         );
+
+        // Amenities
+        for(let i=0;i < slice.segments.length; i++){
+            for(let j=(slice.segments[i].passengers.length-1);j>=0;j--){
+                let amenities = {};
+                if(slice.segments[i].passengers[j].cabin)
+                    if(slice.segments[i].passengers[j].cabin?.amenities)
+                        amenities=slice.segments[i].passengers[j].cabin?.amenities
+                all_amenities={
+                    ...all_amenities,
+                    ...amenities
+                }
+            }
+        }
     });
 
     let is_one_way=true;
@@ -91,6 +107,11 @@ const DuffelOfferItem = (props) => {
                 </p>);
         }
     }
+    if(STOPSMARKUP.length<1){
+        STOPSMARKUP.push(<p style={{color: "rgba(0,0,0,0.8)", textAlign: "center", fontSize: 11, marginBottom: 5}}>
+        {AIRCRAFT_NAME}</p>)
+    }
+
     let duration = slices[0]?.duration; // [P1DT2H30M, PT23H45M]
     if(duration?.includes("D")){
         duration=duration?.replace("P","")?.replace("T","")?.replace("D", "d ");
@@ -115,11 +136,27 @@ const DuffelOfferItem = (props) => {
                         <p style={{marginLeft: 40, color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
                             {owner.name}
                         </p>
+                        <p style={{color: "rgba(0,0,0,0.7)", marginTop: 5}}>
+                            {
+                                all_amenities?.wifi?.available &&
+                                <i style={{fontSize: 13, marginRight: 10}} className="fa-solid fa-wifi"></i>
+                            }
+                            {
+                                all_amenities?.power?.available &&
+                                <i style={{fontSize: 13, marginRight: 10}} className="fa-solid fa-plug-circle-bolt"></i>
+                            }
+                        </p>
+                        
                     </div>
                     <div>
                         <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, textAlign: "center", marginBottom: 5}}>
                             {HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "nonstop")})</p>
                         {STOPSMARKUP.map(each=>each)}
+                        {
+                            EMISSIONS && <p style={{textAlign: "center", color: "rgba(0,0,0,0.7)", fontSize: 11, marginTop: 5}}>
+                                Emisions: {EMISSIONS} kg C0<sub style={{fontSize: 11}}>2</sub>
+                            </p>
+                        }
                     </div>
                     <div className="each_ticket_price_display_container">
                         <p className="each_ticket_price_display" style={{textAlign: "center", color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 18, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
@@ -148,9 +185,7 @@ const DuffelOfferItem = (props) => {
                             style={{display: "flex", margin: "auto", backgroundColor: "rgb(23, 87, 148)", color: "rgba(255,255,255,0.4)", transition: "all 0.2s ease-out", alignItems: "center", justifyContent: "center", borderRadius: "100%", fontSize: 13, width: 30, height: 30, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
                             <i className="fa-solid fa-angle-down"></i>
                     </div>
-                </div> 
-                <p style={{display: "none", color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
-                    {AIRCRAFT_NAME} {OPERATED_BY && "operated by " + OPERATED_BY}</p>
+                </div>
             </div>
             <div id={"each_ticket_item_more_details_container_"+index} 
                 className="each_ticket_item_more_details_container speech-bubble-top" 

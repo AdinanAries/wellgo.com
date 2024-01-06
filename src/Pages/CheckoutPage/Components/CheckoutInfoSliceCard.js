@@ -92,20 +92,20 @@ for(let i=0;i < slice.segments.length; i++){
                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 5}}>
                     {STOPSMARKUP.map(each=>each)}
                 </p>
-                <p style={{color: "rgba(0,0,0,0.7)", fontSize: 17, marginTop: 5}}>
+                <p style={{color: "rgba(0,0,0,0.7)", marginTop: 5}}>
                     {
                         all_amenities?.wifi?.available &&
-                        <i style={{marginRight: 10}} className="fa-solid fa-wifi"></i>
+                        <i style={{fontSize: 13, marginRight: 10}} className="fa-solid fa-wifi"></i>
                     }
                     {
                         all_amenities?.power?.available &&
-                        <i style={{marginRight: 10}} className="fa-solid fa-plug-circle-bolt"></i>
+                        <i style={{fontSize: 13, marginRight: 10}} className="fa-solid fa-plug-circle-bolt"></i>
                     }
-                    <i style={{marginRight: 10}} className="fa fa-wifi"></i>
+                    <i style={{fontSize: 13, marginRight: 10}} className="fa fa-wifi"></i>
                 </p>
                 <p onClick={()=>toggle_see_ticket_details_itinerary_details(index+"checkout_see_ticket_details_itinerary_details")}
-                     style={{cursor: "pointer", marginTop: 10, fontSize: 14, color: "#c900b0"}}>
-                    See details <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
+                     style={{cursor: "pointer", marginTop: 15, fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "#c900b0"}}>
+                    Flight Route <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
                 </p>
                 <SelectedTicketItinSegments element_id={index+"checkout_see_ticket_details_itinerary_details"} segments={slice.segments}/>
             </div>

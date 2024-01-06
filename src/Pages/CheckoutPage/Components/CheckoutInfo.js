@@ -154,28 +154,19 @@ const CheckoutInfo = (props) => {
     }
 
     if(additional_checked_bags_count.length>0){
+        let curr=get_currency_symbol(additional_checked_bags_count[0].total_currency);
         CHECKED_BAGS.push(
             <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
                 <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
                     <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
                     {additional_checked_bags_count.length}
-                    {" additional purchasable checked "}
+                    {" Purchasable checked "}
                     {additional_checked_bags_count.length>1 ? "bags" : "bag"}:
-                </span>
-                {
-                    additional_checked_bags_count.map((each, i)=>{
-                        let curr=get_currency_symbol(each.total_currency);
-                        return (
-                            <>
-                                {i>0 && ","}
-                                <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: i<1 ? 15 : 4}}>
-                                    <span dangerouslySetInnerHTML={{__html: curr}}></span>
-                                    {each.total_amount}
-                                </span>
-                            </>
-                        )
-                    })
-                }
+                    <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginLeft: 15}}>
+                        <span dangerouslySetInnerHTML={{__html: curr}}></span>
+                        {additional_checked_bags_count[0].total_amount} each
+                    </span>
+                </span>              
             </p>
         )
     }
