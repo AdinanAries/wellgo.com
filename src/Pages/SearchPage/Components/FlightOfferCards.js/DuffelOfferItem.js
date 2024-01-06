@@ -154,7 +154,7 @@ const DuffelOfferItem = (props) => {
                         {STOPSMARKUP.map(each=>each)}
                         {
                             EMISSIONS && <p style={{textAlign: "center", color: "rgba(0,0,0,0.7)", fontSize: 11, marginTop: 5}}>
-                                Emisions: {EMISSIONS} kg C0<sub style={{fontSize: 11}}>2</sub>
+                                Emisions: {EMISSIONS} kg CO<sub style={{fontSize: 11}}>2</sub>
                             </p>
                         }
                     </div>
