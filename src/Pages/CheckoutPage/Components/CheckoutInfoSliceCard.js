@@ -104,7 +104,7 @@ for(let i=0;i < slice.segments.length; i++){
                     <i style={{fontSize: 13, marginRight: 10}} className="fa fa-wifi"></i>
                 </p>
                 <p onClick={()=>toggle_see_ticket_details_itinerary_details(index+"checkout_see_ticket_details_itinerary_details")}
-                     style={{cursor: "pointer", marginTop: 15, fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "#c900b0"}}>
+                     style={{cursor: "pointer", marginTop: 15, fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "#c900b0"}}>
                     Flight Route <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
                 </p>
                 <SelectedTicketItinSegments element_id={index+"checkout_see_ticket_details_itinerary_details"} segments={slice.segments}/>

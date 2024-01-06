@@ -319,10 +319,10 @@ const PassengerForm = (props) => {
                 />
             }
             <div style={{display: "flex", justifyContent: "space-between"}}>
-                <div style={{width: "calc(50% - 5px)", backgroundColor: "crimson", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
+                <div style={{width: "calc(50% - 5px)", backgroundColor: "crimson", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 50, textAlign: "center", color: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3"}}
                     onClick={props.unSelectPassengerCard}
                 >Cancel</div>
-                <div style={{width: "calc(50% - 5px)", backgroundColor: "darkslateblue", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 6, textAlign: "center", color: "white"}}
+                <div style={{width: "calc(50% - 5px)", backgroundColor: "rgb(23, 87, 148)", cursor: "pointer", fontSize: 14, fontFamily: "'Prompt', Sans-serif", padding: 10, borderRadius: 50, textAlign: "center", color: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3"}}
                     onClick={onSubmit} 
                 >Save</div>
             </div>

@@ -121,7 +121,7 @@ export function show_support_chat_settings_container(){
 }
 
 let botPromptHideTimeoutObj;
-export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=15000) {
+export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=100000) {
 
     let audio = new Audio(notification_sound);
     

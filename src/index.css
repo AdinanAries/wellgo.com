@@ -815,9 +815,10 @@ footer {
 .selected_ticket_book_btn {
   cursor: pointer;
   color: white;
-  background-color: darkslateblue;
-  padding: 14px;
-  border-radius: 9px;
+  background-color: rgb(23, 87, 148);
+  padding: 10px;
+  border-radius: 50px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.3);
   text-align: center;
 }
 #booking_start_checkout_page_container {
@@ -849,8 +850,9 @@ footer {
   text-align: center;
   background-color: rgb(23, 87, 148);
   color: white;
-  padding: 14px;
-  border-radius: 9px;
+  padding: 10px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.3);
+  border-radius: 50px;
 }
 .checkout_page_mobile_button_place_total_price_display {
   display: none;
