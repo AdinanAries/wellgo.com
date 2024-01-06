@@ -152,8 +152,10 @@ const DuffelOfferItem = (props) => {
                 <p style={{display: "none", color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
                     {AIRCRAFT_NAME} {OPERATED_BY && "operated by " + OPERATED_BY}</p>
             </div>
-            <div id={"each_ticket_item_more_details_container_"+index} className="each_ticket_item_more_details_container" style={{padding: 10, paddingTop: 0, marginBottom: 30, display: "none"}}>
-                <div style={{fontFamily: "'Prompt', Sans-serif", marginBottom: 10, color: "rgba(0,0,0,0.7)", backgroundColor: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.1)", padding: 5, textAlign: "center", fontWeight: "bolder", fontSize: 11}}>
+            <div id={"each_ticket_item_more_details_container_"+index} 
+                className="each_ticket_item_more_details_container speech-bubble-top" 
+                style={{ borderRadius: 9, marginBottom: 10, display: "none", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
+                <div style={{borderTopLeftRadius: 9, borderTopRightRadius: 9,fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", backgroundColor: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.1)", padding: 10, textAlign: "center", fontWeight: "bolder", fontSize: 11}}>
                     {ORIGIN_IATA}
                     <span style={{margin: "0 10px", color: "rgba(0,0,0,0.4)"}}>
                         <i style={{fontSize: 11}}
@@ -173,13 +175,15 @@ const DuffelOfferItem = (props) => {
                     </span>
                     
                 </div>
-                <div className="mobile_content_display_block_container"
-                    style={{display: "flex", justifyContent: "space-between",}}>
-                    {ITIN_SEGMENTS.map(each=>each)}
-                </div>
-                <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}}
-                     style={{borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", color: "white", backgroundColor: "rgb(23, 87, 148)", fontSize: 14, padding: 10, cursor: "pointer"}}>
-                    select
+                <div style={{padding: 15}}>
+                    <div className="mobile_content_display_block_container"
+                        style={{display: "flex", justifyContent: "space-between", marginTop: 15}}>
+                        {ITIN_SEGMENTS.map(each=>each)}
+                    </div>
+                    <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}}
+                        style={{borderRadius: 50, marginTop: 15, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", color: "white", backgroundColor: "rgb(23, 87, 148)", fontSize: 14, padding: 10, cursor: "pointer"}}>
+                        select
+                    </div>
                 </div>
             </div>
         </>

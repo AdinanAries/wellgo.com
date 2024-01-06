@@ -1088,6 +1088,16 @@ footer {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
+.speech-bubble-top:after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 60px;
+  border-bottom: 10px solid rgb(23, 87, 148);
+  border-bottom-color: rgb(23, 87, 148);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
 .all_ratings_dotes {
   display: flex;
   flex-direction: row;
