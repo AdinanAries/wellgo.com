@@ -120,10 +120,6 @@ const DuffelOfferItem = (props) => {
                         <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, textAlign: "center", marginBottom: 5}}>
                             {HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "nonstop")})</p>
                         {STOPSMARKUP.map(each=>each)}
-                        <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 10, textAlign: "center"}}>
-                            <span style={{fontSize: 12}}>
-                                {is_one_way?"one way":"round trip"}</span>
-                        </p>
                     </div>
                     <div className="each_ticket_price_display_container">
                         <p className="each_ticket_price_display" style={{textAlign: "center", color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 18, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
@@ -143,10 +139,13 @@ const DuffelOfferItem = (props) => {
                             className={is_one_way ? "fa-solid fa-arrow-right" : "fa-solid fa-exchange"}></i></span>
                         {DESTINATION_IATA}
                     </div>
-                    <div className="hover_bg-grey"
-                    onClick={toggle_show_more_details}
+                    <div style={{color: "rgba(0,0,0,0.8)", fontSize: 12, textAlign: "center", marginBottom: 5}}>
+                            <span style={{fontSize: 12}}>
+                                {is_one_way?"one way":"round trip"}</span>
+                    </div>
+                    <div onClick={toggle_show_more_details}
                             id={"each_ticket_item_more_details_btn_"+index}
-                            style={{display: "flex", margin: "auto", transition: "all 0.2s ease-out", alignItems: "center", justifyContent: "center", borderRadius: "100%", fontSize: 18, width: 40, height: 40, color: "rgba(0,0,0,0.7)"}}>
+                            style={{display: "flex", margin: "auto", backgroundColor: "rgb(23, 87, 148)", color: "rgba(255,255,255,0.4)", transition: "all 0.2s ease-out", alignItems: "center", justifyContent: "center", borderRadius: "100%", fontSize: 13, width: 30, height: 30, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
                             <i className="fa-solid fa-angle-down"></i>
                     </div>
                 </div> 
@@ -179,7 +178,7 @@ const DuffelOfferItem = (props) => {
                     {ITIN_SEGMENTS.map(each=>each)}
                 </div>
                 <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}}
-                     style={{borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", color: "white", backgroundColor: "darkslateblue", fontSize: 14, padding: 10, cursor: "pointer"}}>
+                     style={{borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", color: "white", backgroundColor: "rgb(23, 87, 148)", fontSize: 14, padding: 10, cursor: "pointer"}}>
                     select
                 </div>
             </div>
