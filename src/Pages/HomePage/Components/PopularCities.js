@@ -106,9 +106,9 @@ const PopularCities = () => {
     let end = begin + data.exploreCities.pagination.numberPerPage;
     return (
         <div className="home_page_most_visited_cities" style={{paddingTop: 10}}>
-            <h1 className="page_title" style={{textAlign: "center", fontSize: 20, marginBottom: 10, marginTop: 20, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
+            <h1 className="page_title" style={{textAlign: "center", fontSize: 15, marginBottom: 10, marginTop: 20, letterSpacing: 1, color: "rgba(0,0,0,0.7)", fontWeight: 1000, fontFamily: "'Prompt', Sans-serif",}}
                 >Suggested Trips</h1>
-            <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 16, color: "rgba(0,0,0,0.6)", fontWeight: "initial", fontFamily: "'Prompt', Sans-serif", marginBottom: 30}}
+            <h1 className="mobile_margin_bottom_20 title_desc" style={{textAlign: "center", marginTop: -10, letterSpacing: 1, fontSize: 13, color: "rgba(0,0,0,0.6)", fontWeight: "initial", fontFamily: "'Prompt', Sans-serif", marginBottom: 30}}
                 >some suggested trips for you</h1>
             <div className="home_page_most_visited_cities_list" style={{display: "none"}}>
                 {

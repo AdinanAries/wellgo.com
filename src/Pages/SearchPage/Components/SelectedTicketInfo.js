@@ -1,5 +1,11 @@
+import { each } from "jquery";
 import { markup } from "../../../helpers/Prices";
-import { convert24HTimeToAMPM, get_short_date_MMMDD, get_currency_symbol } from "../../../helpers/general";
+import { 
+    convert24HTimeToAMPM, 
+    get_short_date_MMMDD, 
+    get_currency_symbol, 
+    get_short_date_DAYMMMDD 
+} from "../../../helpers/general";
 
 import SelectedTicketItinSegments from "./SelectedTicketItinSegments";
 
@@ -19,7 +25,7 @@ const SelectedTicketInfo = (props) => {
     const DESTINATION_CITY = slices[0].segments[(SEGMENT_LENGTH - 1)].destination?.city_name;
     const CABIN_CLASS = slices[0].segments[0].passengers[0].cabin?.marketing_name;
     const DEPARTURE_DATE = get_short_date_MMMDD(slices[0].segments[0].departing_at.replace("T", " "));
-    const ARRIVAL_DATE = get_short_date_MMMDD(slices[0].segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
+    const ARRIVAL_DATE = get_short_date_MMMDD(slices[(slices.length-1)].segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
     const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
 
     let is_one_way=true;
@@ -172,7 +178,60 @@ const SelectedTicketInfo = (props) => {
             </p>
         );
     }
+
+    let all_amenities={};
+    const ITIN_SEGMENTS=[];
+    slices.forEach((slice, index)=>{
+        const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0].departing_at.replace("T", " "));
+        const TRIP=( index ? "Return" : "Take-Off");
+        ITIN_SEGMENTS.push(
+            <div>
+                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
+                    <i style={{marginRight: 10, fontSize: 11}}
+                        className="fa-solid fa-plane-departure"></i>
+                    {TRIP}
+                    <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "rgba(0,0,0,0.7)", fontSize: 11}}>
+                        &#8226;
+                    </span>
+                    {DEPARTURE_DATE}
+                </p>
+                <SelectedTicketItinSegments 
+                    element_id={index+"see_ticket_details_itinerary_details"} 
+                    segments={slice.segments}
+                    display="block"
+                />
+                <SelectedTicketItinSegments element_id="see_ticket_details_itinerary_details" segments={slices[0].segments}/>
+            </div>
+        );
+
+        // Amenities
+        for(let i=0;i < slice.segments.length; i++){
+            for(let j=(slice.segments[i].passengers.length-1);j>=0;j--){
+                let amenities = {};
+                if(slice.segments[i].passengers[j].cabin)
+                    if(slice.segments[i].passengers[j].cabin?.amenities)
+                        amenities=slice.segments[i].passengers[j].cabin?.amenities
+                all_amenities={
+                    ...all_amenities,
+                    ...amenities
+                }
+            }
+        }
+    });
      
+    let is_flight_route_shown = false;
+    const toggle_show_flight_route = () =>{
+        
+        if(is_flight_route_shown){
+            window.$(`#ticket_flight_route_details_container`).slideUp("fast");
+            document.getElementById(`show_flight_route_details_caret`).style.transform = "rotate(0deg)";
+        }else{
+            window.$(`#ticket_flight_route_details_container`).slideDown("fast");
+            document.getElementById(`show_flight_route_details_caret`).style.transform = "rotate(180deg)";
+        }
+        is_flight_route_shown = !is_flight_route_shown;
+
+    }
 
     return (
         <div id="selected_ticket_main_details_pane">
@@ -193,12 +252,18 @@ const SelectedTicketInfo = (props) => {
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                 <img src={owner.logo_symbol_url} alt={"todo"} style={{width: 27, height: "auto", marginRight: 10, objectFit: "cover"}} />
                                 {owner.name}
-                                <span onClick={()=>global.toggle_see_ticket_details_itinerary_details("see_ticket_details_itinerary_details")} 
+                                <span onClick={()=>toggle_show_flight_route()/*global.toggle_see_ticket_details_itinerary_details("see_ticket_details_itinerary_details")*/} 
                                     style={{cursor: "pointer", marginLeft: 15, fontSize: 12, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
-                                    Flight Route <i style={{marginLeft: 5}} className="fa fa-angle-down"></i>
+                                    Flight Route 
+                                    <i id="show_flight_route_details_caret" 
+                                        style={{marginLeft: 5}} className="fa fa-angle-down"></i>
                                 </span>
                             </p>
-                            <SelectedTicketItinSegments element_id="see_ticket_details_itinerary_details" segments={slices[0].segments}/>
+                            <div id="ticket_flight_route_details_container" style={{display: "none", marginTop: 20}}>
+                                {
+                                    ITIN_SEGMENTS.map(each=>each)
+                                }
+                            </div>
                         </div>
                         <p className="pop-up-close-btn" onClick={()=>{global.hide_selected_ticket_details_pane(); props.unselectFlightOffer();}} 
                             style={{cursor: "pointer", color: "rgba(0,0,0,0.6)", border: "1px solid rgba(0,0,0,0.1)", width: 40, height: 40, borderRadius: "100%", fontSize: 22, marginRight: 5, display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -212,8 +277,12 @@ const SelectedTicketInfo = (props) => {
                             dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
                         {(markup(total_amount).new_price).toFixed(2)}
                     </p>
-                    <p style={{color: "crimson", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
-                        {is_one_way ? "One-way":"Rountrip"} for {passengers.length>1?(`${passengers.length} travelers`):"1 traveler"}
+                    <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                        {is_one_way ? "one way":"roun trip"}
+                        <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 5px", color: "rgba(0,0,0,0.7)", fontSize: 11}}>
+                            &#8226;
+                        </span>
+                        {passengers.length>1?(`${passengers.length} passengers`):"1 passenger"}
                     </p>
                     <p style={{fontSize: 12, marginTop: 20, fontFamily: "'Prompt', sans-serif", color: "green"}}>
                         Main Cabin

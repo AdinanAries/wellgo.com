@@ -1177,7 +1177,7 @@ footer {
   border-bottom: 8px solid rgb(202, 231, 243);
 }
 .home_page_each_most_visited_cities_bottom{
-  height: calc(100% - 250px);
+  height: calc(100% - 245px);
   margin-top: -33px;
   background: linear-gradient(23deg, #c751b9, rgb(153, 216, 241));
 }

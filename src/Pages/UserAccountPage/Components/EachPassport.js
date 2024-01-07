@@ -34,7 +34,7 @@ const EachPassport = (props) => {
     return (
         <div style={{padding: 10}}>
             <div id={"show_more_passport_info_btn"+index}>
-                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 16, color: "rgb(12, 109, 133)"}}>
+                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                     <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
                     {each.holder_name}
                     <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}
@@ -42,18 +42,16 @@ const EachPassport = (props) => {
                     <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}
                     > , {each.city} - {each.country} ...</span>
                 </p>
-                <p onClick={()=>show_more_passport_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                <p onClick={()=>show_more_passport_info(index)} 
+                    style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 13, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                     view more ...
                 </p>
             </div>
             <div  id={"show_more_passport_info_container"+index} style={{display: "none"}}>
-                <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)",}}>
+                <p style={{fontFamily: "'Prompt', sans-serif", color: "rgb(12, 109, 133)", fontSize: 13}}>
                     <i style={{marginRight: 10, color: "rgba(0,0,0,0.4)"}} className="fa fa-passport"></i>
-                    {each.holder_name}</p>
+                    {each.passport_number}</p>
                 <div style={{marginLeft: 10, marginTop: 10}}>
-                <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                        <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                            Number:</span> {each.passport_number}</p>
                     <p style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
                         <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
                             Issued:</span> {each.issue_date}</p>
@@ -83,7 +81,8 @@ const EachPassport = (props) => {
                     <span style={{fontFamily: "'Prompt', sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
                         Birth City:</span> {each.holder_birth_city}</p>
                 </div>
-                <p onClick={()=>hide_more_passport_info(index)} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 15, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
+                <p onClick={()=>hide_more_passport_info(index)} 
+                    style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 13, borderRadius: 6, margin: "5px 0", color: "#c751b9"}}>
                     view less ...
                 </p>
                 {

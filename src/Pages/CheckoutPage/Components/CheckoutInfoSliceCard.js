@@ -101,7 +101,7 @@ for(let i=0;i < slice.segments.length; i++){
                         all_amenities?.power?.available &&
                         <i style={{fontSize: 13, marginRight: 10}} className="fa-solid fa-plug-circle-bolt"></i>
                     }
-                    <i style={{fontSize: 13, marginRight: 10}} className="fa fa-wifi"></i>
+                    <i style={{fontSize: 13, marginRight: 10}} className="fa fa-youtube"></i>
                 </p>
                 <p onClick={()=>toggle_see_ticket_details_itinerary_details(index+"checkout_see_ticket_details_itinerary_details")}
                      style={{cursor: "pointer", marginTop: 15, fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "#c900b0"}}>

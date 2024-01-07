@@ -14,9 +14,9 @@ const EachPopularCityMore = (prop) => {
                     </div>
                     <div className="home_page_each_most_visited_cities_btn"
                         onClick={()=>searchFlightsForPopularCity(city)} >
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 17, textAlign: "center", color: "rgb(0,0,0,0.8)", letterSpacing: 1}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)"}}>
                             {city.city}</p>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 12, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: 0, letterSpacing: 1}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 12, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: 0}}>
                             $168, 1h 40m ({city.country})</p>
                     </div>
                     <div className="home_page_each_most_visited_cities_bottom">
