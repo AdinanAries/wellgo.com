@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { calculate_age, validateYYYYMMDDInputDates, confirmYYYMMDDDateValidity } from "../../../helpers/general";
 import CONSTANTS from "../../../Constants/Constants";
 import FormErrorCard from "../../../components/FormErrorCard";
+import { bind_calling_codes, return_calling_option_components } from "../../../helpers/country_calling_codes";
 
 const PassengerForm = (props) => {
     
@@ -27,7 +28,9 @@ const PassengerForm = (props) => {
         });
     }
 
-    //console.log("Passenger: ", passenger);
+    useEffect(()=>{
+        //bind_calling_codes("passenger_form_call_code_select");
+    });
 
     const setFirstName = (e) => {
         resetCheckoutConfirmation();
@@ -240,20 +243,18 @@ const PassengerForm = (props) => {
                                 Phone is set to: {passenger.phone_number}</p>
                         }
                         <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                            <select 
+                            <select id="passenger_form_call_code_select"
                                 onChange={setCountryCallingCode}
                                 value={phonePrefix}
-                                style={{border: "none", background: "none", padding: 10}}>
-                                <option value="">+CC</option>
-                                <option value="+1">+1</option>
-                                <option value="+233">+233</option>
+                                style={{border: "none", background: "none", padding: 10, width: "90px"}}>
+                                    {return_calling_option_components()}
                             </select>
                             <input 
                                 onInput={setPhoneNumber}
                                 value={phoneSuffix}
                                 type="number" placeholder="type here..."  
                                 style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", 
-                                width: "calc(100% - 80px)", padding: 10, background: "none", border: "none"}}/>
+                                width: "calc(100% - 100px)", padding: 10, background: "none", border: "none"}}/>
                         </div>
                     </div>
                 }
