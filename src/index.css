@@ -1696,9 +1696,24 @@ footer {
   .checkout_passengers_container {
     padding-left: 10px;
   }
+  .cm-toggle {
+    margin-right: 30px !important;
+  }
   .search-page-wrapper {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .search_list_main_ads_section {
+    display: none;
+  }
+  .search_list_main__settings_section {
+    width: 28% ;
+  }
+  .search_list_main_tickets_section {
+    width: 70%;
+  }
+  .info_item_loader {
+    width: 100% !important;
   }
 }
 
@@ -1706,9 +1721,6 @@ footer {
   .search-page-wrapper {
     padding-left: 0;
     padding-right: 0;
-  }
-  .cm-toggle {
-    margin-right: 25px !important;
   }
   .user_account_main_top_menu_container {
     background-color: white;
@@ -2074,9 +2086,7 @@ footer {
     width: 100%;
     padding: 0 5px;
   }
-  .search_list_main_ads_section {
-    display: none;
-  }
+  
   #close_filter_and_sort_btn {
     display: block;
   }
