@@ -3,6 +3,7 @@ import { calculate_age, validateYYYYMMDDInputDates, confirmYYYMMDDDateValidity }
 import CONSTANTS from "../../../Constants/Constants";
 import FormErrorCard from "../../../components/FormErrorCard";
 import { bind_calling_codes, return_calling_option_components } from "../../../helpers/country_calling_codes";
+import { return_country_alpha_option_components } from "../../../helpers/world_country_codes";
 
 const PassengerForm = (props) => {
     
@@ -308,7 +309,7 @@ const PassengerForm = (props) => {
                             value={passenger.identity_documents[0].issuing_country_code}
                             style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}>
                             <option value="">Select here...</option>
-                            <option value="US">United States</option>
+                            {return_country_alpha_option_components()}
                         </select>
                     </div>
                 </div>
