@@ -412,8 +412,9 @@ export default function ResultsListContainer(props){
                                                         />
                                                     }
                                                     <div onClick={showTimesFilter}
-                                                        className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
-                                                        <i style={{color: "#c751b9", fontSize: 20}} 
+                                                        className="hover_bg-grey show_only_mobile_flex" 
+                                                            style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
+                                                        <i style={{color: "#c751b9", fontSize: 17}} 
                                                             className="fa-solid fa-business-time"></i>    
                                                     </div>
                                                     <div onClick={showTimesFilter}
@@ -440,7 +441,7 @@ export default function ResultsListContainer(props){
                                                     }
                                                     <div onClick={showBagsFilter}
                                                         className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
-                                                        <i style={{color: "#c751b9", fontSize: 22}} 
+                                                        <i style={{color: "#c751b9", fontSize: 19}} 
                                                             className="fa-solid fa-person-walking-luggage"></i>    
                                                     </div>
                                                     <div onClick={showBagsFilter}
@@ -469,7 +470,7 @@ export default function ResultsListContainer(props){
                                                     }
                                                     <div onClick={showDurationFilter}
                                                         className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
-                                                        <i style={{color: "#c751b9", fontSize: 20}} 
+                                                        <i style={{color: "#c751b9", fontSize: 17}} 
                                                             className="fa-solid fa-clock"></i>    
                                                     </div>
                                                     <div onClick={showDurationFilter}
@@ -489,7 +490,7 @@ export default function ResultsListContainer(props){
                                                     }
                                                     <div onClick={showPricesGrid}
                                                         className="hover_bg-grey show_only_mobile_flex" style={{display: "none", cursor: "pointer", borderRadius: "100%", height: 40, width: 40, justifyContent: "center", alignItems: "center"}}>
-                                                        <i style={{color: "#c751b9", fontSize: 20}} 
+                                                        <i style={{color: "blue", fontSize: 17}} 
                                                             className="fa-solid fa-chart-column"></i>    
                                                     </div>
                                                     <div onClick={showPricesGrid}
