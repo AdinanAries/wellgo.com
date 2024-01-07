@@ -56,5 +56,17 @@ const BotResponses = {
         You may proceed to view the booking details with or without login. 
         Also, you may register later in case you dont have an account already
         `
+    ],
+    "no language support": [
+        "Lanuguage support has been disabled for maintenance purposes",
+        "No language support for now",
+        "Only English language can be used for now",
+        "IT department is working to re-enabling language support",
+    ],
+    "no currency support": [
+        "Currency support has been disabled for maintenance purposes",
+        "No currency support for now",
+        "Only US Dollar currency can be used for now",
+        "IT department is working to re-enable currency support"
     ]
 }

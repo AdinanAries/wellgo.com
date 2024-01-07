@@ -63,77 +63,77 @@ const ErrorCard = () => {
 
 const LoaderCard = () => {
     return <div className="prices-grid-items-container">
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>
         </div>
-        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)"}}>
+        <div className="each-grid-item info_item_loader" style={{background: "rgba(0,0,0,0.4)", maxWidth: 50}}>
             <div>
                 <p style={{color: "rgba(0,0,0,0.0)"}}>$120</p>
             </div>

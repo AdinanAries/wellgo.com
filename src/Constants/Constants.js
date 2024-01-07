@@ -4,6 +4,14 @@ const CONSTANTS = {
         product: "Wellgo",
         product_market_name: "to be discovered",
     },
+    language_support: {
+        enabled: false,
+        default: "ENGLISH"
+    },
+    currency_support: {
+        enabled: false,
+        default: "USD"
+    },
     viewport_threshold: 1000,
     infant_age_threshold: 5,
     special_str_separator: " [$/*S#_P#_R#T*/$] ",
@@ -63,13 +71,15 @@ const CONSTANTS = {
         responses: {
             introduction_greetings: "introduction greetings",
             no_hotel_booking: "no hotel booking",
+            no_language_support: "no language support",
+            no_currency_support: "no currency support",
             no_cars_renting: "no cars renting",
             no_travel_packages : "no travel packages",
             uncompleted_pnr: "incomplete passenger name record",
             not_logged_in_on_checkout_complete: "checkout completed but user is not logged in",
         }
     },
-    envs: [ "PRODUCTION", "DEVELOPMENT" ],
+    envs: [ "PRODUCTION", "DEVELOPMENT", "STAGE" ],
 }
 
 export default CONSTANTS;

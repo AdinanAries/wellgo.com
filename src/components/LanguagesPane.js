@@ -2,6 +2,9 @@ import { useState } from "react";
 import isoLangs from "../Constants/Languages";
 import { ellipsify } from "../helpers/general";
 import CONSTANTS from "../Constants/Constants";
+import { show_prompt_on_Bot_AD_tips_popup } from "./HPSupport";
+import getBotResponse from "../Constants/BotResponses";
+
 const ALL_LANGUAGES=Object.values(isoLangs);
 
 const LanguagesPane = (props) => {
@@ -11,6 +14,7 @@ const LanguagesPane = (props) => {
     let [ filtered, setFiltered ] = useState(ALL_LANGUAGES);
     const [ val, setVal ] = useState("");
     const [ selected, setSelected ] = useState(localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_lang));
+    const [ isError, setIsError ] = useState(false);
 
     const FilterCurrencies = (evnt) => {
         setVal(evnt.target.value);
@@ -22,9 +26,16 @@ const LanguagesPane = (props) => {
         }
     }
 
-    const SelectSiteLanguage = (LANG) => {
-        props.SelectSiteLanguage(LANG);
-        setSelected(LANG);
+    const SelectSiteLanguage = (LANG, enabled=CONSTANTS.language_support.enabled) => {
+        if(enabled){
+            props.SelectSiteLanguage(LANG);
+            setSelected(LANG);
+        } else {
+            setIsError(true);
+            show_prompt_on_Bot_AD_tips_popup(
+                getBotResponse(CONSTANTS.bot.responses.no_language_support), 
+                CONSTANTS.bot.prompt_types.warn);
+        }
     }
 
     return (
@@ -45,6 +56,15 @@ const LanguagesPane = (props) => {
                             placeholder="search..." />
                     </div>
                 </div>
+                {
+                    isError &&
+                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "red", padding: 10, background: "rgba(255,0,0,0.1)", borderBottom: "1px solid rgba(255,255,255,0.1)", textAlign: "center"}}>
+                        <i style={{marginRight: 10, color: "yellow"}}
+                            className="fa-solid fa-exclamation-triangle"></i>
+                        Language not changed
+                    </p>
+
+                }
                 <div className="mobile-full-screen" style={{ height: 400, minWidth: 500, overflow: "auto", padding: "0 10px"}}>
                     {
                         filtered.map(each=>(

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import CURRENCIES_FULL from "../Constants/CurrenciesFull";
 import { ellipsify } from "../helpers/general";
+import { show_prompt_on_Bot_AD_tips_popup } from "./HPSupport";
+import getBotResponse from "../Constants/BotResponses";
 import CONSTANTS from "../Constants/Constants";
 
 const CurrenciesPane = (props) => {
@@ -10,6 +12,7 @@ const CurrenciesPane = (props) => {
     let [ filtered, setFiltered ] = useState(CURRENCIES_FULL);
     const [ val, setVal ] = useState("");
     const [ selected, setSelected ] = useState(localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_curr));
+    const [ isError, setIsError ] = useState(false);
 
     const FilterCurrencies = (evnt) => {
         setVal(evnt.target.value);
@@ -21,9 +24,16 @@ const CurrenciesPane = (props) => {
         }
     }
 
-    const SelectSiteCurrency = (CURR) => {
-        props.SelectSiteCurrency(CURR);
-        setSelected(CURR);
+    const SelectSiteCurrency = (CURR, enabled=CONSTANTS.currency_support.enabled) => {
+        if(enabled){
+            props.SelectSiteCurrency(CURR);
+            setSelected(CURR);
+        } else {
+            setIsError(true);
+            show_prompt_on_Bot_AD_tips_popup(
+                getBotResponse(CONSTANTS.bot.responses.no_currency_support), 
+                CONSTANTS.bot.prompt_types.warn);
+        }
     }
 
     return (
@@ -44,6 +54,15 @@ const CurrenciesPane = (props) => {
                             placeholder="search..." />
                     </div>
                 </div>
+                {
+                    isError &&
+                    <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "red", padding: 10, background: "rgba(255,0,0,0.1)", borderBottom: "1px solid rgba(255,255,255,0.1)", textAlign: "center"}}>
+                        <i style={{marginRight: 10, color: "yellow"}}
+                            className="fa-solid fa-exclamation-triangle"></i>
+                        Currency not changed
+                    </p>
+
+                }
                 <div className="mobile-full-screen" style={{ height: 400, minWidth: 500, overflow: "auto", padding: "0 10px"}}>
                     {
                         filtered.map(each=>(
