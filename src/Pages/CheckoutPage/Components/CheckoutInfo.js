@@ -392,7 +392,7 @@ const CheckoutInfo = (props) => {
                 <div style={{margin: 10, marginBottom: 0}}>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                         <div>
-                            <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "darkslateblue"}}>
+                            <p style={{fontSize: 13, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.9)"}}>
                                 {ORIGIN_CITY} {">"} {ORIGIN_AIRPORT} 
                                 <span style={{margin: "0 15px", color: "rgba(0,0,0,0.5)"}}>
                                     <i className={is_one_way ? "fa-solid fa-arrow-right" : "fa-solid fa-exchange"}></i></span>

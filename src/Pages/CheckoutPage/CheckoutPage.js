@@ -369,21 +369,44 @@ export default function CheckoutPage(props){
                             </div>
                             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                                 <div style={{display: "flex", flexDirection: "row"}}>
-                                    <div onClick={showInfoPage} style={{cursor: "pointer", padding: 10, color: (activePage===CONSTANTS.checkout_pages.info) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.8)"}}>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                            <i style={{marginRight: 10, opacity: 0.4}} className='fa-solid fa-plane-departure' aria-hidden="false"></i>
+                                    <div onClick={showInfoPage} style={{cursor: "pointer", padding: 10, 
+                                            color: (
+                                                    (activePage===CONSTANTS.checkout_pages.info) 
+                                                    || (activePage===CONSTANTS.checkout_pages.pnr)
+                                                    || (activePage===CONSTANTS.checkout_pages.payment)
+                                                ) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.6)"}}>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                                            <i style={{marginRight: 10, 
+                                                opacity: 
+                                                (
+                                                    (activePage===CONSTANTS.checkout_pages.info) 
+                                                    || (activePage===CONSTANTS.checkout_pages.pnr)
+                                                    || (activePage===CONSTANTS.checkout_pages.payment)
+                                                ) ? 1 : 0.3}} className='fa-solid fa-plane-departure' aria-hidden="false"></i>
                                             Flight</p>
                                     </div>
                                     <div style={nav_separator_style}>{">"}</div>
-                                    <div onClick={showPNRPage} style={{cursor: "pointer", padding: 10, color: (activePage===CONSTANTS.checkout_pages.pnr) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.8)"}}>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                            <i style={{marginRight: 10, opacity: 0.4}} className='fa-solid fa-users' aria-hidden="false"></i>
+                                    <div onClick={showPNRPage} style={{cursor: "pointer", padding: 10, 
+                                        color: (
+                                            (activePage===CONSTANTS.checkout_pages.pnr)
+                                            || (activePage===CONSTANTS.checkout_pages.payment)
+                                        ) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.6)"}}>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                                            <i style={{marginRight: 10, 
+                                                 opacity: (
+                                                    (activePage===CONSTANTS.checkout_pages.pnr)
+                                                    || (activePage===CONSTANTS.checkout_pages.payment)
+                                                ) ? 1 : 0.3}} className='fa-solid fa-users' aria-hidden="false"></i>
                                             Passengers</p>
                                     </div>
                                     <div style={nav_separator_style}>{">"}</div>
-                                    <div onClick={showPaymentPage} style={{cursor: "pointer", padding: 10, color: (activePage===CONSTANTS.checkout_pages.payment) ? "rgb(201, 0, 176)" : "rgba(0,0,0,0.8)"}}>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                            <i style={{marginRight: 10, opacity: 0.4}} className='fa-solid fa-credit-card' aria-hidden="false"></i>
+                                    <div onClick={showPaymentPage} style={{cursor: "pointer", padding: 10, 
+                                        color: (activePage===CONSTANTS.checkout_pages.payment)  ? 
+                                            "rgb(201, 0, 176)" : "rgba(0,0,0,0.6)"}}>
+                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                                            <i style={{marginRight: 10, 
+                                                opacity: (activePage===CONSTANTS.checkout_pages.payment
+                                                    ) ? 1 : 0.3}} className='fa-solid fa-credit-card' aria-hidden="false"></i>
                                             Payment</p>
                                     </div>
                                 </div>
