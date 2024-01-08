@@ -1,4 +1,4 @@
-import { each } from "jquery";
+import airplane_seat from "../../../icons/airplane_seat.png"
 import { markup } from "../../../helpers/Prices";
 import { 
     convert24HTimeToAMPM, 
@@ -135,7 +135,7 @@ const SelectedTicketInfo = (props) => {
         CHECKED_BAGS.push(
             <p style={{marginTop: 10, display: "flex", flexDirection: "row"}}>
                 <span style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                    <i className="fa fa-money" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
+                    <i className="fa-solid fa-suitcase-rolling" style={{marginRight: 10, fontSize: 16, color: "rgba(0,0,0,0.5)"}}></i>
                     {additional_checked_bags_count.length}
                     {" Purchasable checked "}
                     {additional_checked_bags_count.length>1 ? "bags" : "bag"}:
@@ -256,7 +256,7 @@ const SelectedTicketInfo = (props) => {
                                     style={{cursor: "pointer", marginLeft: 15, fontSize: 12, color: "green", fontFamily: "'Prompt', Sans-serif"}}>
                                     Flight Route 
                                     <i id="show_flight_route_details_caret" 
-                                        style={{marginLeft: 5}} className="fa fa-angle-down"></i>
+                                        style={{marginLeft: 10, color: "rgba(0,0,0,0.6)"}} className="fa fa-angle-down"></i>
                                 </span>
                             </p>
                             <div id="ticket_flight_route_details_container" style={{display: "none", marginTop: 20}}>
@@ -285,6 +285,36 @@ const SelectedTicketInfo = (props) => {
                         {passengers.length>1?(`${passengers.length} passengers`):"1 passenger"}
                     </p>
                     <p style={{fontSize: 12, marginTop: 20, fontFamily: "'Prompt', sans-serif", color: "green"}}>
+                        Amenities & Extras
+                    </p>
+                    <div style={{marginTop: 5}}>
+                                {
+                                    all_amenities?.wifi?.available &&
+                                    <p style={{color: "rgba(0,0,0,0.9)", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                        <i style={{fontSize: 11, marginRight: 5}} className="fa-solid fa-wifi"></i>
+                                        Wifi
+                                    </p>
+                                }
+                                {
+                                    all_amenities?.power?.available &&
+                                    <p style={{color: "rgba(0,0,0,0.9)", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                        <i style={{fontSize: 11, marginRight: 5}} className="fa-solid fa-plug-circle-bolt"></i>
+                                        Power
+                                    </p>
+                                }
+                                <p style={{color: "rgba(0,0,0,0.9)", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                    <i style={{fontSize: 11, marginRight: 5}} className="fa fa-youtube"></i>
+                                    Entertainment
+                                </p>
+                                {
+                                    (additional_checked_bags_count.length>0) && 
+                                    <p style={{color: "rgba(0,0,0,0.9)", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                        <i style={{fontSize: 13, marginRight: 5}} className="fa-solid fa-suitcase-rolling"></i>
+                                        checked bags
+                                    </p>
+                                }
+                            </div>
+                    <p style={{fontSize: 12, marginTop: 20, fontFamily: "'Prompt', sans-serif", color: "green"}}>
                         Main Cabin
                     </p>
                     <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 5}}>
@@ -294,6 +324,22 @@ const SelectedTicketInfo = (props) => {
                         Seat
                     </p>
                     {SEATS_SELECTION.map(each=>each)}
+                    {
+                        all_amenities?.seat && 
+                        <div style={{backgroundColor: "rgba(0,0,255,0.1)", position: "relative", maxWidth: 180, marginTop: 15, borderTop: "4px solid rgba(0,0,255,0.3)", borderBottomLeftRadius: 10, borderBottomRightRadius: 10, padding: 10}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", marginTop: 5,fontSize: 11, fontWeight: "bolder", color: "rgba(0,0,0,0.9)"}}>
+                                Seat Info
+                            </p>
+                            <div style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11, marginTop: 5, color: "rgba(0,0,0,0.9)"}}>
+                                <p style={{ width: 30, height: 30, borderRadius: "100%", display: "flex", justifyContent: "center", alignItems: "center",
+                                        position: "absolute", top: -55, left: 0, background: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)"}}>
+                                    <img src={airplane_seat} 
+                                        style={{width: 22, height: "auto"}}/>
+                                </p>
+                                {`Pitch: ${all_amenities?.seat?.pitch}, Legroom: ${all_amenities?.seat?.legroom}`}
+                            </div>
+                        </div>
+                    }
                     <p style={{fontSize: 12, marginTop: 25, fontFamily: "'Prompt', Sans-serif", color: "green"}}>
                         Bags
                     </p>
