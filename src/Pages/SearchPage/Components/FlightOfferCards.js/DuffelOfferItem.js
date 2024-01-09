@@ -208,16 +208,20 @@ const DuffelOfferItem = (props) => {
                     <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "initial", fontSize: 11}}>
                         {is_one_way?"one way":"round trip"}
                     </span>
-                    
                 </div>
                 <div style={{padding: 15}}>
                     <div className="mobile_content_display_block_container"
                         style={{display: "flex", justifyContent: "space-between", marginTop: 15}}>
                         {ITIN_SEGMENTS.map(each=>each)}
                     </div>
-                    <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id)}}
-                        style={{borderRadius: 50, marginTop: 15, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", color: "white", backgroundColor: "rgb(23, 87, 148)", fontSize: 14, padding: 10, cursor: "pointer"}}>
-                        select
+                    <div style={{display: "flex", justifyContent: "space-between", marginTop: 15,}}>
+                        <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id); toggle_show_more_details();}}
+                            style={{width: "calc(100% - 45px)", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", color: "white", backgroundColor: "rgb(23, 87, 148)", fontSize: 14, padding: 10, cursor: "pointer"}}>
+                            select
+                        </div>
+                        <div onClick={toggle_show_more_details} style={{cursor: "pointer", width: 40, height: 40, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", background: "crimson", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                            <i style={{color: "white", fontSize: 13}} className="fa-solid fa-times"></i>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -307,7 +307,7 @@ const SelectedTicketInfo = (props) => {
                                     Entertainment
                                 </p>
                                 {
-                                    (additional_checked_bags_count.length>0) && 
+                                    (free_checked_bags_count>0) && 
                                     <p style={{color: "rgba(0,0,0,0.9)", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
                                         <i style={{fontSize: 13, marginRight: 5}} className="fa-solid fa-suitcase-rolling"></i>
                                         checked bags

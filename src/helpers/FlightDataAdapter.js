@@ -204,9 +204,10 @@ const return_duffel_object = (data) => {
                     }
                 ],
                 "id": data.passengers[pp].id,
-                "given_name": data.passengers[pp].given_name,
+                "given_name": data.passengers[pp]?.given_name || "",
                 "gender": "",
-                "family_name": data.passengers[pp].family_name,
+                "type": data.passengers[pp]?.type || "",
+                "family_name": data.passengers[pp]?.family_name || "",
                 "email": "",
                 "born_on": ""
             });

@@ -34,7 +34,7 @@ const PassengerNameRecord = (props) => {
     const setAdultPsngrForInfants = () => {
         let temp_arr=[];
         passengers.forEach( each => {
-            if(calculate_age(each.born_on) > CONSTANTS.infant_age_threshold) 
+            if((calculate_age(each.born_on) > 17) || (each?.type?.trim()==="adult")) 
                 temp_arr.push(each);
         });
         setAvailableAdultPassengersForInfants(temp_arr);
