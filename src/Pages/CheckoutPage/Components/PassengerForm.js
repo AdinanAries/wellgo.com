@@ -19,6 +19,7 @@ const PassengerForm = (props) => {
         message: "",
         isDateFormat: false,
     });
+    let passenger_type = passenger?.type;
  
     const resetFormValidation = () => {
         setFormValidation({
@@ -138,13 +139,44 @@ const PassengerForm = (props) => {
             });
             return;
         }
+        
+        if((age || age===0) && passenger_type){
+            if((passenger_type.trim()==="adult") 
+                && (age < 18)){
+                setFormValidation({
+                    type: "error",
+                    isError: true,
+                    message: "Adult passenger must be 18 years and above",
+                    isDateFormat: false
+                });
+                return;
+            }
+            if((passenger_type.trim()==="child") 
+                && (age < 2 || age > 17)){
+                setFormValidation({
+                    type: "error",
+                    isError: true,
+                    message: "Child passenger must be from 2 to 17 years",
+                    isDateFormat: false
+                });
+                return;
+            }
+            if((passenger_type.trim()==="infant_without_seat") 
+                && (age > 1)){
+                setFormValidation({
+                    type: "error",
+                    isError: true,
+                    message: "Infant passenger must be less than 2 years",
+                    isDateFormat: false
+                });
+                return;
+            }
+        }
         props.savePassengerInfo(passenger, props.index)
     }
 
     return (
         <div style={{width: "calc(100%)"}}>
-            <p>{
-                (passenger.infant_passenger_id) }</p>
             <div style={{padding: "10px 0"}}>
                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', Sans-serif", fontSize: 14, padding: 10, paddingTop: 0}}>
                     TRAVELER DETAILS</p>
@@ -192,7 +224,16 @@ const PassengerForm = (props) => {
                         "rgba(0,0,0,0.07)"), padding: 10, borderRadius: 8}}>
                     <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                         <i className="fa-solid fa-calendar" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                        Birth Date (YYYY-MM-DD)</p>
+                        Birth Date (YYYY-MM-DD)
+                        <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "rgba(0,0,0,0.7)", fontSize: 11}}>
+                            &#8226;
+                        </span>
+                        <span style={{fontSize: 12, color: "rgba(0,0,0,0.6)", fontFamily: "'Prompt', Sans-serif"}}>
+                            {(passenger_type.trim()==="adult") && "18+ years"}
+                            {(passenger_type.trim()==="child") && "2 - 17 years"}
+                            {(passenger_type.trim()==="infant_without_seat") && "0 - 1 year"}
+                        </span>
+                    </p>
                     <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                         <input 
                             onBlur={setPassengerAge}
@@ -233,7 +274,7 @@ const PassengerForm = (props) => {
                     </div>
                 }
                 {
-                    (passenger.born_on && (age > CONSTANTS.infant_age_threshold)) &&
+                    (passenger.born_on && (age >= CONSTANTS.infant_age_threshold)) &&
                     <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
                         <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                             <i className="fa-solid fa-mobile" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>

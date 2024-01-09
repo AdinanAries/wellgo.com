@@ -194,7 +194,11 @@ const return_duffel_object = (data) => {
         passengers.push({
                 "title": "",
                 "phone_number": "",
-                //"infant_passenger_id": "pas_00009hj8USM8Ncg32aMILY",
+                ...(
+                    data.passengers[pp]?.infant_passenger_id 
+                        ? { "infant_passenger_id": data.passengers[pp]?.infant_passenger_id } 
+                        : {}
+                ),
                 "identity_documents": [
                     {
                         "unique_identifier": "",
@@ -203,7 +207,7 @@ const return_duffel_object = (data) => {
                         "expires_on": ""
                     }
                 ],
-                "id": data.passengers[pp].id,
+                "id": data.passengers[pp]?.id,
                 "given_name": data.passengers[pp]?.given_name || "",
                 "gender": "",
                 "type": data.passengers[pp]?.type || "",
