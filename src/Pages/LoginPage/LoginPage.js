@@ -21,11 +21,6 @@ export default function LoginPage(props){
 
     return (
         <main>
-            <div id="booking_history_more_info_pane" className="display_more_info_pane">
-                <p onClick={()=>document.getElementById("booking_history_more_info_pane").style.display="none"} className="page-popup-cover-close-btn">
-                    &times;
-                </p>
-            </div>
             <div className="wrapper">
                 <LoginForm 
                     isLoggedIn={isLoggedIn}

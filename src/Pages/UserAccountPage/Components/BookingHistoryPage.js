@@ -4,6 +4,7 @@ import loading_icon from "../../../icons/loading.svg";
 import nothing_found_icon from "../../../icons/nothing_found_icon.svg";
 import { useState } from "react";
 import { get_date_format_DAYMMMDDYYYY } from "../../../helpers/general";
+import BookingHistorySelectedItem from "./BookingHistorySelectedItem";
 
 const BookingHistoryPage = (props) => {
     
@@ -15,6 +16,7 @@ const BookingHistoryPage = (props) => {
         bookings, 
         show_booking_history_more_info_pane 
     } = props;
+    const [ selectedHistoryItem, setSelectedHistoryItem ] = useState();
     const [pagination, setPagination] = useState({
         CURRENT_PAGE: 1,
         PAGE_SIZE: 4,
@@ -90,7 +92,11 @@ const BookingHistoryPage = (props) => {
                                             {each.takeoff_city} ({each.takeoff_airport_code}) - {each.destination_city} ({each.destination_airport_code})</p>
                                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
                                             {get_date_format_DAYMMMDDYYYY(each.departure_date)} - {get_date_format_DAYMMMDDYYYY(each.return_date)}</p>
-                                        <p onClick={show_booking_history_more_info_pane} style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 13, borderRadius: 6, color: "rgb(199, 81, 185)"}}>
+                                        <p onClick={()=> {
+                                                show_booking_history_more_info_pane();
+                                                setSelectedHistoryItem(each);
+                                            }
+                                        } style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 13, borderRadius: 6, color: "rgb(199, 81, 185)"}}>
                                             view more ...
                                         </p>
                                     </div>
@@ -112,6 +118,20 @@ const BookingHistoryPage = (props) => {
                     }
                 </>
             }
+            <div id="booking_history_more_info_pane" className="display_more_info_pane">
+                <p onClick={()=>document.getElementById("booking_history_more_info_pane").style.display="none"} className="page-popup-cover-close-btn">
+                    &times;
+                </p>
+                <p>
+
+                </p>
+                {
+                    selectedHistoryItem?._id && 
+                    <BookingHistorySelectedItem 
+                        selectedHistoryItem={selectedHistoryItem} 
+                    />
+                }
+            </div>
         </div>
     )
 }
