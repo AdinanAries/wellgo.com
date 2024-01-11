@@ -1,4 +1,5 @@
 import { get_date_format_DAYMMMDDYYYY } from "../../../helpers/general"
+import HistoryPayloadItem from "./HistoryPayloadItem";
 
 const BookingHistorySelectedItem = (props) => {
 
@@ -19,7 +20,9 @@ const BookingHistorySelectedItem = (props) => {
             </div>
         </div>
         <div>
-
+            <HistoryPayloadItem 
+                completedOrderDetails={selectedHistoryItem?.originPayloads[0]}
+            />
         </div>
     </div>
 }
