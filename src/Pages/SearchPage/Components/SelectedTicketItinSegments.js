@@ -10,8 +10,9 @@ function extractSegmentDuration (duration) {
     }else{
         duration = duration.substring(2);
     }
-    const h =  duration.split("H")[0];
-    const m = duration.split("H")[1].replace("M","");
+    const h = duration.split("H")[0] || "";
+    let m = duration.split("H")[1]?.replace("M","");
+    m = m || "";
     return { h, m }
 }
 
