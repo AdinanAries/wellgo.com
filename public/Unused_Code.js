@@ -11,6 +11,18 @@ const submitFromSearchPage = async () => {
   setLoading(false);
 }
 
+function extractSegmentDuration (duration) {
+  // Duration examples: [P1DT2H30M, PT23H45M]
+  if(duration.includes("D")){
+      duration=duration.replace("P","").replace("T","").replace("D", "d ");
+  }else{
+      duration = duration.substring(2);
+  }
+  const h = duration.split("H")[0] || "";
+  let m = duration.split("H")[1]?.replace("M","");
+  m = m || "";
+  return { h, m }
+}
 
 // Obsolete function for enforcing date format in YYYY/MM/DD
 export const validateYYYYMMDDInputDates = (date_string, date_separator="/") => {

@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { convert24HTimeToAMPM, get_short_date_MMMDD, get_short_date_DAYMMMDD, calculateTotalTime, ellipsify, get_currency_symbol } from "../../../helpers/general";
+import { 
+    convert24HTimeToAMPM,
+    get_short_date_MMMDD, 
+    get_duration_d_h_m, 
+    get_short_date_DAYMMMDD, 
+    calculateTotalTime, ellipsify,
+    get_currency_symbol 
+} from "../../../helpers/general";
 import SelectedTicketItinSegments from "../../SearchPage/Components/SelectedTicketItinSegments";
 
 const CheckoutInfoSliceCard = (props) => {
@@ -17,22 +24,15 @@ const CheckoutInfoSliceCard = (props) => {
     const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0].departing_at.replace("T", " "));
     const ARRIVAL_DATE = get_short_date_DAYMMMDD(slice?.segments[(SEGMENT_LENGTH-1)].arriving_at.replace("T", " "));
     //const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
-    let duration = slice?.duration; // [P1DT2H30M, PT23H45M]
-    if(duration?.includes("D")){
-        duration=duration?.replace("P","")?.replace("T","")?.replace("D", "d ");
-    }else{
-        duration = duration?.substring(2);
-    }
-    const HOURS =  duration?.split("H")[0];
-    const MINUTES = duration?.split("H")[1]?.replace("M","");
+    const {d: DAYS, h: HOURS, m: MINUTES} = get_duration_d_h_m(slice?.duration);
 
     let STOPSMARKUP = [];
     if(SEGMENT_LENGTH>1){
         for(let sg=0; sg<SEGMENT_LENGTH-1; sg++){
             let flight_stop_arrival = slice.segments[sg].arriving_at;
             let flight_stop_departure = slice.segments[sg+1].departing_at;
-            const {h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
-            let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slice.segments[sg].destination?.city_name)} (${slice.segments[sg].destination?.iata_code})`);
+            const {d: ST_DAYS, h: ST_HOURS, m: ST_MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
+            let STOP_DETAILS = (`${ST_DAYS} ${ST_HOURS} ${ST_MINUTES} in ${ellipsify(slice.segments[sg].destination?.city_name)} (${slice.segments[sg].destination?.iata_code})`);
             STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12}}>
                     {STOP_DETAILS}
                     <div className="tooltip">{`${slice.segments[sg].destination?.city_name} - ${slice.segments[sg].destination?.name}`}</div>
@@ -84,7 +84,7 @@ for(let i=0;i < slice.segments.length; i++){
                     {TRIP_START} - {TRIP_ENDS}
                 </p>
                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 5}}>
-                    {HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")} )
+                    {DAYS} {HOURS} {MINUTES} ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "no stops")} )
                 </p>
                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 13, marginTop: 5}}>
                     {CABIN_CLASS}

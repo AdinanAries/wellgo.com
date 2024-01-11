@@ -184,6 +184,7 @@ const SelectedTicketInfo = (props) => {
     slices.forEach((slice, index)=>{
         const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0].departing_at.replace("T", " "));
         const TRIP=( index ? "Return" : "Take-Off");
+        const ARRIVAL_DATE = get_short_date_DAYMMMDD(slice?.segments[(slice?.segments?.length - 1)]?.arriving_at?.replace("T", " "));
         ITIN_SEGMENTS.push(
             <div>
                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
@@ -197,10 +198,19 @@ const SelectedTicketInfo = (props) => {
                 </p>
                 <SelectedTicketItinSegments 
                     element_id={index+"see_ticket_details_itinerary_details"} 
-                    segments={slice.segments}
+                    segments={slice?.segments}
                     display="block"
                 />
-                <SelectedTicketItinSegments element_id="see_ticket_details_itinerary_details" segments={slices[0].segments}/>
+                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: -10, marginBottom: 20}}>
+                    <i style={{marginRight: 10, fontSize: 11}}
+                        className="fa-solid fa-plane-arrival"></i>
+                    Arrival
+                    <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "rgba(0,0,0,0.7)", fontSize: 11}}>
+                        &#8226;
+                    </span>
+                    {ARRIVAL_DATE}
+                </p>
+                {/*<SelectedTicketItinSegments element_id="see_ticket_details_itinerary_details" segments={slices[0].segments}/>*/}
             </div>
         );
 

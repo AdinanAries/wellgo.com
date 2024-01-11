@@ -262,18 +262,58 @@ export const confirmYYYMMDDDateValidity = (date) => {
 
 export const calculateTotalTime = (earlier, later) => {
     let diff_ms = new Date(later).getTime() - new Date(earlier).getTime();
-    let diff_s = diff_ms/1000;
-    let diff_m = diff_s/60;
-    let diff_h = Math.floor(diff_m/60);
-    let diff_rm = (diff_m%60);
-    return {
-        h: diff_h,
-        total_m: diff_m,
-        m: diff_rm,
-        total_s: diff_s,
-        total_ms: diff_ms
-
+    let diff_s, diff_m, diff_h, diff_d;
+    if(diff_ms>1000){
+        diff_s = Math.floor(diff_ms/1000);
+    }else{
+        return {
+            d: "",
+            h: "",
+            m: "",
+            s: "",
+        }
     }
+    if(diff_s>60){
+        diff_m = Math.floor(diff_s/60);
+        diff_s = (diff_s%60)
+    }else{
+        return {
+            d: "",
+            h: "",
+            m: "",
+            s: `${diff_s}s`,
+        }
+    }
+    if(diff_m>60){
+        diff_h = Math.floor(diff_m/60);
+        diff_m = (diff_m%60);
+    }else{
+        return {
+            d: "",
+            h: "",
+            m: `${diff_m}m`,
+            s: `${diff_s}s`,
+        }
+    }
+    if(diff_h>24){
+        diff_d = Math.floor(diff_h/24);
+        diff_h = (diff_h%24)
+    }else{
+        return {
+            d: "",
+            h: `${diff_h}h`,
+            m: `${diff_m}m`,
+            s: `${diff_s}s`,
+        }
+    }
+    
+    return {
+        d: diff_d,
+        h: `${diff_h}h`,
+        m: `${diff_m}m`,
+        s: `${diff_s}s`,
+    }
+    
 }
 
 export const getClient = async () => {
@@ -338,4 +378,34 @@ export const getUserFriendlyDurationStringFromTotalMunites = (total_minutes) => 
         return stringDuration;
     }
     return "0h 0m";
+}
+
+export const get_duration_d_h_m = (_duration) => {
+    let duration =_duration?.replace("P","")?.replace("T",""); // [P1DT2H30M, PT23H45M]
+    let d_string="";
+    let h_string="";
+    let m_string="";
+    if(duration?.includes("D")){
+        d_string=duration.split("D")[0].trim();
+        duration=duration.split("D")[1].trim();
+    }
+    if(duration?.includes("H")){
+        h_string=duration.split("H")[0].trim();
+        duration=duration.split("H")[1]
+    }
+    if(duration?.includes("M")){
+        m_string=duration.split("M")[0].trim();
+        duration=duration.split("M")[0];
+    }
+    let Days = d_string ? parseInt(d_string) : 0;
+    let Hours =  h_string ? parseInt(h_string) : 0;
+    let Minutes = m_string ? parseInt(m_string) : 0;
+
+    let d = Days ? `${Days}d` : "";
+    let h = Hours ? `${Hours}h` : "";
+    let m = Minutes ? `${Minutes}m` : "";
+
+    return {
+        d, h, m
+    }
 }

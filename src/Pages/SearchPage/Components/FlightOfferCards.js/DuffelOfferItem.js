@@ -1,9 +1,11 @@
 import { markup } from "../../../../helpers/Prices";
-import { convert24HTimeToAMPM, 
+import { 
+    convert24HTimeToAMPM, 
     calculateTotalTime, 
     ellipsify, 
     get_currency_symbol, 
-    get_short_date_DAYMMMDD 
+    get_short_date_DAYMMMDD,
+    get_duration_d_h_m, 
 } from "../../../../helpers/general";
 import SelectedTicketItinSegments from "../SelectedTicketItinSegments";
 
@@ -51,8 +53,9 @@ const DuffelOfferItem = (props) => {
     let all_amenities={};
     const ITIN_SEGMENTS=[];
     slices.forEach((slice, index)=>{
-        const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0].departing_at.replace("T", " "));
+        const DEPARTURE_DATE = get_short_date_DAYMMMDD(slice?.segments[0]?.departing_at?.replace("T", " "));
         const TRIP=( index ? "Return" : "Take-Off");
+        const ARRIVAL_DATE = get_short_date_DAYMMMDD(slice?.segments[(slice?.segments?.length - 1)]?.arriving_at?.replace("T", " "));
         ITIN_SEGMENTS.push(
             <div>
                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif"}}>
@@ -69,6 +72,15 @@ const DuffelOfferItem = (props) => {
                     segments={slice.segments}
                     display="block"
                 />
+                <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: -10, marginBottom: 20}}>
+                    <i style={{marginRight: 10, fontSize: 11}}
+                        className="fa-solid fa-plane-arrival"></i>
+                    Arrival
+                    <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "rgba(0,0,0,0.7)", fontSize: 11}}>
+                        &#8226;
+                    </span>
+                    {ARRIVAL_DATE}
+                </p>
             </div>
         );
 
@@ -99,8 +111,8 @@ const DuffelOfferItem = (props) => {
         for(let sg=0; sg<SEGMENT_LENGTH-1; sg++){
             let flight_stop_arrival = slices[0].segments[sg].arriving_at;
             let flight_stop_departure = slices[0].segments[sg+1].departing_at;
-            const {h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
-            let STOP_DETAILS = (`${HOURS}h ${MINUTES}m in ${ellipsify(slices[0].segments[sg].destination.city_name)} (${slices[0].segments[sg].destination.iata_code})`);
+            const {d: DAYS, h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
+            let STOP_DETAILS = (`${DAYS} ${HOURS} ${MINUTES} in ${ellipsify(slices[0].segments[sg].destination.city_name)} (${slices[0].segments[sg].destination.iata_code})`);
             STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12, zIndex: 1, textAlign: "center"}}>
                     {STOP_DETAILS}
                     <div className="tooltip">{`${slices[0].segments[sg].destination.city_name} - ${slices[0].segments[sg].destination.name}`}</div>
@@ -112,14 +124,7 @@ const DuffelOfferItem = (props) => {
         {AIRCRAFT_NAME}</p>)
     }
 
-    let duration = slices[0]?.duration; // [P1DT2H30M, PT23H45M]
-    if(duration?.includes("D")){
-        duration=duration?.replace("P","")?.replace("T","")?.replace("D", "d ");
-    }else{
-        duration = duration?.substring(2);
-    }
-    const HOURS =  duration?.split("H")[0];
-    const MINUTES = duration?.split("H")[1]?.replace("M","");
+    const {d: DAYS, h: HOURS, m: MINUTES} = get_duration_d_h_m(slices[0]?.duration)
 
     return (
         <>
@@ -150,7 +155,8 @@ const DuffelOfferItem = (props) => {
                     </div>
                     <div>
                         <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, textAlign: "center", marginBottom: 5}}>
-                            {HOURS}h {MINUTES}m ({(STOPS_COUNT > 0 ? (STOPS_COUNT + (STOPS_COUNT > 1 ? " stops" : " stop")) : "nonstop")})</p>
+                            {DAYS} {HOURS} {MINUTES} ({(STOPS_COUNT > 0 ? (STOPS_COUNT + ((STOPS_COUNT > 1) ? " stops" : " stop")) : "nonstop")})
+                        </p>
                         {STOPSMARKUP.map(each=>each)}
                         {
                             EMISSIONS && <p style={{textAlign: "center", color: "rgba(0,0,0,0.7)", fontSize: 11, marginTop: 5}}>

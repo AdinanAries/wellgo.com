@@ -1,20 +1,11 @@
-import { convert24HTimeToAMPM, calculateTotalTime } from "../../../helpers/general";
+import { 
+    convert24HTimeToAMPM, 
+    calculateTotalTime, 
+    get_duration_d_h_m 
+} from "../../../helpers/general";
 
 // For testing
 import { segs } from "../../../test_objects/duffel_segment";
-
-function extractSegmentDuration (duration) {
-    // Duration examples: [P1DT2H30M, PT23H45M]
-    if(duration.includes("D")){
-        duration=duration.replace("P","").replace("T","").replace("D", "d ");
-    }else{
-        duration = duration.substring(2);
-    }
-    const h = duration.split("H")[0] || "";
-    let m = duration.split("H")[1]?.replace("M","");
-    m = m || "";
-    return { h, m }
-}
 
 const SelectedTicketItinSegments = (props) => {
     const { segments, element_id } = props;
@@ -30,7 +21,7 @@ const SelectedTicketItinSegments = (props) => {
     const ORIGIN_CITY = segments[0]?.origin?.city_name;
     const ORIGIN_AIRPORT = `${segments[0]?.origin.name} (${segments[0]?.origin?.iata_code})`;
     const ORIGIN_TAKEOFF_TIME = convert24HTimeToAMPM(segments[0]?.departing_at?.split("T")[1]);
-    const { h: TAKE_OFF_HOURS, m: TAKE_OFF_MINUTES} = extractSegmentDuration(segments[0]?.duration);
+    const {d: TAKE_OFF_DAYS, h: TAKE_OFF_HOURS, m: TAKE_OFF_MINUTES} = get_duration_d_h_m(segments[0]?.duration);
     const TAKE_OFF_CARRIER_OPERATOR = segments[0]?.operating_carrier?.name;
     const TAKE_OFF_CARRIER_AIRCRAFT = segments[0]?.aircraft?.name;
     const TAKE_OFF_CABIN_TYPE = segments[0]?.passengers[0]?.cabin?.marketing_name;
@@ -60,7 +51,7 @@ const SelectedTicketItinSegments = (props) => {
                     {ORIGIN_AIRPORT}</p>
                 <div style={{marginLeft: 20}}>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                        {TAKE_OFF_HOURS}h {TAKE_OFF_MINUTES}m flight</p>
+                        {TAKE_OFF_DAYS} {TAKE_OFF_HOURS} {TAKE_OFF_MINUTES} flight</p>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
                         Operated by {TAKE_OFF_CARRIER_OPERATOR}</p>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
@@ -78,7 +69,7 @@ const SelectedTicketItinSegments = (props) => {
     } else {
         // First array item (departure airport)
         
-        const { h: LAST_ROUND_HOURS, m: LAST_ROUND_MINUTES} = extractSegmentDuration(segments[(segments?.length-1)]?.duration);
+        const {d: LAST_ROUND_DAYS, h: LAST_ROUND_HOURS, m: LAST_ROUND_MINUTES} = get_duration_d_h_m(segments[(segments?.length-1)]?.duration);
         const LAST_ROUND_CARRIER_OPERATOR = segments[(segments?.length-1)]?.operating_carrier?.name;
         const LAST_ROUND_CARRIER_AIRCRAFT = segments[(segments?.length-1)]?.aircraft?.name;
         const LAST_ROUND_CABIN_TYPE = segments[(segments?.length-1)]?.passengers[0]?.cabin?.marketing_name;
@@ -88,7 +79,7 @@ const SelectedTicketItinSegments = (props) => {
         const LAST_STOP_TAKEOFF_TIME = convert24HTimeToAMPM(segments[(segments.length-1)]?.departing_at?.split("T")[1]);
 
         const LAST_STOP_ARRIVAL_TIME = convert24HTimeToAMPM(segments[(segments.length-2)]?.arriving_at?.split("T")[1]);
-        const {h: LAST_STOP_WAIT_TIME_HOURS, m: LAST_STOP_WAIT_TIME_MINUTES} = calculateTotalTime(
+        const {d: LAST_STOP_TIME_DAYS, h: LAST_STOP_WAIT_TIME_HOURS, m: LAST_STOP_WAIT_TIME_MINUTES} = calculateTotalTime(
                                                                     segments[(segments.length-2)]?.arriving_at?.replace("T", " "), 
                                                                     segments[(segments.length-1)]?.departing_at?.replace("T", " "));
 
@@ -110,7 +101,7 @@ const SelectedTicketItinSegments = (props) => {
                     {ORIGIN_AIRPORT}</p>
                 <div style={{marginLeft: 20}}>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                        {TAKE_OFF_HOURS}h {TAKE_OFF_MINUTES}m flight</p>
+                        {TAKE_OFF_DAYS} {TAKE_OFF_HOURS} {TAKE_OFF_MINUTES} flight</p>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
                         Operated by {TAKE_OFF_CARRIER_OPERATOR}</p>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
@@ -128,12 +119,12 @@ const SelectedTicketItinSegments = (props) => {
             const _STOP_AIRPORT = `${segments[i].origin?.name} (${segments[i]?.origin?.iata_code})`;
             const _STOP_ARRIVAL_TIME = convert24HTimeToAMPM(segments[i-1]?.arriving_at?.split("T")[1]);
             const _STOP_TAKEOFF_TIME = convert24HTimeToAMPM(segments[i]?.departing_at?.split("T")[1]);
-            const { h: _STOP_TRAVEL_HOURS, m: _STOP_TRAVEL_MINUTES} = extractSegmentDuration(segments[i].duration);
+            const {d: _STOP_TRAVEL_DAYS, h: _STOP_TRAVEL_HOURS, m: _STOP_TRAVEL_MINUTES} = get_duration_d_h_m(segments[i].duration);
             const _STOP_TRAVEL_CARRIER_OPERATOR = segments[i]?.operating_carrier?.name;
             const _STOP_TRAVEL_CARRIER_AIRCRAFT = segments[i]?.aircraft?.name;
             const _STOP_TRAVEL_CABIN_TYPE = segments[i]?.passengers[0]?.cabin?.marketing_name;
             
-            const {h: STOP_WAIT_TIME_HOURS, m: STOP_WAIT_TIME_MINUTES} = calculateTotalTime(
+            const {d: STOP_WAIT_TIME_DAYS, h: STOP_WAIT_TIME_HOURS, m: STOP_WAIT_TIME_MINUTES} = calculateTotalTime(
                                                                         segments[i-1]?.arriving_at?.replace("T", " "), 
                                                                         segments[i]?.departing_at?.replace("T", " "));
 
@@ -159,11 +150,11 @@ const SelectedTicketItinSegments = (props) => {
                             Flight Stop
                         </p>
                         <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 5}}>
-                            {STOP_WAIT_TIME_HOURS}h {STOP_WAIT_TIME_MINUTES}m wait in Toronto</p>
+                            {STOP_WAIT_TIME_DAYS} {STOP_WAIT_TIME_HOURS} {STOP_WAIT_TIME_MINUTES} wait in Toronto</p>
                     </div>
                     <div style={{marginLeft: 20}}>
                         <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                            {_STOP_TRAVEL_HOURS}h {_STOP_TRAVEL_MINUTES}m flight</p>
+                            {_STOP_TRAVEL_DAYS} {_STOP_TRAVEL_HOURS} {_STOP_TRAVEL_MINUTES} flight</p>
                         <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
                             {_STOP_TRAVEL_CARRIER_OPERATOR}</p>
                         <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
@@ -197,11 +188,12 @@ const SelectedTicketItinSegments = (props) => {
                         <i className="fa fa-exclamation-triangle" style={{color: "rgba(255,0,0,0.7)", marginRight: 5}}></i>
                         Flight Stop
                     </p>
-                    <p style={{fontSize: 12, color: "rgba(0,0,0,0.7)", marginTop: 5}}>{LAST_STOP_WAIT_TIME_HOURS}h {LAST_STOP_WAIT_TIME_MINUTES}m wait in {LAST_STOP_CITY}</p>
+                    <p style={{fontSize: 12, color: "rgba(0,0,0,0.7)", marginTop: 5}}>
+                        {LAST_STOP_TIME_DAYS} {LAST_STOP_WAIT_TIME_HOURS} {LAST_STOP_WAIT_TIME_MINUTES} wait in {LAST_STOP_CITY}</p>
                 </div>
                 <div style={{marginLeft: 20}}>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}}>
-                        {LAST_ROUND_HOURS}h {LAST_ROUND_MINUTES}m flight</p>
+                        {LAST_ROUND_DAYS} {LAST_ROUND_HOURS} {LAST_ROUND_MINUTES} flight</p>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
                         Operated by {LAST_ROUND_CARRIER_OPERATOR}</p>
                     <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginTop: 4}}>
