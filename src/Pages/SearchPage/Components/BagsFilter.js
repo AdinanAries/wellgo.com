@@ -58,7 +58,7 @@ const BagsFilter = (props) => {
                     <p style={{marginRight: 10}}>
                         <i style={{color: "green"}} className="fa-solid fa-info"></i>
                     </p>
-                    <p style={{fontSize: 11, color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}}>
+                    <p style={{fontSize: 11, color: "rgba(0,0,0,0.7)"}}>
                         Available bags for round trip includes bags for both departure and return flights combined
                     </p>
                 </div>

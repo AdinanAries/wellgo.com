@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { markup } from "../../../helpers/Prices";
 import { get_currency_symbol, convert24HTimeToAMPM } from "../../../helpers/general";
 
@@ -11,21 +12,51 @@ const TimesFilter = (props) => {
         filtersByTimes,
     } = props;
 
+    const [ applied, setApplied ] = useState([]);
+
     const filterByTimes = (e, flights, key) => {
         if(e.target.checked){
             filtersByTimes[key]=flights;
+            
+            // Only for UI Rendering of Checkbox check status
+            addFilterKeyToApplied(key);
         }else{
             filtersByTimes[key]=[];
+            // Only for UI Rendering of Checkbox check status
+            removeFilterKyeFromApplied(key);
         }
         filterFlights();
     }
 
-    const TIME_FILTERS_MARKUP = filterTimes.map(each=>{ 
+    useEffect(()=>{
+        let keys = Object.keys(filtersByTimes);
+        let arr=[];
+        keys.forEach(key=>{
+            if(filtersByTimes[key].length>0){
+                arr.push(key);
+            }
+        });
+        setApplied(arr);
+    }, [])
+
+    const addFilterKeyToApplied = (key) => {
+        setApplied([...applied, key]);
+    }
+
+    const removeFilterKyeFromApplied = (key) => {
+        let index = applied.findIndex(each=>each===key);
+        applied.splice(index, 1)
+        setApplied([...applied]);
+    }
+
+    const TIME_FILTERS_MARKUP = filterTimes.map(each=>{
+        let checked=applied.includes(`times_${each.takeOffTime}`);
         return (
             <div key={each.takeOffTime} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10}}>
                 <div style={{display: "flex", flexDirection: "row"}}>
                     <input className="cm-toggle" onChange={(e)=>filterByTimes(e, each.flights, `times_${each.takeOffTime}`)} 
-                        id={"filter-by-times_"+each.takeOffTime} style={{marginRight: 15}} type="checkbox" />
+                        id={"filter-by-times_"+each.takeOffTime} checked={checked}
+                            style={{marginRight: 15}} type="checkbox" />
                     <label htmlFor={"filter-by-times_"+each.takeOffTime}>
                         <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
                             {convert24HTimeToAMPM(each.takeOffTime.replaceAll("_", ":"))} ({each.flights.length})</p>
