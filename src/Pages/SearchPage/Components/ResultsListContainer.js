@@ -22,7 +22,9 @@ import {
     filterByMaxPrice,
     getMinAndMaxDuration,
     filterByMaxDuration,
-    duffelTimesAndPrices
+    duffelTimesAndPrices,
+    getMaxBags,
+    filterByBags,
 } from "../../../helpers/FlightsFilterHelpers";
 import { useEffect, useState } from "react";
 
@@ -85,6 +87,7 @@ let filtersByAirlines={};
 let filtersByTimes={};
 let filtersByPrice={};
 let filtersByDuration={};
+let filtersByBags={};
 export default function ResultsListContainer(props){
 
     const { SEARCH_OBJ } = props;
@@ -105,6 +108,8 @@ export default function ResultsListContainer(props){
     const [ D_SLIDER_MIN_PERCENT, setDSliderMinPercent ] = useState(0);
     const [ checkedBagsFilterQuantity, setCheckedBagsFilterQuantity] = useState(0);
     const [ carryOnBagsFilterQuantity, setCarryOnBagsFilterQuantity] = useState(0);
+    const [ maxCheckedBagsFilter, setMaxCheckedBagsFilter ] = useState(0);
+    const [ maxCarryOnBagsFilter, setMaxCarryOnBagsFilter ] = useState(0);
 
     const showPricesGrid = () => {
         setIsShowPriceGrid(true);
@@ -150,6 +155,12 @@ export default function ResultsListContainer(props){
         setFlightsMaxDuration(DURATION_RANGE.max_duration);
         setFlightsMinDuration(DURATION_RANGE.min_duration);
         setDSliderMinPercent((DURATION_RANGE.min_duration*100)/DURATION_RANGE.max_duration);
+
+        // Bags
+        const MAX_BAGS = getMaxBags(props.flights);
+        setMaxCheckedBagsFilter(MAX_BAGS.maxCheckedBags); 
+        setMaxCarryOnBagsFilter(MAX_BAGS.maxCarryOnBags);
+        
     });
 
     const slidePriceFilter = (e) => {
@@ -171,6 +182,11 @@ export default function ResultsListContainer(props){
         filtersByDuration["_by_duration_range"]=filterByMaxDuration(props.flights, _duration);
         filterFlights();
     }
+
+    const filterBags = (maxChecked, maxCarryOn) => {
+        filtersByBags["_by_bags_count"] = filterByBags(props.flights, maxChecked, maxCarryOn);   
+        filterFlights();
+    } 
 
     const filterFlights = () => {
         setFilteredFlights([]);
@@ -203,6 +219,12 @@ export default function ResultsListContainer(props){
             });     
         });
         Object.values(filtersByTimes).forEach(each=>{
+            each.forEach(inner=>{
+                if(!filtered.find(f_each=>f_each.id===inner.id))
+                    filtered.push(inner)
+            });     
+        });
+        Object.values(filtersByBags).forEach(each=>{
             each.forEach(inner=>{
                 if(!filtered.find(f_each=>f_each.id===inner.id))
                     filtered.push(inner)
@@ -437,6 +459,9 @@ export default function ResultsListContainer(props){
                                                             setCheckedBagsFilterQuantity={setCheckedBagsFilterQuantity}
                                                             setCarryOnBagsFilterQuantity={setCarryOnBagsFilterQuantity}
                                                             hideBagsFilter={hideBagsFilter} 
+                                                            maxCheckedBagsFilter={maxCheckedBagsFilter}
+                                                            maxCarryOnBagsFilter={maxCarryOnBagsFilter}
+                                                            filterBags={filterBags}
                                                         />
                                                     }
                                                     <div onClick={showBagsFilter}

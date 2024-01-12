@@ -1766,7 +1766,7 @@ footer {
     max-width: 500px;
   }
   .each_more_popular_city:hover .each_more_popular_city_popup{
-    
+    display: none;
   }
   .home_page_each_most_visited_cities_top{
     height: 255px;
@@ -1883,12 +1883,6 @@ footer {
   }
   .reviews_rating_number {
     /*margin: auto;*/
-  }
-  .mobile_hidden {
-    display: none !important;
-  }
-  .show_only_mobile_flex {
-    display: flex !important;
   }
   .home_page_reviews_container {
     box-shadow: none;
@@ -2344,6 +2338,12 @@ footer {
   }
 }
 @media screen and (max-width: 700px) {
+  .show_only_mobile_flex {
+    display: flex !important;
+  }
+  .mobile_hidden {
+    display: none !important;
+  }
   .checkout_passenger_card {
     width: calc(100% - 4px) !important;
   }

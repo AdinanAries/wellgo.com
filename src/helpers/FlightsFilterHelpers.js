@@ -196,3 +196,94 @@ export const duffelTimesAndPrices = (flightsArr) => {
 
     return TimesArr;
 }
+
+export const getMaxBags = (flightsArr) => {
+    //slices[0].segments[0].passengers[0].baggages
+    /*  
+        {quantity: 2, type: 'checked'}
+        {quantity: 1, type: 'carry_on'}*/
+    let maxCarryOnBags=0;
+    let maxCheckedBags=0;
+    if(flightsArr && flightsArr?.length){
+        for(let i=0; i<flightsArr.length; i++){
+            let flightCarryOnBags=0;
+            let flightCheckedBags=0;
+            let slices=flightsArr[i].slices;
+            for(let j=0; j<slices.length; j++){
+                let segments=slices[j].segments;
+                for(let k=0; k<segments.length; k++){
+                    let passengers=segments[k].passengers;
+                    for(let l=0; l<passengers.length; l++){
+                        let baggages=passengers[l].baggages;
+                        for(let m=0; m<baggages.length; m++){
+                            if(baggages[m].type==="carry_on"){
+                                flightCarryOnBags+=baggages[m].quantity;
+                            }
+                            if(baggages[m].type==="checked"){
+                                flightCheckedBags+=baggages[m].quantity;
+                            }
+                        }
+                    }
+                }
+            }
+            if(flightCarryOnBags>maxCarryOnBags){
+                maxCarryOnBags=flightCarryOnBags
+            }
+            if(flightCheckedBags>maxCheckedBags){
+                maxCheckedBags=flightCheckedBags;
+            }
+        }
+        return {
+            maxCarryOnBags, 
+            maxCheckedBags
+        }
+    }
+    return {
+        maxCarryOnBags: 0, 
+        maxCheckedBags: 0,
+    }
+}
+
+export const getTotalBags = (flight) => {
+        let flightCarryOnBags=0;
+        let flightCheckedBags=0;
+        let slices=flight.slices;
+        for(let j=0; j<slices.length; j++){
+            let segments=slices[j].segments;
+            for(let k=0; k<segments.length; k++){
+                let passengers=segments[k].passengers;
+                for(let l=0; l<passengers.length; l++){
+                    let baggages=passengers[l].baggages;
+                    for(let m=0; m<baggages.length; m++){
+                        if(baggages[m].type==="carry_on"){
+                            flightCarryOnBags+=baggages[m].quantity;
+                        }
+                        if(baggages[m].type==="checked"){
+                            flightCheckedBags+=baggages[m].quantity;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return {
+            totalCarryOnBags: flightCarryOnBags,
+            totalCheckedBags: flightCheckedBags,
+        }
+}
+
+export const filterByBags = (flightsArr, maxChecked, maxCarryOn ) => {
+    let filtered = [];
+
+    if(flightsArr && flightsArr?.length){
+        for(let i=0; i<flightsArr.length; i++){
+            let Bags = getTotalBags(flightsArr[i]);
+            if((Bags?.totalCheckedBags >= maxChecked) 
+                && (Bags?.totalCarryOnBags >= maxCarryOn)){
+                    filtered.push(flightsArr[i]);
+            }
+        }
+    }
+
+    return filtered;
+}
