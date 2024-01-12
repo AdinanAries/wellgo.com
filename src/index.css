@@ -1723,6 +1723,15 @@ footer {
     padding-left: 0;
     padding-right: 0;
   }
+  .display_flex_on_1000px {
+    display: flex !important;
+  }
+  .sp_search_form_submit_btn_flex_container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
   .user_account_main_top_menu_container {
     background-color: white;
     padding-bottom: 15px;

@@ -349,7 +349,8 @@ export default function ResultsListContainer(props){
     return (
         <div style={{marginTop: 10, minHeight: "calc(100vh - 300px)", padding: 0}}>
             
-            <div id="search_results_mobile_top_itin_display">
+            <div style={{display: "none"}} 
+                id={"not_using_id"+"search_results_mobile_top_itin_display"}>
                 { 
                     !props.loading ? 
                     props.flights.length > 0 && <MobileItinTopInfo SEARCH_OBJ={SEARCH_OBJ} />
