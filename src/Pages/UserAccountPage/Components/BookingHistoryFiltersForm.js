@@ -36,6 +36,8 @@ const BookingHistoryFiltersForm = (props) => {
         }
         setFiltersForm({
             ...filtersForm,
+            departure_date: "",
+            return_date: "",
             trip_type: e.target.value
         });
     }
