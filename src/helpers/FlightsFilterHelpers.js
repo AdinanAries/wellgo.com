@@ -197,7 +197,7 @@ export const duffelTimesAndPrices = (flightsArr) => {
     return TimesArr;
 }
 
-export const getMaxBags = (flightsArr) => {
+export const getMaxBags = (flightsArr, departureSegmentsOnly=true, firstStopOnly=true) => {
     //slices[0].segments[0].passengers[0].baggages
     /*  
         {quantity: 2, type: 'checked'}
@@ -210,8 +210,12 @@ export const getMaxBags = (flightsArr) => {
             let flightCheckedBags=0;
             let slices=flightsArr[i].slices;
             for(let j=0; j<slices.length; j++){
+                if(departureSegmentsOnly && (j>0))
+                    break;
                 let segments=slices[j].segments;
                 for(let k=0; k<segments.length; k++){
+                    if(firstStopOnly && (k>0))
+                        break;
                     let passengers=segments[k].passengers;
                     for(let l=0; l<passengers.length; l++){
                         let baggages=passengers[l].baggages;
@@ -244,13 +248,17 @@ export const getMaxBags = (flightsArr) => {
     }
 }
 
-export const getTotalBags = (flight) => {
+export const getTotalBags = (flight, departureSegmentsOnly=true, firstStopOnly=true) => {
         let flightCarryOnBags=0;
         let flightCheckedBags=0;
         let slices=flight.slices;
         for(let j=0; j<slices.length; j++){
+            if(departureSegmentsOnly && (j>0))
+                break;
             let segments=slices[j].segments;
             for(let k=0; k<segments.length; k++){
+                    if(firstStopOnly && (k>0))
+                        break;
                 let passengers=segments[k].passengers;
                 for(let l=0; l<passengers.length; l++){
                     let baggages=passengers[l].baggages;
@@ -272,7 +280,7 @@ export const getTotalBags = (flight) => {
         }
 }
 
-export const filterByBags = (flightsArr, maxChecked, maxCarryOn ) => {
+export const filterByBags = (flightsArr, maxChecked, maxCarryOn) => {
     let filtered = [];
 
     if(flightsArr && flightsArr?.length){

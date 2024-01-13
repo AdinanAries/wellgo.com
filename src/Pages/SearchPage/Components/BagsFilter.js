@@ -59,7 +59,7 @@ const BagsFilter = (props) => {
                         <i style={{color: "green"}} className="fa-solid fa-info"></i>
                     </p>
                     <p style={{fontSize: 11, color: "rgba(0,0,0,0.7)"}}>
-                        Available bags for round trip includes bags for both departure and return flights combined
+                        Available bags include only carry-on bags and free checked-bags allowed on your departure flight
                     </p>
                 </div>
                 <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 5}}>

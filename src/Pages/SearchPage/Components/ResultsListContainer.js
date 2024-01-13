@@ -112,7 +112,10 @@ export default function ResultsListContainer(props){
     const [ maxCarryOnBagsFilter, setMaxCarryOnBagsFilter ] = useState(0);
 
     const showPricesGrid = () => {
-        setIsShowPriceGrid(true);
+        if(isShowPriceGrid)
+            setIsShowPriceGrid(false);
+        else
+            setIsShowPriceGrid(true);
     }
 
     const hidePricesGrid = () => {
@@ -120,7 +123,10 @@ export default function ResultsListContainer(props){
     }
 
     const showBagsFilter = () => {
-        setIsShowBagsFilter(true);
+        if(isShowBagsFilter)
+            setIsShowBagsFilter(false);
+        else
+            setIsShowBagsFilter(true);
     }
 
     const hideBagsFilter = () => {
@@ -128,7 +134,10 @@ export default function ResultsListContainer(props){
     }
 
     const showDurationFilter = () => {
-        setIsShowDurationFilter(true);
+        if(isShowDurationFilter)
+            setIsShowDurationFilter(false);
+        else
+            setIsShowDurationFilter(true);
     }
 
     const hideTimesFilter = () => {
@@ -136,7 +145,10 @@ export default function ResultsListContainer(props){
     }
 
     const showTimesFilter = () => {
-        setIsShowTimesFilter(true);
+        if(isShowTimesFilter)
+            setIsShowTimesFilter(false);
+        else
+            setIsShowTimesFilter(true);
     }
 
     const hideDurationFilter = () => {
@@ -169,7 +181,11 @@ export default function ResultsListContainer(props){
         const _price = Math.ceil((_value/100)*flightsMaxPrice);
         setFlightsSliderMaxPrice(_price);
         //setFilteredFlights(filterByMaxPrice(props.flights, _price));
-        filtersByPrice["_by_price_range"]=filterByMaxPrice(props.flights, _price);
+        if(_value>99){
+            filtersByPrice["_by_price_range"]=[];
+        }else{
+            filtersByPrice["_by_price_range"]=filterByMaxPrice(props.flights, _price);
+        }
         filterFlights();
     }
 
@@ -179,12 +195,20 @@ export default function ResultsListContainer(props){
         const _duration = (_value/100)*flightsMaxDuration;
         setFlightsSliderMaxDuration(_duration);
         //setFilteredFlights(filterByMaxDuration(props.flights, _duration));
-        filtersByDuration["_by_duration_range"]=filterByMaxDuration(props.flights, _duration);
+        if(_value>99){
+            filtersByDuration["_by_duration_range"]=[];
+        }else{
+            filtersByDuration["_by_duration_range"]=filterByMaxDuration(props.flights, _duration);
+        }
         filterFlights();
     }
 
     const filterBags = (maxChecked, maxCarryOn) => {
-        filtersByBags["_by_bags_count"] = filterByBags(props.flights, maxChecked, maxCarryOn);   
+        if(!maxCarryOn && !maxChecked){
+            filtersByBags["_by_bags_count"]=[];
+        }else{
+            filtersByBags["_by_bags_count"] = filterByBags(props.flights, maxChecked, maxCarryOn); 
+        }  
         filterFlights();
     } 
 

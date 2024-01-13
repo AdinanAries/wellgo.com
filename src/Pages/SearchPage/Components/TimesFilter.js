@@ -78,7 +78,7 @@ const TimesFilter = (props) => {
             x</p>
         <div style={{padding: 10, paddingTop: 0, marginBottom: 10}}>
             <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                Travel Times
+                Departure Times
             </p>
         </div>
         <div>

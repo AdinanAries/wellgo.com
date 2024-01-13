@@ -2076,7 +2076,7 @@ footer {
   .search_list_main__settings_section {
     display: none;
     padding: 0 10px;
-    padding-bottom: 50px;
+    padding-bottom: 90px;
     width: 100vw;
     position: fixed;
     z-index: 1001;

@@ -112,10 +112,10 @@ const SearchFilters = (props) => {
     return (
         <div>
             <div id="mobile_sort_and_filter_title_and_sort">
-                <div style={{height: 40, display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                <div style={{height: 50, display: "flex", flexDirection: "column", justifyContent: "center"}}>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                        <p style={{color: "rgba(0,0,0,0.5)", fontFamily: "'Prompt', Sans-serif", display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                            Sort and Filter
+                        <p style={{color: "rgba(0,0,0,0.5)", fontFamily: "'Prompt', Sans-serif", display: "flex", flexDirection: "column", justifyContent: "center", marginTop: 15}}>
+                            Sort By
                         </p>
                         <p onClick={()=>document.getElementById('search_list_main__settings_section').style.display='none'} id="close_filter_and_sort_btn" style={{color: "rgba(255,0,0,0.6)", fontSize: 33, marginRight: 5}}>
                             &times;

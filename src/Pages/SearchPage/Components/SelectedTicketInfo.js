@@ -6,6 +6,7 @@ import {
     get_currency_symbol, 
     get_short_date_DAYMMMDD 
 } from "../../../helpers/general";
+import { getTotalBags } from "../../../helpers/FlightsFilterHelpers";
 
 import SelectedTicketItinSegments from "./SelectedTicketItinSegments";
 
@@ -37,9 +38,10 @@ const SelectedTicketInfo = (props) => {
     }
 
     let BAGGAGES=[];
-    let carry_on_bags_count=0;
-    let free_checked_bags_count=0;
-    //for(let sl=0;sl<slices.length;sl++){
+    const TOTAL_BAGS = getTotalBags(data);
+    let carry_on_bags_count=TOTAL_BAGS.totalCarryOnBags;
+    let free_checked_bags_count=TOTAL_BAGS.totalCheckedBags;
+    /*for(let sl=0;sl<slices.length;sl++){
         for(let sg=0;sg<slices[0].segments.length;sg++){
             for(let ps=0; ps<slices[0].segments[sg].passengers.length;ps++){
                 for(let bb=0; bb<slices[0].segments[sg].passengers[ps].baggages.length; bb++){
@@ -52,7 +54,7 @@ const SelectedTicketInfo = (props) => {
                 }
             }
         }  
-    //}
+    }*/
     if(carry_on_bags_count>0){
         BAGGAGES.push(
             <p style={{color: "rgba(0,0,0,0.8)", fontFamily: "'Prompt', Sans-serif", fontSize: 13, marginTop: 10}}>

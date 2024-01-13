@@ -21,7 +21,7 @@ const DuffelOfferItem = (props) => {
         passengers 
     } = props.flight;
     const EMISSIONS = props.flight?.total_emissions_kg
-    console.log(props.flight);
+    //console.log(props.flight);
     
     const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
     const AIRCRAFT_NAME = slices[0].segments[0].aircraft?.name;
