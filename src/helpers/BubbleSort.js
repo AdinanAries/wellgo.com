@@ -1,7 +1,8 @@
 // Optimized javaScript implementation
 // of Bubble sort
 // An optimized version of Bubble Sort
-export const bubbleSort = (flights, type=0) => {
+export const bubbleSort = (flights_p, type=0) => {
+    let flights=flights_p;
     // type 0 = lowest, type 1 = highest
     var i, j, temp;
     var swapped;
@@ -10,11 +11,14 @@ export const bubbleSort = (flights, type=0) => {
         swapped = false;
         for (j = 0; j < (flights.length - i - 1); j++) 
         {
-            let condition = ((type===1)
-                                ? (parseFloat(flights[j]?.total_amount) < parseFloat(flights[j + 1]?.total_amount))
-                                : (parseFloat(flights[j]?.total_amount) > parseFloat(flights[j + 1]?.total_amount)))
-            if (condition) 
-            {
+            let condition;
+            if((type===1))
+                condition  = (parseFloat(flights[j]?.total_amount) < parseFloat(flights[j + 1]?.total_amount));
+            else
+                condition = (parseFloat(flights[j]?.total_amount) > parseFloat(flights[j + 1]?.total_amount));
+    
+            if (condition){
+                console.log("swap")
                 // Swap arr[j] and arr[j+1]
                 temp = JSON.parse(JSON.stringify(flights[j]));
                 flights[j] = JSON.parse(JSON.stringify(flights[j + 1]));
@@ -27,6 +31,7 @@ export const bubbleSort = (flights, type=0) => {
         if (swapped === false)
         break;
     }
+    return flights;
 }
 
 // Function to print an array for testing

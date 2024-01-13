@@ -89,6 +89,12 @@ let filtersByTimes={};
 let filtersByPrice={};
 let filtersByDuration={};
 let filtersByBags={};
+let SORT;
+if(window.localStorage.getItem("search_page_price_sort"))
+    SORT = JSON.parse(window.localStorage.getItem("search_page_price_sort"));
+else {
+    SORT = 0;
+}
 export default function ResultsListContainer(props){
 
     const { SEARCH_OBJ } = props;
@@ -111,7 +117,7 @@ export default function ResultsListContainer(props){
     const [ carryOnBagsFilterQuantity, setCarryOnBagsFilterQuantity] = useState(0);
     const [ maxCheckedBagsFilter, setMaxCheckedBagsFilter ] = useState(0);
     const [ maxCarryOnBagsFilter, setMaxCarryOnBagsFilter ] = useState(0);
-    const [ priceHighLowSort, setPriceHighLowSort] = useState(1); // [0 => Lowest, 1 => Highest]
+    const [ priceHighLowSort, setPriceHighLowSort] = useState(SORT); // [0 => Lowest, 1 => Highest]
 
     const showPricesGrid = () => {
         if(isShowPriceGrid)
@@ -329,21 +335,26 @@ export default function ResultsListContainer(props){
             if(take)
                 cross_filtered.push(item);
         });*/
-        bubbleSort(filtered, priceHighLowSort);
-        setFilteredFlights(filtered);
+        
+        // Sorting takes place here
+        let _flights = bubbleSort(filtered, priceHighLowSort);
+        setFilteredFlights(_flights);
     }
 
     const sortByHighestOrLowestPrice = (e) => {
         let val=e.target.value;
         setPriceHighLowSort(val);
+        window.localStorage.setItem("search_page_price_sort", val);
+        window.location.reload();
     }
 
     let FLIGHTS;
     if(props.flights.length>0 && filteredFlights.length<1){
+        
         // Sorting takes place here
-        bubbleSort(props.flights, priceHighLowSort);
+        let _flights = bubbleSort(props.flights, priceHighLowSort);
 
-        FLIGHTS = props.flights.map((each, index) => 
+        FLIGHTS = _flights.map((each, index) => 
             <FlightOfferItem 
                 selectFlightOffer={props.selectFlightOffer}
                 key={index} 
