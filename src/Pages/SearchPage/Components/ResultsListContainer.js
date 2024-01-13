@@ -351,8 +351,6 @@ export default function ResultsListContainer(props){
                 flight={each}
             />);
     }else if(Array.isArray(filteredFlights) && filteredFlights.length>0){
-        // Sorting takes place here
-        bubbleSort(filteredFlights, priceHighLowSort);
 
         FLIGHTS = filteredFlights.map((each, index) => 
             <FlightOfferItem 
