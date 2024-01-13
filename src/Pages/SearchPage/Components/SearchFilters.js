@@ -9,7 +9,9 @@ const SearchFilters = (props) => {
         filterAirlines, // array of airline filters
         filterFlights, // runs filter function to appy filters
         filtersByStops, // global object to keep filter by stops
-        filtersByAirlines // global object to keep filter by airlines
+        filtersByAirlines, // global object to keep filter by airlines
+        sortByHighestOrLowestPrice,
+        priceHighLowSort,
     } = props;
 
     const filterByStops = (e, flights, key) => {
@@ -128,9 +130,15 @@ const SearchFilters = (props) => {
                             <i style={{fontSize: 17, color: "rgba(0,0,0,0.5)", marginRight: 5}} 
                                 class="fa-solid fa-arrow-down-1-9"></i>
                         </p>
-                        <select style={{border: "none", background: "none", fontSize: 13, width: "100%", color: "rgba(0,0,0,0.7)"}}>
-                            <option>
+                        <select 
+                            value={priceHighLowSort}
+                            onChange={sortByHighestOrLowestPrice} 
+                            style={{border: "none", background: "none", fontSize: 13, width: "100%", color: "rgba(0,0,0,0.7)"}}>
+                            <option value={0}>
                                 Price (Lowest)
+                            </option>
+                            <option value={1}>
+                                Price (Highest)
                             </option>
                         </select>
                     </div>

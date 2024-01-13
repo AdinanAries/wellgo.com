@@ -27,6 +27,7 @@ import {
     filterByBags,
 } from "../../../helpers/FlightsFilterHelpers";
 import { useEffect, useState } from "react";
+import { bubbleSort } from "../../../helpers/BubbleSort";
 
 function add_clouds_to_animated_loader(){
     if(document.getElementById("animated_loader")){
@@ -110,6 +111,7 @@ export default function ResultsListContainer(props){
     const [ carryOnBagsFilterQuantity, setCarryOnBagsFilterQuantity] = useState(0);
     const [ maxCheckedBagsFilter, setMaxCheckedBagsFilter ] = useState(0);
     const [ maxCarryOnBagsFilter, setMaxCarryOnBagsFilter ] = useState(0);
+    const [ priceHighLowSort, setPriceHighLowSort] = useState(1); // [0 => Lowest, 1 => Highest]
 
     const showPricesGrid = () => {
         if(isShowPriceGrid)
@@ -255,6 +257,7 @@ export default function ResultsListContainer(props){
             });     
         });
 
+        
         // Step 2: Finding the Cross Items (like && operator does)
         /*filtered.forEach( item => {
             let take=true;
@@ -326,12 +329,20 @@ export default function ResultsListContainer(props){
             if(take)
                 cross_filtered.push(item);
         });*/
-        
+        bubbleSort(filtered, priceHighLowSort);
         setFilteredFlights(filtered);
+    }
+
+    const sortByHighestOrLowestPrice = (e) => {
+        let val=e.target.value;
+        setPriceHighLowSort(val);
     }
 
     let FLIGHTS;
     if(props.flights.length>0 && filteredFlights.length<1){
+        // Sorting takes place here
+        bubbleSort(props.flights, priceHighLowSort);
+
         FLIGHTS = props.flights.map((each, index) => 
             <FlightOfferItem 
                 selectFlightOffer={props.selectFlightOffer}
@@ -340,6 +351,9 @@ export default function ResultsListContainer(props){
                 flight={each}
             />);
     }else if(Array.isArray(filteredFlights) && filteredFlights.length>0){
+        // Sorting takes place here
+        bubbleSort(filteredFlights, priceHighLowSort);
+
         FLIGHTS = filteredFlights.map((each, index) => 
             <FlightOfferItem 
                 selectFlightOffer={props.selectFlightOffer}
@@ -359,15 +373,16 @@ export default function ResultsListContainer(props){
                 Oops! Nothing to show</p>
         </div>
     }
+    
     setTimeout(()=>{
         add_clouds_to_animated_loader();
     },500);
 
-    // Getting Filter - Flight Stops
+    // Getting Filter - Flight Stops - Creates Filter Toggles
     let filterStops = duffelStopsAndPrices(props.flights);
-    // Getting Filter - Airlines
+    // Getting Filter - Airlines - Creates Filter Toggles
     let filterAirlines = duffelAirlinesAndPrices(props.flights);
-    // Getting Filter - Take-off Times
+    // Getting Filter - Take-off Times - Creates Filter Toggles
     let filterTimes = duffelTimesAndPrices(props.flights);
 
     return (
@@ -387,6 +402,8 @@ export default function ResultsListContainer(props){
                         !props.loading ? 
                         props.flights.length > 0 &&
                             <SearchFilters 
+                                sortByHighestOrLowestPrice={sortByHighestOrLowestPrice}
+                                priceHighLowSort={priceHighLowSort}
                                 filterStops={filterStops}
                                 filterAirlines={filterAirlines}
                                 filterFlights={filterFlights}
