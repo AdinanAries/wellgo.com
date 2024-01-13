@@ -17,6 +17,8 @@ const EachPopularCityMore = (prop) => {
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgb(0,0,0,0.8)"}}>
                             {city.city}</p>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 12, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: 0}}>
+                            - {city.country} -</p>
+                        <p style={{display: "none", fontFamily: "'Prompt', Sans-serif", fontWeight: "initial", fontSize: 12, textAlign: "center", color: "rgb(0,0,0,0.8)", marginTop: 0}}>
                             $168, 1h 40m ({city.country})</p>
                     </div>
                     <div className="home_page_each_most_visited_cities_bottom">
@@ -27,7 +29,7 @@ const EachPopularCityMore = (prop) => {
             <div style={{display: "flex", justifyContent: "space-between", padding: "0 10px", paddingBottom: 4, marginBottom: 5, borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                 <div  onClick={()=>document.getElementById(("each_more_popular_city_popup_"+city.city)).style.display="block"} style={{textAlign: "initial", color: "rgb(174, 101, 0)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
                     {city.city} - <span style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.8)"}}>
-                    1h 40m, $160</span>
+                    {city.country}</span>
                     
                 </div>
                 <div style={{position: "absolute", right: 10, top: 0, display: "flex"}}>

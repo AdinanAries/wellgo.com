@@ -627,14 +627,14 @@ export default function ResultsListContainer(props){
                                     <p><i style={{color: "green", marginRight: 10}} 
                                         className="fa-solid fa-info"></i></p>
                                     <p style={{fontSize: 13, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
-                                        You have applied some filters to the search results. Use the buttons below to toggle in-between.
+                                        You have applied some filters to the search results. Use the buttons below to toggle in-between all flights and filtered flights.
                                     </p>
                                 </div>
-                                <div style={{marginTop: 10}}>
+                                <div style={{marginTop: 10, display: "flex", justifyContent: "space-between"}}>
                                     <div style={{display: "flex"}}>
                                         <div onClick={resetSearchFilters}
                                             style={{boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? 
-                                                "1px 2px 3px rgba(0,0,0,0.3)" : "none", width: 110, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
+                                                "1px 2px 3px rgba(0,0,0,0.3)" : "none", width: 110, borderRadius: 50, padding: 5, paddingTop: 7, cursor: "pointer", textAlign: "center", 
                                                 backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? "orange" : "rgba(0,0,0,0.1)",
                                                 fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
                                                 "white" : "rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif"}}>
@@ -644,7 +644,7 @@ export default function ResultsListContainer(props){
                                         </div>
                                         <div onClick={filterFlights}
                                             style={{marginLeft: 5, boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
-                                            "none": "1px 2px 3px rgba(0,0,0,0.3)", width: 120, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
+                                            "none": "1px 2px 3px rgba(0,0,0,0.3)", width: 120, borderRadius: 50, padding: 5, paddingTop: 7, cursor: "pointer", textAlign: "center", 
                                             backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0)? "rgba(0,0,0,0.1)" : "orange",
                                             fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
                                             "rgba(0,0,0,0.3)" : "white", fontFamily: "'Prompt', Sans-serif"}}>
@@ -652,9 +652,9 @@ export default function ResultsListContainer(props){
                                                 className="fa-solid fa-sliders-h"></i>
                                             See Filtered
                                         </div>
-                                        <div onClick={()=>setIsFiltersApplied(false)} style={{marginLeft: 5, cursor: "pointer", width: 30, height: 30, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", background: "crimson", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                            <i style={{color: "white", fontSize: 13}} className="fa-solid fa-times"></i>
-                                        </div>
+                                    </div>
+                                    <div onClick={()=>setIsFiltersApplied(false)} style={{marginLeft: 5, cursor: "pointer", width: 30, height: 30, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", background: "crimson", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        <i style={{color: "white", fontSize: 13}} className="fa-solid fa-times"></i>
                                     </div>
                                 </div>
                             </div>
