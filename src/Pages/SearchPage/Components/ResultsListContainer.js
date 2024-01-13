@@ -348,9 +348,15 @@ export default function ResultsListContainer(props){
         window.location.reload();
     }
 
+    const resetSortByHighestOrLowestPrice = () => {
+        setPriceHighLowSort(0);
+        window.localStorage.setItem("search_page_price_sort", 0);
+        window.location.reload();
+    }
+
     let FLIGHTS;
     if(props.flights.length>0 && filteredFlights.length<1){
-        
+
         // Sorting takes place here
         let _flights = bubbleSort(props.flights, priceHighLowSort);
 
@@ -588,7 +594,23 @@ export default function ResultsListContainer(props){
                             </div>
                         }
                     </div>
-                    
+                    {
+                        // Highest to Lowest Price
+                        (!props.loading && priceHighLowSort===1) &&
+                        <div style={{borderRadius: 8, padding: 10, background: "crimson",}}>
+                        <div style={{display: "flex", alignItems: "center"}}>
+                            <p><i style={{color: "yellow", marginRight: 10}} 
+                                className="fa-solid fa-exclamation-triangle"></i></p>
+                            <p style={{fontSize: 12, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                You have applied price sorting by highest prices. In order to see the best prices please click on the button below.
+                            </p>
+                        </div>
+                        <div onClick={resetSortByHighestOrLowestPrice}
+                            style={{width: 160, marginTop: 5, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", backgroundColor: "orange", fontSize: 12, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                Click to reset
+                            </div>
+                        </div>
+                    }
                     <div id="search_results_list_items">
 
                         { !props.loading ? FLIGHTS : "" }
