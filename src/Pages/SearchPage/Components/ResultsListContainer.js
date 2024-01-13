@@ -622,37 +622,39 @@ export default function ResultsListContainer(props){
                     {
                         // Filters Prompt
                         (!props.loading && isFiltersApplied) && 
-                            <div style={{borderRadius: 8, padding: 10, margin: 10, marginTop: 0, background: "crimson",}}>
+                            <div style={{borderRadius: 8, padding: 10, margin: 10, marginTop: 0,}}>
                                 <div style={{display: "flex"}}>
-                                    <p><i style={{color: "yellow", marginRight: 10}} 
-                                        className="fa-solid fa-exclamation-triangle"></i></p>
-                                    <p style={{fontSize: 13, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                    <p><i style={{color: "green", marginRight: 10}} 
+                                        className="fa-solid fa-info"></i></p>
+                                    <p style={{fontSize: 13, color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif"}}>
                                         You have applied some filters to the search results. Use the buttons below to toggle in-between.
                                     </p>
                                 </div>
-                                <div style={{display: "flex", marginTop: 5}}>
-                                    <div onClick={resetSearchFilters}
-                                        style={{boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? 
-                                            "1px 2px 3px rgba(0,0,0,0.3)" : "none", width: 110, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
-                                            backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? "orange" : "rgba(0,0,0,0.1)",
-                                             fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
-                                             "white" : "rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif"}}>
-                                            <i style={{marginRight: 10}}
-                                                className="fa-solid fa-rotate"></i>
-                                            See All
-                                    </div>
-                                    <div onClick={filterFlights}
-                                        style={{marginLeft: 5, boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
-                                        "none": "1px 2px 3px rgba(0,0,0,0.3)", width: 120, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
-                                        backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0)? "" : "orange", 
-                                        fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
-                                        "rgba(0,0,0,0.3)" : "white", fontFamily: "'Prompt', Sans-serif"}}>
-                                        <i style={{marginRight: 10}}
-                                            className="fa-solid fa-sliders-h"></i>
-                                        See Filtered
-                                    </div>
-                                    <div onClick={()=>setIsFiltersApplied(false)} style={{marginLeft: 5, cursor: "pointer", width: 30, height: 30, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", background: "red", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                        <i style={{color: "white", fontSize: 13}} className="fa-solid fa-times"></i>
+                                <div style={{marginTop: 10}}>
+                                    <div style={{display: "flex"}}>
+                                        <div onClick={resetSearchFilters}
+                                            style={{boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? 
+                                                "1px 2px 3px rgba(0,0,0,0.3)" : "none", width: 110, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
+                                                backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? "orange" : "rgba(0,0,0,0.1)",
+                                                fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
+                                                "white" : "rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif"}}>
+                                                <i style={{marginRight: 10, fontSize: 13}}
+                                                    className="fa-solid fa-rotate"></i>
+                                                See All
+                                        </div>
+                                        <div onClick={filterFlights}
+                                            style={{marginLeft: 5, boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
+                                            "none": "1px 2px 3px rgba(0,0,0,0.3)", width: 120, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
+                                            backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0)? "rgba(0,0,0,0.1)" : "orange",
+                                            fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
+                                            "rgba(0,0,0,0.3)" : "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                            <i style={{marginRight: 10, fontSize: 13}}
+                                                className="fa-solid fa-sliders-h"></i>
+                                            See Filtered
+                                        </div>
+                                        <div onClick={()=>setIsFiltersApplied(false)} style={{marginLeft: 5, cursor: "pointer", width: 30, height: 30, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", background: "crimson", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                            <i style={{color: "white", fontSize: 13}} className="fa-solid fa-times"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
