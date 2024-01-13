@@ -100,6 +100,7 @@ export default function ResultsListContainer(props){
     const { SEARCH_OBJ } = props;
     const [ filteredFlights, setFilteredFlights ] = useState([]);
     const [ priceSlider, setPriceSlider ] = useState(101);
+    const [ isFiltersApplied, setIsFiltersApplied ] = useState(false);
     const [ flightsMinPrice, setFlightsMinPrice ] = useState(0);
     const [ flightsMaxPrice, setFlightsMaxPrice ] = useState(0);
     const [ flightsSliderMaxPrice, setFlightsSliderMaxPrice ] = useState(0);
@@ -339,6 +340,11 @@ export default function ResultsListContainer(props){
         // Sorting takes place here
         let _flights = bubbleSort(filtered, priceHighLowSort);
         setFilteredFlights(_flights);
+        setIsFiltersApplied(true);
+    }
+
+    const resetSearchFilters = () => {
+        setFilteredFlights([]);
     }
 
     const sortByHighestOrLowestPrice = (e) => {
@@ -351,11 +357,10 @@ export default function ResultsListContainer(props){
     const resetSortByHighestOrLowestPrice = () => {
         setPriceHighLowSort(0);
         window.localStorage.setItem("search_page_price_sort", 0);
-        window.location.reload();
     }
 
     let FLIGHTS;
-    if(props.flights.length>0 && filteredFlights.length<1){
+    if(props.flights.length>0 && filteredFlights?.length<1){
 
         // Sorting takes place here
         let _flights = bubbleSort(props.flights, priceHighLowSort);
@@ -595,21 +600,62 @@ export default function ResultsListContainer(props){
                         }
                     </div>
                     {
-                        // Highest to Lowest Price
+                        // Highest to Lowest Price Prompt
                         (!props.loading && priceHighLowSort===1) &&
-                        <div style={{borderRadius: 8, padding: 10, background: "crimson",}}>
-                        <div style={{display: "flex", alignItems: "center"}}>
-                            <p><i style={{color: "yellow", marginRight: 10}} 
-                                className="fa-solid fa-exclamation-triangle"></i></p>
-                            <p style={{fontSize: 12, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
-                                You have applied price sorting by highest prices. In order to see the best prices please click on the button below.
-                            </p>
-                        </div>
-                        <div onClick={resetSortByHighestOrLowestPrice}
-                            style={{width: 160, marginTop: 5, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", backgroundColor: "orange", fontSize: 12, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
-                                Click to reset
+                            <div style={{borderRadius: 8, padding: 10, margin: 10, marginTop: 0, background: "crimson",}}>
+                                <div style={{display: "flex"}}>
+                                    <p><i style={{color: "yellow", marginRight: 10}} 
+                                        className="fa-solid fa-exclamation-triangle"></i></p>
+                                    <p style={{fontSize: 13, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                        You have applied sorting by highest to lowest prices. To see the 
+                                        <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}> Best Prices</span>, please click on the button below.
+                                    </p>
+                                </div>
+                                <div onClick={resetSortByHighestOrLowestPrice}
+                                    style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", width: 180, marginTop: 5, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", backgroundColor: "orange", fontSize: 12, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                        <i style={{marginRight: 10}}
+                                            className="fa-solid fa-rotate"></i>
+                                        Reset price sorting
+                                </div>
                             </div>
-                        </div>
+                    }
+                    {
+                        // Filters Prompt
+                        (!props.loading && isFiltersApplied) && 
+                            <div style={{borderRadius: 8, padding: 10, margin: 10, marginTop: 0, background: "crimson",}}>
+                                <div style={{display: "flex"}}>
+                                    <p><i style={{color: "yellow", marginRight: 10}} 
+                                        className="fa-solid fa-exclamation-triangle"></i></p>
+                                    <p style={{fontSize: 13, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                        You have applied some filters to the search results. Use the buttons below to toggle in-between.
+                                    </p>
+                                </div>
+                                <div style={{display: "flex", marginTop: 5}}>
+                                    <div onClick={resetSearchFilters}
+                                        style={{boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? 
+                                            "1px 2px 3px rgba(0,0,0,0.3)" : "none", width: 110, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
+                                            backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0) ? "orange" : "rgba(0,0,0,0.1)",
+                                             fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
+                                             "white" : "rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif"}}>
+                                            <i style={{marginRight: 10}}
+                                                className="fa-solid fa-rotate"></i>
+                                            See All
+                                    </div>
+                                    <div onClick={filterFlights}
+                                        style={{marginLeft: 5, boxShadow: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
+                                        "none": "1px 2px 3px rgba(0,0,0,0.3)", width: 120, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", 
+                                        backgroundColor: (Array.isArray(filteredFlights) && filteredFlights.length>0)? "" : "orange", 
+                                        fontSize: 12, color: (Array.isArray(filteredFlights) && filteredFlights.length>0) ?
+                                        "rgba(0,0,0,0.3)" : "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                        <i style={{marginRight: 10}}
+                                            className="fa-solid fa-sliders-h"></i>
+                                        See Filtered
+                                    </div>
+                                    <div onClick={()=>setIsFiltersApplied(false)} style={{marginLeft: 5, cursor: "pointer", width: 30, height: 30, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: "100%", background: "red", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                        <i style={{color: "white", fontSize: 13}} className="fa-solid fa-times"></i>
+                                    </div>
+                                </div>
+                            </div>
                     }
                     <div id="search_results_list_items">
 
