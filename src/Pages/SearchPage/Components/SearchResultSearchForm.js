@@ -300,7 +300,7 @@ function SearchForm( props ){
                     <div className="sp_search_form_submit_btn_flex_container">
                         <div className="display_flex_on_1000px"
                             onClick={()=>document.getElementById('search_list_main__settings_section').style.display='block'}
-                            style={{display: "none", backgroundColor: "rgb(199, 81, 185)", padding: 5, paddingRight: 25, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 50, alignItems: "center", marginTop: 10}}>
+                            style={{display: "none", backgroundColor: "rgb(199, 81, 185)", padding: 5, paddingRight: 25, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 50, marginRight: 10, alignItems: "center", marginTop: 10}}>
                             <p style={{marginRight: 10, display: "flex", justifyContent: "center", alignItems: "center", width: 40, height: 40, backgroundColor: "rgba(0,0,0,0.1)", borderRadius: "100%"}}>
                                 <i className="fa fa-sliders" aria-hidden="true"></i>
                             </p>
