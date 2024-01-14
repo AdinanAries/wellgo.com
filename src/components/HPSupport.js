@@ -74,6 +74,15 @@ export default function HPSupportBtn(){
                         {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
                         {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
                     </p>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11, marginTop: 10, paddingTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
+                        <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
+                            className="fa-solid fa-temperature-high"></i>
+                        New York (Thu Mar 23) -
+                        <span style={{margin: "0 5px", fontSize: 11, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                            56°</span>
+                        <span style={{margin: "0 5px", fontSize: 11, fontFamily: "'Prompt', Sans-serif"}}>
+                            | heavy rain</span>
+                    </p>
                 </div>
                 <div id="main_chatbot_popup_tip_img" className="chatbot_popup_tip_img">
                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
@@ -121,7 +130,7 @@ export function show_support_chat_settings_container(){
 }
 
 let botPromptHideTimeoutObj;
-export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=100000) {
+export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=100000, params={}) {
 
     let audio = new Audio(notification_sound);
     
@@ -153,6 +162,18 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
                     ${message}
                 </p>`;
         }
+
+        document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
+            <p style="font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1)">
+                <i style="color: rgba(255,255,255,0.5); margin-right: 10px; font-size: 13px;"
+                    class="fa-solid fa-temperature-high"></i>
+                New York (Thu Mar 23) -
+                <span style="margin: 0 5px; font-size: 11px; font-family: 'Prompt', Sans-serif; font-weight: bolder">
+                    56°</span>
+                <span style="margin: 0 5px; font-size: 11px; font-family: 'Prompt', Sans-serif">
+                    | heavy rain</span>
+            </p>
+        `
         //audio.play();
     }, randWait);
 

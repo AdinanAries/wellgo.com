@@ -5,6 +5,7 @@ import nothing_found_icon from "../../../icons/nothing_found_icon.svg";
 import { useState } from "react";
 import { get_date_format_DAYMMMDDYYYY } from "../../../helpers/general";
 import BookingHistorySelectedItem from "./BookingHistorySelectedItem";
+import CONSTANTS from "../../../Constants/Constants";
 
 const BookingHistoryPage = (props) => {
     
@@ -82,26 +83,40 @@ const BookingHistoryPage = (props) => {
                                     Oops nothing found</p>
                             </div>
                         }{
-                            (bookings.length > 0) && bookings.slice(begin, end).map(each =>(
-                                <div key={each._id} style={{padding: 10, display: "flex"}}>
-                                    <p>
-                                        <i className="fa fa-route" style={{marginRight: 10, color: "rgba(0,0,0,0.6)"}}></i>
-                                    </p>
-                                    <div>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
-                                            {each.takeoff_city} ({each.takeoff_airport_code}) - {each.destination_city} ({each.destination_airport_code})</p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
-                                            {get_date_format_DAYMMMDDYYYY(each.departure_date)} - {get_date_format_DAYMMMDDYYYY(each.return_date)}</p>
-                                        <p onClick={()=> {
-                                                show_booking_history_more_info_pane();
-                                                setSelectedHistoryItem(each);
-                                            }
-                                        } style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 13, borderRadius: 6, color: "rgb(199, 81, 185)"}}>
-                                            view more ...
+                            (bookings.length > 0) && bookings.slice(begin, end).map(each => {
+                                let trip_type = each.trip_type;
+                                let departure_date = get_date_format_DAYMMMDDYYYY(each.departure_date);
+                                let return_date = "";
+                                let trip_type_icon_class = "fa-solid fa-arrow-right"
+                                if(trip_type===CONSTANTS.round_trip.toLocaleLowerCase()){
+                                    return_date = `- ${get_date_format_DAYMMMDDYYYY(each.return_date)}`;
+                                    trip_type_icon_class= "fa-solid fa-exchange"
+                                }
+                                return (
+                                    <div key={each._id} style={{padding: 10, display: "flex"}}>
+                                        <p>
+                                            <i className="fa fa-route" style={{marginRight: 10, color: "rgba(0,0,0,0.6)"}}></i>
                                         </p>
-                                    </div>
-                                </div>
-                            ))
+                                        <div>
+                                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgb(12, 109, 133)"}}>
+                                                {each.takeoff_city} ({each.takeoff_airport_code})
+                                                <i style={{margin: "0px 10px", fontSize: 13, color: "rgba(0,0,0,0.6)"}}
+                                                    className={trip_type_icon_class}></i> 
+                                                {each.destination_city} ({each.destination_airport_code})
+                                            </p>
+                                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.5)"}}>
+                                                {departure_date} {return_date}</p>
+                                            <p onClick={()=> {
+                                                    show_booking_history_more_info_pane();
+                                                    setSelectedHistoryItem(each);
+                                                }
+                                            } style={{fontFamily: "'Prompt', Sans-serif", cursor: "pointer", fontSize: 13, borderRadius: 6, color: "rgb(199, 81, 185)"}}>
+                                                view more ...
+                                            </p>
+                                        </div>
+                                    </div>)
+                                }
+                            )
                         }
                     </div>
                     {

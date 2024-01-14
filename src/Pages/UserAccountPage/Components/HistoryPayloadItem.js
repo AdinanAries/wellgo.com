@@ -14,6 +14,8 @@ const HistoryPayloadItem = (props) => {
         /*prices,*/
     } = props;
 
+    console.log("Booking History Item:", completedOrderDetails);
+
     const [isLoading, setIsLoading] = useState(false);
 
 

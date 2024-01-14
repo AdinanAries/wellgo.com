@@ -608,12 +608,12 @@ export default function ResultsListContainer(props){
                                         className="fa-solid fa-exclamation-triangle"></i></p>
                                     <p style={{fontSize: 13, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
                                         You have applied sorting by highest to lowest prices. To see the 
-                                        <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif"}}> Best Prices</span>, please click on the button below.
+                                        <span style={{fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", fontSize: 13}}> Best Prices first</span>, please click on the button below.
                                     </p>
                                 </div>
                                 <div onClick={resetSortByHighestOrLowestPrice}
-                                    style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", width: 180, marginTop: 5, borderRadius: 50, padding: 5, cursor: "pointer", textAlign: "center", backgroundColor: "orange", fontSize: 12, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
-                                        <i style={{marginRight: 10}}
+                                    style={{boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", width: 180, marginTop: 5, borderRadius: 50, padding: 5, paddingToP: 7, cursor: "pointer", textAlign: "center", backgroundColor: "orange", fontSize: 12, color: "white", fontFamily: "'Prompt', Sans-serif"}}>
+                                        <i style={{marginRight: 10, fontSize: 12}}
                                             className="fa-solid fa-rotate"></i>
                                         Reset price sorting
                                 </div>
