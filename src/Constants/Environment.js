@@ -54,8 +54,8 @@ const errorCallback = (err) => {
     }
 };
 
-export const getClientLocation = async () => {
-    return await navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+export const getClientLocation = () => {
+    return navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
 
 export default ENVIRONMENT;
