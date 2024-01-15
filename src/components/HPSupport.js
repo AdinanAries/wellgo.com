@@ -1,4 +1,4 @@
-import $ from "jquery";
+import $, { param } from "jquery";
 import HelpSupportChatMessaging from "./HelpSupportChatMessaging";
 import HelpSupportChatStartPage from "./HelpSupportChatStartPage";
 import botIcon from "../icons/botIcon.svg";
@@ -145,7 +145,7 @@ setTimeout(async()=>{
 },1000);
 
 let botPromptHideTimeoutObj;
-export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=100000, params={}) {
+export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=100000, params={image: true, weather: true, data: {}}) {
 
     let audio = new Audio(notification_sound);
     
@@ -176,6 +176,21 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
                     <i style="color: yellow;" class="fa-solid fa-exclamation-triangle"></i>
                     ${message}
                 </p>`;
+        }
+
+        if(params?.image){
+            document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
+                <div style="position: relative;">
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; background-color: rgba(0,0,0,0.4); padding: 10px; z-index: 1;">
+                        <p style="font-size: 12px; font-family: 'Prompt', Sans-serif; color: white;">
+                            This is an overlay
+                        </p>
+                    </div>
+                    <img style="width: 100%; height: auto; margin-top: 10px;"
+                        src="https://th.bing.com/th/id/OIP.akTDnK_uV13cS7rXZvLOOgAAAA?pid=ImgDet&w=200&h=149&c=7&dpr=1.3" 
+                        alt="to do" />
+                </div>
+            `;
         }
 
         document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
