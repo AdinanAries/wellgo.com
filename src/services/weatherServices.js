@@ -1,4 +1,4 @@
-const API_URL="https://wellgo-backend-a2628ce79736.herokuapp.com";//getApiHost();
+const API_URL="https://wellgo-backend-a2628ce79736.herokuapp.com";
 
 export const fetchWeatherData = async (long, lat, start_date, end_date, path="/api/weather") => {
     try{
