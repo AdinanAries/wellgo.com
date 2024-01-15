@@ -136,11 +136,11 @@ setTimeout(async()=>{
     const callback = (data) => {
         console.log('Weather', data);
         if(data?.error){
-            // error handling here
+            // Error handling
         }
     }
     // Weather Data
-    window.weather = await Weather.getWeatherDetaultLocation("2024-01-23","2024-01-23", callback);
+    window.weather = await Weather.getWeatherDetaultLocation("2024-02-23","2024-02-23", callback);
 
 },1000);
 
