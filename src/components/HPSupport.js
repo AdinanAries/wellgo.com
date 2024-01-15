@@ -6,6 +6,7 @@ import HelpSupportSettingsPage from "./HelpSupportChatSettingsPage";
 import CONSTANTS from "../Constants/Constants";
 import BotAuxMsg from "../Constants/BotAuxMsg";
 import getBotResponse from "../Constants/BotResponses";
+import Weather from "../helpers/Weather";
 
 import notification_sound from "../audio/livechat.mp3";
 
@@ -130,6 +131,18 @@ export function show_support_chat_settings_container(){
     document.getElementById("support_chat_settings_container").style.display="block";
     document.getElementById("chat_settings_page_bot_status_display").innerHTML = return_bot_chat_status_markup("online")
 }
+
+setTimeout(async()=>{
+    const callback = (data) => {
+        console.log('Weather', data);
+        if(data?.error){
+            // error handling here
+        }
+    }
+    // Weather Data
+    window.weather = await Weather.getWeatherDetaultLocation("2024-01-23","2024-01-23", callback);
+
+},1000);
 
 let botPromptHideTimeoutObj;
 export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=100000, params={}) {

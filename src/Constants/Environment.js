@@ -40,22 +40,4 @@ export const getAnonymousID = () => {
     return id;
 }
 
-const successCallback = (position) => {
-    console.log(position);
-    return position;
-};
-  
-const errorCallback = (err) => {
-    console.log(err);
-    return {
-        error: true,
-        message: "Error from geolocation.getCurrentPosition",
-        err
-    }
-};
-
-export const getClientLocation = () => {
-    return navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-}
-
 export default ENVIRONMENT;

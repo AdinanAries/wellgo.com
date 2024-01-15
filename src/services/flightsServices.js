@@ -22,7 +22,7 @@ export const fetchFlightOffers = async (path="/api/flights") => {
         .catch(err => {
             console.log(err);
             return {data: []};
-        })
+        });
     } catch (e){
         console.log(e);
         return {data: []};
