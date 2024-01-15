@@ -140,7 +140,7 @@ setTimeout(async()=>{
         }
     }
     // Weather Data
-    window.weather = await Weather.getWeatherDetaultLocation("2024-02-23","2024-02-23", callback);
+    window.weather = await Weather.getWeatherDetaultLocation("2024-01-23","2024-01-30", callback);
 
 },1000);
 
