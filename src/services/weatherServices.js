@@ -1,5 +1,3 @@
-//import { getApiHost } from "../Constants/Environment";
-
 const API_URL="https://wellgo-backend-a2628ce79736.herokuapp.com";//getApiHost();
 
 export const fetchWeatherData = async (long, lat, start_date, end_date, path="/api/weather") => {
