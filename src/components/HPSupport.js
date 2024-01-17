@@ -7,6 +7,7 @@ import CONSTANTS from "../Constants/Constants";
 import BotAuxMsg from "../Constants/BotAuxMsg";
 import getBotResponse from "../Constants/BotResponses";
 import Weather from "../helpers/Weather";
+import rain_sun_cloud_img from "../icons/Weather/Sun-Rain-Cloud.png"
 
 import notification_sound from "../audio/livechat.mp3";
 
@@ -75,6 +76,16 @@ export default function HPSupportBtn(){
                         {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
                         {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
                     </p>
+                    <div style={{position: "relative"}}>
+                        <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", backgroundColor: "rgba(0,0,0,0.4)", padding: 10, zIndex: 1}}>
+                            <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
+                                Rainy, Cloudy, and Sunny
+                            </p>
+                        </div>
+                        <img style={{width: "100%", height: "auto", marginTop: 10}}
+                            src={rain_sun_cloud_img} 
+                            alt="to do" />
+                    </div>
                     <div style={{display: "flex", marginTop: 10, paddingTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
                         <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
                                 className="fa-solid fa-temperature-high"></i>
