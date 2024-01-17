@@ -76,17 +76,21 @@ export default function HPSupportBtn(){
                         {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
                         {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
                     </p>
-                    <div style={{position: "relative"}}>
-                        <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", backgroundColor: "rgba(0,0,0,0.4)", padding: 10, zIndex: 1}}>
-                            <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
+                    <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
+                        <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white", marginTop: 10}}>
+                            Today: {new Date().toString()}</p>
+                        <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", zIndex: 1}}>
+                            <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
                                 Rainy, Cloudy, and Sunny
                             </p>
                         </div>
-                        <img style={{width: "100%", height: "auto", marginTop: 10}}
-                            src={rain_sun_cloud_img} 
-                            alt="to do" />
+                        <p style={{textAlign: "center", paddingTop: 5, paddingBottom: 25}}>
+                            <img style={{width: 90, height: "auto", marginTop: 10}}
+                                src={rain_sun_cloud_img} 
+                                alt="to do" />
+                        </p>
                     </div>
-                    <div style={{display: "flex", marginTop: 10, paddingTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
+                    <div style={{display: "flex", marginTop: 5, paddingTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
                         <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
                                 className="fa-solid fa-temperature-high"></i>
                         <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
