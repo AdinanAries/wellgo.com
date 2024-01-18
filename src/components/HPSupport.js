@@ -199,14 +199,14 @@ export default function HPSupportBtn(){
     );
 }
 
-function return_bot_chat_status_markup(status){
+const return_bot_chat_status_markup = (status) => {
     //statuses: online, offline, other...
     return `
         <p style="width: 8px; height: 8px; background-color: green; margin-right: 5px; margin-top: 6px; border-radius: 100%;"></p>
         <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">online</p>
     `
 }
-function return_bot_chat_loading_markup(){
+const return_bot_chat_loading_markup = () => {
     return `
         <p style="width: 8px; height: 8px; background-color: red; margin-right: 5px; margin-top: 6px; border-radius: 100%;"></p>
         <p style="font-family: 'Prompt', sans-serif; font-size: 13px; color: rgba(0,0,0,0.7);">loading...</p>
