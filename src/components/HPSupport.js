@@ -176,12 +176,12 @@ export default function HPSupportBtn(){
                                     className="fa-solid fa-temperature-high"></i>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
                                 New York
-                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "white", fontSize: 11}}>
+                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "orange", fontSize: 11}}>
                                     &#8226;
                                 </span>
                                 <span style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
                                     {Math.round(currentHourWeather?.apparentTemperature)} °F</span>
-                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "white", fontSize: 11}}>
+                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "orange", fontSize: 11}}>
                                     &#8226;
                                 </span>
                                 <span style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif"}}>
