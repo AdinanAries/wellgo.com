@@ -7,11 +7,85 @@ import CONSTANTS from "../Constants/Constants";
 import BotAuxMsg from "../Constants/BotAuxMsg";
 import getBotResponse from "../Constants/BotResponses";
 import Weather from "../helpers/Weather";
-import rain_sun_cloud_img from "../icons/Weather/Sun-Rain-Cloud.png"
 
 import notification_sound from "../audio/livechat.mp3";
+import { useEffect, useState } from "react";
 
 export default function HPSupportBtn(){
+
+    const [ currentHourWeather, setCurrentHourWeather ] = useState();
+
+    useEffect(()=>{
+        // Get and Set Weather Data
+        let today_iso_date = new Date().toISOString().split("T")[0];
+        Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback);
+    
+    }, []);
+
+    const weatherCallback = (weatherData) => {
+        console.log('Weather', weatherData);
+        if(weatherData?.error){
+            // Error handling
+            setCurrentHourWeather({
+                isError: true
+            });
+            return;
+        }
+        let current_hour = new Date().toString().split(" ")[4].split(":")[0];
+        let current_hour_weather = {};
+        let i = parseInt(current_hour);
+        current_hour_weather.time = weatherData.hourly.time[i];//.toISOString();
+        current_hour_weather.temperature2m=weatherData.hourly.temperature2m[i];
+        current_hour_weather.relativeHumidity2m=weatherData.hourly.relativeHumidity2m[i];
+        current_hour_weather.dewPoint2m=weatherData.hourly.dewPoint2m[i];
+        current_hour_weather.apparentTemperature=weatherData.hourly.apparentTemperature[i];
+        current_hour_weather.precipitationProbability=weatherData.hourly.precipitationProbability[i];
+        current_hour_weather.precipitation=weatherData.hourly.precipitation[i];
+        current_hour_weather.rain=weatherData.hourly.rain[i];
+        current_hour_weather.showers=weatherData.hourly.showers[i];
+        current_hour_weather.snowfall=weatherData.hourly.snowfall[i];
+        current_hour_weather.snowDepth=weatherData.hourly.snowDepth[i];
+        current_hour_weather.weatherCode=weatherData.hourly.weatherCode[i];
+        current_hour_weather.pressureMsl=weatherData.hourly.pressureMsl[i];
+        current_hour_weather.surfacePressure=weatherData.hourly.surfacePressure[i];
+        current_hour_weather.cloudCover=weatherData.hourly.cloudCover[i];
+        current_hour_weather.cloudCoverLow=weatherData.hourly.cloudCoverLow[i];
+        current_hour_weather.cloudCoverMid=weatherData.hourly.cloudCoverMid[i];
+        current_hour_weather.cloudCoverHigh=weatherData.hourly.cloudCoverHigh[i];
+        current_hour_weather.visibility=weatherData.hourly.visibility[i];
+        current_hour_weather.evapotranspiration=weatherData.hourly.evapotranspiration[i];
+        current_hour_weather.et0FaoEvapotranspiration=weatherData.hourly.et0FaoEvapotranspiration[i];
+        current_hour_weather.vapourPressureDeficit=weatherData.hourly.vapourPressureDeficit[i];
+        current_hour_weather.windSpeed10m=weatherData.hourly.windSpeed10m[i];
+        current_hour_weather.windSpeed80m=weatherData.hourly.windSpeed80m[i];
+        current_hour_weather.windSpeed120m=weatherData.hourly.windSpeed120m[i];
+        current_hour_weather.windSpeed180m=weatherData.hourly.windSpeed180m[i];
+        current_hour_weather.windDirection10m=weatherData.hourly.windDirection10m[i];
+        current_hour_weather.windDirection80m=weatherData.hourly.windDirection80m[i];
+        current_hour_weather.windDirection120m=weatherData.hourly.windDirection120m[i];
+        current_hour_weather.windDirection180m=weatherData.hourly.windDirection180m[i];
+        current_hour_weather.windGusts10m=weatherData.hourly.windGusts10m[i];
+        current_hour_weather.temperature80m=weatherData.hourly.temperature80m[i];
+        current_hour_weather.temperature120m=weatherData.hourly.temperature120m[i];
+        current_hour_weather.temperature180m=weatherData.hourly.temperature180m[i];
+        current_hour_weather.soilTemperature0cm=weatherData.hourly.soilTemperature0cm[i];
+        current_hour_weather.soilTemperature6cm=weatherData.hourly.soilTemperature6cm[i];
+        current_hour_weather.soilTemperature18cm=weatherData.hourly.soilTemperature18cm[i];
+        current_hour_weather.soilTemperature54cm=weatherData.hourly.soilTemperature54cm[i];
+        current_hour_weather.soilMoisture0To1cm=weatherData.hourly.soilMoisture0To1cm[i];
+        current_hour_weather.soilMoisture1To3cm=weatherData.hourly.soilMoisture1To3cm[i];
+        current_hour_weather.soilMoisture3To9cm=weatherData.hourly.soilMoisture3To9cm[i];
+        current_hour_weather.soilMoisture9To27cm=weatherData.hourly.soilMoisture9To27cm[i];
+        current_hour_weather.soilMoisture27To81cm=weatherData.hourly.soilMoisture27To81cm[i];
+        current_hour_weather.icon=Weather.getCurrentWeatherIcon(current_hour_weather, current_hour);
+        // State Change
+        setCurrentHourWeather(current_hour_weather);
+        // Showing the Prompt
+        let duration=20000
+        window.show_new_chatbot_tip(duration);
+        
+    }
+
     return (
         <div className="hp_support_container">
             <div id="support_chat_container" className="support_chat_div_container">
@@ -76,31 +150,45 @@ export default function HPSupportBtn(){
                         {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
                         {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
                     </p>
-                    <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
-                        <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white", marginTop: 10}}>
-                            Today: {new Date().toString()}</p>
-                        <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", zIndex: 1}}>
-                            <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
-                                Rainy, Cloudy, and Sunny
+                    { (!currentHourWeather?.isError) && <>
+                        <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
+                            <div style={{display: "flex"}}>
+                                <p style={{color: "orange", marginRight: 5, fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                                    Today:
+                                </p>
+                                <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white", marginTop: 10}}>
+                                    {new Date().toString()}
+                                </p>
+                            </div>
+                            <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", zIndex: 1}}>
+                                <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
+                                    Rainy, Cloudy, and Sunny
+                                </p>
+                            </div>
+                            <p style={{textAlign: "center", paddingTop: 5, paddingBottom: 25}}>
+                                <img style={{width: 90, height: "auto", marginTop: 10}}
+                                    src={currentHourWeather?.icon} 
+                                    alt="to do" />
                             </p>
                         </div>
-                        <p style={{textAlign: "center", paddingTop: 5, paddingBottom: 25}}>
-                            <img style={{width: 90, height: "auto", marginTop: 10}}
-                                src={rain_sun_cloud_img} 
-                                alt="to do" />
-                        </p>
-                    </div>
-                    <div style={{display: "flex", marginTop: 5, paddingTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
-                        <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
-                                className="fa-solid fa-temperature-high"></i>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
-                            New York (Thu Mar 23) -
-                            <span style={{margin: "0 5px", fontSize: 11, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                                56 °F</span>
-                            <span style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif"}}>
-                                | heavy rain</span>
-                        </p>
-                    </div>
+                        <div style={{display: "flex", marginTop: 5, paddingTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
+                            <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
+                                    className="fa-solid fa-temperature-high"></i>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                New York
+                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "white", fontSize: 11}}>
+                                    &#8226;
+                                </span>
+                                <span style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
+                                    {Math.round(currentHourWeather?.apparentTemperature)} °F</span>
+                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "white", fontSize: 11}}>
+                                    &#8226;
+                                </span>
+                                <span style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif"}}>
+                                    heavy rain</span>
+                            </p>
+                        </div>
+                    </>}
                 </div>
                 <div id="main_chatbot_popup_tip_img" className="chatbot_popup_tip_img">
                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
@@ -147,16 +235,8 @@ export function show_support_chat_settings_container(){
     document.getElementById("chat_settings_page_bot_status_display").innerHTML = return_bot_chat_status_markup("online")
 }
 
-setTimeout(async()=>{
-    const callback = (data) => {
-        console.log('Weather', data);
-        if(data?.error){
-            // Error handling
-        }
-    }
-    // Weather Data
-    window.weather = await Weather.getWeatherDetaultLocation("2024-01-23","2024-01-30", callback);
-
+setTimeout(()=>{
+    
 },1000);
 
 let botPromptHideTimeoutObj;

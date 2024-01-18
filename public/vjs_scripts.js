@@ -496,10 +496,10 @@ let typeWriter = () => {
 }
 window.typeWriter=typeWriter;
 
-let show_new_chatbot_tip = (msg) => {
+let show_new_chatbot_tip = (timeout=15000) => {
   if(document.getElementById("main_chat_bot_tips_poppup_section"))
     document.getElementById("main_chat_bot_tips_poppup_section").style.display="block";
-    setTimeout(()=>hide_new_chatbot_tip(),15000);
+    setTimeout(()=>hide_new_chatbot_tip(),timeout);
 }
 window.show_new_chatbot_tip=show_new_chatbot_tip;
 
@@ -510,7 +510,7 @@ let hide_new_chatbot_tip = () => {
 window.hide_new_chatbot_tip=hide_new_chatbot_tip;
 
 window.$(document).ready(()=>{
-  setTimeout(()=>show_new_chatbot_tip("msg"),10000);
+  //setTimeout(()=>show_new_chatbot_tip(),10000);
   setTimeout(()=>window.toggle_main_page_search_filters(), 3500);
 });
 
