@@ -154,7 +154,7 @@ export default function HPSupportBtn(){
                         <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
                             <div style={{display: "flex"}}>
                                 <p style={{color: "orange", marginRight: 5, fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                                    Today:
+                                    Weather:
                                 </p>
                                 <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white", marginTop: 10}}>
                                     {new Date().toString()}
