@@ -79,6 +79,7 @@ export default function HPSupportBtn(){
         current_hour_weather.soilMoisture27To81cm=weatherData.hourly.soilMoisture27To81cm[i];
         current_hour_weather.icon=Weather.getCurrentWeatherIcon(current_hour_weather, current_hour);
         current_hour_weather.city=weatherData?.city;
+        current_hour_weather.description=Weather.getWeatherCodeDescription(current_hour_weather?.weatherCode)
         // State Change
         setCurrentHourWeather(current_hour_weather);
         // Showing the Prompt
@@ -155,7 +156,7 @@ export default function HPSupportBtn(){
                         <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
                             <div style={{display: "flex"}}>
                                 <p style={{color: "orange", marginRight: 5, fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                                    Weather:
+                                    Now:
                                 </p>
                                 <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white", marginTop: 10}}>
                                     {new Date().toString()}
@@ -163,7 +164,7 @@ export default function HPSupportBtn(){
                             </div>
                             <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", zIndex: 1}}>
                                 <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
-                                    Rainy, Cloudy, and Sunny
+                                    {currentHourWeather?.description}
                                 </p>
                             </div>
                             <p style={{textAlign: "center", paddingTop: 5, paddingBottom: 25}}>
@@ -186,7 +187,7 @@ export default function HPSupportBtn(){
                                     &#8226;
                                 </span>
                                 <span style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif"}}>
-                                    heavy rain</span>
+                                    AD v1.0.0</span>
                             </p>
                         </div>
                     </>}
