@@ -18,7 +18,7 @@ import SunDoubleCloud from "../icons/Weather/Sun-Double-Cloud.png";
 import SunRainCloud from "../icons/Weather/Sun-Rain-Cloud.png";
 import SunnyCloudy from "../icons/Weather/Sunny-Cloudy.png";
 
-import { fetchWeatherData } from "../services/weatherServices";
+import { fetchWeatherData, fetchWeatherCity } from "../services/weatherServices";
 
 const Weather = {
     /**
@@ -30,6 +30,8 @@ const Weather = {
             let long = position.coords.longitude;
             let lat = position.coords.latitude;
             let weather = await fetchWeatherData(long, lat, start_date, end_date);
+            let city = await fetchWeatherCity(long, lat);
+            weather.city=city[0];
             callback(weather);
         }, (err) => {
             console.log(err);

@@ -78,6 +78,7 @@ export default function HPSupportBtn(){
         current_hour_weather.soilMoisture9To27cm=weatherData.hourly.soilMoisture9To27cm[i];
         current_hour_weather.soilMoisture27To81cm=weatherData.hourly.soilMoisture27To81cm[i];
         current_hour_weather.icon=Weather.getCurrentWeatherIcon(current_hour_weather, current_hour);
+        current_hour_weather.city=weatherData?.city;
         // State Change
         setCurrentHourWeather(current_hour_weather);
         // Showing the Prompt
@@ -175,7 +176,7 @@ export default function HPSupportBtn(){
                             <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
                                     className="fa-solid fa-temperature-high"></i>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
-                                New York
+                                {currentHourWeather?.city?.city} ({currentHourWeather?.city?.iso3})
                                 <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "orange", fontSize: 11}}>
                                     &#8226;
                                 </span>
