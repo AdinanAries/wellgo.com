@@ -152,7 +152,7 @@ export default function CheckoutPage(props){
                     data: {
                         img_url: PassengerImg,
                         icon_class: "far fa-address-card",
-                        text: "Incomplete Passenger Form(s)",
+                        text: "Incomplete Passenger Form(s)...",
                     }
                 }
             );
