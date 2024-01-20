@@ -17,6 +17,8 @@ import SunCloud from "../icons/Weather/Sun-Cloud.png";
 import SunDoubleCloud from "../icons/Weather/Sun-Double-Cloud.png";
 import SunRainCloud from "../icons/Weather/Sun-Rain-Cloud.png";
 import SunnyCloudy from "../icons/Weather/Sunny-Cloudy.png";
+import CloudsDouble from "../icons/Weather/Cloud-Double.png";
+import CloudSunBehind from "../icons/Weather/Cloud-Sun-Behind.png";
 
 import { fetchWeatherData, fetchWeatherCity } from "../services/weatherServices";
 
@@ -48,9 +50,15 @@ const Weather = {
      * @param {*} currentWeather 
      */
     getCurrentWeatherIcon: (currentWeather, currentHour) => {
-        if(currentHour>17){ // Nightly Icons
+        if(currentHour>17 || currentHour<11){ // Nightly Icons
+            if(currentWeather?.weatherCode===3){
+                return CloudsDouble;
+            }
             return NightlyQuaterMoonCloudy;
         }else{ // Daily Icons
+            if(currentWeather?.weatherCode===3){
+                return CloudSunBehind;
+            }
             return SunRainCloud;
         }
     },

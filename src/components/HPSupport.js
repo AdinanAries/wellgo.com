@@ -83,7 +83,7 @@ export default function HPSupportBtn(){
         // State Change
         setCurrentHourWeather(current_hour_weather);
         // Showing the Prompt
-        let duration=20000
+        let duration=50000
         window.show_new_chatbot_tip(duration);
         
     }
@@ -154,6 +154,9 @@ export default function HPSupportBtn(){
                     </p>
                     { (!currentHourWeather?.isError) && <>
                         <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
+                            <p style={{position: "absolute", top: 50, left: 20, fontSize: 30, color: "orange", fontFamily: "'Prompt', Sans-serif"}}>
+                                {Math.round(currentHourWeather?.apparentTemperature)}°F
+                            </p>
                             <div style={{display: "flex"}}>
                                 <p style={{color: "orange", marginRight: 5, fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
                                     Now:
@@ -177,7 +180,7 @@ export default function HPSupportBtn(){
                             <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
                                     className="fa-solid fa-temperature-high"></i>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
-                                {currentHourWeather?.city?.city} ({currentHourWeather?.city?.iso3})
+                                {currentHourWeather?.city?.city}, {currentHourWeather?.city?.iso3}
                                 <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "orange", fontSize: 11}}>
                                     &#8226;
                                 </span>
