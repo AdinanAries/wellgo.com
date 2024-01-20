@@ -11,7 +11,7 @@ import SelectedTicketItinSegments from "../SelectedTicketItinSegments";
 
 const DuffelOfferItem = (props) => {
 
-    const index = props.index;
+    const index = props?.index;
     const {
         total_amount, 
         total_currency, 
@@ -19,22 +19,22 @@ const DuffelOfferItem = (props) => {
         owner, 
         slices, 
         passengers 
-    } = props.flight;
-    const EMISSIONS = props.flight?.total_emissions_kg
+    } = props?.flight;
+    const EMISSIONS = props?.flight?.total_emissions_kg
     //console.log(props.flight);
     
     const CURRENCY_SYMBOL = get_currency_symbol(total_currency);
-    const AIRCRAFT_NAME = slices[0].segments[0].aircraft?.name;
-    const OPERATED_BY = slices[0].segments[0].operating_carrier?.name;
-    const SEGMENT_LENGTH = slices[0].segments.length;
-    const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
-    const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
+    const AIRCRAFT_NAME = slices[0]?.segments[0]?.aircraft?.name;
+    const OPERATED_BY = slices[0]?.segments[0]?.operating_carrier?.name;
+    const SEGMENT_LENGTH = slices[0]?.segments?.length;
+    const TRIP_START = convert24HTimeToAMPM(slices[0]?.segments[0]?.departing_at?.split("T")[1]);
+    const TRIP_ENDS = convert24HTimeToAMPM(slices[0]?.segments[(SEGMENT_LENGTH - 1)]?.arriving_at?.split("T")[1]);
     const STOPS_COUNT = (SEGMENT_LENGTH-1);
-    const ORIGIN_AIRPORT = `${slices[0].segments[0].origin.name} (${slices[0].segments[0].origin.iata_code})`;
-    const DESTINATION_AIRPORT = `${slices[0].segments[(SEGMENT_LENGTH - 1)].destination.name} (${slices[0].segments[(SEGMENT_LENGTH - 1)].destination.iata_code})`;
-    const ORIGIN_IATA=slices[0].segments[0].origin.iata_code;
-    const DESTINATION_IATA=slices[0].segments[(SEGMENT_LENGTH - 1)].destination.iata_code;
-    const ORIGIN_CITY = slices[0].segments[0].origin.city_name;
+    const ORIGIN_AIRPORT = `${slices[0]?.segments[0]?.origin.name} (${slices[0]?.segments[0]?.origin?.iata_code})`;
+    const DESTINATION_AIRPORT = `${slices[0]?.segments[(SEGMENT_LENGTH - 1)]?.destination.name} (${slices[0]?.segments[(SEGMENT_LENGTH - 1)]?.destination?.iata_code})`;
+    const ORIGIN_IATA=slices[0]?.segments[0]?.origin?.iata_code;
+    const DESTINATION_IATA=slices[0]?.segments[(SEGMENT_LENGTH - 1)]?.destination?.iata_code;
+    const ORIGIN_CITY = slices[0]?.segments[0]?.origin?.city_name;
 
     let is_more_details_shown = false;
     const toggle_show_more_details = () =>{
@@ -69,7 +69,7 @@ const DuffelOfferItem = (props) => {
                 </p>
                 <SelectedTicketItinSegments 
                     element_id={index+"search_result_see_ticket_details_itinerary_details"} 
-                    segments={slice.segments}
+                    segments={slice?.segments}
                     display="block"
                 />
                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: -10, marginBottom: 20}}>
@@ -85,12 +85,12 @@ const DuffelOfferItem = (props) => {
         );
 
         // Amenities
-        for(let i=0;i < slice.segments.length; i++){
-            for(let j=(slice.segments[i].passengers.length-1);j>=0;j--){
+        for(let i=0;i < slice?.segments?.length; i++){
+            for(let j=(slice?.segments[i]?.passengers?.length-1);j>=0;j--){
                 let amenities = {};
-                if(slice.segments[i].passengers[j].cabin)
-                    if(slice.segments[i].passengers[j].cabin?.amenities)
-                        amenities=slice.segments[i].passengers[j].cabin?.amenities
+                if(slice?.segments[i]?.passengers[j]?.cabin)
+                    if(slice?.segments[i]?.passengers[j]?.cabin?.amenities)
+                        amenities=slice?.segments[i]?.passengers[j]?.cabin?.amenities
                 all_amenities={
                     ...all_amenities,
                     ...amenities
@@ -100,22 +100,22 @@ const DuffelOfferItem = (props) => {
     });
 
     let is_one_way=true;
-    if(slices.length>1){
-        const LAST_SLICE_SEG_LENGTH=slices[(slices.length-1)].segments.length;
-        if(ORIGIN_CITY===slices[(slices.length-1)].segments[LAST_SLICE_SEG_LENGTH-1].destination.city_name){
+    if(slices?.length>1){
+        const LAST_SLICE_SEG_LENGTH=slices[(slices?.length-1)]?.segments?.length;
+        if(ORIGIN_CITY===slices[(slices?.length-1)]?.segments[LAST_SLICE_SEG_LENGTH-1]?.destination?.city_name){
             is_one_way=false;
         }
     }
     let STOPSMARKUP = [];
     if(SEGMENT_LENGTH>1){
         for(let sg=0; sg<SEGMENT_LENGTH-1; sg++){
-            let flight_stop_arrival = slices[0].segments[sg].arriving_at;
-            let flight_stop_departure = slices[0].segments[sg+1].departing_at;
-            const {d: DAYS, h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure.replace("T", " "));
-            let STOP_DETAILS = (`${DAYS} ${HOURS} ${MINUTES} in ${ellipsify(slices[0].segments[sg].destination.city_name)} (${slices[0].segments[sg].destination.iata_code})`);
-            STOPSMARKUP.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12, zIndex: 1, textAlign: "center"}}>
+            let flight_stop_arrival = slices[0]?.segments[sg]?.arriving_at;
+            let flight_stop_departure = slices[0]?.segments[sg+1]?.departing_at;
+            const {d: DAYS, h: HOURS, m: MINUTES} = calculateTotalTime(flight_stop_arrival.replace("T", " "), flight_stop_departure?.replace("T", " "));
+            let STOP_DETAILS = (`${DAYS} ${HOURS} ${MINUTES} in ${ellipsify(slices[0]?.segments[sg]?.destination?.city_name)} (${slices[0]?.segments[sg]?.destination?.iata_code})`);
+            STOPSMARKUP?.push(<p className="tooltip_parent" style={{color: "rgba(0,0,0,0.8)", fontSize: 12, zIndex: 1, textAlign: "center"}}>
                     {STOP_DETAILS}
-                    <div className="tooltip">{`${slices[0].segments[sg].destination.city_name} - ${slices[0].segments[sg].destination.name}`}</div>
+                    <div className="tooltip">{`${slices[0]?.segments[sg]?.destination?.city_name} - ${slices[0]?.segments[sg]?.destination?.name}`}</div>
                 </p>);
         }
     }
@@ -135,11 +135,11 @@ const DuffelOfferItem = (props) => {
                     style={{width: "calc(100% - 110px)", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
                     <div>
                         <div style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontWeight: "bolder", marginBottom: 5}}>
-                            <img src={owner.logo_symbol_url/*"./deltaIcon.png"*/} alt={"test"} style={{width: 30, height: "auto", objectFit: "cover", marginRight: 7}} />
+                            <img src={owner?.logo_symbol_url/*"./deltaIcon.png"*/} alt={"test"} style={{width: 30, height: "auto", objectFit: "cover", marginRight: 7}} />
                             {TRIP_START} - {TRIP_ENDS}
                         </div>
                         <p style={{marginLeft: 40, color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 5}}>
-                            {owner.name}
+                            {owner?.name}
                         </p>
                         <p style={{color: "rgba(0,0,0,0.7)", marginTop: 5}}>
                             {
@@ -157,7 +157,7 @@ const DuffelOfferItem = (props) => {
                         <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, textAlign: "center", marginBottom: 5}}>
                             {DAYS} {HOURS} {MINUTES} ({(STOPS_COUNT > 0 ? (STOPS_COUNT + ((STOPS_COUNT > 1) ? " stops" : " stop")) : "nonstop")})
                         </p>
-                        {STOPSMARKUP.map(each=>each)}
+                        {STOPSMARKUP?.map(each=>each)}
                         {
                             EMISSIONS && <p style={{textAlign: "center", color: "rgba(0,0,0,0.7)", fontSize: 11, marginTop: 5}}>
                                 Emisions: {EMISSIONS} kg CO<sub style={{fontSize: 11}}>2</sub>
@@ -168,7 +168,7 @@ const DuffelOfferItem = (props) => {
                         <p className="each_ticket_price_display" style={{textAlign: "center", color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 18, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
                             <span style={{fontSize: 18, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
                                 dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
-                            {(markup(total_amount).new_price).toFixed(2)}</p>
+                            {(markup(total_amount)?.new_price)?.toFixed(2)}</p>
                         <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 10, textAlign: "center"}}>
                             {passengers.length>1?(`${passengers.length} passengers`):"1 passenger"}
                         </p>
@@ -206,7 +206,7 @@ const DuffelOfferItem = (props) => {
                         &#8226;
                     </span>
                     <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "initial", fontSize: 11}}>
-                        {owner.name}
+                        {owner?.name}
                     </span>
                     <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "rgba(0,0,0,0.7)", fontSize: 11}}>
                         &#8226;
@@ -218,10 +218,10 @@ const DuffelOfferItem = (props) => {
                 <div style={{padding: 15}}>
                     <div className="mobile_content_display_block_container"
                         style={{display: "flex", justifyContent: "space-between", marginTop: 15}}>
-                        {ITIN_SEGMENTS.map(each=>each)}
+                        {ITIN_SEGMENTS?.map(each=>each)}
                     </div>
                     <div style={{display: "flex", justifyContent: "space-between", marginTop: 15,}}>
-                        <div onClick={()=>{global.show_selected_ticket_details_pane(); props.selectFlightOffer(id); toggle_show_more_details();}}
+                        <div onClick={()=>{global?.show_selected_ticket_details_pane(); props?.selectFlightOffer(id); toggle_show_more_details();}}
                             style={{width: "calc(100% - 45px)", borderRadius: 50, boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", fontFamily: "'Prompt', Sans-serif", textAlign: "center", color: "white", backgroundColor: "rgb(23, 87, 148)", fontSize: 14, padding: 10, cursor: "pointer"}}>
                             select
                         </div>
