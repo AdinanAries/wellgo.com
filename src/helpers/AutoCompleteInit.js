@@ -61,8 +61,9 @@ const AutoCompleteInit = () => {
             let flights = [];
 
             //if backspace has been pressed, don't auto-complete on input
-            if(!evnt.data){
-                return null;
+            if(!evnt.data){ //Backspace
+                // Remove this condition for now
+                //return null;
             }
 
             if(evnt.target.value){
@@ -71,15 +72,15 @@ const AutoCompleteInit = () => {
 
                 flights = flights.map(elem => {
                         counter++;
-                        return counter < 6 && `
-                            <li><div onclick="changeAirportsFromInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                        return counter < 9 && `
+                            <li><div onclick="changeAirportsFromInput('${elem?.city} - ${elem?.name} (${elem?.IATA})', '${elem?.IATA}', '${elem?.ICAO}', '${elem?.lon}', '${elem?.lat}');" class="autocomplete_list_each_item_container">
                                 <div>
                                     <p class="autocomplete_list_airport_city_name">
                                         <i class="fa fa-plane"></i>
-                                        ${elem.city} (${elem.IATA} - ${elem.name})
+                                        ${elem?.city} (${elem?.IATA} - ${elem?.name})
                                     </p>
                                     <p class="autocomplete_list_country_name">
-                                        ${elem.country}
+                                        ${elem?.country}
                                     </p>
                                 </div>
                             </div></li>`;
@@ -92,7 +93,7 @@ const AutoCompleteInit = () => {
     }
 
 
-    window.changeAirportsFromInput = function(airport, iata, icao){
+    window.changeAirportsFromInput = function(airport, iata, icao, lon="", lat=""){
         if(document.getElementById("from_where_airports_auto_complete_input_fld"))
             document.getElementById("from_where_airports_auto_complete_input_fld").value = airport;
         if(document.getElementById("search_forms_from_where_input_fld"))
@@ -100,6 +101,8 @@ const AutoCompleteInit = () => {
         add_origin_input_airport_to_history(iata)
         let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
         flight_search_data.itinerary.departure.airport = iata;
+        flight_search_data.itinerary.departure.longitude = lon;
+        flight_search_data.itinerary.departure.latitude = lat;
         //fligh_search_data.origin_iata = iata;
 
         if(iata === "\\N" || iata === "N"){
@@ -124,25 +127,26 @@ const AutoCompleteInit = () => {
             let flights = [];
 
             //if backspace has been pressed, don't auto-complete on input
-            if(!evnt.data){
-                return null;
+            if(!evnt.data){ // Backspace
+                // Remove this condition for now
+                //return null;
             }
 
             if(evnt.target.value){
 
-                flights = filter_airports_array_based_input_value(evnt.target.value);
+                flights = filter_airports_array_based_input_value(evnt?.target?.value);
 
                 flights = flights.map(elem => {
                     counter++;
-                    return counter < 6 && `
-                            <li><div onclick="changeAirportsToInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                    return counter < 9 && `
+                            <li><div onclick="changeAirportsToInput('${elem?.city} - ${elem?.name} (${elem?.IATA})', '${elem?.IATA}', '${elem?.ICAO}', '${elem?.lon}', '${elem?.lat}');" class="autocomplete_list_each_item_container">
                                 <div>
                                     <p class="autocomplete_list_airport_city_name">
                                         <i class="fa fa-plane"></i>
-                                        ${elem.city} (${elem.IATA} - ${elem.name})
+                                        ${elem?.city} (${elem?.IATA} - ${elem?.name})
                                     </p>
                                     <p class="autocomplete_list_country_name">
-                                        ${elem.country}
+                                        ${elem?.country}
                                     </p>
                                 </div>
                             </div></li>`;
@@ -155,7 +159,7 @@ const AutoCompleteInit = () => {
     }
 
 
-    window.changeAirportsToInput = function(airport, iata, icao){
+    window.changeAirportsToInput = function(airport, iata, icao, lon="", lat=""){
         if(document.getElementById("to_where_airports_auto_complete_input_fld"))
             document.getElementById("to_where_airports_auto_complete_input_fld").value = airport;
         if(document.getElementById("search_forms_to_where_input_fld"))
@@ -163,6 +167,8 @@ const AutoCompleteInit = () => {
         add_destination_input_airport_to_history(iata)
         let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
         flight_search_data.itinerary.arrival.airport = iata;
+        flight_search_data.itinerary.arrival.longitude = lon;
+        flight_search_data.itinerary.arrival.latitude = lat;
         //fligh_search_data.destination_iata = iata;
 
         if(iata === "\\N" || iata === "N"){
@@ -170,9 +176,9 @@ const AutoCompleteInit = () => {
             flight_search_data.itinerary.arrival.airport = icao;
             //fligh_search_data.destination_iata = icao;
             if(document.getElementById("to_where_airports_auto_complete_input_fld"))
-                document.getElementById("to_where_airports_auto_complete_input_fld").value = airport.split("(")[0] + " (" + icao + ")";
+                document.getElementById("to_where_airports_auto_complete_input_fld").value = airport?.split("(")[0] + " (" + icao + ")";
             if(document.getElementById("search_forms_to_where_input_fld"))
-                document.getElementById("search_forms_to_where_input_fld").value =  airport.split("(")[0] + " (" + icao + ")";
+                document.getElementById("search_forms_to_where_input_fld").value =  airport?.split("(")[0] + " (" + icao + ")";
         }
 
         window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
@@ -187,25 +193,26 @@ const AutoCompleteInit = () => {
             let flights = [];
 
             //if backspace has been pressed, don't auto-complete on input
-            if(!evnt.data){
-                return null;
+            if(!evnt?.data){ // Backspace
+                // Remove this condition for now
+                //return null;
             }
 
-            if(evnt.target.value){
+            if(evnt?.target?.value){
 
-                flights = filter_airports_array_based_input_value(evnt.target.value);
+                flights = filter_airports_array_based_input_value(evnt?.target?.value);
 
                 flights = flights.map(elem => {
                         counter++;
-                        return counter < 6 && `
-                            <li><div onclick="sp_changeAirportsFromInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                        return counter < 9 && `
+                            <li><div onclick="sp_changeAirportsFromInput('${elem?.city} - ${elem?.name} (${elem?.IATA})', '${elem?.IATA}', '${elem?.ICAO}', '${elem?.lon}', '${elem?.lat}');" class="autocomplete_list_each_item_container">
                                 <div>
                                     <p class="autocomplete_list_airport_city_name">
                                         <i class="fa fa-plane"></i>
-                                        ${elem.city} (${elem.IATA} - ${elem.name})
+                                        ${elem?.city} (${elem?.IATA} - ${elem?.name})
                                     </p>
                                     <p class="autocomplete_list_country_name">
-                                        ${elem.country}
+                                        ${elem?.country}
                                     </p>
                                 </div>
                             </div></li>`;
@@ -218,14 +225,16 @@ const AutoCompleteInit = () => {
     }
 
 
-    window.sp_changeAirportsFromInput = function(airport, iata, icao){
+    window.sp_changeAirportsFromInput = function(airport, iata, icao, lon="", lat=""){
         if(document.getElementById("sp_from_where_airports_auto_complete_input_fld"))
             document.getElementById("sp_from_where_airports_auto_complete_input_fld").value = airport;
         if(document.getElementById("sp_search_forms_from_where_input_fld"))
             document.getElementById("sp_search_forms_from_where_input_fld").value = airport;
-        sp_add_origin_input_airport_to_history(iata)
+        sp_add_origin_input_airport_to_history(iata);
         let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
         flight_search_data.itinerary.departure.airport = iata;
+        flight_search_data.itinerary.departure.longitude = lon;
+        flight_search_data.itinerary.departure.latitude = lat;
         //fligh_search_data.origin_iata = iata;
 
         if(iata === "\\N" || iata === "N"){
@@ -254,21 +263,21 @@ const AutoCompleteInit = () => {
                 return null;
             }
 
-            if(evnt.target.value){
+            if(evnt?.target?.value){
 
                 flights = filter_airports_array_based_input_value(evnt.target.value);
 
                 flights = flights.map(elem => {
                     counter++;
-                    return counter < 6 && `
-                            <li><div onclick="sp_changeAirportsToInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}');" class="autocomplete_list_each_item_container">
+                    return counter < 9 && `
+                            <li><div onclick="sp_changeAirportsToInput('${elem.city} - ${elem.name} (${elem.IATA})', '${elem.IATA}', '${elem.ICAO}', '${elem?.lon}', '${elem?.lat}');" class="autocomplete_list_each_item_container">
                                 <div>
                                     <p class="autocomplete_list_airport_city_name">
                                         <i class="fa fa-plane"></i>
-                                        ${elem.city} (${elem.IATA} - ${elem.name})
+                                        ${elem?.city} (${elem?.IATA} - ${elem?.name})
                                     </p>
                                     <p class="autocomplete_list_country_name">
-                                        ${elem.country}
+                                        ${elem?.country}
                                     </p>
                                 </div>
                             </div></li>`;
@@ -282,7 +291,7 @@ const AutoCompleteInit = () => {
     }
 
 
-    window.sp_changeAirportsToInput = function(airport, iata, icao){
+    window.sp_changeAirportsToInput = function(airport, iata, icao, lon, lat){
         if(document.getElementById("sp_to_where_airports_auto_complete_input_fld"))
             document.getElementById("sp_to_where_airports_auto_complete_input_fld").value = airport;
         if(document.getElementById("sp_search_forms_to_where_input_fld"))
@@ -290,6 +299,8 @@ const AutoCompleteInit = () => {
         sp_add_destination_input_airport_to_history(iata)
         let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
         flight_search_data.itinerary.arrival.airport = iata;
+        flight_search_data.itinerary.arrival.longitude = lon;
+        flight_search_data.itinerary.arrival.latitude = lat;
         //fligh_search_data.destination_iata = iata;
 
         if(iata === "\\N" || iata === "N"){
@@ -341,23 +352,23 @@ const AutoCompleteInit = () => {
             let airports_history = JSON.parse(window.localStorage.getItem("airports_input_history"));
             
             //removing existing same vlaue
-            airports_history.from = airports_history.from.filter(each => {
+            airports_history.from = airports_history?.from?.filter(each => {
                 return (each !== aita)
             });
 
             let temp_airports = [];
-            if(airports_history.from.length > 4){
+            if(airports_history?.from?.length > 4){
                 for(let i=1; i<5; i++){
-                    temp_airports.push(airports_history.from[i]);
+                    temp_airports?.push(airports_history?.from[i]);
                 }
                 console.log(temp_airports);
                 airports_history.from = [...temp_airports, aita];
             }else{
-                airports_history.from.push(aita);
+                airports_history?.from?.push(aita);
             }
             localStorage.setItem("airports_input_history", JSON.stringify(airports_history));
         }else{
-            aiports_input_history.from.push(aita);
+            aiports_input_history?.from?.push(aita);
             window.localStorage.setItem("airports_input_history", JSON.stringify(aiports_input_history));
         }
         
@@ -368,7 +379,7 @@ const AutoCompleteInit = () => {
             let airports_history = JSON.parse(window.localStorage.getItem("airports_input_history"));
             
             //removing existing same vlaue
-            airports_history.to = airports_history.to.filter(each => {
+            airports_history.to = airports_history?.to?.filter(each => {
                 return (each !== aita)
             });
 
@@ -384,7 +395,7 @@ const AutoCompleteInit = () => {
             }
             localStorage.setItem("airports_input_history", JSON.stringify(airports_history));
         }else{
-            aiports_input_history.to.push(aita);
+            aiports_input_history?.to.push(aita);
             window.localStorage.setItem("airports_input_history", JSON.stringify(aiports_input_history));
         }
         
@@ -442,17 +453,17 @@ const AutoCompleteInit = () => {
         if(!obj) return "";
         if(type === "origin"){
             return `
-                <li><div onclick="changeAirportsFromInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
+                <li><div onclick="changeAirportsFromInput('${obj?.city} - ${obj?.name} (${obj?.IATA})', '${obj?.IATA}', '${obj?.ICAO}', '${obj?.lon}', '${obj?.lat}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
                     <div style="height: 35px; margin-right: 15px; display: flex; flex-direction: column; justify-content: center;">
                         <i class="fa fa-history" style="color: rgba(0,0,0,0.3); font-size: 22px;"></i>
                     </div>
                     <div>
                         <div>
                             <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
-                                ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
+                                ${obj?.city} (${(obj?.IATA === "\\N" || obj?.IATA === "N") ? obj?.ICAO : obj?.IATA} - ${obj?.name})
                             </p>
                             <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
-                                ${obj.country}
+                                ${obj?.country}
                             </p>
                         </div>
                     </div>
@@ -460,17 +471,17 @@ const AutoCompleteInit = () => {
             `;
         }else{
             return `
-                <li><div onclick="changeAirportsToInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
+                <li><div onclick="changeAirportsToInput('${obj?.city} - ${obj?.name} (${obj?.IATA})', '${obj?.IATA}', '${obj?.ICAO}', '${obj?.lon}', '${obj?.lat}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
                     <div style="height: 35px; margin-right: 15px; display: flex; flex-direction: column; justify-content: center;">
                         <i class="fa fa-history" style="color: rgba(0,0,0,0.3); font-size: 22px;"></i>
                     </div>
                     <div>
                         <div>
                             <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
-                                ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
+                                ${obj?.city} (${(obj?.IATA === "\\N" || obj?.IATA === "N") ? obj?.ICAO : obj?.IATA} - ${obj?.name})
                             </p>
                             <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
-                                ${obj.country}
+                                ${obj?.country}
                             </p>
                         </div>
                     </div>
@@ -595,17 +606,17 @@ const AutoCompleteInit = () => {
         if(!obj) return "";
         if(type === "origin"){
             return `
-                <li><div onclick="sp_changeAirportsFromInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
+                <li><div onclick="sp_changeAirportsFromInput('${obj?.city} - ${obj?.name} (${obj?.IATA})', '${obj?.IATA}', '${obj?.ICAO}', '${obj?.lon}', '${obj?.lat}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
                     <div style="height: 35px; margin-right: 15px; display: flex; flex-direction: column; justify-content: center;">
                         <i class="fa fa-history" style="color: rgba(0,0,0,0.3); font-size: 22px;"></i>
                     </div>
                     <div>
                         <div>
                             <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
-                                ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
+                                ${obj?.city} (${(obj?.IATA === "\\N" || obj?.IATA === "N") ? obj?.ICAO : obj?.IATA} - ${obj?.name})
                             </p>
                             <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
-                                ${obj.country}
+                                ${obj?.country}
                             </p>
                         </div>
                     </div>
@@ -613,17 +624,17 @@ const AutoCompleteInit = () => {
             `;
         }else{
             return `
-                <li><div onclick="sp_changeAirportsToInput('${obj.city} - ${obj.name} (${obj.IATA})', '${obj.IATA}', '${obj.ICAO}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
+                <li><div onclick="sp_changeAirportsToInput('${obj?.city} - ${obj?.name} (${obj?.IATA})', '${obj?.IATA}', '${obj?.ICAO}', '${obj?.lon}', '${obj?.lat}');" style="padding: 10px; display: flex; flex-direction: row; cursor: pointer;">
                     <div style="height: 35px; margin-right: 15px; display: flex; flex-direction: column; justify-content: center;">
                         <i class="fa fa-history" style="color: rgba(0,0,0,0.3); font-size: 22px;"></i>
                     </div>
                     <div>
                         <div>
                             <p style="font-size: 14px; color: rgba(0,0,0,0.9); font-family: 'Prompt', sans-serif;">
-                                ${obj.city} (${(obj.IATA === "\\N" || obj.IATA === "N") ? obj.ICAO : obj.IATA} - ${obj.name})
+                                ${obj?.city} (${(obj?.IATA === "\\N" || obj?.IATA === "N") ? obj?.ICAO : obj?.IATA} - ${obj?.name})
                             </p>
                             <p style="font-size: 13px; color: rgba(0,0,0,0.8);">
-                                ${obj.country}
+                                ${obj?.country}
                             </p>
                         </div>
                     </div>
