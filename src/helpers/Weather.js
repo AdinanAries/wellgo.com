@@ -1,24 +1,9 @@
 // Weather Icons
-import CloudExtremeWindy from "../icons/Weather/Cloud-Extreme-Windy.png";
-import CloudRain from "../icons/Weather/Cloud-Rain.png";
-import CloudRainbow from "../icons/Weather/Cloud-Rainbow.png";
-import CloudSnow from "../icons/Weather/Cloud-Snow.png";
-import CloudThunder from "../icons/Weather/Cloud-Thunder.png";
-import Cloud from "../icons/Weather/Cloud.png";
-import DarkClouds from "../icons/Weather/Dark-Clouds.png";
-import DoubleCloudSunBetween from "../icons/Weather/Double-Cloud-Sun-Between.png";
-import NightlyFullMoonClear from "../icons/Weather/Nightly-Full-Moon_Clear.png";
-import NightlyFullMoonCloudy from "../icons/Weather/Nightly-Full-Moon-Cloudy.png";
-import NightlyQuaterMoonCloudy from "../icons/Weather/Nightly-Quater-Moon-Cloudy.png";
-import NightlyLightRain from "../icons/Weather/Nightly-Light-Rain.png";
-import NightlyNoMoonClear from "../icons/Weather/Nightly-No-Moon-Clear.png";
-import NightlyQuaterMoonClear from "../icons/Weather/Nightly-Quater-Moon-Clear.png";
-import SunCloud from "../icons/Weather/Sun-Cloud.png";
-import SunDoubleCloud from "../icons/Weather/Sun-Double-Cloud.png";
-import SunRainCloud from "../icons/Weather/Sun-Rain-Cloud.png";
-import SunnyCloudy from "../icons/Weather/Sunny-Cloudy.png";
+import MoonOnly from "../icons/Weather/Moon-Only.png"
 import CloudsDouble from "../icons/Weather/Cloud-Double.png";
 import CloudSunBehind from "../icons/Weather/Cloud-Sun-Behind.png";
+import SunOnly from "../icons/Weather/Sun-Only.png";
+import FogOnly from "../icons/Weather/Fog-Only.png";
 
 import { fetchWeatherData, fetchWeatherCity } from "../services/weatherServices";
 
@@ -52,14 +37,30 @@ const Weather = {
     getCurrentWeatherIcon: (currentWeather, currentHour) => {
         if(currentHour>17 || currentHour<11){ // Nightly Icons
             if(currentWeather?.weatherCode===3){
+                // Mainly clear, partly cloudy and overcast
                 return CloudsDouble;
+            } else if(currentWeather?.weatherCode===0){
+                // clear sky
+                return MoonOnly
+            } else if(currentWeather?.weatherCode===45){
+                // fog
+                return FogOnly;
             }
-            return NightlyQuaterMoonCloudy;
+            // clear sky default
+            return MoonOnly;
         }else{ // Daily Icons
             if(currentWeather?.weatherCode===3){
+                // Mainly clear, partly cloudy and overcast
                 return CloudSunBehind;
+            } else if(currentWeather?.weatherCode===0){
+                // clear sky
+                return SunOnly;
+            } else if(currentWeather?.weatherCode===45){
+                // fog
+                return FogOnly;
             }
-            return SunRainCloud;
+            // clear sky - default
+            return SunOnly;
         }
     },
 
