@@ -7,6 +7,7 @@ import CONSTANTS from "../Constants/Constants";
 import BotAuxMsg from "../Constants/BotAuxMsg";
 import getBotResponse from "../Constants/BotResponses";
 import Weather from "../helpers/Weather";
+import Bot_Construction_Site from "../Bot_in_Construction_Site.jpg";
 
 import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
@@ -146,36 +147,40 @@ export default function HPSupportBtn(){
                 <div onClick={hide_new_chatbot_tip} className="chatbot_popup_tip_close_btn">
                     &times;
                 </div>
-                <div id="main_chatbot_popup_tip_msg" className="chatbot_popup_tip_msg">
-                    <p>
-                        <i className="fa fa-lightbulb-o"></i>
-                        {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
-                        {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
-                    </p>
-                    { (!currentHourWeather?.isError) && <>
-                        <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
-                            <p style={{position: "absolute", top: 50, left: 20, fontSize: 30, color: "orange", fontFamily: "'Prompt', Sans-serif"}}>
-                                {Math.round(currentHourWeather?.apparentTemperature)}°F
-                            </p>
-                            <div style={{display: "flex"}}>
-                                <p style={{color: "orange", marginRight: 5, fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
-                                    Now:
+                <div className="chatbot_popup_tip_msg">
+                    <div id="main_chatbot_popup_tip_msg">
+                        <p>
+                            <i className="fa fa-lightbulb-o"></i>
+                            {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
+                            {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
+                        </p>
+                        { (!currentHourWeather?.isError) && <>
+                            <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
+                                <p style={{position: "absolute", top: 50, left: 20, fontSize: 30, color: "orange", fontFamily: "'Prompt', Sans-serif"}}>
+                                    {Math.round(currentHourWeather?.apparentTemperature)}°F
                                 </p>
-                                <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white", marginTop: 10}}>
-                                    {new Date().toString()}
+                                <div style={{display: "flex"}}>
+                                    <p style={{color: "orange", marginRight: 5, fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
+                                        Now:
+                                    </p>
+                                    <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white", marginTop: 10}}>
+                                        {new Date().toString()}
+                                    </p>
+                                </div>
+                                <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", zIndex: 1}}>
+                                    <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
+                                        {currentHourWeather?.description}
+                                    </p>
+                                </div>
+                                <p style={{textAlign: "center", paddingTop: 5, paddingBottom: 25}}>
+                                    <img style={{width: 90, height: "auto", marginTop: 10}}
+                                        src={currentHourWeather?.icon} 
+                                        alt="to do" />
                                 </p>
                             </div>
-                            <div style={{position: "absolute", bottom: 0, left: 0, width: "100%", zIndex: 1}}>
-                                <p style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", color: "white"}}>
-                                    {currentHourWeather?.description}
-                                </p>
-                            </div>
-                            <p style={{textAlign: "center", paddingTop: 5, paddingBottom: 25}}>
-                                <img style={{width: 90, height: "auto", marginTop: 10}}
-                                    src={currentHourWeather?.icon} 
-                                    alt="to do" />
-                            </p>
-                        </div>
+                        </>}
+                    </div>
+                    { (!currentHourWeather?.isError) &&
                         <div style={{display: "flex", marginTop: 5, paddingTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
                             <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
                                     className="fa-solid fa-temperature-high"></i>
@@ -193,7 +198,7 @@ export default function HPSupportBtn(){
                                     AD v1.0.0</span>
                             </p>
                         </div>
-                    </>}
+                    }
                 </div>
                 <div id="main_chatbot_popup_tip_img" className="chatbot_popup_tip_img">
                     <div style={{backgroundImage: `url('${botIcon}')`, width: 30, height: 30, backgroundSize: "contain", backgroundRepeat: 'no-repeat'}}></div>
@@ -281,35 +286,26 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
         if(params?.image){
             document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
                 <div style="position: relative;">
-                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; background-color: rgba(0,0,0,0.4); padding: 10px; z-index: 1;">
-                        <p style="font-size: 12px; font-family: 'Prompt', Sans-serif; color: white;">
-                            This is an overlay
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; z-index: 1;">
+                        <p style="font-size: 13px; font-family: 'Prompt', Sans-serif; color: white; text-shadow: 1px 2px 3px rgba(0,0,0,0.8);">
+                            <i style="color: orange; margin-right: 5px; font-size: 13px" class="fa-solid fa-tools"></i>    
+                            Work in progress...
                         </p>
                     </div>
-                    <img style="width: 100%; height: auto; margin-top: 10px;"
-                        src="https://th.bing.com/th/id/OIP.akTDnK_uV13cS7rXZvLOOgAAAA?pid=ImgDet&w=200&h=149&c=7&dpr=1.3" 
-                        alt="to do" />
+                    <p style="text-align: center;">
+                        <img style="width: 100%; height: 190px; object-fit: cover; margin-top: 10px; box-shadow: -2px -2px 3px rgba(0,0,0,0.2);"
+                            src="${Bot_Construction_Site}"
+                            alt="to do" />
+                    </p>
                 </div>
             `;
         }
-
-        document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
-            <div style="display: flex; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1)">
-                <i style="color: rgba(255,255,255,0.5); margin-right: 10px; font-size: 13px;"
-                        class="fa-solid fa-temperature-high"></i>
-                <p style="font-family: 'Prompt', Sans-serif; font-size: 11px;">
-                    California City (Thu Mar 23) -
-                    <span style="margin: 0 2px; font-size: 11px; font-family: 'Prompt', Sans-serif; font-weight: bolder">
-                        56 °F</span>
-                    <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                        | heavy rain</span>
-                </p>
-            </div>
-        `
         //audio.play();
     }, randWait);
 
     botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (duration+randWait));
 }
+
+//"https://th.bing.com/th/id/OIP.akTDnK_uV13cS7rXZvLOOgAAAA?pid=ImgDet&w=200&h=149&c=7&dpr=1.3"
 
 
