@@ -11,6 +11,7 @@ import Bot_Construction_Site from "../Bot_in_Construction_Site.jpg";
 
 import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
+import { get_short_date_DAYMMMDD } from "../helpers/general";
 
 export default function HPSupportBtn(){
 
@@ -314,10 +315,43 @@ export function show_prompt_on_Bot_AD_tips_popup(
                 </div>
             `;
         }
+
+        if(params?.weather){
+            document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=getBotWeatherPromptMarkup(params?.data);
+        }
+
         //audio.play();
     }, randWait);
 
     botPromptHideTimeoutObj = setTimeout(hide_new_chatbot_tip, (duration+randWait));
+}
+
+const getBotWeatherPromptMarkup = (currentHourWeather) => {
+    return `
+        <div style="position: relative; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px;">
+            <p style="position: absolute; top: 50px; left: 20px; font-size: 30px; color: orange; font-family: 'Prompt', Sans-serif;">
+                ${Math.round(currentHourWeather?.apparentTemperature)}°F
+            </p>
+            <div style="display: flex;">
+                <p style="color: orange; margin-right: 5px; font-size: 11px; font-family: 'Prompt', Sans-serif; margin-top: 10px;">
+                    ${get_short_date_DAYMMMDD(currentHourWeather?.time)}, 
+                </p>
+                <p style="font-size: 11px; font-family: 'Prompt', Sans-serif; color: white; margin-top: 10px;">
+                    ${currentHourWeather?.city?.city}, ${currentHourWeather?.city?.iso3}
+                </p>
+            </div>
+            <div style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1;">
+                <p style="font-size: 11px; font-family: 'Prompt', Sans-serif; color: white;">
+                    ${currentHourWeather?.description}
+                </p>
+            </div>
+            <p style="text-align: center; padding-fop: 5px; padding-bottom: 25px">
+                <img style="width: 90px; height: auto; margin-top: 10px;"
+                    src=${currentHourWeather?.icon} 
+                    alt="to do" />
+            </p>
+        </div>
+    `;
 }
 
 //"https://th.bing.com/th/id/OIP.akTDnK_uV13cS7rXZvLOOgAAAA?pid=ImgDet&w=200&h=149&c=7&dpr=1.3"

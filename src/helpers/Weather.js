@@ -30,6 +30,19 @@ const Weather = {
 
     },
     /**
+     * @param {*} lon 
+     * @param {*} lat 
+     * @param {*} start_date 
+     * @param {*} end_date 
+     * @param {*} callback 
+     */
+    getWeather: async (lon, lat, start_date, end_date, callback=()=>{}) => {
+        let weather = await fetchWeatherData(lon, lat, start_date, end_date);
+        let city = await fetchWeatherCity(lon, lat);
+        weather.city=city[0];
+        callback(weather);
+    },
+    /**
      * 
      * @param {*} currentHour 
      * @param {*} currentWeather 
