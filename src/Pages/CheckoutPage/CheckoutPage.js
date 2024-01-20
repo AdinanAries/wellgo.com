@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import OrderCompletedPage from './Components/OrderCompletedPage';
 import Logger, { getBookingConfirmedLogMessage } from '../../helpers/Logger';
+import PassengerImg from "../../TravelerAnonymous.jpg";
 
 export default function CheckoutPage(props){
 
@@ -145,7 +146,15 @@ export default function CheckoutPage(props){
             show_prompt_on_Bot_AD_tips_popup(
                 getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
                 CONSTANTS.bot.prompt_types.warn, 
-                10000
+                100000,
+                {
+                    image: true, 
+                    data: {
+                        img_url: PassengerImg,
+                        icon_class: "far fa-address-card",
+                        text: "Incomplete Passenger Form(s)",
+                    }
+                }
             );
     }
 

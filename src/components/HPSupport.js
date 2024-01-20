@@ -250,7 +250,20 @@ setTimeout(()=>{
 },1000);
 
 let botPromptHideTimeoutObj;
-export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_types.prompt, duration=100000, params={image: true, weather: true, data: {}}) {
+export function show_prompt_on_Bot_AD_tips_popup(
+        msg, 
+        type=CONSTANTS.bot.prompt_types.prompt, 
+        duration=100000, 
+        params={
+            image: true, 
+            weather: false, 
+            data: {
+                img_url: Bot_Construction_Site,
+                icon_class: "fa-solid fa-tools",
+                text: "Work in progress...",
+            }
+        }
+    ){
 
     let audio = new Audio(notification_sound);
     
@@ -288,13 +301,14 @@ export function show_prompt_on_Bot_AD_tips_popup(msg, type=CONSTANTS.bot.prompt_
                 <div style="position: relative;">
                     <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; z-index: 1;">
                         <p style="font-size: 13px; font-family: 'Prompt', Sans-serif; color: white; text-shadow: 1px 2px 3px rgba(0,0,0,0.8);">
-                            <i style="color: orange; margin-right: 5px; font-size: 13px" class="fa-solid fa-tools"></i>    
-                            Work in progress...
+                            <i style="color: orange; margin-right: 5px; font-size: 13px" 
+                                class="${params?.data?.icon_class}"></i>    
+                            ${params?.data?.text}
                         </p>
                     </div>
                     <p style="text-align: center;">
                         <img style="width: 100%; height: 190px; object-fit: cover; margin-top: 10px; box-shadow: -2px -2px 3px rgba(0,0,0,0.2);"
-                            src="${Bot_Construction_Site}"
+                            src="${params?.data?.img_url}"
                             alt="to do" />
                     </p>
                 </div>
