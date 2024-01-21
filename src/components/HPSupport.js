@@ -351,17 +351,17 @@ export function show_prompt_on_Bot_AD_tips_popup(
                     </p>
                     <div style="display: flex;">
                         <p style="font-family: 'Prompt', Sans-serif; font-size: 11px;">
-                                Min: $${markup(summeries?.prices?.min).new_price.toFixed(2)}
+                                Min: $${markup(summeries?.prices?.min)?.new_price?.toFixed(2)}
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Max: $${markup(summeries?.prices?.max).new_price.toFixed(2)}</span>
+                                Max: $${markup(summeries?.prices?.max)?.new_price?.toFixed(2)}</span>
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Average: $${markup(summeries?.prices?.avg).new_price.toFixed(2)}</span>
+                                Average: $${markup(summeries?.prices?.avg)?.new_price?.toFixed(2)}</span>
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
@@ -373,7 +373,8 @@ export function show_prompt_on_Bot_AD_tips_popup(
             }
         }else {
             if(params?.flight_data_summeries){
-            
+                let summaries = params?.flight_data_summeries;
+                document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=getBotSummariesPromptMarkup(summaries);
             }
         }
 
@@ -407,6 +408,69 @@ const getBotWeatherPromptMarkup = (currentHourWeather) => {
                     src=${currentHourWeather?.icon} 
                     alt="to do" />
             </p>
+        </div>
+    `;
+}
+
+const getBotSummariesPromptMarkup = (summaries) => {
+    let max_price = markup(summaries?.prices?.max)?.new_price?.toFixed(2);
+    let avg_price = markup(summaries?.prices.avg)?.new_price?.toFixed(2);
+    let min_price = markup(summaries?.prices.min)?.new_price?.toFixed(2);
+    let popular_price = markup(summaries?.prices?.popular)?.new_price?.toFixed(2);
+    let popular_count = summaries?.prices?.popular_count;
+    let items_total = summaries?.prices?.items_total;
+    let minPercent = Math.floor(((min_price*100)/max_price));
+    let avgPercent = Math.floor(((avg_price*100)/max_price));
+    return `
+        <div style="padding: 10, border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px;">
+                Price Summaries:
+            </p>
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 5px; justify-content: space-between;">
+                    <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        $${min_price} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            (min)</span>:
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: ${minPercent}%; background: orange;"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 5px; justify-content: space-between;">
+                    <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        $${avg_price} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            (avg)</span>:
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: ${avgPercent}%; background: orange;"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 5px; justify-content: space-between;">
+                    <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        $${max_price} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            (max)</span>:
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: 95%; background: orange;"></div>
+                    </div>
+                </div>
+                <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px;">
+                Popular Price: <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                ($${popular_price})</span>
+            </p>
+                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        <span style="color: orange; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            ${popular_count}/${items_total}:</span>
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: 6%; background: orange;"></div>
+                    </div>
+                    <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-left: 10px;">
+                        total: ${items_total}
+                    </p>
+                </div>
+            </div>
         </div>
     `;
 }

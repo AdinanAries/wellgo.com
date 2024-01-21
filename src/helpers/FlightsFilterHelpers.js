@@ -301,6 +301,8 @@ export const getDataSummeries = (flightsArr) => {
         let min_price=parseFloat(flightsArr[0].total_amount);
         let max_price=parseFloat(flightsArr[0].total_amount);
         let total_of_all_prices = 0;
+        let priceOccurrence = 0;
+        let popularPrice = 0;
         const pricesCount={};
         for(let i=0; i < flightsArr.length; i++){
             const FLIGHT = flightsArr[i];
@@ -320,21 +322,32 @@ export const getDataSummeries = (flightsArr) => {
             }
 
             // Duration
+            for (let [key, value] of Object.entries(pricesCount)){
+                if(value > priceOccurrence){
+                    priceOccurrence = value;
+                    popularPrice = parseFloat(key);
+                }
+            }
         }
                 
         return {
-            prices:{
+            prices: {
                 min: min_price, 
                 max: max_price,
                 avg: (((total_of_all_prices)/flightsArr.length)),
                 prices_count: pricesCount,
-                popular: 0,
+                popular: popularPrice,
+                popular_count: priceOccurrence,
+                items_total: flightsArr.length,
             },
             duration: {
                 min: 0,
                 max: 0,
                 avg: 0,
-                popular: 0
+                prices_count: 0,
+                popular: 0,
+                popular_count: 0,
+                items_total: 0,
             }
         }
     }

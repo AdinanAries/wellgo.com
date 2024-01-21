@@ -186,6 +186,28 @@ const Weather = {
         return msgs[Math.floor(Math.random() * msgs.length)];
     },
 
+    /**
+     * 
+     * @param {*} current_hour_weather 
+     * @returns 
+     */
+    getWeatherPromptMsgSummeries: (summeries={})=>{
+        let msgs = [
+            `Hi... I Prepared some summeries for you based on your search...
+            `,
+            `Hi... I've added some summeries for you for this search.. FYI.
+            `,
+            `Sup, Please see summeries for this flight search below...
+            `,
+            `Just wanted to inform you with some summeries ... cool...
+            `,
+            `Umm... FYI, For this search, I have added some summeries below... Thanks!
+            `
+        ];
+
+        return msgs[Math.floor(Math.random() * msgs.length)];
+    },
+
 
 }
 

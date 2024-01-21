@@ -88,7 +88,7 @@ const SearchPageMain = (props) => {
                 // Do nothing for now
             }else{
                 let summeries = getDataSummeries(flightsOffers);
-                let prompt_msg="Only Summaries Message";
+                let prompt_msg = Weather.getWeatherPromptMsgSummeries(flightsOffers);
                 show_prompt_on_Bot_AD_tips_popup(
                     prompt_msg,
                     CONSTANTS.bot.prompt_types.prompt, 
