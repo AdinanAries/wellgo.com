@@ -14,6 +14,11 @@ import { useEffect, useState } from 'react';
 import OrderCompletedPage from './Components/OrderCompletedPage';
 import Logger, { getBookingConfirmedLogMessage } from '../../helpers/Logger';
 import PassengerImg from "../../TravelerAnonymous.jpg";
+import PassengerImg2 from "../../explore_destination_img7.jpg";
+import PassengerImg3 from "../../explore_destination_img4.jpg";
+import PassengerImg4 from "../../explore_destination_img8.jpg";
+import PassengerImg5 from "../../explore_destination_img3.jpg";
+import passengerImg6 from "../../explore_destination_img5.jpg";
 
 export default function CheckoutPage(props){
 
@@ -139,6 +144,7 @@ export default function CheckoutPage(props){
         setActivePage(CONSTANTS.checkout_pages.pnr);
     }
 
+    let imgs = [PassengerImg, PassengerImg2, PassengerImg3, PassengerImg4, PassengerImg5, passengerImg6];
     const showPaymentPage = () => {
         if(is_passenger_data_all_set())
             setActivePage(CONSTANTS.checkout_pages.payment);
@@ -150,7 +156,7 @@ export default function CheckoutPage(props){
                 {
                     image: true, 
                     data: {
-                        img_url: PassengerImg,
+                        img_url: imgs[Math.floor(Math.random() * imgs.length)],
                         icon_class: "far fa-address-card",
                         text: "Incomplete Passenger Form(s)...",
                     }
