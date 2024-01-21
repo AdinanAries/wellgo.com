@@ -347,7 +347,7 @@ export function show_prompt_on_Bot_AD_tips_popup(
                 let summeries=params?.flight_data_summeries;
                 document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
                     <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px;">
-                        Price summary:
+                        Price Summary:
                     </p>
                     <div style="display: flex;">
                         <p style="font-family: 'Prompt', Sans-serif; font-size: 11px;">
@@ -424,7 +424,7 @@ const getBotSummariesPromptMarkup = (summaries) => {
     return `
         <div style="padding: 10, border-top: 1px solid rgba(255,255,255,0.1);">
             <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px;">
-                Price summary:
+                Price Summary:
             </p>
             <div>
                 <div style="display: flex; align-items: center; margin-bottom: 5px; justify-content: space-between;">
