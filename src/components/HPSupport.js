@@ -421,6 +421,7 @@ const getBotSummariesPromptMarkup = (summaries) => {
     let items_total = summaries?.prices?.items_total;
     let minPercent = Math.floor(((min_price*100)/max_price));
     let avgPercent = Math.floor(((avg_price*100)/max_price));
+    let popularPercent = Math.floor(((popular_count*100)/items_total));
     return `
         <div style="padding: 10, border-top: 1px solid rgba(255,255,255,0.1);">
             <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px;">
@@ -464,7 +465,7 @@ const getBotSummariesPromptMarkup = (summaries) => {
                             ${popular_count}/${items_total}:</span>
                     </p>
                     <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
-                        <div style="height: 100%; width: 6%; background: orange;"></div>
+                        <div style="height: 100%; width: ${popularPercent}%; background: orange;"></div>
                     </div>
                     <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-left: 10px;">
                         total: ${items_total}
