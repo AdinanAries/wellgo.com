@@ -79,10 +79,12 @@ const SearchPageMain = (props) => {
 
     const weatherCallback = (weatherData, flightsOffers={isError: true}) => {
         console.log('Weather', weatherData);
+        const PROMPTS=["*", "summaries", "weather"]
+        const TO_SHOW=PROMPTS[Math.floor(Math.random() * PROMPTS.length)]
         // Duration of the Prompt
         let duration=150000;
 
-        if(weatherData?.error){
+        if(weatherData?.error || TO_SHOW==="summaries"){
             // Error handling
             if(flightsOffers && flightsOffers?.isError){
                 // Do nothing for now
@@ -150,7 +152,7 @@ const SearchPageMain = (props) => {
         current_hour_weather.city=weatherData?.city;
         current_hour_weather.description=Weather.getWeatherCodeDescription(current_hour_weather?.weatherCode);
 
-        if(flightsOffers?.isError){ // Flight Offers Were Not Available
+        if(flightsOffers?.isError || TO_SHOW==="weather"){ // Flight Offers Were Not Available
             let prompt_msg=Weather.getWeatherPromptMsgDestinationCity(current_hour_weather);
             show_prompt_on_Bot_AD_tips_popup(
                 prompt_msg,
@@ -161,7 +163,7 @@ const SearchPageMain = (props) => {
                     data: current_hour_weather
                 }
             );
-        }else{
+        }else{ // Both Weather and Summaries
             let summeries = getDataSummeries(flightsOffers);
             let prompt_msg = Weather.getWeatherPromptMsgDestinationCityAndSummeries(current_hour_weather);
             show_prompt_on_Bot_AD_tips_popup(
