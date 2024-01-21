@@ -119,12 +119,10 @@ const SearchPageMain = (props) => {
 
         // Showing the Prompt
         let duration=50000;
+        let prompt_msg=Weather.getWeatherPromptMsgDestinationCity(current_hour_weather);
         show_prompt_on_Bot_AD_tips_popup(
             //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
-            `Hi... just a heads up... Be aware of the probable weather in 
-                ${current_hour_weather?.city?.city}, ${current_hour_weather?.city?.iso3}... 
-                on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... cheers...
-            `,
+            prompt_msg,
             CONSTANTS.bot.prompt_types.prompt, 
             duration,
             {

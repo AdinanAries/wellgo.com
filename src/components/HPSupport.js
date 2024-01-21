@@ -28,9 +28,6 @@ export default function HPSupportBtn(){
         console.log('Weather', weatherData);
         if(weatherData?.error){
             // Error handling
-            setCurrentHourWeather({
-                isError: true
-            });
             return;
         }
         let current_hour = new Date().toString().split(" ")[4].split(":")[0];
@@ -186,7 +183,7 @@ export default function HPSupportBtn(){
                             <i style={{color: "rgba(255,255,255,0.5)", marginRight: 10, fontSize: 13}}
                                     className="fa-solid fa-temperature-high"></i>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
-                                {currentHourWeather?.city?.city}, {currentHourWeather?.city?.iso3}
+                                {(currentHourWeather?.city?.city) || "Your city"}, {(currentHourWeather?.city?.iso3) || "..."}
                                 <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "orange", fontSize: 11}}>
                                     &#8226;
                                 </span>
@@ -329,7 +326,7 @@ export function show_prompt_on_Bot_AD_tips_popup(
 const getBotWeatherPromptMarkup = (currentHourWeather) => {
     return `
         <div style="position: relative; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px;">
-            <p style="position: absolute; top: 50px; left: 20px; font-size: 30px; color: orange; font-family: 'Prompt', Sans-serif;">
+            <p style="position: absolute; top: 40px; left: 15px; font-size: 25px; color: orange; font-family: 'Prompt', Sans-serif;">
                 ${Math.round(currentHourWeather?.apparentTemperature)}°F
             </p>
             <div style="display: flex;">
@@ -337,7 +334,7 @@ const getBotWeatherPromptMarkup = (currentHourWeather) => {
                     ${get_short_date_DAYMMMDD(currentHourWeather?.time)}, 
                 </p>
                 <p style="font-size: 11px; font-family: 'Prompt', Sans-serif; color: white; margin-top: 10px;">
-                    ${currentHourWeather?.city?.city}, ${currentHourWeather?.city?.iso3}
+                    ${(currentHourWeather?.city?.city) || "..."}, ${(currentHourWeather?.city?.iso3) || "..."}
                 </p>
             </div>
             <div style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1;">

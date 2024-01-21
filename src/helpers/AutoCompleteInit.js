@@ -259,8 +259,9 @@ const AutoCompleteInit = () => {
             let flights = [];
 
             //if backspace has been pressed, don't auto-complete on input
-            if(!evnt.data){
-                return null;
+            if(!evnt.data){ // Backspace
+                // Removing this condition for now
+                //return null;
             }
 
             if(evnt?.target?.value){

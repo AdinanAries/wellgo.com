@@ -4,6 +4,7 @@ import CloudsDouble from "../icons/Weather/Cloud-Double.png";
 import CloudSunBehind from "../icons/Weather/Cloud-Sun-Behind.png";
 import SunOnly from "../icons/Weather/Sun-Only.png";
 import FogOnly from "../icons/Weather/Fog-Only.png";
+import { get_short_date_DAYMMMDD } from "./general";
 
 import { fetchWeatherData, fetchWeatherCity } from "../services/weatherServices";
 
@@ -18,8 +19,21 @@ const Weather = {
             let lat = position.coords.latitude;
             let weather = await fetchWeatherData(long, lat, start_date, end_date);
             let city = await fetchWeatherCity(long, lat);
-            weather.city=city[0];
-            callback(weather);
+            if(weather){
+                if(Array.isArray(city) && city?.length>0)
+                    weather.city=city[0];
+                else
+                    weather.city={
+                        //city: "..",
+                        //iso3: ".."
+                    };
+                callback(weather);
+            }else{
+                callback({
+                    error: true,
+                    message: "Weather was null"
+                });
+            }
         }, (err) => {
             console.log(err);
             callback({
@@ -39,8 +53,21 @@ const Weather = {
     getWeather: async (lon, lat, start_date, end_date, callback=()=>{}) => {
         let weather = await fetchWeatherData(lon, lat, start_date, end_date);
         let city = await fetchWeatherCity(lon, lat);
-        weather.city=city[0];
-        callback(weather);
+        if(weather){
+            if(city?.length>0)
+                weather.city=city[0];
+            else 
+                weather.city={
+                    //city: "",
+                    //iso3: ""
+                };
+            callback(weather);
+        }else{
+            callback({
+                error: true,
+                message: "Weather was null"
+            });
+        }
     },
     /**
      * 
@@ -86,7 +113,36 @@ const Weather = {
         if(weather_desc)
             return weather_desc
         return "no weather description"
-    }
+    },
+
+    /**
+     * 
+     */
+    getWeatherPromptMsgDestinationCity: (current_hour_weather)=>{
+        let msgs = [
+            `Hi... just a heads up... Be aware of the probable weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... cheers...
+            `,
+            `Hi... Be aware of the probable weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... FYI.
+            `,
+            `Sup, in ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                I found the weather on ${get_short_date_DAYMMMDD(current_hour_weather.time)}...
+            `,
+            `Ok... Just wanted to inform you about the expected weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)} ... cool...
+            `,
+            `Umm... FYI, the weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... Thanks!
+            `
+        ];
+
+        return msgs[Math.floor(Math.random() * msgs.length)];
+    },
 
 
 }
