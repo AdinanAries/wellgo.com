@@ -80,7 +80,7 @@ const SearchPageMain = (props) => {
     const weatherCallback = (weatherData, flightsOffers={isError: true}) => {
         console.log('Weather', weatherData);
         // Duration of the Prompt
-        let duration=50000;
+        let duration=150000;
 
         if(weatherData?.error){
             // Error handling
@@ -90,7 +90,6 @@ const SearchPageMain = (props) => {
                 let summeries = getDataSummeries(flightsOffers);
                 let prompt_msg="Only Summaries Message";
                 show_prompt_on_Bot_AD_tips_popup(
-                    //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
                     prompt_msg,
                     CONSTANTS.bot.prompt_types.prompt, 
                     duration,
@@ -154,7 +153,6 @@ const SearchPageMain = (props) => {
         if(flightsOffers?.isError){ // Flight Offers Were Not Available
             let prompt_msg=Weather.getWeatherPromptMsgDestinationCity(current_hour_weather);
             show_prompt_on_Bot_AD_tips_popup(
-                //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
                 prompt_msg,
                 CONSTANTS.bot.prompt_types.prompt, 
                 duration,
@@ -167,7 +165,6 @@ const SearchPageMain = (props) => {
             let summeries = getDataSummeries(flightsOffers);
             let prompt_msg = Weather.getWeatherPromptMsgDestinationCityAndSummeries(current_hour_weather);
             show_prompt_on_Bot_AD_tips_popup(
-                //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
                 prompt_msg,
                 CONSTANTS.bot.prompt_types.prompt, 
                 duration,
