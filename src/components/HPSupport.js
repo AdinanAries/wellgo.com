@@ -8,7 +8,12 @@ import BotAuxMsg from "../Constants/BotAuxMsg";
 import getBotResponse from "../Constants/BotResponses";
 import Weather from "../helpers/Weather";
 import Bot_Construction_Site from "../Bot_in_Construction_Site.jpg";
-
+import Bot_In_Server_Room from "../Bot-In-Server-Room.jpg";
+import Bot_Mechanic from "../Bot-Mechanic.jpg";
+import Bot_Work_In_Progress_1 from "../Bot-Work-In-Progress-1.jpg";
+import Bot_Work_In_Progress_2 from "../Bot-Work-In-Progress-2.jpg";
+import Bot_Work_In_Progress_3 from "../Bot-Work-In-Progress-3.jpg";
+import Bot_Work_In_Progress_4 from "../Bot-Work-In-Progress-4.jpg";
 import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
 import { get_short_date_DAYMMMDD } from "../helpers/general";
@@ -256,7 +261,7 @@ export function show_prompt_on_Bot_AD_tips_popup(
             image: true, 
             weather: false, 
             data: {
-                img_url: Bot_Construction_Site,
+                img_url: "",
                 icon_class: "fa-solid fa-tools",
                 text: "Work in progress...",
             }
@@ -295,6 +300,21 @@ export function show_prompt_on_Bot_AD_tips_popup(
         }
 
         if(params?.image){
+
+            if(!params?.data?.img_url){
+                // Only for mainntenance prompts as default
+                let imgs = [
+                    Bot_Construction_Site,
+                    Bot_In_Server_Room, 
+                    Bot_Mechanic,
+                    Bot_Work_In_Progress_1,
+                    Bot_Work_In_Progress_2,
+                    Bot_Work_In_Progress_3,
+                    Bot_Work_In_Progress_4
+                ];
+                params.data.img_url = imgs[Math.floor(Math.random() * imgs.length)];
+            }
+
             document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
                 <div style="position: relative;">
                     <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; z-index: 1;">
