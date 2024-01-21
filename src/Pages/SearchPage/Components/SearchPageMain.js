@@ -31,7 +31,7 @@ const SearchPageMain = (props) => {
 
     const setFlightsResults = async () => {
         let res = await fetchFlightOffers();
-            console.log(res);
+            console.log('Flight Offers:', res);
             if(res.data)
                 (res.data.length>0) ? setFlights(res.data) : setFlights([]);
             else
