@@ -6,7 +6,7 @@ import SelectedTicketPane from "./SelectedTicketPane";
 import { fetchFlightOffers } from "../../../services/flightsServices";
 import Weather from "../../../helpers/Weather";
 import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
-import { get_short_date_DAYMMMDD } from "../../../helpers/general";
+import { getDataSummeries } from "../../../helpers/FlightsFilterHelpers";
 
 const SearchPageMain = (props) => {
 
@@ -32,11 +32,19 @@ const SearchPageMain = (props) => {
     const setFlightsResults = async () => {
         let res = await fetchFlightOffers();
             console.log('Flight Offers:', res);
-            if(res.data)
-                (res.data.length>0) ? setFlights(res.data) : setFlights([]);
+            if(res?.data)
+                (res?.data?.length>0) ? setFlights(res?.data) : setFlights([]);
             else
                 setFlights([]);
             setLoading(false);
+
+        if(res?.data)
+            if(res?.data?.length>0)
+                runBotPrompt(res?.data);
+            else
+                runBotPrompt();
+        else
+            runBotPrompt();
     }
 
     const submitFromSearchPage = async () => {
@@ -54,23 +62,49 @@ const SearchPageMain = (props) => {
 
     useEffect(()=>{
         // Getting Weather
+        
+    }, []);
+
+    const runBotPrompt = (flights=null) => {
         let lon = parseFloat(SEARCH_OBJ?.itinerary?.arrival?.longitude);
         let lat = parseFloat(SEARCH_OBJ?.itinerary?.arrival?.latitude);
         let iso_date = (SEARCH_OBJ?.itinerary?.arrival?.date) ? SEARCH_OBJ?.itinerary?.arrival?.date : SEARCH_OBJ?.itinerary?.departure?.date;
-        Weather.getWeather(lon, lat, iso_date, iso_date, weatherCallback);
-    }, []);
+        let flightsOffers;
+        if(!flights)
+            flightsOffers={isError: true}
+        else
+            flightsOffers=flights;
+        Weather.getWeather(lon, lat, iso_date, iso_date, weatherCallback, flightsOffers);
+    }
 
-    const weatherCallback = (weatherData) => {
+    const weatherCallback = (weatherData, flightsOffers={isError: true}) => {
         console.log('Weather', weatherData);
+        // Duration of the Prompt
+        let duration=50000;
+
         if(weatherData?.error){
             // Error handling
-            // Do nothing for now
+            if(flightsOffers && flightsOffers?.isError){
+                // Do nothing for now
+            }else{
+                let summeries = getDataSummeries(flightsOffers);
+                let prompt_msg="Only Summaries Message";
+                show_prompt_on_Bot_AD_tips_popup(
+                    //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
+                    prompt_msg,
+                    CONSTANTS.bot.prompt_types.prompt, 
+                    duration,
+                    {
+                        flight_data_summeries: summeries
+                    }
+                );
+            }
             return;
         }
         let current_hour = new Date().toString().split(" ")[4].split(":")[0];
         let current_hour_weather = {};
         let i = parseInt(current_hour);
-        current_hour_weather.time = weatherData.hourly.time[i];//.toISOString();
+        current_hour_weather.time = weatherData.hourly.time[i]; //.toISOString();
         current_hour_weather.temperature2m=weatherData.hourly.temperature2m[i];
         current_hour_weather.relativeHumidity2m=weatherData.hourly.relativeHumidity2m[i];
         current_hour_weather.dewPoint2m=weatherData.hourly.dewPoint2m[i];
@@ -117,19 +151,33 @@ const SearchPageMain = (props) => {
         current_hour_weather.city=weatherData?.city;
         current_hour_weather.description=Weather.getWeatherCodeDescription(current_hour_weather?.weatherCode);
 
-        // Showing the Prompt
-        let duration=50000;
-        let prompt_msg=Weather.getWeatherPromptMsgDestinationCity(current_hour_weather);
-        show_prompt_on_Bot_AD_tips_popup(
-            //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
-            prompt_msg,
-            CONSTANTS.bot.prompt_types.prompt, 
-            duration,
-            {
-                weather: true, 
-                data: current_hour_weather
-            }
-        );
+        if(flightsOffers?.isError){ // Flight Offers Were Not Available
+            let prompt_msg=Weather.getWeatherPromptMsgDestinationCity(current_hour_weather);
+            show_prompt_on_Bot_AD_tips_popup(
+                //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
+                prompt_msg,
+                CONSTANTS.bot.prompt_types.prompt, 
+                duration,
+                {
+                    weather: true, 
+                    data: current_hour_weather
+                }
+            );
+        }else{
+            let summeries = getDataSummeries(flightsOffers);
+            let prompt_msg = Weather.getWeatherPromptMsgDestinationCityAndSummeries(current_hour_weather);
+            show_prompt_on_Bot_AD_tips_popup(
+                //getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
+                prompt_msg,
+                CONSTANTS.bot.prompt_types.prompt, 
+                duration,
+                {
+                    weather: true, 
+                    data: current_hour_weather,
+                    flight_data_summeries: summeries
+                }
+            );
+        }
         
     }
 

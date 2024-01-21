@@ -295,3 +295,51 @@ export const filterByBags = (flightsArr, maxChecked, maxCarryOn) => {
 
     return filtered;
 }
+
+export const getDataSummeries = (flightsArr) => {
+    if(flightsArr.length>0){
+        let min_price=parseFloat(flightsArr[0].total_amount);
+        let max_price=parseFloat(flightsArr[0].total_amount);
+        let total_of_all_prices = 0;
+        const pricesCount={};
+        for(let i=0; i < flightsArr.length; i++){
+            const FLIGHT = flightsArr[i];
+
+            // Prices
+            const FLIGHT_PRICE = parseFloat(FLIGHT.total_amount);
+            const total_amount = FLIGHT.total_amount;
+            total_of_all_prices += FLIGHT_PRICE;
+            if(!pricesCount[total_amount]) 
+                pricesCount[total_amount] = 0;
+            pricesCount[total_amount] += 1;
+            if(FLIGHT_PRICE < min_price){
+                min_price = FLIGHT_PRICE
+            }
+            if(FLIGHT_PRICE > max_price){
+                max_price = FLIGHT_PRICE;
+            }
+
+            // Duration
+        }
+                
+        return {
+            prices:{
+                min: min_price, 
+                max: max_price,
+                avg: (((total_of_all_prices)/flightsArr.length)),
+                prices_count: pricesCount,
+                popular: 0,
+            },
+            duration: {
+                min: 0,
+                max: 0,
+                avg: 0,
+                popular: 0
+            }
+        }
+    }
+    return {
+        min_price: 0,
+        max_price: 0
+    }
+}

@@ -50,7 +50,7 @@ const Weather = {
      * @param {*} end_date 
      * @param {*} callback 
      */
-    getWeather: async (lon, lat, start_date, end_date, callback=()=>{}) => {
+    getWeather: async (lon, lat, start_date, end_date, callback=()=>{}, relevant_data=null) => {
         let weather = await fetchWeatherData(lon, lat, start_date, end_date);
         let city = await fetchWeatherCity(lon, lat);
         if(weather){
@@ -61,13 +61,23 @@ const Weather = {
                     //city: "",
                     //iso3: ""
                 };
-            callback(weather);
+            
+            if(relevant_data)
+                callback(weather, relevant_data);
+            else
+                callback(weather);
         }else{
-            callback({
-                error: true,
-                message: "Weather was null"
-            });
-        }
+            if(relevant_data)
+                callback({
+                    error: true,
+                    message: "Weather was null"
+                }, relevant_data);
+            else
+                callback({
+                    error: true,
+                    message: "Weather was null"
+                });
+            }
     },
     /**
      * 
@@ -138,6 +148,38 @@ const Weather = {
             `Umm... FYI, the weather in 
                 ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
                 on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... Thanks!
+            `
+        ];
+
+        return msgs[Math.floor(Math.random() * msgs.length)];
+    },
+
+    /**
+     * 
+     * @param {*} current_hour_weather 
+     * @returns 
+     */
+    getWeatherPromptMsgDestinationCityAndSummeries: (current_hour_weather)=>{
+        let msgs = [
+            `Hi... just a heads up... I prepared some summeries for you...
+             Also be aware of the probable weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... cheers...
+            `,
+            `Hi... Be aware of the probable weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... Also I've added some summeries for you.. FYI.
+            `,
+            `Sup, in ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                I found the weather on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... Also see summeries below...
+            `,
+            `Ok... Just wanted to inform you about the expected weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)} and some summeries ... cool...
+            `,
+            `Umm... FYI, the weather in 
+                ${(current_hour_weather?.city?.city) || "your destination city"}, ${(current_hour_weather?.city?.iso3) || ""}... 
+                on ${get_short_date_DAYMMMDD(current_hour_weather.time)}... I added some summeries as well... Thanks!
             `
         ];
 

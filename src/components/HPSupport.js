@@ -17,6 +17,7 @@ import Bot_Work_In_Progress_4 from "../Bot-Work-In-Progress-4.jpg";
 import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
 import { get_short_date_DAYMMMDD } from "../helpers/general";
+import { markup } from "../helpers/Prices";
 
 export default function HPSupportBtn(){
 
@@ -335,6 +336,45 @@ export function show_prompt_on_Bot_AD_tips_popup(
 
         if(params?.weather){
             document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=getBotWeatherPromptMarkup(params?.data);
+            if(params?.flight_data_summeries){
+                /*prices:{
+                    min: min_price, 
+                    max: max_price,
+                    avg: (((total_of_all_prices)/flightsArr.length)),
+                    prices_count: pricesCount,
+                    popular: 0,
+                }*/
+                let summeries=params?.flight_data_summeries;
+                document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=`
+                    <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px;">
+                        Price Summeries:
+                    </p>
+                    <div style="display: flex;">
+                        <p style="font-family: 'Prompt', Sans-serif; font-size: 11px;">
+                                Min: $${markup(summeries?.prices?.min).new_price.toFixed(2)}
+                            <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
+                                |
+                            </span>
+                            <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                                Max: $${markup(summeries?.prices?.max).new_price.toFixed(2)}</span>
+                            <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
+                                |
+                            </span>
+                            <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                                Average: $${markup(summeries?.prices?.avg).new_price.toFixed(2)}</span>
+                            <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
+                                |
+                            </span>
+                            <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                                Popular: $${markup(summeries?.prices?.popular).new_price.toFixed(2)}</span>
+                        </p>
+                    </div>
+                `;
+            }
+        }else {
+            if(params?.flight_data_summeries){
+            
+            }
         }
 
         //audio.play();
