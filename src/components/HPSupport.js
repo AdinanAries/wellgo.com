@@ -25,12 +25,8 @@ export default function HPSupportBtn(){
 
     useEffect(()=>{
         // Get and Set Weather Data
-        const page = window.location.pathname.substring(1);
-        if(!page || (CONSTANTS.site_pages.landing===page)){ // Home page
-            let today_iso_date = new Date().toISOString().split("T")[0];
-            Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback);
-        }
-    
+        let today_iso_date = new Date().toISOString().split("T")[0];
+        Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback); 
     }, []);
 
     const weatherCallback = (weatherData) => {
@@ -91,8 +87,11 @@ export default function HPSupportBtn(){
         // State Change
         setCurrentHourWeather(current_hour_weather);
         // Showing the Prompt
-        let duration=50000
-        window.show_new_chatbot_tip(duration);
+        const page = window.location.pathname.substring(1);
+        if(!page || (CONSTANTS.site_pages.landing===page)){ // Home page
+            let duration=50000
+            window.show_new_chatbot_tip(duration);
+        }
         
     }
 
