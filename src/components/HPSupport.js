@@ -25,8 +25,11 @@ export default function HPSupportBtn(){
 
     useEffect(()=>{
         // Get and Set Weather Data
-        let today_iso_date = new Date().toISOString().split("T")[0];
-        Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback);
+        const page = window.location.pathname.substring(1);
+        if(!page || (CONSTANTS.site_pages.landing===page)){ // Home page
+            let today_iso_date = new Date().toISOString().split("T")[0];
+            Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback);
+        }
     
     }, []);
 
