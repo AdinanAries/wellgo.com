@@ -353,22 +353,22 @@ export function show_prompt_on_Bot_AD_tips_popup(
                     </p>
                     <div style="display: flex;">
                         <p style="font-family: 'Prompt', Sans-serif; font-size: 11px;">
-                                Min: $${markup(summeries?.prices?.min)?.new_price?.toFixed(2)}
+                                Min: $${markup(summeries?.prices?.min)?.new_price?.toFixed(0)}
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Max: $${markup(summeries?.prices?.max)?.new_price?.toFixed(2)}</span>
+                                Max: $${markup(summeries?.prices?.max)?.new_price?.toFixed(0)}</span>
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Average: $${markup(summeries?.prices?.avg)?.new_price?.toFixed(2)}</span>
+                                Average: $${markup(summeries?.prices?.avg)?.new_price?.toFixed(0)}</span>
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Popular: $${markup(summeries?.prices?.popular).new_price.toFixed(2)}</span>
+                                Popular: $${markup(summeries?.prices?.popular).new_price.toFixed(0)}</span>
                         </p>
                     </div>
                 `;
