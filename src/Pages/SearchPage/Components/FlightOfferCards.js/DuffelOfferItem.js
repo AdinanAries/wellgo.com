@@ -168,7 +168,7 @@ const DuffelOfferItem = (props) => {
                         <p className="each_ticket_price_display" style={{textAlign: "center", color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 18, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
                             <span style={{fontSize: 18, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
                                 dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
-                            {(markup(total_amount)?.new_price)?.toFixed(2)}</p>
+                            {(markup(total_amount)?.new_price)?.toFixed(0)}</p>
                         <p style={{color: "rgba(0,0,0,0.8)", fontSize: 12, marginBottom: 10, textAlign: "center"}}>
                             {passengers.length>1?(`${passengers.length} passengers`):"1 passenger"}
                         </p>

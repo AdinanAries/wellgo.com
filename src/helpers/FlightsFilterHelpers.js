@@ -298,12 +298,26 @@ export const filterByBags = (flightsArr, maxChecked, maxCarryOn) => {
 
 export const getDataSummeries = (flightsArr) => {
     if(flightsArr.length>0){
+        // Price
         let min_price=parseFloat(flightsArr[0].total_amount);
         let max_price=parseFloat(flightsArr[0].total_amount);
         let total_of_all_prices = 0;
         let priceOccurrence = 0;
         let popularPrice = 0;
-        const pricesCount={};
+        const pricesCount = {};
+
+        // Duration
+        let min_duration=getTotalMinutesFromDurationString(
+            flightsArr[0].slices[0]?.duration
+        );
+        let max_duration=getTotalMinutesFromDurationString(
+            flightsArr[0].slices[0]?.duration
+        );
+        let total_of_all_duration = 0;
+        let durationOccurrence = 0;
+        let popularDuration = 0;
+        const durationCount={};
+
         for(let i=0; i < flightsArr.length; i++){
             const FLIGHT = flightsArr[i];
 
@@ -322,6 +336,30 @@ export const getDataSummeries = (flightsArr) => {
             }
 
             // Duration
+            const DUR = FLIGHT.slices[0]?.duration
+            const FLIGHT_DURATION = getTotalMinutesFromDurationString(
+                DUR
+            );
+            if(!durationCount[FLIGHT_DURATION])
+                durationCount[FLIGHT_DURATION]=0;
+            durationCount[FLIGHT_DURATION] += 1;
+            total_of_all_duration += FLIGHT_DURATION;
+            if(FLIGHT_DURATION<min_duration){
+                min_duration=FLIGHT_DURATION
+            }
+            if(FLIGHT_DURATION>max_duration){
+                max_duration=FLIGHT_DURATION;
+            }
+
+            // Duration
+            for (let [key, value] of Object.entries(durationCount)){
+                if(value > durationOccurrence){
+                    durationOccurrence = value;
+                    popularDuration = parseFloat(key);
+                }
+            }
+
+            // Prices
             for (let [key, value] of Object.entries(pricesCount)){
                 if(value > priceOccurrence){
                     priceOccurrence = value;
@@ -341,13 +379,13 @@ export const getDataSummeries = (flightsArr) => {
                 items_total: flightsArr.length,
             },
             duration: {
-                min: 0,
-                max: 0,
-                avg: 0,
-                prices_count: 0,
-                popular: 0,
-                popular_count: 0,
-                items_total: 0,
+                min: min_duration,
+                max: max_duration,
+                avg: (((total_of_all_duration)/flightsArr.length)),
+                duration_count: durationCount,
+                popular: popularDuration,
+                popular_count: durationOccurrence,
+                items_total: flightsArr.length,
             }
         }
     }

@@ -16,7 +16,7 @@ import Bot_Work_In_Progress_3 from "../Bot-Work-In-Progress-3.jpg";
 import Bot_Work_In_Progress_4 from "../Bot-Work-In-Progress-4.jpg";
 import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
-import { get_short_date_DAYMMMDD } from "../helpers/general";
+import { get_short_date_DAYMMMDD, getUserFriendlyDurationStringFromTotalMunites } from "../helpers/general";
 import { markup } from "../helpers/Prices";
 
 export default function HPSupportBtn(){
@@ -415,22 +415,34 @@ const getBotWeatherPromptMarkup = (currentHourWeather) => {
 }
 
 const getBotSummariesPromptMarkup = (summaries) => {
-    let max_price = markup(summaries?.prices?.max)?.new_price?.toFixed(2);
-    let avg_price = markup(summaries?.prices.avg)?.new_price?.toFixed(2);
-    let min_price = markup(summaries?.prices.min)?.new_price?.toFixed(2);
-    let popular_price = markup(summaries?.prices?.popular)?.new_price?.toFixed(2);
+    // Prices
+    let max_price = markup(summaries?.prices?.max)?.new_price?.toFixed(0);
+    let avg_price = markup(summaries?.prices.avg)?.new_price?.toFixed(0);
+    let min_price = markup(summaries?.prices.min)?.new_price?.toFixed(0);
+    let popular_price = markup(summaries?.prices?.popular)?.new_price?.toFixed(0);
     let popular_count = summaries?.prices?.popular_count;
     let items_total = summaries?.prices?.items_total;
     let minPercent = Math.floor(((min_price*100)/max_price));
     let avgPercent = Math.floor(((avg_price*100)/max_price));
     let popularPercent = Math.floor(((popular_count*100)/items_total));
+
+    // Duration
+    let max_duration = summaries?.duration?.max;
+    let avg_duration = summaries?.duration.avg;
+    let min_duration = summaries?.duration.min;
+    let popular_duration = summaries?.duration?.popular;
+    let dur_popular_count = summaries?.duration?.popular_count;
+    let dur_items_total = summaries?.duration?.items_total;
+    let dur_minPercent = Math.floor(((min_duration*100)/max_duration));
+    let dur_avgPercent = Math.floor(((avg_duration*100)/max_duration));
+    let dur_popularPercent = Math.floor(((dur_popular_count*100)/dur_items_total));
     return `
         <div style="padding: 10, border-top: 1px solid rgba(255,255,255,0.1);">
-            <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px;">
+            <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px;">
                 Price Summary:
             </p>
             <div>
-                <div style="display: flex; align-items: center; margin-bottom: 5px; justify-content: space-between;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
                     <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
                         $${min_price} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
                             (min)</span>:
@@ -439,7 +451,7 @@ const getBotSummariesPromptMarkup = (summaries) => {
                         <div style="height: 100%; width: ${minPercent}%; background: orange;"></div>
                     </div>
                 </div>
-                <div style="display: flex; align-items: center; margin-bottom: 5px; justify-content: space-between;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
                     <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
                         $${avg_price} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
                             (avg)</span>:
@@ -448,7 +460,7 @@ const getBotSummariesPromptMarkup = (summaries) => {
                         <div style="height: 100%; width: ${avgPercent}%; background: orange;"></div>
                     </div>
                 </div>
-                <div style="display: flex; align-items: center; margin-bottom: 5px; justify-content: space-between;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
                     <p style="color: orange; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
                         $${max_price} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
                             (max)</span>:
@@ -457,10 +469,10 @@ const getBotSummariesPromptMarkup = (summaries) => {
                         <div style="height: 100%; width: 95%; background: orange;"></div>
                     </div>
                 </div>
-                <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px;">
-                Popular Price: <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                ($${popular_price})</span>
-            </p>
+                <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px;">
+                    Popular Price: <span style="color: orange; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                    $${popular_price}</span>
+                </p>
                 <div style="display: flex; align-items: center; margin-bottom: 5px;">
                     <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
                         <span style="color: orange; font-size: 11px; font-family: 'Prompt', Sans-serif;">
@@ -470,7 +482,64 @@ const getBotSummariesPromptMarkup = (summaries) => {
                         <div style="height: 100%; width: ${popularPercent}%; background: orange;"></div>
                     </div>
                     <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-left: 10px;">
-                        total: ${items_total}
+                        ${items_total} flights
+                    </p>
+                </div>
+            </div>
+        </div>
+            <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px;">
+                Duration Summary:
+            </p>
+            <div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <p style="color: rgb(169, 221, 255); font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        ${getUserFriendlyDurationStringFromTotalMunites(
+                            min_duration
+                        )} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            (min)</span>:
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: ${dur_minPercent}%; background: rgb(169, 221, 255);"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <p style="color: rgb(169, 221, 255); font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        ${getUserFriendlyDurationStringFromTotalMunites(
+                            Math.ceil(avg_duration)
+                        )} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            (avg)</span>:
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: ${dur_avgPercent}%; background: rgb(169, 221, 255);"></div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <p style="color: rgb(169, 221, 255); font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        ${getUserFriendlyDurationStringFromTotalMunites(
+                            max_duration
+                        )} <span style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            (max)</span>:
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: 95%; background: rgb(169, 221, 255);"></div>
+                    </div>
+                </div>
+                <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-top: 5px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px;">
+                    Popular Duration: <span style="color: rgb(169, 221, 255); font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                    ${getUserFriendlyDurationStringFromTotalMunites(
+                        popular_duration
+                    )}</span>
+                </p>
+                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-right: 10px;">
+                        <span style="color: rgb(169, 221, 255); font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            ${dur_popular_count}/${dur_items_total}:</span>
+                    </p>
+                    <div style="width: 120px; height: 4px; background: rgba(255,255,255,0.2); overflow: hidden; border-radius: 50px; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);">
+                        <div style="height: 100%; width: ${dur_popularPercent}%; background: rgb(169, 221, 255);"></div>
+                    </div>
+                    <p style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-left: 10px;">
+                        ${dur_items_total} flights
                     </p>
                 </div>
             </div>
