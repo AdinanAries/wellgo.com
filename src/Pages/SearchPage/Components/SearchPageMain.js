@@ -79,10 +79,30 @@ const SearchPageMain = (props) => {
 
     const weatherCallback = (weatherData, flightsOffers={isError: true}) => {
         console.log('Weather', weatherData);
-        const PROMPTS=["*", "summaries", "weather"]
+        const PROMPTS=["*", "summaries", "weather", "places"]
         const TO_SHOW=PROMPTS[Math.floor(Math.random() * PROMPTS.length)]
         // Duration of the Prompt
         let duration=150000;
+
+        // Showing places bot prompt
+        let place = {name: "Kintampo Water Falls"} // To Do - Get Places.
+        if(place?.name && TO_SHOW==="places"){
+            const PROMPTS = [
+                `Hey, have you visited ${place?.name}?.. I just thought you might be interested if traveling for tourism...`,
+                `Hi, I found ${place?.name}... If interested, of course for tourism, consider visiting the place...`,
+                `I found ${place?.name} popular in the destinaton country... You might be interested if traveling for tourism...`
+            ]
+            let prompt_msg = PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
+            show_prompt_on_Bot_AD_tips_popup(
+                prompt_msg,
+                CONSTANTS.bot.prompt_types.prompt, 
+                duration,
+                {
+                    places: place
+                }
+            );
+            return;
+        }
 
         if(weatherData?.error || TO_SHOW==="summaries"){
             // Error handling

@@ -14,6 +14,7 @@ import Bot_Work_In_Progress_1 from "../Bot-Work-In-Progress-1.jpg";
 import Bot_Work_In_Progress_2 from "../Bot-Work-In-Progress-2.jpg";
 import Bot_Work_In_Progress_3 from "../Bot-Work-In-Progress-3.jpg";
 import Bot_Work_In_Progress_4 from "../Bot-Work-In-Progress-4.jpg";
+import Tourism_Photo from "../tour-img-2.svg"
 import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
 import { get_short_date_DAYMMMDD, getUserFriendlyDurationStringFromTotalMunites } from "../helpers/general";
@@ -302,6 +303,11 @@ export function show_prompt_on_Bot_AD_tips_popup(
                 </p>`;
         }
 
+        // Suggested Places
+        if(params?.places){
+            document.getElementById("main_chatbot_popup_tip_msg").innerHTML+=getPlacesPromptMarkup(params?.places);
+        }
+
         if(params?.image){
 
             if(!params?.data?.img_url){
@@ -544,6 +550,45 @@ const getBotSummariesPromptMarkup = (summaries) => {
                 </div>
             </div>
         </div>
+    `;
+}
+
+const getPlacesPromptMarkup = (place) => {
+    return `
+        <div>
+            <div style="margin-top: 15px; height: 160px; background-image: url('${Tourism_Photo}'); background-size: cover; display: flex; flex-direction: column; justify-content: flex-end;">
+                <p style="text-shadow: 1px 2px 3px rgba(0,0,0,0.4); color: lightblue; font-family: 'Prompt', Sans-serif; font-size: 11px;">
+                    - popular tourism -</p>
+            </div>
+            <div>
+                <p style="color: orange; font-size: 12px; font-family: 'Prompt', Sans-serif; margin-top: 10px; margin-bottom: 5px;">
+                    <i style="margin-right: 5px; font-size: 13px;" class="fa fa-map-marker"></i>    
+                    ${place?.name}
+                </p>
+                <p style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif; margin-bottom: 5px;">
+                    123 street, Bronx, New York, USA
+                </p>
+                <div style="border-top: 1px solid rgba(255,255,255, 0.1); padding-top: 5px;">
+                    <p style="color: white; font-size: 11px; margin-bottom: 10px;">
+                        People who have visited rated this place</p>
+                    <div style="background: linear-gradient(0.25turn, red, orange, yellow, green); box-shadow: 1px 2px 3px rgba(0,0,0,0.4); border-radius: 50px;">
+                        <div style="height: 4px; width: 45%; position: relative;">
+                            <div style="position: absolute; top: -6px; right: 0; width: 15px; height: 15px; background-color: white; border-radius: 100%; box-shadow: 1px 2px 3px rgba(0,0,0,0.4);"></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 7px;">
+                        <p style="color: red; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            0 | 😞</p>
+                        <p style="color: orange; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            33 | 😐</p>
+                        <p style="color: yellow; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            66 | 🙂</p>
+                        <p style="color: green; font-size: 11px; font-family: 'Prompt', Sans-serif;">
+                            99 | 😁</p>
+                    </div>
+                </div>
+            </div>
+        </div>    
     `;
 }
 
