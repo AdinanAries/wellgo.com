@@ -7,6 +7,7 @@ import CONSTANTS from "../Constants/Constants";
 import BotAuxMsg from "../Constants/BotAuxMsg";
 import getBotResponse from "../Constants/BotResponses";
 import Weather from "../helpers/Weather";
+import Tourism from "../helpers/Tourism";
 import Bot_Construction_Site from "../Bot_in_Construction_Site.jpg";
 import Bot_In_Server_Room from "../Bot-In-Server-Room.jpg";
 import Bot_Mechanic from "../Bot-Mechanic.jpg";
@@ -23,17 +24,39 @@ import { markup } from "../helpers/Prices";
 export default function HPSupportBtn(){
 
     const [ currentHourWeather, setCurrentHourWeather ] = useState();
+    const [ touristAttraction, setTouristAttraction ] = useState();
+
+    // Bot prompt to show
+    let PROMPTS = ["weather", "tourist-attraction"];
+    let TO_SHOW = PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
 
     useEffect(()=>{
-        // Get and Set Weather Data
+        // Get and Set Weather Data or Tourist Attraction
+        Tourism.getTouristAttractionDefaultLocation(touristAttractionCallback);
         let today_iso_date = new Date().toISOString().split("T")[0];
         Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback); 
+
     }, []);
+
+    const touristAttractionCallback = (attraction) => {
+        console.log("Tourism:", attraction);
+        if(attraction?.error){
+            // Error handling
+            setTouristAttraction({
+                isError: true,
+            });
+            return;
+        }
+        setTouristAttraction(attraction);
+    }
 
     const weatherCallback = (weatherData) => {
         console.log('Weather', weatherData);
         if(weatherData?.error){
             // Error handling
+            setCurrentHourWeather({
+                isError: true
+            });
             return;
         }
         let current_hour = new Date().toString().split(" ")[4].split(":")[0];
@@ -161,7 +184,7 @@ export default function HPSupportBtn(){
                             {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
                             {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
                         </p>
-                        { (!currentHourWeather?.isError) && <>
+                        { (!currentHourWeather?.isError && TO_SHOW==="weather") && <>
                             <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
                                 <p style={{position: "absolute", top: 50, left: 20, fontSize: 30, color: "orange", fontFamily: "'Prompt', Sans-serif"}}>
                                     {Math.round(currentHourWeather?.apparentTemperature)}°F
@@ -184,6 +207,42 @@ export default function HPSupportBtn(){
                                         src={currentHourWeather?.icon} 
                                         alt="to do" />
                                 </p>
+                            </div>
+                        </>}
+                        { (!touristAttraction?.isError && TO_SHOW==="tourist-attraction") && <>
+                            <p style={{color: "orange", fontSize: 11, paddingTop: 5, marginTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
+                                Tourist attractions in your current city</p>
+                            <div style={{marginTop: 15, height: 160, backgroundImage: `url('${Tourism_Photo}')`, backgroundSize: "cover", display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
+                                <p style={{textShadow: "1px 2px 3px rgba(0,0,0,0.4)", color: "lightblue", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                    - popular tourism -</p>
+                            </div>
+                            <div>
+                                <p style={{color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10, marginBottom: 5}}>
+                                    <i style={{marginRight: 5, fontSize: 13}} className="fa fa-map-marker" aria-hidden="true" ></i>    
+                                    {touristAttraction?.name}
+                                </p>
+                                <p style={{color: "white", fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginBottom: 5}}>
+                                    {(currentHourWeather?.city?.city || "city not found")}, {(currentHourWeather?.city?.iso3) || "..."}
+                                </p>
+                                <div style={{borderTop: "1px solid rgba(255,255,255, 0.1)", paddingTop: 5}}>
+                                    <p style={{color: "white", fontSize: 11, marginBottom: 10}}>
+                                        People who have visited rated this place</p>
+                                    <div style={{background: "linear-gradient(0.25turn, red, orange, yellow, green)", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)", borderRadius: 50}}>
+                                        <div style={{height: 4, width: "45%", position: "relative"}} >
+                                            <div style={{position: "absolute", top: -6, right: 0, width: 15, height: 15, backgroundColor: "white", borderRadius: "100%", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)"}}></div>
+                                        </div>
+                                    </div>
+                                    <div style={{display: "flex", justifyContent: "space-between", marginTop: 7}}>
+                                        <p style={{color: "red", fontSize: 11, fontFamily: "'Prompt', Sans-serif"}} >
+                                            0 | 😞</p>
+                                        <p style={{color: "orange", fontSize: 11, fontFamily: "'Prompt', Sans-serif"}} >
+                                            33 | 😐</p>
+                                        <p style={{color: "yellow", fontSize: 11, fontFamily: "'Prompt', Sans-serif"}} >
+                                            66 | 🙂</p>
+                                        <p style={{color: "green", fontSize: 11, fontFamily: "'Prompt', Sans-serif"}} >
+                                            99 | 😁</p>
+                                    </div>
+                                </div>
                             </div>
                         </>}
                     </div>
