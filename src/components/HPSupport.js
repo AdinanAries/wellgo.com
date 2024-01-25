@@ -211,18 +211,15 @@ export default function HPSupportBtn(){
                         </>}
                         { (!touristAttraction?.isError && TO_SHOW==="tourist-attraction") && <>
                             <p style={{color: "orange", fontSize: 11, paddingTop: 5, marginTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
-                                Tourist attractions in your current city</p>
+                                Tourist attractions in {(currentHourWeather?.city?.city || "your current city")}</p>
                             <div style={{marginTop: 15, height: 160, backgroundImage: `url('${Tourism_Photo}')`, backgroundSize: "cover", display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
                                 <p style={{textShadow: "1px 2px 3px rgba(0,0,0,0.4)", color: "lightblue", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
-                                    - popular tourism -</p>
+                                    - Type: {(touristAttraction?.type || "unknown")} -</p>
                             </div>
                             <div>
                                 <p style={{color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10, marginBottom: 5}}>
                                     <i style={{marginRight: 5, fontSize: 13}} className="fa fa-map-marker" aria-hidden="true" ></i>    
                                     {touristAttraction?.name}
-                                </p>
-                                <p style={{color: "white", fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginBottom: 5}}>
-                                    {(currentHourWeather?.city?.city || "city not found")}, {(currentHourWeather?.city?.iso3) || "..."}
                                 </p>
                                 <div style={{borderTop: "1px solid rgba(255,255,255, 0.1)", paddingTop: 5}}>
                                     <p style={{color: "white", fontSize: 11, marginBottom: 10}}>
