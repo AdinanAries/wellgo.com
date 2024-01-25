@@ -23,12 +23,12 @@ import { markup } from "../helpers/Prices";
 
 export default function HPSupportBtn(){
 
-    const [ currentHourWeather, setCurrentHourWeather ] = useState();
-    const [ touristAttraction, setTouristAttraction ] = useState();
-
     // Bot prompt to show
     let PROMPTS = ["weather", "tourist-attraction"];
-    let TO_SHOW = PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
+
+    const [ currentHourWeather, setCurrentHourWeather ] = useState();
+    const [ touristAttraction, setTouristAttraction ] = useState();
+    const [TO_SHOW, SET_TO_SHOW] = useState(PROMPTS[Math.floor(Math.random() * PROMPTS.length)]);
 
     useEffect(()=>{
         // Get and Set Weather Data or Tourist Attraction
@@ -184,7 +184,7 @@ export default function HPSupportBtn(){
                             {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
                             {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
                         </p>
-                        { (!currentHourWeather?.isError && TO_SHOW==="weather") && <>
+                        { ((!currentHourWeather?.isError && TO_SHOW==="weather")) && <>
                             <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
                                 <p style={{position: "absolute", top: 50, left: 20, fontSize: 30, color: "orange", fontFamily: "'Prompt', Sans-serif"}}>
                                     {Math.round(currentHourWeather?.apparentTemperature)}°F
@@ -209,7 +209,7 @@ export default function HPSupportBtn(){
                                 </p>
                             </div>
                         </>}
-                        { (!touristAttraction?.isError && TO_SHOW==="tourist-attraction") && <>
+                        { ((!touristAttraction?.isError && TO_SHOW==="tourist-attraction")) && <>
                             <p style={{color: "orange", fontSize: 11, paddingTop: 5, marginTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
                                 Tourist attractions in {(currentHourWeather?.city?.city || "your current city")}</p>
                             <div style={{marginTop: 15, height: 160, backgroundImage: `url('${Tourism_Photo}')`, backgroundSize: "cover", display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
