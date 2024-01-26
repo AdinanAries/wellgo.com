@@ -216,14 +216,17 @@ export default function HPSupportBtn(){
                             <div style={{marginTop: 15, height: 160, backgroundImage: `url('${Tourism_Photo}')`, backgroundSize: "cover", display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
                                 <a href={(touristAttraction?.url) || "#"} target="_blank" rel="noreferrer"  style={{textDecoration: "none"}}>
                                     <div style={{border: "1px solid rgba(255,255,255, 0.2)", backgroundColor: "rgba(0,0,0,0.8)", padding: 10}}>
-                                        <p style={{textShadow:  "1px 1px 1px rgba(0,0,0,0.9)", color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif",}}>
-                                            <i style={{marginRight: 5, fontSize: 13}} className="fa fa-map-marker" aria-hidden="true" ></i>    
-                                            {touristAttraction?.name} - <span style={{color: "white", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
-                                            click here to read more...</span>
-                                        </p>
+                                        <div style={{display: "flex"}}>
+                                            <p style={{textShadow:  "1px 1px 1px rgba(0,0,0,0.9)", color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif",}}>
+                                                <i style={{marginRight: 5, fontSize: 13}} className="fa fa-map-marker" aria-hidden="true" ></i>
+                                            </p>
+                                            <p style={{textShadow:  "1px 1px 1px rgba(0,0,0,0.9)", color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif",}}>
+                                                {touristAttraction?.name} - <span style={{color: "white", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                                click here to read more about this tourist attraction...</span>
+                                            </p>
+                                        </div>
                                         <p style={{textShadow: "1px 1px 1px rgba(0,0,0,0.9)", color: "lightblue", fontFamily: "'Prompt', Sans-serif", fontSize: 11, marginLeft: 10}}>
-                                            {(touristAttraction?.type || "")}:
-                                            suggested to visit in/around {(currentHourWeather?.city?.city || "your current city")} for tourism
+                                            {(touristAttraction?.type || "")} - in/near {(currentHourWeather?.city?.city || "your current city")}
                                         </p>
                                     </div>
                                 </a>
