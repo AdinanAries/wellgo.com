@@ -33,7 +33,7 @@ export default function HPSupportBtn(){
     useEffect(()=>{
         // Get and Set Weather Data or Tourist Attraction
         const page = window.location.pathname.substring(1);
-        if(!page || (CONSTANTS.site_pages.landing===page)){ // Home page
+        if((!page || (CONSTANTS.site_pages.landing===page)) && TO_SHOW==="tourist-attraction"){ // Home page
             Tourism.getTouristAttractionDefaultLocation(touristAttractionCallback);
         }
         let today_iso_date = new Date().toISOString().split("T")[0];
@@ -218,7 +218,8 @@ export default function HPSupportBtn(){
                                     <div style={{border: "1px solid rgba(255,255,255, 0.2)", backgroundColor: "rgba(0,0,0,0.8)", padding: 10}}>
                                         <p style={{textShadow:  "1px 1px 1px rgba(0,0,0,0.9)", color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif",}}>
                                             <i style={{marginRight: 5, fontSize: 13}} className="fa fa-map-marker" aria-hidden="true" ></i>    
-                                            {touristAttraction?.name}
+                                            {touristAttraction?.name} - <span style={{color: "white", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
+                                            click here to read more...</span>
                                         </p>
                                         <p style={{textShadow: "1px 1px 1px rgba(0,0,0,0.9)", color: "lightblue", fontFamily: "'Prompt', Sans-serif", fontSize: 11, marginLeft: 10}}>
                                             {(touristAttraction?.type || "")}:
@@ -627,7 +628,8 @@ const getPlacesPromptMarkup = (place) => {
                             ${place?.name}
                         </p>
                         <p style="text-shadow: 1px 1px 1px rgba(0,0,0,0.9); color: lightblue; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-left: 10px;">
-                            ${(place?.city?.city) || "..."}, ${(place?.city?.iso3) || "..."}
+                            in/near ${(place?.city?.city) || "..."}, ${(place?.city?.iso3) || "..."} - <span style="color: white; font-family: 'Prompt', Sans-serif; font-size: 11px;">
+                            click here to read more...</span>
                         </p>
                     </div>
                 </a>
