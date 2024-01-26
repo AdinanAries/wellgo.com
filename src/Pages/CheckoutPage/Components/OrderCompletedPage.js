@@ -11,6 +11,9 @@ import getBotResponse from "../../../Constants/BotResponses";
 import loading_icon from "../../../icons/loading.svg";
 import FormErrorCard from "../../../components/FormErrorCard";
 import { updateFlightBookingLogId } from "../../../services/bookingHistoryServices";
+import BotLogin from "../../../Bot-Login.jpg";
+import BotLogin2 from "../../../Bot-Login-2.jpg";
+import BotLogin3 from "../../../Bot-Login-3.jpg";
 
 const OrderCompletedPage = (props) => {
 
@@ -54,10 +57,20 @@ const OrderCompletedPage = (props) => {
                 // User is not logged in
                 setShowBookingDetails(false);
                 setIsLoggedIn(false);
+
+                const BOT_IMGs = [BotLogin, BotLogin3, BotLogin2]
                 show_prompt_on_Bot_AD_tips_popup(
                     getBotResponse(CONSTANTS.bot.responses.not_logged_in_on_checkout_complete),
                     CONSTANTS.bot.prompt_types.warn, 
-                    500000
+                    500000,
+                    {
+                        image: true,
+                        data: {
+                            img_url: BOT_IMGs[Math.floor(Math.random() * BOT_IMGs.length)],
+                            icon_class: "fa-solid fa-sign-in-alt",
+                            text: "Login to save the booking...",
+                        }
+                    }
                 );
             }
             setIsLoading(false);
@@ -427,19 +440,21 @@ const OrderCompletedPage = (props) => {
                         </div>
                 }
                 {
-                    ((!showBookingDetails && !isLoggedIn) && !isLoading) ? <div style={{paddingTop: 15}}>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", color: "crimson"}}>
-                            <i style={{marginRight: 10, color: "red"}} className="fa-solid fa-exclamation-triangle"></i>
-                            You are not logged in!
-                        </p>
-                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                            If you have an account, logging in will ensure that this booking is saved to your account
-                            <br/><span style={{fontFamily: "'Prompt', Sans-serif", color: "blue", fontSize: 14}}>
-                                You may login and continue or may continue without logging in
-                            </span>
-                        </p>
+                    ((!showBookingDetails && !isLoggedIn) && !isLoading) ? <div style={{paddingTop: 10}}>
+                        <div style={{padding: "0 10px"}}>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder", color: "crimson"}}>
+                                <i style={{marginRight: 10, color: "red"}} className="fa-solid fa-exclamation-triangle"></i>
+                                You are not logged in!
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                If you have an account, logging in will ensure that this booking is saved to your account
+                                <br/><span style={{fontFamily: "'Prompt', Sans-serif", color: "blue", fontSize: 14}}>
+                                    You may login and continue or may continue without logging in
+                                </span>
+                            </p>
+                        </div>
                         <div style={{paddingTop: 5}}>
-                            <div style={{display: "flex"}}>
+                            <div style={{display: "flex", padding: "0 10px"}}>
                                 <div onClick={continueToDetails} style={{textAlign: "center", cursor: "pointer", padding: 10, color: "white", backgroundColor: "crimson", fontSize: 14, fontFamily: "'Prompt', Sans-serif", borderRadius: 7}}>
                                     continue without logging in
                                     <i style={{marginLeft: 10, color: "yellow"}} className="fa-solid fa-arrow-right"></i>

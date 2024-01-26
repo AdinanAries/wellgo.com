@@ -47,15 +47,9 @@ const BotResponses = {
         Click on each passenger card will open their form`
     ],
     "checkout completed but user is not logged in": [
-        `This booking will be saved as anonymous!
-        The booking has been confirmed by the airline,
-        however since you are not logged in,
-        retrieving the record for this booking will not 
-        be as simple as viewing your booking history
-        on user account page. 
-        You may proceed to view the booking details with or without login. 
-        Also, you may register later in case you dont have an account already
-        `
+        `The booking has been confirmed by the airline!
+        However it will not be added to your booking history
+        since you are not logged in..`
     ],
     "no language support": [
         "Lanuguage support has been disabled for maintenance purposes",
