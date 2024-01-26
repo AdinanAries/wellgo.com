@@ -4,7 +4,7 @@ const Tourism = {
     /**
      * 
      */
-    getTouristAttraction: async (lon, lat) => {
+    getTouristAttraction: async (lon, lat, callback) => {
         const ATTRACTIONS = await fetchTouristAttraction(lon, lat);
         let attr = ATTRACTIONS[Math.floor(Math.random() * ATTRACTIONS.length)];
         let cities = await fetchTouristAttractionCity(lon, lat);
@@ -16,13 +16,12 @@ const Tourism = {
                     //city: "..",
                     //iso3: ".."
                 };
-
-            return attr;
+            callback(attr);
         }else{
-            return{
+            callback({
                 error: true,
                 message: "Tourist attraction was null"
-            };
+            });
         }
     },
 
@@ -60,8 +59,19 @@ const Tourism = {
                 ...err
             });
         })
-    }
+    },
 
+    /**
+     * 
+     */
+    getBotPromptMessage: (place) => {
+        const PROMPTS = [
+            `Hey, have you visited ${place?.name} in/near ${place?.city?.city}?.. I just thought you might be interested if traveling for tourism...`,
+            `Hi, I found ${place?.name} in/near ${place?.city?.city}... If interested, of course for tourism, consider visiting the place...`,
+            `I found ${place?.name} popular in/near ${place?.city?.city}... You might be interested if traveling for tourism...`
+        ]
+        return PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
+    }
 
 }
 

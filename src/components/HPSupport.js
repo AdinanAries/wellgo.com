@@ -32,7 +32,10 @@ export default function HPSupportBtn(){
 
     useEffect(()=>{
         // Get and Set Weather Data or Tourist Attraction
-        Tourism.getTouristAttractionDefaultLocation(touristAttractionCallback);
+        const page = window.location.pathname.substring(1);
+        if(!page || (CONSTANTS.site_pages.landing===page)){ // Home page
+            Tourism.getTouristAttractionDefaultLocation(touristAttractionCallback);
+        }
         let today_iso_date = new Date().toISOString().split("T")[0];
         Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback); 
 
@@ -210,18 +213,22 @@ export default function HPSupportBtn(){
                             </div>
                         </>}
                         { ((!touristAttraction?.isError && TO_SHOW==="tourist-attraction")) && <>
-                            <p style={{color: "orange", fontSize: 11, paddingTop: 5, marginTop: 10, borderTop: "1px solid rgba(255,255,255,0.1)"}}>
-                                Tourist attractions in {(currentHourWeather?.city?.city || "your current city")}</p>
                             <div style={{marginTop: 15, height: 160, backgroundImage: `url('${Tourism_Photo}')`, backgroundSize: "cover", display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
-                                <p style={{textShadow: "1px 2px 3px rgba(0,0,0,0.4)", color: "lightblue", fontFamily: "'Prompt', Sans-serif", fontSize: 11}}>
-                                    - Type: {(touristAttraction?.type || "unknown")} -</p>
+                                <a href={(touristAttraction?.url) || "#"} target="_blank" rel="noreferrer"  style={{textDecoration: "none"}}>
+                                    <div style={{border: "1px solid rgba(255,255,255, 0.2)", backgroundColor: "rgba(0,0,0,0.8)", padding: 10}}>
+                                        <p style={{textShadow:  "1px 1px 1px rgba(0,0,0,0.9)", color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif",}}>
+                                            <i style={{marginRight: 5, fontSize: 13}} className="fa fa-map-marker" aria-hidden="true" ></i>    
+                                            {touristAttraction?.name}
+                                        </p>
+                                        <p style={{textShadow: "1px 1px 1px rgba(0,0,0,0.9)", color: "lightblue", fontFamily: "'Prompt', Sans-serif", fontSize: 11, marginLeft: 10}}>
+                                            {(touristAttraction?.type || "")}:
+                                            suggested to visit in/around {(currentHourWeather?.city?.city || "your current city")} for tourism
+                                        </p>
+                                    </div>
+                                </a>
                             </div>
                             <div>
-                                <p style={{color: "orange", fontSize: 12, fontFamily: "'Prompt', Sans-serif", marginTop: 10, marginBottom: 5}}>
-                                    <i style={{marginRight: 5, fontSize: 13}} className="fa fa-map-marker" aria-hidden="true" ></i>    
-                                    {touristAttraction?.name}
-                                </p>
-                                <div style={{borderTop: "1px solid rgba(255,255,255, 0.1)", paddingTop: 5}}>
+                                <div style={{paddingTop: 5}}>
                                     <p style={{color: "white", fontSize: 11, marginBottom: 10}}>
                                         People who have visited rated this place</p>
                                     <div style={{background: "linear-gradient(0.25turn, red, orange, yellow, green)", boxShadow: "1px 2px 3px rgba(0,0,0,0.4)", borderRadius: 50}}>
@@ -613,18 +620,20 @@ const getPlacesPromptMarkup = (place) => {
     return `
         <div>
             <div style="margin-top: 15px; height: 160px; background-image: url('${Tourism_Photo}'); background-size: cover; display: flex; flex-direction: column; justify-content: flex-end;">
-                <p style="text-shadow: 1px 2px 3px rgba(0,0,0,0.4); color: lightblue; font-family: 'Prompt', Sans-serif; font-size: 11px;">
-                    - popular tourism -</p>
+                <a href=${(place?.url) || "#"} target="_blank" rel="noreferrer" style="text-decoration: none;">    
+                    <div style="border: 1px solid rgba(255,255,255, 0.2); background-color: rgba(0,0,0,0.8); padding: 10px;">
+                        <p style="text-shadow: 1px 1px 1px rgba(0,0,0,0.9); color: orange; font-size: 12px; font-family: 'Prompt', Sans-serif;">
+                            <i style="margin-right: 5px; font-size: 13px;" class="fa fa-map-marker" aria-hidden="true" ></i>    
+                            ${place?.name}
+                        </p>
+                        <p style="text-shadow: 1px 1px 1px rgba(0,0,0,0.9); color: lightblue; font-family: 'Prompt', Sans-serif; font-size: 11px; margin-left: 10px;">
+                            ${(place?.city?.city) || "..."}, ${(place?.city?.iso3) || "..."}
+                        </p>
+                    </div>
+                </a>
             </div>
             <div>
-                <p style="color: orange; font-size: 12px; font-family: 'Prompt', Sans-serif; margin-top: 10px; margin-bottom: 5px;">
-                    <i style="margin-right: 5px; font-size: 13px;" class="fa fa-map-marker"></i>    
-                    ${place?.name}
-                </p>
-                <p style="color: white; font-size: 11px; font-family: 'Prompt', Sans-serif; margin-bottom: 5px;">
-                    123 street, Bronx, New York, USA
-                </p>
-                <div style="border-top: 1px solid rgba(255,255,255, 0.1); padding-top: 5px;">
+                <div style="padding-top: 5px;">
                     <p style="color: white; font-size: 11px; margin-bottom: 10px;">
                         People who have visited rated this place</p>
                     <div style="background: linear-gradient(0.25turn, red, orange, yellow, green); box-shadow: 1px 2px 3px rgba(0,0,0,0.4); border-radius: 50px;">

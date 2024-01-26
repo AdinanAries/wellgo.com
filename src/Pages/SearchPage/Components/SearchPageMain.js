@@ -5,6 +5,7 @@ import CONSTANTS from "../../../Constants/Constants";
 import SelectedTicketPane from "./SelectedTicketPane";
 import { fetchFlightOffers } from "../../../services/flightsServices";
 import Weather from "../../../helpers/Weather";
+import Tourism from "../../../helpers/Tourism";
 import { show_prompt_on_Bot_AD_tips_popup } from "../../../components/HPSupport";
 import { getDataSummeries } from "../../../helpers/FlightsFilterHelpers";
 
@@ -79,46 +80,47 @@ const SearchPageMain = (props) => {
 
     const weatherCallback = (weatherData, flightsOffers={isError: true}) => {
         console.log('Weather', weatherData);
-        const PROMPTS=["*", "summaries", "weather", "places"]
+        const PROMPTS=["*", "summaries", "weather", "places"];
         const TO_SHOW=PROMPTS[Math.floor(Math.random() * PROMPTS.length)]
         // Duration of the Prompt
         let duration=150000;
 
         // Showing places bot prompt
-        let place = {name: "Kintampo Water Falls"} // To Do - Get Places.
-        if(place?.name && TO_SHOW==="places"){
-            const PROMPTS = [
-                `Hey, have you visited ${place?.name}?.. I just thought you might be interested if traveling for tourism...`,
-                `Hi, I found ${place?.name}... If interested, of course for tourism, consider visiting the place...`,
-                `I found ${place?.name} popular in the destinaton country... You might be interested if traveling for tourism...`
-            ]
-            let prompt_msg = PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
-            show_prompt_on_Bot_AD_tips_popup(
-                prompt_msg,
-                CONSTANTS.bot.prompt_types.prompt, 
-                duration,
-                {
-                    places: place
+        if(TO_SHOW==="places"){
+            let lon = parseFloat(SEARCH_OBJ?.itinerary?.arrival?.longitude);
+            let lat = parseFloat(SEARCH_OBJ?.itinerary?.arrival?.latitude);
+            Tourism.getTouristAttraction(lon, lat, (touristAttraction) => {
+                console.log("Search Page Attraction", touristAttraction);
+                if(touristAttraction?.error || !touristAttraction?.name){
+                    // Fall back on Summaries
+                    if(flightsOffers?.isError){
+                        // Do nothing for now
+                    }else{
+                        getAndShowBotFlightSummaryPrompt(flightsOffers, duration)
+                    }
+                    return;
                 }
-            );
-            return;
-        }
-
-        if(weatherData?.error || TO_SHOW==="summaries"){
-            // Error handling
-            if(flightsOffers && flightsOffers?.isError){
-                // Do nothing for now
-            }else{
-                let summeries = getDataSummeries(flightsOffers);
-                let prompt_msg = Weather.getWeatherPromptMsgSummeries(flightsOffers);
+                let place=touristAttraction;
+                let prompt_msg = Tourism.getBotPromptMessage(place);
                 show_prompt_on_Bot_AD_tips_popup(
                     prompt_msg,
                     CONSTANTS.bot.prompt_types.prompt, 
                     duration,
                     {
-                        flight_data_summeries: summeries
+                        places: place
                     }
                 );
+            });
+            
+            return;
+        }
+
+        if(weatherData?.error || TO_SHOW==="summaries"){
+            // Error handling
+            if(flightsOffers?.isError){
+                // Do nothing for now
+            }else{
+                getAndShowBotFlightSummaryPrompt(flightsOffers, duration)
             }
             return;
         }
@@ -198,6 +200,20 @@ const SearchPageMain = (props) => {
             );
         }
         
+    }
+
+
+    const getAndShowBotFlightSummaryPrompt = (flightsOffers, duration) => {
+        let summeries = getDataSummeries(flightsOffers);
+        let prompt_msg = Weather.getWeatherPromptMsgSummeries(flightsOffers);
+        show_prompt_on_Bot_AD_tips_popup(
+            prompt_msg,
+            CONSTANTS.bot.prompt_types.prompt, 
+            duration,
+            {
+                flight_data_summeries: summeries
+            }
+        );
     }
 
     return (
