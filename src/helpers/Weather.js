@@ -4,6 +4,9 @@ import CloudsDouble from "../icons/Weather/Cloud-Double.png";
 import CloudSunBehind from "../icons/Weather/Cloud-Sun-Behind.png";
 import SunOnly from "../icons/Weather/Sun-Only.png";
 import FogOnly from "../icons/Weather/Fog-Only.png";
+import DrizzleCloudsSun from "../icons/Weather/Drizzle-Clouds-Sun.png";
+import Thunderstorm from "../icons/Weather/Thunderstorm.png";
+import DrizzleCloud from "../icons/Weather/Drizzle-Cloud.png";
 import { get_short_date_DAYMMMDD } from "./general";
 
 import { fetchWeatherData, fetchWeatherCity } from "../services/weatherServices";
@@ -92,9 +95,18 @@ const Weather = {
             } else if(currentWeather?.weatherCode===0){
                 // clear sky
                 return MoonOnly
-            } else if(currentWeather?.weatherCode===45){
+            } else if(currentWeather?.weatherCode===45 || currentWeather?.weatherCode===48){
                 // fog
                 return FogOnly;
+            } else if(currentWeather?.weatherCode===51
+                || currentWeather?.weatherCode===53
+                || currentWeather?.weatherCode===55
+            ){
+                // Drizzle with Clouds
+                return DrizzleCloud;
+            } else if(currentWeather?.weatherCode===96 || currentWeather?.weatherCode===99) {
+                // all thunder related
+                return Thunderstorm;
             }
             // clear sky default
             return MoonOnly;
@@ -105,9 +117,18 @@ const Weather = {
             } else if(currentWeather?.weatherCode===0){
                 // clear sky
                 return SunOnly;
-            } else if(currentWeather?.weatherCode===45){
+            } else if(currentWeather?.weatherCode===45 || currentWeather?.weatherCode===48){
                 // fog
                 return FogOnly;
+            } else if(currentWeather?.weatherCode===51
+                || currentWeather?.weatherCode===53
+                || currentWeather?.weatherCode===55
+            ){
+                // Drizzle with Clouds
+                return DrizzleCloudsSun;
+            } else if(currentWeather?.weatherCode===96 || currentWeather?.weatherCode===99) {
+                // all thunder related
+                return Thunderstorm;
             }
             // clear sky - default
             return SunOnly;
