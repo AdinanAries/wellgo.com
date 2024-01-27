@@ -8,9 +8,10 @@ import {
     return_passenger_by_id, 
     return_segment_by_id,
 } from "../../../helpers/general";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import refund from "../../../refund.jpg";
 
+let INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
 const CheckoutInfo = (props) => {
 
     const { 
@@ -23,8 +24,8 @@ const CheckoutInfo = (props) => {
         removeAllBookingAncillaries
     } = props;
 
-    console.log("Checkout Infor", flight);
-    console.log("Available Services", adapted_available_services);
+    /*console.log("Checkout Infor", flight);
+    console.log("Available Services", adapted_available_services);*/
 
     const { total_amount, total_currency, 
             slices, owner, conditions, 
@@ -34,8 +35,11 @@ const CheckoutInfo = (props) => {
     const [ includedCheckedBagsTotal, setIncludedCheckedBagsTotal] = useState(0);
     const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
     const [ servicesForPost, setServicesForPost ] = useState([]);
-    
-    const INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
+    const [ includedCB, setIncludedCB ] = useState({});
+
+    useEffect(()=>{
+        setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
+    }, [])
 
     const SEGMENT_LENGTH = slices[0].segments.length;
     const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
@@ -221,21 +225,38 @@ const CheckoutInfo = (props) => {
     const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />);
 
     const addCheckedBag = (eachPrice=0, pass_id="", total_quantity=0, service=null) => {
-        const incremented = includedCheckedBagsNumber+1;
-        if(includedCheckedBagsNumber > total_quantity)
-            return;
 
-        let max_numer = INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY[pass_id]; // This has the quantity for the current passenger
-        if(includedCheckedBagsNumber<max_numer){
-            setIncludedCheckedBagsNumber(incremented);
-            setIncludedCheckedBagsTotal((incremented*eachPrice));
+        const allTotal = includedCheckedBagsNumber+1;
+        if(includedCheckedBagsNumber > total_quantity){
+            return;
+        }
+
+        let curr_qntty = includedCB[service?.id][pass_id].included;
+        const incremented = (curr_qntty+1);
+        let max_numer = includedCB[service?.id][pass_id].quantity; // This has the quantity for the current passenger
+        if(curr_qntty<max_numer){
+
+            includedCB[service?.id][pass_id].included=incremented;
+            setIncludedCB({...includedCB});
+
+            setIncludedCheckedBagsNumber(allTotal);
+            // Setting Total Price For All Passengers Here
+            let allTotalPrice=0;
+            for (let value of Object.values(includedCB)){
+                for (let vvalue of Object.values(value)){
+                    console.log(vvalue);
+                    allTotalPrice+=(vvalue?.included * vvalue?.total_amount)
+                }
+            }
+            setIncludedCheckedBagsTotal(allTotalPrice);
+
         }
         
         // Include object in services
         if(service){
             setServicesForPost(prevState=>{
                 let object = prevState.find(each=>each.id===service.id);
-                if(object && incremented<max_numer){
+                if(object && curr_qntty<max_numer){
                     object.quantity=(incremented);
                     let objIndex = prevState.findIndex(each=>each.id===service.id);
                     prevState[objIndex]=object;
@@ -252,12 +273,28 @@ const CheckoutInfo = (props) => {
         console.log("Selected Services", servicesForPost);
     }
 
-    const removeCheckedBag = (eachPrice=0, service=null) => {
-        const decremented = includedCheckedBagsNumber-1;
-        if(includedCheckedBagsNumber>0){
-            setIncludedCheckedBagsNumber(decremented);
-            setIncludedCheckedBagsTotal((decremented*eachPrice));
+    const removeCheckedBag = (eachPrice=0, pass_id="", service=null) => {
+
+        let curr_qntty = includedCB[service?.id][pass_id].included;
+        const decremented = (curr_qntty-1);
+        const allTotal = includedCheckedBagsNumber-1;
+        if(includedCheckedBagsNumber < 1 || curr_qntty < 1){
+            return;
         }
+
+        includedCB[service?.id][pass_id].included=decremented;
+        setIncludedCB({...includedCB});
+
+        setIncludedCheckedBagsNumber(allTotal);
+        // Setting Total Price For All Passengers Here
+        let allTotalPrice=0;
+        for (let value of Object.values(includedCB)){
+            for (let vvalue of Object.values(value)){
+                console.log(vvalue);
+                allTotalPrice+=(vvalue?.included * vvalue?.total_amount)
+            }
+        }
+        setIncludedCheckedBagsTotal(allTotalPrice);
 
         // Removing object from services
         if(servicesForPost.length>0){
@@ -279,13 +316,14 @@ const CheckoutInfo = (props) => {
         }
         console.log("Selected Services", servicesForPost);
     }
-
+    
     const resetAncillaries = () => {
         resetPriceExtras();
         // Reset all local state
         setIncludedCheckedBagsTotal(0);
         setIncludedCheckedBagsNumber(0);
         setServicesForPost([]);
+        setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
         // Reset actual checkout payload
         removeAllBookingAncillaries();
         global.hide_add_ancillaries_container();
@@ -341,19 +379,30 @@ const CheckoutInfo = (props) => {
                 "id": "ase_0000AcP2qTyZUEqLYsaIQj"
             }
          */
+
+        // Getting and Setting Passengers
         const PASSENGERS = [];
+        INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY[
+            adapted_available_services[i].id
+        ]={};
         for(let p=0; p<adapted_available_services[i].passenger_ids.length; p++){
             let psngr = return_passenger_by_id(flight, adapted_available_services[i].passenger_ids[p]);
-            console.log("Passenger for Checked Bag:", psngr);
             INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY[
+                adapted_available_services[i].id
+            ][
                 adapted_available_services[i].passenger_ids[p]
-            ] = adapted_available_services[i].maximum_quantity;
+            ] = {
+                included: 0,
+                quantity: adapted_available_services[i].maximum_quantity,
+                total_amount: parseFloat(adapted_available_services[i].total_amount),
+            }
             PASSENGERS.push(psngr);
         }
+
+        // Getting and Setting Segments
         const SEGMENTS=[];
         for(let p=0; p<adapted_available_services[i].segment_ids.length; p++){
             let segment = return_segment_by_id(flight, adapted_available_services[i].segment_ids[p]);
-            console.log("Segment for Checked Bag:", segment);
             SEGMENTS.push(segment);
         }
         if(adapted_available_services[i].type==="baggage"){
@@ -361,8 +410,8 @@ const CheckoutInfo = (props) => {
             const CURRENCY_SYMBOL = get_currency_symbol(SERVICE.total_currency);
             const TOTAL_AMOUNT = SERVICE.total_amount;
             const QUANTITY = SERVICE?.maximum_quantity || 0;
+            
             const MAX_WEIGHT_KG = (SERVICE?.metadata && SERVICE?.metadata?.maximum_weight_kg);
-
             BAGGAGES.push(
                 <div style={{padding: 10, marginBotton: 10, cursor: "pointer", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
                     <div style={{paddingBottom: 10, display: "flex"}}>
@@ -415,20 +464,24 @@ const CheckoutInfo = (props) => {
                             <p style={{color: "rgba(0,0,0,0.8)", fontWeight: 1000, fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginBottom: 2}}>
                                 <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "initial"}}>Each price:</span> <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
                                     dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
-                                {(markup(TOTAL_AMOUNT).new_price).toFixed(2)}</p>
+                                {(markup(TOTAL_AMOUNT).new_price).toFixed(0)}</p>
                         </div>
                         <div style={{marginLeft: 10, display: "flex", flexDirection: "column", justifyContent: "flex-end"}}>
                                 <p style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginBottom: 10, textAlign: "right"}}>
-                                    Total: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "initial"}}>Each price:</span> <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
+                                    Total: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontWeight: "bolder"}} 
                                         dangerouslySetInnerHTML={{__html: CURRENCY_SYMBOL}}></span>
-                                    {(markup(includedCheckedBagsTotal).new_price).toFixed(2)}
+                                    {(markup((TOTAL_AMOUNT*(includedCB?.[SERVICE?.id]?.[PASSENGERS[0]?.id].included || 0))).new_price).toFixed(0)}
                                 </p>
                                 <div style={{display: "flex"}}>
-                                    <p onClick={()=>removeCheckedBag(TOTAL_AMOUNT, SERVICE)} style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <p onClick={()=>removeCheckedBag(
+                                        TOTAL_AMOUNT, 
+                                        PASSENGERS[0].id, 
+                                        SERVICE)
+                                    } style={{backgroundColor: "white", fontSize: 20, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         -
                                     </p>
                                     <p style={{fontSize: 14, width: 30, height: 35, borderRadius: "100%", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                        {includedCheckedBagsNumber}
+                                        {(includedCB?.[SERVICE?.id]?.[PASSENGERS[0]?.id].included || 0)}
                                     </p>
                                     <p onClick={()=>addCheckedBag(
                                         TOTAL_AMOUNT, 
