@@ -409,3 +409,27 @@ export const get_duration_d_h_m = (_duration) => {
         d, h, m
     }
 }
+
+export const return_passenger_by_id = (flight, id) => {
+    let passengers = flight.passengers;
+    let psngr = {};
+    for(let p=0; p<passengers.length; p++){
+        if(passengers[p].id===id){
+            psngr = passengers[p];
+        }
+    }
+    return psngr;
+}
+
+export const return_segment_by_id = (flight, id) => {
+    let slices = flight.slices;
+    let segment = {};
+    for(let i=0; i<slices.length; i++){
+        for(let p=0; p<slices[i].segments.length; p++){
+            if(slices[i].segments[p].id===id){
+                segment = slices[i].segments[p];
+            }
+        }
+    }
+    return segment;
+}

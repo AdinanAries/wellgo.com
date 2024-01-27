@@ -1,7 +1,13 @@
 import PriceSummary from "./PriceSummary";
 import CheckoutInfoSliceCard from "./CheckoutInfoSliceCard";
 import { markup } from "../../../helpers/Prices";
-import { get_currency_symbol, convert24HTimeToAMPM, get_short_date_MMMDD } from "../../../helpers/general";
+import { 
+    get_currency_symbol, 
+    convert24HTimeToAMPM, 
+    get_short_date_MMMDD, 
+    return_passenger_by_id, 
+    return_segment_by_id,
+} from "../../../helpers/general";
 import { useState } from "react";
 import refund from "../../../refund.jpg";
 
@@ -29,6 +35,8 @@ const CheckoutInfo = (props) => {
     const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
     const [ servicesForPost, setServicesForPost ] = useState([]);
     
+    const INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
+
     const SEGMENT_LENGTH = slices[0].segments.length;
     const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
     const TRIP_ENDS = convert24HTimeToAMPM(slices[0].segments[(SEGMENT_LENGTH - 1)].arriving_at.split("T")[1]);
@@ -212,8 +220,12 @@ const CheckoutInfo = (props) => {
 
     const SLICES = slices.map((each, i)=><CheckoutInfoSliceCard index={i} slice={each} />);
 
-    const addCheckedBag = (eachPrice=0, max_numer=0, service=null) => {
+    const addCheckedBag = (eachPrice=0, pass_id="", total_quantity=0, service=null) => {
         const incremented = includedCheckedBagsNumber+1;
+        if(includedCheckedBagsNumber > total_quantity)
+            return;
+
+        let max_numer = INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY[pass_id]; // This has the quantity for the current passenger
         if(includedCheckedBagsNumber<max_numer){
             setIncludedCheckedBagsNumber(incremented);
             setIncludedCheckedBagsTotal((incremented*eachPrice));
@@ -301,6 +313,11 @@ const CheckoutInfo = (props) => {
     }
 
     const BAGGAGES=[];
+    let INCLUDE_CHECKED_BAGS_TOTAL_QUANTITY=0;
+    for(let i=0; i<adapted_available_services.length; i++){
+        if(adapted_available_services[i]?.type==="baggage")
+            INCLUDE_CHECKED_BAGS_TOTAL_QUANTITY+=adapted_available_services[i]?.maximum_quantity;
+    }
     for(let i=0; i<adapted_available_services.length; i++){
         /**
          * {
@@ -324,14 +341,65 @@ const CheckoutInfo = (props) => {
                 "id": "ase_0000AcP2qTyZUEqLYsaIQj"
             }
          */
+        const PASSENGERS = [];
+        for(let p=0; p<adapted_available_services[i].passenger_ids.length; p++){
+            let psngr = return_passenger_by_id(flight, adapted_available_services[i].passenger_ids[p]);
+            console.log("Passenger for Checked Bag:", psngr);
+            INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY[
+                adapted_available_services[i].passenger_ids[p]
+            ] = adapted_available_services[i].maximum_quantity;
+            PASSENGERS.push(psngr);
+        }
+        const SEGMENTS=[];
+        for(let p=0; p<adapted_available_services[i].segment_ids.length; p++){
+            let segment = return_segment_by_id(flight, adapted_available_services[i].segment_ids[p]);
+            console.log("Segment for Checked Bag:", segment);
+            SEGMENTS.push(segment);
+        }
         if(adapted_available_services[i].type==="baggage"){
             const SERVICE = adapted_available_services[i];
             const CURRENCY_SYMBOL = get_currency_symbol(SERVICE.total_currency);
             const TOTAL_AMOUNT = SERVICE.total_amount;
             const QUANTITY = SERVICE?.maximum_quantity || 0;
             const MAX_WEIGHT_KG = (SERVICE?.metadata && SERVICE?.metadata?.maximum_weight_kg);
+
             BAGGAGES.push(
                 <div style={{padding: 10, marginBotton: 10, cursor: "pointer", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
+                    <div style={{paddingBottom: 10, display: "flex"}}>
+                        {
+                            SEGMENTS.map( (each, index) => (
+                                <>
+                                    {
+                                        (index > 0) && <p style={{margin: "0 10px", fontSize: 12, color: "rgba(0,0,0,0.5)"}}>
+                                        &</p>
+
+                                    }
+                                    <p key={each.id} style={{fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                        {each.origin.iata_city_code}
+                                        <i style={{margin: "0 5px", fontSize: 10, color: "rgba(0,0,0,0.5)"}}
+                                            className="fa-solid fa-arrow-right"></i>
+                                        {each.destination.iata_city_code}
+                                    </p>
+                                </>)
+                            )
+                        }
+                    </div>
+                    <div style={{paddingBottom: 10, display: "flex"}}>
+                        {
+                            PASSENGERS.map( (each, index) => (
+                                <>
+                                    {
+                                        (index > 0) && <p style={{margin: "0 10px", fontSize: 12, color: "rgba(0,0,0,0.5)"}}>
+                                        &</p>
+
+                                    }
+                                    <p key={each.id} style={{fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                        Passenger ID: {(each.id)}
+                                    </p>
+                                </>)
+                            )
+                        }
+                    </div>
                     <div style={{display: "flex", justifyContent: "space-between"}}>
                         <div>
                             <p style={{color: "rgba(0,0,0,0.8)", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
@@ -362,7 +430,12 @@ const CheckoutInfo = (props) => {
                                     <p style={{fontSize: 14, width: 30, height: 35, borderRadius: "100%", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         {includedCheckedBagsNumber}
                                     </p>
-                                    <p onClick={()=>addCheckedBag(TOTAL_AMOUNT, QUANTITY, SERVICE)} style={{backgroundColor: "white", fontSize: 16, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <p onClick={()=>addCheckedBag(
+                                        TOTAL_AMOUNT, 
+                                        PASSENGERS[0].id,
+                                        INCLUDE_CHECKED_BAGS_TOTAL_QUANTITY,
+                                        SERVICE
+                                    )} style={{backgroundColor: "white", fontSize: 16, width: 35, height: 35, borderRadius: "100%", border: "1px solid rgba(0,0,0,0.1)", cursor: "pointer", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                         +
                                     </p>
                                 </div>
