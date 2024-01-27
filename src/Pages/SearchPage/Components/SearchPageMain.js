@@ -69,12 +69,16 @@ const SearchPageMain = (props) => {
     const runBotPrompt = (flights=null) => {
         let lon = parseFloat(SEARCH_OBJ?.itinerary?.arrival?.longitude);
         let lat = parseFloat(SEARCH_OBJ?.itinerary?.arrival?.latitude);
-        let iso_date = (SEARCH_OBJ?.itinerary?.arrival?.date) ? SEARCH_OBJ?.itinerary?.arrival?.date : SEARCH_OBJ?.itinerary?.departure?.date;
+        let iso_date;
         let flightsOffers;
-        if(!flights)
+        if(!flights){
             flightsOffers={isError: true}
-        else
+            iso_date = SEARCH_OBJ?.itinerary?.departure?.date;
+        }
+        else{
             flightsOffers=flights;
+            iso_date=flightsOffers[0]?.slices[0]?.segments[0]?.arriving_at?.split("T")[0];
+        }
         Weather.getWeather(lon, lat, iso_date, iso_date, weatherCallback, flightsOffers);
     }
 
@@ -124,7 +128,13 @@ const SearchPageMain = (props) => {
             }
             return;
         }
-        let current_hour = new Date().toString().split(" ")[4].split(":")[0];
+        let current_hour=0;
+        if(flightsOffers?.isError){
+            current_hour = new Date().toString().split(" ")[4].split(":")[0];
+        }else{
+            current_hour=flightsOffers[0]?.slices[0]?.segments[0]?.arriving_at?.split("T")[1]?.split(":")[0];
+        }
+        
         let current_hour_weather = {};
         let i = parseInt(current_hour);
         current_hour_weather.time = weatherData.hourly.time[i]; //.toISOString();

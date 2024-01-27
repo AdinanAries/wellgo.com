@@ -36,7 +36,9 @@ export default function HPSupportBtn(){
         if((!page || (CONSTANTS.site_pages.landing===page)) && TO_SHOW==="tourist-attraction"){ // Home page
             Tourism.getTouristAttractionDefaultLocation(touristAttractionCallback);
         }
-        let today_iso_date = new Date().toISOString().split("T")[0];
+        let date = new Date();
+        date.setDate(date.getDate() - 1); // Hack because javascript is stupid...
+        let today_iso_date = new Date(date).toISOString().split("T")[0];
         Weather.getWeatherDetaultLocation(today_iso_date, today_iso_date, weatherCallback); 
 
     }, []);
@@ -190,7 +192,7 @@ export default function HPSupportBtn(){
                         { ((!currentHourWeather?.isError && TO_SHOW==="weather")) && <>
                             <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
                                 <p style={{position: "absolute", top: 50, left: 20, fontSize: 30, color: "orange", fontFamily: "'Prompt', Sans-serif"}}>
-                                    {Math.round(currentHourWeather?.apparentTemperature)}°F
+                                    {Math.round(currentHourWeather?.temperature2m)}°F
                                 </p>
                                 <div style={{display: "flex"}}>
                                     <p style={{color: "orange", marginRight: 5, fontSize: 11, fontFamily: "'Prompt', Sans-serif", marginTop: 10}}>
@@ -463,7 +465,7 @@ const getBotWeatherPromptMarkup = (currentHourWeather) => {
     return `
         <div style="position: relative; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 10px;">
             <p style="position: absolute; top: 40px; left: 15px; font-size: 25px; color: orange; font-family: 'Prompt', Sans-serif;">
-                ${Math.round(currentHourWeather?.apparentTemperature)}°F
+                ${Math.round(currentHourWeather?.temperature2m)}°F
             </p>
             <div style="display: flex;">
                 <p style="color: orange; margin-right: 5px; font-size: 11px; font-family: 'Prompt', Sans-serif; margin-top: 10px;">
