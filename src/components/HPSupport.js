@@ -266,7 +266,7 @@ export default function HPSupportBtn(){
                                     &#8226;
                                 </span>
                                 <span style={{fontSize: 11, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                                    {Math.round(currentHourWeather?.apparentTemperature)} °F</span>
+                                    {Math.round(currentHourWeather?.temperature2m)} °F</span>
                                 <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "orange", fontSize: 11}}>
                                     &#8226;
                                 </span>
