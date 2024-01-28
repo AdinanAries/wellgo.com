@@ -84,7 +84,9 @@ const HistoryPayloadItem = (props) => {
                 <span style={{color: "brown", textDecoration: "underline", fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginLeft: 10}}>
                     show route</span>
             </span>
-            <SelectedTicketItinSegments element_id={(index+"_completed_order_details_itinerary_details")} segments={slice.segments}/>
+            <div style={{paddingLeft: 20, paddingTop: 5, paddingBottom: 5, backgroundColor: "rgba(0,0,0,0.1)"}}>
+                <SelectedTicketItinSegments element_id={(index+"_completed_order_details_itinerary_details")} segments={slice.segments}/>
+            </div>
         </div>);
 
         slice.segments.forEach(segment=> {
@@ -147,7 +149,7 @@ const HistoryPayloadItem = (props) => {
                                 </span>, Aircraft: {segment.aircraft.name}, Checked bags: {total_checked_baggages}, Carry-on bags: {total_carry_on_baggages}
                             </p>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, color: "rgba(0,0,0,0.7)"}}>
-                                Amenities: wifi, power | Seats: {seats}
+                                Seats: {seats}
                             </p>
                         </div>
                     </div>
@@ -267,25 +269,27 @@ const HistoryPayloadItem = (props) => {
     }
 
     let overallTotal = parseFloat(completedOrderDetails.total_amount);
-    /*const { extras } = prices;
+    const { services } = completedOrderDetails;
     const EXTRAS_MARKUP = [];
-    extras.forEach(each=>{
-        overallTotal=(overallTotal+each.total);
+    services.forEach(each=>{
+        //overallTotal=(overallTotal+each.total);
         EXTRAS_MARKUP.push(
             <div>
                 <p style={{fontSize: 13, letterSpacing: 1, color: "rgba(0,0,0,0.9)"}}>
-                    {each.name} ({each.quantity}):
+                    {each.type} ({each.quantity}):
                     <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", marginLeft: 5}} 
-                            dangerouslySetInnerHTML={{__html: get_currency_symbol(prices.base_currency)}}></span>
-                    {(markup(each.total).new_price).toFixed(2)}
+                            dangerouslySetInnerHTML={{__html: get_currency_symbol(each.total_currency)}}></span>
+                    {(markup(each.total_amount).new_price).toFixed(2)}
                 </p>
             </div>
         );
-    });*/
+    });
+
+    // Purcha
 
     return (
         <div style={{position: "relative"}}>
-            <div style={{padding: "20px 0"}}>
+            <div style={{paddingBottom: 10}}>
                 <div style={{padding: "0 10px"}}>
                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
                         <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-ticket"></i>
@@ -293,15 +297,6 @@ const HistoryPayloadItem = (props) => {
                         <span style={{fontFamily: "'Prompt', Sans-serif", marginLeft: 5, color: "rgba(0,0,0,0.7)", fontSize: 13}}>
                             {completedOrderDetails.booking_reference}
                         </span>
-                    </p>
-                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                        <i style={{color: "rgba(0,0,0,0.5)", marginRight: 10}}
-                            className="fa-solid fa-temperature-high"></i>
-                        New York (Thu Mar 23) -
-                        <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                            56°</span>
-                        <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                            | heavy rain</span>
                     </p>
                 </div>
                 {
@@ -389,37 +384,11 @@ const HistoryPayloadItem = (props) => {
                                         Tax Amount: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
                                             dangerouslySetInnerHTML={{__html: get_currency_symbol(completedOrderDetails.tax_currency)}}></span>
                                             {(markup(completedOrderDetails.tax_amount).new_price).toFixed(2)}</p>
-                                    {/*EXTRAS_MARKUP.map(each=>each)*/}
+                                    {EXTRAS_MARKUP.map(each=>each)}
                                     <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, fontWeight: "bolder"}}>
                                         Total Paid: <span style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)"}} 
                                             dangerouslySetInnerHTML={{__html: get_currency_symbol(completedOrderDetails.total_currency)}}></span>
                                         {(markup(overallTotal).new_price).toFixed(2)}</p>
-                                </div>
-                                <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 25}}>
-                                    Weather</h1>
-                                <div style={{display: "flex", paddingBottom: 10, marginRight: 25}}>
-                                    <div style={{fontFamily: "'Prompt', Sans-serif", marginRight: 10}}>
-                                        <i style={{color: "rgba(0,0,0,0.5)"}}
-                                                className="fa-solid fa-temperature-high"></i>
-                                    </div>
-                                    <div>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                            New York (Thu Mar 23) -
-                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                                                56°</span>
-                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                                | heavy rain</span>
-                                            | please hold an umbrella
-                                        </p>
-                                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13}}>
-                                            Accra (Thu Mar 23) -
-                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif", fontWeight: "bolder"}}>
-                                                78°</span>
-                                            <span style={{margin: "0 5px", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
-                                                | sunny</span>
-                                            | please avoid heavy coats
-                                        </p>
-                                    </div>
                                 </div>
                                 <h1 style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, marginBottom: 10, marginTop: 25}}>
                                     Important Notices</h1>
