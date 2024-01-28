@@ -187,7 +187,7 @@ export default function HPSupportBtn(){
                         <p>
                             <i className="fa fa-lightbulb-o"></i>
                             {BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " "}
-                            {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)} &#127866;
+                            {getBotResponse(CONSTANTS.bot.responses.introduction_greetings)}
                         </p>
                         { ((!currentHourWeather?.isError && TO_SHOW==="weather")) && <>
                             <div style={{position: "relative", borderTop: "1px solid rgba(255,255,255,0.1)", marginTop: 10}}>
@@ -358,7 +358,7 @@ export function show_prompt_on_Bot_AD_tips_popup(
         if(type===CONSTANTS.bot.prompt_types.prompt)
             document.getElementById("main_chatbot_popup_tip_msg").innerHTML=`<p>
                 <i class="fa fa-lightbulb-o"></i>
-                ${msg} &#127866;
+                ${msg}
             </p>`;
         else if(type===CONSTANTS.bot.prompt_types.warn){
             let message = BotAuxMsg.regular[Math.floor(Math.random() * BotAuxMsg.regular.length)] + " " +

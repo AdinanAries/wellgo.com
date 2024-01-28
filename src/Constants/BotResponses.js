@@ -6,12 +6,12 @@ export default getBotResponse;
 
 const BotResponses = {
     "introduction greetings": [
-        `I'm AD, I'll be assisting you around here... cheers...`,
-        `AD here, I'm your AI assitant. Feel free to reach out anytime. Cheers...`,
+        `I'm AD, I'll be assisting you around here...`, // &#127866;
+        `AD here, I'm your AI assitant. Feel free to reach out anytime.`, // &#129309;
         `Thanks for choosing us. I'm AD, your assistant here... 
-        I was just checking the flight prices, there's been a drop. Cheers..., 
-        I encourage you to book your flights ASAP. Cheers...`,
-        `Cheers... call me AD, I'm your AI assistant. Cheers...`
+        I was just checking the flight prices, there's been a drop. , 
+        I encourage you to book your flights ASAP.`, // &#128077;
+        `Cheers... call me AD, I'm your AI assistant...` // &#128578;
     ],
     "no hotel booking": [
         "We can't book hotels for now",

@@ -2,21 +2,16 @@ const BotAuxMsg = {
     regular: [
         "Hey,",
         "Hi,",
-        "Sup,",
-        "Bro..",
-        "Umm..",
-        "...",
-        "Hey!"
-
-
+        "Hi...",
+        "Hey..",
     ],
     bad_mood: [
-        "unfortunately,",
-        "So.. Apologies,",
+        "Unfortunately,",
+        "So.. Apologies..",
         "Oops!",
-        "apologies..",
-        "too bad..",
-        "please.."
+        "Apologies..",
+        "Excuse me...",
+        "Please.."
     ],
     damage_control: [
         "My bad!",
