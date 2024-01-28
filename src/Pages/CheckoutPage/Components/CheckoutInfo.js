@@ -502,7 +502,7 @@ const CheckoutInfo = (props) => {
                     <i style={{color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
                 </span>
                 <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14}}>
-                    Checked bags inclusion not available at this time
+                    No purchasable checked bags for this flight
                 </span>
             </div>
         );
