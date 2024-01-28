@@ -65,7 +65,7 @@ const postFlightBookingLog = async (payload, url, user_token="") => {
     }
 }
 
-export const updateFlightBookingLogId = async (booking_id, path=`\\api\\bookings\\set-user-id\\`) => {
+export const updateFlightBookingLogId = async (booking_id, USER_TOKEN, path=`\\api\\bookings\\set-user-id\\`) => {
     try{
         return await fetch(API_URL+path+`${booking_id}`, {
             method: "PUT",

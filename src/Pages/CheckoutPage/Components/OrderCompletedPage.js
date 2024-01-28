@@ -124,10 +124,8 @@ const OrderCompletedPage = (props) => {
         let res = await loginPost(formData);
         if(res.token){
             localStorage.setItem("user_token", res.token);
-            // To Do: Set user ID for the booking
-            // Will be removed after 
             window.setAwaitDoRefresh();
-            await updateFlightBookingLogId(bookingID);
+            await updateFlightBookingLogId(bookingID, res.token);
             LogMeIn();
             setIsLoggedIn(true);
             setShowBookingDetails(true);
