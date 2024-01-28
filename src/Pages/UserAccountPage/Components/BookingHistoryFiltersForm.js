@@ -85,7 +85,7 @@ const BookingHistoryFiltersForm = (props) => {
                                 <option value="economy">Economy</option>
                                 <option value="premium">Premium</option>
                                 <option value="business">Business</option>
-                                <option value="first_class">First</option>
+                                <option value="first">First</option>
                             </select>
                             <p style={{fontSize: 13, letterSpacing: 1, color: "rgba(0,0,0,0.7)", marginTop: 15, fontFamily: "'Prompt', sans-serif"}}>
                                 Trip type</p>
