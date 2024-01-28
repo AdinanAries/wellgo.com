@@ -324,13 +324,21 @@ function SearchForm( props ){
 
 let sp_switch_btn_switched = false
 function sp_switch_input_rotate_func(){
+
+    let INITIAL_ROTATE=0;
+    let FINAL_ROTATE=360;
+    if(global.$(window).width()<=CONSTANTS.viewport_threshold){
+        INITIAL_ROTATE=90;
+        FINAL_ROTATE=270;
+    }
+    
     if(!sp_switch_btn_switched){
         if(document.getElementById("sp_main_switch_inputs_btn"))
-            document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate(360deg)";
+            document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate("+FINAL_ROTATE+"deg)";
         sp_switch_btn_switched = true;
     }else{
         if(document.getElementById("sp_main_switch_inputs_btn"))
-            document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate(0deg)";
+            document.getElementById("sp_main_switch_inputs_btn").style.transform = "rotate("+INITIAL_ROTATE+"deg)";
         sp_switch_btn_switched = false;
     }
     
