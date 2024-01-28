@@ -562,38 +562,38 @@ const CheckoutInfo = (props) => {
                         <i style={{marginRight: 10, color: "orangered"}} className="fa fa-times"></i>Close
                     </div>
                     <div id="seat_ancillary_settings_container" className="each_ancillary_setting_container">
-                        <p style={{textAlign: "center", fontSize: 15, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                            Select Your Preferred Seat
+                        <p style={{fontSize: 14, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
+                            Seat Choice:
                         </p>
                         <div style={{padding: "10px 0"}}>
-                            <div style={{padding: 10, border: "1px solid rgba(0,0,0,0.1)", display: "flex", backgroundColor: "rgba(255,0,0,0.1)", justifyContent: "center"}}>
+                            <div style={{padding: 10, margin: "10px 0", border: "1px solid rgba(0,0,0,0.1)", display: "flex", backgroundColor: "rgba(255,0,0,0.1)", justifyContent: "center"}}>
                                 <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14, marginRight: 10}}>
                                     <i style={{color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
                                 </span>
                                 <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14}}>
-                                    Seat selection not available at this time
+                                    Seat choice not available at this time
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div id="meal_ancillary_settings_container" className="each_ancillary_setting_container">
-                        <p style={{textAlign: "center", fontSize: 15, letterSpacing: 1, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                            Add Meal to Your Trip
+                        <p style={{fontSize: 14, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
+                            Flight Meals:
                         </p>
                         <div style={{padding: "10px 0"}}>
-                            <div style={{padding: 10, border: "1px solid rgba(0,0,0,0.1)", display: "flex", backgroundColor: "rgba(255,0,0,0.1)", justifyContent: "center"}}>
+                            <div style={{padding: 10, margin: "10px 0", border: "1px solid rgba(0,0,0,0.1)", display: "flex", backgroundColor: "rgba(255,0,0,0.1)", justifyContent: "center"}}>
                                 <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14, marginRight: 10}}>
                                     <i style={{color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
                                 </span>
                                 <span style={{fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)", fontSize: 14}}>
-                                    Meals inclusion not available at this time
+                                    Meals not available at this time
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div id="luggage_ancillary_settings_container" className="each_ancillary_setting_container">
                         <p style={{fontSize: 14, letterSpacing: 1, fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
-                            Include Bags:
+                            Checked Bags:
                         </p>
                         <div style={{padding: "10px 0"}}>
                             {BAGGAGES.map(each=>each)}
