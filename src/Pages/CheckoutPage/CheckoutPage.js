@@ -20,6 +20,7 @@ import PassengerImg4 from "../../explore_destination_img8.jpg";
 import PassengerImg5 from "../../explore_destination_img3.jpg";
 import passengerImg6 from "../../explore_destination_img5.jpg";
 
+let INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
 export default function CheckoutPage(props){
 
     const { payload, cancel_checkout, LogMeIn } = props;
@@ -40,6 +41,17 @@ export default function CheckoutPage(props){
         data: FLIGHT_DATA_ADAPTER.prepareCheckout(payload)
     });
     const [ stage, setStage ] = useState({percentage: 0, step: "", message: ""});
+
+    // State for Including Checked Bags
+    const [ includedCheckedBagsTotal, setIncludedCheckedBagsTotal] = useState(0);
+    const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
+    const [ servicesForPost, setServicesForPost ] = useState([]);
+    const [ includedCB, setIncludedCB ] = useState({});
+
+    useEffect(()=>{
+        setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
+    }, [])
+
     // code: const TOTAL_PRICE=checkoutPayload.data.payments[0].amount;
     useEffect(()=>{
         calcOverall_Total();
@@ -141,6 +153,7 @@ export default function CheckoutPage(props){
     }
 
     const showPNRPage = () => {
+        saveAncillaries();
         setActivePage(CONSTANTS.checkout_pages.pnr);
     }
 
@@ -307,6 +320,22 @@ export default function CheckoutPage(props){
         SET_PRICES({...PRICES});
     }
 
+    const saveAncillaries = () => {
+        resetPriceExtras();
+        // Including ancillary services in prices
+        setTimeout(()=>{
+            if(includedCheckedBagsNumber>0){
+                addServiceToPrices(
+                    "Checked bags",
+                    includedCheckedBagsNumber,
+                    includedCheckedBagsTotal
+                );
+                includeBookingAncillaries(servicesForPost)
+            }
+        }, 5);
+        
+    }
+
     const includeBookingAncillaries = (_services=[]) => {
         calcOverall_Total();
         const data_with_services_included = FLIGHT_DATA_ADAPTER.addServicesToCheckout(
@@ -446,6 +475,16 @@ export default function CheckoutPage(props){
                                     includeBookingAncillaries={includeBookingAncillaries}
                                     removeAllBookingAncillaries={removeAllBookingAncillaries}
                                     adapted_available_services={AVAILABLE_SERVICES}
+                                    includedCheckedBagsTotal={includedCheckedBagsTotal}
+                                    setIncludedCheckedBagsTotal={setIncludedCheckedBagsTotal}
+                                    includedCheckedBagsNumber={includedCheckedBagsNumber}
+                                    setIncludedCheckedBagsNumber={setIncludedCheckedBagsNumber}
+                                    servicesForPost={servicesForPost}
+                                    setServicesForPost={setServicesForPost}
+                                    includedCB={includedCB}
+                                    setIncludedCB={setIncludedCB}
+                                    saveAncillaries={saveAncillaries}
+                                    INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY={INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY}
                                 /> : ""
                         }
                         {

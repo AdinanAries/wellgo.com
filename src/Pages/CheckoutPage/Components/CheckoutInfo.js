@@ -11,7 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import refund from "../../../refund.jpg";
 
-let INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
 const CheckoutInfo = (props) => {
 
     const { 
@@ -21,7 +20,17 @@ const CheckoutInfo = (props) => {
         addServiceToPrices, 
         resetPriceExtras, 
         includeBookingAncillaries,
-        removeAllBookingAncillaries
+        removeAllBookingAncillaries,
+        includedCheckedBagsTotal,
+        setIncludedCheckedBagsTotal,
+        includedCheckedBagsNumber, 
+        setIncludedCheckedBagsNumber,
+        servicesForPost, 
+        setServicesForPost,
+        includedCB, 
+        setIncludedCB,
+        saveAncillaries,
+        INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY,
     } = props;
 
     /*console.log("Checkout Infor", flight);
@@ -32,14 +41,6 @@ const CheckoutInfo = (props) => {
             available_services, passengers 
     } = flight;
 
-    const [ includedCheckedBagsTotal, setIncludedCheckedBagsTotal] = useState(0);
-    const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
-    const [ servicesForPost, setServicesForPost ] = useState([]);
-    const [ includedCB, setIncludedCB ] = useState({});
-
-    useEffect(()=>{
-        setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
-    }, [])
 
     const SEGMENT_LENGTH = slices[0].segments.length;
     const TRIP_START = convert24HTimeToAMPM(slices[0].segments[0].departing_at.split("T")[1]);
@@ -329,21 +330,6 @@ const CheckoutInfo = (props) => {
         global.hide_add_ancillaries_container();
     }
 
-    const saveAncillaries = () => {
-        resetPriceExtras();
-        // Including ancillary services in prices
-        setTimeout(()=>{
-            if(includedCheckedBagsNumber>0){
-                addServiceToPrices(
-                    "Checked bags",
-                    includedCheckedBagsNumber,
-                    includedCheckedBagsTotal
-                );
-                includeBookingAncillaries(servicesForPost)
-            }
-        }, 5);
-        
-    }
 
     const saveAncillariesOnclick = () => {
         saveAncillaries();
@@ -356,6 +342,8 @@ const CheckoutInfo = (props) => {
         if(adapted_available_services[i]?.type==="baggage")
             INCLUDE_CHECKED_BAGS_TOTAL_QUANTITY+=adapted_available_services[i]?.maximum_quantity;
     }
+    const TEMP_PSNGR_NAMES={};
+    let psngr_no=0;
     for(let i=0; i<adapted_available_services.length; i++){
         /**
          * {
@@ -396,6 +384,8 @@ const CheckoutInfo = (props) => {
                 quantity: adapted_available_services[i].maximum_quantity,
                 total_amount: parseFloat(adapted_available_services[i].total_amount),
             }
+            if(!TEMP_PSNGR_NAMES[adapted_available_services[i].passenger_ids[p]])
+                TEMP_PSNGR_NAMES[adapted_available_services[i].passenger_ids[p]]=`Passenger ${(++psngr_no)}`
             PASSENGERS.push(psngr);
         }
 
@@ -414,16 +404,19 @@ const CheckoutInfo = (props) => {
             const MAX_WEIGHT_KG = (SERVICE?.metadata && SERVICE?.metadata?.maximum_weight_kg);
             BAGGAGES.push(
                 <div style={{padding: 10, marginBotton: 10, cursor: "pointer", borderBottom: "1px solid rgba(0,0,0,0.1)"}}>
-                    <div style={{paddingBottom: 10, display: "flex"}}>
+                    <div style={{paddingBottom: 1, display: "flex"}}>
+                        <p style={{marginRight: 5, color: "red", fontSize: 10}}>
+                            FLIGHT(S):
+                        </p>
                         {
                             SEGMENTS.map( (each, index) => (
                                 <>
                                     {
-                                        (index > 0) && <p style={{margin: "0 10px", fontSize: 12, color: "rgba(0,0,0,0.5)"}}>
+                                        (index > 0) && <p style={{margin: "0 10px", fontSize: 12, color: "red"}}>
                                         &</p>
 
                                     }
-                                    <p key={each.id} style={{fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
+                                    <p key={each.id} style={{fontSize: 10, fontFamily: "'Prompt', Sans-serif", color: "rgb(201, 0, 176)"}}>
                                         {each.origin.iata_city_code}
                                         <i style={{margin: "0 5px", fontSize: 10, color: "rgba(0,0,0,0.5)"}}
                                             className="fa-solid fa-arrow-right"></i>
@@ -434,16 +427,19 @@ const CheckoutInfo = (props) => {
                         }
                     </div>
                     <div style={{paddingBottom: 10, display: "flex"}}>
+                        <p style={{marginRight: 5, color: "red", fontSize: 10}}>
+                            FOR:
+                        </p>
                         {
                             PASSENGERS.map( (each, index) => (
                                 <>
                                     {
-                                        (index > 0) && <p style={{margin: "0 10px", fontSize: 12, color: "rgba(0,0,0,0.5)"}}>
+                                        (index > 0) && <p style={{margin: "0 10px", fontSize: 12, color: "red"}}>
                                         &</p>
 
                                     }
-                                    <p key={each.id} style={{fontSize: 10, fontFamily: "'Prompt', Sans-serif"}}>
-                                        Passenger ID: {(each.id)}
+                                    <p key={each.id} style={{fontSize: 10, fontFamily: "'Prompt', Sans-serif", color: "rgb(201, 0, 176)"}}>
+                                        {TEMP_PSNGR_NAMES[(each.id)]}
                                     </p>
                                 </>)
                             )
