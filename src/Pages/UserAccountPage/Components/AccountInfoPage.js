@@ -102,7 +102,13 @@ const AccountInfoPage = (props) => {
                             <i style={{marginRight: 5}} className="fa fa-pencil"></i>
                             edit profile
                         </p>
-                        <p onClick={()=>{logoutOnclick();document.getElementById("profile_view_more_options_drop_down").style.display="none"}} style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", marginTop: 10, backgroundColor: "crimson", fontSize: 13, padding: "10px 20px", color: "white", cursor: "pointer"}}>
+                        <p onClick={()=>{
+                            logoutOnclick();
+                            setTimeout(()=>{
+                                window.location.reload();
+                            }, 100);
+                             document.getElementById("profile_view_more_options_drop_down").style.display="none"
+                        }} style={{textAling: "center", fontFamily: "'Prompt', Sans-serif", marginTop: 10, backgroundColor: "crimson", fontSize: 13, padding: "10px 20px", color: "white", cursor: "pointer"}}>
                             <i style={{marginRight: 5}} className="fa fa-sign-out"></i>
                             logout
                         </p>

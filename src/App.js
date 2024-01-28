@@ -108,6 +108,7 @@ function App() {
   const LogMeOut = () => {
     setIsLoggedIn(false);
     localStorage.setItem(CONSTANTS.local_storage.logged_in_usr, false);
+    localStorage.removeItem("user_token");
   }
 
   return (
