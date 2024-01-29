@@ -1,7 +1,21 @@
 import PriceSummary from "./PriceSummary";
 import FormErrorCard from "../../../components/FormErrorCard";
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import CheckoutForm from "./CheckoutForm";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe('pk_test_51OdjZ3An0YMgH2TtyCpkCBN4vDrMuQlwvmFSNKqBl9gJY996OXSpZ9QLz5dBGHLYLsa7QVvwY51I0DcLHErLxW7y00vjEWv9Lc');
+
 
 const PaymentPage = (props) => {
+
+    const options = {
+        // passing the client secret obtained from the server
+        clientSecret: '{{CLIENT_SECRET}}',
+      };
+
     const { 
         payments, 
         prices, 
@@ -19,6 +33,9 @@ const PaymentPage = (props) => {
                             <i style={{marginRight: 10}} className="fa-solid fa-credit-card"></i>
                             Payment Method
                         </p>
+                        <Elements stripe={stripePromise} options={options}>
+                            <CheckoutForm />
+                        </Elements>
                         <div style={{padding: 10, marginTop: 10, minHeight: 100, background: "rgba(0,0,0,0.1)"}}>
                             <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
                                 This app is still in test mode, you may process without adding card details...
