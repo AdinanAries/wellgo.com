@@ -20,12 +20,10 @@ import PassengerImg4 from "../../explore_destination_img8.jpg";
 import PassengerImg5 from "../../explore_destination_img3.jpg";
 import passengerImg6 from "../../explore_destination_img5.jpg";
 
-import {useStripe, useElements} from '@stripe/react-stripe-js';
-
 let INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
 export default function CheckoutPage(props){
 
-    const { payload, cancel_checkout, LogMeIn, stripeOptions } = props;
+    const { payload, cancel_checkout, LogMeIn } = props;
 
     const [ PRICES, SET_PRICES ] = useState(FLIGHT_DATA_ADAPTER.adaptPriceProps(payload));
     const [ overallTotal, setOverallTotal ] = useState(0);
@@ -49,8 +47,6 @@ export default function CheckoutPage(props){
     const [ includedCheckedBagsNumber, setIncludedCheckedBagsNumber ] = useState(0);
     const [ servicesForPost, setServicesForPost ] = useState([]);
     const [ includedCB, setIncludedCB ] = useState({});
-    const stripe = useStripe();
-    const elements = useElements();
 
     useEffect(()=>{
         setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
@@ -124,21 +120,6 @@ export default function CheckoutPage(props){
             const intvl = setInterval(()=>{
                 i+=10;
                 setStage({percentage: i, step: "Log", message: "Logging your booking"});
-                if(i===90){
-                    endCheckoutProcessing();
-                    clearInterval(intvl)
-                    resolve(true);
-                }
-            }, PROCESSOR_INTERVAL);
-        });
-    }
-
-    const orderCompletionCleanup = () => {
-        let i=90;
-        return new Promise((resolve)=>{
-            const intvl = setInterval(()=>{
-                i+=10;
-                setStage({percentage: i, step: "Redirect", message: "Redirecting to Confirmation Page"});
                 if(i===100){
                     endCheckoutProcessing();
                     clearInterval(intvl)
@@ -282,49 +263,8 @@ export default function CheckoutPage(props){
             overallTotal=(overallTotal+extras[i].total).toFixed(2);
             checkoutPayload.data.payments[0].amount=overallTotal;
         }
-
         // 2. Processing Payment
         await startProcessingPayment();
-        
-        if (!stripe || !elements) {
-            await startProcessingBookingOrderError();
-            setCheckoutConfirmation({
-                type: "server_error",
-                isError: true,
-                message: "Payment system not ready",
-            });
-            return;
-        }
-  
-        const result = await stripe.confirmPayment({
-            //`Elements` instance that was used to create the Payment Element
-            elements,
-            confirmParams: {
-                return_url: "https://to-do",
-            },
-          redirect: "if_required",
-        });
-  
-        if (result.error) {
-            await startProcessingBookingOrderError();
-            setCheckoutConfirmation({
-                type: "server_error",
-                isError: true,
-                message: result.error.message,
-            });
-            return;
-        }else if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
-            console.log("Payment succeeded");
-        } else {
-            await startProcessingBookingOrderError();
-            setCheckoutConfirmation({
-                type: "server_error",
-                isError: true,
-                message: "Payment Failed",
-            });
-            return;
-        }
-        
         // 3. Creating flight order
         await startProcessingBookingOrder();
         let res=await createFlightOrder(checkoutPayload);
@@ -343,8 +283,6 @@ export default function CheckoutPage(props){
                 resource_id: logged._id,
                 resource_type: CONSTANTS.resource_types.booking_history,
             });
-            // 5. Finalizing
-            await orderCompletionCleanup();
         }else{
             await startProcessingBookingOrderError();
             setCheckoutConfirmation({
@@ -563,7 +501,6 @@ export default function CheckoutPage(props){
                         {
                             (activePage===CONSTANTS.checkout_pages.payment) ?
                                 <PaymentPage 
-                                    stripeOptions={stripeOptions}
                                     payments={checkoutPayload.data.payments}
                                     prices={PRICES}
                                     checkoutConfirmation={checkoutConfirmation}
