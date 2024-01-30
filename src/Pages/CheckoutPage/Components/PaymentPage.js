@@ -18,8 +18,18 @@ const PaymentPage = (props) => {
 
     useEffect(()=>{
         (async () => {
-            const response = await fetch((API_HOST+'/api/payment/secret/'));
-            const {client_secret: clientSecret} = await response.json();
+            const response = await fetch((API_HOST+'/api/payment/secret/'), {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: 1000,
+                    currency: 'usd'
+                })
+            }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
+            const {client_secret: clientSecret} = response;
             // Render the form using the clientSecret
             setOptions({
                 // passing the client secret obtained from the server
