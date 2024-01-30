@@ -13,10 +13,10 @@ const stripePromise = loadStripe('pk_test_51OdjZ3An0YMgH2TtyCpkCBN4vDrMuQlwvmFSN
 
 const PaymentPage = (props) => {
 
-    const [ options, setOptions ] = useState();
-    const API_HOST=getApiHost();
+    /*const [ options, setOptions ] = useState();
+    const API_HOST=getApiHost();*/
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         (async () => {
             const response = await fetch((API_HOST+'/api/payment/secret/'), {
                 method: "POST",
@@ -37,14 +37,15 @@ const PaymentPage = (props) => {
                 clientSecret,
             });
         })();
-    });
+    });*/
 
     const { 
         payments, 
         prices, 
         total_travelers, 
         checkoutConfirmation,
-        createOrderOnSubmit 
+        createOrderOnSubmit,
+        options // For stripe
     } = props;
     
     return (

@@ -19,11 +19,16 @@ import PassengerImg3 from "../../explore_destination_img4.jpg";
 import PassengerImg4 from "../../explore_destination_img8.jpg";
 import PassengerImg5 from "../../explore_destination_img3.jpg";
 import passengerImg6 from "../../explore_destination_img5.jpg";
+import { getApiHost } from '../../Constants/Environment';
 
 let INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
 export default function CheckoutPage(props){
 
     const { payload, cancel_checkout, LogMeIn } = props;
+
+    // For Stripe
+    const [ options, setOptions ] = useState();
+    const API_HOST=getApiHost();
 
     const [ PRICES, SET_PRICES ] = useState(FLIGHT_DATA_ADAPTER.adaptPriceProps(payload));
     const [ overallTotal, setOverallTotal ] = useState(0);
@@ -158,9 +163,38 @@ export default function CheckoutPage(props){
     }
 
     let imgs = [PassengerImg, PassengerImg2, PassengerImg3, PassengerImg4, PassengerImg5, passengerImg6];
-    const showPaymentPage = () => {
-        if(is_passenger_data_all_set())
+    const showPaymentPage = async () => {
+        if(is_passenger_data_all_set()){
+            // Reset payments amount in case function runs multiple times
+            checkoutPayload.data.payments[0].amount=PRICES.total_amount;
+
+            // 1. Including ancillaries totals into price
+            const { extras } = PRICES;
+            for(let i=0;i<extras.length;i++){
+                let overallTotal = parseFloat(checkoutPayload.data.payments[0].amount);
+                overallTotal=(overallTotal+extras[i].total).toFixed(2);
+                checkoutPayload.data.payments[0].amount=overallTotal;
+            }
+            const response = await fetch((API_HOST+'/api/payment/secret/'), {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: overallTotal,
+                    currency: 'usd'
+                })
+            }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
+            const {client_secret: clientSecret} = response;
+            // Render the form using the clientSecret
+            setOptions({
+                // passing the client secret obtained from the server
+                ...options,
+                clientSecret,
+            });
             setActivePage(CONSTANTS.checkout_pages.payment);
+        }
         else
             show_prompt_on_Bot_AD_tips_popup(
                 getBotResponse(CONSTANTS.bot.responses.uncompleted_pnr),
@@ -253,16 +287,7 @@ export default function CheckoutPage(props){
     }
 
     const createOrderOnSubmit = async () => {
-        // Reset payments amount in case function runs multiple times
-        checkoutPayload.data.payments[0].amount=PRICES.total_amount;
-
-        // 1. Including ancillaries totals into price
-        const { extras } = PRICES;
-        for(let i=0;i<extras.length;i++){
-            let overallTotal = parseFloat(checkoutPayload.data.payments[0].amount);
-            overallTotal=(overallTotal+extras[i].total).toFixed(2);
-            checkoutPayload.data.payments[0].amount=overallTotal;
-        }
+        
         // 2. Processing Payment
         await startProcessingPayment();
         // 3. Creating flight order
@@ -503,6 +528,7 @@ export default function CheckoutPage(props){
                                 <PaymentPage 
                                     payments={checkoutPayload.data.payments}
                                     prices={PRICES}
+                                    options={options} // For stripe
                                     checkoutConfirmation={checkoutConfirmation}
                                     createOrderOnSubmit={createOrderOnSubmit}
                                     total_travelers={checkoutPayload.data.passengers.length}
