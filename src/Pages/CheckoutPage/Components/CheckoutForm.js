@@ -34,13 +34,6 @@ const CheckoutForm = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <form>
-      <PaymentElement />
-      <button>Submit</button>
-    </form>
-  );
-=======
     <form onSubmit={handleSubmit}>
       <PaymentElement />
       <button style={{ display: "none",
@@ -49,7 +42,6 @@ const CheckoutForm = () => {
         disabled={!stripe}>Submit</button>
     </form>
   )
->>>>>>> parent of 300e69b... now payment integrates with checkout workflow
 };
 
 export default CheckoutForm;
