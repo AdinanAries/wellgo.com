@@ -3,6 +3,7 @@ import './App.css';
 import UseCurrentPage from './helpers/PageRoutingFuncs';
 //components
 import Header from './components/Header';
+import FullPageLoader from './components/FullPageLoader';
 import HomePage from './Pages/HomePage/HomePage';
 import Footer from './components/Footer';
 import MobileMenu from './components/MobileMenu';
@@ -19,6 +20,13 @@ import CurrenciesPane from './components/CurrenciesPane';
 import LanguagesPane from './components/LanguagesPane';
 import "react-toastify/dist/ReactToastify.css";
 import CONSTANTS from './Constants/Constants';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import { getApiHost } from './Constants/Environment';
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe('pk_test_51OdjZ3An0YMgH2TtyCpkCBN4vDrMuQlwvmFSNKqBl9gJY996OXSpZ9QLz5dBGHLYLsa7QVvwY51I0DcLHErLxW7y00vjEWv9Lc');
+
 
 let CURR=CONSTANTS.default_currency;
 if (localStorage.getItem(CONSTANTS.local_storage.wellgo_usr_curr)) {
@@ -54,7 +62,11 @@ function App() {
   const [ siteCurrency, setSiteCurrency ] = useState(CURR);
   const [ toggleShowLanguagesPage, setToggleShowLanguagesPage ] = useState(false);
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
-  
+  const [ isLoading, setIsLoading ] = useState(false);
+
+  // For Stripe Payment
+  const [ options, setOptions ] = useState();
+
   useEffect(()=>{
     UseCurrentPage();
   }, []);
@@ -77,9 +89,20 @@ function App() {
     setcheckoutPayload({});
   }
 
-  const begin_checkout = (data) => {
-    setIsCheckout(true);
+  const begin_checkout = async (data) => {
+    setIsLoading(true);
     setcheckoutPayload(data);
+    const API_HOST=getApiHost();
+    const response = await fetch((API_HOST+'/api/payment/secret/'));
+    const {client_secret: clientSecret} = await response.json();
+    // Render the form using the clientSecret
+    setOptions({
+        // passing the client secret obtained from the server
+        ...options,
+        clientSecret,
+    });
+    setIsCheckout(true);
+    setIsLoading(false);
   }
 
   const toggle_show_hide_currency_page = () => {
@@ -114,6 +137,9 @@ function App() {
   return (
     <div className="">
       {
+        isLoading && <FullPageLoader />
+      }
+      {
         toggleShowCurrencyPage && <CurrenciesPane 
           SelectSiteCurrency={SelectSiteCurrency}
           toggle_show_hide_pane={toggle_show_hide_currency_page} />
@@ -127,11 +153,14 @@ function App() {
       <MobileMenu />
       {
         isCheckout ? 
-          <CheckoutPage 
-            LogMeIn={LogMeIn}
-            payload={checkoutPayload}
-            cancel_checkout={cancel_checkout}
-          /> 
+        <Elements stripe={stripePromise} options={options}>
+            <CheckoutPage 
+              stripeOptions={options}
+              LogMeIn={LogMeIn}
+              payload={checkoutPayload}
+              cancel_checkout={cancel_checkout}
+            /> 
+        </Elements>
         : ""
       }
       <Header  
