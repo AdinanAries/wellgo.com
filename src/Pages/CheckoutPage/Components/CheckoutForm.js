@@ -1,14 +1,24 @@
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
+
+  const { 
+    createOrderOnSubmit,
+    startProcessingPayment,
+    startProcessingBookingOrderError,
+    setCheckoutConfirmation,
+  } = props;
+
   const stripe = useStripe();
   const elements = useElements();
 
-  const handleSubmit = async (event) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
+  const CheckoutOnSubmit = async (event) => {
+
     event.preventDefault();
 
+    // 1. Processing Payment
+    await startProcessingPayment();
+    
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -19,27 +29,44 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "https://example.com/order/123/complete",
+        return_url: "https://willgo-test.herokuapp.com",
       },
+      redirect: "if_required",
     });
 
-    if (result.error) {
-      // Show error to your customer (for example, payment details incomplete)
-      console.log(result.error.message);
+    if (result?.error) {
+      await startProcessingBookingOrderError();
+      setCheckoutConfirmation({
+          type: "server_error",
+          isError: true,
+          message: result?.error?.message,
+      });
+      return;
+    } else if (result?.paymentIntent && result?.paymentIntent?.status === "succeeded") {
+      // 2. To do: Provide logging for payment here
+      console.log("Payment Success:", result);
     } else {
-      // Your customer will be redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer will be redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
+      await startProcessingBookingOrderError();
+      setCheckoutConfirmation({
+          type: "server_error",
+          isError: true,
+          message: "Payment failed",
+      });
+      return;
     }
+
+    // 3. Creating the Booking Order
+    createOrderOnSubmit();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={CheckoutOnSubmit}>
       <PaymentElement />
-      <button style={{ display: "none",
-          color: "white", backgroundColor: "rgb(23, 87, 148)", width: "100%", margin: "10px 0",
-          border: "none", fontFamily: "'Prompt', Sans-serif", padding: 10, textAlign: "center"}}
-        disabled={!stripe}>Submit</button>
+      <button className='checkout_page_main_checkout_btn'
+        style={{width: "100%", margin: "10px 0", border: "none", fontFamily: "'Prompt', Sans-serif"}} disabled={!stripe}>
+        <i style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}} className="fa fa-credit-card"></i>
+        Checkout
+      </button>
     </form>
   )
 };

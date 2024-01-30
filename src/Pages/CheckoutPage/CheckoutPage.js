@@ -20,6 +20,7 @@ import PassengerImg4 from "../../explore_destination_img8.jpg";
 import PassengerImg5 from "../../explore_destination_img3.jpg";
 import passengerImg6 from "../../explore_destination_img5.jpg";
 import { getApiHost } from '../../Constants/Environment';
+import FullPageLoader from '../../components/FullPageLoader';
 
 let INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
 export default function CheckoutPage(props){
@@ -46,6 +47,7 @@ export default function CheckoutPage(props){
         data: FLIGHT_DATA_ADAPTER.prepareCheckout(payload)
     });
     const [ stage, setStage ] = useState({percentage: 0, step: "", message: ""});
+    const [ isLoading, setIsLoading ] = useState(false);
 
     // State for Including Checked Bags
     const [ includedCheckedBagsTotal, setIncludedCheckedBagsTotal] = useState(0);
@@ -66,7 +68,7 @@ export default function CheckoutPage(props){
         setStage({percentage: 0, step: "", message: ""});
     }
 
-    const PROCESSOR_INTERVAL = 1000;
+    const PROCESSOR_INTERVAL = 500;
     const startProcessingPayment = () => {
         let i=0;
         setStage({percentage: 1, step: "Payment", message: "Processing Payment"});
@@ -125,6 +127,21 @@ export default function CheckoutPage(props){
             const intvl = setInterval(()=>{
                 i+=10;
                 setStage({percentage: i, step: "Log", message: "Logging your booking"});
+                if(i===90){
+                    endCheckoutProcessing();
+                    clearInterval(intvl)
+                    resolve(true);
+                }
+            }, PROCESSOR_INTERVAL);
+        });
+    }
+
+    const CompletedBookingCleanup = () => {
+        let i=90;
+        return new Promise((resolve)=>{
+            const intvl = setInterval(()=>{
+                i+=10;
+                setStage({percentage: i, step: "Redirecting", message: "Redirecting to Confirmation Page"});
                 if(i===100){
                     endCheckoutProcessing();
                     clearInterval(intvl)
@@ -165,6 +182,9 @@ export default function CheckoutPage(props){
     let imgs = [PassengerImg, PassengerImg2, PassengerImg3, PassengerImg4, PassengerImg5, passengerImg6];
     const showPaymentPage = async () => {
         if(is_passenger_data_all_set()){
+
+            setIsLoading(true);
+
             // Reset payments amount in case function runs multiple times
             checkoutPayload.data.payments[0].amount=PRICES.total_amount;
 
@@ -182,7 +202,7 @@ export default function CheckoutPage(props){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    amount: overallTotal,
+                    amount: markup(overallTotal).new_price.toFixed(0),
                     currency: 'usd'
                 })
             }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
@@ -193,6 +213,7 @@ export default function CheckoutPage(props){
                 ...options,
                 clientSecret,
             });
+            setIsLoading(false);
             setActivePage(CONSTANTS.checkout_pages.payment);
         }
         else
@@ -288,26 +309,27 @@ export default function CheckoutPage(props){
 
     const createOrderOnSubmit = async () => {
         
-        // 2. Processing Payment
-        await startProcessingPayment();
-        // 3. Creating flight order
+        // 1. Creating flight order
         await startProcessingBookingOrder();
         let res=await createFlightOrder(checkoutPayload);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
-            // 4. Adding to booking history
+            // 2. Adding to booking history
             await startProcessingBookingLog();
             const logged = await logFlightBooking(log);
             setIsBookingConfirmed(true);
             setCompletedOrderDetails(res.data);
             setComfirmedBookingResourceID(logged._id);
-            // 4. Logging booking as user activity
+            // 3. Logging booking as user activity
             Logger.log_activity({
                 title: "Flight Booking Confirmed",
                 body: getBookingConfirmedLogMessage(res.data),
                 resource_id: logged._id,
                 resource_type: CONSTANTS.resource_types.booking_history,
             });
+
+            // Redirecting to Confirmation Page and Cleaning up
+            await CompletedBookingCleanup();
         }else{
             await startProcessingBookingOrderError();
             setCheckoutConfirmation({
@@ -315,7 +337,7 @@ export default function CheckoutPage(props){
                 isError: true,
                 message: res.message,
             });
-            checkoutPayload.data.payments[0].amount=PRICES.total_amount;
+            //checkoutPayload.data.payments[0].amount=PRICES.total_amount;
         }
         
     }
@@ -397,6 +419,9 @@ export default function CheckoutPage(props){
 
     return (
         <div id="booking_start_checkout_page_container" style={{display: "block"}}>
+            {
+                isLoading && <FullPageLoader />
+            }
             {
                 (stage.percentage) ?
                 <SubmitCheckoutInProgress 
@@ -527,6 +552,9 @@ export default function CheckoutPage(props){
                             (activePage===CONSTANTS.checkout_pages.payment) ?
                                 <PaymentPage 
                                     payments={checkoutPayload.data.payments}
+                                    startProcessingPayment={startProcessingPayment}
+                                    startProcessingBookingOrderError={startProcessingBookingOrderError}
+                                    setCheckoutConfirmation={setCheckoutConfirmation}
                                     prices={PRICES}
                                     options={options} // For stripe
                                     checkoutConfirmation={checkoutConfirmation}

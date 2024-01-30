@@ -95,10 +95,8 @@ const PriceSummary = (props) => {
                         Continue
                         <span style={{fontSize: 13, color: "rgba(255,255,255,0.4)", marginLeft: 10}}>
                             ({props.buttonText})</span>
-                    </div> :
-                    <div  onClick={props.buttonFunction} className="checkout_page_main_checkout_btn">
-                        <i style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}} className="fa fa-credit-card"></i>Checkout
-                    </div>
+                    </div> : <div></div>
+                    
                 }
             </div>
         </div>
@@ -106,3 +104,7 @@ const PriceSummary = (props) => {
 }
 
 export default PriceSummary;
+
+/*<div  onClick={props.buttonFunction} className="checkout_page_main_checkout_btn">
+    <i style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}} className="fa fa-credit-card"></i>Checkout
+</div>*/

@@ -3,8 +3,6 @@ import FormErrorCard from "../../../components/FormErrorCard";
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from "./CheckoutForm";
-import { useEffect, useState } from "react";
-import { getApiHost } from "../../../Constants/Environment";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -13,38 +11,15 @@ const stripePromise = loadStripe('pk_test_51OdjZ3An0YMgH2TtyCpkCBN4vDrMuQlwvmFSN
 
 const PaymentPage = (props) => {
 
-    /*const [ options, setOptions ] = useState();
-    const API_HOST=getApiHost();*/
-
-    /*useEffect(()=>{
-        (async () => {
-            const response = await fetch((API_HOST+'/api/payment/secret/'), {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    amount: 1000,
-                    currency: 'usd'
-                })
-            }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
-            const {client_secret: clientSecret} = response;
-            // Render the form using the clientSecret
-            setOptions({
-                // passing the client secret obtained from the server
-                ...options,
-                clientSecret,
-            });
-        })();
-    });*/
-
     const { 
         payments, 
         prices, 
         total_travelers, 
         checkoutConfirmation,
         createOrderOnSubmit,
+        startProcessingPayment,
+        startProcessingBookingOrderError,
+        setCheckoutConfirmation,
         options // For stripe
     } = props;
     
@@ -60,17 +35,30 @@ const PaymentPage = (props) => {
                         {
                             (options?.clientSecret) && <div style={{marginTop: 10}}>
                                 <Elements stripe={stripePromise} options={options}>
-                                    <CheckoutForm />
+                                    <CheckoutForm 
+                                        createOrderOnSubmit={createOrderOnSubmit} 
+                                        startProcessingPayment={startProcessingPayment}
+                                        startProcessingBookingOrderError={startProcessingBookingOrderError}
+                                        setCheckoutConfirmation={setCheckoutConfirmation}
+                                    />
                                 </Elements>
                             </div>
                         }
                         <div style={{padding: 10, marginTop: 10, minHeight: 100, background: "rgba(0,0,0,0.1)"}}>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
-                                This app is still in test mode, you may process without adding card details...
-                            </p>
-                            <p style={{marginTop: 10, fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
+                            <p style={{marginBottom: 10, fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
                                 <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
-                                PAYMENT FORM DISABLED
+                                TEST PAYMENT CARD
+                            </p>
+                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
+                                This app is still in test mode! You may use Card No. Below for Testing
+                                <br/>
+                                <span style={{color: "blue", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                                    Number: 4242 4242 4242 4242
+                                </span>
+                                <br/>
+                                <span style={{color: "blue", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                                    Any valid CVC, Expiration, and Zip Code can be entered for testing...
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -116,7 +104,7 @@ const PaymentPage = (props) => {
                     <PriceSummary 
                         prices={prices} 
                         payments={payments} 
-                        buttonFunction={createOrderOnSubmit} 
+                        buttonFunction={()=>{alert("I dont work")}}//createOrderOnSubmit} 
                         buttonText="" 
                         isPaymentPage={true} 
                         total_travelers={total_travelers}
