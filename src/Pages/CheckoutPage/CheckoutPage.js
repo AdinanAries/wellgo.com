@@ -25,7 +25,15 @@ import FullPageLoader from '../../components/FullPageLoader';
 let INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY = {};
 export default function CheckoutPage(props){
 
-    const { payload, cancel_checkout, LogMeIn } = props;
+    const { 
+        payload, 
+        cancel_checkout, 
+        LogMeIn,
+        justPaid, 
+        setJustPaid,
+        paymentIntent, 
+        setPaymentIntent,
+    } = props;
 
     // For Stripe
     const [ options, setOptions ] = useState();
@@ -56,6 +64,7 @@ export default function CheckoutPage(props){
     const [ includedCB, setIncludedCB ] = useState({});
 
     useEffect(()=>{
+        setPaymentIntent(null);
         setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
     }, [])
 
@@ -137,6 +146,10 @@ export default function CheckoutPage(props){
     }
 
     const CompletedBookingCleanup = () => {
+        // Reset Just Paid Flag
+        setJustPaid(false);
+        // Reset Payment Intent
+        setPaymentIntent(null);
         let i=90;
         return new Promise((resolve)=>{
             const intvl = setInterval(()=>{
@@ -195,24 +208,26 @@ export default function CheckoutPage(props){
                 overallTotal=(overallTotal+extras[i].total).toFixed(2);
                 checkoutPayload.data.payments[0].amount=overallTotal;
             }
-            const response = await fetch((API_HOST+'/api/payment/secret/'), {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    amount: markup(overallTotal).new_price.toFixed(0),
-                    currency: 'usd'
-                })
-            }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
-            const {client_secret: clientSecret} = response;
-            // Render the form using the clientSecret
-            setOptions({
-                // passing the client secret obtained from the server
-                ...options,
-                clientSecret,
-            });
+            if(!justPaid){
+                const response = await fetch((API_HOST+'/api/payment/secret/'), {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        amount: markup(overallTotal).new_price.toFixed(2),
+                        currency: 'usd'
+                    })
+                }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
+                const {client_secret: clientSecret} = response;
+                // Render the form using the clientSecret
+                setOptions({
+                    // passing the client secret obtained from the server
+                    ...options,
+                    clientSecret,
+                });
+            }
             setIsLoading(false);
             setActivePage(CONSTANTS.checkout_pages.payment);
         }
@@ -310,7 +325,9 @@ export default function CheckoutPage(props){
     const createOrderOnSubmit = async () => {
         
         // 1. Creating flight order
-        await startProcessingBookingOrder();
+        await startProcessingBookingOrder(paymentIntent);
+        // Bind payment intent to checkout obj
+        checkoutPayload.meta.paymentIntent=paymentIntent;
         let res=await createFlightOrder(checkoutPayload);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
@@ -551,6 +568,10 @@ export default function CheckoutPage(props){
                         {
                             (activePage===CONSTANTS.checkout_pages.payment) ?
                                 <PaymentPage 
+                                    paymentIntent={paymentIntent} 
+                                    setPaymentIntent={setPaymentIntent}
+                                    setJustPaid={setJustPaid}
+                                    justPaid={justPaid}
                                     payments={checkoutPayload.data.payments}
                                     startProcessingPayment={startProcessingPayment}
                                     startProcessingBookingOrderError={startProcessingBookingOrderError}

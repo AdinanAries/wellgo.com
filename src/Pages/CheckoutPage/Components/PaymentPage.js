@@ -20,7 +20,11 @@ const PaymentPage = (props) => {
         startProcessingPayment,
         startProcessingBookingOrderError,
         setCheckoutConfirmation,
-        options // For stripe
+        options, // For stripe
+        setJustPaid,
+        justPaid,
+        paymentIntent, 
+        setPaymentIntent,
     } = props;
     
     return (
@@ -36,6 +40,10 @@ const PaymentPage = (props) => {
                             (options?.clientSecret) && <div style={{marginTop: 10}}>
                                 <Elements stripe={stripePromise} options={options}>
                                     <CheckoutForm 
+                                        paymentIntent={paymentIntent}
+                                        setPaymentIntent={setPaymentIntent}
+                                        setJustPaid={setJustPaid}
+                                        justPaid={justPaid}
                                         createOrderOnSubmit={createOrderOnSubmit} 
                                         startProcessingPayment={startProcessingPayment}
                                         startProcessingBookingOrderError={startProcessingBookingOrderError}
@@ -44,23 +52,25 @@ const PaymentPage = (props) => {
                                 </Elements>
                             </div>
                         }
-                        <div style={{padding: 10, marginTop: 10, minHeight: 100, background: "rgba(0,0,0,0.1)"}}>
-                            <p style={{marginBottom: 10, fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
-                                <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
-                                TEST PAYMENT CARD
-                            </p>
-                            <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
-                                This app is still in test mode! You may use Card No. Below for Testing
-                                <br/>
-                                <span style={{color: "blue", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
-                                    Number: 4242 4242 4242 4242
-                                </span>
-                                <br/>
-                                <span style={{color: "blue", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
-                                    Any valid CVC, Expiration, and Zip Code can be entered for testing...
-                                </span>
-                            </p>
-                        </div>
+                        {!justPaid &&
+                            <div style={{padding: 10, marginTop: 10, minHeight: 100, background: "rgba(0,0,0,0.1)"}}>
+                                <p style={{marginBottom: 10, fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
+                                    <i style={{marginRight: 10, color: "orange"}} className="fa-solid fa-exclamation-triangle"></i>
+                                    TEST PAYMENT CARD
+                                </p>
+                                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 12, textAlign: "center", color: "rgba(0,0,0,0.6)"}}>
+                                    This app is still in test mode! You may use Card No. Below for Testing
+                                    <br/>
+                                    <span style={{color: "blue", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                                        Number: 4242 4242 4242 4242
+                                    </span>
+                                    <br/>
+                                    <span style={{color: "blue", fontFamily: "'Prompt', Sans-serif", fontSize: 12}}>
+                                        Any valid CVC, Expiration, and Zip Code can be entered for testing...
+                                    </span>
+                                </p>
+                            </div>
+                        }
                     </div>
                     {
                         
