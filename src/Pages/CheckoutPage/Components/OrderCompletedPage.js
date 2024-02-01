@@ -526,7 +526,7 @@ const OrderCompletedPage = (props) => {
                         </div>
                         <div>
                             {
-                                !isLoggedIn && <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, backgroundColor: "rgba(255,0,0,0.2)", border: "1px solid rgba(255,0,0,0.2)", borderRadius: 4, maxWidth: 230, padding: "5px 10px"}}>
+                                !isLoggedIn && <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 13, backgroundColor: "rgba(255,0,0,0.2)", border: "1px solid rgba(255,0,0,0.2)", borderRadius: 4, padding: "5px 10px", margin: "0 10px"}}>
                                     <i style={{marginRight: 10, color: "red"}} className="fa-solid fa-exclamation-triangle"></i>
                                     You are not logged in...
                                 </p>
