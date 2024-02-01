@@ -54,7 +54,6 @@ function App() {
   const [ siteCurrency, setSiteCurrency ] = useState(CURR);
   const [ toggleShowLanguagesPage, setToggleShowLanguagesPage ] = useState(false);
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
-  const [ justPaid, setJustPaid ] = useState(false);
   const [ paymentIntent, setPaymentIntent ] = useState();
   
   useEffect(()=>{
@@ -133,8 +132,6 @@ function App() {
             LogMeIn={LogMeIn}
             payload={checkoutPayload}
             cancel_checkout={cancel_checkout}
-            justPaid={justPaid} 
-            setJustPaid={setJustPaid}
             paymentIntent={paymentIntent}
             setPaymentIntent={setPaymentIntent}
           /> 

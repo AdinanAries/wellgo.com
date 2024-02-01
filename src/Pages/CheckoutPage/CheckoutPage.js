@@ -29,8 +29,6 @@ export default function CheckoutPage(props){
         payload, 
         cancel_checkout, 
         LogMeIn,
-        justPaid, 
-        setJustPaid,
         paymentIntent, 
         setPaymentIntent,
     } = props;
@@ -64,7 +62,9 @@ export default function CheckoutPage(props){
     const [ includedCB, setIncludedCB ] = useState({});
 
     useEffect(()=>{
-        setPaymentIntent(null);
+        setPaymentIntent(null); // <-- This will be changed
+        // Best Practice Check if Payment Intent Status is 
+        // requires_captrue and update with new price 
         setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
     }, [])
 
@@ -146,9 +146,9 @@ export default function CheckoutPage(props){
     }
 
     const CompletedBookingCleanup = () => {
-        // Reset Just Paid Flag
-        setJustPaid(false);
         // Reset Payment Intent
+        // To Do: Before setting to null also confirm the status
+        // if status is still requires_capture or other, further actions can be taken
         setPaymentIntent(null);
         let i=90;
         return new Promise((resolve)=>{
@@ -208,7 +208,7 @@ export default function CheckoutPage(props){
                 overallTotal=(overallTotal+extras[i].total).toFixed(2);
                 checkoutPayload.data.payments[0].amount=overallTotal;
             }
-            if(!justPaid){
+            if(!paymentIntent?.id){
                 const response = await fetch((API_HOST+'/api/payment/secret/'), {
                     method: "POST",
                     headers: {
@@ -322,12 +322,12 @@ export default function CheckoutPage(props){
         return true;
     }
 
-    const createOrderOnSubmit = async () => {
+    const createOrderOnSubmit = async (payment_intent) => {
         
         // 1. Creating flight order
-        await startProcessingBookingOrder(paymentIntent);
+        await startProcessingBookingOrder();
         // Bind payment intent to checkout obj
-        checkoutPayload.meta.paymentIntent=paymentIntent;
+        checkoutPayload.meta.paymentIntent=payment_intent;
         let res=await createFlightOrder(checkoutPayload);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
@@ -570,8 +570,6 @@ export default function CheckoutPage(props){
                                 <PaymentPage 
                                     paymentIntent={paymentIntent} 
                                     setPaymentIntent={setPaymentIntent}
-                                    setJustPaid={setJustPaid}
-                                    justPaid={justPaid}
                                     payments={checkoutPayload.data.payments}
                                     startProcessingPayment={startProcessingPayment}
                                     startProcessingBookingOrderError={startProcessingBookingOrderError}

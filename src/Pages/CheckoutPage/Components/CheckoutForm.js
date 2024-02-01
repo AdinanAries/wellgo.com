@@ -7,9 +7,8 @@ const CheckoutForm = (props) => {
     createOrderOnSubmit,
     startProcessingPayment,
     startProcessingBookingOrderError,
+    checkoutConfirmation,
     setCheckoutConfirmation,
-    setJustPaid,
-    justPaid,
     paymentIntent, 
     setPaymentIntent,
   } = props;
@@ -31,7 +30,7 @@ const CheckoutForm = (props) => {
     }
 
     let result;
-    if(!justPaid){
+    if(!paymentIntent?.id){
         result = await stripe.confirmPayment({
         //`Elements` instance that was used to create the Payment Element
         elements,
@@ -41,7 +40,7 @@ const CheckoutForm = (props) => {
         redirect: "if_required",
         });
 
-        if (result?.error && !justPaid) {
+        if (result?.error) {
         await startProcessingBookingOrderError();
         setCheckoutConfirmation({
             type: "server_error",
@@ -49,26 +48,21 @@ const CheckoutForm = (props) => {
             message: result?.error?.message,
         });
         return;
-        } else if (
-            (result?.paymentIntent 
-            && result?.paymentIntent?.status === "succeeded")
-            || justPaid
-        ) {
-        // 2. To do: Provide logging for payment here
-        console.log("Payment Success:", result);
-        setJustPaid(true);
-        setPaymentIntent(result?.paymentIntent);
+        } else if (result?.paymentIntent && result?.paymentIntent?.status === "requires_capture")    
+        {
+          // 2. To do: Provide logging for payment here
+          setPaymentIntent(result?.paymentIntent);
         } else {
-        await startProcessingBookingOrderError();
-        setCheckoutConfirmation({
-            type: "server_error",
-            isError: true,
-            message: "Payment failed",
-        });
-        return;
+          await startProcessingBookingOrderError();
+          setCheckoutConfirmation({
+              type: "server_error",
+              isError: true,
+              message: "Payment failed",
+          });
+          return;
         }
     }
-    console.log("payment intent", result?.paymentIntent);
+    
     // 3. Creating the Booking Order
     // Security - Server checks payment Status using payment intent before ordering booking
     let pi=((result?.paymentIntent) || paymentIntent)
@@ -77,13 +71,44 @@ const CheckoutForm = (props) => {
 
   return (
     <form onSubmit={CheckoutOnSubmit}>
-      { !justPaid &&
+      { (!paymentIntent?.id) &&
         <PaymentElement />
+      }
+      { paymentIntent?.id &&
+        <div style={{padding: 10, border: "1px solid rgba(0,255,0,0.1)", background: "rgba(0,255,0,0.1)"}}>
+          
+          <div>
+            <div style={{display: "flex", alignItems: "center",}}>
+              <p style={{fontSize: 12}}> 
+                <i style={{fontSize: 12, marginRight: 10, color: "green"}} className="fa-solid fa-info"></i>
+              </p>
+              <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
+                <span style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
+                  Important Notice:</span> We 
+                have captured your payment details, You only need to re-submit the order at this point
+              </p>
+            </div>
+            { checkoutConfirmation?.isError &&
+              <div style={{marginTop: 10, borderTop: "1px dashed rgba(0,0,0,0.1)", paddingTop: 10}}>
+                <p style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.8)"}}>
+                  The server returned the following error message: 
+                  <span style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", padding: "0 5px", margin: 5, backgroundColor: "crimson", color: "white"}}>
+                    "{checkoutConfirmation.message}".</span>
+                  <b/>
+                    Please go back one step and check your passenger details by clicking on 
+                    <span style={{fontSize: 12, fontFamily: "'Prompt', Sans-serif", padding: "0 5px", margin: 5, backgroundColor: "crimson", color: "white"}}>
+                      "Passengers"</span> at the top.
+                  <b/> Then open the passenger forms to confirm their details are correct
+                </p>
+              </div>
+            }
+          </div>
+        </div>
       }
       <button className='checkout_page_main_checkout_btn'
         style={{width: "100%", margin: "10px 0", border: "none", fontFamily: "'Prompt', Sans-serif"}} disabled={!stripe}>
         {
-            justPaid ? <>Re-order Booking</> :
+            (paymentIntent?.id) ? <>Submit Order</> :
             <><i style={{marginRight: 5, color: "rgba(255,255,255,0.5)"}} className="fa fa-credit-card"></i>
             Checkout</>
         }
