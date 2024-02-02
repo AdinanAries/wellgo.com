@@ -45,7 +45,7 @@ export default function ExploreDestinations(props){
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontWeight: 1000, fontFamily: "'Prompt', sans-serif", fontSize: 28, textAlign: "center"}}>
                                 Cheap Travel</p>
                             <p style={{color: "white", animation: "fade_and_pop 0.5s 0.5s ease-in", transition: "all 2s", fontFamily: "'Prompt', sans-serif", fontSize: 15, textAlign: "center"}}>
-                                &#8226; AI Travel Assistant &#8226;</p>
+                                &#8226; Aide is AI Assistant &#8226;</p>
                         </div>
                         <div>
                             <div id="landing_page_search_form_bar" style={{position: "relative", cursor: "pointer", textShadow: "none", backgroundColor: "rgba(0,0,0,0.3)", /*border: "1px solid rgba(255,255,255,0.5)",*/ height: 70, maxWidth: 550, margin: "auto", borderRadius: 50, /*boxShadow: "1px 2px 3px rgba(0,0,0,0.3)",*/ zIndex: 5}}>
@@ -91,9 +91,9 @@ export default function ExploreDestinations(props){
                                             <div id="landing_page_search_bar_book_w_vta_btn" style={{borderRadius: 40, borderTopRightRadius: 10, borderTopLeftRadius: 10, padding: 16, border: "1px solid rgba(0,0,0,0.1)", backgroundColor: "#eee"}}>
                                                 <p style={{color: "rgba(0,0,0,0.7)", textAlign: "center", fontFamily: "'Prompt', sans-serif", fontSize: 14}}>
                                                 <i className="fa fa-commenting" style={{marginRight: 10, fontSize: 19, color: "rgb(23, 87, 148)"}}></i>
-                                                Book with Virtual Agent</p>
+                                                Book with AI Assistant</p>
                                                 <p style={{fontSize: 11, marginTop: 3, textAlign: "center", color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', sans-serif"}}>
-                                                    Bot AD &#8226; <span style={{color: "goldenrod", fontSize: 11}}>V1.0.0</span> &#8226; powered by wellgo</p>
+                                                    Aide &#8226; <span style={{color: "goldenrod", fontSize: 11}}>V1.0.0</span> &#8226; Welldugo.com</p>
                                             </div>
                                         </div>
                                     </div>

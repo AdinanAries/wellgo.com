@@ -31,6 +31,8 @@ export default function CheckoutPage(props){
         LogMeIn,
         paymentIntent, 
         setPaymentIntent,
+        bookingIntent, 
+        setBookingIntent,
     } = props;
 
     // For Stripe
@@ -63,6 +65,7 @@ export default function CheckoutPage(props){
 
     useEffect(()=>{
         setPaymentIntent(null); // <-- This will be changed
+        setBookingIntent(null); // <-- This will be changed
         // Best Practice Check if Payment Intent Status is 
         // requires_captrue and update with new price 
         setIncludedCB(INCLUDED_CHECKED_BAGS_EACH_PSNGR_QUANTITY);
@@ -150,6 +153,7 @@ export default function CheckoutPage(props){
         // To Do: Before setting to null also confirm the status
         // if status is still requires_capture or other, further actions can be taken
         setPaymentIntent(null);
+        setBookingIntent(null);
         let i=90;
         return new Promise((resolve)=>{
             const intvl = setInterval(()=>{
@@ -322,12 +326,13 @@ export default function CheckoutPage(props){
         return true;
     }
 
-    const createOrderOnSubmit = async (payment_intent) => {
+    const createOrderOnSubmit = async (payment_intent, booking_intent) => {
         
         // 1. Creating flight order
         await startProcessingBookingOrder();
         // Bind payment intent to checkout obj
         checkoutPayload.meta.paymentIntent=payment_intent;
+        checkoutPayload.meta.bookingIntent=booking_intent;
         let res=await createFlightOrder(checkoutPayload);
         if(res?.data?.id){
             let log=FLIGHT_DATA_ADAPTER.prepareFlightBookingLogObject(res.data);
@@ -468,7 +473,7 @@ export default function CheckoutPage(props){
                                             <img src={"./WillgoLogo.png"} alt={"to do"} /></p>
                                         <div className="site-logo-txt">
                                             <p style={{color: "rgb(23, 87, 148)", fontSize: 17}}>
-                                                Wellgo<span>.com</span>
+                                                welldugo<span>.com</span>
                                             </p>
                                         </div>
                                     </div>
@@ -570,7 +575,10 @@ export default function CheckoutPage(props){
                                 <PaymentPage 
                                     paymentIntent={paymentIntent} 
                                     setPaymentIntent={setPaymentIntent}
+                                    bookingIntent={bookingIntent} 
+                                    setBookingIntent={setBookingIntent}
                                     payments={checkoutPayload.data.payments}
+                                    checkoutPayload={checkoutPayload}
                                     startProcessingPayment={startProcessingPayment}
                                     startProcessingBookingOrderError={startProcessingBookingOrderError}
                                     setCheckoutConfirmation={setCheckoutConfirmation}

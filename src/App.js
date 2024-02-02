@@ -55,6 +55,7 @@ function App() {
   const [ toggleShowLanguagesPage, setToggleShowLanguagesPage ] = useState(false);
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
   const [ paymentIntent, setPaymentIntent ] = useState();
+  const [ bookingIntent, setBookingIntent ] = useState();
   
   useEffect(()=>{
     UseCurrentPage();
@@ -134,6 +135,8 @@ function App() {
             cancel_checkout={cancel_checkout}
             paymentIntent={paymentIntent}
             setPaymentIntent={setPaymentIntent}
+            bookingIntent={bookingIntent}
+            setBookingIntent={setBookingIntent}
           /> 
         : ""
       }

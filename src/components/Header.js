@@ -18,7 +18,7 @@ function Header(props){
                                 <img src={WillgoLogo} alt={"to do"} /></p>
                             <div className="site-logo-txt">
                                 <p>
-                                    Wellgo
+                                    welldugo
                                     <span>.com</span>
                                 </p>
                             </div>

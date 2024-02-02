@@ -1,5 +1,5 @@
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
-import { useState } from 'react';
+import { getApiHost } from '../../../Constants/Environment';
 
 const CheckoutForm = (props) => {
 
@@ -11,7 +11,12 @@ const CheckoutForm = (props) => {
     setCheckoutConfirmation,
     paymentIntent, 
     setPaymentIntent,
+    bookingIntent, 
+    setBookingIntent,
+    checkoutPayload,
   } = props;
+
+  const API_HOST=getApiHost();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -30,6 +35,7 @@ const CheckoutForm = (props) => {
     }
 
     let result;
+    let bi;
     if(!paymentIntent?.id){
         result = await stripe.confirmPayment({
         //`Elements` instance that was used to create the Payment Element
@@ -50,7 +56,20 @@ const CheckoutForm = (props) => {
         return;
         } else if (result?.paymentIntent && result?.paymentIntent?.status === "requires_capture")    
         {
-          // 2. To do: Provide logging for payment here
+          // Creating booking intent with payment
+          let bookingItent = {
+            payment_intent: result?.paymentIntent,
+            booking_order: checkoutPayload,
+          }
+          bi = await fetch((API_HOST+'/api/activities/booking-intent/'), {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bookingItent)
+          }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
+          setBookingIntent(bi);
           setPaymentIntent(result?.paymentIntent);
         } else {
           await startProcessingBookingOrderError();
@@ -65,8 +84,9 @@ const CheckoutForm = (props) => {
     
     // 3. Creating the Booking Order
     // Security - Server checks payment Status using payment intent before ordering booking
-    let pi=((result?.paymentIntent) || paymentIntent)
-    createOrderOnSubmit(pi);
+    let pi=((result?.paymentIntent) || paymentIntent);
+    let _bi=(bi?._id || bookingIntent);
+    createOrderOnSubmit(pi, _bi);
   };
 
   return (

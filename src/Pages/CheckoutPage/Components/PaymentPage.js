@@ -23,6 +23,9 @@ const PaymentPage = (props) => {
         options, // For stripe
         paymentIntent, 
         setPaymentIntent,
+        bookingIntent, 
+        setBookingIntent,
+        checkoutPayload,
     } = props;
     
     return (
@@ -40,11 +43,14 @@ const PaymentPage = (props) => {
                                     <CheckoutForm 
                                         paymentIntent={paymentIntent}
                                         setPaymentIntent={setPaymentIntent}
+                                        bookingIntent={bookingIntent}
+                                        setBookingIntent={setBookingIntent}
                                         createOrderOnSubmit={createOrderOnSubmit} 
                                         startProcessingPayment={startProcessingPayment}
                                         startProcessingBookingOrderError={startProcessingBookingOrderError}
                                         checkoutConfirmation={checkoutConfirmation}
                                         setCheckoutConfirmation={setCheckoutConfirmation}
+                                        checkoutPayload={checkoutPayload}
                                     />
                                 </Elements>
                             </div>

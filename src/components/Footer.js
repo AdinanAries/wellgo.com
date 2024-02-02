@@ -52,8 +52,17 @@ function Footer(props){
                 <div className="footer_section_flex_container">
                 <div className="footer_section_each_flex_section_container">
                         <div>
-                            <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
-                                Wellgo.com</p>
+                            <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", letterSpacing: 0.5, fontFamily: "Courgette"}}>
+                                welldugo.com</p>
+                            <p style={{textAlign: "center", fontSize: 12, color: "rgba(255,255,255,0.7)", marginBottom: 10}}>
+                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "rgba(255,255,255,0.7)", fontSize: 11}}>
+                                    &#8226;
+                                </span>
+                                Aide is AI assistant
+                                <span style={{fontFamily: "'Prompt', Sans-serif", margin: "0 10px", color: "rgba(255,255,255,0.7)", fontSize: 11}}>
+                                    &#8226;
+                                </span>
+                            </p>
                             <p className="footer-site-logo">
                                 <img src={WillgoLogo}/></p>
                             <p style={{color: "white", fontSize: 14, marginTop: 5, textAlign: "center"}}>
@@ -65,8 +74,8 @@ function Footer(props){
                         <div>
                             <p style={{fontWeight: "bolder", color: "#c751b9", textAlign: "center", marginBottom: 15, letterSpacing: 0.5, fontFamily: "Courgette"}}>
                                 About Us</p>
-                            <p className="footer_about_text" style={{color: "white", textAlign: "center", letterSpacing: 0.5, fontFamily: "Courgette", maxWidth: 250}}>
-                            Wellgo.com is a virtual travel agency with AI travel assistants...</p>
+                            <p className="footer_about_text" style={{color: "white", margin: "auto", textAlign: "center", letterSpacing: 0.5, fontFamily: "Courgette", maxWidth: 250}}>
+                            Welldugo.com is your favorite virtual travel agency with AI assistance...</p>
                         </div>
                         <p style={{fontFamily: "'Courgette', Sans-serif", textAlign: "center", marginTop: 10, color: "white", letterSpacing: 0.5, fontSize: 13}}>
                             <i style={{marginRight: 10, opacity: 0.4}} className="fa-solid fa-envelope"></i>
@@ -91,7 +100,7 @@ function Footer(props){
                             <div style={{marginTop: 10}}>
                                 <p style={{color: "white", textAlign: "center"}}>
                                     <i style={{marginRight: 10, opacity: 0.4, marginBottom: 8}} className="fa fa-envelope"></i>
-                                    support@wellgo.com
+                                    support@welldugo.com
                                 </p>
                                 <p style={{color: "white", textAlign: "center"}}>
                                     <i style={{marginRight: 10, opacity: 0.4, marginBottom: 20}} className="fa fa-phone"></i>
@@ -113,7 +122,7 @@ function Footer(props){
                     </div>
                 </div>
                 <p className="footer_very_lower_text" style={{marginTop: 20, textAlign: "center", opacity: 0.6, paddingTop: 20, color: "rgba(255,255,255,0.55)", borderTop: "1px solid rgba(255,255,255,0.3)"}}>
-                    &copy; {new Date().getFullYear()} wellgo.com...</p>
+                    &copy; {new Date().getFullYear()} welldugo.com...</p>
             </div> 
         </footer>
     );
