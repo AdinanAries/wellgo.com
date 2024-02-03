@@ -75,7 +75,7 @@ const PaymentPage = (props) => {
                                         adinanaries@outlook.com </span>
                                     </p>
                                     <div style={{display: "flex", alignItems: "center", marginTop: 10}}>
-                                        <div style={{marginRight: 10, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "100%", width: 57, height: 57, backgroundColor: "rgba(0,0,0,0.1)", border: "1px solid rgba(0,0,0,0.1)"}}>
+                                        <div style={{marginRight: 10, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "100%", minWidth: 57, height: 57, backgroundColor: "rgba(0,0,0,0.1)", border: "1px solid rgba(0,0,0,0.1)"}}>
                                             <div>
                                                 <p style={{textAlign: "center", fontSize: 22, marginTop: -5}}>
                                                     <i style={{color: "rgba(0,0,0,0.7)"}} className="fa-solid fa-robot"></i>
