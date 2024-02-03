@@ -40,6 +40,10 @@ if(localStorage.getItem(CONSTANTS.local_storage.logged_in_usr)){
   localStorage.setItem(CONSTANTS.local_storage.logged_in_usr, AMLOGGEDIN);
 }
 
+window._getSearchObj=()=>{
+  return JSON.parse(localStorage.getItem(CONSTANTS.local_storage.flight_search_object));
+}
+
 // Instantiating search post obj
 global.instantiateSearchObj();
 

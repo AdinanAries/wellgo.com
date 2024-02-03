@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { calculate_age, validateYYYYMMDDInputDates, confirmYYYMMDDDateValidity } from "../../../helpers/general";
+import { 
+    calculate_age, 
+    validateYYYYMMDDInputDates, 
+    confirmYYYMMDDDateValidity, 
+    add_months_to_date, 
+} from "../../../helpers/general";
 import CONSTANTS from "../../../Constants/Constants";
 import FormErrorCard from "../../../components/FormErrorCard";
 import { bind_calling_codes, return_calling_option_components } from "../../../helpers/country_calling_codes";
@@ -120,6 +125,9 @@ const PassengerForm = (props) => {
         setPassenger({ ...passenger, infant_passenger_id: e.target.value });
     }
 
+    // Search object
+    const SEARCH_OBJ=window._getSearchObj();
+
     const onSubmit = () => {
         if(!confirmYYYMMDDDateValidity(passenger.born_on)){
             setFormValidation({
@@ -167,6 +175,22 @@ const PassengerForm = (props) => {
                     type: "error",
                     isError: true,
                     message: "Infant passenger must be less than 2 years",
+                    isDateFormat: false
+                });
+                return;
+            }
+        }
+
+        // Checking passport expiration date
+        const ADDED_MONTHS=2;
+        const PASSPORT_VALIDITY_DATE=add_months_to_date(new Date((SEARCH_OBJ?.itinerary?.departure?.date+"T00:00:00")), ADDED_MONTHS);
+        const PASSPORT_EXPIRATION_DATE=new Date((passenger?.identity_documents[0]?.expires_on+"T00:00:00"));
+        if(passenger?.identity_documents[0]?.expires_on){
+            if(PASSPORT_EXPIRATION_DATE < PASSPORT_VALIDITY_DATE){
+                setFormValidation({
+                    type: "error",
+                    isError: true,
+                    message: `Passport must be valid until: ${PASSPORT_VALIDITY_DATE.toISOString().split("T")[0]}`,
                     isDateFormat: false
                 });
                 return;

@@ -369,6 +369,7 @@ export default function CheckoutPage(props){
         cancel_checkout();
         global.__unselectFlightOffer();
         global.hide_selected_ticket_details_pane();
+        window.location.reload();
     }
 
     const goHome = () => {
