@@ -287,7 +287,7 @@ export const return_calling_option_components = (current=0, add_country_name=fal
 
     for(let i=0; i<calling_codes.length; i++){
 
-        if(calling_codes[i].code === "")
+        if(!calling_codes[i]?.code.trim())
             continue;
 
         options.push(
