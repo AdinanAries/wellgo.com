@@ -1327,3 +1327,41 @@ for(let ll=0;ll<NAME_TO_DO_CURRENCY_SYMBOLS.length;ll++){
 }
 
 console.log(ttt);
+
+
+
+// Checkout page Payment Intent
+/*/ Checkout Re-started: Updating existing Payment Intent
+            if(paymentIntent?.id){
+                const pi = await fetch((API_HOST+'/api/payment/update-intent-amount/'), {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: paymentIntent?.id,
+                        amount: markup(overallTotal).new_price.toFixed(2),
+                        currency: 'usd'
+                    })
+                }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e)); 
+                // Updating state with new pi
+                setPaymentIntent(pi);
+            }*/
+
+            // Checkout Re-started: Updating existing Booking Intent with new payment and flight
+            /*if(bookingIntent?._id){
+                bookingIntent.payment_intent = paymentIntent;
+                // Maybe new flight has been selected
+                bookingIntent.booking_order.data = checkoutPayload.data;
+                let bi = await fetch((API_HOST+'/api/activities/add-booking-intent-update/'), {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(bookingIntent)
+                }).then(res=>res.json()).then(data=>data).catch(e=>console.log(e));
+                // Updating state with new bi
+                setBookingIntent(bi);
+            }*/
