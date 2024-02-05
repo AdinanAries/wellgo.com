@@ -61,6 +61,7 @@ function App() {
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
   const [ paymentIntent, setPaymentIntent ] = useState();
   const [ bookingIntent, setBookingIntent ] = useState();
+  const [ productType, setProductType ] = useState(CONSTANTS.product_types.flights);
   
   useEffect(()=>{
     UseCurrentPage();
@@ -83,6 +84,18 @@ function App() {
     setIsCheckout(false);
     setcheckoutPayload({});
   }
+
+  const change_product_type = (type=0, call_back=()=>{}) => {
+    setProductType(type);
+    call_back();
+  }
+  // Making above function global
+  window.__change_proct_type=change_product_type;
+  const get_current_product_type = () => {
+    return productType;
+  }
+  // Making above function global
+  window.__get_current_product_type=get_current_product_type;
 
   const begin_checkout = (data) => {
     setIsCheckout(true);
@@ -142,6 +155,8 @@ function App() {
             setPaymentIntent={setPaymentIntent}
             bookingIntent={bookingIntent}
             setBookingIntent={setBookingIntent}
+            productType={productType}
+            change_product_type={change_product_type}
           /> 
         : ""
       }
@@ -157,6 +172,8 @@ function App() {
         siteLanguage={siteLanguage}
         toggle_show_hide_currency_page={toggle_show_hide_currency_page}
         toggle_show_hide_languages_page={toggle_show_hide_languages_page}
+        productType={productType}
+        change_product_type={change_product_type}
       />
       <TripsPage />
       <DealsPage />
