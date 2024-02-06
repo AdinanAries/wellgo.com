@@ -1699,6 +1699,9 @@ footer {
   .cm-toggle {
     margin-right: 30px !important;
   }
+  .hotel_search_form_toggle{
+    margin-right: 10px !important;
+  }
   .search-page-wrapper {
     padding-left: 10px;
     padding-right: 10px;
