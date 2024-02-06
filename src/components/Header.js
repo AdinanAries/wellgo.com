@@ -3,10 +3,14 @@ import { show_main_mobile_menu } from "./MobileMenu";
 import WillgoLogo from '../WillgoLogo.png';
 
 import { show_login_page, show_home_page, show_trips_page, show_explore_page } from '../helpers/PageRoutingFuncs';
+import CONSTANTS from "../Constants/Constants";
 
 function Header(props){
 
-    const { showSearchPage } = props;
+    const { 
+        showSearchPage, 
+        productType,
+    } = props;
     
     return (
         <header id="site_main_header">
@@ -45,7 +49,12 @@ function Header(props){
                             <div style={{display: "flex", flexDirection: "row", fontSize: 14, paddingRight: "5px", width: 105, color: "rgba(255,255,255,0.7)", /*border: "1px solid rgba(255,255,255,0.2)",*/ borderRadius: 50,}}>
                                 <div style={{textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", width: 35, height: 35, backgroundColor: "white", borderRadius: "100%", marginRight: 10}}>
                                     <i style={{display: 'inline', color: "rgb(46, 98, 133)", margin: 0, fontSize: 17}} 
-                                        className={showSearchPage?"fa-solid fa-home":"fa-solid fa-plane-departure"}/>
+                                        className={showSearchPage? "fa-solid fa-home" :
+                                        ( 
+                                            (productType===CONSTANTS.product_types.flights) ? "fa-solid fa-plane-departure"
+                                            : (productType===CONSTANTS.product_types.stays) ? "fa-solid fa-hotel"
+                                            : (productType===CONSTANTS.product_types.rental_cars) ? "fa-solid fa-car" : ""
+                                        )}/>
                                 </div>
                                 <div style={{display: "flex", flexDirection: "column", justifyContent: "center", fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
                                     {showSearchPage ? "Home" : "Search"}</div>
@@ -59,7 +68,12 @@ function Header(props){
                                 <div style={{display: "flex", flexDirection: "row", margin: 0, fontSize: 14, height: "auto", paddingRight: "10px", width: 100, justifyContent: "flex-start", textAlign: "center", color: "rgba(255,255,255,0.7)", /*border: "1px solid rgba(255,255,255,0.2)",*/ borderRadius: 50}}>
                                     <div style={{textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", width: 35, height: 35, backgroundColor: "white", borderRadius: "100%", margin: 0, marginRight: 10}}>
                                         <i style={{display: 'inline', color: "rgb(46, 98, 133)", margin: 0, fontSize: 15}} 
-                                            className={showSearchPage?"fa-solid fa-home":"fa-solid fa-plane-departure"}/>
+                                            className={showSearchPage ? "fa-solid fa-home"
+                                            :( 
+                                                (productType===CONSTANTS.product_types.flights) ? "fa-solid fa-plane-departure"
+                                                : (productType===CONSTANTS.product_types.stays) ? "fa-solid fa-hotel"
+                                                : (productType===CONSTANTS.product_types.rental_cars) ? "fa-solid fa-car" : ""
+                                            )}/>
                                     </div>
                                     <div style={{display: "flex", flexDirection: "column", justifyContent: "center", height: "auto", margin: 0, fontSize: 14,  fontFamily: "'Prompt', Sans-serif"}}>
                                         {showSearchPage ? "Home" : "Search"}

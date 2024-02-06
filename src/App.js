@@ -162,7 +162,9 @@ function App() {
       }
       <Header  
         showSearchPage={showSearchPage}
-        show_home_page={show_home_page} />
+        show_home_page={show_home_page} 
+        productType={productType}
+      />
       <HomePage 
         show_search_page={show_search_page} 
         showSearchPage={showSearchPage}
