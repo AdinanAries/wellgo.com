@@ -1702,6 +1702,15 @@ footer {
   .hotel_search_form_toggle{
     margin-right: 10px !important;
   }
+  @supports (-webkit-touch-callout: none) {
+    /* CSS specific to iOS devices */ 
+    .hotel_search_form_toggle{
+      margin-right: 25px !important;
+    }
+  }
+  @supports not (-webkit-touch-callout: none) {
+    /* CSS for other than iOS devices */ 
+  }
   .search-page-wrapper {
     padding-left: 10px;
     padding-right: 10px;
