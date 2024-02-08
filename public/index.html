@@ -85,6 +85,42 @@
         }else{
           localStorage.setItem("search_obj", JSON.stringify(search_obj));
         }
+
+        // Hotel search
+        const hotel_search_obj = {
+          checkin_date: "",
+          checkout_date: "",
+          location: {
+            iata: 0,
+            long: 0,
+            lat: 0,
+          },
+          flights: {
+            included: false,
+            origin_airport: {
+              iata: 0,
+              long: 0,
+              lat: 0,
+            }
+          },
+          cars: {
+            included: false,
+          },
+          rooms: [
+            {
+              total_adults: 1,
+              children: [
+                {age: 0}
+              ]
+            }
+          ]
+        }
+        
+        if(localStorage.getItem("hotel_search_obj")){
+          //other code here
+        }else{
+          localStorage.setItem("hotel_search_obj", JSON.stringify(hotel_search_obj));
+        }
       }
     </script>
     <div id="root"></div>
