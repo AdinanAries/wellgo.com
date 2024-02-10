@@ -2292,7 +2292,9 @@ footer {
     height: calc(100vh);
     box-shadow: none;
   }
-  #sp_from_where_airports_auto_complete_input, #sp_to_where_airports_auto_complete_input{
+  #sp_from_where_airports_auto_complete_input, 
+  #sp_to_where_airports_auto_complete_input,
+  .hotel_sp_search_airports_inputs_auto_complete {
     top: 60px;
     height: calc(100vh - 60px);
   }
