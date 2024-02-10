@@ -87,6 +87,7 @@ function App() {
 
   const change_product_type = (type=0, call_back=()=>{}) => {
     setProductType(type);
+    localStorage.setItem(CONSTANTS.local_storage.product_type, type);
     call_back();
   }
   // Making above function global

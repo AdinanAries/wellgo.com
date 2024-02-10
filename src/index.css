@@ -1146,7 +1146,7 @@ footer {
   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
 }
 #search_page{
-  padding-top: 90px;
+  /*padding-top: 90px;*/
 }
 #explore_page, #trips_page, #deals_page, #help_page, #login_page{
   padding-top: 60px;
@@ -1877,7 +1877,7 @@ footer {
     font-size: 11px !important;
   }
   #search_page{
-    padding-top: 50px !important;
+    /*padding-top: 50px !important;*/
   }
   .explore_page_main{
   }
