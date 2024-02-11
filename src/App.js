@@ -50,6 +50,8 @@ global.instantiateSearchObj();
 
 function App() {
 
+  const PRODUCT_TYPE = localStorage.getItem(CONSTANTS.local_storage.product_type) || CONSTANTS.product_types.flights;
+
   const [ showSearchPage, setShowSearchPage ] = useState(false);
   const [ isCheckout, setIsCheckout ] = useState(false);
   const [ isLoggedIn, setIsLoggedIn ] = useState(AMLOGGEDIN);
@@ -61,7 +63,7 @@ function App() {
   const [ siteLanguage, setSiteLanguage ] = useState(LANG);
   const [ paymentIntent, setPaymentIntent ] = useState();
   const [ bookingIntent, setBookingIntent ] = useState();
-  const [ productType, setProductType ] = useState(CONSTANTS.product_types.flights);
+  const [ productType, setProductType ] = useState(PRODUCT_TYPE);
   
   useEffect(()=>{
     UseCurrentPage();
