@@ -2374,7 +2374,10 @@ footer {
     width: 100% !important;
   }
   .hotel-offer-card-img-container {
-    height: 200px !important;
+    /*height: 200px !important;*/
+  }
+  .hotel-offer-card-info-container {
+    padding-top: 0 !important;
   }
   .mobile_hidden {
     display: none !important;
@@ -2692,9 +2695,23 @@ path {
 .carousel .control-prev.control-arrow:before {
   border-right: 12px solid orange !important;
 }
-.carousel .control-dots {
+/*.carousel .control-dots {
    bottom: calc(50% - 20px) !important;
    background-color: rgba(0, 0, 0, 0.3) !important;
+}*/
+.carousel .thumbs-wrapper {
+  margin: 5px !important;
+  overflow: hidden;
+}
+.carousel .thumb {
+  transition: border .15s ease-in;
+  display: inline-block;
+  margin-right: 0 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 40px !important;
+  border: 3px solid #fff;
+  padding: 2px;
 }
 /*.carousel .control-dots .dot{
   background: #6b3f66 !important;
