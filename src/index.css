@@ -2377,7 +2377,8 @@ footer {
     /*height: 200px !important;*/
   }
   .hotel-offer-card-info-container {
-    padding-top: 0 !important;
+    padding: 10px !important;
+    padding-bottom: 20px !important;
   }
   .mobile_hidden {
     display: none !important;
@@ -2702,6 +2703,7 @@ path {
 .carousel .thumbs-wrapper {
   margin: 5px !important;
   overflow: hidden;
+  display: none !important;
 }
 .carousel .thumb {
   transition: border .15s ease-in;
