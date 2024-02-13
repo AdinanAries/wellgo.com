@@ -2690,12 +2690,12 @@ path {
 .carousel.carousel-slider .control-arrow {
   opacity: 1 !important;
 }
-.carousel .control-next.control-arrow::before{
+/*.carousel .control-next.control-arrow::before{
   border-left: 12px solid orange !important;
 }
 .carousel .control-prev.control-arrow:before {
   border-right: 12px solid orange !important;
-}
+}*/
 /*.carousel .control-dots {
    bottom: calc(50% - 20px) !important;
    background-color: rgba(0, 0, 0, 0.3) !important;
