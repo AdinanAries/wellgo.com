@@ -1679,6 +1679,12 @@ footer {
   .agent_hero_menu_item.main {
     display: none;
   }
+  .selected_hotel_full_details_images_section {
+    display: block !important;
+  }
+  .selected_hotel_full_details_other_images_section {
+    display: none !important;
+  }
 }
 @media screen and (max-width: 1200px){
   .between-jumbotron-and-subsections, .home_page_most_visited_cities_list, .why-choose-us-container, #user_account_manager_page{
