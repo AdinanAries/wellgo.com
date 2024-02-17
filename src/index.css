@@ -1700,6 +1700,12 @@ footer {
 }
 
 @media screen and (max-width: 1200px){
+  .hotel_checkout_page_container {
+    padding: 0 10px;
+  }
+  .hotel_search_results_main_items_container {
+    padding-left: 10px;
+  }
   .checkout_passengers_container {
     padding-left: 10px;
   }
@@ -1738,6 +1744,12 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
+  .hotel_checkout_page_container {
+    padding: 0;
+  }
+  .hotel_checkout_page_main_wrapper {
+    padding-bottom: 200px;
+  }
   .search-page-wrapper {
     padding-left: 0;
     padding-right: 0;
