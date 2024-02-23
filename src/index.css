@@ -2713,12 +2713,32 @@ path {
 .carousel.carousel-slider .control-arrow {
   opacity: 1 !important;
 }
-/*.carousel .control-next.control-arrow::before{
-  border-left: 12px solid orange !important;
+.carousel .control-next.control-arrow,
+.carousel .control-prev.control-arrow
+{
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  height: 35px !important;
+  width: 35px !important;
+  border-radius: 100% !important;
+  margin: 5px;
+  top: calc(50% - 5px) !important;
+  font-size: 1px !important;
+  bottom: auto !important;
+  margin-top: auto !important;
+  padding: 0 !important;
 }
-.carousel .control-prev.control-arrow:before {
-  border-right: 12px solid orange !important;
-}*/
+.carousel .control-next.control-arrow::before{
+  border-left: 5px solid white !important;
+  border-top: 5px solid transparent !important;
+  border-bottom: 5px solid transparent !important;
+  margin: auto !important;
+}
+.carousel .control-prev.control-arrow::before {
+  border-right: 5px solid white !important;
+  border-top: 5px solid transparent !important;
+  border-bottom: 5px solid transparent !important;
+  margin: auto !important
+}
 /*.carousel .control-dots {
    bottom: calc(50% - 20px) !important;
    background-color: rgba(0, 0, 0, 0.3) !important;
