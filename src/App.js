@@ -70,12 +70,14 @@ function App() {
   }, []);
 
   const show_search_page = () => {
+    cancel_checkout();
     setShowSearchPage(true);
   }
   // making show_search_page() global
   window.__show_search_page__=show_search_page;
 
   const show_home_page = (with_search_form=false) => {
+    cancel_checkout();
     setShowSearchPage(false);
     setShowHomePageSearchForm(with_search_form);
   }
@@ -166,6 +168,7 @@ function App() {
       <Header  
         showSearchPage={showSearchPage}
         show_home_page={show_home_page} 
+        cancel_checkout={cancel_checkout}
         productType={productType}
       />
       <HomePage 

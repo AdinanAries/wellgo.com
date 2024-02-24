@@ -1767,6 +1767,9 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
+  .full-screen-pictures-gallery-close-btn {
+    z-index: 10000001 !important;
+  }
   .hotel_checkout_page_container {
     padding: 0;
   }

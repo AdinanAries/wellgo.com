@@ -10,6 +10,7 @@ function Header(props){
     const { 
         showSearchPage, 
         productType,
+        cancel_checkout,
     } = props;
     
     return (
@@ -30,17 +31,17 @@ function Header(props){
                     </div>
                     
                     <div className="header-menu-items">
-                        <div id="desktop_explore_menu_item" onClick={show_explore_page} className="each-header-menu-item">
+                        <div id="desktop_explore_menu_item" onClick={()=>{show_explore_page();cancel_checkout();}} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-globe" />Explore
                             </p>
                         </div>
-                        <div id="desktop_trips_menu_item" onClick={show_trips_page} className="each-header-menu-item">
+                        <div id="desktop_trips_menu_item" onClick={()=>{show_trips_page();cancel_checkout();}} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-briefcase" />Trips
                             </p>
                         </div>
-                        <div id="desktop_login_menu_item" onClick={show_login_page} className="each-header-menu-item">
+                        <div id="desktop_login_menu_item" onClick={()=>{show_login_page();cancel_checkout();}} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-user" />Account
                             </p>
@@ -80,7 +81,7 @@ function Header(props){
                                     </div>
                                 </div>
                             </div>
-                            <div id="mobile_login_menu_item" style={{marginRight: 0}} className="header_mobile_menus_item" onClick={show_login_page}>
+                            <div id="mobile_login_menu_item" style={{marginRight: 0}} className="header_mobile_menus_item" onClick={()=>{show_login_page();cancel_checkout();}}>
                                 <i style={{fontSize: 27, color: "rgba(255,255,255,0.6)"}} className="fa fa-user-circle"></i></div>
                         </div>
                     </div>
