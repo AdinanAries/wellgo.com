@@ -2419,6 +2419,11 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
+  .booking_hotel_each_room_item{
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
   .home_page_reviews_each_reviewer_pic {
     margin-top: 93px;
   }
