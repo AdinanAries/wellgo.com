@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import WillgoLogo from '../WillgoLogo.png';
+import BtcLogo from '../Byte_the_Code_logo.jpeg';
 import { getClient } from "../helpers/general";
 import { registerPriceAlertsUser } from "../services/accountServices";
 
@@ -65,9 +66,15 @@ function Footer(props){
                             </p>
                             <p className="footer-site-logo">
                                 <img src={WillgoLogo}/></p>
-                            <p style={{color: "white", fontSize: 14, marginTop: 5, textAlign: "center"}}>
-                                &copy; {new Date().getFullYear()}, all rights reserved
+                            <p style={{color: "rgba(255,255,255,0.7)", fontSize: 12, marginTop: 10, marginBottom: 5, textAlign: "center"}}>
+                               <span style={{color: "red", fontWeight: "bolder", fontSize: 14, letterSpacing: 0.5, fontFamily: "Courgette"}}>
+                                    Byte the Code LLC
+                                </span>
+                                <br/>&copy; {new Date().getFullYear()}, all rights reserved
                             </p>
+                            <p className="footer-site-logo">
+                                <img src={BtcLogo} style={{borderRadius: 4, width: 100,}}/></p>
+
                         </div>
                     </div>
                     <div className="footer_section_each_flex_section_container">
@@ -121,8 +128,8 @@ function Footer(props){
                         </div>
                     </div>
                 </div>
-                <p className="footer_very_lower_text" style={{marginTop: 20, textAlign: "center", opacity: 0.6, paddingTop: 20, color: "rgba(255,255,255,0.55)", borderTop: "1px solid rgba(255,255,255,0.3)"}}>
-                    &copy; {new Date().getFullYear()} welldugo.com...</p>
+                <p className="footer_very_lower_text" style={{marginTop: 20, textAlign: "center", opacity: 0.6, paddingTop: 20, paddingBottom: 20, color: "rgba(255,255,255,0.55)", borderTop: "1px solid rgba(255,255,255,0.3)"}}>
+                    &copy; {new Date().getFullYear()} Byte The Code LLC...</p>
             </div> 
         </footer>
     );
