@@ -1,6 +1,7 @@
 import $ from "jquery";
 import botIcon from "../icons/botIcon.svg";
 import { show_support_chat_start_page_container,  show_support_chat_settings_container} from "./HPSupport"
+import CONSTANTS from "../Constants/Constants";
 
 function HelpSupportChatMessaging(){
     return (
@@ -36,24 +37,36 @@ function HelpSupportChatMessaging(){
             <div id="hp_support_chat_items" style={{padding: 10, height: "calc(100% - 140px)", overflowY: "scroll", paddingBottom: 100, overscrollBehavior: "contain"}}>
                 
             </div>
-            <div id="main_support_chat_user_input_txt_wait_while_loading_status" style={{display: "none", padding: "0 10px", paddingTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
-                <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center"}}>
-                    <i style={{marginRight: 10, color: "orange"}} class="fa-solid fa-brain"></i>
-                    Please wait while bot is thinking...</p>
-            </div>
-            <div id="main_support_chat_user_input_txt_container" className="support_chat_user_input_txt_container">
-                <div className="support_chat_user_input_txt_inner_container">
-                    <textarea onFocus={chat_txt_input_focus_func} onBlur={chat_txt_input_blur_func}>
-                        type your message here...
-                    </textarea>
-                    <div id="hp_support_user_submit_chat_btn" className="cht-btn">
-                        <i style={{transform: "rotate(49deg)"}} className="fa fa-paper-plane"></i>
+            {
+                (!CONSTANTS.disabled_features.bot_aide.chat) && <>
+                    <div id="main_support_chat_user_input_txt_wait_while_loading_status" style={{display: "none", padding: "0 10px", paddingTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+                        <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center"}}>
+                            <i style={{marginRight: 10, color: "orange"}} class="fa-solid fa-brain"></i>
+                            Please wait while bot is thinking...</p>
                     </div>
-                </div>
-                <div id="suggested_bot_query_display">
+                    <div id="main_support_chat_user_input_txt_container" className="support_chat_user_input_txt_container">
+                        <div className="support_chat_user_input_txt_inner_container">
+                            <textarea onFocus={chat_txt_input_focus_func} onBlur={chat_txt_input_blur_func}>
+                                type your message here...
+                            </textarea>
+                            <div id="hp_support_user_submit_chat_btn" className="cht-btn">
+                                <i style={{transform: "rotate(49deg)"}} className="fa fa-paper-plane"></i>
+                            </div>
+                        </div>
+                        <div id="suggested_bot_query_display">
 
+                        </div>
+                    </div>
+                </>
+            }
+            {
+                
+                (CONSTANTS.disabled_features.bot_aide.chat) && <div id="main_support_chat_user_input_txt_wait_while_loading_status" style={{padding: "0 10px", paddingTop: 10, borderTop: "1px solid rgba(0,0,0,0.1)"}}>
+                    <p style={{fontFamily: "'Prompt', Sans-serif", fontSize: 14, textAlign: "center"}}>
+                        <i style={{marginRight: 10, color: "orange"}} class="fa-solid fa-tools"></i>
+                        Work In Progress. Cannot chat right now...</p>
                 </div>
-            </div>
+            }
         </div>
     )
 }
