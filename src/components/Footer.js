@@ -3,6 +3,7 @@ import WillgoLogo from '../WillgoLogo.png';
 import BtcLogo from '../Byte_the_Code_logo.jpeg';
 import { getClient } from "../helpers/general";
 import { registerPriceAlertsUser } from "../services/accountServices";
+import CONSTANTS from '../Constants/Constants';
 
 function Footer(props){
 
@@ -107,11 +108,11 @@ function Footer(props){
                             <div style={{marginTop: 10}}>
                                 <p style={{color: "white", textAlign: "center"}}>
                                     <i style={{marginRight: 10, opacity: 0.4, marginBottom: 8}} className="fa fa-envelope"></i>
-                                    support@welldugo.com
+                                    {CONSTANTS.our_company.contacts.support.email}
                                 </p>
                                 <p style={{color: "white", textAlign: "center"}}>
                                     <i style={{marginRight: 10, opacity: 0.4, marginBottom: 20}} className="fa fa-phone"></i>
-                                    +1 732-799-9546
+                                    {CONSTANTS.our_company.contacts.support.tel}
                                 </p>
                                 <p style={{color: "white", textAlign: "center"}}>
                                     <span style={{padding: "5px", marginRight: 10, borderRadius: 4, cursor: "pointer"}}>

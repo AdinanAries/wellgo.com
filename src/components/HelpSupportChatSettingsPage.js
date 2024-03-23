@@ -1,3 +1,4 @@
+import CONSTANTS from "../Constants/Constants";
 import botIcon from "../icons/botIcon.svg";
 import { show_support_chat_messaging_container } from "./HPSupport";
 
@@ -27,6 +28,23 @@ function HelpSupportSettingsPage(){
                             Settings</p>
                     </div>
                 </div>
+                {
+                    (CONSTANTS.disabled_features.bot_aide.settings) && <div style={{background: "rgba(0,0,0,0.07", padding: "40px 10px"}}>
+                        <p style={{textAlign: "center", fontWeight: "bolder", fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
+                            <i className="fa-solid fa-tools" style={{marginRight: 10, color: "red"}}></i>
+                            Site Maintenance Notice
+                        </p>
+                        <p style={{textAlign: "center", marginTop: 10, fontFamily: "'Prompt', Sans-serif", fontSize: 14, color: "rgba(0,0,0,0.8)"}}>
+                                This feature has been disabled due to ongoing site development work
+                            </p>
+                        
+                    </div>
+                }
+                {
+                    (!CONSTANTS.disabled_features.bot_aide.settings) && <div>
+                        To Do: Settings go here
+                    </div>
+                }
             </div>
         </div>
     );

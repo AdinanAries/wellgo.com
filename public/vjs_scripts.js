@@ -1,8 +1,17 @@
-for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
-  e.style.setProperty('--value', e.value);
-  e.style.setProperty('--min', e.min == '' ? '0' : e.min);
-  e.style.setProperty('--max', e.max == '' ? '100' : e.max);
-  e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+let bot_name='Aide';
+let support_contacts = {
+  email: "adinanaries@outlook.com",
+  tel: "+17327999546",
+  mobile: "+17327999546",
+}
+
+if(document.querySelectorAll('input[type="range"].slider-progress')){
+  for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
+    e.style.setProperty('--value', e.value);
+    e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+    e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+    e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+  }
 }
 
 window.instantiateSearchObj();
@@ -515,6 +524,7 @@ window.$(document).ready(()=>{
 });
 
 let show_chat_bot_uprading_message = () => {
+  
   if(document.getElementById("hp_support_chat_items"))
     document.getElementById("hp_support_chat_items").innerHTML = `
         <div class="support_chat_bot_sent_msg_container">
@@ -527,20 +537,23 @@ let show_chat_bot_uprading_message = () => {
         </div>
         <div id="chatbot_provided_manual_channels" style="display: none; animation: pop-in 0.2s ease-out;">
           <div style="display: flex; flex-direction: row; padding: 20px 0;">
-            <div style="cursor: pointer; margin-right: 10px; background-color: rgba(122,21,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
-                <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
-                    <i style="margin-right: 10px" class="fa fa-phone"></i>
-                    Call</p>
-            </div>
-            <div style="cursor: pointer; margin-right: 10px; background-color: rgba(21,122,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
-                <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
-                    <i style="margin-right: 10px;" class="fa fa-envelope"></i>
-                    Email</p>
-            </div>
+            <a href="tel:${support_contacts.tel}" style="text-decoration: none;">
+              <div style="cursor: pointer; margin-right: 10px; background-color: rgba(122,21,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+                  <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
+                      <i style="margin-right: 10px" class="fa fa-phone"></i>
+                      Call</p>
+              </div>
+            </a>
+            <a href="mailto:${support_contacts.email}" style="text-decoration: none;">
+              <div style="cursor: pointer; margin-right: 10px; background-color: rgba(21,122,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+                  <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
+                      <i style="margin-right: 10px;" class="fa fa-envelope"></i>
+                      Email</p>
+              </div>
+            </a>
           </div>
         </div>
     `;
-    let bot_name='Alien Dough'
     let all_txt=[
       `Hey! &#128400; ${bot_name} is my name.<br/>
       FYI, we are currently upgrading some site features...
@@ -641,7 +654,6 @@ window.start_book_with_vitual_agent=start_book_with_vitual_agent;
 
 if(document.getElementById("landing_page_search_bar_call_btn")){
   document.getElementById("landing_page_search_bar_call_btn").addEventListener("click", e=>{
-    alert("placing your call now");
     window.toggle_main_page_search_filters();
   });
 }
@@ -658,7 +670,7 @@ if(document.getElementById("landing_page_search_bar_help_pg_btn")){
 }
 
 window.onscroll = function() {
-  if(localStorage.getItem("is_home_page")){
+  if(localStorage.getItem("is_home_page") && ((window.location.pathname.substring(1)==="home") || (window.location.pathname.substring(1)===""))){
     if (window.pageYOffset > 40) { 
 
       if(window.$(window).width() > 1000){
