@@ -590,6 +590,15 @@ if(document.getElementById("main_homepage_start_support_btn")){
   });
 }
 
+if(document.getElementById("main_supportpage_start_support_btn")){
+  document.getElementById("main_supportpage_start_support_btn").addEventListener("click", e=>{
+    if(window.wellgo_bot.status===""){
+      show_chat_bot_uprading_message();
+    }
+    toggle_show_hp_support_chat_container();
+  });
+}
+
 /*if(document.getElementById("main_chatbot_popup_tip_msg")){
   document.getElementById("main_chatbot_popup_tip_msg").addEventListener("click", e=>{
     if(window.wellgo_bot.status===""){
