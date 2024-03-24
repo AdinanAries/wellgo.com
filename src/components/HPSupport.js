@@ -55,6 +55,20 @@ export default function HPSupportBtn(){
         setTouristAttraction(attraction);
     }
 
+    let is_tourist_attraction_rated=false; // TO DO: Move to state and assign when tourist data has been returned from server
+    let ratings_cover=<></>;
+    if(!is_tourist_attraction_rated){
+        ratings_cover = <div style={{position: "absolute", zIndex: 1, height: "100%", width: "100%", backgroundColor: "rgba(0,0,0,0.8)", border: "1px solid red", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <div style={{padding: 10}}>
+                <p style={{fontFamily: "'Prompt', Sans-serif", color: "white", fontSize: 12}}>
+                    <i className="fa-solid fa-exclamation-triangle" 
+                    style={{color: "yellow", marginRight: 10}}></i>
+                    No ratings found for this place...
+                </p>
+            </div>
+        </div>;
+    }
+
     const weatherCallback = (weatherData) => {
         console.log('Weather', weatherData);
         if(weatherData?.error){
@@ -233,7 +247,8 @@ export default function HPSupportBtn(){
                                     </div>
                                 </a>
                             </div>
-                            <div>
+                            <div style={{position: "relative"}}>
+                                {ratings_cover}
                                 <div style={{paddingTop: 5}}>
                                     <p style={{color: "white", fontSize: 11, marginBottom: 10}}>
                                         People who have visited rated this place</p>
@@ -623,6 +638,20 @@ const getBotSummariesPromptMarkup = (summaries) => {
 }
 
 const getPlacesPromptMarkup = (place) => {
+    let rated=false;
+
+    let ratings_cover=``;
+    if(!rated){
+        ratings_cover = `<div style="position: absolute; z-index: 1; height: 100%; width: 100%; background-color: rgba(0,0,0,0.8);  border: 1px solid red; display: flex; justify-content: space-between; align-items: center;">
+            <div style="padding: 10px;">
+                <p style="font-family: 'Prompt', Sans-serif; color: white; font-size: 12px;">
+                    <i class="fa-solid fa-exclamation-triangle" style="color: yellow; margin-right: 10px;"></i>
+                    No ratings found for this place...
+                </p>
+            </div>
+        </div>`
+    }
+
     return `
         <div>
             <div style="margin-top: 15px; height: 160px; background-image: url('${Tourism_Photo}'); background-size: cover; display: flex; flex-direction: column; justify-content: flex-end;">
@@ -639,7 +668,8 @@ const getPlacesPromptMarkup = (place) => {
                     </div>
                 </a>
             </div>
-            <div>
+            <div style="position: relative;">
+                ${ratings_cover}
                 <div style="padding-top: 5px;">
                     <p style="color: white; font-size: 11px; margin-bottom: 10px;">
                         People who have visited rated this place</p>
