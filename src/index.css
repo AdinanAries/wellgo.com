@@ -1767,6 +1767,9 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
+  .deals-list-item {
+    width: calc(33% - 3px) !important;
+  }
   .full-screen-pictures-gallery-close-btn {
     z-index: 10000001 !important;
   }
@@ -2373,7 +2376,15 @@ footer {
     padding-bottom: 30px !important;
   }
 }
+@media screen and (max-width: 910px) {
+  .deals-list-item {
+    width: calc(33% - 4px) !important;
+  }
+}
 @media screen and (max-width: 780px) {
+  .deals-list-item {
+    width: calc(50% - 6px) !important;
+  }
   .home_page_most_visited_cities_list{
     display: block;
   }
@@ -2423,6 +2434,9 @@ footer {
 }
 
 @media screen and (max-width: 480px) {
+  .deals-list-item {
+    width: calc(100% - 6px) !important;
+  }
   .booking_hotel_each_room_item{
     max-width: 100% !important;
     margin-left: 0 !important;
