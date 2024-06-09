@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 const BotRandPrompt = (props) => {
 
     const {
+        requiredAction,
         promptMessage,
     } = props;
 
@@ -31,7 +32,7 @@ const BotRandPrompt = (props) => {
         { isTyping ?
             <p className="bot-rand-prompt-element-msg">
                 Typing...</p> :
-            <p className="bot-rand-prompt-element-msg">
+            <p  onClick={requiredAction} className="bot-rand-prompt-element-msg">
                 {promptMessage}</p>
         }
         <div onClick={closePrompt} className="bot-rand-prompt-element-close-btn">
