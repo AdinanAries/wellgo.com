@@ -3038,7 +3038,7 @@ body input[type=range]::-ms-thumb:active {
   height: auto;
   box-shadow: 1px 2px 3px rgba(0,0,0,0.33);
   border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-right-radius: 20px;
   position: absolute;
   top: calc(100% + 30px);
   left: 60px;
@@ -3072,7 +3072,7 @@ body input[type=range]::-ms-thumb:active {
   font-size: 12px;
   text-align: center;
   height: 40px;
-  border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 20px;
   border-bottom-right-radius: 8px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   position: absolute;
