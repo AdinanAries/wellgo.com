@@ -3032,21 +3032,22 @@ body input[type=range]::-ms-thumb:active {
   animation: pop-in 0.2s ease-out;
   z-index: 100;
   background-color: black;
-  max-width: 200px;
-  min-width: 150px;
-  padding: 10px 15px;
+  max-width: 300px;
+  min-width: 200px;
+  padding: 20px;
   height: auto;
   box-shadow: 1px 2px 3px rgba(0,0,0,0.33);
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   position: absolute;
   top: calc(100% + 30px);
   left: 60px;
-  border: 2px solid red;
+  /*border: 1px solid red;*/
   transition: all 2s linear;
 }
 .bot-rand-prompt-element-msg{
   color: white;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
   font-family: 'Prompt', sans-serif;
 }
@@ -3055,8 +3056,8 @@ body input[type=range]::-ms-thumb:active {
   height: auto;
   margin: auto;
   position: absolute;
-  top: -16px;
-  left: 10px;
+  top: -13px;
+  left: 20px;
 }
 .bot-rand-prompt-element-arrow {
   height: 60px;
@@ -3068,14 +3069,14 @@ body input[type=range]::-ms-thumb:active {
 .bot-rand-prompt-element-close-btn {
   background-color: crimson;
   color: white;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  box-shadow: 1px 2px 3px rgba(0,0,0,0.33);
+  height: 40px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   position: absolute;
-  bottom: -35px;
+  bottom: -40px;
   left: 0;
   width: 100%;
   font-family: 'Prompt', sans-serif;
