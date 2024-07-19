@@ -536,19 +536,19 @@ let show_chat_bot_uprading_message = () => {
           </div>
         </div>
         <div id="chatbot_provided_manual_channels" style="display: none; animation: pop-in 0.2s ease-out;">
-          <div style="display: flex; flex-direction: row; padding: 20px 0;">
+          <div style="display: flex; flex-direction: row;">
             <a href="tel:${support_contacts.tel}" style="text-decoration: none;">
-              <div style="cursor: pointer; margin-right: 10px; background-color: rgba(122,21,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
-                  <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
-                      <i style="margin-right: 10px" class="fa fa-phone"></i>
-                      Call</p>
+              <div style="cursor: pointer; margin-right: 10px;">
+                  <p style="font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.5); letter-spacing: 1px; font-size: 12px;">
+                    <i style="margin-right: 5px" class="fa fa-phone"></i>
+                  </p>
               </div>
             </a>
             <a href="mailto:${support_contacts.email}" style="text-decoration: none;">
-              <div style="cursor: pointer; margin-right: 10px; background-color: rgba(21,122,112); padding: 20px; border-radius: 50px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
-                  <p style="font-weight: bolder; font-family: 'Prompt', Sans-serif; color: white; letter-spacing: 1px; font-size: 12px;">
-                      <i style="margin-right: 10px;" class="fa fa-envelope"></i>
-                      Email</p>
+              <div style="cursor: pointer; margin-right: 10px;">
+                  <p style="font-family: 'Prompt', Sans-serif; color: rgba(0,0,0,0.5); letter-spacing: 1px; font-size: 12px;">
+                    <i style="margin-right: 5px;" class="fa fa-envelope"></i>
+                  </p>
               </div>
             </a>
           </div>

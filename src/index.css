@@ -1455,11 +1455,12 @@ footer {
 }
 .support_chat_user_sent_msg_inner_container, .support_chat_user_input_input_suggestions{
   max-width: calc(100% - 20px);
-  background-color: rgb(218, 232, 238);
+  /*background-color: rgb(218, 232, 238);*/
+  background-color: #eee;
   border-radius: 30px;
   border-top-right-radius: 0;
   padding: 20px 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
 }
 .support_chat_user_sent_msg_inner_container p{
   color: rgba(0, 0, 0, 0.9);
@@ -1477,8 +1478,8 @@ footer {
 .support_chat_bot_sent_msg_container_bot_profile_pic, .support_chat_bot_sent_msg_container_user_profile_pic {
   position: absolute;
   z-index: 1;
-  top: -15px;
-  left: 10px;
+  top: -10px;
+  left: -5px;
   width: 34px;
   height: 35px;
   background-color: #eee;
@@ -1491,25 +1492,29 @@ footer {
 .support_chat_bot_sent_msg_container_user_profile_pic{
   left: initial;
   border: 3px solid rgb(218, 232, 238);
+  top: -15px;
   right: 0;
 }
 .support_chat_bot_sent_msg_container_bot_profile_pic i {
-  color: rgb(134, 18, 147);
+  color: rgb(190, 190, 190);
 }
 .support_chat_bot_sent_msg_container_user_profile_pic i {
   color: rgb(18, 110, 147);
 }
 .support_chat_bot_sent_msg_inner_container{
   max-width: calc(100% - 20px);
-  background-color: rgb(236, 226, 240);
+  /*background-color: rgb(236, 226, 240);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
+  border-radius: 30px;*/
   border-top-left-radius: 0;
-  padding: 20px 10px;
+  /*padding: 20px 10px;*/
+  padding: 10px;
+  padding-top: 30px;
+  border-left: 3px solid rgb(236, 226, 240);
 }
 .support_chat_bot_sent_msg_inner_container p{
   color: rgba(0, 0, 0, 0.9);
-  font-size: 15px;
+  font-size: 14px;
   font-family: 'Prompt', sans-serif;
 }
 .support_chat_bot_msg_highlights{
@@ -1527,8 +1532,9 @@ footer {
   left: 5px;
   width: calc(100% - 10px);
   border-radius: 50px;
-  background-color: rgb(238, 237, 237);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  /*background-color: rgb(238, 237, 237);
+  border: 1px solid rgba(0, 0, 0, 0.1);*/
+  background-color: #eee;
   overflow: hidden;
   height: 50px;
   z-index: 2;
