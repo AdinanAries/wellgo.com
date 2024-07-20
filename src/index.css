@@ -3037,22 +3037,25 @@ body input[type=range]::-ms-thumb:active {
 .bot-rand-prompt-element{
   animation: pop-in 0.2s ease-out;
   z-index: 100;
-  background-color: black;
+  background-color: white;
   max-width: 300px;
-  min-width: 200px;
+  min-width: 230px;
   padding: 20px;
+  padding-right: 50px;
   height: auto;
+  border-radius: 50px;
   box-shadow: 1px 2px 3px rgba(0,0,0,0.33);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 20px;
+  /*border-top-left-radius: 8px;
+  border-top-right-radius: 20px;*/
   position: absolute;
-  top: calc(100% + 30px);
+  top: calc(100% + 25px);
   left: 60px;
   /*border: 1px solid red;*/
   transition: all 2s linear;
 }
 .bot-rand-prompt-element-msg{
-  color: white;
+  /*color: white;*/
+  color: rgba(0, 0, 0, 0.8);
   font-size: 12px;
   text-align: center;
   font-family: 'Prompt', sans-serif;
@@ -3077,14 +3080,18 @@ body input[type=range]::-ms-thumb:active {
   color: white;
   font-size: 12px;
   text-align: center;
-  height: 40px;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  /*width: 100%;
   border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 8px;
+  border-bottom-right-radius: 8px;*/
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.33);
   position: absolute;
-  bottom: -40px;
-  left: 0;
-  width: 100%;
+  /*bottom: -40px;
+  left: 0;*/
+  top: calc(50% - 15px);
+  right: 5px;
   font-family: 'Prompt', sans-serif;
   display: flex;
   justify-content: center;

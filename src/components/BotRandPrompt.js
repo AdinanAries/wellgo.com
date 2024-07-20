@@ -36,7 +36,7 @@ const BotRandPrompt = (props) => {
                 {promptMessage}</p>
         }
         <div onClick={closePrompt} className="bot-rand-prompt-element-close-btn">
-            Close
+            X
         </div>
     </div>;
 }
