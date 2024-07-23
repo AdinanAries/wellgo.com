@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import bot_img from "../bot-rand-prompt.png";
+import getBotResponse from "../Constants/BotResponses";
+import CONSTANTS from "../Constants/Constants";
 
 const Waiting = (props) => {
 
@@ -25,7 +27,9 @@ const Waiting = (props) => {
                     Fetching Data
                 </p>
                 <p style={{color: "white", fontSize: 14, marginBottom: 60, marginTop: 10}}>
-                    We are working on it. Please be wait!</p>
+                {
+                    getBotResponse(CONSTANTS.bot.responses.wait_while_loading)
+                }</p>
             </>
         }
         <div className="waiting"></div>
