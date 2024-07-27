@@ -3039,14 +3039,16 @@ body input[type=range]::-ms-thumb:active {
   z-index: 100;
   background-color: white;
   max-width: 300px;
-  min-width: 210px;
+  min-width: 220px;
   padding: 10px;
   padding-right: 50px;
   height: auto;
-  border-radius: 50px;
+  /*border-radius: 50px;*/
   box-shadow: 1px 2px 3px rgba(0,0,0,0.33);
-  /*border-top-left-radius: 8px;
-  border-top-right-radius: 20px;*/
+  border: 2px dashed rgb(90, 90, 90);
+  border-left: 4px solid red;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
   text-shadow: none;
   position: absolute;
   top: calc(100% + 25px);
@@ -3079,7 +3081,6 @@ body input[type=range]::-ms-thumb:active {
   /*background-color: crimson;
   color: white;*/
   color: crimson;
-  font-size: 12px;
   text-align: center;
   height: 30px;
   width: 30px;
@@ -3098,6 +3099,9 @@ body input[type=range]::-ms-thumb:active {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.bot-rand-prompt-element-close-btn i {
+  font-size: 22px !important;
 }
 .bounce {
   animation: bounce 2s infinite;
