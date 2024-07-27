@@ -141,16 +141,23 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
   } else {
     bot_reply_msg = window.virtual_assistant_functions.return_server_failed_error();
   }
+
+  // Handle Third-Party Responses Here
+  if(!wellgo_bot.status && bot_reply.sec_type==="third_pary_response"){
+    bot_reply_msg=bot_reply.msg;
+  }
   
   if(TEXT_ELE.value.trim() === "" || TEXT_ELE.value.trim() === "type your message here..."){
     //dont add empty input to chat displayed items
     document.getElementById("main_chat_bot_status_display").innerHTML=window.return_bot_chat_status_markup("online");
   }else{
     if(TEXT_ELE.value !== "$%#%%%#@@&&&**(*)"){
-      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_user_chat_message_markup(TEXT_ELE.value.trim());
+      document.getElementById("hp_support_chat_items").innerHTML 
+        += window.return_each_user_chat_message_markup(TEXT_ELE.value.trim());
     }
     setTimeout(()=>{
-      document.getElementById("hp_support_chat_items").innerHTML += window.return_each_bot_chat_message_markup(bot_reply_msg);
+      document.getElementById("hp_support_chat_items").innerHTML 
+        += window.return_each_bot_chat_message_markup(bot_reply_msg);
       if(wellgo_bot.scroll_chat){
         window.$("#hp_support_chat_items").scrollTop(
           window.$("#hp_support_chat_items").prop("scrollHeight")
