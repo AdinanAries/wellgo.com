@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import PasswordReset from './PasswordReset/PasswordReset';
 import reportWebVitals from './reportWebVitals';
 import CONSTANTS from './Constants/Constants';
 
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route path={CONSTANTS.site_pages.explore} element={<App />} />
         <Route path={CONSTANTS.site_pages.landing} element={<App />} />
         <Route path={CONSTANTS.site_pages.support} element={<App />} />
+        <Route path={CONSTANTS.site_pages.password_reset} element={<PasswordReset />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
