@@ -31,6 +31,8 @@ function Header(props){
                               let userResponse = window.confirm("Do you want to exit the checkout page?");
                               if (userResponse) {
                                 //console.log("User clicked OK");
+                                show_home_page();
+                                props.show_home_page();
                                 // Reset app level checkout status
                                 CONSTANTS.checkout_pages.app_level_checkout_status=false;
                               } else {
@@ -39,8 +41,6 @@ function Header(props){
                               }
                             }
 
-                            show_home_page();
-                            props.show_home_page();
                         }} className="site-logo">
                             <p className="site-logo-img">
                                 <img src={WillgoLogo} alt={"to do"} /></p>
@@ -61,6 +61,8 @@ function Header(props){
                               let userResponse = window.confirm("Do you want to exit the checkout page?");
                               if (userResponse) {
                                 //console.log("User clicked OK");
+                                show_explore_page();
+                                cancel_checkout();
                                 // Reset app level checkout status
                                 CONSTANTS.checkout_pages.app_level_checkout_status=false;
                               } else {
@@ -69,8 +71,6 @@ function Header(props){
                               }
                             }
 
-                            show_explore_page();
-                            cancel_checkout();
                         }} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-globe" />Explore
@@ -83,6 +83,8 @@ function Header(props){
                               let userResponse = window.confirm("Do you want to exit the checkout page?");
                               if (userResponse) {
                                 //console.log("User clicked OK");
+                                show_trips_page();
+                                cancel_checkout();
                                 // Reset app level checkout status
                                 CONSTANTS.checkout_pages.app_level_checkout_status=false;
                               } else {
@@ -91,8 +93,6 @@ function Header(props){
                               }
                             }
 
-                            show_trips_page();
-                            cancel_checkout();
                         }} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-briefcase" />Trips
@@ -105,6 +105,8 @@ function Header(props){
                               let userResponse = window.confirm("Do you want to exit the checkout page?");
                               if (userResponse) {
                                 //console.log("User clicked OK");
+                                show_login_page();
+                                cancel_checkout();
                                 // Reset app level checkout status
                                 CONSTANTS.checkout_pages.app_level_checkout_status=false;
                               } else {
@@ -113,8 +115,6 @@ function Header(props){
                               }
                             }
 
-                            show_login_page();
-                            cancel_checkout();
                         }} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-user" />Account
@@ -127,6 +127,8 @@ function Header(props){
                                   let userResponse = window.confirm("Do you want to exit the checkout page?");
                                   if (userResponse) {
                                     //console.log("User clicked OK");
+                                    show_home_page(false);
+                                    props.show_home_page(true);
                                     // Reset app level checkout status
                                     CONSTANTS.checkout_pages.app_level_checkout_status=false;
                                   } else {
@@ -135,8 +137,6 @@ function Header(props){
                                   }
                                 }
 
-                                show_home_page(false);
-                                props.show_home_page(true);
                                 if(!showSearchPage){
                                     show_full_search_form();
                                 }
@@ -165,6 +165,7 @@ function Header(props){
                                   let userResponse = window.confirm("Do you want to exit the checkout page?");
                                   if (userResponse) {
                                     //console.log("User clicked OK");
+                                    show_trips_page();
                                     // Reset app level checkout status
                                     CONSTANTS.checkout_pages.app_level_checkout_status=false;
                                   } else {
@@ -173,7 +174,6 @@ function Header(props){
                                   }
                                 }
 
-                                show_trips_page();
                             }}>
                                 <i className="fa fa-briefcase"></i>
                             </div>
@@ -185,6 +185,8 @@ function Header(props){
                                       let userResponse = window.confirm("Do you want to exit the checkout page?");
                                       if (userResponse) {
                                         //console.log("User clicked OK");
+                                        show_home_page(false);
+                                        props.show_home_page(true);
                                         // Reset app level checkout status
                                         CONSTANTS.checkout_pages.app_level_checkout_status=false;
                                       } else {
@@ -193,8 +195,6 @@ function Header(props){
                                       }
                                     }
 
-                                    show_home_page(false);
-                                    props.show_home_page(true);
                                     if(!showSearchPage){
                                         show_full_search_form();
                                     }
@@ -221,6 +221,8 @@ function Header(props){
                                   let userResponse = window.confirm("Do you want to exit the checkout page?");
                                   if (userResponse) {
                                     //console.log("User clicked OK");
+                                    show_login_page();
+                                    cancel_checkout();
                                     // Reset app level checkout status
                                     CONSTANTS.checkout_pages.app_level_checkout_status=false;
                                   } else {
@@ -229,8 +231,6 @@ function Header(props){
                                   }
                                 }
 
-                                show_login_page();
-                                cancel_checkout();
                               }}>
                                 <i style={{fontSize: 27, color: "rgba(255,255,255,0.6)"}} className="fa fa-user-circle"></i></div>
                         </div>
