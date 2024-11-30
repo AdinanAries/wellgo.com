@@ -64,7 +64,7 @@ function App() {
   const [ paymentIntent, setPaymentIntent ] = useState();
   const [ bookingIntent, setBookingIntent ] = useState();
   const [ productType, setProductType ] = useState(PRODUCT_TYPE);
-  
+
   useEffect(()=>{
     UseCurrentPage();
   }, []);
@@ -85,11 +85,22 @@ function App() {
   window.__show_home_page__=show_home_page;
 
   const cancel_checkout = () => {
-    setIsCheckout(false);
-    setcheckoutPayload({});
-    
-    // Constant App Level Checkout Status
-    CONSTANTS.checkout_pages.app_level_checkout_status=false;
+
+    // Ask before leaving checkout page
+    if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+      let userResponse = window.confirm("Do you want to exit the checkout page?");
+      if (userResponse) {
+        //console.log("User clicked OK");
+        setIsCheckout(false);
+        setcheckoutPayload({});
+        // Reset app level checkout status
+        CONSTANTS.checkout_pages.app_level_checkout_status=false;
+      } else {
+        //console.log("User clicked Cancel");
+        return;
+      }
+    }
+
   }
 
   const change_product_type = (type=0, call_back=()=>{}) => {
@@ -145,20 +156,20 @@ function App() {
   return (
     <div className="">
       {
-        toggleShowCurrencyPage && <CurrenciesPane 
+        toggleShowCurrencyPage && <CurrenciesPane
           SelectSiteCurrency={SelectSiteCurrency}
           toggle_show_hide_pane={toggle_show_hide_currency_page} />
       }
       {
-        toggleShowLanguagesPage && <LanguagesPane 
+        toggleShowLanguagesPage && <LanguagesPane
           SelectSiteLanguage={SelectSiteLanguage}
           toggle_show_hide_pane={toggle_show_hide_languages_page} />
       }
       <HPSupport />
       <MobileMenu />
       {
-        isCheckout ? 
-          <CheckoutPage 
+        isCheckout ?
+          <CheckoutPage
             LogMeIn={LogMeIn}
             payload={checkoutPayload}
             cancel_checkout={cancel_checkout}
@@ -168,17 +179,17 @@ function App() {
             setBookingIntent={setBookingIntent}
             productType={productType}
             change_product_type={change_product_type}
-          /> 
+          />
         : ""
       }
-      <Header  
+      <Header
         showSearchPage={showSearchPage}
-        show_home_page={show_home_page} 
+        show_home_page={show_home_page}
         cancel_checkout={cancel_checkout}
         productType={productType}
       />
-      <HomePage 
-        show_search_page={show_search_page} 
+      <HomePage
+        show_search_page={show_search_page}
         showSearchPage={showSearchPage}
         begin_checkout={begin_checkout}
         showSearchForm={showHomePageSearchForm}
@@ -191,18 +202,18 @@ function App() {
       />
       <TripsPage />
       <DealsPage />
-      <HelpPage /> 
+      <HelpPage />
       <div className='wrapper'  id="login_page" style={{display: "none"}}>
         <LoginPage
           LogMeIn={LogMeIn}
-          isLoggedIn={isLoggedIn} /> 
-        <UserAccountPage 
+          isLoggedIn={isLoggedIn} />
+        <UserAccountPage
           LogMeOut={LogMeOut}
-          isLoggedIn={isLoggedIn} /> 
+          isLoggedIn={isLoggedIn} />
       </div>
       <ExplorePage />
       <Footer />
-      <ToastContainer 
+      <ToastContainer
         className="my-toast-container"
         position="top-left" />
     </div>

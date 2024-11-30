@@ -2,29 +2,46 @@ import { show_main_mobile_menu } from "./MobileMenu";
 
 import WillgoLogo from '../WillgoLogo.png';
 
-import { 
-    show_login_page, 
-    show_home_page, 
-    show_trips_page, 
+import {
+    show_login_page,
+    show_home_page,
+    show_trips_page,
     show_explore_page,
-    show_full_search_form 
+    show_full_search_form
 } from '../helpers/PageRoutingFuncs';
 import CONSTANTS from "../Constants/Constants";
 
 function Header(props){
 
-    const { 
-        showSearchPage, 
+    const {
+        showSearchPage,
         productType,
         cancel_checkout,
     } = props;
-    
+
     return (
         <header id="site_main_header">
             <div className="wrapper">
                 <div className="header_content_container" style={{display: "flex", justifyContent: "space-between"}}>
                     <div style={{height: "60px", display: "flex", flexDirection: "column", justifyContent: "center"}}>
-                        <div onClick={()=>{show_home_page();props.show_home_page();}} className="site-logo">
+                        <div onClick={()=>{
+
+                            // Ask before leaving checkout page
+                            if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                              let userResponse = window.confirm("Do you want to exit the checkout page?");
+                              if (userResponse) {
+                                //console.log("User clicked OK");
+                                // Reset app level checkout status
+                                CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                              } else {
+                                //console.log("User clicked Cancel");
+                                return;
+                              }
+                            }
+
+                            show_home_page();
+                            props.show_home_page();
+                        }} className="site-logo">
                             <p className="site-logo-img">
                                 <img src={WillgoLogo} alt={"to do"} /></p>
                             <div className="site-logo-txt">
@@ -35,24 +52,89 @@ function Header(props){
                             </div>
                         </div>
                     </div>
-                    
+
                     <div className="header-menu-items">
-                        <div id="desktop_explore_menu_item" onClick={()=>{show_explore_page();cancel_checkout();}} className="each-header-menu-item">
+                        <div id="desktop_explore_menu_item" onClick={()=>{
+
+                            // Ask before leaving checkout page
+                            if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                              let userResponse = window.confirm("Do you want to exit the checkout page?");
+                              if (userResponse) {
+                                //console.log("User clicked OK");
+                                // Reset app level checkout status
+                                CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                              } else {
+                                //console.log("User clicked Cancel");
+                                return;
+                              }
+                            }
+
+                            show_explore_page();
+                            cancel_checkout();
+                        }} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-globe" />Explore
                             </p>
                         </div>
-                        <div id="desktop_trips_menu_item" onClick={()=>{show_trips_page();cancel_checkout();}} className="each-header-menu-item">
+                        <div id="desktop_trips_menu_item" onClick={()=>{
+
+                            // Ask before leaving checkout page
+                            if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                              let userResponse = window.confirm("Do you want to exit the checkout page?");
+                              if (userResponse) {
+                                //console.log("User clicked OK");
+                                // Reset app level checkout status
+                                CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                              } else {
+                                //console.log("User clicked Cancel");
+                                return;
+                              }
+                            }
+
+                            show_trips_page();
+                            cancel_checkout();
+                        }} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-briefcase" />Trips
                             </p>
                         </div>
-                        <div id="desktop_login_menu_item" onClick={()=>{show_login_page();cancel_checkout();}} className="each-header-menu-item">
+                        <div id="desktop_login_menu_item" onClick={()=>{
+
+                            // Ask before leaving checkout page
+                            if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                              let userResponse = window.confirm("Do you want to exit the checkout page?");
+                              if (userResponse) {
+                                //console.log("User clicked OK");
+                                // Reset app level checkout status
+                                CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                              } else {
+                                //console.log("User clicked Cancel");
+                                return;
+                              }
+                            }
+
+                            show_login_page();
+                            cancel_checkout();
+                        }} className="each-header-menu-item">
                             <p>
                                 <i className="fa fa-user" />Account
                             </p>
                         </div>
                         <div id="desktop_search_menu_item" onClick={()=>{
+
+                                // Ask before leaving checkout page
+                                if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                                  let userResponse = window.confirm("Do you want to exit the checkout page?");
+                                  if (userResponse) {
+                                    //console.log("User clicked OK");
+                                    // Reset app level checkout status
+                                    CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                                  } else {
+                                    //console.log("User clicked Cancel");
+                                    return;
+                                  }
+                                }
+
                                 show_home_page(false);
                                 props.show_home_page(true);
                                 if(!showSearchPage){
@@ -61,9 +143,9 @@ function Header(props){
                             }} className="each-header-menu-item active">
                             <div style={{display: "flex", flexDirection: "row", fontSize: 14, paddingRight: "5px", width: 105, color: "rgba(255,255,255,0.7)", /*border: "1px solid rgba(255,255,255,0.2)",*/ borderRadius: 50,}}>
                                 <div style={{textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", width: 35, height: 35, backgroundColor: "white", borderRadius: "100%", marginRight: 10}}>
-                                    <i style={{display: 'inline', color: "rgb(46, 98, 133)", margin: 0, fontSize: 17}} 
+                                    <i style={{display: 'inline', color: "rgb(46, 98, 133)", margin: 0, fontSize: 17}}
                                         className={showSearchPage? "fa-solid fa-home" :
-                                        ( 
+                                        (
                                             (productType===CONSTANTS.product_types.flights) ? "fa-solid fa-plane-departure"
                                             : (productType===CONSTANTS.product_types.stays) ? "fa-solid fa-hotel"
                                             : (productType===CONSTANTS.product_types.rental_cars) ? "fa-solid fa-car" : ""
@@ -76,11 +158,41 @@ function Header(props){
                     </div>
                     <div className="header_humburger_menu">
                         <div className="header_mobile_menus" style={{display: "flex", flexDirection: "row"}}>
-                            <div style={{display: "none"}} id="mobile_trips_menu_item" className="header_mobile_menus_item" onClick={show_trips_page}>
+                            <div style={{display: "none"}} id="mobile_trips_menu_item" className="header_mobile_menus_item" onClick={()=>{
+
+                                // Ask before leaving checkout page
+                                if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                                  let userResponse = window.confirm("Do you want to exit the checkout page?");
+                                  if (userResponse) {
+                                    //console.log("User clicked OK");
+                                    // Reset app level checkout status
+                                    CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                                  } else {
+                                    //console.log("User clicked Cancel");
+                                    return;
+                                  }
+                                }
+
+                                show_trips_page();
+                            }}>
                                 <i className="fa fa-briefcase"></i>
                             </div>
-                            <div id="mobile_search_menu_item" style={{marginRight: 18}} className="header_mobile_menus_item active" 
+                            <div id="mobile_search_menu_item" style={{marginRight: 18}} className="header_mobile_menus_item active"
                                 onClick={()=>{
+
+                                    // Ask before leaving checkout page
+                                    if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                                      let userResponse = window.confirm("Do you want to exit the checkout page?");
+                                      if (userResponse) {
+                                        //console.log("User clicked OK");
+                                        // Reset app level checkout status
+                                        CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                                      } else {
+                                        //console.log("User clicked Cancel");
+                                        return;
+                                      }
+                                    }
+
                                     show_home_page(false);
                                     props.show_home_page(true);
                                     if(!showSearchPage){
@@ -89,9 +201,9 @@ function Header(props){
                                 }}>
                                 <div style={{display: "flex", flexDirection: "row", margin: 0, fontSize: 14, height: "auto", paddingRight: "10px", width: 100, justifyContent: "flex-start", textAlign: "center", color: "rgba(255,255,255,0.7)", /*border: "1px solid rgba(255,255,255,0.2)",*/ borderRadius: 50}}>
                                     <div style={{textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", width: 35, height: 35, backgroundColor: "white", borderRadius: "100%", margin: 0, marginRight: 10}}>
-                                        <i style={{display: 'inline', color: "rgb(46, 98, 133)", margin: 0, fontSize: 15}} 
+                                        <i style={{display: 'inline', color: "rgb(46, 98, 133)", margin: 0, fontSize: 15}}
                                             className={showSearchPage ? "fa-solid fa-home"
-                                            :( 
+                                            :(
                                                 (productType===CONSTANTS.product_types.flights) ? "fa-solid fa-plane-departure"
                                                 : (productType===CONSTANTS.product_types.stays) ? "fa-solid fa-hotel"
                                                 : (productType===CONSTANTS.product_types.rental_cars) ? "fa-solid fa-car" : ""
@@ -102,11 +214,28 @@ function Header(props){
                                     </div>
                                 </div>
                             </div>
-                            <div id="mobile_login_menu_item" style={{marginRight: 0}} className="header_mobile_menus_item" onClick={()=>{show_login_page();cancel_checkout();}}>
+                            <div id="mobile_login_menu_item" style={{marginRight: 0}} className="header_mobile_menus_item" onClick={()=>{
+
+                                // Ask before leaving checkout page
+                                if(CONSTANTS.checkout_pages.app_level_checkout_status===true) {
+                                  let userResponse = window.confirm("Do you want to exit the checkout page?");
+                                  if (userResponse) {
+                                    //console.log("User clicked OK");
+                                    // Reset app level checkout status
+                                    CONSTANTS.checkout_pages.app_level_checkout_status=false;
+                                  } else {
+                                    //console.log("User clicked Cancel");
+                                    return;
+                                  }
+                                }
+
+                                show_login_page();
+                                cancel_checkout();
+                              }}>
                                 <i style={{fontSize: 27, color: "rgba(255,255,255,0.6)"}} className="fa fa-user-circle"></i></div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </header>
