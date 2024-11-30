@@ -87,6 +87,9 @@ function App() {
   const cancel_checkout = () => {
     setIsCheckout(false);
     setcheckoutPayload({});
+    
+    // Constant App Level Checkout Status
+    CONSTANTS.checkout_pages.app_level_checkout_status=false;
   }
 
   const change_product_type = (type=0, call_back=()=>{}) => {
@@ -105,6 +108,9 @@ function App() {
   const begin_checkout = (data) => {
     setIsCheckout(true);
     setcheckoutPayload(data);
+
+    // Constant App Level Checkout Status
+    CONSTANTS.checkout_pages.app_level_checkout_status=true;
   }
 
   const toggle_show_hide_currency_page = () => {
