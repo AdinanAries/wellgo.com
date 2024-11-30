@@ -91,8 +91,6 @@ function App() {
       let userResponse = window.confirm("Do you want to exit the checkout page?");
       if (userResponse) {
         //console.log("User clicked OK");
-        setIsCheckout(false);
-        setcheckoutPayload({});
         // Reset app level checkout status
         CONSTANTS.checkout_pages.app_level_checkout_status=false;
       } else {
@@ -100,6 +98,9 @@ function App() {
         return;
       }
     }
+
+    setIsCheckout(false);
+    setcheckoutPayload({});
 
   }
 
