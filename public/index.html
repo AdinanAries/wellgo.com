@@ -28,9 +28,9 @@
     <script type="text/javascript" src="./daterangepicker-master/moment.min.js"></script>
     <script type="text/javascript" src="./daterangepicker-master/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="./daterangepicker-master/daterangepicker.css" />
-    
+
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
+
     <link
       href="https://fonts.googleapis.com/css?family=Roboto"
       rel="stylesheet"
@@ -60,6 +60,23 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script type="text/javascript">
+
+      function isLocalStorageEnabled() {
+          try {
+              const testKey = '__storage_test__';
+              localStorage.setItem(testKey, 'test');
+              localStorage.removeItem(testKey);
+              return true;
+          } catch (e) {
+              return false;
+          }
+      }
+
+      if(!isLocalStorageEnabled()){
+          // Set page path to redirect to local storage disabled page
+          window.location = 'https://google.com';
+      }
+
       function instantiateSearchObj(){
         var search_obj = {
           type: "one-way",
@@ -113,7 +130,7 @@
             }
           ]
         }
-        
+
         if(localStorage.getItem("hotel_search_obj")){
           //other code here
         }else{
