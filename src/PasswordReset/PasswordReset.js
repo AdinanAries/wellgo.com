@@ -57,7 +57,7 @@ const PasswordReset = (props) => {
       toggleFormValidation("ok", false, "");
       const res = await resetPassword(formData);
       setIsLoading(false);
-      if(res.isError){
+      if(res?.isError){
         toggleFormValidation("warning", true, res.message);
       } else {
         // Success Status Logic Here

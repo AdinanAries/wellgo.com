@@ -119,10 +119,33 @@ export const registerPost = async (formData, path=`\\api\\users\\register\\`) =>
             console.log(err);
             return {isError: true, message: err.message};
         })
-    } catch (e){
+    } catch (e) {
         console.log(e);
         return {isError: true, message: e.message};
     }
+}
+
+export const requestPasswordReset = async (formData, path=``) => {
+  try{
+      return await fetch(API_URL+path, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.json())
+      .then(data => data)
+      .catch(err => {
+        console.log(err);
+        return {isError: true, message: err.message}
+      })
+
+  } catch (e) {
+    console.log(e);
+    return {isError: true, message: e.message}
+  }
 }
 
 export const resetPassword = async (formData, path=``) => {
