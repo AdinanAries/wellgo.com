@@ -3,15 +3,66 @@ import Footer from "../components/Footer";
 import FullPageLoader from "../components/FullPageLoader";
 import FormErrorCard from "../components/FormErrorCard";
 import WillgoLogo from '../WillgoLogo.png';
+import { resetPassword } from '../services/accountServices.js';
 
 const PasswordReset = (props) => {
 
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ formData, setFormData ] = useState({
+      password: "",
+      repeatPassword: ""
+    });
     const [ formValidation, setFormValidation ] = useState({
         type: "warning",
         isError: false,
         message: "",
     });
+
+    const toggleFormValidation = (type, isError, message) => {
+      setFormValidation({type, isError, message});
+    }
+
+    const passwordInputOnchange = (e) => {
+      setFormData({
+        ...formData,
+        password: e.target.value
+      });
+    }
+
+    const repeatPasswordInputOnchange = (e) => {
+      const value = e.target.value;
+      if(formData.password !== value){
+        toggleFormValidation("warning", true, "Passwords Don't Match");
+      } else {
+        toggleFormValidation("ok", false, "");
+      }
+      setFormData({
+        ...formData,
+        repeatPassword: value
+      });
+    }
+
+    const formOnSubmit = async () => {
+      setIsLoading(true);
+      if(!formData.password){
+        toggleFormValidation("warning", true, "Password Field is Empty");
+        setIsLoading(false);
+        return;
+      }
+      if(formData.password !== formData.repeatPassword){
+        toggleFormValidation("warning", true, "Passwords Don't Match");
+        setIsLoading(false);
+        return;
+      }
+      toggleFormValidation("ok", false, "");
+      const res = await resetPassword(formData);
+      setIsLoading(false);
+      if(res.isError){
+        toggleFormValidation("warning", true, res.message);
+      } else {
+        // Success Status Logic Here
+      }
+    }
 
     return <div>
         <main>
@@ -48,6 +99,8 @@ const PasswordReset = (props) => {
                                     Enter New Password:</p>
                                 <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                                     <input
+                                        onInput={passwordInputOnchange}
+                                        value={formData.password}
                                         type="password" placeholder="type here..."
                                         style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                                 </div>
@@ -58,18 +111,20 @@ const PasswordReset = (props) => {
                                     Confirm Password:</p>
                                 <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
                                     <input
+                                        onInput={repeatPasswordInputOnchange}
+                                        value={formData.repeatPassword}
                                         type="password" placeholder="type here..."
                                         style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
                                 </div>
                             </div>
                             {
-                                formValidation.isError && <FormErrorCard 
-                                    message={formValidation.message} 
+                                formValidation.isError && <FormErrorCard
+                                    message={formValidation.message}
                                     type={formValidation.type}
                                 />
                             }
                             <div style={{marginTop: 5}}>
-                            <div style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
+                            <div onClick={formOnSubmit} style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
                                 Submit
                             </div>
                         </div>
