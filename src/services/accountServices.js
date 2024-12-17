@@ -125,7 +125,7 @@ export const registerPost = async (formData, path=`\\api\\users\\register\\`) =>
     }
 }
 
-export const requestPasswordReset = async (formData, path=``) => {
+export const requestPasswordReset = async (formData, path=`\\api\\users\\request-password-reset`) => {
   try{
       return await fetch(API_URL+path, {
         method: 'POST',
@@ -148,13 +148,13 @@ export const requestPasswordReset = async (formData, path=``) => {
   }
 }
 
-export const resetPassword = async (formData, path=``) => {
+export const resetPassword = async (formData, path=`\\api\\users\\reset-password`) => {
   try {
     return await fetch(API_URL+path, {
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'Content-Type': 'applicatio/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(formData)
     })

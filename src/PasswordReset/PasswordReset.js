@@ -7,8 +7,19 @@ import { resetPassword } from '../services/accountServices.js';
 
 const PasswordReset = (props) => {
 
+    let token = "";
+    let id = "";
+    const params = new URLSearchParams(window.location.search);
+    if(params.has('token'))
+      token = params.get('token');
+    if(params.has('id'))
+      id = params.get('id');
+
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ isPasswordResetSuccess, setIsPasswordResetSuccess ] = useState(false);
     const [ formData, setFormData ] = useState({
+      userId: id,
+      token: token,
       password: "",
       repeatPassword: ""
     });
@@ -60,7 +71,7 @@ const PasswordReset = (props) => {
       if(res?.isError){
         toggleFormValidation("warning", true, res.message);
       } else {
-        // Success Status Logic Here
+        setIsPasswordResetSuccess(true);
       }
     }
 
@@ -92,43 +103,61 @@ const PasswordReset = (props) => {
                     <div  className="login_page_form_container" style={{maxWidth: "600px", margin: "auto", backgroundColor: "white", boxShadow: "1px 2px 3px rgba(0,0,0,0.3)", borderRadius: 9, overflow: "hidden"}}>
                         <p style={{padding: "0 20px", paddingTop: 20, fontFamily: "'Prompt', Sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 16, fontWeight: "bolder", letterSpacing: 1, marginBottom: 10,}}>
                             Forgot Password</p>
-                        <div style={{padding: "10px",}}>
-                            <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                    <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    Enter New Password:</p>
-                                <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                                    <input
-                                        onInput={passwordInputOnchange}
-                                        value={formData.password}
-                                        type="password" placeholder="type here..."
-                                        style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                        {
+                          !isPasswordResetSuccess ?
+                          <div style={{padding: "10px"}}>
+                              <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                                  <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                      <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                      Enter New Password:</p>
+                                  <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                                      <input
+                                          onInput={passwordInputOnchange}
+                                          value={formData.password}
+                                          type="password" placeholder="type here..."
+                                          style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                                  </div>
+                              </div>
+                              <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
+                                  <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
+                                      <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
+                                      Confirm Password:</p>
+                                  <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
+                                      <input
+                                          onInput={repeatPasswordInputOnchange}
+                                          value={formData.repeatPassword}
+                                          type="password" placeholder="type here..."
+                                          style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
+                                  </div>
+                              </div>
+                              {
+                                  formValidation.isError && <FormErrorCard
+                                      message={formValidation.message}
+                                      type={formValidation.type}
+                                  />
+                              }
+                              <div style={{marginTop: 5}}>
+                              <div onClick={formOnSubmit} style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
+                                  Submit
+                              </div>
+                          </div>
+                          </div> :
+                          <div style={{padding: "10px", margin: 10}}>
+                            <div style={{padding: 10, borderLeft: "5px solid rgba(0,255,0,0.2)", background: "rgba(0,255,0,0.1)"}}>
+                                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                  <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", marginRight: 15}}>
+                                    <i className="fa-solid fa-exclamation-triangle" style={{color: "orange"}}></i></p>
+                                  <p style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif"}}>
+                                    Password Reset Succeeded. Please goto Login page to Login with your new password!</p>
                                 </div>
                             </div>
-                            <div style={{marginBottom: 5, backgroundColor: "rgba(0,0,0,0.07)", padding: 10, borderRadius: 8}}>
-                                <p style={{color: "rgba(0,0,0,0.7)", fontFamily: "'Prompt', Sans-serif", fontSize: 14}}>
-                                    <i className="fa-solid fa-envelope" style={{marginRight: 10, color: "rgb(43, 52, 61)"}}></i>
-                                    Confirm Password:</p>
-                                <div style={{border: "none", borderTop: "1px solid rgba(0,0,0,0.1)", marginTop: 10}}>
-                                    <input
-                                        onInput={repeatPasswordInputOnchange}
-                                        value={formData.repeatPassword}
-                                        type="password" placeholder="type here..."
-                                        style={{fontSize: 14, fontFamily: "'Prompt', Sans-serif", width: "calc(100% - 20px)", padding: 10, background: "none", border: "none"}}/>
-                                </div>
-                            </div>
-                            {
-                                formValidation.isError && <FormErrorCard
-                                    message={formValidation.message}
-                                    type={formValidation.type}
-                                />
-                            }
-                            <div style={{marginTop: 5}}>
-                            <div onClick={formOnSubmit} style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
-                                Submit
-                            </div>
-                        </div>
-                        </div>
+                            <a href="/account">
+                              <div style={{marginTop: 10,fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
+                                  Go to Login
+                              </div>
+                            </a>
+                          </div>
+                        }
                     </div>
                 }
             </div>
