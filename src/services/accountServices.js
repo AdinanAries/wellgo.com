@@ -170,6 +170,94 @@ export const resetPassword = async (formData, path=`\\api\\users\\reset-password
   }
 }
 
+export const requestEmailVerificationCode = async (formData, path=`\\api\\users\\request-email-verification-code`) => {
+  try {
+    return await fetch(API_URL+path, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => {
+      console.log(err);
+      return {isError: true, message: err.message}
+    })
+  } catch (e) {
+    console.log(e);
+    return {isError: true, message: e.message}
+  }
+}
+
+export const requestMobileVerificationCode = async (formData, path=`\\api\\users\\request-mobile-verification-code`) => {
+  try {
+    return await fetch(API_URL+path, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => {
+      console.log(err);
+      return {isError: true, message: err.message}
+    })
+  } catch (e) {
+    console.log(e);
+    return {isError: true, message: e.message}
+  }
+}
+
+export const VerifyEmail = async (formData, path=`\\api\\users\\verify-email`) => {
+  try {
+    return await fetch(API_URL+path, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => {
+      console.log(err);
+      return {isError: true, message: err.message}
+    })
+  } catch (e) {
+    console.log(e);
+    return {isError: true, message: e.message}
+  }
+}
+
+export const VerifyPhone = async (formData, path=`\\api\\users\\verify-phone`) => {
+  try {
+    return await fetch(API_URL+path, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => data)
+    .catch(err => {
+      console.log(err);
+      return {isError: true, message: err.message}
+    })
+  } catch (e) {
+    console.log(e);
+    return {isError: true, message: e.message}
+  }
+}
+
 export const registerPriceAlertsUser = async (payload, path="\\api\\users\\price-alerts\\subscribe\\") => {
     try{
         return await fetch(API_URL+path, {
