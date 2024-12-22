@@ -220,7 +220,8 @@ export const VerifyEmail = async (formData, path=`\\api\\users\\verify-email`) =
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${USER_TOKEN}`
       },
       body: JSON.stringify(formData)
     })
@@ -242,7 +243,8 @@ export const VerifyPhone = async (formData, path=`\\api\\users\\verify-phone`) =
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${USER_TOKEN}`
       },
       body: JSON.stringify(formData)
     })
