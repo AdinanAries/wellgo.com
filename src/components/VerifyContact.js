@@ -15,6 +15,10 @@ const VerifyContact = (props) => {
     closeVerifyContactPane,
   } = props;
 
+  const [ emailInput, setEmailInput ] = useState(email);
+  const [ phoneInput, setPhoneInput ] = useState(phone);
+  const [ emailCodeInput, setEmailCodeInput ] = useState("");
+  const [ phoneCodeInput, setPhoneCodeInput ] = useState("");
   const [ isEmailVerified, setIsEmailVerified ] = useState(email_verified);
   const [ isPhoneVerified, setIsPhoneVerified ] = useState(phone_verified);
   const [ isEmailCodeSent, setIsEmailCodeSent ] = useState(false);
@@ -30,9 +34,27 @@ const VerifyContact = (props) => {
     unverifiedItemTxt = "Email and Phone";
   }
 
-  const sendVerificationCode = () => {
+  const emailInputOnChange = (e) => {
+      setEmailInput(e.target.value);
+  }
+
+  const phoneInputOnChange = (e) =>  {
+      setPhoneInput(e.target.value)
+  }
+
+  const emailCodeInputOnChange = (e) => {
+    setEmailCodeInput(e.target.value);
+  }
+
+  const phoneCodeInputOnChange = (e) => {
+    setPhoneCodeInput(e.target.value);
+  }
+
+  const sendVerificationCode = async () => {
     if(!isEmailVerified){
       // Send Email Verification Code
+      const e_res = await requestEmailVerificationCode({email: emailInput});
+      console.log(e_res);
       setIsEmailCodeSent(true);
       setIsVerificationRequired(false);
     } else if(!isPhoneCodeSent) {
@@ -42,9 +64,11 @@ const VerifyContact = (props) => {
     }
   }
 
-  const VerifyContactOnSubmit = () => {
+  const VerifyContactOnSubmit = async () => {
     if(!isEmailVerified){
       // Do Email Verification Here
+      let e_res = await VerifyEmail({email: emailInput, verification_code: emailCodeInput});
+      console.log(e_res);
       setIsEmailVerified(true);
       if(!isPhoneVerified)
         setIsVerificationRequired(true);
@@ -91,7 +115,8 @@ const VerifyContact = (props) => {
                   !isEmailVerified &&
                   <div style={{backgroundColor: "rgba(255,255,255,0.1)", padding: "0 10px", borderRadius: 8, marginBottom: 5}}>
                       <i style={{color: "rgba(255,255,255,0.1)", marginRight: 10}} className="fa-solid fa-envelope"></i>
-                      <input value={email}
+                      <input onInput={emailInputOnChange}
+                          value={emailInput}
                           style={{width: "calc(100% - 60px)", background: "none", color: "white", padding: "10px 0", border: "none"}} type="text"
                           placeholder="Please enter your email here..." />
                   </div>
@@ -99,7 +124,8 @@ const VerifyContact = (props) => {
                   (!isPhoneVerified && isEmailVerified) &&
                   <div style={{backgroundColor: "rgba(255,255,255,0.1)", padding: "0 10px", borderRadius: 8, marginBottom: 10}}>
                       <i style={{color: "rgba(255,255,255,0.1)", marginRight: 10}} className="fa-solid fa-phone"></i>
-                      <input value={phone}
+                      <input onInput={phoneInputOnChange}
+                        value={phoneInput}
                           style={{width: "calc(100% - 60px)", background: "none", color: "white", padding: "10px 0", border: "none"}} type="text"
                           placeholder="Please enter your phone here..." />
                   </div>
@@ -113,7 +139,8 @@ const VerifyContact = (props) => {
                   !isEmailVerified &&
                   <div style={{backgroundColor: "rgba(255,255,255,0.1)", padding: "0 10px", borderRadius: 8, marginBottom: 10}}>
                       <i style={{color: "rgba(255,255,255,0.1)", marginRight: 10}} className="fa-solid fa-envelope"></i>
-                      <input value=""
+                      <input onInput={emailCodeInputOnChange}
+                          value={emailCodeInput}
                           style={{width: "calc(100% - 60px)", background: "none", color: "white", padding: "10px 0", border: "none"}} type="text"
                           placeholder="Enter Email Verification Code" />
                   </div>
@@ -121,7 +148,8 @@ const VerifyContact = (props) => {
                   (!isPhoneVerified && isEmailVerified) &&
                   <div style={{backgroundColor: "rgba(255,255,255,0.1)", padding: "0 10px", borderRadius: 8, marginBottom: 10}}>
                       <i style={{color: "rgba(255,255,255,0.1)", marginRight: 10}} className="fa-solid fa-phone"></i>
-                      <input value=""
+                      <input onInput={phoneCodeInputOnChange}
+                          value={phoneCodeInput}
                           style={{width: "calc(100% - 60px)", background: "none", color: "white", padding: "10px 0", border: "none"}} type="text"
                           placeholder="Enter Phone Verification Code" />
                   </div>
