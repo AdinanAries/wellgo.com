@@ -176,7 +176,8 @@ export const requestEmailVerificationCode = async (formData, path=`\\api\\users\
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${USER_TOKEN}`
       },
       body: JSON.stringify(formData)
     })
@@ -198,7 +199,8 @@ export const requestMobileVerificationCode = async (formData, path=`\\api\\users
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${USER_TOKEN}`
       },
       body: JSON.stringify(formData)
     })

@@ -137,10 +137,10 @@ const PasswordReset = (props) => {
                                   />
                               }
                               <div style={{marginTop: 5}}>
-                              <div onClick={formOnSubmit} style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
-                                  Submit
-                              </div>
-                          </div>
+                                <div onClick={formOnSubmit} style={{fontFamily: "'Prompt', Sans-serif", color: "white", cursor: "pointer", backgroundColor: "rgb(24, 67, 98)", textAlign: "center", padding: 14, borderRadius: 8}}>
+                                    Submit
+                                </div>
+                            </div>
                           </div> :
                           <div style={{padding: "10px", margin: 10}}>
                             <div style={{padding: 10, borderLeft: "5px solid rgba(0,255,0,0.2)", background: "rgba(0,255,0,0.1)"}}>

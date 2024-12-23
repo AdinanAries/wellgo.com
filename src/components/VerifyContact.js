@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FullPageLoader from "./FullPageLoader";
+import FormErrorCard from "./FormErrorCard";
 import {
   VerifyEmail,
   VerifyPhone,
@@ -26,6 +27,15 @@ const VerifyContact = (props) => {
   const [ isEmailCodeSent, setIsEmailCodeSent ] = useState(false);
   const [ isPhoneCodeSent, setIsPhoneCodeSent ] = useState(false);
   const [ isVerificationRequired, setIsVerificationRequired ] = useState(true);
+  const [ formValidation, setFormValidation ] = useState({
+      type: "warning",
+      isError: false,
+      message: "",
+  });
+
+  const toggleFormValidation = (type, isError, message) => {
+    setFormValidation({type, isError, message});
+  }
 
   let unverifiedItemTxt = "";
   if(!isEmailVerified){
@@ -37,30 +47,40 @@ const VerifyContact = (props) => {
   }
 
   const emailInputOnChange = (e) => {
+      toggleFormValidation("ok", false, "");
       setEmailInput(e.target.value);
   }
 
   const phoneInputOnChange = (e) =>  {
+      toggleFormValidation("ok", false, "");
       setPhoneInput(e.target.value)
   }
 
   const emailCodeInputOnChange = (e) => {
+    toggleFormValidation("ok", false, "");
     setEmailCodeInput(e.target.value);
   }
 
   const phoneCodeInputOnChange = (e) => {
+    toggleFormValidation("ok", false, "");
     setPhoneCodeInput(e.target.value);
   }
 
   const sendVerificationCode = async () => {
+    toggleFormValidation("ok", false, "");
     setIsLoading(true);
     if(!isEmailVerified){
       // Send Email Verification Code
       const e_res = await requestEmailVerificationCode({email: emailInput});
       console.log(e_res);
+      setIsLoading(false);
+      if(e_res?.isError || !e_res?.isSuccess) {
+        toggleFormValidation("warning", true, e_res?.message);
+        return;
+      }
       setIsEmailCodeSent(true);
       setIsVerificationRequired(false);
-      setIsLoading(false);
+
     } else if(!isPhoneCodeSent) {
       // Send Phone Verification code
       setIsPhoneCodeSent(true);
@@ -186,6 +206,12 @@ const VerifyContact = (props) => {
                             placeholder="Enter Phone Verification Code" />
                     </div>
                   </div>
+                }
+                {
+                    formValidation.isError && <FormErrorCard
+                        message={formValidation.message}
+                        type={formValidation.type}
+                    />
                 }
                 {
                   (!isEmailVerified || !isPhoneVerified) ?
