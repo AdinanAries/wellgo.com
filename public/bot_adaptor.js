@@ -6,7 +6,7 @@ let virtual_assistant = {
             BEGIN_AIR_BOOKING: "begin_air_booking"
         },
         last_query: "can i book a flight",
-        step: "", 
+        step: "",
         about: "countries, cities, and airports",
         scroll_chat: true,
         isTripRoundFirstEntered: true,
@@ -30,7 +30,7 @@ let virtual_assistant = {
                 <br/>I'm unable to help you without my server being online.
                 <br/>I'll put in a ticket to alert the technical team.
                 <br/>But also make sure its not your internet.`,
-                `... I can't reach my server. Please check your internet. I think its not working. 
+                `... I can't reach my server. Please check your internet. I think its not working.
                     <br/>Or Maybe my server crushed`,
                 `I can't imagine my life without the server. Oh no! 🤦🏾‍♂️🤦🏾‍♂️🤦🏾‍♂️ my server is not online right now.<br/>
                 Please, also make sure that your internet it working.`
@@ -41,16 +41,16 @@ let virtual_assistant = {
         begin_air_booking: {
             start_msgs: [
                 `Hey! &#128400;... We're only 4 steps away...
-                    please tell me from where you are traveling and to where you are going. You should say something like 
+                    please tell me from where you are traveling and to where you are going. You should say something like
                     '<span class="support_chat_bot_msg_highlights">New York to Paris</span>',
                       or something like '<span class="support_chat_bot_msg_highlights">
                       United States to France</span>'...
                       , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
-                `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like 
+                `Sup! &#128400; kk.. let's dive right in... To start with, please tell me your departure and arrival places. You should say something like
                 '<span class="support_chat_bot_msg_highlights">New York to Paris</span>'
                       , or something like '<span class="support_chat_bot_msg_highlights">United States to France</span>'
                         , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
-                `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like 
+                `Hi... We'll start with by collecting some information from you... So tell me from where you are traveling and to where you are going. You should say something like
                 '<span class="support_chat_bot_msg_highlights">New York to Paris</span>'
                       , or something like '<span class="support_chat_bot_msg_highlights">United States to France</span>'
                         , or '<span class="support_chat_bot_msg_highlights">La Guardia to Charles de Gaulle Intl</span>'`,
@@ -111,11 +111,11 @@ let virtual_assistant = {
                 `Umm... I'm expecting something like '
                 <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
                 <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
-                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... 
+                <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'...
                 or we can do another thing if you say '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">stop</span>'`
             ],
             start_over_msgs: [
-                `K.. cool.. in order to get the new airports please say something like 
+                `K.. cool.. in order to get the new airports please say something like
                 '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">New York to Paris</span>' or '
                 <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">United States to France</span>' or '
                 <span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">La-guardia to Charles de gualle Intl</span>'... Else say '
@@ -143,7 +143,7 @@ let virtual_assistant = {
                 `Getting there 💪... I have found a couple airports. Please select your departure and destination then reply with '<span class="support_chat_bot_msg_highlights">done</span>' so I can confirm.`,
             ],
             change_values_commands: [
-                "changeairports", "change airports", 
+                "changeairports", "change airports",
                 "startover", "start over",
                 "startagain", "start again"
             ],
@@ -196,7 +196,7 @@ let virtual_assistant = {
                 premium</span>', or '<span class="support_chat_bot_msg_highlights">
                 cheapest</span>'`
             ],
-            accepted_queries: [ "first class", "economy", "business", "premium", "cheapest" ],
+            accepted_queries: [ "first class", "first-class", "firstclass", "first", "economy", "business", "premium", "cheapest" ],
             change_values_commands: [
                 "changecabinclass", "change cabin class",
                 "changeflightclass", "change flight class",
@@ -210,7 +210,7 @@ let virtual_assistant = {
                 `K.. cool 😎... do you want a return flight?... say '<span class="support_chat_bot_msg_highlights">
                 round trip</span>' if you do or say '
                 <span class="support_chat_bot_msg_highlights">one way</span>' if you dont`,
-                `Looking good... 💪 Now do you want a "return flight" as well?...<br/> 
+                `Looking good... 💪 Now do you want a "return flight" as well?...<br/>
                 Say '<span class="support_chat_bot_msg_highlights">
                 round trip</span>' if so. Also say '
                 <span class="support_chat_bot_msg_highlights">one way</span>' if you want only the departure`,
@@ -244,45 +244,45 @@ let virtual_assistant = {
                 1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
                 1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above,
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`,
                 `How many people are getting on the flight... You could say '<span class="support_chat_bot_msg_highlights">
                 1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
                 1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above,
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`,
                 `How many people are you booking for... You could say '<span class="support_chat_bot_msg_highlights">
                 1 adult</span>' ... or something like '<span class="support_chat_bot_msg_highlights">
                 1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 adult, 1 infant</span>' ... or ' <span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above,
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`,
             ],
             validation_error_msgs: [
                 `You should say something like '<span class="support_chat_bot_msg_highlights">
                 1 adult</span>' ... or something like
-                '<span class="support_chat_bot_msg_highlights">1 child</span>' 
+                '<span class="support_chat_bot_msg_highlights">1 child</span>'
                 ... or '<span class="support_chat_bot_msg_highlights">
                 1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above, 
+                1 adult, 2 children, 1 infant</span>' ... Note that, adults refer to 18 years and above,
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`,
                 `I'm expecting you to say something like '<span class="support_chat_bot_msg_highlights">
                 1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
+                1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above,
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`,
                 `Say something like '<span class="support_chat_bot_msg_highlights">
                 1 adult</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 child</span>' ... or '<span class="support_chat_bot_msg_highlights">
                 1 adult, 1 infant</span>' ... or '<span class="support_chat_bot_msg_highlights">
-                1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above, 
+                1 adult, 2 children, 1 infant</span>' ... Adults refer to 18 years and above,
                 children refer to 2 to 17 years, infants refer to below 2 years, ...
                 and only 'adult/adults, child/children, and infant/infants are allowed`
             ],
@@ -346,7 +346,7 @@ let virtual_assistant = {
                 "done", "selected", "finished", "i have selected a flight",
                 "i have selected", "i have chosen one", "i have chosen my flight",
                 "i have selected one", "i have finished", "i have selected my flight",
-                "i have chosen a flight", "continue", "proceed", "let go", "forward",
+                "i have chosen a flight", "continue", "proceed", "lets go", "let's go", "forward",
             ],
         },
         pnr_recording: {
@@ -381,7 +381,7 @@ window.virtual_assistant_functions = {
     get_starter_message: (activity_type) => {
         if(activity_type===virtual_assistant.state.status_names.BEGIN_AIR_BOOKING){
             return virtual_assistant.starters.begin_air_booking.start_msgs[
-                Math.floor(Math.random() * 
+                Math.floor(Math.random() *
                 virtual_assistant.starters.begin_air_booking.start_msgs.length)]
         }
     },
@@ -423,26 +423,26 @@ window.virtual_assistant_functions = {
     get_start_over_message: (origin_destination_stage=false) => {
         if(origin_destination_stage){
             return virtual_assistant.steps.origin_destination.start_over_msgs_in_origin_detination_stage[
-                Math.floor(Math.random() * 
+                Math.floor(Math.random() *
                 virtual_assistant.steps.origin_destination.start_over_msgs_in_origin_detination_stage.length)];
         }
         return virtual_assistant.steps.origin_destination.start_over_msgs[
-            Math.floor(Math.random() * 
+            Math.floor(Math.random() *
             virtual_assistant.steps.origin_destination.start_over_msgs.length)];
     },
     get_airports_found_confirmation_message: () => {
         return virtual_assistant.steps.origin_destination.airports_found_confirmation_msgs[
-            Math.floor(Math.random() * 
+            Math.floor(Math.random() *
             virtual_assistant.steps.origin_destination.airports_found_confirmation_msgs.length)];
     },
     get_trip_round_start_message: () => {
         return virtual_assistant.steps.trip_round.start_msgs[
-            Math.floor(Math.random() * 
+            Math.floor(Math.random() *
             virtual_assistant.steps.trip_round.start_msgs.length)];
     },
     get_trip_round_input_validation_error_message: () => {
         return virtual_assistant.steps.trip_round.input_validation_error[
-            Math.floor(Math.random() * 
+            Math.floor(Math.random() *
             virtual_assistant.steps.trip_round.input_validation_error.length)];
     },
     get_travelers_input_validation_error_message: () => {
@@ -536,7 +536,7 @@ window.validate_user_dates_input_for_bot = (inputs, trip_round) => {
             Feb</span>' is for month, and '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
             16</span>' for date of month, and '<span style="font-family: 'Prompt', sans-serif; font-size: 14px; color: rgb(174, 101, 0);">
             2022</span>' for year...`
-            
+
         ]
 
         if(inputs.trim().split(" ").length !== 3){
@@ -545,7 +545,7 @@ window.validate_user_dates_input_for_bot = (inputs, trip_round) => {
                 msg: err_msg[Math.floor(Math.random() * err_msg.length)]
             }
         }
-        
+
         let dateparts = inputs.trim().split(" ");
         let mmm = dateparts[0].length > 3 ? dateparts[0].substring(0,3) : dateparts[0];
         let dd = dateparts[1].length < 3 ? `0${dateparts[1]}` : dateparts[1];
@@ -563,31 +563,37 @@ window.validate_user_dates_input_for_bot = (inputs, trip_round) => {
             let today = new Date();
             today = today.setDate(today.getDate()-1);
             if(the_date < today){
+                let pst_date_err_msg = [
+                  `Umm.. The date you provided is past...`,
+                  `Oops! The date you are giving is past...`,
+                  `Hey, your date is a past date...`,
+                  `So.. Please check your date. Its a past one!`,
+                ]
                 return{
                     isValid: false,
-                    msg: `Umm.. I think the date you provided is past. We can only use today or future date...`
+                    msg: pst_date_err_msg[Math.floor(Math.random() * pst_date_err_msg.length)]
                 }
             }
             return {
                 isValid: true,
                 msg: `Ok great...`,
-                date: the_date,
+                date: new Date(the_date).toISOString(),
             }
         }
 
     }else if(trip_round==="round-trip"){
 
         let err_msg = [
-            `Your answer must look like '<span class="support_chat_bot_msg_highlights">February 4, 2022 to February 10, 2022</span>' 
+            `Your answer must look like '<span class="support_chat_bot_msg_highlights">February 4, 2022 to February 10, 2022</span>'
             and each date must be in the form 'Month day, year', or say 'stop' to cancel flight booking all-together`,
             `I can't read your date. You should say something like '<span class="support_chat_bot_msg_highlights">
             February 4, 2022 to February 10, 2022</span>'... You can also say 'stop' to stop booking a flight`,
-            `Your answer must look like '<span class="support_chat_bot_msg_highlights">February 16, 2022 to February 20, 2022</span>' 
+            `Your answer must look like '<span class="support_chat_bot_msg_highlights">February 16, 2022 to February 20, 2022</span>'
             and each. Where '<span class="support_chat_bot_msg_highlights">February</span>' or '<span class="support_chat_bot_msg_highlights">
             Feb</span>' is for month, and '<span class="support_chat_bot_msg_highlights">16</span>' and '
             <span class="support_chat_bot_msg_highlights">20</span>' for date of month, and '<span class="support_chat_bot_msg_highlights">
             2022</span>' for year...`
-            
+
         ]
 
         if(!inputs.split(" ").includes("to")){
@@ -637,13 +643,30 @@ window.validate_user_dates_input_for_bot = (inputs, trip_round) => {
         }else{
             let today = new Date();
             today = today.setDate(today.getDate()-1);
-            if(the_date_1 < today || the_date < today){
+            if(the_date_1 < today){ // Departure Date
+                let pst_dep_date_err_msg = [
+                  `Umm.. The departure date you provided is past...`,
+                  `Oops! The departure you are giving is past...`,
+                  `Hey, your departure date is a past date...`,
+                  `So.. Please check your departure date. Its a past one!`,
+                ];
                 return{
                     isValid: false,
-                    msg: `Umm.. I think the date you provided is past. We can only use today or future date...`
+                    msg: pst_dep_date_err_msg[Math.floor(Math.random() * pst_dep_date_err_msg.length)]
                 }
             }
-
+            if(the_date < today){ // Return Date
+              let pst_ret_date_err_msg = [
+                `Umm.. The return date you provided is past...`,
+                `Oops! The return date you are giving is past...`,
+                `Hey, your return date is a past date...`,
+                `So.. Please check your return date. Its a past one!`,
+              ];
+              return{
+                  isValid: false,
+                  msg: pst_ret_date_err_msg[Math.floor(Math.random() * pst_ret_date_err_msg.length)]
+              }
+            }
             if(the_date < the_date_1){
                 return{
                     isValid: false,
@@ -654,8 +677,8 @@ window.validate_user_dates_input_for_bot = (inputs, trip_round) => {
             return {
                 isValid: true,
                 msg: `Ok great...`,
-                dep_date: the_date_1,
-                arr_date: the_date
+                dep_date: new Date(the_date_1).toISOString(), // Departure Date
+                arr_date: new Date(the_date).toISOString() // Return Date
             }
         }
     }
@@ -692,15 +715,15 @@ window.validate_travelers_input_for_bot = (input) => {
             }else{
                 if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
                     resp_obj.isValid = true;
-                    resp_obj.adults=travelers[0].trim();
+                    resp_obj.adults=parseInt(travelers[0].trim(), 10);
                 }
                 if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
                     resp_obj.isValid = true;
-                    resp_obj.children=travelers[0].trim();
+                    resp_obj.children=parseInt(travelers[0].trim(), 10);
                 }
                 if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
                     resp_obj.isValid = true;
-                    resp_obj.infants=travelers[0].trim();
+                    resp_obj.infants=parseInt(travelers[0].trim(), 10);
                 }
                 return resp_obj;
             }
@@ -714,31 +737,31 @@ window.validate_travelers_input_for_bot = (input) => {
             }else{
                 if(travelers[1].trim().toLowerCase() === "adult" || travelers[1].trim().toLowerCase() === "adults"){
                     resp_obj.isValid = true;
-                    resp_obj.adults=travelers[0].trim();
+                    resp_obj.adults=parseInt(travelers[0].trim();
                 }
                 if(travelers[1].trim().toLowerCase() === "child" || travelers[1].trim().toLowerCase() === "children"){
                     resp_obj.isValid = true;
-                    resp_obj.children=travelers[0].trim();
+                    resp_obj.children=parseInt(travelers[0].trim();
                 }
                 if(travelers[1].trim().toLowerCase() === "infant" || travelers[1].trim().toLowerCase() === "infants"){
                     resp_obj.isValid = true;
-                    resp_obj.infants=travelers[0].trim();
+                    resp_obj.infants=parseInt(travelers[0].trim();
                 }
                 if(travelers[3].trim().toLowerCase() === "adult" || travelers[3].trim().toLowerCase() === "adults"){
                     resp_obj.isValid = true;
-                    resp_obj.adults=travelers[2].trim();
+                    resp_obj.adults=parseInt(travelers[2].trim();
                 }
                 if(travelers[3].trim().toLowerCase() === "child" || travelers[3].trim().toLowerCase() === "children"){
                     resp_obj.isValid = true;
-                    resp_obj.children=travelers[2].trim();
+                    resp_obj.children=parseInt(travelers[2].trim();
                 }
                 if(travelers[3].trim().toLowerCase() === "infant" || travelers[3].trim().toLowerCase() === "infants"){
                     resp_obj.isValid = true;
-                    resp_obj.infants=travelers[2].trim();
+                    resp_obj.infants=parseInt(travelers[2].trim();
                 }
                 return resp_obj;
             }
-            
+
         }else if(travelers.length === 6){
             console.log(isNaN(parseInt(travelers[0].trim(), 10)));
             if(isNaN(parseInt(travelers[0].trim(), 10)) || isNaN(parseInt(travelers[2].trim(), 10)) || isNaN(parseInt(travelers[4].trim(), 10))){
@@ -782,7 +805,7 @@ window.validate_travelers_input_for_bot = (input) => {
                 }
                 if(travelers[5].trim().toLowerCase() === "infant" || travelers[5].trim().toLowerCase() === "infants"){
                     resp_obj.isValid = true;
-                    resp_obj.infants=travelers[4].trim(); 
+                    resp_obj.infants=travelers[4].trim();
                 }
                 return resp_obj;
             }
@@ -888,7 +911,7 @@ window.validate_travelers_input_for_bot = (input) => {
             }
             if(travelers[5].trim().toLowerCase() === "infant" || travelers[5].trim().toLowerCase() === "infants"){
                 resp_obj.isValid = true;
-                resp_obj.infants=travelers[4].trim(); 
+                resp_obj.infants=travelers[4].trim();
             }
             return resp_obj;
         }
@@ -898,5 +921,5 @@ window.validate_travelers_input_for_bot = (input) => {
     resp_obj.children=0;
     resp_obj.infants=0;
     return resp_obj;
-    
+
 }
