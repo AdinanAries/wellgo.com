@@ -5,23 +5,97 @@ let bot_server_base_url = "https://wellgo-vta.herokuapp.com";
 window.BOT_STEPS=BOT_STEPS;
 window.wellgo_bot=wellgo_bot;
 
-
 //----------------------to remove--------------------------------
 /**
  * To Do: Always try to construct a perfect query for the UI
  */
-wellgo_bot.status = "";
-wellgo_bot.step = "";
-wellgo_bot.scroll_chat=true;
-wellgo_bot.isTripRoundFirstEntered=true;
-wellgo_bot.isPNRFirstEntered=true;
-wellgo_bot.isDatesFirstEntered=true;
-wellgo_bot.isCabinClassFirstEntered=true;
-wellgo_bot.isSearchingFlightFirstEnter=true;
-wellgo_bot.isGettingTravelersFirstEntered=true;
-wellgo_bot.selectedOriginAirport="";
-wellgo_bot.selectedDestinationAirport="";
+ const init_wellgo_bot_local_state = () => {
+    wellgo_bot.status = "";
+    wellgo_bot.step = "";
+    wellgo_bot.scroll_chat=true;
+    wellgo_bot.isTripRoundFirstEntered=true;
+    wellgo_bot.isPNRFirstEntered=true;
+    wellgo_bot.isDatesFirstEntered=true;
+    wellgo_bot.isCabinClassFirstEntered=true;
+    wellgo_bot.isSearchingFlightFirstEnter=true;
+    wellgo_bot.isGettingTravelersFirstEntered=true;
+    wellgo_bot.selectedOriginAirport="";
+    wellgo_bot.selectedDestinationAirport="";
+    wellgo_bot.steps_not_yet_taken = [
+      BOT_STEPS.TRIP_ROUND,
+      BOT_STEPS.ORIGIN_DESTINATION,
+      BOT_STEPS.TRAVEL_DATES,
+      BOT_STEPS.CABIN_CLASS,
+      //BOT_STEPS.FLIGHT_SEARCH,
+      BOT_STEPS.TRAVELER_COUNT,
+      //BOT_STEPS.PNR_RECORD,
+    ]
+}
+init_wellgo_bot_local_state();
+window.init_wellgo_bot_local_state=init_wellgo_bot_local_state;
 //------------------------------------------------------
+
+const randomly_set_bot_next_step = (current_previous_step) => {
+  let reply_message = "";
+
+  if(wellgo_bot.steps_not_yet_taken.length > 0){
+
+    // 1. Remove current previous step
+    wellgo_bot.steps_not_yet_taken=wellgo_bot.steps_not_yet_taken.filter(each=>each!==current_previous_step);
+    console.log(wellgo_bot);
+
+    // 2. Set current next step
+    wellgo_bot.step=wellgo_bot.steps_not_yet_taken[
+      Math.floor(Math.random() * wellgo_bot.steps_not_yet_taken.length)
+    ];
+
+    // 3. If current step is Travel-Dates change it to Trip-ROUND - Due to dependency to collect either one date or two based on either one way or round trip
+    if(wellgo_bot.step===BOT_STEPS.TRAVEL_DATES) {
+      if(wellgo_bot.steps_not_yet_taken.includes(BOT_STEPS.TRIP_ROUND))
+        wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
+    }
+  }
+
+  // 4. If Steps not yet taken array is empty then Set to Flight_Search Steps
+  if(wellgo_bot.steps_not_yet_taken.length < 1){
+    wellgo_bot.step=BOT_STEPS.FLIGHT_SEARCH;
+  }
+
+  // 5. Return Bot Reply message
+  if(wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
+    reply_message = ""; // First step (airports entry) always set from bot reply or other init places
+  }else if(wellgo_bot.step===BOT_STEPS.TRIP_ROUND) {
+    reply_message = window.virtual_assistant_functions.get_trip_round_start_message();
+  }else if(wellgo_bot.step===BOT_STEPS.TRAVEL_DATES) {
+    let travel_dates_init_message="";
+    if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
+      travel_dates_init_message =
+        window.virtual_assistant_functions.get_travel_dates_start_message("one-way");
+    }else if(JSON.parse(localStorage.getItem("search_obj")).type==="round-trip"){
+      travel_dates_init_message =
+        window.virtual_assistant_functions.get_travel_dates_start_message("round-trip");
+    }
+    reply_message = travel_dates_init_message;
+  }else if(wellgo_bot.step===BOT_STEPS.CABIN_CLASS) {
+    reply_message = window.virtual_assistant_functions.get_cabin_class_input_start_message();
+  }else if(wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT) {
+    reply_message = window.virtual_assistant_functions.get_travelers_input_start_message();
+  }else if(wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH) {
+    let flight_search_init_message = "";
+    let fs_msgs = [
+      'Great! I will send you to the search page to select your flight and continue',
+      'I am sending you to search page in a minute. You may select your flight and continue',
+      'All set. Please let me send you to search page to continue',
+      'Thanks. You may proceed from the search page. wait a minute.'
+    ]
+    reply_message = flight_search_init_message;
+  }else if(wellgo_bot.step===BOT_STEPS.PNR_RECORD) {
+    reply_message = ""; // To Do: Bot PNR currently not supported.
+  }
+
+  return reply_message;
+}
+window.randomly_set_bot_next_step=randomly_set_bot_next_step;
 
 let get_answer_from_bot = (user_query) => {
     //console.log(user_query)
@@ -442,7 +516,8 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             bot_reply_msg=`Please select your destination airport`
           }else{
             window.clear_airports_suggested_by_bot_ids();
-            wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
+            //wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
+            bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.ORIGIN_DESTINATION);
           }
         }else{
           if(window.virtual_assistant_functions
@@ -457,7 +532,8 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             }else if(wellgo_bot.selectedDestinationAirport===""){
               bot_reply_msg=`Please select your destination airport`
             }else{
-              wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
+              //wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
+              bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.ORIGIN_DESTINATION);
             }
           }else{
             wellgo_bot.step=BOT_STEPS.ORIGIN_DESTINATION;
@@ -467,32 +543,32 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
               //after selection, set wellgo_bot.step="departure-arrival-dates"
               let origin_airpots = window.filter_airports_array_based_input_value(validation.origin);
               let destination_airports = window.filter_airports_array_based_input_value(validation.destination);
-              console.log(origin_airpots);
-              console.log(destination_airports);
+              //console.log(origin_airpots);
+              //console.log(destination_airports);
               if(origin_airpots.length === 1 && destination_airports.length === 1){
-                // Origin airport
-                // Code: wellgo_bot.selectedOriginAirport=origin_airpots[0].IATA;
-                // Code: add_origin_input_airport_to_history(origin_airpots[0].IATA)
+
                 let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+
+                // Origin airport
+                wellgo_bot.selectedOriginAirport=origin_airpots[0].IATA;
                 flight_search_data.itinerary.departure.airport = origin_airpots[0].IATA;
+                // Code: add_origin_input_airport_to_history(origin_airpots[0].IATA);
 
                 if(origin_airpots[0].IATA === "\\N" || origin_airpots[0].IATA === "N"){
-                  // Code: wellgo_bot.selectedOriginAirport=origin_airpots[0].ICAO;
-                  // Code: add_origin_input_airport_to_history(origin_airpots[0].ICAO)
+                  wellgo_bot.selectedOriginAirport=origin_airpots[0].ICAO;
                   flight_search_data.itinerary.departure.airport = origin_airpots[0].ICAO;
+                  // Code: add_origin_input_airport_to_history(origin_airpots[0].ICAO);
                 }
 
-                // Code: window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
-
                 // Destination airport
-                // Code: add_destination_input_airport_to_history(destination_airports[0].IATA)
-                // Code: let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+                wellgo_bot.selectedDestinationAirport = destination_airports[0].IATA;
                 flight_search_data.itinerary.arrival.airport = destination_airports[0].IATA;
+                // add_destination_input_airport_to_history(destination_airports[0].IATA);
 
                 if(destination_airports[0].IATA === "\\N" || destination_airports[0].IATA === "N"){
-                  // Code: wellgo_bot.selectedDestinationAirport=icao
-                  // Code: add_destination_input_airport_to_history(destination_airports[0].ICAO)
+                  wellgo_bot.selectedDestinationAirport=destination_airports[0].ICAO;
                   flight_search_data.itinerary.arrival.airport = destination_airports[0].ICAO;
+                  // Code: add_destination_input_airport_to_history(destination_airports[0].ICAO);
                 }
 
                 window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
@@ -562,7 +638,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
     // Step two: trip-round
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
       && wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
-      bot_reply_msg = window.virtual_assistant_functions.get_trip_round_start_message();
+      //bot_reply_msg = window.virtual_assistant_functions.get_trip_round_start_message();
       if(!wellgo_bot.isTripRoundFirstEntered){
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
@@ -573,7 +649,8 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           if(window.virtual_assistant_functions.verify_trip_round_if_query_accepted(
               TEXT_ELE.value.trim().toLowerCase())
               && wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
-            wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
+            //wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
+            bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.TRIP_ROUND);
             let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
             if(TEXT_ELE.value.trim().toLowerCase() === "one way"
               || TEXT_ELE.value.trim().toLowerCase() === "one-way"
@@ -601,7 +678,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
       && wellgo_bot.step===BOT_STEPS.TRAVEL_DATES){
       wellgo_bot.isTripRoundFirstEntered=true;
-      let travel_dates_init_message="";
+      /*let travel_dates_init_message="";
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_message =
           window.virtual_assistant_functions.get_travel_dates_start_message("one-way");
@@ -609,7 +686,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
         travel_dates_init_message =
           window.virtual_assistant_functions.get_travel_dates_start_message("round-trip");
       }
-      bot_reply_msg = travel_dates_init_message;
+      bot_reply_msg = travel_dates_init_message;*/
       if(!wellgo_bot.isDatesFirstEntered){
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
@@ -620,7 +697,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             TEXT_ELE.value.trim(),
             JSON.parse(localStorage.getItem("search_obj")).type
           )
-          console.log("date validation: ", validation);
+          //console.log("date validation: ", validation);
           if(!validation.isValid){
             bot_reply_msg = validation.msg;
           }else if(validation.isValid){
@@ -634,7 +711,8 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             }
             window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
             wellgo_bot.step = BOT_STEPS.CABIN_CLASS;
-            bot_reply_msg = validation.msg;
+            bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.TRAVEL_DATES);
+            //bot_reply_msg = validation.msg;
           }
         }
       }
@@ -649,7 +727,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
       && wellgo_bot.step===BOT_STEPS.CABIN_CLASS){
       wellgo_bot.isDatesFirstEntered=true;
       wellgo_bot.hasBotReturnedResults=true;
-      bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_start_message();
+      //bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_start_message();
       if(!wellgo_bot.isCabinClassFirstEntered){
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
@@ -672,8 +750,9 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
               flight_search_data.itinerary.cabin = TEXT_ELE.value.trim().toUpperCase();
             }
             window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
-            wellgo_bot.step = BOT_STEPS.TRAVELER_COUNT;
-            bot_reply_msg = window.virtual_assistant_functions.get_travelers_input_start_message();
+            //wellgo_bot.step = BOT_STEPS.TRAVELER_COUNT;
+            bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.CABIN_CLASS);
+            //bot_reply_msg = window.virtual_assistant_functions.get_travelers_input_start_message();
           }else{
             bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_validation_error_message();
           }
@@ -701,7 +780,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           window.virtual_assistant_functions.reset_bot_status();
         }else{
           let validation = window.validate_travelers_input_for_bot(TEXT_ELE.value.trim().toLowerCase())
-          console.log("validation: ", validation);
+          //console.log("validation: ", validation);
           if(!validation.isValid){
             bot_reply_msg = window.virtual_assistant_functions.get_travelers_input_validation_error_message();
           }else{
@@ -710,8 +789,9 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
             flight_search_data.itinerary.travelers.children = validation.children;
             flight_search_data.itinerary.travelers.infants = validation.infants;
             window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
-            wellgo_bot.step = BOT_STEPS.FLIGHT_SEARCH;
-            bot_reply_msg = `Great! give me a minute to get you some flight schedules`;
+            //wellgo_bot.step = BOT_STEPS.FLIGHT_SEARCH;
+            bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.TRAVELER_COUNT);
+            //bot_reply_msg = `Great! give me a minute to get you some flight schedules`;
           }
         }
       }
@@ -729,7 +809,8 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
 
       setTimeout(()=>{
         window.location = `${window.location.origin}/search`;
-      }, 5000);  
+      }, 5000);
+      return // Return from function at this point - until the remaining code can be activated
       // Above code to be removed
 
       wellgo_bot.isGettingTravelersFirstEntered=true;
