@@ -8,6 +8,13 @@ let virtual_assistant = {
         last_query: "can i book a flight",
         step: "",
         steps_not_yet_taken: [],
+        prev_state: {
+          name: "",
+          last_visited_step: "",
+          last_step_completed: false,
+          last_step_succeeded: false,
+          last_step_failed: false,
+        },
         about: "countries, cities, and airports",
         scroll_chat: true,
         isTripRoundFirstEntered: true,
