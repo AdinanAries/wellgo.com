@@ -81,14 +81,15 @@ const randomly_set_bot_next_step = (current_previous_step) => {
   }else if(wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT) {
     reply_message = window.virtual_assistant_functions.get_travelers_input_start_message();
   }else if(wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH) {
-    let flight_search_init_message = "";
-    let fs_msgs = [
+    const flight_search_init_messages = [
       'Great! I will send you to the search page to select your flight and continue',
       'I am sending you to search page in a minute. You may select your flight and continue',
       'All set. Please let me send you to search page to continue',
       'Thanks. You may proceed from the search page. wait a minute.'
     ]
-    reply_message = flight_search_init_message;
+    reply_message = flight_search_init_messages[
+      Math.floor(Math.random() * flight_search_init_messages.length)
+    ];
   }else if(wellgo_bot.step===BOT_STEPS.PNR_RECORD) {
     reply_message = ""; // To Do: Bot PNR currently not supported.
   }
@@ -96,6 +97,41 @@ const randomly_set_bot_next_step = (current_previous_step) => {
   return reply_message;
 }
 window.randomly_set_bot_next_step=randomly_set_bot_next_step;
+
+const remove_bot_step_is_first_entered = (TEXT_ELE) => {
+  let is_stop_current_activity_command = window.virtual_assistant_functions
+        .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase());
+
+  if(wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
+    // Not required here
+  }else if(wellgo_bot.step===BOT_STEPS.TRIP_ROUND) {
+    if(!is_stop_current_activity_command){
+      wellgo_bot.isTripRoundFirstEntered=false;
+    }
+  }else if(wellgo_bot.step===BOT_STEPS.TRAVEL_DATES) {
+    if(!is_stop_current_activity_command){
+      wellgo_bot.isDatesFirstEntered=false;
+    }
+  }else if(wellgo_bot.step===BOT_STEPS.CABIN_CLASS) {
+    if(!is_stop_current_activity_command){
+      wellgo_bot.isCabinClassFirstEntered=false;
+    }
+  }else if(wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT) {
+    if(!is_stop_current_activity_command){
+      wellgo_bot.isGettingTravelersFirstEntered=false;
+    }
+  }else if(wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH) {
+    if(!is_stop_current_activity_command){
+      wellgo_bot.isSearchingFlightFirstEnter=false;
+    }
+  }else if(wellgo_bot.step===BOT_STEPS.PNR_RECORD) {
+    if(!is_stop_current_activity_command){
+      wellgo_bot.isPNRFirstEntered=false;
+    }
+  }
+}
+
+window.remove_bot_step_is_first_entered=remove_bot_step_is_first_entered;
 
 let get_answer_from_bot = (user_query) => {
     //console.log(user_query)
@@ -192,6 +228,9 @@ let run_chat_instance = async (input_txt_fld="#main_support_chat_user_input_txt_
       )
       bot_reply_msg=flight_eval_res.bot_reply_msg;
       bot_reply=flight_eval_res.bot_reply;
+
+      //----------------------remove _is_first_entered = set to false - flight booking process---------------------------------------//
+      remove_bot_step_is_first_entered(TEXT_ELE);
 
       // Saying stop when flight booking has started yet no bot step has been set
       if(!wellgo_bot.step
@@ -668,16 +707,20 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           }
         }
       }
-      if(!window.virtual_assistant_functions
+
+      // Set is_first_entered = false - But not when "stop activity" command is entered.
+      /*if(!window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isTripRoundFirstEntered=false;
-      }
+      }*/
+
     }
 
     // Step three: travel dates
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
       && wellgo_bot.step===BOT_STEPS.TRAVEL_DATES){
-      wellgo_bot.isTripRoundFirstEntered=true;
+      // _is_first_entered
+      //wellgo_bot.isTripRoundFirstEntered=true;
       /*let travel_dates_init_message="";
       if(JSON.parse(localStorage.getItem("search_obj")).type==="one-way"){
         travel_dates_init_message =
@@ -716,17 +759,20 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           }
         }
       }
-      if(!window.virtual_assistant_functions
+
+      // Set is_first_entered = false - But not when "stop activity" command is entered.
+      /*if(!window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isDatesFirstEntered=false;
-      }
+      }*/
     }
 
     // Step four: cabin class
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
       && wellgo_bot.step===BOT_STEPS.CABIN_CLASS){
-      wellgo_bot.isDatesFirstEntered=true;
-      wellgo_bot.hasBotReturnedResults=true;
+      // _is_first_entered
+      //wellgo_bot.isDatesFirstEntered=true;
+      //wellgo_bot.hasBotReturnedResults=true;
       //bot_reply_msg = window.virtual_assistant_functions.get_cabin_class_input_start_message();
       if(!wellgo_bot.isCabinClassFirstEntered){
         if(window.virtual_assistant_functions
@@ -758,17 +804,20 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           }
         }
       }
-      if(!window.virtual_assistant_functions
+
+      // Set is_first_entered = false - But not when "stop activity" command is entered.
+      /*if(!window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isCabinClassFirstEntered=false;
-      }
+      }*/
 
     }
 
     //step five: gettings travlers
     if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
       && wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT){
-      wellgo_bot.isCabinClassFirstEntered=true;
+        // _is_first_entered
+      //wellgo_bot.isCabinClassFirstEntered=true;
 
       //TEXT_ELE.value = `1 adult, 0 child, 0 infant`;
       //TEXT_ELE.focus();
@@ -795,10 +844,12 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           }
         }
       }
-      if(!window.virtual_assistant_functions
+
+      // Set is_first_entered = false - But not when "stop activity" command is entered.
+      /*if(!window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
         wellgo_bot.isGettingTravelersFirstEntered=false;
-      }
+      }*/
     }
 
     //step six: searching flight schedules
@@ -806,21 +857,21 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
       && wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH){
 
       // Go to search page - temporary solution
-
       setTimeout(()=>{
+        init_wellgo_bot_local_state();
         window.location = `${window.location.origin}/search`;
       }, 5000);
-      return // Return from function at this point - until the remaining code can be activated
       // Above code to be removed
 
-      wellgo_bot.isGettingTravelersFirstEntered=true;
+      // _is_first_entered
+      //wellgo_bot.isGettingTravelersFirstEntered=true;
       let interim_msg=[
         `Looking Good! 💪 I found some really good flights for you... please view and select which one you want. And just reply '
         <span class="support_chat_bot_msg_highlights">done</span>' when you finish.`,
         `Aha! 😃 These flights are really good... please view and select which one you want. And then reply '
         <span class="support_chat_bot_msg_highlights">done</span>' so we can proceed.`,
       ]
-      setTimeout(()=>{
+      /*setTimeout(()=>{
         if(wellgo_bot.hasBotReturnedResults){
           wellgo_bot.scroll_chat=false;
           window.show_interapting_message(`
@@ -850,9 +901,9 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           window.show_interapting_message(itns, false, false);
           wellgo_bot.hasBotReturnedResults=false;
         }
-      }, 6000)
+      }, 6000)*/
 
-      if(!wellgo_bot.isSearchingFlightFirstEnter){
+      /*if(!wellgo_bot.isSearchingFlightFirstEnter){
         if(window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
           bot_reply_msg = window.virtual_assistant_functions.get_in_activity_stop_command_reponse();
@@ -928,15 +979,17 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           bot_reply_msg = interim_msg[Math.floor(Math.random() * interim_msg.length)];
 
         }
-      }
-      if(!window.virtual_assistant_functions
+      }*/
+
+      // Set is_first_entered = false - But not when "stop activity" command is entered.
+      /*if(!window.virtual_assistant_functions
             .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase())){
-        wellgo_bot.isSearchingFlightFirstEnter=false
-      }
+        wellgo_bot.isSearchingFlightFirstEnter=false;
+      }*/
     }
 
     //step seven: pnr recording
-    if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
+    /*if(wellgo_bot.status===wellgo_bot.status_names.BEGIN_AIR_BOOKING
       && wellgo_bot.step===BOT_STEPS.PNR_RECORD){
       if(wellgo_bot.isPNRFirstEntered){
         //setTimeout(()=>window.show_interapting_message(`So lets do that now...`, "none", false),2000);
@@ -971,8 +1024,10 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           //alert("pnr recording");
         }
       }
-      wellgo_bot.isPNRFirstEntered=false
-    }
+
+      // Set is_first_entered = false
+      wellgo_bot.isPNRFirstEntered=false;
+    }*/
   }
   return {
     bot_reply, bot_reply_msg
