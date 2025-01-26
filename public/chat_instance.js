@@ -766,6 +766,7 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
               || TEXT_ELE.value.trim().toLowerCase() === "roundtrip"){
                 flight_search_data.type = "round-trip";
             }
+            window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
 
             //wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
             if(wellgo_bot.steps_not_yet_taken.includes(BOT_STEPS.TRAVEL_DATES)){
@@ -788,8 +789,8 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
               }else{
                 bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.TRIP_ROUND);
                 }
-              }
-              window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+            }
+
           }else{
             bot_reply_msg = window.virtual_assistant_functions.get_trip_round_input_validation_error_message();
             wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
