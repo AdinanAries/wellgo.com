@@ -119,8 +119,13 @@ const randomly_set_bot_next_step = (current_previous_step, new_step_to_be_set=nu
 window.randomly_set_bot_next_step=randomly_set_bot_next_step;
 
 const remove_bot_step_is_first_entered = (TEXT_ELE) => {
-  let is_stop_current_activity_command = window.virtual_assistant_functions
-        .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase());
+
+  let is_stop_current_activity_command = false;
+
+  if(TEXT_ELE){
+    is_stop_current_activity_command = window.virtual_assistant_functions
+          .is_stop_current_activity_command(TEXT_ELE.value.trim().toLowerCase());
+  }
 
   if(wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
     // Not required here
@@ -151,6 +156,27 @@ const remove_bot_step_is_first_entered = (TEXT_ELE) => {
   }
 }
 window.remove_bot_step_is_first_entered=remove_bot_step_is_first_entered;
+
+const make_current_bot_step_is_first_entered = () => {
+
+  if(wellgo_bot.step===BOT_STEPS.ORIGIN_DESTINATION){
+    // Not required here
+  }else if(wellgo_bot.step===BOT_STEPS.TRIP_ROUND) {
+    wellgo_bot.isTripRoundFirstEntered=true;
+  }else if(wellgo_bot.step===BOT_STEPS.TRAVEL_DATES) {
+    wellgo_bot.isDatesFirstEntered=true;
+  }else if(wellgo_bot.step===BOT_STEPS.CABIN_CLASS) {
+    wellgo_bot.isCabinClassFirstEntered=true;
+  }else if(wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT) {
+    wellgo_bot.isGettingTravelersFirstEntered=true;
+  }else if(wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH) {
+    wellgo_bot.isSearchingFlightFirstEnter=true;
+  }else if(wellgo_bot.step===BOT_STEPS.PNR_RECORD) {
+    wellgo_bot.isPNRFirstEntered=true;
+  }
+
+}
+window.make_current_bot_step_is_first_entered=make_current_bot_step_is_first_entered;
 
 let get_answer_from_bot = (user_query) => {
     //console.log(user_query)
@@ -374,6 +400,7 @@ let virtual_assistant_flight_booking_change_values_assessment = (TEXT_ELE, bot_r
             TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")
           ))
       ){
+        make_current_bot_step_is_first_entered();
         if(wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
           window.show_user_interapting_message(TEXT_ELE.value.trim(), true);
           window.show_interapting_message(`Yab! I should be expecting your  inputs..
@@ -404,6 +431,7 @@ let virtual_assistant_flight_booking_change_values_assessment = (TEXT_ELE, bot_r
           .is_travel_dates_change_values_command(
             TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")))
       ){
+        make_current_bot_step_is_first_entered();
         if(wellgo_bot.step===BOT_STEPS.TRAVEL_DATES){
           window.show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           randomly_set_bot_next_step(BOT_STEPS.TRAVEL_DATES, BOT_STEPS.TRAVEL_DATES);
@@ -434,6 +462,7 @@ let virtual_assistant_flight_booking_change_values_assessment = (TEXT_ELE, bot_r
           .is_cabin_class_change_values_command(
             TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")))
       ){
+        make_current_bot_step_is_first_entered();
         if(wellgo_bot.step===BOT_STEPS.CABIN_CLASS){
           window.show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           randomly_set_bot_next_step(BOT_STEPS.CABIN_CLASS, BOT_STEPS.CABIN_CLASS);
@@ -465,6 +494,7 @@ let virtual_assistant_flight_booking_change_values_assessment = (TEXT_ELE, bot_r
             .is_travelers_change_values_command(
               TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")))
       ){
+        make_current_bot_step_is_first_entered();
         if(wellgo_bot.step===BOT_STEPS.TRAVELER_COUNT){
           window.show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           randomly_set_bot_next_step(BOT_STEPS.TRAVELER_COUNT, BOT_STEPS.TRAVELER_COUNT);
@@ -497,6 +527,7 @@ let virtual_assistant_flight_booking_change_values_assessment = (TEXT_ELE, bot_r
             .is_flight_search_change_values_command(
               TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")))
       ){
+        make_current_bot_step_is_first_entered();
         if(wellgo_bot.step===BOT_STEPS.FLIGHT_SEARCH){
           window.show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           randomly_set_bot_next_step(BOT_STEPS.FLIGHT_SEARCH, BOT_STEPS.FLIGHT_SEARCH);
@@ -530,6 +561,7 @@ let virtual_assistant_flight_booking_change_values_assessment = (TEXT_ELE, bot_r
             .is_pnr_change_values_command(
               TEXT_ELE.value.trim().toLowerCase().replaceAll(" ", "")))
       ){
+        make_current_bot_step_is_first_entered();
         if(wellgo_bot.step===BOT_STEPS.PNR_RECORD){
           window.show_user_interapting_message(TEXT_ELE.value.trim(), "passive");
           // eslint-disable-next-line no-undef
@@ -721,9 +753,10 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
           if(window.virtual_assistant_functions.verify_trip_round_if_query_accepted(
               TEXT_ELE.value.trim().toLowerCase())
               && wellgo_bot.step===BOT_STEPS.TRIP_ROUND){
-            //wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
-            bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.TRIP_ROUND);
+
             let flight_search_data = JSON.parse(localStorage.getItem("search_obj"));
+            const was_already_one_way = (flight_search_data.type === "one-way");
+
             if(TEXT_ELE.value.trim().toLowerCase() === "one way"
               || TEXT_ELE.value.trim().toLowerCase() === "one-way"
               || TEXT_ELE.value.trim().toLowerCase() === "oneway"){
@@ -733,7 +766,30 @@ let virtual_assistant_flight_booking_values_assessment = (TEXT_ELE, bot_reply_ms
               || TEXT_ELE.value.trim().toLowerCase() === "roundtrip"){
                 flight_search_data.type = "round-trip";
             }
-            window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
+
+            //wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
+            if(wellgo_bot.steps_not_yet_taken.includes(BOT_STEPS.TRAVEL_DATES)){
+              // Travel dates not yet collected.
+              bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.TRIP_ROUND);
+            }else{
+              // Travel dates already collected - incase of change trip round command.
+              if(was_already_one_way && flight_search_data.type === "round-trip"){
+                wellgo_bot.step=BOT_STEPS.TRAVEL_DATES;
+                wellgo_bot.isDatesFirstEntered=true;
+                const trip_round_changes_prompt_msgs = [
+                  `Please what are your new travel dates for round trip. Say something like '<span class="support_chat_bot_msg_highlights">
+                  February 23, 2022 to February 28, 2022</span>', but of course your actual travel dates...`,
+                  `You've changed your trip round. Please what are your departure and return dates. Your response should look as follows: '<span class="support_chat_bot_msg_highlights">
+                  February 23, 2022 to February 28, 2022</span>'`,
+                ]
+                bot_reply_msg = trip_round_changes_prompt_msgs[
+                  Math.floor(Math.random() * trip_round_changes_prompt_msgs.length)
+                ];
+              }else{
+                bot_reply_msg = randomly_set_bot_next_step(BOT_STEPS.TRIP_ROUND);
+                }
+              }
+              window.localStorage.setItem("search_obj", JSON.stringify(flight_search_data));
           }else{
             bot_reply_msg = window.virtual_assistant_functions.get_trip_round_input_validation_error_message();
             wellgo_bot.step=BOT_STEPS.TRIP_ROUND;
