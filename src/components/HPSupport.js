@@ -20,6 +20,9 @@ import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
 import { get_short_date_DAYMMMDD, getUserFriendlyDurationStringFromTotalMunites } from "../helpers/general";
 import { markup } from "../helpers/Prices";
+import { getPriceMarkupPercentage } from "../services/flightsServices";
+
+let __priceMarkupPercentage=0;
 
 export default function HPSupportBtn(){
 
@@ -29,6 +32,15 @@ export default function HPSupportBtn(){
     const [ currentHourWeather, setCurrentHourWeather ] = useState();
     const [ touristAttraction, setTouristAttraction ] = useState();
     const [TO_SHOW, SET_TO_SHOW] = useState(PROMPTS[Math.floor(Math.random() * PROMPTS.length)]);
+
+    const [ PriceMarkupPercentage, setPriceMarkupPercentage ] = useState(0);
+
+    useEffect(()=>{
+        (async()=>{
+            __priceMarkupPercentage = await getPriceMarkupPercentage();
+            setPriceMarkupPercentage(parseInt(__priceMarkupPercentage));
+        })();
+    }, []);
 
     useEffect(()=>{
         // Get and Set Weather Data or Tourist Attraction
@@ -443,22 +455,22 @@ export function show_prompt_on_Bot_AD_tips_popup(
                     </p>
                     <div style="display: flex;">
                         <p style="font-family: 'Prompt', Sans-serif; font-size: 11px;">
-                                Min: $${markup(summeries?.prices?.min)?.new_price?.toFixed(0)}
+                                Min: $${markup(summeries?.prices?.min, __priceMarkupPercentage)?.new_price?.toFixed(0)}
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Max: $${markup(summeries?.prices?.max)?.new_price?.toFixed(0)}</span>
+                                Max: $${markup(summeries?.prices?.max, __priceMarkupPercentage)?.new_price?.toFixed(0)}</span>
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Average: $${markup(summeries?.prices?.avg)?.new_price?.toFixed(0)}</span>
+                                Average: $${markup(summeries?.prices?.avg, __priceMarkupPercentage)?.new_price?.toFixed(0)}</span>
                             <span style="font-family: 'Prompt', Sans-serif; margin: 0 2px; color: orange; font-size: 11px;">
                                 |
                             </span>
                             <span style="font-size: 11px; font-family: 'Prompt', Sans-serif;">
-                                Popular: $${markup(summeries?.prices?.popular).new_price.toFixed(0)}</span>
+                                Popular: $${markup(summeries?.prices?.popular, __priceMarkupPercentage).new_price.toFixed(0)}</span>
                         </p>
                     </div>
                 `;
@@ -505,11 +517,12 @@ const getBotWeatherPromptMarkup = (currentHourWeather) => {
 }
 
 const getBotSummariesPromptMarkup = (summaries) => {
+
     // Prices
-    let max_price = markup(summaries?.prices?.max)?.new_price?.toFixed(0);
-    let avg_price = markup(summaries?.prices.avg)?.new_price?.toFixed(0);
-    let min_price = markup(summaries?.prices.min)?.new_price?.toFixed(0);
-    let popular_price = markup(summaries?.prices?.popular)?.new_price?.toFixed(0);
+    let max_price = markup(summaries?.prices?.max, __priceMarkupPercentage)?.new_price?.toFixed(0);
+    let avg_price = markup(summaries?.prices.avg, __priceMarkupPercentage)?.new_price?.toFixed(0);
+    let min_price = markup(summaries?.prices.min, __priceMarkupPercentage)?.new_price?.toFixed(0);
+    let popular_price = markup(summaries?.prices?.popular, __priceMarkupPercentage)?.new_price?.toFixed(0);
     let popular_count = summaries?.prices?.popular_count;
     let items_total = summaries?.prices?.items_total;
     let minPercent = Math.floor(((min_price*100)/max_price));

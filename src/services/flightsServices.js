@@ -66,3 +66,24 @@ export const createFlightOrder = async (payload, path=`/api/flights/orders/creat
         return {isError: true, message: e.message};
     }
 }
+
+export const getPriceMarkupPercentage = async (path="/api/flights/price-markup-percentage/") => {
+    try{
+        return await fetch(API_URL+path, {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => {
+            console.log(err);
+            return {data: []};
+        });
+    } catch (e){
+        console.log(e);
+        return {data: []};
+    }
+}
