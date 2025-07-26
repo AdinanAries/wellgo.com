@@ -20,7 +20,7 @@ import notification_sound from "../audio/livechat.mp3";
 import { useEffect, useState } from "react";
 import { get_short_date_DAYMMMDD, getUserFriendlyDurationStringFromTotalMunites } from "../helpers/general";
 import { markup } from "../helpers/Prices";
-import { getPriceMarkupPercentage } from "../services/flightsServices";
+import { getPriceMarkup } from "../services/flightsServices";
 
 let __priceMarkupPercentage=0;
 
@@ -37,7 +37,7 @@ export default function HPSupportBtn(){
 
     useEffect(()=>{
         (async()=>{
-            __priceMarkupPercentage = await getPriceMarkupPercentage();
+            __priceMarkupPercentage = await getPriceMarkup();
             setPriceMarkupPercentage(parseInt(__priceMarkupPercentage));
         })();
     }, []);

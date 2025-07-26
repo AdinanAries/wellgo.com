@@ -67,7 +67,7 @@ export const createFlightOrder = async (payload, path=`/api/flights/orders/creat
     }
 }
 
-export const getPriceMarkupPercentage = async (path="/api/flights/price-markup-percentage/") => {
+export const getPriceMarkup = async (path="/api/flights/price-markup/") => {
     try{
         return await fetch(API_URL+path, {
             method: "GET",
